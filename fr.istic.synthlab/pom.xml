@@ -21,6 +21,15 @@
 			<version>3.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+		    <groupId>com.jsyn</groupId>
+		    <artifactId>jsyn</artifactId>
+		    <version>16.5.14</version>
+		    <scope>system</scope>
+		    <systemPath>${project.basedir}/lib/jsyn-beta-16.5.14.jar</systemPath>
+		</dependency>
+
 	</dependencies>
 
 </project>
