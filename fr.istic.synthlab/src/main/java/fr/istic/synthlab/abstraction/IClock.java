@@ -1,7 +1,5 @@
 package fr.istic.synthlab.abstraction;
 
-public class Module {
-
-
+public interface IClock {
 
 }
