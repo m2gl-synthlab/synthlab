@@ -21,82 +21,20 @@ import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.presentation.IPModule;
 import fr.istic.synthlab.presentation.IPSynthesizer;
 
-public class PSynthesizer extends JFrame implements IPSynthesizer, ActionListener, ItemListener {
+public class PSynthesizer extends JPanel implements IPSynthesizer, ActionListener, ItemListener {
 
 	ICSynthesizer ctrl;
 	
 	public PSynthesizer(ICSynthesizer control){
 		ctrl = control;
 		// Construction de la Frame contenant le Panel du Synthetizer
-		JFrame frame = new JFrame("Synthetizer Grp2");
-		frame.setJMenuBar(createJMenuBar());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(850, 700);
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
-		frame.setResizable(true);
-		frame.setVisible(true);
+
 		
-		JPanel panel = new JPanel();
 		JLabel label = new JLabel("PSynthetizer!");
-		panel.add(label);
-
-		frame.getContentPane().add(panel);
-		
-		
-		
+		this.add(label);		
 	}
 
-	private JMenuBar createJMenuBar() {
-		JMenuBar mainMenuBar;
-		JMenu menuFile, menuHelp;
-		JMenuItem menuItemNew, menuItemOpen, menuItemSave, menuItemQuit, menuItemDoc, menuItemAbout;
-		
-		mainMenuBar = new JMenuBar();
-		
-		// -------------------------- File Menu --------------------------
-		menuFile = new JMenu("File");
 	
-		menuItemNew = new JMenuItem("New");
-		menuItemNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
-		menuItemNew.addActionListener(this);
-		menuFile.add(menuItemNew);
-		
-		menuItemOpen = new JMenuItem("Open");
-		menuItemOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
-		menuItemOpen.addActionListener(this);
-		menuFile.add(menuItemOpen);
-		
-		menuItemSave = new JMenuItem("Save");
-		menuItemSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
-		menuItemSave.addActionListener(this);
-		menuFile.add(menuItemSave);
-		
-		menuItemQuit = new JMenuItem("Quit");
-		menuItemQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
-		menuItemQuit.addActionListener(this);
-		menuFile.add(menuItemQuit);
-		
-
-		// -------------------------- Help Menu --------------------------
-		menuHelp = new JMenu("Help");
-		
-		menuItemDoc = new JMenuItem("Documentation");
-		menuItemDoc.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
-		menuItemDoc.addActionListener(this);
-		menuHelp.add(menuItemDoc);
-		
-		menuItemAbout = new JMenuItem("About");
-		menuItemAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.CTRL_MASK));
-		menuItemAbout.addActionListener(this);
-		menuHelp.add(menuItemAbout);
-
-		// Ajout des 2 menus
-		mainMenuBar.add(menuFile);
-		mainMenuBar.add(menuHelp);
-		
-		return mainMenuBar;
-	}
 
 	public void addPModule(IPModule ipModule) {
 		this.add((Component)ipModule);
@@ -121,7 +59,6 @@ public class PSynthesizer extends JFrame implements IPSynthesizer, ActionListene
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
 		switch (((JMenuItem)e.getSource()).getText()){
 			case "New": System.out.println("new");
 				break;

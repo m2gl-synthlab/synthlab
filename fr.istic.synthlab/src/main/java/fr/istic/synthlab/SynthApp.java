@@ -3,6 +3,7 @@ import java.awt.Toolkit;
 
 import fr.istic.synthlab.abstraction.impl.InputPort;
 import fr.istic.synthlab.abstraction.impl.OutputPort;
+import fr.istic.synthlab.command.DisplayCommand;
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.impl.CModule;
@@ -16,11 +17,15 @@ import fr.istic.synthlab.factory.impl.PFactory;
 
 public class SynthApp implements ISynthApp {
 
-	/**
-	 * @param args
-	 */
+	private ICSynthesizer synth;
+	private ISynthFrame synthFrame;
+	private ICommand displayCmd;
+	
 	public static void main(String[] args) {
-
+		SynthApp app = new SynthApp();
+		SynthFrame frame = new SynthFrame();
+		frame.setTitle("Synthlab grp2");
+		
 		PACFactory.setAFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
@@ -28,33 +33,40 @@ public class SynthApp implements ISynthApp {
 		
 		ICSynthesizer syn = (CSynthesizer)factory.newSynthesizer(factory);
 		
+		app.setSynthesizer(syn);
+		app.setDisplaySynthCommand(new DisplayCommand(app, frame));
+		//app.setUndisplaySynthCommand(new DisplayCommand(app, frame));
+		//TODO
+		
+		app.startSynth();
+		
+	}
+
+	@Override
+	public void startSynth() {
+		newSynth();
+		displayCmd.execute();
+	}
+
+	@Override
+	public void newSynth() {
+		
+		//creer frame
+		
 		// Ajout des modules
-		CModule vco = (CModule)factory.newVCO(factory);
-		CModule vca = (CModule)factory.newVCA(factory);
-		syn.addModule(vco);
-		syn.addModule(vca);
+		CModule vco = (CModule)PACFactory.getFactory().newVCO(PACFactory.getFactory());
+		CModule vca = (CModule)PACFactory.getFactory().newVCA(PACFactory.getFactory());
+		synth.addModule(vco);
+		synth.addModule(vca);
 		
 		// Ajout des fils
-		CWire wire = (CWire)factory.newWire(factory);
+		CWire wire = (CWire)PACFactory.getFactory().newWire(PACFactory.getFactory());
 		wire.connect((OutputPort) vco.getPort(0));
 		wire.connect((InputPort) vca.getPort(0));
 		
 		System.out.println("Beep!");
 		Toolkit.getDefaultToolkit().beep();
 		//JSyn.createSynthesizer().start();
-		
-	}
-
-	@Override
-	public void startSynth() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void newSynth() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -64,21 +76,18 @@ public class SynthApp implements ISynthApp {
 	}
 
 	@Override
-	public void setSynthesizer(CSynthesizer synth) {
-		// TODO Auto-generated method stub
-		
+	public void setSynthesizer(ICSynthesizer syn) {
+		this.synth = syn;
 	}
 
 	@Override
-	public CSynthesizer getSynthesizer() {
-		// TODO Auto-generated method stub
-		return null;
+	public ICSynthesizer getSynthesizer() {
+		return synth;
 	}
 
 	@Override
 	public void setDisplaySynthCommand(ICommand displaySynthCommand) {
-		// TODO Auto-generated method stub
-		
+		this.displayCmd = displaySynthCommand;
 	}
 
 	@Override

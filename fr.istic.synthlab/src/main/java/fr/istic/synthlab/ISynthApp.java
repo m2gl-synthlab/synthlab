@@ -1,6 +1,7 @@
 package fr.istic.synthlab;
 
 import fr.istic.synthlab.command.ICommand;
+import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.impl.CSynthesizer;
 
 public interface ISynthApp {
@@ -25,14 +26,14 @@ public interface ISynthApp {
 	 * 
 	 * @param synthesizer
 	 */
-	public void setSynthesizer(CSynthesizer synth);
+	public void setSynthesizer(ICSynthesizer synth);
 
 	/**
 	 * Return the current synthesizer controller
 	 * 
 	 * @return the current synthesizer controller
 	 */
-	public CSynthesizer getSynthesizer();
+	public ICSynthesizer getSynthesizer();
 
 	/**
 	 * Register a command to display the synthesizer
