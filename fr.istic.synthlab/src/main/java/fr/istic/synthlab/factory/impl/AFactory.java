@@ -1,4 +1,4 @@
-package fr.istic.synthlab.factory;
+package fr.istic.synthlab.factory.impl;
 
 
 import fr.istic.synthlab.abstraction.IModule;
@@ -11,6 +11,7 @@ import fr.istic.synthlab.abstraction.impl.Module;
 import fr.istic.synthlab.abstraction.impl.OutputPort;
 import fr.istic.synthlab.abstraction.impl.Synthetizer;
 import fr.istic.synthlab.abstraction.impl.Wire;
+import fr.istic.synthlab.factory.IFactory;
 
 public class AFactory implements IFactory {
 

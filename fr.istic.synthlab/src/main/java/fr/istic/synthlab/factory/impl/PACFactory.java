@@ -1,4 +1,7 @@
-package fr.istic.synthlab.factory;
+package fr.istic.synthlab.factory.impl;
+
+import fr.istic.synthlab.factory.IFactory;
+import fr.istic.synthlab.factory.IPFactory;
 
 
 

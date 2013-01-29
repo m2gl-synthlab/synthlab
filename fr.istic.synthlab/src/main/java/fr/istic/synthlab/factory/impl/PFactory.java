@@ -1,7 +1,8 @@
-package fr.istic.synthlab.factory;
+package fr.istic.synthlab.factory.impl;
 
 import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICSynthesizer;
+import fr.istic.synthlab.factory.IPFactory;
 import fr.istic.synthlab.presentation.IPModule;
 import fr.istic.synthlab.presentation.IPSynthesizer;
 import fr.istic.synthlab.presentation.impl.PModule;

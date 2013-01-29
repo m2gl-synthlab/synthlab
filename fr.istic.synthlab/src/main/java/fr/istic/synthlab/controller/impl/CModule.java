@@ -6,7 +6,7 @@ import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.IParameter;
 import fr.istic.synthlab.abstraction.IPort;
 import fr.istic.synthlab.controller.ICModule;
-import fr.istic.synthlab.factory.PACFactory;
+import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.IPModule;
 
 public class CModule implements ICModule{

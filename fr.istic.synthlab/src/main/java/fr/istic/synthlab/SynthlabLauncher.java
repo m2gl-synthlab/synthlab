@@ -11,11 +11,11 @@ import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.impl.CModule;
 import fr.istic.synthlab.controller.impl.CSynthesizer;
 import fr.istic.synthlab.controller.impl.CWire;
-import fr.istic.synthlab.factory.AFactory;
-import fr.istic.synthlab.factory.CFactory;
 import fr.istic.synthlab.factory.IFactory;
-import fr.istic.synthlab.factory.PACFactory;
-import fr.istic.synthlab.factory.PFactory;
+import fr.istic.synthlab.factory.impl.AFactory;
+import fr.istic.synthlab.factory.impl.CFactory;
+import fr.istic.synthlab.factory.impl.PACFactory;
+import fr.istic.synthlab.factory.impl.PFactory;
 
 
 public class SynthlabLauncher {

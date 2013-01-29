@@ -9,7 +9,7 @@ import fr.istic.synthlab.abstraction.impl.OutputPort;
 import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.factory.IFactory;
-import fr.istic.synthlab.factory.PACFactory;
+import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.IPSynthesizer;
 import fr.istic.synthlab.presentation.impl.PSynthesizer;
 
