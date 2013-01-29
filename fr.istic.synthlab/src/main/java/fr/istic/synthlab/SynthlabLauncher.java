@@ -44,15 +44,8 @@ public class SynthlabLauncher {
 		wire.connect((InputPort) vca.getPort(0));
 		
 		
-		
-		
-		
-		
 		// Construction de la Frame contenant le Panel du Synthetizer
 		JFrame frame = new JFrame("Synthetizer Grp2");
-		
-		if(syn.getPresentation()==null) System.out.println("null");
-		
 		frame.getContentPane().add((JPanel)syn.getPresentation());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(850, 700);
