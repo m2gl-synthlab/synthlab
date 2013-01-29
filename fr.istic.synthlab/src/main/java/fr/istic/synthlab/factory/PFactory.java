@@ -4,6 +4,8 @@ import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.presentation.IPModule;
 import fr.istic.synthlab.presentation.IPSynthesizer;
+import fr.istic.synthlab.presentation.impl.PModule;
+import fr.istic.synthlab.presentation.impl.PSynthesizer;
 
 public class PFactory implements IPFactory{
 
@@ -17,32 +19,27 @@ public class PFactory implements IPFactory{
 
 	@Override
 	public IPSynthesizer newSynthesizer(ICSynthesizer control) {
-		// TODO Auto-generated method stub
-		return null;
+		return new PSynthesizer(control);
 	}
 
 	@Override
 	public IPModule newModule(ICModule control) {
-		// TODO Auto-generated method stub
-		return null;
+		return new PModule(control);
 	}
 
 	@Override
 	public IPModule newVCO(ICModule control) {
-		// TODO Auto-generated method stub
-		return null;
+		return new PModule(control); //TODO
 	}
 
 	@Override
 	public IPModule newVCF(ICModule control) {
-		// TODO Auto-generated method stub
-		return null;
+		return new PModule(control); //TODO
 	}
 
 	@Override
 	public IPModule newVCA(ICModule control) {
-		// TODO Auto-generated method stub
-		return null;
+		return new PModule(control); //TODO
 	}
 
 }

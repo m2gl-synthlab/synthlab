@@ -5,7 +5,12 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import fr.istic.synthlab.abstraction.impl.InputPort;
+import fr.istic.synthlab.abstraction.impl.OutputPort;
+import fr.istic.synthlab.controller.ICSynthesizer;
+import fr.istic.synthlab.controller.impl.CModule;
 import fr.istic.synthlab.controller.impl.CSynthesizer;
+import fr.istic.synthlab.controller.impl.CWire;
 import fr.istic.synthlab.factory.AFactory;
 import fr.istic.synthlab.factory.CFactory;
 import fr.istic.synthlab.factory.IFactory;
@@ -25,10 +30,29 @@ public class SynthlabLauncher {
 		PACFactory.setPFactory(PFactory.getInstance());
 		IFactory factory = PACFactory.getFactory();
 		
-		CSynthesizer syn = (CSynthesizer)factory.newSynthesizer(factory);
+		ICSynthesizer syn = (CSynthesizer)factory.newSynthesizer(factory);
+		
+		// Ajout des modules
+		CModule vco = (CModule)factory.newVCO(factory);
+		CModule vca = (CModule)factory.newVCA(factory);
+		syn.addModule(vco);
+		syn.addModule(vca);
+		
+		// Ajout des fils
+		CWire wire = (CWire)factory.newWire(factory);
+		wire.connect((OutputPort) vco.getPort(0));
+		wire.connect((InputPort) vca.getPort(0));
+		
+		
+		
+		
+		
 		
 		// Construction de la Frame contenant le Panel du Synthetizer
 		JFrame frame = new JFrame("Synthetizer Grp2");
+		
+		if(syn.getPresentation()==null) System.out.println("null");
+		
 		frame.getContentPane().add((JPanel)syn.getPresentation());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(850, 700);

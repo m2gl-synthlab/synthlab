@@ -63,7 +63,8 @@ public class AFactory implements IFactory {
 	
 
 	public IParameter newParameter(String name, IFactory factory) {
-		// TODO Auto-generated method stub
+		//IParameter parameter = new PA(name);
+		//return port;
 		return null;
 	}
 

@@ -4,10 +4,14 @@ import java.util.List;
 
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.ISynthesizer;
+import fr.istic.synthlab.abstraction.impl.InputPort;
+import fr.istic.synthlab.abstraction.impl.OutputPort;
 import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICSynthesizer;
+import fr.istic.synthlab.factory.IFactory;
 import fr.istic.synthlab.factory.PACFactory;
 import fr.istic.synthlab.presentation.IPSynthesizer;
+import fr.istic.synthlab.presentation.impl.PSynthesizer;
 
 public class CSynthesizer implements ICSynthesizer {
 	
@@ -17,7 +21,6 @@ public class CSynthesizer implements ICSynthesizer {
 	public CSynthesizer() {
 		this.pres = PACFactory.getPFactory().newSynthesizer(this);
 		this.abs = PACFactory.getAFactory().newSynthesizer(PACFactory.getAFactory());
-		
 	}
 	
 	@Override
