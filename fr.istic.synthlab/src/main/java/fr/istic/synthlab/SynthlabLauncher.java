@@ -1,19 +1,5 @@
 package fr.istic.synthlab;
-import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.KeyStroke;
 
 import fr.istic.synthlab.abstraction.impl.InputPort;
 import fr.istic.synthlab.abstraction.impl.OutputPort;
