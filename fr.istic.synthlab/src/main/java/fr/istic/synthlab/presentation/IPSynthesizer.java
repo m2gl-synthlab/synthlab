@@ -20,9 +20,6 @@ public interface IPSynthesizer {
 	public void addModule(IPModule module);
 
 	/**
-	 * Supprimer un composant du plan de travail
-	 */
-	/**
 	 * Remove a module presentation from the synthesizer
 	 * 
 	 * @param module

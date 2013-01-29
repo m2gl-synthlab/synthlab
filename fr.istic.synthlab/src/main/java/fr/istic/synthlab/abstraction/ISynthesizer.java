@@ -2,48 +2,45 @@ package fr.istic.synthlab.abstraction;
 
 import java.util.List;
 
-/**
- * @author Clément Hardouin
- *
- */
+
 public interface ISynthesizer {
 
 	/**
-	 * Start the synthetizer
+	 * Start the synthesizer
 	 */
 	public void start();
 	
 	/**
-	 * Stop the synthetizer
+	 * Stop the synthesizer
 	 */
 	public void stop();
 
 	/**
-	 * Is the synthetizer running ?
+	 * Is the synthesizer running ?
 	 * @return boolean
 	 */
 	public boolean isRunning();
 	
 	/**
-	 * Add the given module to the synthetizer
+	 * Add the given module to the synthesizer
 	 * @param module
 	 */
 	public void addModule(IModule module);
 	
 	/**
-	 * Return the given module to the synthetizer
+	 * Return the given module from the synthesizer
 	 * @param module
 	 */
 	public IModule getModule(int i);
 	
 	/**
-	 * Return the given module to the synthetizer
+	 * Return all modules from the synthesizer
 	 * @param module
 	 */
 	public List<IModule> getModules();
 	
 	/**
-	 * Remobe the given module to the synthetizer
+	 * Remove the given module from the synthesizer
 	 * @param module
 	 */
 	public void removeModule(IModule module);

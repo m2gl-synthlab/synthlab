@@ -2,13 +2,26 @@ package fr.istic.synthlab.controller.impl;
 
 import java.util.List;
 
+import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.IParameter;
 import fr.istic.synthlab.abstraction.IPort;
 import fr.istic.synthlab.controller.ICModule;
+import fr.istic.synthlab.factory.PACFactory;
 import fr.istic.synthlab.presentation.IPModule;
 
 public class CModule implements ICModule{
 
+	private IPModule pres;
+	private IModule abs;
+
+	
+	public CModule(String name) {
+
+		this.abs = PACFactory.getAFactory().newModule(name, PACFactory.getAFactory());
+		this.pres = PACFactory.getPFactory().newModule(this);
+		
+	}
+	
 	@Override
 	public void start() {
 		// TODO Auto-generated method stub
@@ -77,8 +90,7 @@ public class CModule implements ICModule{
 
 	@Override
 	public IPModule getPresentation() {
-		// TODO Auto-generated method stub
-		return null;
+		return pres;
 	}
 
 	
