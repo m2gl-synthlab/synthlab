@@ -38,7 +38,7 @@ public class SynthlabLauncher {
 		
 		
 		// Construction de la Frame contenant le Panel du Synthetizer
-		JFrame frame = new JFrame("Le solitaire le plus sexy de la terre :)");
+		JFrame frame = new JFrame("Synthetizer Grp2");
 		frame.getContentPane().add(syn.getPresentation());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(850, 700);
