@@ -27,7 +27,6 @@ import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
 
-// Coucou
 public class SynthlabLauncher {
 
 	/**
