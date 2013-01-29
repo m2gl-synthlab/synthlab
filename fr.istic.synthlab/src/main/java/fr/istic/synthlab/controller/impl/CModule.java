@@ -16,10 +16,8 @@ public class CModule implements ICModule{
 
 	
 	public CModule(String name) {
-
 		this.abs = PACFactory.getAFactory().newModule(name, PACFactory.getAFactory());
 		this.pres = PACFactory.getPFactory().newModule(this);
-		
 	}
 	
 	@Override
