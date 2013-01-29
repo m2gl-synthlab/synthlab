@@ -5,13 +5,13 @@ import java.util.List;
 
 import fr.istic.synthlab.abstraction.IClock;
 import fr.istic.synthlab.abstraction.IModule;
-import fr.istic.synthlab.abstraction.ISynthesizer;
+import fr.istic.synthlab.abstraction.ISynthetizer;
 
 /**
  * @author Clément Hardouin
  *
  */
-public class Synthetizer implements ISynthesizer {
+public class Synthetizer implements ISynthetizer {
 
 	private IClock clock;
 	private List<IModule> modules;

@@ -4,7 +4,7 @@ package fr.istic.synthlab.factory;
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.IParameter;
 import fr.istic.synthlab.abstraction.IPort;
-import fr.istic.synthlab.abstraction.ISynthesizer;
+import fr.istic.synthlab.abstraction.ISynthetizer;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.InputPort;
 import fr.istic.synthlab.abstraction.impl.Module;
@@ -27,8 +27,8 @@ public class AFactory implements IFactory {
 		return instance;
 	}
 
-	public ISynthesizer newSynthesizer(IFactory factory) {
-		ISynthesizer syn = new Synthetizer();
+	public ISynthetizer newSynthesizer(IFactory factory) {
+		ISynthetizer syn = new Synthetizer();
 		return syn;
 	}
 

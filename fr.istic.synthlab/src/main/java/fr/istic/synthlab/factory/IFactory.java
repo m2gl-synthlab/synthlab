@@ -3,12 +3,12 @@ package fr.istic.synthlab.factory;
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.IParameter;
 import fr.istic.synthlab.abstraction.IPort;
-import fr.istic.synthlab.abstraction.ISynthesizer;
+import fr.istic.synthlab.abstraction.ISynthetizer;
 import fr.istic.synthlab.abstraction.IWire;
 
 public interface IFactory {
 
-	ISynthesizer newSynthesizer(IFactory factory);
+	ISynthetizer newSynthesizer(IFactory factory);
 	
 	IModule newModule(String name, IFactory factory);
 	IModule newVCO(IFactory factory);

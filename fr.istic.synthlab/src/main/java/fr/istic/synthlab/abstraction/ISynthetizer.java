@@ -4,7 +4,7 @@ package fr.istic.synthlab.abstraction;
  * @author Clément Hardouin
  *
  */
-public interface ISynthesizer {
+public interface ISynthetizer {
 
 	/**
 	 * Start the synthetizer
