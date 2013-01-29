@@ -30,10 +30,6 @@ public class PSynthesizer extends JFrame implements IPSynthesizer, ActionListene
 	
 	public PSynthesizer(ICSynthesizer control){
 		ctrl = control;
-		//this.setLayout(new BorderLayout());
-		
-
-		
 		// Construction de la Frame contenant le Panel du Synthetizer
 		JFrame frame = new JFrame("Synthetizer Grp2");
 		frame.setJMenuBar(createJMenuBar());

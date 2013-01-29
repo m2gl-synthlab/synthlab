@@ -13,7 +13,6 @@ import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
 
-
 public class SynthlabLauncher {
 
 	/**
