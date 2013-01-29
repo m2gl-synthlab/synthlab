@@ -3,6 +3,7 @@ import java.awt.Toolkit;
 
 import fr.istic.synthlab.abstraction.impl.InputPort;
 import fr.istic.synthlab.abstraction.impl.OutputPort;
+import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.impl.CModule;
 import fr.istic.synthlab.controller.impl.CSynthesizer;
@@ -13,7 +14,7 @@ import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
 
-public class SynthlabLauncher {
+public class SynthApp implements ISynthApp {
 
 	/**
 	 * @param args
@@ -41,6 +42,48 @@ public class SynthlabLauncher {
 		System.out.println("Beep!");
 		Toolkit.getDefaultToolkit().beep();
 		//JSyn.createSynthesizer().start();
+		
+	}
+
+	@Override
+	public void startSynth() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void newSynth() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void quitSynth() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setSynthesizer(CSynthesizer synth) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public CSynthesizer getSynthesizer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setDisplaySynthCommand(ICommand displaySynthCommand) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setUndisplaySynthCommand(ICommand undisplaySynthCommand) {
+		// TODO Auto-generated method stub
 		
 	}
 
