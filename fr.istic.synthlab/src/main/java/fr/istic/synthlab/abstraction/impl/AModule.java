@@ -33,6 +33,7 @@ public abstract class AModule implements IModule {
 	 * 
 	 * @see fr.istic.synthlab.abstraction.IModule#start()
 	 */
+	@Override
 	public void start() {
 		if (!isRunning()) isRunning = true;
 	}
@@ -42,6 +43,7 @@ public abstract class AModule implements IModule {
 	 * 
 	 * @see fr.istic.synthlab.abstraction.IModule#stop()
 	 */
+	@Override
 	public void stop() {
 		if (isRunning()) isRunning = false;
 	}
@@ -51,6 +53,7 @@ public abstract class AModule implements IModule {
 	 * 
 	 * @see fr.istic.synthlab.abstraction.IModule#isRunning()
 	 */
+	@Override
 	public boolean isRunning() {
 		return isRunning;
 	}
@@ -58,6 +61,7 @@ public abstract class AModule implements IModule {
 	/* (non-Javadoc)
 	 * @see fr.istic.synthlab.abstraction.IModule#addParameter(fr.istic.synthlab.abstraction.IParameter)
 	 */
+	@Override
 	public void addParameter(IParameter param) {
 		this.parameters.add(param);
 	}
@@ -65,6 +69,7 @@ public abstract class AModule implements IModule {
 	/* (non-Javadoc)
 	 * @see fr.istic.synthlab.abstraction.IModule#removeParameter(fr.istic.synthlab.abstraction.IParameter)
 	 */
+	@Override
 	public void removeParameter(IParameter param) {
 		this.parameters.remove(param);
 	}
@@ -72,6 +77,7 @@ public abstract class AModule implements IModule {
 	/* (non-Javadoc)
 	 * @see fr.istic.synthlab.abstraction.IModule#getParameter(int)
 	 */
+	@Override
 	public IParameter getParameter(int i) {
 		return this.parameters.get(i);
 	}
@@ -79,6 +85,7 @@ public abstract class AModule implements IModule {
 	/* (non-Javadoc)
 	 * @see fr.istic.synthlab.abstraction.IModule#getParameters()
 	 */
+	@Override
 	public List<IParameter> getParameters() {
 		return this.parameters;
 	}
@@ -86,6 +93,7 @@ public abstract class AModule implements IModule {
 	/* (non-Javadoc)
 	 * @see fr.istic.synthlab.abstraction.IModule#addPort(fr.istic.synthlab.abstraction.IPort)
 	 */
+	@Override
 	public void addPort(IPort port) {
 		this.ports.add(port);
 	}
@@ -93,6 +101,7 @@ public abstract class AModule implements IModule {
 	/* (non-Javadoc)
 	 * @see fr.istic.synthlab.abstraction.IModule#removePort(fr.istic.synthlab.abstraction.IPort)
 	 */
+	@Override
 	public void removePort(IPort port) {
 		this.ports.remove(port);
 	}
@@ -100,6 +109,7 @@ public abstract class AModule implements IModule {
 	/* (non-Javadoc)
 	 * @see fr.istic.synthlab.abstraction.IModule#getPort(int)
 	 */
+	@Override
 	public IPort getPort(int i) {
 		return this.ports.get(i);
 	}
@@ -107,6 +117,7 @@ public abstract class AModule implements IModule {
 	/* (non-Javadoc)
 	 * @see fr.istic.synthlab.abstraction.IModule#getPorts()
 	 */
+	@Override
 	public List<IPort> getPorts() {
 		return this.ports;
 	}

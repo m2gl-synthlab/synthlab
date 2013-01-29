@@ -31,6 +31,7 @@ public class Synthetizer implements ISynthesizer {
 	 * 
 	 * @see fr.istic.synthlab.abstraction.ISynthesizer#start()
 	 */
+	@Override
 	public void start() {
 		if(!isRunning()){
 			isRunning = true;
@@ -45,6 +46,7 @@ public class Synthetizer implements ISynthesizer {
 	 * 
 	 * @see fr.istic.synthlab.abstraction.ISynthesizer#stop()
 	 */
+	@Override
 	public void stop() {
 		if(isRunning()){
 			for (IModule m : modules) {
@@ -59,6 +61,7 @@ public class Synthetizer implements ISynthesizer {
 	 * 
 	 * @see fr.istic.synthlab.abstraction.ISynthesizer#isRunning()
 	 */
+	@Override
 	public boolean isRunning() {
 		return isRunning;
 	}
@@ -68,6 +71,7 @@ public class Synthetizer implements ISynthesizer {
 	 * 
 	 * @see fr.istic.synthlab.abstraction.ISynthesizer#addModule(fr.istic.synthlab.abstraction.IModule)
 	 */
+	@Override
 	public void addModule(IModule module) {
 		modules.add(module);
 	}
@@ -77,8 +81,25 @@ public class Synthetizer implements ISynthesizer {
 	 * 
 	 * @see fr.istic.synthlab.abstraction.ISynthesizer#removeModule(fr.istic.synthlab.abstraction.IModule)
 	 */
+	@Override
 	public void removeModule(IModule module) {
 		modules.remove(module);
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.istic.synthlab.abstraction.ISynthesizer#getModule(int)
+	 */
+	@Override
+	public IModule getModule(int i) {
+		return modules.get(i);
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.istic.synthlab.abstraction.ISynthesizer#getModules()
+	 */
+	@Override
+	public List<IModule> getModules() {
+		return modules;
 	}
 
 }

@@ -16,6 +16,7 @@ public class OutputPort implements IPort{
 	/* (non-Javadoc)
 	 * @see fr.istic.synthlab.abstraction.IPort#getName()
 	 */
+	@Override
 	public String getName() {
 		return this.name;
 	}
