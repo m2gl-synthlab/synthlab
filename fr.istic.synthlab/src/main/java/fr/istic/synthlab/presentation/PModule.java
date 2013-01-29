@@ -1,13 +1,12 @@
 package fr.istic.synthlab.presentation;
 
-public class PModule {
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+public class PModule extends JPanel{
 
+	public PModule(String name){
+		JLabel nameLbl = new JLabel(name);
+		this.add(nameLbl);
 	}
-
 }

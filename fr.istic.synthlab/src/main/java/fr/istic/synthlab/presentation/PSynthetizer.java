@@ -9,8 +9,12 @@ public class PSynthetizer extends JPanel {
 
 	public PSynthetizer(){
 
-		this.setLayout(new BorderLayout());
-		JLabel label = new JLabel("Le tout premier texte !");
+		//this.setLayout(new BorderLayout());
+		JLabel label = new JLabel("PSynthetizer!");
 		this.add(label);
+	}
+
+	public void addPModule(PModule pModule) {
+		this.add(pModule);
 	}
 }

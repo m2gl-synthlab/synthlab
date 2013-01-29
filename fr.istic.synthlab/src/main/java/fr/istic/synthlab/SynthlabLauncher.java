@@ -26,16 +26,6 @@ public class SynthlabLauncher {
 		
 		
 		CSynthetizer syn = (CSynthetizer)factory.newSynthesizer(factory);
-		CModule vco = (CModule)factory.newVCO(factory);
-		CModule vca = (CModule)factory.newVCA(factory);
-		syn.addModule(vco);
-		syn.addModule(vca);
-		
-		CWire wire = (CWire)factory.newWire(factory);
-		wire.connect((OutputPort) vco.getPort(0));
-		wire.connect((InputPort) vca.getPort(0));
-		
-		
 		
 		// Construction de la Frame contenant le Panel du Synthetizer
 		JFrame frame = new JFrame("Synthetizer Grp2");
