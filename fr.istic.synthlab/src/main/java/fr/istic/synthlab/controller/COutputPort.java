@@ -1,18 +1,13 @@
 package fr.istic.synthlab.controller;
 
-import fr.istic.synthlab.abstraction.IPort;
+import fr.istic.synthlab.abstraction.impl.OutputPort;
 
-public class COutputPort implements IPort {
+public class COutputPort extends OutputPort {
 
-	private String name;
 
 	public COutputPort(String name) {
-		this.name = name;
+		super(name);
 	}
 	
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

@@ -2,9 +2,10 @@ package fr.istic.synthlab.controller;
 
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.ISynthetizer;
+import fr.istic.synthlab.abstraction.impl.Synthetizer;
 import fr.istic.synthlab.presentation.PSynthetizer;
 
-public class CSynthetizer implements ISynthetizer {
+public class CSynthetizer extends Synthetizer {
 
 	private PSynthetizer pSynthetizer;
 	
@@ -17,29 +18,5 @@ public class CSynthetizer implements ISynthetizer {
 	public PSynthetizer getPresentation(){
 		return pSynthetizer;
 	}
-	
-	public void start() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	public void stop() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public boolean isRunning() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public void addModule(IModule module) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void removeModule(IModule module) {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -1,30 +1,11 @@
 package fr.istic.synthlab.controller;
 
 import fr.istic.synthlab.abstraction.IPort;
-import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.InputPort;
 import fr.istic.synthlab.abstraction.impl.OutputPort;
+import fr.istic.synthlab.abstraction.impl.Wire;
 
-public class CWire implements IWire {
+public class CWire extends Wire {
 
-	public IPort getInput() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public IPort getOutput() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void connect(InputPort port) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void connect(OutputPort port) {
-		// TODO Auto-generated method stub
-
-	}
 
 }
