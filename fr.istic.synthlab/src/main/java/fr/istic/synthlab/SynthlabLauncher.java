@@ -1,9 +1,19 @@
 package fr.istic.synthlab;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.KeyStroke;
 
 import fr.istic.synthlab.abstraction.impl.InputPort;
 import fr.istic.synthlab.abstraction.impl.OutputPort;
@@ -42,17 +52,6 @@ public class SynthlabLauncher {
 		CWire wire = (CWire)factory.newWire(factory);
 		wire.connect((OutputPort) vco.getPort(0));
 		wire.connect((InputPort) vca.getPort(0));
-		
-		
-		// Construction de la Frame contenant le Panel du Synthetizer
-		JFrame frame = new JFrame("Synthetizer Grp2");
-		frame.getContentPane().add((JPanel)syn.getPresentation());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(850, 700);
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
-		frame.setResizable(true);
-		frame.setVisible(true);
 		
 		System.out.println("Beep!");
 		Toolkit.getDefaultToolkit().beep();
