@@ -11,6 +11,9 @@ public class POutputPort extends JPanel implements IPOutputPort {
 
 	public POutputPort(ICOutputPort control) {
 		ctrl = control;
+
+		this.setSize(100, 100);
+		this.setPreferredSize(this.getSize());
 		this.setBorder(BorderFactory.createTitledBorder(getClass().getSimpleName()));
 	}
 	

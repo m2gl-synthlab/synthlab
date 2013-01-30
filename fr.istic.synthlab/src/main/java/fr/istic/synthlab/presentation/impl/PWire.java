@@ -19,7 +19,7 @@ public class PWire extends JPanel implements IPWire {
 	 */
 	public PWire(ICWire control) {
 		this.ctrl = control;
-		this.setSize(10, 60);
+		this.setSize(200, 200);
 		this.setPreferredSize(this.getSize());
 		this.setBorder(BorderFactory.createTitledBorder(getClass().getSimpleName()));
 	}

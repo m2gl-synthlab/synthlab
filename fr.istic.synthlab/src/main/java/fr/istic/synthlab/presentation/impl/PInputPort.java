@@ -12,6 +12,9 @@ public class PInputPort extends JPanel implements IPInputPort {
 
 	public PInputPort(ICInputPort control) {
 		ctrl = control;
+
+		this.setSize(100, 100);
+		this.setPreferredSize(this.getSize());
 		this.setBorder(BorderFactory.createTitledBorder(getClass().getSimpleName()));
 	}
 	
