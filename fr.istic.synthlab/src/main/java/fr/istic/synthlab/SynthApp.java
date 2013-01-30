@@ -41,8 +41,10 @@ public class SynthApp implements ISynthApp {
 	public void newSynth() {
 		// Ajout des modules
 		CModule vco = (CModule)PACFactory.getFactory().newVCO(PACFactory.getFactory());
+		CModule vco2 = (CModule)PACFactory.getFactory().newVCO(PACFactory.getFactory());
 		CModule vca = (CModule)PACFactory.getFactory().newVCA(PACFactory.getFactory());
 		synth.addModule(vco);
+		synth.addModule(vco2);
 		synth.addModule(vca);
 		
 		// Ajout des fils

@@ -1,5 +1,6 @@
 package fr.istic.synthlab.presentation.impl;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -14,9 +15,7 @@ public class PSynthesizer extends JPanel implements IPSynthesizer {
 
 	public PSynthesizer(ICSynthesizer control) {
 		ctrl = control;
-
-		JLabel label = new JLabel(getClass().getSimpleName());
-		this.add(label);
+		this.setBorder(BorderFactory.createTitledBorder(getClass().getSimpleName()));
 	}
 
 	@Override

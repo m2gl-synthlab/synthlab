@@ -129,7 +129,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private void configureView() {
 		// parametrage de la JFrame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(850, 700);
+		this.setSize(1400, 880);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height
 				/ 2 - this.getSize().height / 2);
