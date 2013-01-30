@@ -1,16 +1,13 @@
 package fr.istic.synthlab.presentation.impl;
 
 import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Insets;
 
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.presentation.IPModule;
+import fr.istic.synthlab.presentation.IPPort;
 
 /**
  * 
@@ -39,5 +36,10 @@ public class PModule extends JPanel implements IPModule {
 	@Override
 	public ICModule getControl() {
 		return ctrl;
+	}
+
+	@Override
+	public void addPort(IPPort port) {
+		this.add((Component)port);
 	}
 }

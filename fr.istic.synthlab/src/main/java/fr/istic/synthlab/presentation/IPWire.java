@@ -10,4 +10,6 @@ public interface IPWire {
 	 * @return the controller
 	 */
 	public ICWire getControl();
+
+	public void connect(IPPort presentation);
 }

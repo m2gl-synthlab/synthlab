@@ -1,5 +1,5 @@
 package fr.istic.synthlab.controller;
 
-public interface ICInputPort {
+public interface ICInputPort extends ICPort {
 
 }
