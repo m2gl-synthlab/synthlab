@@ -3,9 +3,9 @@ import java.awt.Toolkit;
 
 import fr.istic.synthlab.abstraction.impl.InputPort;
 import fr.istic.synthlab.abstraction.impl.OutputPort;
-import fr.istic.synthlab.command.DisplayCommand;
 import fr.istic.synthlab.command.ICommand;
-import fr.istic.synthlab.command.UndisplayCommand;
+import fr.istic.synthlab.command.app.DisplayCommand;
+import fr.istic.synthlab.command.app.UndisplayCommand;
 import fr.istic.synthlab.command.menu.AboutCommand;
 import fr.istic.synthlab.command.menu.DocumentationCommand;
 import fr.istic.synthlab.command.menu.NewSynthCommand;

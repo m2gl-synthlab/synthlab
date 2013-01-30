@@ -1,17 +1,18 @@
-package fr.istic.synthlab.command;
+package fr.istic.synthlab.command.app;
 
 import fr.istic.synthlab.ISynthApp;
 import fr.istic.synthlab.ISynthFrame;
+import fr.istic.synthlab.command.ICommand;
 
 /**
- * Command that hide the synthesizer
+ * Command that display the synthesizer
  */
-public class UndisplayCommand implements ICommand {
+public class DisplayCommand implements ICommand {
 
 	private ISynthApp synthApp;
 	private ISynthFrame synthFrame;
 
-	public UndisplayCommand(ISynthApp synthApp, ISynthFrame synthFrame) {
+	public DisplayCommand(ISynthApp synthApp, ISynthFrame synthFrame) {
 		this.synthApp = synthApp;
 		this.synthFrame = synthFrame;
 	}
@@ -23,6 +24,6 @@ public class UndisplayCommand implements ICommand {
 	 */
 	@Override
 	public void execute() {
-		synthFrame.quitSynth();
+		synthFrame.displaySynth(synthApp.getSynthesizer().getPresentation());
 	}
 }
