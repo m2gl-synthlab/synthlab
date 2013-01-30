@@ -1,15 +1,20 @@
 package fr.istic.synthlab;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
 import fr.istic.synthlab.command.ICommand;
@@ -21,11 +26,23 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private static final long serialVersionUID = -7577358239451859975L;
 
 	private IPSynthesizer pres;
+
+	// Menu
 	private JMenuBar mainMenuBar;
 	private JMenu menuFile, menuHelp;
 	private JMenuItem menuItemNew, menuItemOpen, menuItemSave;
 	private JMenuItem menuItemQuit, menuItemDoc, menuItemAbout;
 
+	// Toolbar
+	private JToolBar toolBar = new JToolBar();
+	private String[] iconFiles = { "new.gif", "open.gif", "save.gif",
+			"cut.gif", "copy.gif", "paste.gif" };
+	private String[] buttonLabels = { "New", "Open", "Save", "Cut", "Copy",
+			"Paste" };
+	private ImageIcon[] icons = new ImageIcon[iconFiles.length];
+	private JButton[] buttons = new JButton[buttonLabels.length];
+
+	// Command
 	private ICommand newSynthCommand;
 	private ICommand saveSynthCommand;
 	private ICommand openSynthCommand;
@@ -76,6 +93,19 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		mainMenuBar.add(menuHelp);
 
 		this.setJMenuBar(mainMenuBar);
+
+		// Toolbar
+		Container frameContainer = getContentPane();
+		frameContainer.setLayout(new BorderLayout());
+		for (int i = 0; i < buttonLabels.length; ++i) {
+			icons[i] = new ImageIcon(iconFiles[i]);
+			buttons[i] = new JButton(icons[i]);
+			buttons[i].setToolTipText(buttonLabels[i]);
+			if (i == 3)
+				toolBar.addSeparator();
+			toolBar.add(buttons[i]);
+		}
+		frameContainer.add("North", toolBar);
 
 	}
 
@@ -158,18 +188,24 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		});
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.istic.synthlab.ISynthFrame#displaySynth(fr.istic.synthlab.presentation.IPSynthesizer)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.istic.synthlab.ISynthFrame#displaySynth(fr.istic.synthlab.presentation
+	 * .IPSynthesizer)
 	 */
 	@Override
 	public void displaySynth(IPSynthesizer presentation) {
-		
+
 		pres = presentation;
-		this.add((PSynthesizer)pres);
+		this.add((PSynthesizer) pres);
 		this.setVisible(true);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.istic.synthlab.ISynthFrame#quitSynth()
 	 */
 	@Override
@@ -178,46 +214,51 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	}
 
 	/**
-	 * @param newSynthCommand the newSynthCommand to set
+	 * @param newSynthCommand
+	 *            the newSynthCommand to set
 	 */
 	public void setNewSynthCommand(ICommand newSynthCommand) {
 		this.newSynthCommand = newSynthCommand;
 	}
 
 	/**
-	 * @param saveSynthCommand the saveSynthCommand to set
+	 * @param saveSynthCommand
+	 *            the saveSynthCommand to set
 	 */
 	public void setSaveSynthCommand(ICommand saveSynthCommand) {
 		this.saveSynthCommand = saveSynthCommand;
 	}
 
 	/**
-	 * @param openSynthCommand the openSynthCommand to set
+	 * @param openSynthCommand
+	 *            the openSynthCommand to set
 	 */
 	public void setOpenSynthCommand(ICommand openSynthCommand) {
 		this.openSynthCommand = openSynthCommand;
 	}
 
 	/**
-	 * @param quitSynthCommand the quitSynthCommand to set
+	 * @param quitSynthCommand
+	 *            the quitSynthCommand to set
 	 */
 	public void setQuitSynthCommand(ICommand quitSynthCommand) {
 		this.quitSynthCommand = quitSynthCommand;
 	}
 
 	/**
-	 * @param docSynthCommand the docSynthCommand to set
+	 * @param docSynthCommand
+	 *            the docSynthCommand to set
 	 */
 	public void setDocSynthCommand(ICommand docSynthCommand) {
 		this.docSynthCommand = docSynthCommand;
 	}
 
 	/**
-	 * @param aboutSynthCommand the aboutSynthCommand to set
+	 * @param aboutSynthCommand
+	 *            the aboutSynthCommand to set
 	 */
 	public void setAboutSynthCommand(ICommand aboutSynthCommand) {
 		this.aboutSynthCommand = aboutSynthCommand;
 	}
-	
 
 }
