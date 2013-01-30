@@ -1,5 +1,7 @@
 package fr.istic.synthlab.controller.impl;
 
+import javax.swing.JPanel;
+
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.InputPort;
 import fr.istic.synthlab.abstraction.impl.OutputPort;
@@ -25,12 +27,15 @@ public class CWire extends Wire implements ICWire {
 	}
 	
 	public void connect(ICPort port){
-		System.out.println("tante");
 		if(port instanceof OutputPort){
 			super.connect((OutputPort)port);
 		} else {
 			super.connect((InputPort)port);
+			
 		}
+		((JPanel)port.getPresentation()).getX();
+		((JPanel)port.getPresentation()).getY();
+		
 		port.getPresentation().connect(pres);
 	}
 }

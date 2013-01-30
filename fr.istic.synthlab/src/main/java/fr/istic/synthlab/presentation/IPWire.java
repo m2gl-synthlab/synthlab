@@ -10,4 +10,6 @@ public interface IPWire {
 	 * @return the controller
 	 */
 	public ICWire getControl();
+
+	public void setXY(int x, int y);
 }

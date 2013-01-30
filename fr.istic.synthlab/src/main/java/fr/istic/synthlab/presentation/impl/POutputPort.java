@@ -23,7 +23,9 @@ public class POutputPort extends JPanel implements IPOutputPort {
 		return ctrl;
 	}
 
-	public void connect(IPWire wire){
-		this.add((PWire) wire);
+	public void connect(IPWire wire)
+	{
+		//wire.setXY(this.getLocation().x, this.getLocation().y);
+		//TODO
 	}
 }
