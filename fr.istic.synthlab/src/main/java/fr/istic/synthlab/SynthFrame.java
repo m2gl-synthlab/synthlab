@@ -3,11 +3,15 @@ package fr.istic.synthlab;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -35,11 +39,9 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 	// Toolbar
 	private JToolBar toolBar = new JToolBar();
-	private String[] iconFiles = { "new.gif", "open.gif", "save.gif",
-			"cut.gif", "copy.gif", "paste.gif" };
-	private String[] buttonLabels = { "New", "Open", "Save", "Cut", "Copy",
-			"Paste" };
-	private ImageIcon[] icons = new ImageIcon[iconFiles.length];
+	private String[] iconFiles = { "res/cable.png", "res/module.png" };
+	private String[] buttonLabels = { "Cable", "Module" };
+	private Image[] icons = new Image[iconFiles.length];
 	private JButton[] buttons = new JButton[buttonLabels.length];
 
 	// Command
@@ -98,8 +100,14 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		Container frameContainer = getContentPane();
 		frameContainer.setLayout(new BorderLayout());
 		for (int i = 0; i < buttonLabels.length; ++i) {
-			icons[i] = new ImageIcon(iconFiles[i]);
-			buttons[i] = new JButton(icons[i]);
+			try {
+				Image img = ImageIO.read( new File(iconFiles[i]) );
+				icons[i] = img.getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			buttons[i] = new JButton(new ImageIcon(icons[i]));
 			buttons[i].setToolTipText(buttonLabels[i]);
 			if (i == 3)
 				toolBar.addSeparator();
