@@ -4,11 +4,11 @@ import fr.istic.synthlab.ISynthApp;
 /**
  * Command that quit the application
  */
-public class QuitCommand implements ICommand {
+public class QuitSynthCommand implements ICommand {
 
 	private ISynthApp synthApp;
 
-	public QuitCommand(ISynthApp synthApp) {
+	public QuitSynthCommand(ISynthApp synthApp) {
 		this.synthApp = synthApp;
 	}
 

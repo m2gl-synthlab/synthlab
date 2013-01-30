@@ -8,6 +8,11 @@ public interface ISynthFrame {
 	 * Display the synthesizer presentation
 	 * @param presentation
 	 */
-	void displaySynth(IPSynthesizer presentation);
+	public void displaySynth(IPSynthesizer presentation);
+
+	/**
+	 * Close the synthesizer
+	 */
+	public void quitSynth();
 
 }

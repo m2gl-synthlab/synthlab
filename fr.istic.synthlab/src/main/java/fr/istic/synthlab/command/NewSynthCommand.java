@@ -4,11 +4,11 @@ import fr.istic.synthlab.ISynthApp;
 /**
  * Command that create a new synthesizer
  */
-public class NewCommand implements ICommand{
+public class NewSynthCommand implements ICommand{
 
 	private ISynthApp synthApp;
 
-	public NewCommand(ISynthApp synthApp) {
+	public NewSynthCommand(ISynthApp synthApp) {
 		this.synthApp = synthApp;
 	}
 

@@ -3,8 +3,15 @@ import java.awt.Toolkit;
 
 import fr.istic.synthlab.abstraction.impl.InputPort;
 import fr.istic.synthlab.abstraction.impl.OutputPort;
+import fr.istic.synthlab.command.AboutCommand;
 import fr.istic.synthlab.command.DisplayCommand;
+import fr.istic.synthlab.command.DocumentationCommand;
 import fr.istic.synthlab.command.ICommand;
+import fr.istic.synthlab.command.NewSynthCommand;
+import fr.istic.synthlab.command.OpenSynthCommand;
+import fr.istic.synthlab.command.QuitSynthCommand;
+import fr.istic.synthlab.command.SaveSynthCommand;
+import fr.istic.synthlab.command.UndisplayCommand;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.impl.CModule;
 import fr.istic.synthlab.controller.impl.CSynthesizer;
@@ -20,6 +27,7 @@ public class SynthApp implements ISynthApp {
 	private ICSynthesizer synth;
 	private ISynthFrame synthFrame;
 	private ICommand displayCmd;
+	private ICommand undisplayCmd;
 	
 	public static void main(String[] args) {
 		SynthApp app = new SynthApp();
@@ -35,8 +43,17 @@ public class SynthApp implements ISynthApp {
 		
 		app.setSynthesizer(syn);
 		app.setDisplaySynthCommand(new DisplayCommand(app, frame));
-		//app.setUndisplaySynthCommand(new DisplayCommand(app, frame));
-		//TODO
+		app.setUndisplaySynthCommand(new UndisplayCommand(app, frame));
+
+		frame.setNewSynthCommand(new NewSynthCommand(app));
+		frame.setOpenSynthCommand(new OpenSynthCommand());
+		frame.setSaveSynthCommand(new SaveSynthCommand());
+		frame.setQuitSynthCommand(new QuitSynthCommand(app));
+		frame.setDocSynthCommand(new DocumentationCommand());
+		frame.setAboutSynthCommand(new AboutCommand());
+		
+		
+		
 		
 		app.startSynth();
 		
@@ -71,8 +88,9 @@ public class SynthApp implements ISynthApp {
 
 	@Override
 	public void quitSynth() {
-		// TODO Auto-generated method stub
-		
+		this.synth = null;
+		undisplayCmd.execute();
+		System.exit(0);
 	}
 
 	@Override
@@ -92,8 +110,7 @@ public class SynthApp implements ISynthApp {
 
 	@Override
 	public void setUndisplaySynthCommand(ICommand undisplaySynthCommand) {
-		// TODO Auto-generated method stub
-		
+		this.undisplayCmd = undisplaySynthCommand;
 	}
 
 }
