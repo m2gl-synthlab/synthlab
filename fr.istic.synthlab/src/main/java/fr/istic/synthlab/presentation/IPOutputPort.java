@@ -1,7 +1,6 @@
 package fr.istic.synthlab.presentation;
 
 import fr.istic.synthlab.controller.ICOutputPort;
-import fr.istic.synthlab.controller.ICParameter;
 
 public interface IPOutputPort {
 	/**

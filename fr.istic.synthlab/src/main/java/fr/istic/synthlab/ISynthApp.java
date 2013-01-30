@@ -2,7 +2,6 @@ package fr.istic.synthlab;
 
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.controller.ICSynthesizer;
-import fr.istic.synthlab.controller.impl.CSynthesizer;
 
 public interface ISynthApp {
 
