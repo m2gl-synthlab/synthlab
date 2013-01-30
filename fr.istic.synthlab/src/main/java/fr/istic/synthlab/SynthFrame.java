@@ -29,6 +29,11 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 	private static final long serialVersionUID = -7577358239451859975L;
 
+	private static final int BUTTON_DEFAULT = 0;
+	private static final int BUTTON_CABLE = 1;
+	private static final int BUTTON_MODULE = 2;
+	
+	
 	private IPSynthesizer pres;
 
 	// Menu
@@ -39,8 +44,8 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 	// Toolbar
 	private JToolBar toolBar = new JToolBar();
-	private String[] iconFiles = { "res/cable.png", "res/module.png" };
-	private String[] buttonLabels = { "Cable", "Module" };
+	private String[] iconFiles = { "res/default.png", "res/cable.png", "res/module.png" };
+	private String[] buttonLabels = { "Default", "Cable", "Module" };
 	private Image[] icons = new Image[iconFiles.length];
 	private JButton[] buttons = new JButton[buttonLabels.length];
 
@@ -106,11 +111,8 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
 			buttons[i] = new JButton(new ImageIcon(icons[i]));
 			buttons[i].setToolTipText(buttonLabels[i]);
-			if (i == 3)
-				toolBar.addSeparator();
 			toolBar.add(buttons[i]);
 		}
 		frameContainer.add("North", toolBar);
@@ -194,6 +196,28 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 					aboutSynthCommand.execute();
 			}
 		});
+		
+		buttons[BUTTON_DEFAULT].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		
+		buttons[BUTTON_CABLE].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		
+		buttons[BUTTON_MODULE].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+		
 	}
 
 	/*
