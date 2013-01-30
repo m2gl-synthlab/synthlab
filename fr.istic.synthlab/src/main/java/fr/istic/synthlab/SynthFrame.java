@@ -30,7 +30,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private static final long serialVersionUID = -7577358239451859975L;
 
 	private static final int BUTTON_DEFAULT = 0;
-	private static final int BUTTON_CABLE = 1;
+	private static final int BUTTON_WIRE = 1;
 	private static final int BUTTON_MODULE = 2;
 	
 	
@@ -44,8 +44,8 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 	// Toolbar
 	private JToolBar toolBar = new JToolBar();
-	private String[] iconFiles = { "res/default.png", "res/cable.png", "res/module.png" };
-	private String[] buttonLabels = { "Default", "Cable", "Module" };
+	private String[] iconFiles = { "res/default.png", "res/wire.png", "res/module.png" };
+	private String[] buttonLabels = { "Default", "Wire", "Module" };
 	private Image[] icons = new Image[iconFiles.length];
 	private JButton[] buttons = new JButton[buttonLabels.length];
 
@@ -56,6 +56,9 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand quitSynthCommand;
 	private ICommand docSynthCommand;
 	private ICommand aboutSynthCommand;
+	private ICommand toolbarDefaultCommand;
+	private ICommand toolbarWireCommand;
+	private ICommand toolbarModuleCommand;
 
 	public SynthFrame() {
 
@@ -200,21 +203,24 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		buttons[BUTTON_DEFAULT].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				if (toolbarDefaultCommand != null)
+					toolbarDefaultCommand.execute();
 			}
 		});
 		
-		buttons[BUTTON_CABLE].addActionListener(new ActionListener() {
+		buttons[BUTTON_WIRE].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				if (toolbarWireCommand != null)
+					toolbarWireCommand.execute();
 			}
 		});
 		
 		buttons[BUTTON_MODULE].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				if (toolbarModuleCommand != null)
+					toolbarModuleCommand.execute();
 			}
 		});
 		
@@ -291,6 +297,30 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	 */
 	public void setAboutSynthCommand(ICommand aboutSynthCommand) {
 		this.aboutSynthCommand = aboutSynthCommand;
+	}
+
+	/**
+	 * @param toolbarDefaultCommand
+	 *            the toolbarDefaultCommand to set
+	 */
+	public void setToolbarDefaultCommand(ICommand toolbarDefaultCommand) {
+		this.toolbarDefaultCommand = toolbarDefaultCommand;
+	}
+	
+	/**
+	 * @param toolbarDefaultWire
+	 *            the toolbarWireCommand to set
+	 */
+	public void setToolbarWireCommand(ICommand toolbarWireCommand) {
+		this.toolbarWireCommand = toolbarWireCommand;
+	}
+	
+	/**
+	 * @param toolbarModuleCommand
+	 *            the toolbarModuleCommand to set
+	 */
+	public void setToolbarModuleCommand(ICommand toolbarModuleCommand) {
+		this.toolbarModuleCommand = toolbarModuleCommand;
 	}
 
 }

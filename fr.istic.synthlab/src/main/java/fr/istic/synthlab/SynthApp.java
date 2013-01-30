@@ -12,6 +12,9 @@ import fr.istic.synthlab.command.menu.NewSynthCommand;
 import fr.istic.synthlab.command.menu.OpenSynthCommand;
 import fr.istic.synthlab.command.menu.QuitSynthCommand;
 import fr.istic.synthlab.command.menu.SaveSynthCommand;
+import fr.istic.synthlab.command.toolbar.ToolbarDefaultCommand;
+import fr.istic.synthlab.command.toolbar.ToolbarModuleCommand;
+import fr.istic.synthlab.command.toolbar.ToolbarWireCommand;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.impl.CModule;
 import fr.istic.synthlab.controller.impl.CSynthesizer;
@@ -50,6 +53,10 @@ public class SynthApp implements ISynthApp {
 		frame.setQuitSynthCommand(new QuitSynthCommand(app));
 		frame.setDocSynthCommand(new DocumentationCommand());
 		frame.setAboutSynthCommand(new AboutCommand());
+		frame.setToolbarDefaultCommand(new ToolbarDefaultCommand());
+		frame.setToolbarWireCommand(new ToolbarWireCommand());
+		frame.setToolbarModuleCommand(new ToolbarModuleCommand());
+		
 		
 		app.startSynth();
 		
