@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 
 import fr.istic.synthlab.controller.ICInputPort;
 import fr.istic.synthlab.presentation.IPInputPort;
+import fr.istic.synthlab.presentation.IPWire;
 
 public class PInputPort extends JPanel implements IPInputPort {
 
@@ -23,4 +24,7 @@ public class PInputPort extends JPanel implements IPInputPort {
 		return ctrl;
 	}
 
+	public void connect(IPWire wire){
+		this.add((PWire) wire);
+	}
 }

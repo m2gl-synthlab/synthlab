@@ -19,19 +19,14 @@ public class PWire extends JPanel implements IPWire {
 	 */
 	public PWire(ICWire control) {
 		this.ctrl = control;
-		this.setSize(200, 200);
+		this.setSize(60, 60);
 		this.setPreferredSize(this.getSize());
-		this.setBorder(BorderFactory.createTitledBorder(getClass().getSimpleName()));
+		this.add(new JLabel("Wire"));
+		this.repaint();
 	}
 	
 	@Override
 	public ICWire getControl() {
 		return ctrl;
 	}
-
-	@Override
-	public void connect(IPPort presentation) {
-		this.add(new JLabel(presentation.getClass().getSimpleName()));
-	}
-
 }

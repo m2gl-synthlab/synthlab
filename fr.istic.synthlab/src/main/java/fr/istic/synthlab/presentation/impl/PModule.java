@@ -3,6 +3,7 @@ package fr.istic.synthlab.presentation.impl;
 import java.awt.Component;
 
 import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fr.istic.synthlab.controller.ICModule;
@@ -40,6 +41,6 @@ public class PModule extends JPanel implements IPModule {
 
 	@Override
 	public void addPort(IPPort port) {
-		this.add((Component)port);
+		this.add((JPanel)port);
 	}
 }

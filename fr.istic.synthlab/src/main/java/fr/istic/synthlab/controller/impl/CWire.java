@@ -25,11 +25,12 @@ public class CWire extends Wire implements ICWire {
 	}
 	
 	public void connect(ICPort port){
+		System.out.println("tante");
 		if(port instanceof OutputPort){
 			super.connect((OutputPort)port);
 		} else {
 			super.connect((InputPort)port);
 		}
-		pres.connect(port.getPresentation());
+		port.getPresentation().connect(pres);
 	}
 }

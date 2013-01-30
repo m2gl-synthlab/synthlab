@@ -9,4 +9,5 @@ public interface IPPort {
 	 * @return the controller
 	 */
 	public ICPort getControl();
+	public void connect(IPWire wire);
 }

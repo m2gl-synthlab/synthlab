@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 
 import fr.istic.synthlab.controller.ICOutputPort;
 import fr.istic.synthlab.presentation.IPOutputPort;
+import fr.istic.synthlab.presentation.IPWire;
 
 public class POutputPort extends JPanel implements IPOutputPort {
 	private ICOutputPort ctrl;
@@ -22,4 +23,7 @@ public class POutputPort extends JPanel implements IPOutputPort {
 		return ctrl;
 	}
 
+	public void connect(IPWire wire){
+		this.add((PWire) wire);
+	}
 }
