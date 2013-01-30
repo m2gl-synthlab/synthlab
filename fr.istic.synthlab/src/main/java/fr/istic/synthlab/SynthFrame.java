@@ -29,11 +29,11 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 	private static final long serialVersionUID = -7577358239451859975L;
 
+	// constantes pour les boutons de la toolbar
 	private static final int BUTTON_DEFAULT = 0;
 	private static final int BUTTON_WIRE = 1;
 	private static final int BUTTON_MODULE = 2;
-	
-	
+
 	private IPSynthesizer pres;
 
 	// Menu
@@ -61,50 +61,50 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand toolbarModuleCommand;
 
 	public SynthFrame() {
-
 		this.initComponents();
 		this.configureView();
 		this.defineCallbacks();
-
 	}
 
 	/**
 	 * Initialize the frame's components
 	 */
 	private void initComponents() {
+		// instanciation de la barre de menu
 		mainMenuBar = new JMenuBar();
 
 		// -------------------------- File Menu --------------------------
 		menuFile = new JMenu("File");
 
+		// instanciation des items
 		menuItemNew = new JMenuItem("New");
-		menuFile.add(menuItemNew);
-
 		menuItemOpen = new JMenuItem("Open");
-		menuFile.add(menuItemOpen);
-
 		menuItemSave = new JMenuItem("Save");
-		menuFile.add(menuItemSave);
-
 		menuItemQuit = new JMenuItem("Quit");
-		menuFile.add(menuItemQuit);
 
+		// ajout des items au menu File
+		menuFile.add(menuItemNew);
+		menuFile.add(menuItemOpen);
+		menuFile.add(menuItemSave);
+		menuFile.add(menuItemQuit);
+		
 		// -------------------------- Help Menu --------------------------
 		menuHelp = new JMenu("Help");
 
+		// instanciation des items
 		menuItemDoc = new JMenuItem("Documentation");
-		menuHelp.add(menuItemDoc);
-
 		menuItemAbout = new JMenuItem("About");
-		menuHelp.add(menuItemAbout);
 
-		// Ajout des 2 menus
+		// ajout des items au menu Help
+		menuHelp.add(menuItemDoc);
+		menuHelp.add(menuItemAbout);
+		
+		// ajout des menus a la barre de menus
 		mainMenuBar.add(menuFile);
 		mainMenuBar.add(menuHelp);
-
 		this.setJMenuBar(mainMenuBar);
 
-		// Toolbar
+		// instanciation des boutons de la toolbar
 		Container frameContainer = getContentPane();
 		frameContainer.setLayout(new BorderLayout());
 		for (int i = 0; i < buttonLabels.length; ++i) {
@@ -118,14 +118,16 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			buttons[i].setToolTipText(buttonLabels[i]);
 			toolBar.add(buttons[i]);
 		}
+		
+		// ajout de la toolbar
 		frameContainer.add("North", toolBar);
-
 	}
 
 	/**
 	 * Configure the frame's components
 	 */
 	private void configureView() {
+		// parametrage de la JFrame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(850, 700);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -133,6 +135,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 				/ 2 - this.getSize().height / 2);
 		this.setResizable(true);
 
+		// ajout des raccourcis clavier au elements du menu
 		menuItemNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
 				ActionEvent.CTRL_MASK));
 		menuItemOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
@@ -235,7 +238,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	 */
 	@Override
 	public void displaySynth(IPSynthesizer presentation) {
-
 		pres = presentation;
 		this.add((PSynthesizer) pres);
 		this.setVisible(true);
