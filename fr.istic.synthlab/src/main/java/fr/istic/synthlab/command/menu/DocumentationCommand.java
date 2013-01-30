@@ -1,6 +1,8 @@
-package fr.istic.synthlab.command;
+package fr.istic.synthlab.command.menu;
 
-public class AboutCommand implements ICommand {
+import fr.istic.synthlab.command.ICommand;
+
+public class DocumentationCommand implements ICommand {
 
 	@Override
 	public void execute() {
