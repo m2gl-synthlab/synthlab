@@ -1,6 +1,5 @@
 package fr.istic.synthlab.factory.impl;
 
-
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.IParameter;
 import fr.istic.synthlab.abstraction.IPort;
@@ -8,6 +7,7 @@ import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.controller.impl.CInputPort;
 import fr.istic.synthlab.controller.impl.CModuleVCA;
+import fr.istic.synthlab.controller.impl.CModuleVCF;
 import fr.istic.synthlab.controller.impl.CModuleVCO;
 import fr.istic.synthlab.controller.impl.COutputPort;
 import fr.istic.synthlab.controller.impl.CSynthesizer;
@@ -34,36 +34,20 @@ public class CFactory implements IFactory {
 		return syn;
 	}
 
-//	public IModule newModule(String name, IFactory factory) { 
-//		IModule module = new CModule(name);
-//		return module;
-//	}
-	
 	public IModule newVCO(IFactory factory) {
 		IModule module = new CModuleVCO(MODULE_VCO);
-		//IPort out = factory.newOutputPort("out", factory);
-		//module.addPort(out);// TODO : add strategy and stuff to output something on this port
 		return module;
 	}
 
 	public IModule newVCF(IFactory factory) {
-//		IModule module = newModule(MODULE_VCF, factory);
-//		IPort in = factory.newInputPort("in", factory);
-//		IPort out = factory.newOutputPort("out", factory);
-//		module.addPort(in);
-//		module.addPort(out);// TODO : add strategy and stuff to output something on this port
-//		return module;
-		return null;
+		IModule module = new CModuleVCF(MODULE_VCF);
+		return module;
 	}
 
 	public IModule newVCA(IFactory factory) {
 		IModule module = new CModuleVCA(MODULE_VCA);
-//		IPort in = factory.newInputPort("in", factory);
-//		module.addPort(in);// TODO : add strategy and stuff to output something on the sound card
 		return module;
 	}
-
-	
 
 	public IParameter newParameter(String name, IFactory factory) {
 		// TODO Auto-generated method stub
@@ -74,7 +58,7 @@ public class CFactory implements IFactory {
 		IPort port = new CInputPort(name);
 		return port;
 	}
-	
+
 	public IPort newOutputPort(String name, IFactory factory) {
 		IPort port = new COutputPort(name);
 		return port;

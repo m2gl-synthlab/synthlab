@@ -6,6 +6,8 @@ import fr.istic.synthlab.abstraction.IPort;
 import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.InputPort;
+import fr.istic.synthlab.abstraction.impl.ModuleVCA;
+import fr.istic.synthlab.abstraction.impl.ModuleVCF;
 import fr.istic.synthlab.abstraction.impl.ModuleVCO;
 import fr.istic.synthlab.abstraction.impl.OutputPort;
 import fr.istic.synthlab.abstraction.impl.Synthesizer;
@@ -47,36 +49,17 @@ public class AFactory implements IFactory {
 
 	public IModule newVCO(IFactory factory) {
 		IModule module = new ModuleVCO();
-		// IPort out = factory.newOutputPort("out", factory);
-		// module.addPort(out);// TODO : add strategy and stuff to output
-		// something on this port
 		return module;
 	}
 
 	public IModule newVCF(IFactory factory) {
-		// TODO not implemented
-		System.err.println(this.getClass().getSimpleName()
-				+ ".newVCF() not implemented");
-		// IModule module = new ModuleVCF(MODULE_VCF);
-		// IPort in = factory.newInputPort("in", factory);
-		// IPort out = factory.newOutputPort("out", factory);
-		// module.addPort(in);
-		// module.addPort(out);// TODO : add strategy and stuff to output
-		// something on this port
-		// return module;
-		return null;
+		IModule module = new ModuleVCF();
+		return module;
 	}
 
 	public IModule newVCA(IFactory factory) {
-		// TODO not implemented
-		System.err.println(this.getClass().getSimpleName()
-				+ ".newVCA() not implemented");
-		// IModule module = new ModuleVCA(MODULE_VCA);
-		// IPort in = factory.newInputPort("in", factory);
-		// module.addPort(in);// TODO : add strategy and stuff to output
-		// something on the sound card
-		// return module;
-		return null;
+		IModule module = new ModuleVCA();
+		return module;
 	}
 
 	public IParameter newParameter(String name, IFactory factory) {
