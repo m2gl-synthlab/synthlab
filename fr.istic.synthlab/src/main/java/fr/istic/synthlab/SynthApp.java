@@ -1,12 +1,8 @@
 package fr.istic.synthlab;
-import java.awt.Toolkit;
-
-import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.impl.InputPort;
 import fr.istic.synthlab.abstraction.impl.ModuleVCO;
 import fr.istic.synthlab.abstraction.impl.OutputPort;
 import fr.istic.synthlab.command.ICommand;
-import fr.istic.synthlab.controller.ICPort;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.impl.CModule;
 import fr.istic.synthlab.controller.impl.CWire;
@@ -28,16 +24,14 @@ public class SynthApp implements ISynthApp {
 	public void newSynth() {
 		// Ajout des modules
 		CModule vco = (CModule)PACFactory.getFactory().newVCO(PACFactory.getFactory());//implemented
-		CModule vco2 = (CModule)PACFactory.getFactory().newVCO(PACFactory.getFactory());
+//		CModule vco2 = (CModule)PACFactory.getFactory().newVCO(PACFactory.getFactory());
 		CModule vca = (CModule)PACFactory.getFactory().newVCA(PACFactory.getFactory());
 		
-		ModuleVCO abstModule = (ModuleVCO)vco.getAbs();
-		abstModule.generate(0, 5);
-		
-		System.err.println("JSyn -> "+abstModule.getOutput()+"   SynthLab -> "+abstModule.getOutputs());
+		ModuleVCO abstModuleVCO = (ModuleVCO)vco.getAbs();
+		double[] values = abstModuleVCO.generateOscillo();
 		
 		synth.addModule(vco);
-		synth.addModule(vco2);
+//		synth.addModule(vco2);
 		synth.addModule(vca);
 		
 		// Ajout des fils

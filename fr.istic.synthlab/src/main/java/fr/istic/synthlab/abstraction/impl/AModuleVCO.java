@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jsyn.unitgen.UnitFilter;
+import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.IParameter;
@@ -13,7 +14,7 @@ import fr.istic.synthlab.abstraction.IPort;
  * 
  * @author Clément Hardouin
  */
-public abstract class AModuleVCO extends UnitFilter implements IModule {
+public abstract class AModuleVCO implements IModule {
 
 	private String name;
 	private boolean isRunning;

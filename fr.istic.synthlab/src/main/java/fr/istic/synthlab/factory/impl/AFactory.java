@@ -35,27 +35,27 @@ public class AFactory implements IFactory {
 	}
 
 	public IModule newModule(String name, IFactory factory) { 
-		if (name.equals(MODULE_VCA)){
-			return  newVCA(factory);
+		if (name == MODULE_VCO){
+			return  newVCO(factory);
 		}
-		if (name.equals(MODULE_VCF)){
+		if (name == MODULE_VCA){
+			return newVCA(factory);
+		}
+		if (name == MODULE_VCF){
 			return newVCF(factory);
-		}
-		if (name.equals(MODULE_VCO)){
-			return newVCO(factory);
 		}
 		return null;
 	}
 	
 	public IModule newVCO(IFactory factory) {
-		IModule module = newModule(MODULE_VCO, factory);
+		IModule module = new ModuleVCO(MODULE_VCO);
 		IPort out = factory.newOutputPort("out", factory);
 		module.addPort(out);// TODO : add strategy and stuff to output something on this port
 		return module;
 	}
 
 	public IModule newVCF(IFactory factory) {
-		IModule module = newModule(MODULE_VCF, factory);
+		IModule module = new Module(MODULE_VCF);
 		IPort in = factory.newInputPort("in", factory);
 		IPort out = factory.newOutputPort("out", factory);
 		module.addPort(in);
@@ -64,7 +64,7 @@ public class AFactory implements IFactory {
 	}
 
 	public IModule newVCA(IFactory factory) {
-		IModule module = newModule(MODULE_VCA, factory);
+		IModule module = new Module(MODULE_VCA);
 		IPort in = factory.newInputPort("in", factory);
 		module.addPort(in);// TODO : add strategy and stuff to output something on the sound card
 		return module;
