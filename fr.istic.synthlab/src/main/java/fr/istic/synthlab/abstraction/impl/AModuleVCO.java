@@ -3,15 +3,17 @@ package fr.istic.synthlab.abstraction.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jsyn.unitgen.UnitFilter;
+
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.IParameter;
 import fr.istic.synthlab.abstraction.IPort;
 
 /**
- *
+ * 
  * @author Clément Hardouin
  */
-public abstract class AModule implements IModule {
+public abstract class AModuleVCO extends UnitFilter implements IModule {
 
 	private String name;
 	private boolean isRunning;
@@ -19,9 +21,9 @@ public abstract class AModule implements IModule {
 	private List<IPort> ports;
 
 	/**
-	 *
+	 * 
 	 */
-	public AModule(String name) {
+	public AModuleVCO(String name) {
 		this.name = name;
 		this.isRunning = false;
 		this.parameters = new ArrayList<IParameter>();
@@ -30,7 +32,7 @@ public abstract class AModule implements IModule {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see fr.istic.synthlab.abstraction.IModule#start()
 	 */
 	@Override
@@ -40,7 +42,7 @@ public abstract class AModule implements IModule {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see fr.istic.synthlab.abstraction.IModule#stop()
 	 */
 	@Override
@@ -50,7 +52,7 @@ public abstract class AModule implements IModule {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see fr.istic.synthlab.abstraction.IModule#isRunning()
 	 */
 	@Override

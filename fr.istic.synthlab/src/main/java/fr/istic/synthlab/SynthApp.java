@@ -1,7 +1,9 @@
 package fr.istic.synthlab;
 import java.awt.Toolkit;
 
+import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.impl.InputPort;
+import fr.istic.synthlab.abstraction.impl.ModuleVCO;
 import fr.istic.synthlab.abstraction.impl.OutputPort;
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.command.app.DisplayCommand;
@@ -40,17 +42,23 @@ public class SynthApp implements ISynthApp {
 	@Override
 	public void newSynth() {
 		// Ajout des modules
-		CModule vco = (CModule)PACFactory.getFactory().newVCO(PACFactory.getFactory());
+		CModule vco = (CModule)PACFactory.getFactory().newVCO(PACFactory.getFactory());//implemented
 		CModule vco2 = (CModule)PACFactory.getFactory().newVCO(PACFactory.getFactory());
 		CModule vca = (CModule)PACFactory.getFactory().newVCA(PACFactory.getFactory());
+		
+		ModuleVCO abstModule = (ModuleVCO)vco.getAbs();
+		abstModule.generate(0, 5);
+		
+		System.err.println("JSyn -> "+abstModule.getOutput()+"   SynthLab -> "+abstModule.getOutputs());
+		
 		synth.addModule(vco);
 		synth.addModule(vco2);
 		synth.addModule(vca);
 		
 		// Ajout des fils
 		CWire wire = (CWire)PACFactory.getFactory().newWire(PACFactory.getFactory());
-		wire.connect((OutputPort) vco.getPort(0));
-		wire.connect((InputPort) vca.getPort(0));
+		wire.connect((OutputPort) vco.getSynthLabPort(0));
+		wire.connect((InputPort) vca.getSynthLabPort(0));
 	}
 
 	@Override

@@ -87,12 +87,12 @@ public interface IModule {
 	 *            index of the port
 	 * @return the port n°i
 	 */
-	public IPort getPort(int i);
+	public IPort getSynthLabPort(int i);
 
 	/**
 	 * Return all the ports
 
 	 */
-	public List<IPort> getPorts();
+	public List<IPort> getSynthLabPorts();
 
 }

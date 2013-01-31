@@ -11,7 +11,10 @@ public class AboutCommand implements ICommand {
 		// TODO Auto-generated method stub
 		System.out.println("Command "+this.getClass().getSimpleName()+" not implemented...");
 		JOptionPane.showMessageDialog(new JFrame("About"),
-				"          SynthLab/Groupe 2    \nChevalier - Chevalot - Guerra\n   Hardouin - Kwete - Le Ho\n             ISTIC 2013", "A propos",
+				"          SynthLab/Groupe 2    " +
+				"\nChevalier - Chevalot - Guerra" +
+				"\n   Hardouin - Kwete - Le Ho" +
+				"\n          ISTIC 2013", "A propos", 
 				JOptionPane.PLAIN_MESSAGE);
 	}
 }

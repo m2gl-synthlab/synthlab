@@ -8,6 +8,7 @@ import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.InputPort;
 import fr.istic.synthlab.abstraction.impl.Module;
+import fr.istic.synthlab.abstraction.impl.ModuleVCO;
 import fr.istic.synthlab.abstraction.impl.OutputPort;
 import fr.istic.synthlab.abstraction.impl.Synthetizer;
 import fr.istic.synthlab.abstraction.impl.Wire;
@@ -34,12 +35,20 @@ public class AFactory implements IFactory {
 	}
 
 	public IModule newModule(String name, IFactory factory) { 
-		IModule module = new Module(name);
-		return module;
+		if (name.equals(MODULE_VCA)){
+			return  newVCA(factory);
+		}
+		if (name.equals(MODULE_VCF)){
+			return newVCF(factory);
+		}
+		if (name.equals(MODULE_VCO)){
+			return newVCO(factory);
+		}
+		return null;
 	}
 	
 	public IModule newVCO(IFactory factory) {
-		IModule module = factory.newModule(MODULE_VCO, factory);
+		IModule module = newModule(MODULE_VCO, factory);
 		IPort out = factory.newOutputPort("out", factory);
 		module.addPort(out);// TODO : add strategy and stuff to output something on this port
 		return module;

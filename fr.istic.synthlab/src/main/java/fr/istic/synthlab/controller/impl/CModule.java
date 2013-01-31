@@ -20,6 +20,10 @@ public class CModule implements ICModule{
 		this.pres = PACFactory.getPFactory().newModule(this);
 	}
 	
+	public IModule getAbs() {
+		return abs;
+	}
+
 	@Override
 	public void start() {
 		// TODO Auto-generated method stub
@@ -75,21 +79,20 @@ public class CModule implements ICModule{
 	}
 
 	@Override
-	public IPort getPort(int i) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<IPort> getPorts() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
 	public IPModule getPresentation() {
 		return pres;
+	}
+
+	@Override
+	public IPort getSynthLabPort(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<IPort> getSynthLabPorts() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
