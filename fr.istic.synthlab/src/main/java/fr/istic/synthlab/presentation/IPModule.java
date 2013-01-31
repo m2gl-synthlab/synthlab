@@ -9,4 +9,6 @@ public interface IPModule {
 	 * @return the controller
 	 */
 	public ICModule getControl();
+
+	public void addPort(IPPort port);
 }

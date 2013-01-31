@@ -57,6 +57,7 @@ public class CFactory implements IFactory {
 	public IModule newVCA(IFactory factory) {
 		IModule module = newModule(MODULE_VCA, factory);
 		IPort in = factory.newInputPort("in", factory);
+		System.out.println(in.getClass());
 		module.addPort(in);// TODO : add strategy and stuff to output something on the sound card
 		return module;
 	}

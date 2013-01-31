@@ -1,5 +1,8 @@
 package fr.istic.synthlab.controller;
 
-public interface ICOutputPort {
+import fr.istic.synthlab.presentation.IPOutputPort;
+
+
+public interface ICOutputPort extends ICPort {
 
 }
