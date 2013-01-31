@@ -3,6 +3,7 @@ package fr.istic.synthlab.abstraction.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jsyn.JSyn;
 import com.jsyn.devices.AudioDeviceManager;
 import com.jsyn.engine.SynthesisEngine;
 import com.jsyn.unitgen.UnitGenerator;
@@ -19,7 +20,7 @@ import fr.istic.synthlab.abstraction.ISynthesizer;
 public class Synthesizer implements ISynthesizer {
 
 
-	private SynthesisEngine synth;
+	private com.jsyn.Synthesizer synth;
 	
 	private List<IModule> modules;
 
@@ -27,7 +28,7 @@ public class Synthesizer implements ISynthesizer {
 	 * Constructor
 	 */
 	public Synthesizer() {
-		this.synth= new SynthesisEngine();
+		this.synth= JSyn.createSynthesizer();
 		modules = new ArrayList<IModule>();
 	}	
 	

@@ -1,7 +1,5 @@
 package fr.istic.synthlab.abstraction.impl;
 
-import com.jsyn.ports.ConnectableInput;
-import com.jsyn.ports.ConnectableOutput;
 import com.jsyn.ports.PortBlockPart;
 import com.jsyn.ports.UnitInputPort;
 import com.jsyn.ports.UnitOutputPort;
@@ -61,24 +59,25 @@ public class OutputPort implements IPort{
 	}
 
 	@Override
-	public void connect(ConnectableInput arg0) {
-		port.connect(arg0);
+	public void connect(InputPort arg0) {
+		System.err.println("Connecting");
+		port.connect(arg0.getJSynIn());
 	}
 
 	@Override
-	public void disconnect(ConnectableInput arg0) {
-		port.disconnect(arg0);
+	public void disconnect(InputPort arg0) {
+		port.disconnect(arg0.getJSynIn());
 	}
 	
 	
 	
 	@Override
-	public void connect(ConnectableOutput arg0) {
+	public void connect(OutputPort arg0) {
 		System.err.println(getClass().getSimpleName() + " can't connect with " + arg0.getClass().getSimpleName());
 	}
 
 	@Override
-	public void disconnect(ConnectableOutput arg0) {
+	public void disconnect(OutputPort arg0) {
 		System.err.println(getClass().getSimpleName() + " can't disconnect with " + arg0.getClass().getSimpleName());
 	}
 

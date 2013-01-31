@@ -1,6 +1,8 @@
 package fr.istic.synthlab.controller.impl;
 
+import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.impl.Synthesizer;
+import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.IPSynthesizer;
@@ -35,6 +37,11 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 		return pres;
 	}
 
+	@Override
+	public void add(IModule module) {
+		super.add(module);
+		pres.addModule(((ICModule)module).getPresentation());
+	}
 
 
 }

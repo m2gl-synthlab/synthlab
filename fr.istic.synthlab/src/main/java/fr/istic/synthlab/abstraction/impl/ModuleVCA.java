@@ -8,59 +8,54 @@ import fr.istic.synthlab.abstraction.IModule;
 
 public class ModuleVCA implements IModule{
 
-	private LineOut out;
+	private LineOut vca;
+	private InputPort in;
 	
 	public ModuleVCA() {
-		this.out = new LineOut();
+		this.vca = new LineOut();
+		this.in = new InputPort(vca.getInput());
 	}
 
 	@Override
+	public UnitGenerator getJSyn() {
+		return this.vca;
+	}
+
+	
+	@Override
 	public OutputPort getOutput() {
-		System.err.println("No Ouput in "+ getClass().getSimpleName());
+		System.err.println("No Output in "+ getClass().getSimpleName());
 		return null;
 	}
 
 	@Override
 	public UnitGenerator getUnitGenerator() {
-		// TODO Auto-generated method stub
-		return null;
+		return vca.getUnitGenerator();
 	}
 
 	@Override
 	public InputPort getInput() {
-		// TODO Auto-generated method stub
-		return null;
+		return in;
 	}
 
 	@Override
 	public void start() {
-		// TODO Auto-generated method stub
-		
+		vca.start();
 	}
 
 	@Override
 	public void start(TimeStamp time) {
-		// TODO Auto-generated method stub
-		
+		vca.start(time);
 	}
 
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
-		
+		vca.stop();
 	}
 
 	@Override
 	public void stop(TimeStamp time) {
-		// TODO Auto-generated method stub
-		
+		vca.stop(time);
 	}
-
-	@Override
-	public UnitGenerator getJSyn() {
-		return this.out;
-	}
-
-	
 
 }

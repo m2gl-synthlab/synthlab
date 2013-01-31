@@ -8,6 +8,9 @@ import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.UnitGenerator;
 import com.softsynth.shared.time.TimeStamp;
 
+import fr.istic.synthlab.abstraction.impl.InputPort;
+import fr.istic.synthlab.abstraction.impl.OutputPort;
+
 /**
  * Interface for a module's port
  * 
@@ -26,9 +29,9 @@ public interface IPort {// extends ConnectableInput, GettablePort, SettablePort,
 	 */
 	public String getName();
 	
-	public void connect(ConnectableOutput arg0);
+	public void connect(OutputPort arg0);
 	
-	public void disconnect(ConnectableOutput arg0);
+	public void disconnect(OutputPort arg0);
 	
 	public PortBlockPart getPortBlockPart();
 	
@@ -40,9 +43,9 @@ public interface IPort {// extends ConnectableInput, GettablePort, SettablePort,
 
 	public void set(int arg0, double arg1, TimeStamp arg2);
 
-	public void connect(ConnectableInput arg0);
+	public void connect(InputPort arg0);
 
-	public void disconnect(ConnectableInput arg0);
+	public void disconnect(InputPort arg0);
 
 	
 }

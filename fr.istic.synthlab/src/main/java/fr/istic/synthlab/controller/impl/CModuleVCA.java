@@ -18,6 +18,4 @@ public class CModuleVCA extends ModuleVCA implements ICModule{
 		return pres;
 	}
 	
-	
-
 }

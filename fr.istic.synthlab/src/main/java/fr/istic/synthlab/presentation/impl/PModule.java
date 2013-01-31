@@ -1,9 +1,6 @@
 package fr.istic.synthlab.presentation.impl;
 
-import java.awt.Component;
-
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fr.istic.synthlab.controller.ICModule;
@@ -27,6 +24,7 @@ public class PModule extends JPanel implements IPModule {
 		this.setSize(300, 400);
 		this.setPreferredSize(this.getSize());
 		this.setBorder(BorderFactory.createTitledBorder(getClass().getSimpleName()));
+		
 	}
 
 	/*

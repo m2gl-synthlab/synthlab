@@ -10,8 +10,8 @@ import fr.istic.synthlab.abstraction.IWire;
  */
 public class Wire implements IWire {
 
-	private IPort input;
-	private IPort output;
+	private InputPort input;
+	private OutputPort output;
 
 	/*
 	 * (non-Javadoc)
@@ -42,6 +42,8 @@ public class Wire implements IWire {
 	@Override
 	public void connect(InputPort port) {
 		this.input = port;
+		System.err.println("Input ok");
+		connect();
 	}
 
 	/*
@@ -54,6 +56,19 @@ public class Wire implements IWire {
 	@Override
 	public void connect(OutputPort port) {
 		this.output = port;
+		System.err.println("Output ok");
+		connect();
+	}
+	
+	private void connect() {
+		if (output == null)
+			System.err.println("Output null");
+		if (input == null)
+			System.err.println("Input null");
+		
+		if (output != null && input != null)
+			this.output.connect(input);
+		
 	}
 
 }

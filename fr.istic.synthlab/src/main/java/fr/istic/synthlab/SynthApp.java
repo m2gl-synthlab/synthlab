@@ -1,5 +1,5 @@
 package fr.istic.synthlab;
-import com.jsyn.devices.AudioDeviceManager;
+import com.jsyn.JSyn;
 
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.command.ICommand;
@@ -31,6 +31,7 @@ public class SynthApp implements ISynthApp {
 	@Override
 	public void newSynth() {
 		// Replace the current synthesizer with a new one
+		
 		this.synth = (ICSynthesizer)PACFactory.getFactory().newSynthesizer(PACFactory.getFactory());
 		
 		// Add the basics modules (Oscilator + Out)
@@ -42,9 +43,10 @@ public class SynthApp implements ISynthApp {
 		
 		// Ajout des fils
 		CWire wire = (CWire)PACFactory.getFactory().newWire(PACFactory.getFactory());
-		wire.connect(vco.getOutput());
 		wire.connect(vca.getInput());
+		wire.connect(vco.getOutput());
 		synth.start();
+		vca.start();
 		vco.start();
 	}
 
