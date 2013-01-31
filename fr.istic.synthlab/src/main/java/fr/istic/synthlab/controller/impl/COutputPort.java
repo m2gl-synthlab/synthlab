@@ -1,6 +1,5 @@
 package fr.istic.synthlab.controller.impl;
 
-import fr.istic.synthlab.abstraction.IPort;
 import fr.istic.synthlab.abstraction.impl.OutputPort;
 import fr.istic.synthlab.controller.ICOutputPort;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -9,11 +8,9 @@ import fr.istic.synthlab.presentation.IPOutputPort;
 public class COutputPort extends OutputPort implements ICOutputPort{
 
 	private IPOutputPort pres;
-	private IPort abs;
 	
 	public COutputPort(String name) {
 		super(name);
-		this.abs = PACFactory.getAFactory().newOutputPort(name, PACFactory.getAFactory());
 		this.pres = PACFactory.getPFactory().newOutputPort(this);
 	}
 	

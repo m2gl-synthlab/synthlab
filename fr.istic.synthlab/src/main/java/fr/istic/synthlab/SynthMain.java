@@ -21,26 +21,29 @@ import fr.istic.synthlab.factory.impl.PFactory;
 
 public class SynthMain {
 	public static void main(String[] args) {
-		// instanciation des factories
+		
+		// Initialize factories
 		PACFactory.setAFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 		IFactory factory = PACFactory.getFactory();
 		
-		// instanciation d'une frame de synthetiseur
-		SynthFrame frame = new SynthFrame();
-		frame.setTitle("Synthlab grp2");
-		
-		// instanciation d'un controleur de synthetiseur
-		ICSynthesizer syn = (CSynthesizer)factory.newSynthesizer(factory);
-		
-		// instanciation de l'application de synthetiseur
+		// Create the application
 		SynthApp app = new SynthApp();
+		
+		// Create the main frame
+		SynthFrame frame = new SynthFrame();
+		frame.setTitle("Synthlab - G");
+		
+		// Create a synthesizer controller
+		ICSynthesizer syn = (CSynthesizer)factory.newSynthesizer(factory);
+
+		// Configure the application
 		app.setSynthesizer(syn);
 		app.setDisplaySynthCommand(new DisplayCommand(app, frame));
 		app.setUndisplaySynthCommand(new UndisplayCommand(app, frame));
 
-		// set des commandes sur la frame
+		// Configure the frame
 		frame.setNewSynthCommand(new NewSynthCommand(app));
 		frame.setOpenSynthCommand(new OpenSynthCommand());
 		frame.setSaveSynthCommand(new SaveSynthCommand());
@@ -51,7 +54,7 @@ public class SynthMain {
 		frame.setToolbarWireCommand(new ToolbarWireCommand());
 		frame.setToolbarModuleCommand(new ToolbarModuleCommand());
 		
-		// demarrage de l'application
+		// Start the application
 		app.startSynth();
 	}
 }

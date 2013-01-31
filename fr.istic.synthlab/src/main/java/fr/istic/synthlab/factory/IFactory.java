@@ -10,7 +10,7 @@ public interface IFactory {
 
 	ISynthesizer newSynthesizer(IFactory factory);
 	
-	IModule newModule(String name, IFactory factory);
+//	IModule newModule(String name, IFactory factory);
 	IModule newVCO(IFactory factory);
 	IModule newVCF(IFactory factory);
 	IModule newVCA(IFactory factory);

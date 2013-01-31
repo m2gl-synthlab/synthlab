@@ -1,45 +1,56 @@
 package fr.istic.synthlab;
-import fr.istic.synthlab.abstraction.impl.InputPort;
-import fr.istic.synthlab.abstraction.impl.ModuleVCO;
-import fr.istic.synthlab.abstraction.impl.OutputPort;
+import com.jsyn.devices.AudioDeviceManager;
+
+import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.controller.ICSynthesizer;
-import fr.istic.synthlab.controller.impl.CModule;
 import fr.istic.synthlab.controller.impl.CWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
+/**
+ * Application 
+ */
 public class SynthApp implements ISynthApp {
 
 	private ICSynthesizer synth;
 	private ICommand displayCmd;
 	private ICommand undisplayCmd;
 
+	/* (non-Javadoc)
+	 * @see fr.istic.synthlab.ISynthApp#startSynth()
+	 */
 	@Override
 	public void startSynth() {
 		newSynth();
 		displayCmd.execute();
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.istic.synthlab.ISynthApp#newSynth()
+	 */
 	@Override
 	public void newSynth() {
-		// Ajout des modules
-		CModule vco = (CModule)PACFactory.getFactory().newVCO(PACFactory.getFactory());//implemented
-//		CModule vco2 = (CModule)PACFactory.getFactory().newVCO(PACFactory.getFactory());
-		CModule vca = (CModule)PACFactory.getFactory().newVCA(PACFactory.getFactory());
+		// Replace the current synthesizer with a new one
+		this.synth = (ICSynthesizer)PACFactory.getFactory().newSynthesizer(PACFactory.getFactory());
 		
-		ModuleVCO abstModuleVCO = (ModuleVCO)vco.getAbs();
-		double[] values = abstModuleVCO.generateOscillo();
+		// Add the basics modules (Oscilator + Out)
+		IModule vco = PACFactory.getFactory().newVCO(PACFactory.getFactory());//implemented
+		IModule vca = PACFactory.getFactory().newVCA(PACFactory.getFactory());
 		
-		synth.addModule(vco);
-//		synth.addModule(vco2);
-		synth.addModule(vca);
+		synth.add(vco);
+		synth.add(vca);
 		
 		// Ajout des fils
 		CWire wire = (CWire)PACFactory.getFactory().newWire(PACFactory.getFactory());
-		wire.connect((OutputPort) vco.getSynthLabPort(0));
-		wire.connect((InputPort) vca.getSynthLabPort(0));
+		wire.connect(vco.getOutput());
+		wire.connect(vca.getInput());
+		synth.start();
+		vco.start();
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.istic.synthlab.ISynthApp#quitSynth()
+	 */
 	@Override
 	public void quitSynth() {
 		this.synth = null;
@@ -47,21 +58,33 @@ public class SynthApp implements ISynthApp {
 		System.exit(0);
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.istic.synthlab.ISynthApp#setSynthesizer(fr.istic.synthlab.controller.ICSynthesizer)
+	 */
 	@Override
 	public void setSynthesizer(ICSynthesizer syn) {
 		this.synth = syn;
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.istic.synthlab.ISynthApp#getSynthesizer()
+	 */
 	@Override
 	public ICSynthesizer getSynthesizer() {
 		return synth;
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.istic.synthlab.ISynthApp#setDisplaySynthCommand(fr.istic.synthlab.command.ICommand)
+	 */
 	@Override
 	public void setDisplaySynthCommand(ICommand displaySynthCommand) {
 		this.displayCmd = displaySynthCommand;
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.istic.synthlab.ISynthApp#setUndisplaySynthCommand(fr.istic.synthlab.command.ICommand)
+	 */
 	@Override
 	public void setUndisplaySynthCommand(ICommand undisplaySynthCommand) {
 		this.undisplayCmd = undisplaySynthCommand;

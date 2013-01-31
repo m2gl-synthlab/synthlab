@@ -1,31 +1,21 @@
 package fr.istic.synthlab.controller.impl;
 
-import java.util.List;
-
-import fr.istic.synthlab.abstraction.IModule;
-import fr.istic.synthlab.abstraction.ISynthesizer;
-import fr.istic.synthlab.abstraction.impl.InputPort;
-import fr.istic.synthlab.abstraction.impl.OutputPort;
-import fr.istic.synthlab.controller.ICModule;
+import fr.istic.synthlab.abstraction.impl.Synthesizer;
 import fr.istic.synthlab.controller.ICSynthesizer;
-import fr.istic.synthlab.factory.IFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.IPSynthesizer;
-import fr.istic.synthlab.presentation.impl.PSynthesizer;
 
-public class CSynthesizer implements ICSynthesizer {
+public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	
 	private IPSynthesizer pres;
-	private ISynthesizer abs;
 
 	public CSynthesizer() {
 		this.pres = PACFactory.getPFactory().newSynthesizer(this);
-		this.abs = PACFactory.getAFactory().newSynthesizer(PACFactory.getAFactory());
 	}
 	
 	@Override
 	public void start() {
-		abs.start();
+		super.start();
 		if(isRunning()){
 //			pres.start();
 		}
@@ -34,29 +24,10 @@ public class CSynthesizer implements ICSynthesizer {
 
 	@Override
 	public void stop() {
-		abs.stop();
+		super.stop();
 		if(!isRunning()){
 //			pres.stop();
 		}
-	}
-
-	@Override
-	public boolean isRunning() {
-		return abs.isRunning();
-	}
-
-	@Override
-	public void addModule(IModule module) {
-		abs.addModule(module);
-		ICModule ctrl = (ICModule) module;
-		pres.addModule(ctrl.getPresentation());
-	}
-
-	@Override
-	public void removeModule(IModule module) {
-		abs.removeModule(module);
-		ICModule ctrl = (ICModule) module;
-		pres.removeModule(ctrl.getPresentation());
 	}
 
 	@Override
@@ -64,14 +35,6 @@ public class CSynthesizer implements ICSynthesizer {
 		return pres;
 	}
 
-	@Override
-	public IModule getModule(int i) {
-		return abs.getModule(i);
-	}
 
-	@Override
-	public List<IModule> getModules() {
-		return abs.getModules();
-	}
 
 }

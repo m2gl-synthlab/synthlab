@@ -7,7 +7,8 @@ import fr.istic.synthlab.abstraction.IPort;
 import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.controller.impl.CInputPort;
-import fr.istic.synthlab.controller.impl.CModule;
+import fr.istic.synthlab.controller.impl.CModuleVCA;
+import fr.istic.synthlab.controller.impl.CModuleVCO;
 import fr.istic.synthlab.controller.impl.COutputPort;
 import fr.istic.synthlab.controller.impl.CSynthesizer;
 import fr.istic.synthlab.controller.impl.CWire;
@@ -33,32 +34,32 @@ public class CFactory implements IFactory {
 		return syn;
 	}
 
-	public IModule newModule(String name, IFactory factory) { 
-		IModule module = new CModule(name);
-		return module;
-	}
+//	public IModule newModule(String name, IFactory factory) { 
+//		IModule module = new CModule(name);
+//		return module;
+//	}
 	
 	public IModule newVCO(IFactory factory) {
-		IModule module = factory.newModule(MODULE_VCO, factory);
-		IPort out = factory.newOutputPort("out", factory);
-		module.addPort(out);// TODO : add strategy and stuff to output something on this port
+		IModule module = new CModuleVCO(MODULE_VCO);
+		//IPort out = factory.newOutputPort("out", factory);
+		//module.addPort(out);// TODO : add strategy and stuff to output something on this port
 		return module;
 	}
 
 	public IModule newVCF(IFactory factory) {
-		IModule module = newModule(MODULE_VCF, factory);
-		IPort in = factory.newInputPort("in", factory);
-		IPort out = factory.newOutputPort("out", factory);
-		module.addPort(in);
-		module.addPort(out);// TODO : add strategy and stuff to output something on this port
-		return module;
+//		IModule module = newModule(MODULE_VCF, factory);
+//		IPort in = factory.newInputPort("in", factory);
+//		IPort out = factory.newOutputPort("out", factory);
+//		module.addPort(in);
+//		module.addPort(out);// TODO : add strategy and stuff to output something on this port
+//		return module;
+		return null;
 	}
 
 	public IModule newVCA(IFactory factory) {
-		IModule module = newModule(MODULE_VCA, factory);
-		IPort in = factory.newInputPort("in", factory);
-		System.out.println(in.getClass());
-		module.addPort(in);// TODO : add strategy and stuff to output something on the sound card
+		IModule module = new CModuleVCA(MODULE_VCA);
+//		IPort in = factory.newInputPort("in", factory);
+//		module.addPort(in);// TODO : add strategy and stuff to output something on the sound card
 		return module;
 	}
 
