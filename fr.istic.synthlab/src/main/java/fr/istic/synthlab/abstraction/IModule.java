@@ -12,16 +12,35 @@ import fr.istic.synthlab.abstraction.impl.OutputPort;
  */
 public interface IModule{
 	
-
+	/**
+	 * Return the jSyn component
+	 * @return jSyn component
+	 */
 	public UnitGenerator getJSyn();
 	
-	public InputPort getInput();
+	
+	/**
+	 * Start the module
+	 */
 	public void start();
-	public void start(TimeStamp time);
+	/**
+	 * Stop the module
+	 */
 	public void stop();
-	public void stop(TimeStamp time);
-	public OutputPort getOutput();
-	public UnitGenerator getUnitGenerator();
+	
+	/**
+	 * Return the input port designed by identifier
+	 * @param identifier
+	 * @return the outputPort
+	 */
+	public InputPort getInput(int identifier);
+	
+	/**
+	 * Return the output port designed by identifier
+	 * @param identifier
+	 * @return the outputPort
+	 */
+	public OutputPort getOutput(int identifier);
 	
 	
 //

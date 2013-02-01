@@ -1,22 +1,38 @@
 package fr.istic.synthlab.abstraction.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.jsyn.unitgen.FilterLowPass;
 import com.jsyn.unitgen.UnitGenerator;
-import com.softsynth.shared.time.TimeStamp;
 
 import fr.istic.synthlab.abstraction.IModule;
 
 public class ModuleVCF implements IModule{
 
-	private FilterLowPass vcf;
-	private OutputPort out;
-	private InputPort in;
+	public static final int OUTPUT_OUT = 0;
+	
+	public static final int INPUT_IN = 0;
+	public static final int INPUT_AMPLITUDE = 1;
+	public static final int INPUT_FREQUENCY = 2;
+
+	private FilterLowPass vcf;	
+
+	private List<InputPort> inputs;
+	private List<OutputPort> outputs;
 	
 	
 	public ModuleVCF() {
 		this.vcf = new FilterLowPass();
-		this.out = new OutputPort(vcf.getOutput());
-		this.in = new InputPort(vcf.getInput());
+
+		this.inputs = new ArrayList<InputPort>();
+		this.outputs = new ArrayList<OutputPort>();
+		
+		this.outputs.add(ModuleVCF.OUTPUT_OUT, new OutputPort(vcf.getOutput()));
+		
+		this.inputs.add(ModuleVCF.INPUT_IN, new InputPort(vcf.getInput()));
+		this.inputs.add(ModuleVCF.INPUT_AMPLITUDE, new InputPort(vcf.amplitude));
+		this.inputs.add(ModuleVCF.INPUT_FREQUENCY, new InputPort(vcf.frequency));
 	}
 
 	@Override
@@ -31,34 +47,19 @@ public class ModuleVCF implements IModule{
 	}
 
 	@Override
-	public void start(TimeStamp arg0) {
-		this.vcf.start(arg0);
-	}
-
-	@Override
 	public void stop() {
 		this.vcf.stop();
 	}
 
+
 	@Override
-	public void stop(TimeStamp arg0) {
-		this.vcf.stop(arg0);
+	public InputPort getInput(int identifier) {
+		return inputs.get(identifier);
 	}
 
 	@Override
-	public InputPort getInput() {
-		return in;
+	public OutputPort getOutput(int identifier) {
+		return outputs.get(identifier);
 	}
-
-	@Override
-	public OutputPort getOutput() {
-		return out;
-	}
-
-	@Override
-	public UnitGenerator getUnitGenerator() {
-		return this.vcf.getUnitGenerator();
-	}
-	
 
 }

@@ -1,6 +1,9 @@
 package fr.istic.synthlab;
 
 import fr.istic.synthlab.abstraction.IModule;
+import fr.istic.synthlab.abstraction.impl.ModuleVCA;
+import fr.istic.synthlab.abstraction.impl.ModuleVCF;
+import fr.istic.synthlab.abstraction.impl.ModuleVCO;
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.impl.CWire;
@@ -39,28 +42,35 @@ public class SynthApp implements ISynthApp {
 				PACFactory.getFactory());
 
 		// Add the basics modules (Oscilator + Out)
-		IModule vco = PACFactory.getFactory().newVCO(PACFactory.getFactory());// implemented
+		IModule vco0 = PACFactory.getFactory().newVCO(PACFactory.getFactory());// implemented
+		IModule vco1 = PACFactory.getFactory().newVCO(PACFactory.getFactory());// implemented
 		IModule vca = PACFactory.getFactory().newVCA(PACFactory.getFactory());
 		IModule vcf = PACFactory.getFactory().newVCF(PACFactory.getFactory());
 
-		synth.add(vco);
+		synth.add(vco0);
+		synth.add(vco1);
 		synth.add(vcf);
 		synth.add(vca);
 
+		
+		
 		// Ajout des fils
-		CWire wire0 = (CWire) PACFactory.getFactory().newWire(
-				PACFactory.getFactory());
-		CWire wire1 = (CWire) PACFactory.getFactory().newWire(
-				PACFactory.getFactory());
+		CWire wire0 = (CWire) PACFactory.getFactory().newWire(PACFactory.getFactory());
+		CWire wire1 = (CWire) PACFactory.getFactory().newWire(PACFactory.getFactory());
+		CWire wire2 = (CWire) PACFactory.getFactory().newWire(PACFactory.getFactory());
 
-		wire0.connect(vco.getOutput());
-		wire0.connect(vcf.getInput());
+		wire0.connect(vco0.getOutput(ModuleVCO.OUTPUT_OUT));
+		wire0.connect(vcf.getInput(ModuleVCF.INPUT_IN));
+		
+		wire1.connect(vco1.getOutput(ModuleVCO.OUTPUT_OUT));
+		wire1.connect(vcf.getInput(ModuleVCF.INPUT_AMPLITUDE));
 
-		wire1.connect(vcf.getOutput());
-		wire1.connect(vca.getInput());
+		wire2.connect(vcf.getOutput(ModuleVCF.OUTPUT_OUT));
+		wire2.connect(vca.getInput(ModuleVCA.INPUT_IN));
 
 		synth.start();
-		vco.start();
+		vco0.start();
+		vco1.start();
 		vcf.start();
 		vca.start();
 	}
