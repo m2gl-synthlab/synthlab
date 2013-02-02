@@ -21,7 +21,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
-import com.softsynth.jsyn.view.UsageDisplay;
+import com.softsynth.jsyn.view102.UsageDisplay;
 
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.presentation.IPSynthesizer;
@@ -92,6 +92,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		// -------------------------- File Menu --------------------------
 		menuFile = new JMenu("File");
 
+//		this.add(new UsageDisplay());
 		// instanciation des items
 		menuItemNew = new JMenuItem("New");
 		menuItemOpen = new JMenuItem("Open");

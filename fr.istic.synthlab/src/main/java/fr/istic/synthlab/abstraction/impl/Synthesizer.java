@@ -22,6 +22,7 @@ public class Synthesizer implements ISynthesizer {
 	 * Constructor
 	 */
 	public Synthesizer() {
+		
 		this.synth = JSyn.createSynthesizer();
 		modules = new ArrayList<IModule>();
 	}
