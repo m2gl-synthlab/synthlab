@@ -2,9 +2,6 @@ package fr.istic.synthlab.abstraction;
 
 /**
  * Interface for a module's parameter
- * 
- * @author Clément Hardouin
- * 
  */
 public interface IParameter {
 

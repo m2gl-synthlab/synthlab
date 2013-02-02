@@ -7,7 +7,6 @@ import fr.istic.synthlab.abstraction.impl.OutputPort;
 
 /**
  * Interface of a synthetizer's module
- * 
  */
 public interface IModule{
 	
