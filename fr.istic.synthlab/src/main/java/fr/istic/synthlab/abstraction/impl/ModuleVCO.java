@@ -8,7 +8,7 @@ import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.IModule;
 
-public class ModuleVCO implements IModule{
+public class ModuleVCO implements IModule {
 
 	public static final int OUTPUT_OUT = 0;
 
@@ -20,15 +20,15 @@ public class ModuleVCO implements IModule{
 
 	private List<InputPort> inputs;
 	private List<OutputPort> outputs;
-	
+
 	public ModuleVCO() {
 		this.vco = new PulseOscillator();
 
 		this.outputs = new ArrayList<OutputPort>();
 		this.inputs = new ArrayList<InputPort>();
-		
+
 		this.outputs.add(ModuleVCO.OUTPUT_OUT, new OutputPort(vco.getOutput()));
-		
+
 		this.inputs.add(ModuleVCO.INPUT_AMPLITUDE, new InputPort(vco.amplitude));
 		this.inputs.add(ModuleVCO.INPUT_FREQUENCY, new InputPort(vco.frequency));
 		this.inputs.add(ModuleVCO.INPUT_WIDTH, new InputPort(vco.width));
@@ -38,11 +38,10 @@ public class ModuleVCO implements IModule{
 	public UnitGenerator getJSyn() {
 		return vco;
 	}
-	
+
 	@Override
 	public void start() {
 		this.vco.start();
-		System.out.println("Synth : JSyn vco started " + this.vco.isEnabled());
 	}
 
 	@Override
@@ -52,7 +51,7 @@ public class ModuleVCO implements IModule{
 
 	@Override
 	public InputPort getInput(int identifier) {
-		System.err.println("No Input in "+ getClass().getSimpleName());
+		System.err.println("No Input in " + getClass().getSimpleName());
 		return null;
 	}
 

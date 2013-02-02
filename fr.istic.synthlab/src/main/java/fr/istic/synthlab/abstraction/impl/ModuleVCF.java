@@ -43,7 +43,6 @@ public class ModuleVCF implements IModule{
 	@Override
 	public void start() {
 		this.vcf.start();
-		System.out.println("Synth : JSyn vcf started " + this.vcf.isEnabled());
 	}
 
 	@Override
