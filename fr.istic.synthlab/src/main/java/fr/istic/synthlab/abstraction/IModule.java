@@ -1,7 +1,6 @@
 package fr.istic.synthlab.abstraction;
 
 import com.jsyn.unitgen.UnitGenerator;
-import com.softsynth.shared.time.TimeStamp;
 
 import fr.istic.synthlab.abstraction.impl.InputPort;
 import fr.istic.synthlab.abstraction.impl.OutputPort;

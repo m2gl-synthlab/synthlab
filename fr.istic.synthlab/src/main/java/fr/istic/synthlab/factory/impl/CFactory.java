@@ -1,8 +1,9 @@
 package fr.istic.synthlab.factory.impl;
 
+import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModule;
+import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.IParameter;
-import fr.istic.synthlab.abstraction.IPort;
 import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.controller.impl.CInputPort;
@@ -29,42 +30,42 @@ public class CFactory implements IFactory {
 		return instance;
 	}
 
-	public ISynthesizer newSynthesizer(IFactory factory) {
+	public ISynthesizer newSynthesizer() {
 		ISynthesizer syn = new CSynthesizer();
 		return syn;
 	}
 
-	public IModule newVCO(IFactory factory) {
+	public IModule newVCO() {
 		IModule module = new CModuleVCO(MODULE_VCO);
 		return module;
 	}
 
-	public IModule newVCF(IFactory factory) {
+	public IModule newVCF() {
 		IModule module = new CModuleVCF(MODULE_VCF);
 		return module;
 	}
 
-	public IModule newVCA(IFactory factory) {
+	public IModule newVCA() {
 		IModule module = new CModuleVCA(MODULE_VCA);
 		return module;
 	}
 
-	public IParameter newParameter(String name, IFactory factory) {
+	public IParameter newParameter(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public IPort newInputPort(String name, IFactory factory) {
-		IPort port = new CInputPort(name);
+	public IInputPort newInputPort(String name) {
+		IInputPort port = new CInputPort(name);
 		return port;
 	}
 
-	public IPort newOutputPort(String name, IFactory factory) {
-		IPort port = new COutputPort(name);
+	public IOutputPort newOutputPort(String name) {
+		IOutputPort port = new COutputPort(name);
 		return port;
 	}
 
-	public IWire newWire(IFactory factory) {
+	public IWire newWire() {
 		IWire wire = new CWire();
 		return wire;
 	}

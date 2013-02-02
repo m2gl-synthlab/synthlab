@@ -36,7 +36,7 @@ public class SynthMain {
 		frame.setTitle("Synthlab - G");
 		
 		// Create a synthesizer controller
-		ICSynthesizer syn = (CSynthesizer)factory.newSynthesizer(factory);
+		ICSynthesizer syn = (CSynthesizer)factory.newSynthesizer();
 
 		// Configure the application
 		app.setSynthesizer(syn);

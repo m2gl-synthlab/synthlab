@@ -1,7 +1,6 @@
 package fr.istic.synthlab.presentation.impl;
 
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fr.istic.synthlab.controller.ICSynthesizer;

@@ -5,7 +5,6 @@ import javax.swing.JPanel;
 
 import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.presentation.IPModule;
-import fr.istic.synthlab.presentation.IPPort;
 
 /**
  * 
@@ -37,8 +36,8 @@ public class PModule extends JPanel implements IPModule {
 		return ctrl;
 	}
 
-	@Override
-	public void addPort(IPPort port) {
-		this.add((JPanel)port);
-	}
+//	@Override
+//	public void addPort(IPPort port) {
+//		this.add((JPanel)port);
+//	}
 }

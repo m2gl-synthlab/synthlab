@@ -1,8 +1,9 @@
 package fr.istic.synthlab.factory.impl;
 
+import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModule;
+import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.IParameter;
-import fr.istic.synthlab.abstraction.IPort;
 import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.InputPort;
@@ -29,56 +30,56 @@ public class AFactory implements IFactory {
 		return instance;
 	}
 
-	public ISynthesizer newSynthesizer(IFactory factory) {
+	public ISynthesizer newSynthesizer() {
 		ISynthesizer syn = new Synthesizer();
 		return syn;
 	}
 
-	public IModule newModule(String name, IFactory factory) {
+	public IModule newModule(String name) {
 		if (name == MODULE_VCO) {
-			return newVCO(factory);
+			return newVCO();
 		}
 		if (name == MODULE_VCA) {
-			return newVCA(factory);
+			return newVCA();
 		}
 		if (name == MODULE_VCF) {
-			return newVCF(factory);
+			return newVCF();
 		}
 		return null;
 	}
 
-	public IModule newVCO(IFactory factory) {
+	public IModule newVCO() {
 		IModule module = new ModuleVCO();
 		return module;
 	}
 
-	public IModule newVCF(IFactory factory) {
+	public IModule newVCF() {
 		IModule module = new ModuleVCF();
 		return module;
 	}
 
-	public IModule newVCA(IFactory factory) {
+	public IModule newVCA() {
 		IModule module = new ModuleVCA();
 		return module;
 	}
 
-	public IParameter newParameter(String name, IFactory factory) {
+	public IParameter newParameter(String name) {
 		// IParameter parameter = new PA(name);
 		// return port;
 		return null;
 	}
 
-	public IPort newInputPort(String name, IFactory factory) {
-		IPort port = new InputPort(name);
+	public IInputPort newInputPort(String name) {
+		IInputPort port = new InputPort(name);
 		return port;
 	}
 
-	public IPort newOutputPort(String name, IFactory factory) {
-		IPort port = new OutputPort(name);
+	public IOutputPort newOutputPort(String name) {
+		IOutputPort port = new OutputPort(name);
 		return port;
 	}
 
-	public IWire newWire(IFactory factory) {
+	public IWire newWire() {
 		IWire wire = new Wire();
 		return wire;
 	}

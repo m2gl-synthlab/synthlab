@@ -8,6 +8,9 @@ import fr.istic.synthlab.presentation.IPOutputPort;
 import fr.istic.synthlab.presentation.IPWire;
 
 public class POutputPort extends JPanel implements IPOutputPort {
+	
+	private static final long serialVersionUID = 4664436294243269232L;
+	
 	private ICOutputPort ctrl;
 
 	public POutputPort(ICOutputPort control) {

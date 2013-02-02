@@ -10,5 +10,5 @@ public interface IPModule {
 	 */
 	public ICModule getControl();
 
-	public void addPort(IPPort port);
+//	public void addPort(IPPort port);
 }

@@ -9,6 +9,8 @@ import fr.istic.synthlab.presentation.IPWire;
 
 public class PInputPort extends JPanel implements IPInputPort {
 
+	private static final long serialVersionUID = -3189854166979295463L;
+	
 	private ICInputPort ctrl;
 
 	public PInputPort(ICInputPort control) {

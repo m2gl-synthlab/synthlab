@@ -1,7 +1,7 @@
 package fr.istic.synthlab.controller.impl;
 
-import fr.istic.synthlab.abstraction.impl.InputPort;
-import fr.istic.synthlab.abstraction.impl.OutputPort;
+import fr.istic.synthlab.abstraction.IInputPort;
+import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.impl.Wire;
 import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -19,6 +19,8 @@ public class CWire extends Wire implements ICWire {
 	public IPWire getPresentation() {
 		return pres;
 	}
+	
+	
 
 //	public void connect(ICPort port){
 //		if(port instanceof OutputPort){
@@ -34,13 +36,13 @@ public class CWire extends Wire implements ICWire {
 //	}
 	
 	@Override
-	public void connect(InputPort port) {
+	public void connect(IInputPort port) {
 		super.connect(port);
 		// TODO : Inform view
 	}
 	
 	@Override
-	public void connect(OutputPort port) {
+	public void connect(IOutputPort port) {
 		super.connect(port);
 		// TODO : Inform view
 	}

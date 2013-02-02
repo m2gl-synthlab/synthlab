@@ -38,14 +38,13 @@ public class SynthApp implements ISynthApp {
 	public void newSynth() {
 		// Replace the current synthesizer with a new one
 
-		this.synth = (ICSynthesizer) PACFactory.getFactory().newSynthesizer(
-				PACFactory.getFactory());
+		this.synth = (ICSynthesizer) PACFactory.getFactory().newSynthesizer();
 
 		// Add the basics modules (Oscilator + Out)
-		IModule vco0 = PACFactory.getFactory().newVCO(PACFactory.getFactory());// implemented
-		IModule vco1 = PACFactory.getFactory().newVCO(PACFactory.getFactory());// implemented
-		IModule vca = PACFactory.getFactory().newVCA(PACFactory.getFactory());
-		IModule vcf = PACFactory.getFactory().newVCF(PACFactory.getFactory());
+		IModule vco0 = PACFactory.getFactory().newVCO();
+		IModule vco1 = PACFactory.getFactory().newVCO();
+		IModule vca = PACFactory.getFactory().newVCA();
+		IModule vcf = PACFactory.getFactory().newVCF();
 
 		synth.add(vco0);
 		synth.add(vco1);
@@ -55,9 +54,9 @@ public class SynthApp implements ISynthApp {
 		
 		
 		// Ajout des fils
-		CWire wire0 = (CWire) PACFactory.getFactory().newWire(PACFactory.getFactory());
-		CWire wire1 = (CWire) PACFactory.getFactory().newWire(PACFactory.getFactory());
-		CWire wire2 = (CWire) PACFactory.getFactory().newWire(PACFactory.getFactory());
+		CWire wire0 = (CWire) PACFactory.getFactory().newWire();
+		CWire wire1 = (CWire) PACFactory.getFactory().newWire();
+		CWire wire2 = (CWire) PACFactory.getFactory().newWire();
 
 		wire0.connect(vco0.getOutput(ModuleVCO.OUTPUT_OUT));
 		wire0.connect(vcf.getInput(ModuleVCF.INPUT_IN));

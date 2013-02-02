@@ -1,22 +1,23 @@
 package fr.istic.synthlab.factory;
 
+import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModule;
+import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.IParameter;
-import fr.istic.synthlab.abstraction.IPort;
 import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
 
 public interface IFactory {
 
-	ISynthesizer newSynthesizer(IFactory factory);
+	ISynthesizer newSynthesizer();
 	
 //	IModule newModule(String name, IFactory factory);
-	IModule newVCO(IFactory factory);
-	IModule newVCF(IFactory factory);
-	IModule newVCA(IFactory factory);
+	IModule newVCO();
+	IModule newVCF();
+	IModule newVCA();
 	
-	IParameter newParameter(String name, IFactory factory);
-	IPort newInputPort(String name, IFactory factory);
-	IPort newOutputPort(String name, IFactory factory);
-	IWire newWire(IFactory factory);
+	IParameter newParameter(String name);
+	IInputPort newInputPort(String name);
+	IOutputPort newOutputPort(String name);
+	IWire newWire();
 }

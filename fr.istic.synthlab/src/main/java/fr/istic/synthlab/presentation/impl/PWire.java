@@ -3,19 +3,17 @@ package fr.istic.synthlab.presentation.impl;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fr.istic.synthlab.LinesComponent;
-import fr.istic.synthlab.controller.ICModule;
-import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.ICWire;
-import fr.istic.synthlab.presentation.IPPort;
 import fr.istic.synthlab.presentation.IPWire;
 
 public class PWire extends JPanel implements IPWire {
 
+	private static final long serialVersionUID = 433233331577188149L;
+	
 	private ICWire ctrl;
 	private LinesComponent comp;
 	int x, y;

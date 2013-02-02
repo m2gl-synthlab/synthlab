@@ -1,8 +1,8 @@
 package fr.istic.synthlab.abstraction;
 
-import fr.istic.synthlab.abstraction.impl.InputPort;
-import fr.istic.synthlab.abstraction.impl.OutputPort;
-
+/**
+ * Interface for a Wire that can connect with input and output port
+ */
 public interface IWire {
 
 	/**
@@ -10,17 +10,26 @@ public interface IWire {
 	 * 
 	 * @return input port
 	 */
-	public IPort getInput();
+	public IInputPort getInput();
 
 	/**
 	 * Return the output port
 	 * 
 	 * @return output port
 	 */
-	public IPort getOutput();
-	
-	
-	public void connect(InputPort port);
-	
-	public void connect(OutputPort port);
+	public IOutputPort getOutput();
+
+	/**
+	 * Connect the wire with an input port
+	 * 
+	 * @param port
+	 */
+	public void connect(IInputPort port);
+
+	/**
+	 * Connect the wire with an output port
+	 * 
+	 * @param port
+	 */
+	public void connect(IOutputPort port);
 }
