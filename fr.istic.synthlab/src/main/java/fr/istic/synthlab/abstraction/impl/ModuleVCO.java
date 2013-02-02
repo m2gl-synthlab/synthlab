@@ -6,7 +6,10 @@ import java.util.List;
 import com.jsyn.unitgen.PulseOscillator;
 import com.jsyn.unitgen.UnitGenerator;
 
+import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModule;
+import fr.istic.synthlab.abstraction.IOutputPort;
+import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleVCO implements IModule {
 
@@ -18,20 +21,20 @@ public class ModuleVCO implements IModule {
 
 	private PulseOscillator vco;
 
-	private List<InputPort> inputs;
-	private List<OutputPort> outputs;
+	private List<IInputPort> inputs;
+	private List<IOutputPort> outputs;
 
 	public ModuleVCO() {
 		this.vco = new PulseOscillator();
 
-		this.outputs = new ArrayList<OutputPort>();
-		this.inputs = new ArrayList<InputPort>();
+		this.outputs = new ArrayList<IOutputPort>();
+		this.inputs = new ArrayList<IInputPort>();
 
-		this.outputs.add(ModuleVCO.OUTPUT_OUT, new OutputPort(vco.getOutput()));
+		this.outputs.add(ModuleVCO.OUTPUT_OUT,PACFactory.getFactory().newOutputPort(vco.getOutput()));
 
-		this.inputs.add(ModuleVCO.INPUT_AMPLITUDE, new InputPort(vco.amplitude));
-		this.inputs.add(ModuleVCO.INPUT_FREQUENCY, new InputPort(vco.frequency));
-		this.inputs.add(ModuleVCO.INPUT_WIDTH, new InputPort(vco.width));
+		this.inputs.add(ModuleVCO.INPUT_AMPLITUDE, PACFactory.getFactory().newInputPort(vco.amplitude));
+		this.inputs.add(ModuleVCO.INPUT_FREQUENCY, PACFactory.getFactory().newInputPort(vco.frequency));
+		this.inputs.add(ModuleVCO.INPUT_WIDTH, PACFactory.getFactory().newInputPort(vco.width));
 	}
 
 	@Override
@@ -51,13 +54,12 @@ public class ModuleVCO implements IModule {
 	}
 
 	@Override
-	public InputPort getInput(int identifier) {
-		System.err.println("No Input in " + getClass().getSimpleName());
-		return null;
+	public IInputPort getInput(int identifier) {
+		return inputs.get(identifier);
 	}
 
 	@Override
-	public OutputPort getOutput(int identifier) {
+	public IOutputPort getOutput(int identifier) {
 		return outputs.get(identifier);
 	}
 

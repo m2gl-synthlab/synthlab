@@ -1,5 +1,8 @@
 package fr.istic.synthlab.factory.impl;
 
+import com.jsyn.ports.UnitInputPort;
+import com.jsyn.ports.UnitOutputPort;
+
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.IOutputPort;
@@ -68,6 +71,18 @@ public class CFactory implements IFactory {
 	public IWire newWire() {
 		IWire wire = new CWire();
 		return wire;
+	}
+
+	@Override
+	public IInputPort newInputPort(UnitInputPort input) {
+		IInputPort port = new CInputPort(input);
+		return port;
+	}
+
+	@Override
+	public IOutputPort newOutputPort(UnitOutputPort output) {
+		IOutputPort port = new COutputPort(output);
+		return port;
 	}
 
 }

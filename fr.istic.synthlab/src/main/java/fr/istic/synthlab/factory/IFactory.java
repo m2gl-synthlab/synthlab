@@ -1,5 +1,8 @@
 package fr.istic.synthlab.factory;
 
+import com.jsyn.ports.UnitInputPort;
+import com.jsyn.ports.UnitOutputPort;
+
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.IOutputPort;
@@ -20,4 +23,7 @@ public interface IFactory {
 	IInputPort newInputPort(String name);
 	IOutputPort newOutputPort(String name);
 	IWire newWire();
+
+	IInputPort newInputPort(UnitInputPort input);
+	IOutputPort newOutputPort(UnitOutputPort output);
 }

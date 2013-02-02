@@ -20,6 +20,12 @@ public class PWire extends JPanel implements IPWire {
 	public PWire(ICWire control) {
 		this.ctrl = control;
 		
+		configView();
+		defineCallbacks();
+		
+	}
+
+	private void configView() {
 		x=y=-1;
 		
 		this.setSize(60, 60);
@@ -29,6 +35,10 @@ public class PWire extends JPanel implements IPWire {
 //		comp = new LinesComponent();
 //		comp.setPreferredSize(new Dimension(1000, 1000));
 //		this.add(comp, BorderLayout.CENTER);
+	}
+
+	private void defineCallbacks() {
+	
 	}
 	
 	@Override

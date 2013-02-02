@@ -6,7 +6,10 @@ import java.util.List;
 import com.jsyn.unitgen.FilterLowPass;
 import com.jsyn.unitgen.UnitGenerator;
 
+import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModule;
+import fr.istic.synthlab.abstraction.IOutputPort;
+import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleVCF implements IModule{
 
@@ -18,21 +21,21 @@ public class ModuleVCF implements IModule{
 
 	private FilterLowPass vcf;	
 
-	private List<InputPort> inputs;
-	private List<OutputPort> outputs;
+	private List<IInputPort> inputs;
+	private List<IOutputPort> outputs;
 	
 	
 	public ModuleVCF() {
 		this.vcf = new FilterLowPass();
 
-		this.inputs = new ArrayList<InputPort>();
-		this.outputs = new ArrayList<OutputPort>();
+		this.inputs = new ArrayList<IInputPort>();
+		this.outputs = new ArrayList<IOutputPort>();
 		
-		this.outputs.add(ModuleVCF.OUTPUT_OUT, new OutputPort(vcf.getOutput()));
+		this.outputs.add(ModuleVCF.OUTPUT_OUT, PACFactory.getFactory().newOutputPort(vcf.getOutput()));
 		
-		this.inputs.add(ModuleVCF.INPUT_IN, new InputPort(vcf.getInput()));
-		this.inputs.add(ModuleVCF.INPUT_AMPLITUDE, new InputPort(vcf.amplitude));
-		this.inputs.add(ModuleVCF.INPUT_FREQUENCY, new InputPort(vcf.frequency));
+		this.inputs.add(ModuleVCF.INPUT_IN, PACFactory.getFactory().newInputPort(vcf.getInput()));
+		this.inputs.add(ModuleVCF.INPUT_AMPLITUDE, PACFactory.getFactory().newInputPort(vcf.amplitude));
+		this.inputs.add(ModuleVCF.INPUT_FREQUENCY, PACFactory.getFactory().newInputPort(vcf.frequency));
 	}
 
 	@Override
@@ -52,12 +55,12 @@ public class ModuleVCF implements IModule{
 
 
 	@Override
-	public InputPort getInput(int identifier) {
+	public IInputPort getInput(int identifier) {
 		return inputs.get(identifier);
 	}
 
 	@Override
-	public OutputPort getOutput(int identifier) {
+	public IOutputPort getOutput(int identifier) {
 		return outputs.get(identifier);
 	}
 

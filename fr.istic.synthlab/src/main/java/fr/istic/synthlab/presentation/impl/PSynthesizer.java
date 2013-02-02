@@ -16,9 +16,19 @@ public class PSynthesizer extends JPanel implements IPSynthesizer {
 
 	public PSynthesizer(ICSynthesizer control) {
 		ctrl = control;
+		
+		configView();
+		defineCallbacks();
+		
+	}
+
+	private void configView() {
 		this.setBorder(BorderFactory.createTitledBorder(getClass().getSimpleName()));
 	}
 
+	private void defineCallbacks() {
+	}
+	
 	@Override
 	public ICSynthesizer getControl() {
 		return ctrl;
@@ -61,16 +71,22 @@ public class PSynthesizer extends JPanel implements IPSynthesizer {
 	@Override
 	public void c2pAddModule(IPModule module) {
 		this.add((PModule) module);
+		validate();
+		repaint();
 	}
 
 	@Override
 	public void c2pAddModuleOk(IPModule module) {
 		this.add((PModule) module);
+		validate();
+		repaint();
 	}
 
 	@Override
 	public void c2pRemoveModuleOk(IPModule module) {
 		this.remove((PModule) module);
+		validate();
+		repaint();
 	}
 
 }

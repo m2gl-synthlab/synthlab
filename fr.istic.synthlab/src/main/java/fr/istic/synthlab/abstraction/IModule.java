@@ -31,14 +31,14 @@ public interface IModule{
 	 * @param identifier
 	 * @return the outputPort
 	 */
-	public InputPort getInput(int identifier);
+	public IInputPort getInput(int identifier);
 	
 	/**
 	 * Return the output port designed by identifier
 	 * @param identifier
 	 * @return the outputPort
 	 */
-	public OutputPort getOutput(int identifier);
+	public IOutputPort getOutput(int identifier);
 	
 	
 //
