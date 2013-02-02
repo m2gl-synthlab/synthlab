@@ -56,6 +56,7 @@ public class Synthesizer implements ISynthesizer {
 	public void start() {
 		
 		this.synth.start();
+		
 		for(IModule mod : this.modules){
 			mod.start();
 		}
@@ -69,6 +70,7 @@ public class Synthesizer implements ISynthesizer {
 
 	@Override
 	public void stop() {
+		
 		this.synth.stop();
 
 		for(IModule mod : this.modules){

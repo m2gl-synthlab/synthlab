@@ -3,6 +3,8 @@ package fr.istic.synthlab.abstraction.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.jsyn.ports.UnitInputPort;
+import com.jsyn.unitgen.ChannelOut;
 import com.jsyn.unitgen.LineOut;
 import com.jsyn.unitgen.UnitGenerator;
 
@@ -17,25 +19,27 @@ public class ModuleOUT implements IModule {
 	public static final int INPUT_IN = 0;
 	public static final int INPUT_GAIN = 1;
 
-	private LineOut vca;
+	private ChannelOut vca;
 	private Map<Integer, IInputPort> inputs;
 	private Map<Integer, IParameter> params;
 
 	public ModuleOUT(String name) {
-		this.vca = new LineOut();
+		this.vca = new ChannelOut();
 
 		this.inputs = new HashMap<Integer, IInputPort>();
 		this.params = new HashMap<Integer, IParameter>();
 
 		this.inputs.put(ModuleOUT.INPUT_IN, PACFactory.getFactory()
-				.newInputPort(vca.getInput()));
+				.newInputPort(vca.input));
 		this.inputs.put(ModuleOUT.INPUT_GAIN, PACFactory.getFactory()
 				.newInputPort(vca.input));
-
-		IParameter gain = PACFactory.getFactory().newParameter("Gain");
-		gain.setValue(100);
-		gain.connect(inputs.get(ModuleOUT.INPUT_GAIN));
-		this.params.put(ModuleOUT.INPUT_GAIN, gain);
+//		vca.setEnabled(false);
+//		IParameter gain = PACFactory.getFactory().newParameter("Gain");
+//		gain.setMax(12);
+//		gain.setMin(-1D);
+//		gain.setValue(-1D);
+//		gain.connect(inputs.get(ModuleOUT.INPUT_GAIN));
+//		this.params.put(ModuleOUT.INPUT_GAIN, gain);
 	}
 
 	@Override
