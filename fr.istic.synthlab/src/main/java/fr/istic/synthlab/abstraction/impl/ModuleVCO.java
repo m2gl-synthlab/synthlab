@@ -42,6 +42,7 @@ public class ModuleVCO implements IModule {
 	@Override
 	public void start() {
 		this.vco.start();
+		System.out.println("vco started");
 	}
 
 	@Override

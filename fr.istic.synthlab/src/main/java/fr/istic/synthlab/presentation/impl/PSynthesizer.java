@@ -47,11 +47,15 @@ public class PSynthesizer extends JPanel implements IPSynthesizer {
 	@Override
 	public void c2pStart() {
 		this.setBackground(Color.GREEN);
+		validate();
+		repaint();
 	}
 
 	@Override
 	public void c2pStop() {
 		this.setBackground(Color.RED);
+		validate();
+		repaint();
 	}
 
 	@Override

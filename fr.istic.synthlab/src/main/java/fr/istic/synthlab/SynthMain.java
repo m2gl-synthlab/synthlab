@@ -10,6 +10,8 @@ import fr.istic.synthlab.command.menu.QuitSynthCommand;
 import fr.istic.synthlab.command.menu.SaveSynthCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarDefaultCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarModuleCommand;
+import fr.istic.synthlab.command.toolbar.ToolbarPauseCommand;
+import fr.istic.synthlab.command.toolbar.ToolbarPlayCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarWireCommand;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.impl.CSynthesizer;
@@ -30,16 +32,15 @@ public class SynthMain {
 		
 		// Create the application
 		SynthApp app = new SynthApp();
+		// Create a default synthesizer
+		app.newSynth();
+		
 		
 		// Create the main frame
 		SynthFrame frame = new SynthFrame();
 		frame.setTitle("Synthlab - G");
 		
-		// Create a synthesizer controller
-		ICSynthesizer syn = (CSynthesizer)factory.newSynthesizer();
-
 		// Configure the application
-		app.setSynthesizer(syn);
 		app.setDisplaySynthCommand(new DisplayCommand(app, frame));
 		app.setUndisplaySynthCommand(new UndisplayCommand(app, frame));
 
@@ -53,6 +54,9 @@ public class SynthMain {
 		frame.setToolbarDefaultCommand(new ToolbarDefaultCommand());
 		frame.setToolbarWireCommand(new ToolbarWireCommand());
 		frame.setToolbarModuleCommand(new ToolbarModuleCommand());
+		frame.setToolbarPlayCommand(new ToolbarPlayCommand(app.getSynthesizer().getPresentation()));
+		frame.setToolbarPauseCommand(new ToolbarPauseCommand(app.getSynthesizer().getPresentation()));
+//		frame.setToolbarRecordCommand(new ToolbarRecordCommand());
 		
 		// Start the application
 		app.startSynth();

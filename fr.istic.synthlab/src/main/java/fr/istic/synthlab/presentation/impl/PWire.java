@@ -1,12 +1,8 @@
 package fr.istic.synthlab.presentation.impl;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import fr.istic.synthlab.LinesComponent;
 import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.presentation.IPWire;
 
@@ -15,7 +11,7 @@ public class PWire extends JPanel implements IPWire {
 	private static final long serialVersionUID = 433233331577188149L;
 	
 	private ICWire ctrl;
-	private LinesComponent comp;
+//	private LinesComponent comp;
 	int x, y;
 	
 	/**
@@ -30,9 +26,9 @@ public class PWire extends JPanel implements IPWire {
 		this.setPreferredSize(this.getSize());
 		this.add(new JLabel("Wire"));
 		
-		comp = new LinesComponent();
-		comp.setPreferredSize(new Dimension(1000, 1000));
-		this.add(comp, BorderLayout.CENTER);
+//		comp = new LinesComponent();
+//		comp.setPreferredSize(new Dimension(1000, 1000));
+//		this.add(comp, BorderLayout.CENTER);
 	}
 	
 	@Override
@@ -48,7 +44,7 @@ public class PWire extends JPanel implements IPWire {
 			this.y=y;
 			return;
 		}
-		comp.addLine(x, y, this.x, this.y);
+//		comp.addLine(x, y, this.x, this.y);
 		this.repaint();
 	}
 }

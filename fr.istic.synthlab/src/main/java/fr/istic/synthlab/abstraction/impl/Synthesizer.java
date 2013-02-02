@@ -41,19 +41,27 @@ public class Synthesizer implements ISynthesizer {
 
 	@Override
 	public void add(IModule module) {
-		this.synth.add(module.getJSyn());
+		System.out.println("Adding module" + this + " " +this.modules.size());
 		modules.add(module);
+		this.synth.add(module.getJSyn());
 	}
 
 	@Override
 	public void remove(IModule module) {
-		this.synth.remove(module.getJSyn());
 		modules.add(module);
+		this.synth.remove(module.getJSyn());
 	}
 
 	@Override
 	public void start() {
+		
 		this.synth.start();
+		System.out.println("Synth.start() " + this + " " + this.modules.size());
+		for(IModule mod : this.modules){
+
+			System.out.println("IModule.start()");
+			mod.start();
+		}
 	}
 
 	@Override
@@ -65,6 +73,11 @@ public class Synthesizer implements ISynthesizer {
 	@Override
 	public void stop() {
 		this.synth.stop();
+
+		this.synth.start();
+		for(IModule mod : this.modules){
+			mod.stop();
+		}
 	}
 
 	@Override

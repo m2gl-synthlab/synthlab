@@ -25,7 +25,9 @@ public class SynthApp implements ISynthApp {
 	 */
 	@Override
 	public void startSynth() {
-		newSynth();
+		if(synth == null){
+			newSynth();
+		}
 		displayCmd.execute();
 	}
 
@@ -51,8 +53,6 @@ public class SynthApp implements ISynthApp {
 		synth.add(vcf);
 		synth.add(vca);
 
-		
-		
 		// Ajout des fils
 		CWire wire0 = (CWire) PACFactory.getFactory().newWire();
 		CWire wire1 = (CWire) PACFactory.getFactory().newWire();
@@ -67,15 +67,6 @@ public class SynthApp implements ISynthApp {
 		wire2.connect(vcf.getOutput(ModuleVCF.OUTPUT_OUT));
 		wire2.connect(vca.getInput(ModuleVCA.INPUT_IN));
 
-//		vca.getInput(ModuleVCA.)
-		
-		synth.start();
-		synth.startModule(vco0);
-		synth.startModule(vco1);
-		synth.startModule(vcf);
-		synth.startModule(vca);
-		
-		
 	}
 
 	/*

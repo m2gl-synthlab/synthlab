@@ -34,6 +34,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private static final int BUTTON_WIRE = 1;
 	private static final int BUTTON_MODULE = 2;
 
+	private static final int BUTTON_PLAY = 3;
+	private static final int BUTTON_PAUSE = 4;
+	private static final int BUTTON_RECORD = 5;
+
 	private IPSynthesizer pres;
 
 	// Menu
@@ -44,10 +48,11 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 	// Toolbar
 	private JToolBar toolBar = new JToolBar();
-	private String[] iconFiles = { "res/default.png", "res/wire.png", "res/module.png" };
-	private String[] buttonLabels = { "Default", "Wire", "Module" };
+	private String[] iconFiles = { "res/default.png", "res/wire.png", "res/module.png", "res/play.png", "res/pause.png", "res/record.png" };
+	private String[] buttonLabels = { "Default", "Wire", "Module", "Play", "Pause", "Record" };
 	private Image[] icons = new Image[iconFiles.length];
 	private JButton[] buttons = new JButton[buttonLabels.length];
+	
 
 	// Command
 	private ICommand newSynthCommand;
@@ -59,6 +64,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand toolbarDefaultCommand;
 	private ICommand toolbarWireCommand;
 	private ICommand toolbarModuleCommand;
+
+	private ICommand toolbarPlayCommand;
+	private ICommand toolbarPauseCommand;
+	private ICommand toolbarRecordCommand;
 
 	public SynthFrame() {
 		this.initComponents();
@@ -118,9 +127,9 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			buttons[i].setToolTipText(buttonLabels[i]);
 			toolBar.add(buttons[i]);
 		}
+
+		frameContainer.add(BorderLayout.NORTH, toolBar);
 		
-		// ajout de la toolbar
-		frameContainer.add("North", toolBar);
 	}
 
 	/**
@@ -218,12 +227,39 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 					toolbarWireCommand.execute();
 			}
 		});
-		
+
 		buttons[BUTTON_MODULE].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (toolbarModuleCommand != null)
 					toolbarModuleCommand.execute();
+			}
+		});
+		
+
+		buttons[BUTTON_PLAY].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (toolbarPlayCommand != null)
+					toolbarPlayCommand.execute();
+			}
+		});
+		
+
+		buttons[BUTTON_PAUSE].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (toolbarPauseCommand != null)
+					toolbarPauseCommand.execute();
+			}
+		});
+		
+
+		buttons[BUTTON_RECORD].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (toolbarRecordCommand != null)
+					toolbarRecordCommand.execute();
 			}
 		});
 		
@@ -324,5 +360,30 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	public void setToolbarModuleCommand(ICommand toolbarModuleCommand) {
 		this.toolbarModuleCommand = toolbarModuleCommand;
 	}
+	
+	/**
+	 * @param toolbarModuleCommand
+	 *            the toolbarModuleCommand to set
+	 */
+	public void setToolbarPlayCommand(ICommand toolbarPlayCommand) {
+		this.toolbarPlayCommand = toolbarPlayCommand;
+	}
+	
+	/**
+	 * @param toolbarModuleCommand
+	 *            the toolbarModuleCommand to set
+	 */
+	public void setToolbarPauseCommand(ICommand toolbarPauseCommand) {
+		this.toolbarPauseCommand = toolbarPauseCommand;
+	}
+
+	/**
+	 * @param toolbarModuleCommand
+	 *            the toolbarModuleCommand to set
+	 */
+	public void setToolbarRecordCommand(ICommand toolbarRecordCommand) {
+		this.toolbarRecordCommand = toolbarRecordCommand;
+	}
+
 
 }
