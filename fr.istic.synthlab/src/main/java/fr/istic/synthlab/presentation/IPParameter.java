@@ -1,5 +1,6 @@
 package fr.istic.synthlab.presentation;
 
+import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.controller.ICParameter;
 
 
@@ -11,4 +12,6 @@ public interface IPParameter {
 	 * @return the controller
 	 */
 	public ICParameter getControl();
+
+	public void connect(IInputPort input);
 }

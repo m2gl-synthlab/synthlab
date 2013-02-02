@@ -71,5 +71,12 @@ public interface IInputPort {// extends ConnectableInput, GettablePort, Settable
 	 * @return part count
 	 */
 	public int getNumParts();
-
+	
+	/**
+	 * Return the default part
+	 * 
+	 * @return default part number
+	 */
+	public int getDefaultPart();
+	
 }

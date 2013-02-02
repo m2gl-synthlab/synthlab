@@ -1,5 +1,6 @@
 package fr.istic.synthlab.controller.impl;
 
+import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.impl.Parameter;
 import fr.istic.synthlab.controller.ICParameter;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -18,6 +19,11 @@ public class CParameter extends Parameter implements ICParameter {
 	@Override
 	public IPParameter getPresentation() {
 		return pres;
+	}
+	
+	public void connect(IInputPort input) {
+		super.connect(input);
+		this.pres.connect(input);
 	}
 
 }

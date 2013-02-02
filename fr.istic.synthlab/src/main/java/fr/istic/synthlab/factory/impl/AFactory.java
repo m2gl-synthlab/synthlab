@@ -92,10 +92,21 @@ public class AFactory implements IFactory {
 		IInputPort port = new InputPort(input);
 		return port;
 	}
+	
+	@Override
+	public IInputPort newInputPort(UnitInputPort input, int part) {
+		IInputPort port = new InputPort(input, part);
+		return port;
+	}
 
 	@Override
 	public IOutputPort newOutputPort(UnitOutputPort output) {
 		IOutputPort port = new OutputPort(output);
+		return port;
+	}
+	
+	public IOutputPort newOutputPort(UnitOutputPort output, int part) {
+		IOutputPort port = new OutputPort(output, part);
 		return port;
 	}
 

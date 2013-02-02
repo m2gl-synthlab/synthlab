@@ -25,5 +25,7 @@ public interface IFactory {
 	IWire newWire();
 
 	IInputPort newInputPort(UnitInputPort input);
+	IInputPort newInputPort(UnitInputPort input, int part);
 	IOutputPort newOutputPort(UnitOutputPort output);
+	IOutputPort newOutputPort(UnitOutputPort output, int part);
 }

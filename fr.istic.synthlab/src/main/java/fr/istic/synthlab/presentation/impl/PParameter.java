@@ -3,9 +3,13 @@ package fr.istic.synthlab.presentation.impl;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import com.jsyn.ports.UnitInputPort;
+import com.jsyn.swing.DoubleBoundedRangeSlider;
 import com.jsyn.swing.ExponentialRangeModel;
+import com.jsyn.swing.PortControllerFactory;
 import com.jsyn.swing.RotaryTextController;
 
+import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.controller.ICParameter;
 import fr.istic.synthlab.presentation.IPParameter;
 
@@ -23,7 +27,7 @@ public class PParameter extends JPanel implements IPParameter {
 	}
 
 	private void configView() {
-		this.setSize(100, 100);
+		this.setSize(400, 100);
 		this.setPreferredSize(this.getSize());
 		this.setBorder(BorderFactory.createTitledBorder(getClass().getSimpleName()));
 		
@@ -31,7 +35,7 @@ public class PParameter extends JPanel implements IPParameter {
 		RotaryTextController knob = new RotaryTextController( amplitudeModel, 5 );
 		JPanel knobPanel = new JPanel();
 		knobPanel.add( knob );
-		add( knobPanel );
+		
 		
 	}
 
@@ -41,6 +45,12 @@ public class PParameter extends JPanel implements IPParameter {
 	@Override
 	public ICParameter getControl() {
 		return ctrl;
+	}
+
+	@Override
+	public void connect(IInputPort input) {
+		DoubleBoundedRangeSlider slider = PortControllerFactory.createPortSlider(ctrl.getPort().getJSyn());
+		add( slider );
 	}
 
 }

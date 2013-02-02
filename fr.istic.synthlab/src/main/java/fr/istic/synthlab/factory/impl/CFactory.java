@@ -79,10 +79,22 @@ public class CFactory implements IFactory {
 		IInputPort port = new CInputPort(input);
 		return port;
 	}
+	
+	@Override
+	public IInputPort newInputPort(UnitInputPort input, int part) {
+		IInputPort port = new CInputPort(input, part);
+		return port;
+	}
 
 	@Override
 	public IOutputPort newOutputPort(UnitOutputPort output) {
 		IOutputPort port = new COutputPort(output);
+		return port;
+	}
+	
+	@Override
+	public IOutputPort newOutputPort(UnitOutputPort output, int part) {
+		IOutputPort port = new COutputPort(output, part);
 		return port;
 	}
 

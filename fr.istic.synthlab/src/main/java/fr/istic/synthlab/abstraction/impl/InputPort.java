@@ -8,6 +8,7 @@ import fr.istic.synthlab.abstraction.IOutputPort;
 public class InputPort implements IInputPort {
 
 	private String name;
+	private int defaultPart = 0;
 	private UnitInputPort port;
 
 	/**
@@ -19,6 +20,11 @@ public class InputPort implements IInputPort {
 
 	public InputPort(UnitInputPort jSynPort) {
 		this.port = jSynPort;
+	}
+	
+	public InputPort(UnitInputPort jSynPort, int part) {
+		this.port = jSynPort;
+		this.defaultPart = part;
 	}
 
 	@Override
@@ -64,6 +70,11 @@ public class InputPort implements IInputPort {
 	@Override
 	public int getNumParts() {
 		return port.getNumParts();
+	}
+
+	@Override
+	public int getDefaultPart() {
+		return this.defaultPart;
 	}
 
 }

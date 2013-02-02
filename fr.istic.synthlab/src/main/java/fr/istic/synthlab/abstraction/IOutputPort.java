@@ -56,5 +56,13 @@ public interface IOutputPort {// extends ConnectableInput, GettablePort{
 	 * @return part count
 	 */
 	public int getNumParts();
+	
+	/**
+	 * Return the default part
+	 * 
+	 * @return default part number
+	 */
+	public int getDefaultPart();
+	
 
 }

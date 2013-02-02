@@ -3,9 +3,8 @@ package fr.istic.synthlab.abstraction.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.jsyn.ports.UnitInputPort;
 import com.jsyn.unitgen.ChannelOut;
-import com.jsyn.unitgen.LineOut;
+import com.jsyn.unitgen.CrossFade;
 import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.IInputPort;
@@ -20,26 +19,30 @@ public class ModuleOUT implements IModule {
 	public static final int INPUT_GAIN = 1;
 
 	private ChannelOut vca;
+	private CrossFade fader;
 	private Map<Integer, IInputPort> inputs;
 	private Map<Integer, IParameter> params;
 
 	public ModuleOUT(String name) {
 		this.vca = new ChannelOut();
-
+		this.fader = new CrossFade();
+		
 		this.inputs = new HashMap<Integer, IInputPort>();
 		this.params = new HashMap<Integer, IParameter>();
-
+	
 		this.inputs.put(ModuleOUT.INPUT_IN, PACFactory.getFactory()
-				.newInputPort(vca.input));
+				.newInputPort(fader.input, 1));
 		this.inputs.put(ModuleOUT.INPUT_GAIN, PACFactory.getFactory()
-				.newInputPort(vca.input));
-//		vca.setEnabled(false);
-//		IParameter gain = PACFactory.getFactory().newParameter("Gain");
-//		gain.setMax(12);
-//		gain.setMin(-1D);
-//		gain.setValue(-1D);
-//		gain.connect(inputs.get(ModuleOUT.INPUT_GAIN));
-//		this.params.put(ModuleOUT.INPUT_GAIN, gain);
+				.newInputPort(fader.fade));
+		
+		IParameter gain = PACFactory.getFactory().newParameter("Gain");
+		gain.setMax(12);
+		gain.setMin(-1D);
+		gain.setValue(10);
+		gain.connect(inputs.get(ModuleOUT.INPUT_GAIN));
+		this.params.put(ModuleOUT.INPUT_GAIN, gain);
+		
+		fader.output.connect(vca.input);
 	}
 
 	@Override

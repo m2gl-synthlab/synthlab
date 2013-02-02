@@ -21,6 +21,11 @@ public class CInputPort extends InputPort implements ICInputPort {
 		this.pres = PACFactory.getPFactory().newInputPort(this);
 	}
 
+	public CInputPort(UnitInputPort input, int part) {
+		super(input, part);
+		this.pres = PACFactory.getPFactory().newInputPort(this);
+	}
+
 	@Override
 	public IPInputPort getPresentation() {
 		return pres;
