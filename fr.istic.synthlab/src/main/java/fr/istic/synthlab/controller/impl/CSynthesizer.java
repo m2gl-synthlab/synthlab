@@ -8,18 +8,20 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.IPSynthesizer;
 
 public class CSynthesizer extends Synthesizer implements ICSynthesizer {
-	
+
 	private IPSynthesizer pres;
 
 	public CSynthesizer() {
 		this.pres = PACFactory.getPFactory().newSynthesizer(this);
+
+		stop();
 	}
-	
+
 	@Override
 	public void start() {
 		super.start();
-		if(isRunning()){
-//			pres.start();
+		if (isRunning()) {
+			pres.c2pStart();
 		}
 
 	}
@@ -27,8 +29,8 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	@Override
 	public void stop() {
 		super.stop();
-		if(!isRunning()){
-//			pres.stop();
+		if (!isRunning()) {
+			pres.c2pStop();
 		}
 	}
 
@@ -40,8 +42,40 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	@Override
 	public void add(IModule module) {
 		super.add(module);
-		pres.addModule(((ICModule)module).getPresentation());
+		pres.c2pAddModule(((ICModule) module).getPresentation());
 	}
 
+	@Override
+	public void p2cStart() {
+		this.start();
+	}
+
+	@Override
+	public void p2cStop() {
+		this.stop();
+	}
+
+	@Override
+	public void p2cAddModule(ICModule module) {
+		// TODO : Do some check here
+		this.add(module);
+		
+		//Inform the presentation
+		pres.c2pAddModuleOk(module.getPresentation());
+	}
+
+	@Override
+	public void p2cRemoveModule(ICModule module) {
+		// TODO : Do some check here
+		this.remove(module);
+		pres.c2pRemoveModuleOk(module.getPresentation());
+	}
+
+	/**
+	 * p2cStart p2cStop
+	 * 
+	 * p2cAddModule(ICModule module) p2cRemoveModule(ICModule module) p2cStart
+	 * p2cStart p2cStart
+	 */
 
 }

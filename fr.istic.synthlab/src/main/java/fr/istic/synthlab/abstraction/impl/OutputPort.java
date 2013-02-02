@@ -5,6 +5,10 @@ import com.jsyn.ports.UnitOutputPort;
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IOutputPort;
 
+
+/**
+ * Implementation of an output port
+ */
 public class OutputPort implements IOutputPort {
 
 	private UnitOutputPort port;

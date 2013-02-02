@@ -19,6 +19,7 @@ public class ModuleVCA implements IModule{
 		this.vca = new LineOut();
 		this.inputs = new ArrayList<InputPort>();
 		this.inputs.add(ModuleVCA.INPUT_IN, new InputPort(vca.getInput()));
+		
 	}
 
 	@Override

@@ -9,6 +9,9 @@ import com.jsyn.engine.SynthesisEngine;
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.ISynthesizer;
 
+/**
+ * Implementation of a Synthesizer
+ */
 public class Synthesizer implements ISynthesizer {
 
 	private com.jsyn.Synthesizer synth;

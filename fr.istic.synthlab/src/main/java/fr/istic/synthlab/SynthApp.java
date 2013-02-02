@@ -67,11 +67,15 @@ public class SynthApp implements ISynthApp {
 		wire2.connect(vcf.getOutput(ModuleVCF.OUTPUT_OUT));
 		wire2.connect(vca.getInput(ModuleVCA.INPUT_IN));
 
+//		vca.getInput(ModuleVCA.)
+		
 		synth.start();
-		vco0.start();
-		vco1.start();
-		vcf.start();
-		vca.start();
+		synth.startModule(vco0);
+		synth.startModule(vco1);
+		synth.startModule(vcf);
+		synth.startModule(vca);
+		
+		
 	}
 
 	/*
