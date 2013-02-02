@@ -21,6 +21,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
+import com.softsynth.jsyn.view.UsageDisplay;
+
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.presentation.IPSynthesizer;
 import fr.istic.synthlab.presentation.impl.PSynthesizer;
@@ -69,6 +71,11 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand toolbarPauseCommand;
 	private ICommand toolbarRecordCommand;
 
+	
+	// Debug
+	private UsageDisplay usage;
+	
+	
 	public SynthFrame() {
 		this.initComponents();
 		this.configureView();
@@ -130,6 +137,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 		frameContainer.add(BorderLayout.NORTH, toolBar);
 		
+		
+		// Debug
+		usage = new UsageDisplay();
+		frameContainer.add(BorderLayout.SOUTH, usage);
 	}
 
 	/**

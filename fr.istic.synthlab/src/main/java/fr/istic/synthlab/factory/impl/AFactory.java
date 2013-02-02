@@ -67,8 +67,8 @@ public class AFactory implements IFactory {
 		return module;
 	}
 
-	public IParameter newParameter(String name) {
-		IParameter parameter = new Parameter();
+	public IParameter newParameter(double min, double max, double val) {
+		IParameter parameter = new Parameter(min, max, val);
 		return parameter;
 	}
 

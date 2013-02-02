@@ -53,8 +53,7 @@ public class Synthesizer implements ISynthesizer {
 
 	@Override
 	public void start() {
-		
-		this.synth.start();
+		this.synth.start(22000);
 		for(IModule mod : this.modules){
 			mod.start();
 		}
@@ -62,15 +61,13 @@ public class Synthesizer implements ISynthesizer {
 
 	@Override
 	public void startModule(IModule module) {
-		//this.synth.startUnit(module.getJSyn());
+//		this.synth.startUnit(module.getJSyn());
 		module.start();
 	}
 
 	@Override
 	public void stop() {
 		this.synth.stop();
-
-		this.synth.start();
 		for(IModule mod : this.modules){
 			mod.stop();
 		}
@@ -78,7 +75,7 @@ public class Synthesizer implements ISynthesizer {
 
 	@Override
 	public void stopModule(IModule module) {
-		//this.synth.stopUnit(module.getJSyn());
+//		this.synth.stopUnit(module.getJSyn());
 		module.stop();
 	}
 

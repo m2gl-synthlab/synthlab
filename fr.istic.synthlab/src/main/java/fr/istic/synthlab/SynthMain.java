@@ -13,7 +13,6 @@ import fr.istic.synthlab.command.toolbar.ToolbarModuleCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarPauseCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarPlayCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarWireCommand;
-import fr.istic.synthlab.factory.IFactory;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -26,7 +25,6 @@ public class SynthMain {
 		PACFactory.setAFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
-		IFactory factory = PACFactory.getFactory();
 		
 		// Create the application
 		SynthApp app = new SynthApp();

@@ -5,12 +5,19 @@ import fr.istic.synthlab.abstraction.IParameter;
 
 public class Parameter implements IParameter {
 
-	private double min = 0;
-	private double max = 100;
-	private double value = 0;
+	private double min;
+	private double max;
+	private double value;
 	
 	private IInputPort port;
 
+	public Parameter(double min, double max, double value){
+		this.max = max;
+		this.min = min;
+		this.value = value;
+	}
+	
+	
 	@Override
 	public void setValue(double val) {
 		this.value = val;
@@ -18,7 +25,9 @@ public class Parameter implements IParameter {
 		if(val < min) this.value = min;
 		
 		if(port!=null){
+			
 			port.set(val);
+			System.out.println("port not null "+ val + " "+ port.getValue());
 		}
 	}
 

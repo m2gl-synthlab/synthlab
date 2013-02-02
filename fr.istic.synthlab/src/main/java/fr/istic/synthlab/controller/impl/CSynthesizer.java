@@ -12,6 +12,7 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	private IPSynthesizer pres;
 
 	public CSynthesizer() {
+		super();
 		this.pres = PACFactory.getPFactory().newSynthesizer(this);
 
 		stop();
@@ -29,7 +30,7 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	@Override
 	public void stop() {
 		super.stop();
-		if (isRunning()) {
+		if (!isRunning()) {
 			pres.c2pStop();
 		}
 	}

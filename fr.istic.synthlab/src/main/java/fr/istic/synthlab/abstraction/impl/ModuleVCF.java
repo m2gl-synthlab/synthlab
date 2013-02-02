@@ -44,14 +44,12 @@ public class ModuleVCF implements IModule{
 		this.inputs.put(ModuleVCF.INPUT_IN, PACFactory.getFactory().newInputPort(vcf.getInput()));
 		
 		
-		IParameter amplitude = PACFactory.getFactory().newParameter("Amplitude");
-		amplitude.setValue(0.5);
+		IParameter amplitude = PACFactory.getFactory().newParameter(0, 1, 0.5);
 		amplitude.connect(inputs.get(ModuleVCF.INPUT_AMPLITUDE));
 		this.params.put(ModuleVCF.INPUT_AMPLITUDE, amplitude);
 		System.out.println("Default amplitude : " + PulseOscillator.DEFAULT_AMPLITUDE);
 		
-		IParameter frequency = PACFactory.getFactory().newParameter("Frequency");
-		frequency.setValue(440);
+		IParameter frequency = PACFactory.getFactory().newParameter(0,1000, 440);
 		frequency.connect(inputs.get(ModuleVCF.INPUT_FREQUENCY));
 		this.params.put(ModuleVCF.INPUT_FREQUENCY, frequency);
 	}
