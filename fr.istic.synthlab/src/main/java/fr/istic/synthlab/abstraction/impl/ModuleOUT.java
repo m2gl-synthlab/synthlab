@@ -34,11 +34,8 @@ public class ModuleOUT implements IModule {
 				.newInputPort(fader.input, 1));
 		this.inputs.put(ModuleOUT.INPUT_GAIN, PACFactory.getFactory()
 				.newInputPort(fader.fade));
-		
-		IParameter gain = PACFactory.getFactory().newParameter("Gain");
-		gain.setMax(12);
-		gain.setMin(-1D);
-		gain.setValue(10);
+
+		IParameter gain = PACFactory.getFactory().newParameter(0,100,100);
 		gain.connect(inputs.get(ModuleOUT.INPUT_GAIN));
 		this.params.put(ModuleOUT.INPUT_GAIN, gain);
 		

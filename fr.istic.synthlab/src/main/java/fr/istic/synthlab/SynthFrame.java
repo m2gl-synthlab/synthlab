@@ -71,6 +71,11 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand toolbarPauseCommand;
 	private ICommand toolbarRecordCommand;
 
+	
+	// Debug
+	private UsageDisplay usage;
+	
+	
 	public SynthFrame() {
 		this.initComponents();
 		this.configureView();
@@ -133,6 +138,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 		frameContainer.add(BorderLayout.NORTH, toolBar);
 		
+		
+		// Debug
+		usage = new UsageDisplay();
+		frameContainer.add(BorderLayout.SOUTH, usage);
 	}
 
 	/**

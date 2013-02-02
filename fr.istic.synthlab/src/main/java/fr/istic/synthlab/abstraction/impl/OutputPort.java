@@ -42,7 +42,6 @@ public class OutputPort implements IOutputPort {
 
 	@Override
 	public void connect(IInputPort inputPort) {
-		System.err.println("Connecting");
 		port.connect(0, inputPort.getJSyn(), inputPort.getDefaultPart());
 	}
 

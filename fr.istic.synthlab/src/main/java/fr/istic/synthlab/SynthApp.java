@@ -18,11 +18,6 @@ public class SynthApp implements ISynthApp {
 	private ICommand displayCmd;
 	private ICommand undisplayCmd;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.istic.synthlab.ISynthApp#startSynth()
-	 */
 	@Override
 	public void startSynth() {
 		if(synth == null){
@@ -31,11 +26,6 @@ public class SynthApp implements ISynthApp {
 		displayCmd.execute();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.istic.synthlab.ISynthApp#newSynth()
-	 */
 	@Override
 	public void newSynth() {
 		// Replace the current synthesizer with a new one
@@ -52,7 +42,7 @@ public class SynthApp implements ISynthApp {
 		synth.add(out);
 
 		// Set up the frequecy parameter
-		vco.getInput(ModuleVCO.INPUT_FREQUENCY).set(440);
+//		vco.getInput(ModuleVCO.INPUT_FREQUENCY).set(440);
 		
 		// Ajout des fils
 		CWire wire0 = (CWire) PACFactory.getFactory().newWire();
@@ -66,11 +56,6 @@ public class SynthApp implements ISynthApp {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.istic.synthlab.ISynthApp#quitSynth()
-	 */
 	@Override
 	public void quitSynth() {
 		this.synth = null;
@@ -78,47 +63,21 @@ public class SynthApp implements ISynthApp {
 		System.exit(0);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * fr.istic.synthlab.ISynthApp#setSynthesizer(fr.istic.synthlab.controller
-	 * .ICSynthesizer)
-	 */
 	@Override
 	public void setSynthesizer(ICSynthesizer syn) {
 		this.synth = syn;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.istic.synthlab.ISynthApp#getSynthesizer()
-	 */
 	@Override
 	public ICSynthesizer getSynthesizer() {
 		return synth;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * fr.istic.synthlab.ISynthApp#setDisplaySynthCommand(fr.istic.synthlab.
-	 * command.ICommand)
-	 */
 	@Override
 	public void setDisplaySynthCommand(ICommand displaySynthCommand) {
 		this.displayCmd = displaySynthCommand;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * fr.istic.synthlab.ISynthApp#setUndisplaySynthCommand(fr.istic.synthlab
-	 * .command.ICommand)
-	 */
 	@Override
 	public void setUndisplaySynthCommand(ICommand undisplaySynthCommand) {
 		this.undisplayCmd = undisplaySynthCommand;

@@ -23,13 +23,10 @@ public class CModuleVCO extends ModuleVCO implements ICModule {
 		IParameter frequency = this.getParameter(INPUT_FREQUENCY);
 		pres.addParameter(((ICParameter) frequency).getPresentation());
 		
-		IParameter width = this.getParameter(INPUT_WIDTH);
-		pres.addParameter(((ICParameter) width).getPresentation());
-
-		
 		IOutputPort output = this.getOutput(OUTPUT_OUT);
 		pres.addOutputPort(((ICOutputPort) output).getPresentation());
-		
+
+
 	}
 
 	@Override
