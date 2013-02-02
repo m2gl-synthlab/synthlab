@@ -5,9 +5,9 @@ import fr.istic.synthlab.abstraction.IParameter;
 
 public class Parameter implements IParameter {
 
-	private double min = Double.MIN_VALUE;
-	private double max = Double.MAX_VALUE;
-	private double value;
+	private double min = 0;
+	private double max = 100;
+	private double value = 0;
 	
 	private IInputPort port;
 
@@ -53,6 +53,11 @@ public class Parameter implements IParameter {
 	public void connect(IInputPort input) {
 		this.port = input;
 		this.port.set(value);
+	}
+
+	@Override
+	public IInputPort getPort() {
+		return this.port;
 	}
 
 }

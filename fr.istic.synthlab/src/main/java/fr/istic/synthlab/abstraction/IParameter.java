@@ -49,4 +49,10 @@ public interface IParameter {
 	 * @param input
 	 */
 	public void connect(IInputPort input);
+	
+	/**
+	 * Return the port 
+	 * @param input
+	 */
+	public IInputPort getPort();
 }

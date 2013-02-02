@@ -13,8 +13,6 @@ import fr.istic.synthlab.command.toolbar.ToolbarModuleCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarPauseCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarPlayCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarWireCommand;
-import fr.istic.synthlab.controller.ICSynthesizer;
-import fr.istic.synthlab.controller.impl.CSynthesizer;
 import fr.istic.synthlab.factory.IFactory;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
