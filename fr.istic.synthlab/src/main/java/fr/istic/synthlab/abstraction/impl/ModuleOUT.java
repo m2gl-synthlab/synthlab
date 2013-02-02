@@ -33,7 +33,7 @@ public class ModuleOUT implements IModule {
 				.newInputPort(vca.input));
 
 		IParameter gain = PACFactory.getFactory().newParameter("Gain");
-		gain.setValue(0);
+		gain.setValue(100);
 		gain.connect(inputs.get(ModuleOUT.INPUT_GAIN));
 		this.params.put(ModuleOUT.INPUT_GAIN, gain);
 	}

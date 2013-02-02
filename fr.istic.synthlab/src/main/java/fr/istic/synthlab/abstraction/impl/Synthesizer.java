@@ -5,8 +5,6 @@ import java.util.List;
 
 import com.jsyn.JSyn;
 import com.jsyn.engine.SynthesisEngine;
-import com.softsynth.jsyn.Synth;
-import com.softsynth.jsyn.view102.UsageDisplay;
 
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.ISynthesizer;
@@ -26,10 +24,6 @@ public class Synthesizer implements ISynthesizer {
 	public Synthesizer() {
 		
 		this.synth = JSyn.createSynthesizer();
-//		Synth.startEngine( 0, Synth.DEFAULT_FRAME_RATE/2.0 );
-		this.synth.getAudioDeviceManager().setSuggestedOutputLatency( 2 );
-		synth.getAudioDeviceManager().setSuggestedInputLatency(2);
-//		synth.getAudioDeviceManager().
 		modules = new ArrayList<IModule>();
 	}
 
@@ -77,7 +71,6 @@ public class Synthesizer implements ISynthesizer {
 	public void stop() {
 		this.synth.stop();
 
-		this.synth.start();
 		for(IModule mod : this.modules){
 			mod.stop();
 		}
