@@ -14,4 +14,6 @@ public interface IPModule {
 
 	public void addOutputPort(IPOutputPort presentation);
 
+	public void addParameter(IPParameter presentation);
+
 }

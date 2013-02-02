@@ -10,10 +10,11 @@ import fr.istic.synthlab.abstraction.IParameter;
 import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.InputPort;
-import fr.istic.synthlab.abstraction.impl.ModuleVCA;
+import fr.istic.synthlab.abstraction.impl.ModuleOUT;
 import fr.istic.synthlab.abstraction.impl.ModuleVCF;
 import fr.istic.synthlab.abstraction.impl.ModuleVCO;
 import fr.istic.synthlab.abstraction.impl.OutputPort;
+import fr.istic.synthlab.abstraction.impl.Parameter;
 import fr.istic.synthlab.abstraction.impl.Synthesizer;
 import fr.istic.synthlab.abstraction.impl.Wire;
 import fr.istic.synthlab.factory.IFactory;
@@ -21,7 +22,7 @@ import fr.istic.synthlab.factory.IFactory;
 public class AFactory implements IFactory {
 
 	public static final String MODULE_VCO = "VCO";
-	public static final String MODULE_VCA = "VCA";
+	public static final String MODULE_OUT = "OUT";
 	public static final String MODULE_VCF = "VCF";
 
 	private static final AFactory instance = new AFactory();
@@ -42,8 +43,8 @@ public class AFactory implements IFactory {
 		if (name == MODULE_VCO) {
 			return newVCO();
 		}
-		if (name == MODULE_VCA) {
-			return newVCA();
+		if (name == MODULE_OUT) {
+			return newOUT();
 		}
 		if (name == MODULE_VCF) {
 			return newVCF();
@@ -52,24 +53,23 @@ public class AFactory implements IFactory {
 	}
 
 	public IModule newVCO() {
-		IModule module = new ModuleVCO();
+		IModule module = new ModuleVCO(MODULE_VCO);
 		return module;
 	}
 
 	public IModule newVCF() {
-		IModule module = new ModuleVCF();
+		IModule module = new ModuleVCF(MODULE_VCF);
 		return module;
 	}
 
-	public IModule newVCA() {
-		IModule module = new ModuleVCA();
+	public IModule newOUT() {
+		IModule module = new ModuleOUT(MODULE_OUT);
 		return module;
 	}
 
 	public IParameter newParameter(String name) {
-		// IParameter parameter = new PA(name);
-		// return port;
-		return null;
+		IParameter parameter = new Parameter();
+		return parameter;
 	}
 
 	public IInputPort newInputPort(String name) {

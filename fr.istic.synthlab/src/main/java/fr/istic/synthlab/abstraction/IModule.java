@@ -2,9 +2,6 @@ package fr.istic.synthlab.abstraction;
 
 import com.jsyn.unitgen.UnitGenerator;
 
-import fr.istic.synthlab.abstraction.impl.InputPort;
-import fr.istic.synthlab.abstraction.impl.OutputPort;
-
 /**
  * Interface of a synthetizer's module
  */
@@ -39,6 +36,14 @@ public interface IModule{
 	 * @return the outputPort
 	 */
 	public IOutputPort getOutput(int identifier);
+
+	
+	/**
+	 * return the parameter designed by identifier
+	 * @param identifier
+	 * @return the parameter
+	 */
+	public IParameter getParameter(int identifier);
 	
 	
 //

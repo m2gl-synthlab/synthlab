@@ -9,26 +9,27 @@ import com.jsyn.unitgen.UnitGenerator;
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.IOutputPort;
+import fr.istic.synthlab.abstraction.IParameter;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
-public class ModuleVCA implements IModule{
+public class ModuleOUT implements IModule {
 
 	public static final int INPUT_IN = 0;
-	
+
 	private LineOut vca;
 	private List<IInputPort> inputs;
-	
-	public ModuleVCA() {
+
+	public ModuleOUT(String name) {
 		this.vca = new LineOut();
 		this.inputs = new ArrayList<IInputPort>();
-		this.inputs.add(ModuleVCA.INPUT_IN, PACFactory.getFactory().newInputPort(vca.getInput()));
+		this.inputs.add(ModuleOUT.INPUT_IN, PACFactory.getFactory().newInputPort(vca.getInput()));
 	}
 
 	@Override
 	public UnitGenerator getJSyn() {
 		return this.vca;
 	}
-	
+
 	@Override
 	public void start() {
 		vca.start();
@@ -38,10 +39,10 @@ public class ModuleVCA implements IModule{
 	public void stop() {
 		vca.stop();
 	}
-	
+
 	@Override
 	public IOutputPort getOutput(int identifier) {
-		System.err.println("No Output in "+ getClass().getSimpleName());
+		System.err.println("No Output in " + getClass().getSimpleName());
 		return null;
 	}
 
@@ -50,6 +51,10 @@ public class ModuleVCA implements IModule{
 		return inputs.get(identifier);
 	}
 
-
+	@Override
+	public IParameter getParameter(int identifier) {
+		System.err.println("No Output in " + getClass().getSimpleName());
+		return null;
+	}
 
 }

@@ -17,7 +17,7 @@ public interface IFactory {
 //	IModule newModule(String name, IFactory factory);
 	IModule newVCO();
 	IModule newVCF();
-	IModule newVCA();
+	IModule newOUT();
 	
 	IParameter newParameter(String name);
 	IInputPort newInputPort(String name);

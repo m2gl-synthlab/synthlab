@@ -1,7 +1,7 @@
 package fr.istic.synthlab;
 
 import fr.istic.synthlab.abstraction.IModule;
-import fr.istic.synthlab.abstraction.impl.ModuleVCA;
+import fr.istic.synthlab.abstraction.impl.ModuleOUT;
 import fr.istic.synthlab.abstraction.impl.ModuleVCF;
 import fr.istic.synthlab.abstraction.impl.ModuleVCO;
 import fr.istic.synthlab.command.ICommand;
@@ -43,29 +43,26 @@ public class SynthApp implements ISynthApp {
 		this.synth = (ICSynthesizer) PACFactory.getFactory().newSynthesizer();
 
 		// Add the basics modules (Oscilator + Out)
-		IModule vco0 = PACFactory.getFactory().newVCO();
-		IModule vco1 = PACFactory.getFactory().newVCO();
-		IModule vca = PACFactory.getFactory().newVCA();
+		IModule vco = PACFactory.getFactory().newVCO();
+		IModule out = PACFactory.getFactory().newOUT();
 		IModule vcf = PACFactory.getFactory().newVCF();
 
-		synth.add(vco0);
-		synth.add(vco1);
+		synth.add(vco);
 		synth.add(vcf);
-		synth.add(vca);
+		synth.add(out);
 
+		// Set up the frequecy parameter
+		vco.getInput(ModuleVCO.INPUT_FREQUENCY).set(440);
+		
 		// Ajout des fils
 		CWire wire0 = (CWire) PACFactory.getFactory().newWire();
 		CWire wire1 = (CWire) PACFactory.getFactory().newWire();
-		CWire wire2 = (CWire) PACFactory.getFactory().newWire();
 
-		wire0.connect(vco0.getOutput(ModuleVCO.OUTPUT_OUT));
+		wire0.connect(vco.getOutput(ModuleVCO.OUTPUT_OUT));
 		wire0.connect(vcf.getInput(ModuleVCF.INPUT_IN));
-		
-		wire1.connect(vco1.getOutput(ModuleVCO.OUTPUT_OUT));
-		wire1.connect(vcf.getInput(ModuleVCF.INPUT_AMPLITUDE));
 
-		wire2.connect(vcf.getOutput(ModuleVCF.OUTPUT_OUT));
-		wire2.connect(vca.getInput(ModuleVCA.INPUT_IN));
+		wire1.connect(vcf.getOutput(ModuleVCF.OUTPUT_OUT));
+		wire1.connect(out.getInput(ModuleOUT.INPUT_IN));
 
 	}
 

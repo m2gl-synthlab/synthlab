@@ -7,6 +7,7 @@ import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.presentation.IPInputPort;
 import fr.istic.synthlab.presentation.IPModule;
 import fr.istic.synthlab.presentation.IPOutputPort;
+import fr.istic.synthlab.presentation.IPParameter;
 
 /**
  * Presentation of a module
@@ -50,6 +51,11 @@ public class PModule extends JPanel implements IPModule {
 	@Override
 	public void addOutputPort(IPOutputPort presentation) {
 		remove((POutputPort)presentation);
+	}
+
+	@Override
+	public void addParameter(IPParameter presentation) {
+		add((PParameter)presentation);
 	}
 
 }

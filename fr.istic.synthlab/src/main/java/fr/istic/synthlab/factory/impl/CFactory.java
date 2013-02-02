@@ -10,10 +10,11 @@ import fr.istic.synthlab.abstraction.IParameter;
 import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.controller.impl.CInputPort;
-import fr.istic.synthlab.controller.impl.CModuleVCA;
+import fr.istic.synthlab.controller.impl.CModuleOUT;
 import fr.istic.synthlab.controller.impl.CModuleVCF;
 import fr.istic.synthlab.controller.impl.CModuleVCO;
 import fr.istic.synthlab.controller.impl.COutputPort;
+import fr.istic.synthlab.controller.impl.CParameter;
 import fr.istic.synthlab.controller.impl.CSynthesizer;
 import fr.istic.synthlab.controller.impl.CWire;
 import fr.istic.synthlab.factory.IFactory;
@@ -21,7 +22,7 @@ import fr.istic.synthlab.factory.IFactory;
 public class CFactory implements IFactory {
 
 	public static final String MODULE_VCO = "VCO";
-	public static final String MODULE_VCA = "VCA";
+	public static final String MODULE_OUT = "OUT";
 	public static final String MODULE_VCF = "VCF";
 
 	private static final CFactory instance = new CFactory();
@@ -48,14 +49,14 @@ public class CFactory implements IFactory {
 		return module;
 	}
 
-	public IModule newVCA() {
-		IModule module = new CModuleVCA(MODULE_VCA);
+	public IModule newOUT() {
+		IModule module = new CModuleOUT(MODULE_OUT);
 		return module;
 	}
 
 	public IParameter newParameter(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		IParameter param = new CParameter(name);
+		return param;
 	}
 
 	public IInputPort newInputPort(String name) {
