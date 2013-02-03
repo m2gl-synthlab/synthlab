@@ -42,7 +42,7 @@ public class OutputPort implements IOutputPort {
 
 	@Override
 	public void connect(IInputPort inputPort) {
-		port.connect(0, inputPort.getJSyn(), inputPort.getDefaultPart());
+		port.connect(this.defaultPart, inputPort.getJSyn(), inputPort.getDefaultPart());
 	}
 
 	@Override

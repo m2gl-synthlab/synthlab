@@ -1,7 +1,5 @@
 package fr.istic.synthlab.presentation;
 
-import com.jsyn.swing.DoubleBoundedRangeModel;
-
 import fr.istic.synthlab.controller.ICParameter;
 
 

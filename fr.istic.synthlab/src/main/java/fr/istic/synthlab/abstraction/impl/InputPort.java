@@ -39,7 +39,7 @@ public class InputPort implements IInputPort {
 
 	@Override
 	public void connect(IOutputPort outPort) {
-		port.connect(outPort.getJSyn());
+		port.connect(this.defaultPart, outPort.getJSyn(), outPort.getDefaultPart());
 	}
 
 	@Override
