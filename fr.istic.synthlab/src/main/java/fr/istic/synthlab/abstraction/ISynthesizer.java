@@ -51,6 +51,13 @@ public interface ISynthesizer {
 	 * @param module
 	 */
 	public void add(IModule module);
+	
+	/**
+	 * Add a wire to the synthesizer
+	 * 
+	 * @param wire
+	 */
+	public void add(IWire wire);
 
 	/**
 	 * Remove this module from the synthesizer

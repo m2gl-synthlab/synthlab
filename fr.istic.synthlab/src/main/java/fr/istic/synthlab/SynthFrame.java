@@ -287,6 +287,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	@Override
 	public void displaySynth(IPSynthesizer presentation) {
 		pres = presentation;
+		
 		this.add((PSynthesizer) pres);
 		this.setVisible(true);
 	}

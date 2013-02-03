@@ -33,9 +33,4 @@ public class PInputPort extends JPanel implements IPInputPort {
 	public ICInputPort getControl() {
 		return ctrl;
 	}
-
-	public void connect(IPWire wire){
-		//wire.setXY(this.getLocationOnScreen().x, this.getLocationOnScreen().y);
-		//TODO
-	}
 }

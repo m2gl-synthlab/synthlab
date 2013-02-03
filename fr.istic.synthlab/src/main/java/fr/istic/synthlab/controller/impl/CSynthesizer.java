@@ -1,9 +1,11 @@
 package fr.istic.synthlab.controller.impl;
 
 import fr.istic.synthlab.abstraction.IModule;
+import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.Synthesizer;
 import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICSynthesizer;
+import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.IPSynthesizer;
 
@@ -46,6 +48,12 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 		pres.c2pAddModule(((ICModule) module).getPresentation());
 	}
 
+	@Override
+	public void add(IWire wire) {
+		super.add(wire);
+		pres.c2pAddWire(((ICWire) wire).getPresentation());
+	}
+	
 	@Override
 	public void p2cStart() {
 		this.start();

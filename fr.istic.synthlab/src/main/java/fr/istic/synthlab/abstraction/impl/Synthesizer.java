@@ -8,6 +8,7 @@ import com.jsyn.engine.SynthesisEngine;
 
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.ISynthesizer;
+import fr.istic.synthlab.abstraction.IWire;
 
 /**
  * Implementation of a Synthesizer
@@ -17,12 +18,10 @@ public class Synthesizer implements ISynthesizer {
 	private com.jsyn.Synthesizer synth;
 
 	private List<IModule> modules;
-
 	/**
 	 * Constructor
 	 */
 	public Synthesizer() {
-
 		this.synth = JSyn.createSynthesizer();
 		modules = new ArrayList<IModule>();
 	}
@@ -50,6 +49,11 @@ public class Synthesizer implements ISynthesizer {
 	public void remove(IModule module) {
 		modules.add(module);
 		this.synth.remove(module.getJSyn());
+	}
+	
+	@Override
+	public void add(IWire wire) {
+		
 	}
 
 	@Override
@@ -88,5 +92,6 @@ public class Synthesizer implements ISynthesizer {
 	public boolean isRunning() {
 		return this.synth.isRunning();
 	}
+	
 
 }

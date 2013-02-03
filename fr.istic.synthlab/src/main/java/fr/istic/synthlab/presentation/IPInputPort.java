@@ -10,5 +10,4 @@ public interface IPInputPort{
 	 * @return the controller
 	 */
 	public ICInputPort getControl();
-	public void connect(IPWire wire);
 }

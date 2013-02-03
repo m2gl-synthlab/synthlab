@@ -1,40 +1,36 @@
 package fr.istic.synthlab.presentation.impl;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import fr.istic.synthlab.LinesComponent;
 import fr.istic.synthlab.controller.ICWire;
+import fr.istic.synthlab.presentation.IPInputPort;
+import fr.istic.synthlab.presentation.IPOutputPort;
 import fr.istic.synthlab.presentation.IPWire;
 
-public class PWire extends JPanel implements IPWire {
+public class PWire extends LinesComponent implements IPWire {
 
 	private static final long serialVersionUID = 433233331577188149L;
 	
 	private ICWire ctrl;
-//	private LinesComponent comp;
-	int x, y;
 	
 	/**
 	 * @param control
 	 */
 	public PWire(ICWire control) {
+		super();
 		this.ctrl = control;
-		
 		configView();
 		defineCallbacks();
 		
 	}
 
 	private void configView() {
-		x=y=-1;
-		
-		this.setSize(60, 60);
-		this.setPreferredSize(this.getSize());
-		this.add(new JLabel("Wire"));
-		
-//		comp = new LinesComponent();
-//		comp.setPreferredSize(new Dimension(1000, 1000));
-//		this.add(comp, BorderLayout.CENTER);
 	}
 
 	private void defineCallbacks() {
@@ -46,15 +42,56 @@ public class PWire extends JPanel implements IPWire {
 		return ctrl;
 	}
 
+	private int inputx;
+	private int inputy;
+	private int outputx;
+	private int outputy;
 	@Override
-	public void setXY(int x, int y) {
-		System.out.println("x="+x+" y="+y);
-		if((x==-1)&&(y==-1)) {
-			this.x=x;
-			this.y=y;
-			return;
+	public void connect(IPInputPort inputPortPresentation,
+			IPOutputPort outputPortPresentation) {
+		inputx = (((JPanel)inputPortPresentation).getParent().getX())
+				+(((JPanel)inputPortPresentation).getX());
+		inputy = ((JPanel)inputPortPresentation).getParent().getY()
+				+((JPanel)inputPortPresentation).getY();
+		outputx = ((JPanel)outputPortPresentation).getParent().getX()
+				+((JPanel)outputPortPresentation).getX();
+		outputy = ((JPanel)outputPortPresentation).getParent().getY()
+				+((JPanel)outputPortPresentation).getY();
+
+		System.out.println("INPUT : x="+(((JPanel)inputPortPresentation).getParent().getX())+"  "+(((JPanel)inputPortPresentation).getX())+" y="+gety());
+		System.out.println("OUTPUT : x="+outputx+ " y="+outputy);
+		
+		int diffx;
+		if(inputx<outputx) diffx =  outputx-inputx;
+		else diffx = inputx-outputx;
+		System.out.println("diffx=" + diffx);
+		
+		int diffy;
+		if(inputy<outputy) diffy =  outputy-inputy;
+		else {
+			diffy = inputy-outputy;
+			diffy=-diffy;
 		}
-//		comp.addLine(x, y, this.x, this.y);
-		this.repaint();
+		System.out.println("diffy=" + diffy);
+		
+		this.setPreferredSize(new Dimension(diffx, diffy));
+		
+		this.addLine(0, 0, diffx, diffy);
+	
 	}
+
+	public int getx() {
+		if(inputx < outputx)
+			return inputx;
+		else
+			return outputx;
+	}
+
+	public int gety() {
+		if(inputy < outputy)
+			return inputy;
+		else
+			return outputy;
+	}
+	
 }

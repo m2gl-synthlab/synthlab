@@ -28,9 +28,6 @@ public class SynthMain {
 		
 		// Create the application
 		SynthApp app = new SynthApp();
-		// Create a default synthesizer
-		app.newSynth();
-		
 		
 		// Create the main frame
 		SynthFrame frame = new SynthFrame();
@@ -39,6 +36,9 @@ public class SynthMain {
 		// Configure the application
 		app.setDisplaySynthCommand(new DisplayCommand(app, frame));
 		app.setUndisplaySynthCommand(new UndisplayCommand(app, frame));
+
+		// Create a default synthesizer
+		app.newSynth();
 
 		// Configure the frame
 		frame.setNewSynthCommand(new NewSynthCommand(app));

@@ -11,5 +11,9 @@ public interface IPWire {
 	 */
 	public ICWire getControl();
 
-	public void setXY(int x, int y);
+	public void connect(IPInputPort inputPortPresentation,
+			IPOutputPort outputPortPresentation);
+	
+	public int getx();
+	public int gety();
 }

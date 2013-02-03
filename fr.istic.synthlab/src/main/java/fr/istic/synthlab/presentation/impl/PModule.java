@@ -18,6 +18,9 @@ public class PModule extends JPanel implements IPModule {
 
 	private static final long serialVersionUID = -8519084219674310285L;
 	private ICModule ctrl;
+	private int width;
+	private int height;
+
 
 	/**
 	 * @param control
@@ -30,12 +33,22 @@ public class PModule extends JPanel implements IPModule {
 	}
 
 	private void configView() {
-		this.setSize(300, 400);
+		width = 300;
+		height = 400;
+		this.setSize(width, height);
 		this.setPreferredSize(this.getSize());
 		this.setBorder(BorderFactory.createTitledBorder(getClass()
 				.getSimpleName()));
 	}
 
+	public int getWidth(){
+		return width;
+	}
+	
+	public int getHeight(){
+		return height;
+	}
+	
 	private void defineCallbacks() {
 	}
 
@@ -52,7 +65,7 @@ public class PModule extends JPanel implements IPModule {
 
 	@Override
 	public void addOutputPort(IPOutputPort presentation) {
-		remove((POutputPort)presentation);
+		add((POutputPort)presentation);
 	}
 
 	@Override

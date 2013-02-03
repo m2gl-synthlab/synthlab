@@ -68,4 +68,11 @@ public interface IPSynthesizer {
 	 */
 	public void c2pAddModuleOk(IPModule module);
 
+	/**
+	 * The presentation can add the given wire presentation
+	 * 
+	 * @param wire
+	 */
+	public void c2pAddWire(IPWire presentation);
+
 }

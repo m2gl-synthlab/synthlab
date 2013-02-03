@@ -10,5 +10,4 @@ public interface IPOutputPort {
 	 * @return the controller
 	 */
 	public ICOutputPort getControl();
-	public void connect(IPWire wire);
 }

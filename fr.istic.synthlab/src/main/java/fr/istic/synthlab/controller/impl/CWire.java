@@ -1,15 +1,23 @@
 package fr.istic.synthlab.controller.impl;
 
+import javax.swing.JPanel;
+
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.impl.Wire;
+import fr.istic.synthlab.controller.ICInputPort;
+import fr.istic.synthlab.controller.ICOutputPort;
 import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
+import fr.istic.synthlab.presentation.IPInputPort;
+import fr.istic.synthlab.presentation.IPOutputPort;
 import fr.istic.synthlab.presentation.IPWire;
 
 public class CWire extends Wire implements ICWire {
 
 	private IPWire pres;
+	private IPInputPort inputPortPresentation;
+	private IPOutputPort outputPortPresentation;
 	
 	public CWire() {
 		this.pres = PACFactory.getPFactory().newWire(this);
@@ -39,12 +47,23 @@ public class CWire extends Wire implements ICWire {
 	public void connect(IInputPort port) {
 		super.connect(port);
 		// TODO : Inform view
+		inputPortPresentation = ((ICInputPort) port).getPresentation();
+		if(outputPortPresentation != null){
+			connect();
+		}
 	}
 	
 	@Override
 	public void connect(IOutputPort port) {
 		super.connect(port);
 		// TODO : Inform view
+		outputPortPresentation = ((ICOutputPort) port).getPresentation();
+		if(inputPortPresentation != null){
+			connect();
+		}
 	}
 	
+	public void connect(){
+		pres.connect(inputPortPresentation, outputPortPresentation);
+	}
 }

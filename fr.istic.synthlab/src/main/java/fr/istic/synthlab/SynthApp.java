@@ -1,11 +1,13 @@
 package fr.istic.synthlab;
 
 import fr.istic.synthlab.abstraction.IModule;
+import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.ModuleOUT;
 import fr.istic.synthlab.abstraction.impl.ModuleVCF;
 import fr.istic.synthlab.abstraction.impl.ModuleVCO;
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.controller.ICSynthesizer;
+import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.controller.impl.CWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
@@ -29,30 +31,36 @@ public class SynthApp implements ISynthApp {
 	@Override
 	public void newSynth() {
 		// Replace the current synthesizer with a new one
-
 		this.synth = (ICSynthesizer) PACFactory.getFactory().newSynthesizer();
 
-		// Add the basics modules (Oscilator + Out)
-		IModule vco = PACFactory.getFactory().newVCO();
-		IModule out = PACFactory.getFactory().newOUT();
-		IModule vcf = PACFactory.getFactory().newVCF();
 
-		synth.add(vco);
-		synth.add(vcf);
-		synth.add(out);
-
-		// Set up the frequecy parameter
-		vco.getParameter(ModuleVCO.PARAM_FREQUENCY).setValue(200);
+		displayCmd.execute();
 		
-		// Ajout des fils
-		CWire wire0 = (CWire) PACFactory.getFactory().newWire();
-		CWire wire1 = (CWire) PACFactory.getFactory().newWire();
-
+		// Add a VCO module
+		IModule vco = PACFactory.getFactory().newVCO();
+		vco.getParameter(ModuleVCO.PARAM_FREQUENCY).setValue(200);
+		synth.add(vco);
+		
+		// Add a OUT module
+		IModule out = PACFactory.getFactory().newOUT();
+		synth.add(out);
+		
+		// Add a VCF module
+		IModule vcf = PACFactory.getFactory().newVCF();
+		synth.add(vcf);
+		
+		// Add a wire between VCO and VCF
+		IWire wire0 = PACFactory.getFactory().newWire();
 		wire0.connect(vco.getOutput(ModuleVCO.OUTPUT_OUT));
 		wire0.connect(vcf.getInput(ModuleVCF.INPUT_IN));
-
+		synth.add(wire0);
+		
+		
+		// Add a wire between CVF and OUT
+		IWire wire1 = PACFactory.getFactory().newWire();
 		wire1.connect(vcf.getOutput(ModuleVCF.OUTPUT_OUT));
 		wire1.connect(out.getInput(ModuleOUT.INPUT_IN));
+		synth.add(wire1);
 
 	}
 

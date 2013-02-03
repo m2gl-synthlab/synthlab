@@ -16,4 +16,7 @@ public interface IPModule {
 
 	public void addParameter(IPParameter presentation);
 
+	public int getHeight();
+	public int getWidth();
+	
 }
