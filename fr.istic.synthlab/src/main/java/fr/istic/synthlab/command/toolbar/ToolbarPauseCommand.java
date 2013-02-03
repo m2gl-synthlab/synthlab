@@ -14,7 +14,6 @@ public class ToolbarPauseCommand implements ICommand {
 	@Override
 	public void execute() {
 		synth.stop();
-		System.out.println("Pause");
 	}
 
 }

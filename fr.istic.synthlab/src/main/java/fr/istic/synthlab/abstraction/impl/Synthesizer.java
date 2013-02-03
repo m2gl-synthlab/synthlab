@@ -22,7 +22,7 @@ public class Synthesizer implements ISynthesizer {
 	 * Constructor
 	 */
 	public Synthesizer() {
-		
+
 		this.synth = JSyn.createSynthesizer();
 		modules = new ArrayList<IModule>();
 	}
@@ -54,30 +54,33 @@ public class Synthesizer implements ISynthesizer {
 
 	@Override
 	public void start() {
-		this.synth.start(22000);
-		for(IModule mod : this.modules){
-			mod.start();
+		if (!isRunning()) {
+			this.synth.start(22000);
+			for (IModule mod : this.modules) {
+				mod.start();
+			}
 		}
 	}
 
 	@Override
 	public void startModule(IModule module) {
-//		this.synth.startUnit(module.getJSyn());
+		// this.synth.startUnit(module.getJSyn());
 		module.start();
 	}
 
 	@Override
 	public void stop() {
-		
-		this.synth.stop();
-		for(IModule mod : this.modules){
-			mod.stop();
+		if (isRunning()) {
+			this.synth.stop();
+			for (IModule mod : this.modules) {
+				mod.stop();
+			}
 		}
 	}
 
 	@Override
 	public void stopModule(IModule module) {
-//		this.synth.stopUnit(module.getJSyn());
+		// this.synth.stopUnit(module.getJSyn());
 		module.stop();
 	}
 
