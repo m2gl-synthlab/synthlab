@@ -13,7 +13,7 @@ import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.IParameter;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
-public class ModuleVCF implements IModule{
+public class ModuleVCF implements IModule {
 
 	public static final int OUTPUT_OUT = 0;
 
@@ -21,35 +21,39 @@ public class ModuleVCF implements IModule{
 	public static final int INPUT_AMPLITUDE = 1;
 	public static final int INPUT_FREQUENCY = 2;
 
-
-	private FilterLowPass vcf;	
+	private FilterLowPass vcf;
 
 	private Map<Integer, IInputPort> inputs;
 	private Map<Integer, IOutputPort> outputs;
 	private Map<Integer, IParameter> params;
 
-	
-	
 	public ModuleVCF(String name) {
 		this.vcf = new FilterLowPass();
 
 		this.inputs = new HashMap<Integer, IInputPort>();
 		this.outputs = new HashMap<Integer, IOutputPort>();
 		this.params = new HashMap<Integer, IParameter>();
-		
-		this.outputs.put(ModuleVCF.OUTPUT_OUT, PACFactory.getFactory().newOutputPort(vcf.getOutput()));
-		
-		this.inputs.put(ModuleVCF.INPUT_AMPLITUDE, PACFactory.getFactory().newInputPort(vcf.amplitude));
-		this.inputs.put(ModuleVCF.INPUT_FREQUENCY, PACFactory.getFactory().newInputPort(vcf.frequency));
-		this.inputs.put(ModuleVCF.INPUT_IN, PACFactory.getFactory().newInputPort(vcf.getInput()));
-		
-		
+
+		this.outputs.put(ModuleVCF.OUTPUT_OUT, PACFactory.getFactory()
+				.newOutputPort(vcf.getOutput()));
+
+		this.inputs.put(ModuleVCF.INPUT_AMPLITUDE, PACFactory.getFactory()
+				.newInputPort(vcf.amplitude));
+		this.inputs.put(ModuleVCF.INPUT_FREQUENCY, PACFactory.getFactory()
+				.newInputPort(vcf.frequency));
+		this.inputs.put(ModuleVCF.INPUT_IN, PACFactory.getFactory()
+				.newInputPort(vcf.getInput()));
+
 		IParameter amplitude = PACFactory.getFactory().newParameter(0, 1, 0.5);
 		amplitude.connect(inputs.get(ModuleVCF.INPUT_AMPLITUDE));
 		this.params.put(ModuleVCF.INPUT_AMPLITUDE, amplitude);
-		System.out.println("Default amplitude : " + PulseOscillator.DEFAULT_AMPLITUDE);
-		
-		IParameter frequency = PACFactory.getFactory().newParameter(0,1000, 440);
+		System.out.println("Default amplitude : "
+				+ PulseOscillator.DEFAULT_AMPLITUDE);
+
+		IParameter frequency = PACFactory.getFactory().newParameter(
+				inputs.get(ModuleVCF.INPUT_FREQUENCY).getJSyn().getMinimum(),
+				inputs.get(ModuleVCF.INPUT_FREQUENCY).getJSyn().getMaximum(),
+				440);
 		frequency.connect(inputs.get(ModuleVCF.INPUT_FREQUENCY));
 		this.params.put(ModuleVCF.INPUT_FREQUENCY, frequency);
 	}
@@ -58,7 +62,7 @@ public class ModuleVCF implements IModule{
 	public UnitGenerator getJSyn() {
 		return vcf;
 	}
-	
+
 	@Override
 	public void start() {
 		this.vcf.start();
@@ -68,7 +72,6 @@ public class ModuleVCF implements IModule{
 	public void stop() {
 		this.vcf.stop();
 	}
-
 
 	@Override
 	public IInputPort getInput(int identifier) {

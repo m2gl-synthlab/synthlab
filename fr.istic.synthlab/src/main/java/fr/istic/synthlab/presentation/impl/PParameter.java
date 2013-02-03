@@ -32,13 +32,13 @@ public class PParameter extends JPanel implements IPParameter {
 		this.setPreferredSize(this.getSize());
 		this.setBorder(BorderFactory.createTitledBorder(getClass().getSimpleName()));
 		
-		amplitudeModel = new DoubleBoundedRangeModel("amplitude", 10 , ctrl.getMin(), ctrl.getMax(), ctrl.getValue());
+		amplitudeModel = new DoubleBoundedRangeModel("amplitude", 10000 , ctrl.getMin(), ctrl.getMax(), ctrl.getValue());
 		
 		knob = new RotaryTextController(amplitudeModel, 2);
 		
 		JPanel knobPanel = new JPanel();
 		knobPanel.add( knob );
-		
+		this.add(knobPanel);
 		
 	}
 
@@ -72,12 +72,12 @@ public class PParameter extends JPanel implements IPParameter {
 	@Override
 	public void c2pInvalidValue() {
 	}
-
-	@Override
-	public void c2pSetRangeModel(DoubleBoundedRangeModel model) {
-		defineCallbacks();
-		knob = new RotaryTextController(model, 2);
-		this.add(knob);
-	}
+//
+//	@Override
+//	public void c2pSetRangeModel(DoubleBoundedRangeModel model) {
+//		defineCallbacks();
+//		knob = new RotaryTextController(model, 2);
+//		this.add(knob);
+//	}
 	
 }

@@ -1,7 +1,5 @@
 package fr.istic.synthlab.controller.impl;
 
-import com.jsyn.swing.PortModelFactory;
-
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.impl.Parameter;
 import fr.istic.synthlab.controller.ICParameter;
@@ -29,10 +27,14 @@ public class CParameter extends Parameter implements ICParameter {
 	}
 	
 	@Override
+	public void setValue(double value) {
+		super.setValue(value);
+		pres.c2pSetValue(getValue());
+	}
+	
+	@Override
 	public void connect(IInputPort input) {
 		super.connect(input);
-		
-		pres.c2pSetRangeModel(PortModelFactory.createLinearModel(input.getJSyn()));
 	}
 
 }

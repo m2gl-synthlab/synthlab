@@ -21,6 +21,6 @@ public interface IPParameter {
 
 //	void c2pSetRangeModel(String type, int resolution, int min, int max, double value);
 
-	public void c2pSetRangeModel(DoubleBoundedRangeModel exponentialRangeModel);
+//	public void c2pSetRangeModel(DoubleBoundedRangeModel exponentialRangeModel);
 	
 }

@@ -33,17 +33,24 @@ public class ModuleVCO implements IModule {
 		this.outputs = new HashMap<Integer, IOutputPort>();
 		this.inputs = new HashMap<Integer, IInputPort>();
 		this.params = new HashMap<Integer, IParameter>();
-		
-		this.outputs.put(ModuleVCO.OUTPUT_OUT,PACFactory.getFactory().newOutputPort(vco.getOutput()));
 
-		this.inputs.put(ModuleVCO.INPUT_AMPLITUDE, PACFactory.getFactory().newInputPort(vco.amplitude));
-		this.inputs.put(ModuleVCO.INPUT_FREQUENCY, PACFactory.getFactory().newInputPort(vco.frequency));
-		
-		IParameter amplitude = PACFactory.getFactory().newParameter(0, 1, PulseOscillator.DEFAULT_AMPLITUDE);
+		this.outputs.put(ModuleVCO.OUTPUT_OUT, PACFactory.getFactory()
+				.newOutputPort(vco.getOutput()));
+
+		this.inputs.put(ModuleVCO.INPUT_AMPLITUDE, PACFactory.getFactory()
+				.newInputPort(vco.amplitude));
+		this.inputs.put(ModuleVCO.INPUT_FREQUENCY, PACFactory.getFactory()
+				.newInputPort(vco.frequency));
+
+		IParameter amplitude = PACFactory.getFactory().newParameter(0, 1,
+				PulseOscillator.DEFAULT_AMPLITUDE);
 		amplitude.connect(inputs.get(ModuleVCO.INPUT_AMPLITUDE));
 		this.params.put(ModuleVCO.INPUT_AMPLITUDE, amplitude);
-		
-		IParameter frequency = PACFactory.getFactory().newParameter(0, 1000, SineOscillator.DEFAULT_FREQUENCY);
+
+		IParameter frequency = PACFactory.getFactory().newParameter(
+				inputs.get(ModuleVCO.INPUT_FREQUENCY).getJSyn().getMinimum(),
+				inputs.get(ModuleVCO.INPUT_FREQUENCY).getJSyn().getMaximum(),
+				SineOscillator.DEFAULT_FREQUENCY);
 		frequency.connect(inputs.get(ModuleVCO.INPUT_FREQUENCY));
 		this.params.put(ModuleVCO.INPUT_FREQUENCY, frequency);
 	}
