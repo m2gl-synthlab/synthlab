@@ -16,7 +16,9 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 public class ModuleOUT implements IModule {
 
 	public static final int INPUT_IN = 0;
+	
 	public static final int PARAM_GAIN = 0;
+	public static final int PARAM_SWITCH_ON_OFF = 1;
 
 	private ChannelOut vca;
 	private FourWayFade fader;
@@ -34,12 +36,15 @@ public class ModuleOUT implements IModule {
 				.newInputPort(fader.input, 1));
 		
 		fader.fade.setMinimum(-1);
-
+		fader.output.connect(vca.input);
+		
 		IParameter gain = PACFactory.getFactory().newParameter("Gain", fader.fade.getMinimum(),12,0);
 		gain.connect(fader.fade);
 		this.params.put(ModuleOUT.PARAM_GAIN, gain);
 		
-		fader.output.connect(vca.input);
+		IParameter switchOnOff = PACFactory.getFactory().newSwitch("Mute", false);
+		switchOnOff.connect(vca.input);
+		this.params.put(ModuleOUT.PARAM_SWITCH_ON_OFF, switchOnOff);
 	}
 
 	@Override

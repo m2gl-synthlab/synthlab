@@ -1,5 +1,7 @@
 package fr.istic.synthlab.presentation.impl;
 
+import java.awt.Component;
+
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
@@ -55,7 +57,7 @@ public class PModule extends JPanel implements IPModule {
 
 	@Override
 	public void addParameter(IPParameter presentation) {
-		add((PParameter)presentation);
+		add((Component) presentation);
 	}
 
 }

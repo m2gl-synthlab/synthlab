@@ -26,6 +26,7 @@ public interface IPFactory {
 	IPInputPort newInputPort(ICInputPort cInputPort);
 
 	IPParameter newParameter(ICParameter cParameter);
+	IPParameter newSwitch(ICParameter cSwitch);
 	
 //	IPParameter newParameter(String name, IFactory factory);
 //	IPPort newInputPort(String name, IFactory factory);

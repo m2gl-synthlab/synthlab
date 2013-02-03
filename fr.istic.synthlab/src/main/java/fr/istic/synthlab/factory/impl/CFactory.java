@@ -15,6 +15,7 @@ import fr.istic.synthlab.controller.impl.CModuleVCF;
 import fr.istic.synthlab.controller.impl.CModuleVCO;
 import fr.istic.synthlab.controller.impl.COutputPort;
 import fr.istic.synthlab.controller.impl.CParameter;
+import fr.istic.synthlab.controller.impl.CSwitch;
 import fr.istic.synthlab.controller.impl.CSynthesizer;
 import fr.istic.synthlab.controller.impl.CWire;
 import fr.istic.synthlab.factory.IFactory;
@@ -56,6 +57,11 @@ public class CFactory implements IFactory {
 
 	public IParameter newParameter(String name, double min, double max, double value) {
 		IParameter param = new CParameter(name, min, max, value);
+		return param;
+	}
+	
+	public IParameter newSwitch(String name, boolean value) {
+		IParameter param = new CSwitch(name, value);
 		return param;
 	}
 

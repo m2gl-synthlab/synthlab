@@ -20,6 +20,7 @@ public interface IFactory {
 	IModule newOUT();
 	
 	IParameter newParameter(String name, double min, double max, double value);
+	IParameter newSwitch(String string, boolean value);
 	IInputPort newInputPort(String name);
 	IOutputPort newOutputPort(String name);
 	IWire newWire();

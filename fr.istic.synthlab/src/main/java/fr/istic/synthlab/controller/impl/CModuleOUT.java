@@ -22,6 +22,9 @@ public class CModuleOUT extends ModuleOUT implements ICModule{
 		
 		IParameter gain = this.getParameter(PARAM_GAIN);
 		pres.addParameter(((ICParameter) gain).getPresentation());
+		
+		IParameter switchOnOff = this.getParameter(PARAM_SWITCH_ON_OFF);
+		pres.addParameter(((ICParameter) switchOnOff).getPresentation());
 	}
 
 	@Override

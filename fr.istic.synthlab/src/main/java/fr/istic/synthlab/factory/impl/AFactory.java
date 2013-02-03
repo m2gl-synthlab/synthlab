@@ -15,6 +15,7 @@ import fr.istic.synthlab.abstraction.impl.ModuleVCF;
 import fr.istic.synthlab.abstraction.impl.ModuleVCO;
 import fr.istic.synthlab.abstraction.impl.OutputPort;
 import fr.istic.synthlab.abstraction.impl.Parameter;
+import fr.istic.synthlab.abstraction.impl.Switch;
 import fr.istic.synthlab.abstraction.impl.Synthesizer;
 import fr.istic.synthlab.abstraction.impl.Wire;
 import fr.istic.synthlab.factory.IFactory;
@@ -69,6 +70,11 @@ public class AFactory implements IFactory {
 
 	public IParameter newParameter(String name, double min, double max, double val) {
 		IParameter parameter = new Parameter(name, min, max, val);
+		return parameter;
+	}
+	
+	public IParameter newSwitch(String name, boolean value) {
+		IParameter parameter = new Switch(name, value);
 		return parameter;
 	}
 

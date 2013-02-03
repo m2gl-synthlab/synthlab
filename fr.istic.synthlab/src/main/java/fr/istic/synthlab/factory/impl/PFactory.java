@@ -17,14 +17,16 @@ import fr.istic.synthlab.presentation.impl.PInputPort;
 import fr.istic.synthlab.presentation.impl.PModule;
 import fr.istic.synthlab.presentation.impl.POutputPort;
 import fr.istic.synthlab.presentation.impl.PParameter;
+import fr.istic.synthlab.presentation.impl.PSwitch;
 import fr.istic.synthlab.presentation.impl.PSynthesizer;
 import fr.istic.synthlab.presentation.impl.PWire;
 
-public class PFactory implements IPFactory{
+public class PFactory implements IPFactory {
 
 	private static final PFactory instance = new PFactory();
 
-	private PFactory() {}
+	private PFactory() {
+	}
 
 	public static PFactory getInstance() {
 		return instance;
@@ -42,27 +44,27 @@ public class PFactory implements IPFactory{
 
 	@Override
 	public IPModule newVCO(ICModule control) {
-		return new PModule(control); //TODO
+		return new PModule(control); // TODO
 	}
 
 	@Override
 	public IPModule newVCF(ICModule control) {
-		return new PModule(control); //TODO
+		return new PModule(control); // TODO
 	}
 
 	@Override
 	public IPModule newVCA(ICModule control) {
-		return new PModule(control); //TODO
+		return new PModule(control); // TODO
 	}
-	
+
 	@Override
 	public IPWire newWire(ICWire control) {
-		return new PWire(control); //TODO
+		return new PWire(control); // TODO
 	}
-	
+
 	@Override
 	public IPOutputPort newOutputPort(ICOutputPort control) {
-		return new POutputPort(control); //TODO
+		return new POutputPort(control); // TODO
 	}
 
 	@Override
@@ -73,6 +75,11 @@ public class PFactory implements IPFactory{
 	@Override
 	public IPParameter newParameter(ICParameter control) {
 		return new PParameter(control);
+	}
+
+	@Override
+	public IPParameter newSwitch(ICParameter control) {
+		return new PSwitch(control);
 	}
 
 }
