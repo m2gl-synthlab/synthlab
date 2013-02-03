@@ -42,7 +42,7 @@ public class SynthApp implements ISynthApp {
 		synth.add(out);
 
 		// Set up the frequecy parameter
-		vco.getParameter(ModuleVCO.INPUT_FREQUENCY).setValue(200);
+		vco.getParameter(ModuleVCO.PARAM_FREQUENCY).setValue(200);
 		
 		// Ajout des fils
 		CWire wire0 = (CWire) PACFactory.getFactory().newWire();

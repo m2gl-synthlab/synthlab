@@ -1,6 +1,7 @@
 package fr.istic.synthlab.abstraction.impl;
 
-import fr.istic.synthlab.abstraction.IInputPort;
+import com.jsyn.ports.UnitInputPort;
+
 import fr.istic.synthlab.abstraction.IParameter;
 
 public class Parameter implements IParameter {
@@ -10,7 +11,7 @@ public class Parameter implements IParameter {
 	private double max;
 	private double value;
 	
-	private IInputPort port;
+	private UnitInputPort port;
 
 	public Parameter(String name, double min, double max, double value){
 		this.name = name;
@@ -59,13 +60,13 @@ public class Parameter implements IParameter {
 	}
 
 	@Override
-	public void connect(IInputPort input) {
+	public void connect(UnitInputPort input) {
 		this.port = input;
 		this.port.set(value);
 	}
 
 	@Override
-	public IInputPort getPort() {
+	public UnitInputPort getPort() {
 		return this.port;
 	}
 

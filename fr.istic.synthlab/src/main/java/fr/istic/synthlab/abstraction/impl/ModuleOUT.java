@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.jsyn.unitgen.ChannelOut;
-import com.jsyn.unitgen.CrossFade;
 import com.jsyn.unitgen.FourWayFade;
 import com.jsyn.unitgen.UnitGenerator;
 
@@ -17,7 +16,7 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 public class ModuleOUT implements IModule {
 
 	public static final int INPUT_IN = 0;
-	public static final int INPUT_GAIN = 1;
+	public static final int PARAM_GAIN = 0;
 
 	private ChannelOut vca;
 	private FourWayFade fader;
@@ -33,14 +32,12 @@ public class ModuleOUT implements IModule {
 	
 		this.inputs.put(ModuleOUT.INPUT_IN, PACFactory.getFactory()
 				.newInputPort(fader.input, 1));
-		this.inputs.put(ModuleOUT.INPUT_GAIN, PACFactory.getFactory()
-				.newInputPort(fader.fade));
 		
 		fader.fade.setMinimum(-1);
 
 		IParameter gain = PACFactory.getFactory().newParameter("Gain", fader.fade.getMinimum(),12,0);
-		gain.connect(inputs.get(ModuleOUT.INPUT_GAIN));
-		this.params.put(ModuleOUT.INPUT_GAIN, gain);
+		gain.connect(fader.fade);
+		this.params.put(ModuleOUT.PARAM_GAIN, gain);
 		
 		fader.output.connect(vca.input);
 	}

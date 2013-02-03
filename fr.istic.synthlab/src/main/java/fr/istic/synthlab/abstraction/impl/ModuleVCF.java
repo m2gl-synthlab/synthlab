@@ -18,8 +18,9 @@ public class ModuleVCF implements IModule {
 	public static final int OUTPUT_OUT = 0;
 
 	public static final int INPUT_IN = 0;
-	public static final int INPUT_AMPLITUDE = 1;
-	public static final int INPUT_FREQUENCY = 2;
+	
+	public static final int PARAM_AMPLITUDE = 0;
+	public static final int PARAM_FREQUENCY = 1;
 
 	private FilterLowPass vcf;
 
@@ -36,26 +37,22 @@ public class ModuleVCF implements IModule {
 
 		this.outputs.put(ModuleVCF.OUTPUT_OUT, PACFactory.getFactory()
 				.newOutputPort(vcf.getOutput()));
-
-		this.inputs.put(ModuleVCF.INPUT_AMPLITUDE, PACFactory.getFactory()
-				.newInputPort(vcf.amplitude));
-		this.inputs.put(ModuleVCF.INPUT_FREQUENCY, PACFactory.getFactory()
-				.newInputPort(vcf.frequency));
+		
 		this.inputs.put(ModuleVCF.INPUT_IN, PACFactory.getFactory()
 				.newInputPort(vcf.getInput()));
 
 		IParameter amplitude = PACFactory.getFactory().newParameter("Amplitude", 0, 1, 0.5);
-		amplitude.connect(inputs.get(ModuleVCF.INPUT_AMPLITUDE));
-		this.params.put(ModuleVCF.INPUT_AMPLITUDE, amplitude);
+		amplitude.connect(vcf.amplitude);
+		this.params.put(ModuleVCF.PARAM_AMPLITUDE, amplitude);
 		System.out.println("Default amplitude : "
 				+ PulseOscillator.DEFAULT_AMPLITUDE);
 
 		IParameter frequency = PACFactory.getFactory().newParameter("Frequency",
-				inputs.get(ModuleVCF.INPUT_FREQUENCY).getJSyn().getMinimum(),
-				inputs.get(ModuleVCF.INPUT_FREQUENCY).getJSyn().getMaximum(),
+				vcf.frequency.getMinimum(),
+				vcf.frequency.getMaximum(),
 				440);
-		frequency.connect(inputs.get(ModuleVCF.INPUT_FREQUENCY));
-		this.params.put(ModuleVCF.INPUT_FREQUENCY, frequency);
+		frequency.connect(vcf.frequency);
+		this.params.put(ModuleVCF.PARAM_FREQUENCY, frequency);
 	}
 
 	@Override

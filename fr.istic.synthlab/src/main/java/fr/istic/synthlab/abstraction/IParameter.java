@@ -1,5 +1,7 @@
 package fr.istic.synthlab.abstraction;
 
+import com.jsyn.ports.UnitInputPort;
+
 /**
  * Interface for a module's parameter
  */
@@ -56,11 +58,11 @@ public interface IParameter {
 	 * Connect the parametter to the given port
 	 * @param input
 	 */
-	public void connect(IInputPort input);
+	public void connect(UnitInputPort input);
 	
 	/**
 	 * Return the port 
 	 * @param input
 	 */
-	public IInputPort getPort();
+	public UnitInputPort getPort();
 }

@@ -16,9 +16,9 @@ public class ModuleVCO implements IModule {
 
 	public static final int OUTPUT_OUT = 0;
 
-	public static final int INPUT_AMPLITUDE = 0;
-	public static final int INPUT_FREQUENCY = 1;
-	public static final int INPUT_WIDTH = 2;
+	public static final int PARAM_AMPLITUDE = 0;
+	public static final int PARAM_FREQUENCY = 1;
+	public static final int PARAM_WIDTH = 2;
 
 	private SineOscillator vco;
 
@@ -36,21 +36,16 @@ public class ModuleVCO implements IModule {
 		this.outputs.put(ModuleVCO.OUTPUT_OUT, PACFactory.getFactory()
 				.newOutputPort(vco.getOutput()));
 
-		this.inputs.put(ModuleVCO.INPUT_AMPLITUDE, PACFactory.getFactory()
-				.newInputPort(vco.amplitude));
-		this.inputs.put(ModuleVCO.INPUT_FREQUENCY, PACFactory.getFactory()
-				.newInputPort(vco.frequency));
-
 		IParameter amplitude = PACFactory.getFactory().newParameter("Amplitude", 0, 1, SineOscillator.DEFAULT_AMPLITUDE);
-		amplitude.connect(inputs.get(ModuleVCO.INPUT_AMPLITUDE));
-		this.params.put(ModuleVCO.INPUT_AMPLITUDE, amplitude);
+		amplitude.connect(vco.amplitude);
+		this.params.put(ModuleVCO.PARAM_AMPLITUDE, amplitude);
 
 		IParameter frequency = PACFactory.getFactory().newParameter( "Frequency",
-				inputs.get(ModuleVCO.INPUT_FREQUENCY).getJSyn().getMinimum(),
-				inputs.get(ModuleVCO.INPUT_FREQUENCY).getJSyn().getMaximum(),
+				vco.frequency.getMinimum(),
+				vco.frequency.getMaximum(),
 				SineOscillator.DEFAULT_FREQUENCY);
-		frequency.connect(inputs.get(ModuleVCO.INPUT_FREQUENCY));
-		this.params.put(ModuleVCO.INPUT_FREQUENCY, frequency);
+		frequency.connect(vco.frequency);
+		this.params.put(ModuleVCO.PARAM_FREQUENCY, frequency);
 	}
 
 	@Override

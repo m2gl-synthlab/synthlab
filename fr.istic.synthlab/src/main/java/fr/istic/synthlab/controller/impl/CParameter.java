@@ -1,6 +1,7 @@
 package fr.istic.synthlab.controller.impl;
 
-import fr.istic.synthlab.abstraction.IInputPort;
+import com.jsyn.ports.UnitInputPort;
+
 import fr.istic.synthlab.abstraction.impl.Parameter;
 import fr.istic.synthlab.controller.ICParameter;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -32,7 +33,7 @@ public class CParameter extends Parameter implements ICParameter {
 	}
 	
 	@Override
-	public void connect(IInputPort input) {
+	public void connect(UnitInputPort input) {
 		super.connect(input);
 	}
 

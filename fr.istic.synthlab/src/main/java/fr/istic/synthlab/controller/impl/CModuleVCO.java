@@ -17,10 +17,10 @@ public class CModuleVCO extends ModuleVCO implements ICModule {
 		super(name);
 		this.pres = PACFactory.getPFactory().newModule(this);
 		
-		IParameter amplitude = this.getParameter(INPUT_AMPLITUDE);
+		IParameter amplitude = this.getParameter(PARAM_AMPLITUDE);
 		pres.addParameter(((ICParameter) amplitude).getPresentation());
 		
-		IParameter frequency = this.getParameter(INPUT_FREQUENCY);
+		IParameter frequency = this.getParameter(PARAM_FREQUENCY);
 		pres.addParameter(((ICParameter) frequency).getPresentation());
 		
 		IOutputPort output = this.getOutput(OUTPUT_OUT);

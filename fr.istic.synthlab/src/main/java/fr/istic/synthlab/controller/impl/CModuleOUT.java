@@ -20,7 +20,7 @@ public class CModuleOUT extends ModuleOUT implements ICModule{
 		IInputPort input = this.getInput(INPUT_IN);
 		pres.addInputPort(((ICInputPort) input).getPresentation());
 		
-		IParameter gain = this.getParameter(INPUT_GAIN);
+		IParameter gain = this.getParameter(PARAM_GAIN);
 		pres.addParameter(((ICParameter) gain).getPresentation());
 	}
 
