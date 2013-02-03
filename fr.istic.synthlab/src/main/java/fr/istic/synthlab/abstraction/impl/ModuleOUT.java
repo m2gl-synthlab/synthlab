@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.jsyn.unitgen.ChannelOut;
 import com.jsyn.unitgen.CrossFade;
+import com.jsyn.unitgen.FourWayFade;
 import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.IInputPort;
@@ -19,13 +20,13 @@ public class ModuleOUT implements IModule {
 	public static final int INPUT_GAIN = 1;
 
 	private ChannelOut vca;
-	private CrossFade fader;
+	private FourWayFade fader;
 	private Map<Integer, IInputPort> inputs;
 	private Map<Integer, IParameter> params;
 
 	public ModuleOUT(String name) {
 		this.vca = new ChannelOut();
-		this.fader = new CrossFade();
+		this.fader = new FourWayFade();
 		
 		this.inputs = new HashMap<Integer, IInputPort>();
 		this.params = new HashMap<Integer, IParameter>();

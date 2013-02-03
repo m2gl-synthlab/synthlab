@@ -22,8 +22,7 @@ public class CParameter extends Parameter implements ICParameter {
 
 	@Override
 	public void p2cSetValue(double value) {
-		this.setValue(value);
-		pres.c2pSetValue(getValue());
+		super.setValue(value);
 	}
 	
 	@Override
