@@ -11,6 +11,8 @@ public interface ICParameter extends IParameter {
 	 * @return presentation
 	 */
 	public IPParameter getPresentation();
+
+	public String getName();
 	
 	public void p2cSetValue(double value);
 	

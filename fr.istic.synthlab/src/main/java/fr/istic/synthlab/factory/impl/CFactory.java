@@ -54,8 +54,8 @@ public class CFactory implements IFactory {
 		return module;
 	}
 
-	public IParameter newParameter(double min, double max, double value) {
-		IParameter param = new CParameter(min, max, value);
+	public IParameter newParameter(String name, double min, double max, double value) {
+		IParameter param = new CParameter(name, min, max, value);
 		return param;
 	}
 

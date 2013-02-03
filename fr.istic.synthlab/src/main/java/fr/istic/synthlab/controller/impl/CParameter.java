@@ -10,8 +10,8 @@ public class CParameter extends Parameter implements ICParameter {
 
 	private IPParameter pres;
 	
-	public CParameter(double min, double max, double value) {
-		super(min, max, value);
+	public CParameter(String name, double min, double max, double value) {
+		super(name, min, max, value);
 		this.pres = PACFactory.getPFactory().newParameter(this);
 	}
 
@@ -35,5 +35,6 @@ public class CParameter extends Parameter implements ICParameter {
 	public void connect(IInputPort input) {
 		super.connect(input);
 	}
+
 
 }

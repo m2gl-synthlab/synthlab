@@ -38,7 +38,7 @@ public class ModuleOUT implements IModule {
 		
 		fader.fade.setMinimum(-1);
 
-		IParameter gain = PACFactory.getFactory().newParameter(fader.fade.getMinimum(),12,0);
+		IParameter gain = PACFactory.getFactory().newParameter("Gain", fader.fade.getMinimum(),12,0);
 		gain.connect(inputs.get(ModuleOUT.INPUT_GAIN));
 		this.params.put(ModuleOUT.INPUT_GAIN, gain);
 		

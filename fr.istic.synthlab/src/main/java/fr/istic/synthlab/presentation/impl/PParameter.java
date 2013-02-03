@@ -18,7 +18,7 @@ public class PParameter extends JPanel implements IPParameter {
 	private ICParameter ctrl;
 	
 	private RotaryTextController knob;
-	private DoubleBoundedRangeModel amplitudeModel;
+	private DoubleBoundedRangeModel model;
 	
 	public PParameter(ICParameter control) {
 		ctrl = control;
@@ -28,13 +28,13 @@ public class PParameter extends JPanel implements IPParameter {
 	}
 
 	private void configView() {
-		this.setSize(400, 100);
+		this.setSize(100, 100);
 		this.setPreferredSize(this.getSize());
-		this.setBorder(BorderFactory.createTitledBorder(getClass().getSimpleName()));
+		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
 		
-		amplitudeModel = new DoubleBoundedRangeModel("amplitude", 10000 , ctrl.getMin(), ctrl.getMax(), ctrl.getValue());
+		model = new DoubleBoundedRangeModel("model", 10000 , ctrl.getMin(), ctrl.getMax(), ctrl.getValue());
 		
-		knob = new RotaryTextController(amplitudeModel, 2);
+		knob = new RotaryTextController(model, 2);
 		
 		JPanel knobPanel = new JPanel();
 		knobPanel.add( knob );
@@ -43,16 +43,13 @@ public class PParameter extends JPanel implements IPParameter {
 	}
 
 	private void defineCallbacks() {
-		amplitudeModel.addChangeListener(new ChangeListener() {
-			
+		model.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				DoubleBoundedRangeModel model = (DoubleBoundedRangeModel) e.getSource();
-				System.out.println(" changed " +amplitudeModel.getValue() + " " + amplitudeModel.getDoubleValue() +" "+amplitudeModel.getExtent());
 				ctrl.p2cSetValue(model.getDoubleValue());
 			}
 		});
-		
 	}
 	
 	@Override
@@ -61,7 +58,7 @@ public class PParameter extends JPanel implements IPParameter {
 	}
 
 	public void setValue(double val) {
-		amplitudeModel.setDoubleValue(val);
+		model.setDoubleValue(val);
 	}
 
 	@Override
@@ -72,12 +69,5 @@ public class PParameter extends JPanel implements IPParameter {
 	@Override
 	public void c2pInvalidValue() {
 	}
-//
-//	@Override
-//	public void c2pSetRangeModel(DoubleBoundedRangeModel model) {
-//		defineCallbacks();
-//		knob = new RotaryTextController(model, 2);
-//		this.add(knob);
-//	}
 	
 }

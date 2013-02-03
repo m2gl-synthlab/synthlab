@@ -19,7 +19,7 @@ public interface IFactory {
 	IModule newVCF();
 	IModule newOUT();
 	
-	IParameter newParameter(double min, double max, double value);
+	IParameter newParameter(String name, double min, double max, double value);
 	IInputPort newInputPort(String name);
 	IOutputPort newOutputPort(String name);
 	IWire newWire();

@@ -3,9 +3,8 @@ package fr.istic.synthlab.abstraction.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.jsyn.unitgen.PulseOscillator;
-import com.jsyn.unitgen.UnitGenerator;
 import com.jsyn.unitgen.SineOscillator;
+import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModule;
@@ -42,12 +41,11 @@ public class ModuleVCO implements IModule {
 		this.inputs.put(ModuleVCO.INPUT_FREQUENCY, PACFactory.getFactory()
 				.newInputPort(vco.frequency));
 
-		IParameter amplitude = PACFactory.getFactory().newParameter(0, 1,
-				PulseOscillator.DEFAULT_AMPLITUDE);
+		IParameter amplitude = PACFactory.getFactory().newParameter("Amplitude", 0, 1, SineOscillator.DEFAULT_AMPLITUDE);
 		amplitude.connect(inputs.get(ModuleVCO.INPUT_AMPLITUDE));
 		this.params.put(ModuleVCO.INPUT_AMPLITUDE, amplitude);
 
-		IParameter frequency = PACFactory.getFactory().newParameter(
+		IParameter frequency = PACFactory.getFactory().newParameter( "Frequency",
 				inputs.get(ModuleVCO.INPUT_FREQUENCY).getJSyn().getMinimum(),
 				inputs.get(ModuleVCO.INPUT_FREQUENCY).getJSyn().getMaximum(),
 				SineOscillator.DEFAULT_FREQUENCY);

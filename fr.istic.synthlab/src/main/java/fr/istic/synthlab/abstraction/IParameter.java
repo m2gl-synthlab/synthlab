@@ -6,6 +6,14 @@ package fr.istic.synthlab.abstraction;
 public interface IParameter {
 
 	/**
+	 * Return the name of the parameter
+	 * 
+	 * @return the name
+	 */
+	public String getName();	
+	
+	
+	/**
 	 * Set the value of this parameter
 	 * 
 	 * @param val
