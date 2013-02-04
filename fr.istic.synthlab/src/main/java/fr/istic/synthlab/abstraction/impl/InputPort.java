@@ -16,20 +16,28 @@ public class InputPort implements IInputPort {
 	 */
 	public InputPort(String name) {
 		this.port = new UnitInputPort(name);
+		this.name = name;
 	}
 
 	public InputPort(UnitInputPort jSynPort) {
 		this.port = jSynPort;
+		this.name = jSynPort.getName();
 	}
 	
 	public InputPort(UnitInputPort jSynPort, int part) {
 		this.port = jSynPort;
 		this.defaultPart = part;
+		this.name = jSynPort.getName();
 	}
 
 	@Override
 	public UnitInputPort getJSyn() {
 		return this.port;
+	}
+
+	@Override
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override

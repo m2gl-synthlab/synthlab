@@ -21,7 +21,15 @@ public class ModuleVCF implements IModule {
 	
 	public static final int PARAM_AMPLITUDE = 0;
 	public static final int PARAM_FREQUENCY = 1;
+	
+	private static final String MODULE_NAME = "Filter Low Pass";
 
+	public static final String OUT_NAME = "Out";
+	public static final String IN_NAME = "In";
+	public static final String AMPLITUDE_NAME = "Ampl";
+	public static final String FREQUENCY_NAME = "Fn";
+	
+	
 	private FilterLowPass vcf;
 
 	private Map<Integer, IInputPort> inputs;
@@ -36,18 +44,18 @@ public class ModuleVCF implements IModule {
 		this.params = new HashMap<Integer, IParameter>();
 
 		this.outputs.put(ModuleVCF.OUTPUT_OUT, PACFactory.getFactory()
-				.newOutputPort(vcf.getOutput()));
+				.newOutputPort(OUT_NAME, vcf.getOutput()));
 		
 		this.inputs.put(ModuleVCF.INPUT_IN, PACFactory.getFactory()
-				.newInputPort(vcf.getInput()));
+				.newInputPort(IN_NAME, vcf.getInput()));
 
-		IParameter amplitude = PACFactory.getFactory().newParameter("Amplitude", 0, 1, 0.5);
+		IParameter amplitude = PACFactory.getFactory().newParameter(AMPLITUDE_NAME, 0, 1, 0.5);
 		amplitude.connect(vcf.amplitude);
 		this.params.put(ModuleVCF.PARAM_AMPLITUDE, amplitude);
 		System.out.println("Default amplitude : "
 				+ PulseOscillator.DEFAULT_AMPLITUDE);
 
-		IParameter frequency = PACFactory.getFactory().newParameter("Frequency",
+		IParameter frequency = PACFactory.getFactory().newParameter(FREQUENCY_NAME,
 				vcf.frequency.getMinimum(),
 				vcf.frequency.getMaximum(),
 				440);
@@ -59,6 +67,12 @@ public class ModuleVCF implements IModule {
 	public UnitGenerator getJSyn() {
 		return vcf;
 	}
+	
+	@Override
+	public String getName() {
+		return MODULE_NAME;
+	}
+
 
 	@Override
 	public void start() {

@@ -94,25 +94,29 @@ public class AFactory implements IFactory {
 	}
 
 	@Override
-	public IInputPort newInputPort(UnitInputPort input) {
+	public IInputPort newInputPort(String name, UnitInputPort input) {
 		IInputPort port = new InputPort(input);
+		port.setName(name);
 		return port;
 	}
 	
 	@Override
-	public IInputPort newInputPort(UnitInputPort input, int part) {
+	public IInputPort newInputPort(String name, UnitInputPort input, int part) {
 		IInputPort port = new InputPort(input, part);
+		port.setName(name);
 		return port;
 	}
 
 	@Override
-	public IOutputPort newOutputPort(UnitOutputPort output) {
+	public IOutputPort newOutputPort(String name, UnitOutputPort output) {
 		IOutputPort port = new OutputPort(output);
+		port.setName(name);
 		return port;
 	}
 	
-	public IOutputPort newOutputPort(UnitOutputPort output, int part) {
+	public IOutputPort newOutputPort(String name, UnitOutputPort output, int part) {
 		IOutputPort port = new OutputPort(output, part);
+		port.setName(name);
 		return port;
 	}
 

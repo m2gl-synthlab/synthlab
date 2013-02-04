@@ -25,8 +25,8 @@ public interface IFactory {
 	IOutputPort newOutputPort(String name);
 	IWire newWire();
 
-	IInputPort newInputPort(UnitInputPort input);
-	IInputPort newInputPort(UnitInputPort input, int part);
-	IOutputPort newOutputPort(UnitOutputPort output);
-	IOutputPort newOutputPort(UnitOutputPort output, int part);
+	IInputPort newInputPort(String name, UnitInputPort input);
+	IInputPort newInputPort(String name, UnitInputPort input, int part);
+	IOutputPort newOutputPort(String name, UnitOutputPort output);
+	IOutputPort newOutputPort(String name, UnitOutputPort output, int part);
 }

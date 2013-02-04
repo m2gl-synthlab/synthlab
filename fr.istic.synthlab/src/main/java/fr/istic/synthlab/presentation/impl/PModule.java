@@ -37,8 +37,7 @@ public class PModule extends JPanel implements IPModule {
 		height = 400;
 		this.setSize(width, height);
 		this.setPreferredSize(this.getSize());
-		this.setBorder(BorderFactory.createTitledBorder(getClass()
-				.getSimpleName()));
+		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
 	}
 
 	public int getWidth(){

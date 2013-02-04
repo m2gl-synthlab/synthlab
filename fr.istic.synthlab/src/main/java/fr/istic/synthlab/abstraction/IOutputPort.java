@@ -15,6 +15,11 @@ public interface IOutputPort {// extends ConnectableInput, GettablePort{
 	public UnitOutputPort getJSyn();
 
 	/**
+	 * Set the port's name
+	 */
+	public void setName(String name);	
+	
+	/**
 	 * Return the port's name
 	 * 
 	 * @return the name

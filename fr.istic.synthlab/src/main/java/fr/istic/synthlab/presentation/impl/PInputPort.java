@@ -22,7 +22,7 @@ public class PInputPort extends JPanel implements IPInputPort {
 	private void configView() {
 		this.setSize(100, 100);
 		this.setPreferredSize(this.getSize());
-		this.setBorder(BorderFactory.createTitledBorder(getClass().getSimpleName()));
+		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
 	}
 
 	private void defineCallbacks() {

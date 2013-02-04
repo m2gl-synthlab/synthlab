@@ -20,6 +20,12 @@ public class ModuleOUT implements IModule {
 	public static final int PARAM_GAIN = 0;
 	public static final int PARAM_SWITCH_ON_OFF = 1;
 
+	private static final String MODULE_NAME = "OUT";
+
+	private static final String IN_NAME = "In";
+	private static final String GAIN_NAME = "Gain";
+	private static final String MUTE_NAME = "Mute";
+
 	private ChannelOut vca;
 	private FourWayFade fader;
 	private Map<Integer, IInputPort> inputs;
@@ -32,17 +38,16 @@ public class ModuleOUT implements IModule {
 		this.inputs = new HashMap<Integer, IInputPort>();
 		this.params = new HashMap<Integer, IParameter>();
 	
-		this.inputs.put(ModuleOUT.INPUT_IN, PACFactory.getFactory()
-				.newInputPort(fader.input, 1));
+		this.inputs.put(ModuleOUT.INPUT_IN, PACFactory.getFactory().newInputPort(IN_NAME, fader.input, 1));
 		
 		fader.fade.setMinimum(-1);
 		fader.output.connect(vca.input);
 		
-		IParameter gain = PACFactory.getFactory().newParameter("Gain", fader.fade.getMinimum(),12,0);
+		IParameter gain = PACFactory.getFactory().newParameter(GAIN_NAME, fader.fade.getMinimum(),12,0);
 		gain.connect(fader.fade);
 		this.params.put(ModuleOUT.PARAM_GAIN, gain);
 		
-		IParameter switchOnOff = PACFactory.getFactory().newSwitch("Mute", false);
+		IParameter switchOnOff = PACFactory.getFactory().newSwitch(MUTE_NAME, false);
 		switchOnOff.connect(vca.input);
 		this.params.put(ModuleOUT.PARAM_SWITCH_ON_OFF, switchOnOff);
 	}
@@ -50,6 +55,11 @@ public class ModuleOUT implements IModule {
 	@Override
 	public UnitGenerator getJSyn() {
 		return this.vca;
+	}
+
+	@Override
+	public String getName() {
+		return MODULE_NAME;
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import fr.istic.synthlab.abstraction.IOutputPort;
  */
 public class OutputPort implements IOutputPort {
 
+	private String name;
 	private UnitOutputPort port;
 	private int defaultPart = 0;
 
@@ -18,10 +19,12 @@ public class OutputPort implements IOutputPort {
 	 * @param name
 	 */
 	public OutputPort(String name) {
+		this.name = name;
 		this.port = new UnitOutputPort(name);
 	}
 
 	public OutputPort(UnitOutputPort jSynPort) {
+		this.name = jSynPort.getName();
 		this.port = jSynPort;
 	}
 	
@@ -36,8 +39,13 @@ public class OutputPort implements IOutputPort {
 	}
 
 	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
 	public String getName() {
-		return port.getName();
+		return this.name;
 	}
 
 	@Override

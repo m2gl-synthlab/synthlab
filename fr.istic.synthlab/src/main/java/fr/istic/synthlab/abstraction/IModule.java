@@ -24,6 +24,12 @@ public interface IModule{
 	public void stop();
 	
 	/**
+	 * Return the module's name
+	 * @return
+	 */
+	public String getName();
+	
+	/**
 	 * Return the input port designed by identifier
 	 * @param identifier
 	 * @return the outputPort

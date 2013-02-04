@@ -20,6 +20,12 @@ public class ModuleVCO implements IModule {
 	public static final int PARAM_FREQUENCY = 1;
 	public static final int PARAM_WIDTH = 2;
 
+	private static final String MODULE_NAME = "VCO";
+	
+	public static final String OUT_NAME = "Out";
+	public static final String AMPLITUDE_NAME = "Ampl";
+	public static final String FREQUENCY_NAME = "Fn";
+	
 	private SineOscillator vco;
 
 	private Map<Integer, IInputPort> inputs;
@@ -33,14 +39,13 @@ public class ModuleVCO implements IModule {
 		this.inputs = new HashMap<Integer, IInputPort>();
 		this.params = new HashMap<Integer, IParameter>();
 
-		this.outputs.put(ModuleVCO.OUTPUT_OUT, PACFactory.getFactory()
-				.newOutputPort(vco.getOutput()));
+		this.outputs.put(ModuleVCO.OUTPUT_OUT, PACFactory.getFactory().newOutputPort(OUT_NAME, vco.getOutput()));
 
-		IParameter amplitude = PACFactory.getFactory().newParameter("Amplitude", 0, 1, SineOscillator.DEFAULT_AMPLITUDE);
+		IParameter amplitude = PACFactory.getFactory().newParameter(AMPLITUDE_NAME, 0, 1, SineOscillator.DEFAULT_AMPLITUDE);
 		amplitude.connect(vco.amplitude);
 		this.params.put(ModuleVCO.PARAM_AMPLITUDE, amplitude);
 
-		IParameter frequency = PACFactory.getFactory().newParameter( "Frequency",
+		IParameter frequency = PACFactory.getFactory().newParameter( FREQUENCY_NAME,
 				vco.frequency.getMinimum(),
 				vco.frequency.getMaximum(),
 				SineOscillator.DEFAULT_FREQUENCY);
@@ -51,6 +56,11 @@ public class ModuleVCO implements IModule {
 	@Override
 	public UnitGenerator getJSyn() {
 		return vco;
+	}
+
+	@Override
+	public String getName() {
+		return MODULE_NAME;
 	}
 
 	@Override
