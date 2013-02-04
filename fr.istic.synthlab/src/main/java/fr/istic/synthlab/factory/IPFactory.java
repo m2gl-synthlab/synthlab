@@ -17,10 +17,9 @@ public interface IPFactory {
 
 	IPSynthesizer newSynthesizer(ICSynthesizer control);
 	
-	IPModule newModule(ICModule control);
 	IPModule newVCO(ICModule control);
 	IPModule newVCF(ICModule control);
-	IPModule newVCA(ICModule control);
+	IPModule newOUT(ICModule control);
 	IPWire newWire(ICWire control);
 	IPOutputPort newOutputPort(ICOutputPort control);
 	IPInputPort newInputPort(ICInputPort cInputPort);

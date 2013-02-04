@@ -15,7 +15,7 @@ public class CModuleOUT extends ModuleOUT implements ICModule{
 
 	public CModuleOUT(String name) {
 		super(name);
-		this.pres = PACFactory.getPFactory().newModule(this);
+		this.pres = PACFactory.getPFactory().newOUT(this);
 		
 		IInputPort input = this.getInput(INPUT_IN);
 		pres.addInputPort(((ICInputPort) input).getPresentation());
