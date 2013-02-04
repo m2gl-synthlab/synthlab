@@ -18,6 +18,8 @@ public class PInputPort extends JPanel implements MouseListener, IPInputPort {
 
 	private ICInputPort ctrl;
 	private JLabel image;
+	
+	
 
 	public PInputPort(ICInputPort control) {
 		ctrl = control;

@@ -32,4 +32,19 @@ public interface IWire {
 	 * @param port
 	 */
 	public void connect(IOutputPort port);
+	
+
+	/**
+	 * Disconnect the wire from an input port
+	 * 
+	 * @param port
+	 */
+	public void disconnect(IInputPort port);
+
+	/**
+	 * Disconnect the wire from an output port
+	 * 
+	 * @param port
+	 */
+	public void disconnect(IOutputPort port);
 }

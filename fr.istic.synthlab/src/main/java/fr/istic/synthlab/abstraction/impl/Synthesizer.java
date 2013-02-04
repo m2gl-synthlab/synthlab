@@ -21,6 +21,7 @@ public class Synthesizer implements ISynthesizer {
 	private List<IModule> modules;
 
 	private IWire currentWire;
+	
 	/**
 	 * Constructor
 	 */
