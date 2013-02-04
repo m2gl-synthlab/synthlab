@@ -18,6 +18,8 @@ public class Synthesizer implements ISynthesizer {
 	private com.jsyn.Synthesizer synth;
 
 	private List<IModule> modules;
+
+	private IWire currentWire;
 	/**
 	 * Constructor
 	 */
@@ -91,6 +93,16 @@ public class Synthesizer implements ISynthesizer {
 	@Override
 	public boolean isRunning() {
 		return this.synth.isRunning();
+	}
+
+	@Override
+	public IWire getCurrentWire() {
+		return currentWire;
+	}
+
+	@Override
+	public void setCurrentWire(IWire wire) {
+		currentWire = wire;
 	}
 	
 

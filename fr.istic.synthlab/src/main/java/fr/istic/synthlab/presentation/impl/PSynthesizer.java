@@ -3,10 +3,10 @@ package fr.istic.synthlab.presentation.impl;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
@@ -22,13 +22,16 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 	private ICSynthesizer ctrl;
 
 	private List<IPModule> modules;
+	private JPanel background;
 	private JPanel modulePanel;
+	
 	
 	public PSynthesizer(ICSynthesizer control) {
 		super();
 		ctrl = control;
 		modules = new ArrayList<IPModule>();
 		modulePanel = new JPanel();
+		background = new JPanel();
 		
 		configView();
 		defineCallbacks();
@@ -36,13 +39,12 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 	}
 
 	private void configView() {
+		
 		modulePanel.setOpaque(false);
-		modulePanel.setLayout(null);
 		modulePanel.setPreferredSize(new Dimension(1000, 500));
-		modulePanel.setBackground(Color.BLUE);
 		modulePanel.setBounds(15, 15, 1000, 500);
-		this.add(modulePanel, new Integer(0));
-		this.setBorder(BorderFactory.createTitledBorder(getClass().getSimpleName()));
+		
+		this.add(modulePanel, 0);
 	}
 
 	private void defineCallbacks() {

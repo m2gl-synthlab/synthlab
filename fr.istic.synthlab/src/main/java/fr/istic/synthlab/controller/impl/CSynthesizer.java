@@ -55,6 +55,19 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	}
 	
 	@Override
+	public IWire getCurrentWire() {
+		return super.getCurrentWire();
+	}
+
+	@Override
+	public void setCurrentWire(IWire wire) {
+		ICWire cWire = (ICWire) wire;
+		pres.c2pAddWire(cWire.getPresentation());
+		super.setCurrentWire(wire);
+	}
+	
+	
+	@Override
 	public void p2cStart() {
 		this.start();
 	}

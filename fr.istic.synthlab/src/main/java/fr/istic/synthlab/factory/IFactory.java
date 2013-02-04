@@ -14,19 +14,18 @@ public interface IFactory {
 
 	ISynthesizer newSynthesizer();
 	
-//	IModule newModule(String name, IFactory factory);
-	IModule newVCO();
-	IModule newVCF();
-	IModule newOUT();
+	IModule newVCO(ISynthesizer synth);
+	IModule newVCF(ISynthesizer synth);
+	IModule newOUT(ISynthesizer synth);
 	
-	IParameter newParameter(String name, double min, double max, double value);
-	IParameter newSwitch(String string, boolean value);
-	IInputPort newInputPort(String name);
-	IOutputPort newOutputPort(String name);
+	IParameter newParameter(IModule mod, String name, double min, double max, double value);
+	IParameter newSwitch(IModule mod, String string, boolean value);
+	IInputPort newInputPort(IModule mod, String name);
+	IOutputPort newOutputPort(IModule mod, String name);
 	IWire newWire();
 
-	IInputPort newInputPort(String name, UnitInputPort input);
-	IInputPort newInputPort(String name, UnitInputPort input, int part);
-	IOutputPort newOutputPort(String name, UnitOutputPort output);
-	IOutputPort newOutputPort(String name, UnitOutputPort output, int part);
+	IInputPort newInputPort(IModule mod, String name, UnitInputPort input);
+	IInputPort newInputPort(IModule mod, String name, UnitInputPort input, int part);
+	IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output);
+	IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output, int part);
 }

@@ -10,4 +10,6 @@ public interface ICInputPort extends IInputPort {
 	 * @return presentation
 	 */
 	public IPInputPort getPresentation();
+
+	public void p2cConnect();
 }

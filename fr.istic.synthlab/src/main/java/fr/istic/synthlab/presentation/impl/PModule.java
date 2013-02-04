@@ -1,5 +1,6 @@
 package fr.istic.synthlab.presentation.impl;
 
+import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.BorderFactory;
@@ -38,6 +39,7 @@ public class PModule extends JPanel implements IPModule {
 		this.setSize(width, height);
 		this.setPreferredSize(this.getSize());
 		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
+		this.setBackground(Color.GRAY);
 	}
 
 	public int getWidth(){

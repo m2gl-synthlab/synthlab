@@ -16,4 +16,7 @@ public interface IPWire {
 	
 	public int getx();
 	public int gety();
+
+	public void c2pConnectOut(IPOutputPort outputPortPresentation);
+	public void c2pConnectIn(IPInputPort inputPortPresentation);
 }

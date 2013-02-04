@@ -2,6 +2,7 @@ package fr.istic.synthlab.controller.impl;
 
 import com.jsyn.ports.UnitInputPort;
 
+import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.InputPort;
 import fr.istic.synthlab.controller.ICInputPort;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -29,6 +30,14 @@ public class CInputPort extends InputPort implements ICInputPort {
 	@Override
 	public IPInputPort getPresentation() {
 		return pres;
+	}
+
+	@Override
+	public void p2cConnect() {
+		IWire wire = getModule().getSynthesizer().getCurrentWire();
+		if(wire != null){
+			wire.connect(this);
+		}
 	}
 
 	

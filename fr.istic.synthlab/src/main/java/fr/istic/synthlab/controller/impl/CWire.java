@@ -49,6 +49,7 @@ public class CWire extends Wire implements ICWire {
 		if(outputPortPresentation != null){
 			connect();
 		}
+		pres.c2pConnectIn(inputPortPresentation);
 	}
 	
 	@Override
@@ -59,6 +60,8 @@ public class CWire extends Wire implements ICWire {
 		if(inputPortPresentation != null){
 			connect();
 		}
+
+		pres.c2pConnectOut(outputPortPresentation);
 	}
 	
 	public void connect(){

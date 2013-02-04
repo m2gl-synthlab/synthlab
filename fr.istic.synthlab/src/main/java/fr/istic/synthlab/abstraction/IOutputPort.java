@@ -69,5 +69,18 @@ public interface IOutputPort {// extends ConnectableInput, GettablePort{
 	 */
 	public int getDefaultPart();
 	
-
+	
+	/**
+	 * Return the module witch contains the current port 
+	 * 
+	 * @return the module
+	 */
+	public IModule getModule();	
+	
+	/**
+	 * Set the module witch contains the current port 
+	 * 
+	 * @return the module
+	 */
+	public void setModule(IModule mod);
 }

@@ -10,4 +10,6 @@ public interface ICOutputPort extends IOutputPort {
 	 * @return presentation
 	 */
 	public IPOutputPort getPresentation();
+
+	void p2cConnect();
 }

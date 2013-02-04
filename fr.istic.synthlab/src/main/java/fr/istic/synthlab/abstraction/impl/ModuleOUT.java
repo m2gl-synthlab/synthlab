@@ -11,6 +11,7 @@ import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.IParameter;
+import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleOUT implements IModule {
@@ -26,6 +27,8 @@ public class ModuleOUT implements IModule {
 	private static final String GAIN_NAME = "Gain";
 	private static final String MUTE_NAME = "Mute";
 
+	private ISynthesizer parentSynth;
+	
 	private ChannelOut vca;
 	private FourWayFade fader;
 	private Map<Integer, IInputPort> inputs;
@@ -38,16 +41,20 @@ public class ModuleOUT implements IModule {
 		this.inputs = new HashMap<Integer, IInputPort>();
 		this.params = new HashMap<Integer, IParameter>();
 	
-		this.inputs.put(ModuleOUT.INPUT_IN, PACFactory.getFactory().newInputPort(IN_NAME, fader.input, 1));
+		this.inputs.put(ModuleOUT.INPUT_IN, PACFactory.getFactory().newInputPort(this, IN_NAME, fader.input, 1));
+		
+		
+		
+		
 		
 		fader.fade.setMinimum(-1);
 		fader.output.connect(vca.input);
 		
-		IParameter gain = PACFactory.getFactory().newParameter(GAIN_NAME, fader.fade.getMinimum(),12,0);
+		IParameter gain = PACFactory.getFactory().newParameter(this, GAIN_NAME, fader.fade.getMinimum(),12,0);
 		gain.connect(fader.fade);
 		this.params.put(ModuleOUT.PARAM_GAIN, gain);
 		
-		IParameter switchOnOff = PACFactory.getFactory().newSwitch(MUTE_NAME, false);
+		IParameter switchOnOff = PACFactory.getFactory().newSwitch(this, MUTE_NAME, false);
 		switchOnOff.connect(vca.input);
 		this.params.put(ModuleOUT.PARAM_SWITCH_ON_OFF, switchOnOff);
 	}
@@ -86,6 +93,16 @@ public class ModuleOUT implements IModule {
 	@Override
 	public IParameter getParameter(int identifier) {
 		return params.get(identifier);
+	}
+
+	@Override
+	public ISynthesizer getSynthesizer() {
+		return parentSynth;
+	}
+
+	@Override
+	public void setSynthesizer(ISynthesizer synth) {
+		parentSynth = synth;
 	}
 
 }

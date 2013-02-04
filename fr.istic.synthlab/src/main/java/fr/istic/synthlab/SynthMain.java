@@ -48,7 +48,7 @@ public class SynthMain {
 		frame.setDocSynthCommand(new DocumentationCommand());
 		frame.setAboutSynthCommand(new AboutCommand());
 		frame.setToolbarDefaultCommand(new ToolbarDefaultCommand());
-		frame.setToolbarWireCommand(new ToolbarWireCommand());
+		frame.setToolbarWireCommand(new ToolbarWireCommand(app.getSynthesizer()));
 		frame.setToolbarModuleCommand(new ToolbarModuleCommand());
 		frame.setToolbarPlayCommand(new ToolbarPlayCommand(app.getSynthesizer().getPresentation()));
 		frame.setToolbarPauseCommand(new ToolbarPauseCommand(app.getSynthesizer().getPresentation()));

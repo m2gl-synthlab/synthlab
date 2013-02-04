@@ -3,6 +3,7 @@ package fr.istic.synthlab.abstraction.impl;
 import com.jsyn.ports.UnitInputPort;
 
 import fr.istic.synthlab.abstraction.IInputPort;
+import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.IOutputPort;
 
 public class InputPort implements IInputPort {
@@ -10,6 +11,7 @@ public class InputPort implements IInputPort {
 	private String name;
 	private int defaultPart = 0;
 	private UnitInputPort port;
+	private IModule parentModule;
 
 	/**
 	 * @param name
@@ -47,12 +49,14 @@ public class InputPort implements IInputPort {
 
 	@Override
 	public void connect(IOutputPort outPort) {
-		port.connect(this.defaultPart, outPort.getJSyn(), outPort.getDefaultPart());
+		if(!port.isConnected())
+			port.connect(this.defaultPart, outPort.getJSyn(), outPort.getDefaultPart());
 	}
 
 	@Override
 	public void disconnect(IOutputPort outPort) {
-		port.disconnect(outPort.getJSyn());
+		if(port.isConnected())
+			port.disconnect(outPort.getJSyn());
 	}
 
 	@Override
@@ -83,6 +87,16 @@ public class InputPort implements IInputPort {
 	@Override
 	public int getDefaultPart() {
 		return this.defaultPart;
+	}
+
+	@Override
+	public IModule getModule() {
+		return parentModule;
+	}
+
+	@Override
+	public void setModule(IModule mod) {
+		parentModule = mod;
 	}
 
 }

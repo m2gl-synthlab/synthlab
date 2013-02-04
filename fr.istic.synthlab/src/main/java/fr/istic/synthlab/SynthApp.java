@@ -35,16 +35,16 @@ public class SynthApp implements ISynthApp {
 		displayCmd.execute();
 		
 		// Add a VCO module
-		IModule vco = PACFactory.getFactory().newVCO();
+		IModule vco = PACFactory.getFactory().newVCO(synth);
 		vco.getParameter(ModuleVCO.PARAM_FREQUENCY).setValue(200);
 		synth.add(vco);
 		
 		// Add a VCF module
-		IModule vcf = PACFactory.getFactory().newVCF();
+		IModule vcf = PACFactory.getFactory().newVCF(synth);
 		synth.add(vcf);
 
 		// Add a OUT module
-		IModule out = PACFactory.getFactory().newOUT();
+		IModule out = PACFactory.getFactory().newOUT(synth);
 		synth.add(out);
 		
 		// Add a wire between VCO and VCF

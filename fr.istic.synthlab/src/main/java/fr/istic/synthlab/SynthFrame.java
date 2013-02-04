@@ -1,6 +1,7 @@
 package fr.istic.synthlab;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -138,7 +139,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 		frameContainer.add(BorderLayout.NORTH, toolBar);
 		
-		
 		// Debug
 		usage = new UsageDisplay();
 		frameContainer.add(BorderLayout.SOUTH, usage);
@@ -151,9 +151,12 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		// parametrage de la JFrame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1400, 880);
+		Container con = getContentPane();
+		con.setBackground(new Color(139,69,19));
+		
+		
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height
-				/ 2 - this.getSize().height / 2);
+		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height/ 2 - this.getSize().height / 2);
 		this.setResizable(true);
 
 		// ajout des raccourcis clavier au elements du menu
@@ -287,7 +290,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	@Override
 	public void displaySynth(IPSynthesizer presentation) {
 		pres = presentation;
-		
 		this.add((PSynthesizer) pres);
 		this.setVisible(true);
 	}

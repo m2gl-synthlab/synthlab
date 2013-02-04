@@ -11,6 +11,7 @@ import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.IParameter;
+import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleVCF implements IModule {
@@ -28,7 +29,8 @@ public class ModuleVCF implements IModule {
 	public static final String IN_NAME = "In";
 	public static final String AMPLITUDE_NAME = "Ampl";
 	public static final String FREQUENCY_NAME = "Fn";
-	
+
+	private ISynthesizer parentSynth;
 	
 	private FilterLowPass vcf;
 
@@ -44,18 +46,18 @@ public class ModuleVCF implements IModule {
 		this.params = new HashMap<Integer, IParameter>();
 
 		this.outputs.put(ModuleVCF.OUTPUT_OUT, PACFactory.getFactory()
-				.newOutputPort(OUT_NAME, vcf.getOutput()));
+				.newOutputPort(this, OUT_NAME, vcf.getOutput()));
 		
 		this.inputs.put(ModuleVCF.INPUT_IN, PACFactory.getFactory()
-				.newInputPort(IN_NAME, vcf.getInput()));
+				.newInputPort(this, IN_NAME, vcf.getInput()));
 
-		IParameter amplitude = PACFactory.getFactory().newParameter(AMPLITUDE_NAME, 0, 1, 0.5);
+		IParameter amplitude = PACFactory.getFactory().newParameter(this, AMPLITUDE_NAME, 0, 1, 0.5);
 		amplitude.connect(vcf.amplitude);
 		this.params.put(ModuleVCF.PARAM_AMPLITUDE, amplitude);
 		System.out.println("Default amplitude : "
 				+ PulseOscillator.DEFAULT_AMPLITUDE);
 
-		IParameter frequency = PACFactory.getFactory().newParameter(FREQUENCY_NAME,
+		IParameter frequency = PACFactory.getFactory().newParameter(this, FREQUENCY_NAME,
 				vcf.frequency.getMinimum(),
 				vcf.frequency.getMaximum(),
 				440);
@@ -97,6 +99,16 @@ public class ModuleVCF implements IModule {
 	@Override
 	public IParameter getParameter(int identifier) {
 		return params.get(identifier);
+	}
+
+	@Override
+	public ISynthesizer getSynthesizer() {
+		return parentSynth;
+	}
+
+	@Override
+	public void setSynthesizer(ISynthesizer synth) {
+		parentSynth = synth;
 	}
 
 }

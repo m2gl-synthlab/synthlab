@@ -35,75 +35,93 @@ public class CFactory implements IFactory {
 		return instance;
 	}
 
+	@Override
 	public ISynthesizer newSynthesizer() {
 		ISynthesizer syn = new CSynthesizer();
 		return syn;
 	}
 
-	public IModule newVCO() {
+	@Override
+	public IModule newVCO(ISynthesizer synth) {
 		IModule module = new CModuleVCO(MODULE_VCO);
+		module.setSynthesizer(synth);
 		return module;
 	}
 
-	public IModule newVCF() {
+	@Override
+	public IModule newVCF(ISynthesizer synth) {
 		IModule module = new CModuleVCF(MODULE_VCF);
+		module.setSynthesizer(synth);
 		return module;
 	}
 
-	public IModule newOUT() {
+	@Override
+	public IModule newOUT(ISynthesizer synth) {
 		IModule module = new CModuleOUT(MODULE_OUT);
+		module.setSynthesizer(synth);
 		return module;
 	}
 
-	public IParameter newParameter(String name, double min, double max, double value) {
+	@Override
+	public IParameter newParameter(IModule mod, String name, double min, double max, double value) {
 		IParameter param = new CParameter(name, min, max, value);
 		return param;
 	}
-	
-	public IParameter newSwitch(String name, boolean value) {
+
+	@Override
+	public IParameter newSwitch(IModule mod, String name, boolean value) {
 		IParameter param = new CSwitch(name, value);
 		return param;
 	}
 
-	public IInputPort newInputPort(String name) {
+	@Override
+	public IInputPort newInputPort(IModule mod, String name) {
 		IInputPort port = new CInputPort(name);
+		port.setModule(mod);
 		return port;
 	}
 
-	public IOutputPort newOutputPort(String name) {
+	@Override
+	public IOutputPort newOutputPort(IModule mod, String name) {
 		IOutputPort port = new COutputPort(name);
+		port.setModule(mod);
 		return port;
 	}
 
+	@Override
 	public IWire newWire() {
 		IWire wire = new CWire();
 		return wire;
 	}
 
 	@Override
-	public IInputPort newInputPort(String name, UnitInputPort input) {
+	public IInputPort newInputPort(IModule mod, String name, UnitInputPort input) {
 		IInputPort port = new CInputPort(input);
+		port.setModule(mod);
 		port.setName(name);
 		return port;
 	}
 	
 	@Override
-	public IInputPort newInputPort(String name, UnitInputPort input, int part) {
+	public IInputPort newInputPort(IModule mod, String name, UnitInputPort input, int part) {
 		IInputPort port = new CInputPort(input, part);
+		port.setModule(mod);
 		port.setName(name);
 		return port;
 	}
 
 	@Override
-	public IOutputPort newOutputPort(String name, UnitOutputPort output) {
+	public IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output) {
 		IOutputPort port = new COutputPort(output);
+		port.setModule(mod);
 		port.setName(name);
 		return port;
 	}
 	
 	@Override
-	public IOutputPort newOutputPort(String name, UnitOutputPort output, int part) {
+	public IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output, int part) {
 		IOutputPort port = new COutputPort(output, part);
+		port.setModule(mod);
 		port.setName(name);
 		return port;
 	}
