@@ -35,8 +35,7 @@ public class PWire extends JPanel implements IPWire {
 	}
 
 	private void configView() {
-		setOpaque(true);
-		setBackground(Color.BLACK);
+		setOpaque(false);
 	}
 
 	private void defineCallbacks() {
@@ -54,9 +53,6 @@ public class PWire extends JPanel implements IPWire {
 		if (posOutput == null) {
 			posOutput = new Point(((JPanel) outputPort).getX(), ((JPanel) outputPort).getY());
 			
-//			Point offsetModule = ((JPanel) outputPort).getParent()
-//					.getLocation();
-//
 			posOutput.x += ((JPanel) outputPort).getParent().getX();
 			posOutput.y += ((JPanel) outputPort).getParent().getY();
 
@@ -88,11 +84,6 @@ public class PWire extends JPanel implements IPWire {
 	public void updateDisplay() {
 		System.out.println("Updating wire " + posInput + " " + posOutput);
 
-//			posInput = ((PInputPort) ((CInputPort) ctrl.getInput())
-//					.getPresentation()).getLocation();
-//			posOutput = ((POutputPort) ((COutputPort) ctrl.getOutput())
-//					.getPresentation()).getLocation();
-
 		int x = 0;
 		int y = 0;
 
@@ -113,7 +104,7 @@ public class PWire extends JPanel implements IPWire {
 		}
 
 		setPreferredSize(new Dimension(width, height));
-		
+
 		setBounds(x+55, y+53, width, height);
 		repaint();
 		validate();
@@ -121,9 +112,7 @@ public class PWire extends JPanel implements IPWire {
 
 	@Override
 	public void paint(Graphics g) {
-		System.out.println("painting");
-
-		g.setColor(Color.BLACK);
+		System.out.println("painting");		
 		g.drawLine(0, height, width, 0);
 	}
 
