@@ -38,11 +38,6 @@ public class PFactory implements IPFactory {
 	}
 
 	@Override
-	public IPModule newModule(ICModule control) {
-		return new PModule(control);
-	}
-
-	@Override
 	public IPModule newVCO(ICModule control) {
 		return new PModule(control); // TODO
 	}
@@ -53,7 +48,7 @@ public class PFactory implements IPFactory {
 	}
 
 	@Override
-	public IPModule newVCA(ICModule control) {
+	public IPModule newOUT(ICModule control) {
 		return new PModule(control); // TODO
 	}
 

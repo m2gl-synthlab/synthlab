@@ -17,7 +17,7 @@ public class CModuleVCF extends ModuleVCF implements ICModule {
 
 	public CModuleVCF(String name) {
 		super(name);
-		this.pres = PACFactory.getPFactory().newModule(this);
+		this.pres = PACFactory.getPFactory().newVCF(this);
 
 		IInputPort input = this.getInput(INPUT_IN);
 		pres.addInputPort(((ICInputPort) input).getPresentation());

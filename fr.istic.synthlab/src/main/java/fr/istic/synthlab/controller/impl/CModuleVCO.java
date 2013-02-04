@@ -15,7 +15,7 @@ public class CModuleVCO extends ModuleVCO implements ICModule {
 
 	public CModuleVCO(String name) {
 		super(name);
-		this.pres = PACFactory.getPFactory().newModule(this);
+		this.pres = PACFactory.getPFactory().newVCO(this);
 		
 		IParameter amplitude = this.getParameter(PARAM_AMPLITUDE);
 		pres.addParameter(((ICParameter) amplitude).getPresentation());
