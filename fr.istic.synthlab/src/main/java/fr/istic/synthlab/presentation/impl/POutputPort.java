@@ -1,6 +1,10 @@
 package fr.istic.synthlab.presentation.impl;
 
+import java.awt.BorderLayout;
+
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fr.istic.synthlab.controller.ICOutputPort;
@@ -23,6 +27,13 @@ public class POutputPort extends JPanel implements IPOutputPort {
 		this.setSize(100, 100);
 		this.setPreferredSize(this.getSize());
 		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
+		
+
+		JPanel pane = new JPanel();
+		JLabel image = new JLabel(new ImageIcon("res/output.png"));
+		pane.setLayout(new BorderLayout());
+		pane.add(image, BorderLayout.CENTER);
+		add(pane);
 	}
 
 	private void defineCallbacks() {
