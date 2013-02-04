@@ -100,7 +100,7 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 		
 		modulePanel.add((JPanel) module);
 
-		((JPanel)module).setBounds(((modules.size())*(module.getWidth()+15)), 15, module.getWidth(), module.getHeight());
+		((JPanel)module).setBounds(((modules.size())*(module.getWidth()+5)), 5, module.getWidth(), module.getHeight());
 		
 		modules.add(module);
 		((JPanel)module).validate();
@@ -120,7 +120,7 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 		((JComponent) wire).setOpaque(false);
 		this.add((Component) wire, new Integer(++i));
 	
-		((Component) wire).setBounds(wire.getx()+65, wire.gety()+65, 1000, 1000);
+		((Component) wire).setBounds(wire.getx()+63, wire.gety()+53, wire.getWidth(), wire.getHeight());
 		
 		validate();
 		repaint();

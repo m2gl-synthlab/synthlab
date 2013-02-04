@@ -16,4 +16,7 @@ public interface IPWire {
 	
 	public int getx();
 	public int gety();
+
+	public int getWidth();
+	public int getHeight();
 }
