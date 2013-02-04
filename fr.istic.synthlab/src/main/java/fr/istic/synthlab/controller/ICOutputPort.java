@@ -1,6 +1,7 @@
 package fr.istic.synthlab.controller;
 
 import fr.istic.synthlab.abstraction.IOutputPort;
+import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.presentation.IPOutputPort;
 
 public interface ICOutputPort extends IOutputPort {
@@ -12,4 +13,6 @@ public interface ICOutputPort extends IOutputPort {
 	public IPOutputPort getPresentation();
 
 	void p2cConnect();
+
+	public IWire getWire();
 }

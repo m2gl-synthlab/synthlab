@@ -1,6 +1,5 @@
 package fr.istic.synthlab.presentation.impl;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -8,8 +7,6 @@ import java.awt.Point;
 import javax.swing.JPanel;
 
 import fr.istic.synthlab.controller.ICWire;
-import fr.istic.synthlab.controller.impl.CInputPort;
-import fr.istic.synthlab.controller.impl.COutputPort;
 import fr.istic.synthlab.presentation.IPInputPort;
 import fr.istic.synthlab.presentation.IPOutputPort;
 import fr.istic.synthlab.presentation.IPWire;
@@ -24,6 +21,9 @@ public class PWire extends JPanel implements IPWire {
 	private Point posOutput;
 	private int height = 0;
 	private int width = 0;
+	private IPInputPort inputPort;
+	private IPOutputPort outputPort;
+	
 
 	/**
 	 * @param control
@@ -50,40 +50,37 @@ public class PWire extends JPanel implements IPWire {
 	@Override
 	public void c2pConnectOut(IPOutputPort outputPort) {
 		System.out.println("Connecting to out");
-		if (posOutput == null) {
-			posOutput = new Point(((JPanel) outputPort).getX(), ((JPanel) outputPort).getY());
-			
-			posOutput.x += ((JPanel) outputPort).getParent().getX();
-			posOutput.y += ((JPanel) outputPort).getParent().getY();
-
-			System.out.println("output : " + posOutput.x + "," + posOutput.y);
-
-			if(posInput != null)
-				updateDisplay();
-		}
+		this.outputPort = outputPort;
+		if(inputPort != null)
+			updateDisplay();
 	}
 
 	@Override
 	public void c2pConnectIn(IPInputPort inputPort) {
 		System.out.println("Connecting to In");
-
-		if (posInput == null) {
-			posInput = new Point(((JPanel) inputPort).getX(), ((JPanel) inputPort).getY());
-
-			posInput.x += ((JPanel) inputPort).getParent().getX();
-			posInput.y += ((JPanel) inputPort).getParent().getY();
-
-			System.out.println("input : " + posInput.x + "," + posInput.y);
-			
-			if(posOutput != null)
-				updateDisplay();
-		}
+		this.inputPort = inputPort;
+		if(outputPort != null)
+			updateDisplay();
 	}
 
 	@Override
 	public void updateDisplay() {
-		System.out.println("Updating wire " + posInput + " " + posOutput);
 
+		posOutput = new Point(((JPanel) outputPort).getX(), ((JPanel) outputPort).getY());
+		
+		posOutput.x += ((JPanel) outputPort).getParent().getX();
+		posOutput.y += ((JPanel) outputPort).getParent().getY();
+
+		System.out.println("output : " + posOutput.x + "," + posOutput.y);
+
+		
+		posInput = new Point(((JPanel) inputPort).getX(), ((JPanel) inputPort).getY());
+
+		posInput.x += ((JPanel) inputPort).getParent().getX();
+		posInput.y += ((JPanel) inputPort).getParent().getY();
+
+		System.out.println("input : " + posInput.x + "," + posInput.y);
+		
 		int x = 0;
 		int y = 0;
 

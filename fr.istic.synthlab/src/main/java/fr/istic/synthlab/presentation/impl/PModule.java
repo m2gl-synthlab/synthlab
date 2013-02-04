@@ -1,22 +1,16 @@
 package fr.istic.synthlab.presentation.impl;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-
-import javax.swing.BorderFactory;
+import java.util.List;
 
 import com.alee.laf.panel.WebPanel;
 
 import fr.istic.synthlab.controller.ICModule;
+import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.presentation.IPInputPort;
 import fr.istic.synthlab.presentation.IPModule;
 import fr.istic.synthlab.presentation.IPOutputPort;
@@ -34,8 +28,6 @@ public class PModule extends WebPanel implements IPModule {
 
 	private int px;
 	private int py;
-
-	private Point origin;
 
 	/**
 	 * @param control
@@ -94,7 +86,13 @@ public class PModule extends WebPanel implements IPModule {
 		            setLocation(e.getLocationOnScreen().x - px, e.getLocationOnScreen().y - py);
 		            px = e.getLocationOnScreen().x - getX();
 		            py = e.getLocationOnScreen().y - getY();
-		            
+		            List<ICWire> wires = ctrl.getWires();
+		            for(ICWire wire : wires){
+		            	if(wire!=null){
+		            		System.out.println("wire="+wire);
+		            		wire.getPresentation().updateDisplay();
+		            	}
+		            }
 		    }
 		});
 	}

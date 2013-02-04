@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
@@ -22,7 +21,6 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 	private ICSynthesizer ctrl;
 
 	private List<IPModule> modules;
-	private JPanel background;
 	private JPanel modulePanel;
 	
 	
@@ -31,7 +29,6 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 		ctrl = control;
 		modules = new ArrayList<IPModule>();
 		modulePanel = new JPanel();
-		background = new JPanel();
 		
 		configView();
 		defineCallbacks();

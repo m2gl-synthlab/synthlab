@@ -47,4 +47,9 @@ public class COutputPort extends OutputPort implements ICOutputPort{
 		}
 	}
 
+	@Override
+	public IWire getWire() {
+		return wire;
+	}
+
 }

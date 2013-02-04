@@ -4,6 +4,7 @@ import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.impl.Wire;
 import fr.istic.synthlab.controller.ICInputPort;
+import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICOutputPort;
 import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -29,6 +30,7 @@ public class CWire extends Wire implements ICWire {
 		super.connect(port);
 
 		IPInputPort pInputPort = ((ICInputPort) port).getPresentation();
+		((ICModule)((ICInputPort) port).getModule()).addWire(this);
 		pres.c2pConnectIn(pInputPort);
 	}
 
@@ -37,6 +39,7 @@ public class CWire extends Wire implements ICWire {
 		super.connect(port);
 
 		IPOutputPort pOutputPort = ((ICOutputPort) port).getPresentation();
+		((ICModule)((ICOutputPort) port).getModule()).addWire(this);
 		pres.c2pConnectOut(pOutputPort);
 	}
 

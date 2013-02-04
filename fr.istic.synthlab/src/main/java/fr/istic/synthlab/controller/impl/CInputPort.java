@@ -47,5 +47,10 @@ public class CInputPort extends InputPort implements ICInputPort {
 		}
 	}
 
+	@Override
+	public IWire getWire() {
+		return wire;
+	}
+
 	
 }
