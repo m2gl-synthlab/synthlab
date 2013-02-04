@@ -31,11 +31,9 @@ public class PModule extends JPanel implements IPModule {
 	private ICModule ctrl;
 	private int width;
 	private int height;
-
-	private int px;
-	private int py;
-
+	
 	private Point origin;
+	
 
 	/**
 	 * @param control
@@ -45,21 +43,21 @@ public class PModule extends JPanel implements IPModule {
 		configView();
 		defineCallbacks();
 	}
-
-	public void paintComponent(Graphics g) {
-		try {
-			Image img = ImageIO.read(new File("res/synthe.png"));
-			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-			// Pour une image de fond
-			// g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	
+	public void paintComponent(Graphics g){
+	    try {
+	      Image img = ImageIO.read(new File("res/synthe.png"));
+	      g.drawImage(img, 0, 0,this.getWidth(),this.getHeight(), this);
+	      //Pour une image de fond
+	      //g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+	    } catch (IOException e) {
+	      e.printStackTrace();
+	    }               
+	  }               
 
 	private void configView() {
 		width = 350;
-		height = 250;
+		height =250;
 		this.setSize(width, height);
 		this.setPreferredSize(this.getSize());
 		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
@@ -67,58 +65,60 @@ public class PModule extends JPanel implements IPModule {
 		this.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-
+				
 			}
-
+			
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (contains(e.getPoint())) {
-					px = e.getLocationOnScreen().x - getX();
-					py = e.getLocationOnScreen().y - getY();
+				Rectangle r = getBounds(); 
+				if(r.contains(e.getPoint())){
+					// prepare to drag
+					origin = e.getPoint();
+					System.out.println("origin="+origin);
 				}
 			}
-
+			
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// no use
 			}
-
+			
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				// no use
 			}
-
+			
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// no use
 			}
 		});
-
+		
 		this.addMouseMotionListener(new MouseMotionListener() {
-
+			
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				// no use
 			}
-
+			
 			@Override
-		    public void mouseDragged(MouseEvent e) {
-		            setLocation(e.getLocationOnScreen().x - px, e.getLocationOnScreen().y - py);
-		            px = e.getLocationOnScreen().x - getX();
-		            py = e.getLocationOnScreen().y - getY();
-		        
-		    }
+			public void mouseDragged(MouseEvent e) {
+				if(r.contains(e.getPoint())){
+					setLocation(e.getPoint());
+				}
+				System.out.println(e.getPoint());
+			}
 		});
 	}
 
-	public int getWidth() {
+	public int getWidth(){
 		return width;
 	}
-
-	public int getHeight() {
+	
+	public int getHeight(){
 		return height;
 	}
-
+	
 	private void defineCallbacks() {
 	}
 
@@ -129,13 +129,13 @@ public class PModule extends JPanel implements IPModule {
 
 	@Override
 	public void addInputPort(IPInputPort presentation) {
-		add((PInputPort) presentation);
+		add((PInputPort)presentation);
 
 	}
 
 	@Override
 	public void addOutputPort(IPOutputPort presentation) {
-		add((POutputPort) presentation);
+		add((POutputPort)presentation);
 	}
 
 	@Override
