@@ -22,14 +22,20 @@ public class COutputPort extends OutputPort implements ICOutputPort{
 		this.pres = PACFactory.getPFactory().newOutputPort(this);
 	}
 
-	public COutputPort(UnitOutputPort output, int part) {
-		super(output, part);
+	public COutputPort(UnitOutputPort output, int part, String name) {
+		super(output, part, name);
 		this.pres = PACFactory.getPFactory().newOutputPort(this);
 	}
 
 	@Override
 	public IPOutputPort getPresentation() {
 		return pres;
+	}
+	
+	@Override
+	public void setName(String name) {
+		super.setName(name);
+		//this.pres.c2pSetName();
 	}
 	
 	@Override

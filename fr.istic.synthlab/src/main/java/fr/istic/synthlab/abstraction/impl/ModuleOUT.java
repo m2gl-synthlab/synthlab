@@ -45,10 +45,6 @@ public class ModuleOUT implements IModule {
 	
 		this.inputs.put(ModuleOUT.INPUT_IN, PACFactory.getFactory().newInputPort(this, IN_NAME, fader.input, 1));
 		
-		
-		
-		
-		
 		fader.fade.setMinimum(-1);
 		fader.output.connect(vca.input);
 		
@@ -65,6 +61,7 @@ public class ModuleOUT implements IModule {
 	public List<UnitGenerator> getJSyn() {
 		List<UnitGenerator> generators = new ArrayList<UnitGenerator>();
 		generators.add(vca);
+		generators.add(fader);
 		return generators;
 	}
 

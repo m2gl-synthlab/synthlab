@@ -31,9 +31,10 @@ public class OutputPort implements IOutputPort {
 		this.port = jSynPort;
 	}
 	
-	public OutputPort(UnitOutputPort jSynPort, int part) {
+	public OutputPort(UnitOutputPort jSynPort, int part, String name) {
 		this.port = jSynPort;
 		this.defaultPart = part;
+		this.name = name;
 	}
 
 	@Override

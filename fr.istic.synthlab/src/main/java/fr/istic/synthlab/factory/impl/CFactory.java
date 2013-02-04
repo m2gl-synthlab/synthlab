@@ -96,7 +96,7 @@ public class CFactory implements IFactory {
 
 	@Override
 	public IInputPort newInputPort(IModule mod, String name, UnitInputPort input) {
-		IInputPort port = new CInputPort(input);
+		IInputPort port = new CInputPort(input, name);
 		port.setModule(mod);
 		port.setName(name);
 		return port;
@@ -104,7 +104,7 @@ public class CFactory implements IFactory {
 	
 	@Override
 	public IInputPort newInputPort(IModule mod, String name, UnitInputPort input, int part) {
-		IInputPort port = new CInputPort(input, part);
+		IInputPort port = new CInputPort(input, part, name);
 		port.setModule(mod);
 		port.setName(name);
 		return port;
@@ -119,7 +119,7 @@ public class CFactory implements IFactory {
 	
 	@Override
 	public IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output, int part) {
-		IOutputPort port = new COutputPort(output, part);
+		IOutputPort port = new COutputPort(output, part, name);
 		port.setModule(mod);
 		port.setName(name);
 		return port;

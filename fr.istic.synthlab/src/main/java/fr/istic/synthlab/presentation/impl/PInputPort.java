@@ -45,6 +45,10 @@ public class PInputPort extends JPanel implements MouseListener, IPInputPort {
 	public ICInputPort getControl() {
 		return ctrl;
 	}
+	
+	public void c2pSetName() {
+		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {

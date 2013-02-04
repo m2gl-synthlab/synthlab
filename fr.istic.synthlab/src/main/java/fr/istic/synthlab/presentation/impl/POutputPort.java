@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fr.istic.synthlab.controller.ICOutputPort;
-import fr.istic.synthlab.presentation.IPInputPort;
 import fr.istic.synthlab.presentation.IPOutputPort;
 
 public class POutputPort extends JPanel implements MouseListener, IPOutputPort {
@@ -46,6 +45,11 @@ public class POutputPort extends JPanel implements MouseListener, IPOutputPort {
 	@Override
 	public ICOutputPort getControl() {
 		return ctrl;
+	}
+	
+	@Override
+	public void c2pSetName() {
+		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
 	}
 
 	@Override

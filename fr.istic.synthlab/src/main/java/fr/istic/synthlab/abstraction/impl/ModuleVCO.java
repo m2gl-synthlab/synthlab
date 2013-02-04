@@ -20,6 +20,8 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleVCO implements IModule {
 
+	public static final int INPUT_MOD_FREQ = 0;
+	
 	public static final int OUTPUT_SAWTOOTH = 3;
 	public static final int OUTPUT_SINE = 2;
 	public static final int OUTPUT_TRIANGLE = 1;
@@ -31,6 +33,8 @@ public class ModuleVCO implements IModule {
 
 	private static final String MODULE_NAME = "VCO";
 
+	public static final String IN_MOD_FREQ = "Modulation";
+	
 	public static final String OUT_SINE_NAME = "Sine";
 	public static final String OUT_SAWTOOTH_NAME = "SawTooth";
 	public static final String OUT_SQUARE_NAME = "Square";
@@ -59,28 +63,29 @@ public class ModuleVCO implements IModule {
 		this.outputs = new HashMap<Integer, IOutputPort>();
 		this.inputs = new HashMap<Integer, IInputPort>();
 		this.params = new HashMap<Integer, IParameter>();
-
+		
+		this.inputs.put(INPUT_MOD_FREQ, PACFactory.getFactory().newInputPort(this, IN_MOD_FREQ, vcoTriangle.frequency));
+		
 		this.outputs.put(ModuleVCO.OUTPUT_SQUARE, PACFactory.getFactory().newOutputPort(this, OUT_SQUARE_NAME, vcoSquare.getOutput()));
 		this.outputs.put(ModuleVCO.OUTPUT_TRIANGLE, PACFactory.getFactory().newOutputPort(this, OUT_TRIANGLE_NAME, vcoTriangle.getOutput()));
 		this.outputs.put(ModuleVCO.OUTPUT_SINE, PACFactory.getFactory().newOutputPort(this, OUT_SINE_NAME, vcoSine.getOutput()));
 		this.outputs.put(ModuleVCO.OUTPUT_SAWTOOTH, PACFactory.getFactory().newOutputPort(this, OUT_SAWTOOTH_NAME, vcoSawtooth.getOutput()));
-
+		
 		IParameter amplitude = PACFactory.getFactory().newParameter(this, AMPLITUDE_NAME, 0, 1, SineOscillator.DEFAULT_AMPLITUDE);
 		amplitude.connect(vcoSquare.amplitude);
-		amplitude.connect(vcoTriangle.amplitude);
 		amplitude.connect(vcoSine.amplitude);
 		amplitude.connect(vcoSawtooth.amplitude);
+		amplitude.connect(vcoTriangle.amplitude);
 		this.params.put(ModuleVCO.PARAM_AMPLITUDE, amplitude);
 
 		IParameter frequency = PACFactory.getFactory().newParameter(this, FREQUENCY_NAME,
 				vcoSquare.frequency.getMinimum(),
 				vcoSquare.frequency.getMaximum(),
 				SineOscillator.DEFAULT_FREQUENCY);
-		
 		frequency.connect(vcoSquare.frequency);
-		frequency.connect(vcoTriangle.frequency);
 		frequency.connect(vcoSine.frequency);
 		frequency.connect(vcoSawtooth.frequency);
+		frequency.connect(vcoTriangle.frequency);
 		this.params.put(ModuleVCO.PARAM_FREQUENCY, frequency);
 	}
 
