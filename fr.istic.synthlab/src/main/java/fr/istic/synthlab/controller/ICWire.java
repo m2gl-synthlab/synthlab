@@ -1,8 +1,9 @@
 package fr.istic.synthlab.controller;
 
+import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.presentation.IPWire;
 
-public interface ICWire {
+public interface ICWire extends IWire {
 
 	/**
 	 * Return the wire's presentation

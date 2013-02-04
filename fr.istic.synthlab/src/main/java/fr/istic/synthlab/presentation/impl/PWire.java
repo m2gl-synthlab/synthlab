@@ -4,11 +4,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Rectangle;
 
 import javax.swing.JPanel;
 
 import fr.istic.synthlab.controller.ICWire;
+import fr.istic.synthlab.controller.impl.CInputPort;
+import fr.istic.synthlab.controller.impl.COutputPort;
 import fr.istic.synthlab.presentation.IPInputPort;
 import fr.istic.synthlab.presentation.IPOutputPort;
 import fr.istic.synthlab.presentation.IPWire;
@@ -22,9 +23,6 @@ public class PWire extends JPanel implements IPWire {
 	private Point posInput;
 	private Point posOutput;
 
-	private Color color;
-
-
 	/**
 	 * @param control
 	 */
@@ -35,6 +33,8 @@ public class PWire extends JPanel implements IPWire {
 	}
 
 	private void configView() {
+		setOpaque(true);
+		setBackground(Color.BLACK);
 		posInput = new Point();
 		posOutput = new Point();
 	}
@@ -73,7 +73,6 @@ public class PWire extends JPanel implements IPWire {
 		posInput.x += offsetModule.x;
 		posInput.y += offsetModule.y;
 
-//		System.out.println("input : " + posInput.x + "," + posInput.y);
 
 		updateDisplay();
 	}
@@ -82,13 +81,35 @@ public class PWire extends JPanel implements IPWire {
 	public void updateDisplay() {
 		System.out.println("Updating wire " + posInput + " " + posOutput);
 
-		Rectangle r = new Rectangle(posInput);
-		r.add(posOutput);
-
-		setPreferredSize(r.getSize());
-		setBounds(r);
-
-		setPreferredSize(new Dimension(r.width, r.height));
+		if(ctrl.getInput() != null)
+			posInput = ((PInputPort) ((CInputPort)ctrl.getInput()).getPresentation()).getLocation();
+		if(ctrl.getOutput() != null)
+			posOutput = ((POutputPort) ((COutputPort)ctrl.getOutput()).getPresentation()).getLocation();
+		
+		
+		int x = 0;
+		int y = 0;
+		int height = 0;
+		int width  = 0;
+		
+		if(posInput.x < posOutput.x){
+			x = posInput.x;
+			width = posOutput.x - posInput.x;
+		}else{
+			x = posOutput.x;
+			width = posInput.x - posOutput.x;
+		}
+		
+		if(posInput.y < posOutput.y){
+			y = posInput.y;
+			height = posOutput.y - posInput.y;
+		}else{
+			y = posOutput.y;
+			height = posInput.y - posOutput.y;
+		}
+		
+		setPreferredSize(new Dimension(width, height));
+		setBounds(x, y, width, height);
 		repaint();
 		validate();
 
@@ -99,9 +120,10 @@ public class PWire extends JPanel implements IPWire {
 		System.out.println("painting");
 		
 		g.setColor(Color.BLACK);
-		g.drawLine(posInput.x, posInput.y, posOutput.x, posOutput.y);
+		g.drawLine(posOutput.x, posOutput.y, posInput.x, posInput.y);
 	}
 
+	
 	@Override
 	public void c2pDisconnectIn(IPInputPort pInputPort) {
 		// TODO Auto-generated method stub
