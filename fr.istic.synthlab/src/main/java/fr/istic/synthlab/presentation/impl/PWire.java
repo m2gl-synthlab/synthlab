@@ -68,13 +68,14 @@ public class PWire extends LinesComponent implements IPWire {
 		}
 		
 		this.setPreferredSize(new Dimension(diffx, diffy));
-		
+				
 		if(inputx<outputx){
-		this.addLine(0, 0, diffx, diffy);
+			this.addLine(0, 0, diffx, diffy);
 		} else {
 			this.addLine(diffx,0, 0, diffy);
 		}
-	
+		
+		
 	}
 
 	public int getx() {
