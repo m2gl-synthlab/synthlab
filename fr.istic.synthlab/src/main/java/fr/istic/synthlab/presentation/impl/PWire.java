@@ -1,7 +1,9 @@
 package fr.istic.synthlab.presentation.impl;
 
+import java.awt.BasicStroke;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 
 import javax.swing.JPanel;
@@ -110,10 +112,14 @@ public class PWire extends JPanel implements IPWire {
 	@Override
 	public void paint(Graphics g) {
 		System.out.println("painting");
+
+		Graphics2D g2 = (Graphics2D) g;
+	    g2.setStroke(new BasicStroke(3));
+	    
 		if (posInput.x > posOutput.x) {
-		g.drawLine(0, height, width, 0);
+		     g2.drawLine(0, height, width, 0);  
 		} else {
-		g.drawLine(0, 0, width, height);
+		     g2.drawLine(0, 0, width, height);  
 		}
 	}
 
