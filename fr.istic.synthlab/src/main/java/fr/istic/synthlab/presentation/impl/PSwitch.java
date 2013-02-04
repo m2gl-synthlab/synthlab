@@ -8,8 +8,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.event.ChangeEvent;
@@ -39,6 +37,8 @@ public class PSwitch extends JPanel implements IPParameter {
 		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
 
 		toggle = new JToggleButton(){
+			private static final long serialVersionUID = 1L;
+
 			public void paintComponent(Graphics g){
 			    try {
 			      Image img = ImageIO.read(new File("res/mute.png"));

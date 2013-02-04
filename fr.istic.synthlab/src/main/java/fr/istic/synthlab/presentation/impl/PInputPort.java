@@ -1,8 +1,6 @@
 package fr.istic.synthlab.presentation.impl;
 
 import java.awt.BorderLayout;
-import java.awt.Image;
-import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
