@@ -112,8 +112,12 @@ public class PWire extends JPanel implements IPWire {
 
 	@Override
 	public void paint(Graphics g) {
-		System.out.println("painting");		
+		System.out.println("painting");
+		if (posInput.x > posOutput.x) {
 		g.drawLine(0, height, width, 0);
+		} else {
+		g.drawLine(0, 0, width, height);
+		}
 	}
 
 	@Override
