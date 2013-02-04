@@ -22,6 +22,8 @@ public class PWire extends JPanel implements IPWire {
 
 	private Point posInput;
 	private Point posOutput;
+	private int height = 0;
+	private int width = 0;
 
 	/**
 	 * @param control
@@ -35,8 +37,6 @@ public class PWire extends JPanel implements IPWire {
 	private void configView() {
 		setOpaque(true);
 		setBackground(Color.BLACK);
-		posInput = new Point();
-		posOutput = new Point();
 	}
 
 	private void defineCallbacks() {
@@ -51,78 +51,82 @@ public class PWire extends JPanel implements IPWire {
 	@Override
 	public void c2pConnectOut(IPOutputPort outputPort) {
 		System.out.println("Connecting to out");
+		if (posOutput == null) {
+			posOutput = new Point(((JPanel) outputPort).getX(), ((JPanel) outputPort).getY());
+			
+//			Point offsetModule = ((JPanel) outputPort).getParent()
+//					.getLocation();
+//
+			posOutput.x += ((JPanel) outputPort).getParent().getX();
+			posOutput.y += ((JPanel) outputPort).getParent().getY();
 
-		posOutput = ((JPanel) outputPort).getLocation();
-		Point offsetModule = ((JPanel) outputPort).getParent().getLocation();
+			System.out.println("output : " + posOutput.x + "," + posOutput.y);
 
-		posOutput.x += offsetModule.x;
-		posOutput.y += offsetModule.y;
-
-		System.out.println("output : " + posOutput.x + "," + posOutput.y);
-
-		updateDisplay();
+			if(posInput != null)
+				updateDisplay();
+		}
 	}
 
 	@Override
 	public void c2pConnectIn(IPInputPort inputPort) {
 		System.out.println("Connecting to In");
 
-		posInput = ((JPanel) inputPort).getLocation();
-		Point offsetModule = ((JPanel) inputPort).getParent().getLocation();
+		if (posInput == null) {
+			posInput = new Point(((JPanel) inputPort).getX(), ((JPanel) inputPort).getY());
 
-		posInput.x += offsetModule.x;
-		posInput.y += offsetModule.y;
+			posInput.x += ((JPanel) inputPort).getParent().getX();
+			posInput.y += ((JPanel) inputPort).getParent().getY();
 
-		updateDisplay();
+			System.out.println("input : " + posInput.x + "," + posInput.y);
+			
+			if(posOutput != null)
+				updateDisplay();
+		}
 	}
 
 	@Override
 	public void updateDisplay() {
 		System.out.println("Updating wire " + posInput + " " + posOutput);
 
-		if(ctrl.getInput() != null)
-			posInput = ((PInputPort) ((CInputPort)ctrl.getInput()).getPresentation()).getLocation();
-		if(ctrl.getOutput() != null)
-			posOutput = ((POutputPort) ((COutputPort)ctrl.getOutput()).getPresentation()).getLocation();
-		
-		
+//			posInput = ((PInputPort) ((CInputPort) ctrl.getInput())
+//					.getPresentation()).getLocation();
+//			posOutput = ((POutputPort) ((COutputPort) ctrl.getOutput())
+//					.getPresentation()).getLocation();
+
 		int x = 0;
 		int y = 0;
-		int height = 0;
-		int width  = 0;
-		
-		if(posInput.x < posOutput.x){
+
+		if (posInput.x < posOutput.x) {
 			x = posInput.x;
 			width = posOutput.x - posInput.x;
-		}else{
+		} else {
 			x = posOutput.x;
 			width = posInput.x - posOutput.x;
 		}
-		
-		if(posInput.y < posOutput.y){
+
+		if (posInput.y < posOutput.y) {
 			y = posInput.y;
 			height = posOutput.y - posInput.y;
-		}else{
+		} else {
 			y = posOutput.y;
 			height = posInput.y - posOutput.y;
 		}
-		
+
 		setPreferredSize(new Dimension(width, height));
-		setBounds(x, y, width, height);
+		
+		setBounds(x+55, y+53, width, height);
 		repaint();
 		validate();
-
 	}
-	
+
 	@Override
 	public void paint(Graphics g) {
 		System.out.println("painting");
-		
+
 		g.setColor(Color.BLACK);
-		g.drawLine(posOutput.x, posOutput.y, posInput.x, posInput.y);
+		g.drawLine(0, height, width, 0);
 	}
 
-	
 	@Override
 	public void c2pDisconnectIn(IPInputPort pInputPort) {
 		// TODO Auto-generated method stub
