@@ -1,6 +1,7 @@
 package fr.istic.synthlab;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -149,6 +150,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	 */
 	private void configureView() {
 		// parametrage de la JFrame
+		this.getContentPane().setBackground(Color.WHITE);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1400, 880);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
