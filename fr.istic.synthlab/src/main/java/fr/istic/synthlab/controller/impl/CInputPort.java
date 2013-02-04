@@ -11,6 +11,7 @@ import fr.istic.synthlab.presentation.IPInputPort;
 public class CInputPort extends InputPort implements ICInputPort {
 
 	private IPInputPort pres;
+	private IWire wire;
 	
 	public CInputPort(String name) {
 		super(name);
@@ -40,8 +41,8 @@ public class CInputPort extends InputPort implements ICInputPort {
 
 	@Override
 	public void p2cConnect() {
-		IWire wire = getModule().getSynthesizer().getCurrentWire();
-		if(wire != null){
+		if(wire == null){
+			wire = getModule().getSynthesizer().getCurrentWire();
 			wire.connect(this);
 		}
 	}

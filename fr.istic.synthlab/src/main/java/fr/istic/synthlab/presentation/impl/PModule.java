@@ -94,6 +94,7 @@ public class PModule extends WebPanel implements IPModule {
 		            setLocation(e.getLocationOnScreen().x - px, e.getLocationOnScreen().y - py);
 		            px = e.getLocationOnScreen().x - getX();
 		            py = e.getLocationOnScreen().y - getY();
+		            
 		    }
 		});
 	}
