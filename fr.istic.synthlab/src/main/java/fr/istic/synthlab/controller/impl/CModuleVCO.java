@@ -23,14 +23,17 @@ public class CModuleVCO extends ModuleVCO implements ICModule {
 		IParameter frequency = this.getParameter(PARAM_FREQUENCY);
 		pres.addParameter(((ICParameter) frequency).getPresentation());
 		
-		IOutputPort output = this.getOutput(OUTPUT_SQUARE);
-		pres.addOutputPort(((ICOutputPort) output).getPresentation());
+		IOutputPort outputSquare = this.getOutput(OUTPUT_SQUARE);
+		pres.addOutputPort(((ICOutputPort) outputSquare).getPresentation());
 
-		IOutputPort output1 = this.getOutput(OUTPUT_TRIANGLE);
-		pres.addOutputPort(((ICOutputPort) output1).getPresentation());
+		IOutputPort outputTriangle = this.getOutput(OUTPUT_TRIANGLE);
+		pres.addOutputPort(((ICOutputPort) outputTriangle).getPresentation());
 		
-		IOutputPort output2 = this.getOutput(OUTPUT_PULSE);
-		pres.addOutputPort(((ICOutputPort) output2).getPresentation());
+		IOutputPort outputSine = this.getOutput(OUTPUT_SINE);
+		pres.addOutputPort(((ICOutputPort) outputSine).getPresentation());
+
+		IOutputPort outputSawtooth = this.getOutput(OUTPUT_SAWTOOTH);
+		pres.addOutputPort(((ICOutputPort) outputSawtooth).getPresentation());
 
 
 	}

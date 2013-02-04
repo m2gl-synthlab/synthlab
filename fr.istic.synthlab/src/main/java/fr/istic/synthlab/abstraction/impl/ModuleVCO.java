@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.jsyn.unitgen.PulseOscillator;
+import com.jsyn.unitgen.SawtoothOscillator;
 import com.jsyn.unitgen.SineOscillator;
 import com.jsyn.unitgen.SquareOscillator;
 import com.jsyn.unitgen.TriangleOscillator;
@@ -19,7 +20,8 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleVCO implements IModule {
 
-	public static final int OUTPUT_PULSE = 2;
+	public static final int OUTPUT_SAWTOOTH = 3;
+	public static final int OUTPUT_SINE = 2;
 	public static final int OUTPUT_TRIANGLE = 1;
 	public static final int OUTPUT_SQUARE = 0;
 
@@ -29,7 +31,8 @@ public class ModuleVCO implements IModule {
 
 	private static final String MODULE_NAME = "VCO";
 
-	public static final String OUT_PULSE_NAME = "Out Pulse";
+	public static final String OUT_SINE_NAME = "Out Sine";
+	public static final String OUT_SAWTOOTH_NAME = "Out Saw Tooth";
 	public static final String OUT_SQUARE_NAME = "Out Square";
 	public static final String OUT_TRIANGLE_NAME = "Out Triangle";
 	
@@ -38,7 +41,8 @@ public class ModuleVCO implements IModule {
 
 	private SquareOscillator vcoSquare;
 	private TriangleOscillator vcoTriangle;
-	private PulseOscillator vcoPulse;
+	private SineOscillator vcoSine;
+	private SawtoothOscillator vcoSawtooth;
 
 	private Map<Integer, IInputPort> inputs;
 	private Map<Integer, IOutputPort> outputs;
@@ -47,7 +51,8 @@ public class ModuleVCO implements IModule {
 	public ModuleVCO(String name) {
 		this.vcoSquare =  new SquareOscillator();
 		this.vcoTriangle =  new TriangleOscillator();
-		this.vcoPulse =  new PulseOscillator();
+		this.vcoSine =  new SineOscillator();
+		this.vcoSawtooth =  new SawtoothOscillator();
 
 		this.outputs = new HashMap<Integer, IOutputPort>();
 		this.inputs = new HashMap<Integer, IInputPort>();
@@ -55,12 +60,14 @@ public class ModuleVCO implements IModule {
 
 		this.outputs.put(ModuleVCO.OUTPUT_SQUARE, PACFactory.getFactory().newOutputPort(OUT_SQUARE_NAME, vcoSquare.getOutput()));
 		this.outputs.put(ModuleVCO.OUTPUT_TRIANGLE, PACFactory.getFactory().newOutputPort(OUT_TRIANGLE_NAME, vcoTriangle.getOutput()));
-		this.outputs.put(ModuleVCO.OUTPUT_PULSE, PACFactory.getFactory().newOutputPort(OUT_PULSE_NAME, vcoPulse.getOutput()));
+		this.outputs.put(ModuleVCO.OUTPUT_SINE, PACFactory.getFactory().newOutputPort(OUT_SINE_NAME, vcoSine.getOutput()));
+		this.outputs.put(ModuleVCO.OUTPUT_SAWTOOTH, PACFactory.getFactory().newOutputPort(OUT_SAWTOOTH_NAME, vcoSawtooth.getOutput()));
 
 		IParameter amplitude = PACFactory.getFactory().newParameter(AMPLITUDE_NAME, 0, 1, SineOscillator.DEFAULT_AMPLITUDE);
 		amplitude.connect(vcoSquare.amplitude);
 		amplitude.connect(vcoTriangle.amplitude);
-		amplitude.connect(vcoPulse.amplitude);
+		amplitude.connect(vcoSine.amplitude);
+		amplitude.connect(vcoSawtooth.amplitude);
 		this.params.put(ModuleVCO.PARAM_AMPLITUDE, amplitude);
 
 		IParameter frequency = PACFactory.getFactory().newParameter( FREQUENCY_NAME,
@@ -70,7 +77,8 @@ public class ModuleVCO implements IModule {
 		
 		frequency.connect(vcoSquare.frequency);
 		frequency.connect(vcoTriangle.frequency);
-		frequency.connect(vcoPulse.frequency);
+		frequency.connect(vcoSine.frequency);
+		frequency.connect(vcoSawtooth.frequency);
 		this.params.put(ModuleVCO.PARAM_FREQUENCY, frequency);
 	}
 
@@ -79,7 +87,8 @@ public class ModuleVCO implements IModule {
 		List<UnitGenerator> generators = new ArrayList<UnitGenerator>();
 		generators.add(vcoSquare);
 		generators.add(vcoTriangle);
-		generators.add(vcoPulse);
+		generators.add(vcoSine);
+		generators.add(vcoSawtooth);
 		return generators;
 	}
 
@@ -92,14 +101,16 @@ public class ModuleVCO implements IModule {
 	public void start() {
 		this.vcoSquare.start();
 		this.vcoTriangle.start();
-		this.vcoPulse.start();
+		this.vcoSine.start();
+		this.vcoSawtooth.start();
 	}
 
 	@Override
 	public void stop() {
 		this.vcoSquare.stop();
 		this.vcoTriangle.stop();
-		this.vcoPulse.stop();
+		this.vcoSine.stop();
+		this.vcoSawtooth.stop();
 	}
 
 	@Override
