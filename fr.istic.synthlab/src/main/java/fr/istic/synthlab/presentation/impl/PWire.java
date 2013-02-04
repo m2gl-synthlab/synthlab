@@ -117,9 +117,17 @@ public class PWire extends JPanel implements IPWire {
 	    g2.setStroke(new BasicStroke(3));
 	    
 		if (posInput.x > posOutput.x) {
-		     g2.drawLine(0, height, width, 0);  
+			if (posInput.y > posOutput.y) {
+				g2.drawLine(0, 0, width, height);
+			} else {
+				g2.drawLine(0, height, width, 0);
+			}
 		} else {
-		     g2.drawLine(0, 0, width, height);  
+			if (posInput.y > posOutput.y) {
+				g2.drawLine(width, 0, height, 0);  
+			} else {
+				g2.drawLine(0, 0, width, height);  
+			}
 		}
 	}
 
