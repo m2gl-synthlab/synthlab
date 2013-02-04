@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.jsyn.unitgen.SineOscillator;
+import com.jsyn.unitgen.SquareOscillator;
 import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.IInputPort;
@@ -26,19 +27,19 @@ public class ModuleVCO implements IModule {
 	public static final String AMPLITUDE_NAME = "Ampl";
 	public static final String FREQUENCY_NAME = "Fn";
 	
-	private SineOscillator vco;
+	private SquareOscillator vco;
 
 	private Map<Integer, IInputPort> inputs;
 	private Map<Integer, IOutputPort> outputs;
 	private Map<Integer, IParameter> params;
 
 	public ModuleVCO(String name) {
-		this.vco = new SineOscillator();
+		this.vco =  new SquareOscillator();
 
 		this.outputs = new HashMap<Integer, IOutputPort>();
 		this.inputs = new HashMap<Integer, IInputPort>();
 		this.params = new HashMap<Integer, IParameter>();
-
+		
 		this.outputs.put(ModuleVCO.OUTPUT_OUT, PACFactory.getFactory().newOutputPort(OUT_NAME, vco.getOutput()));
 
 		IParameter amplitude = PACFactory.getFactory().newParameter(AMPLITUDE_NAME, 0, 1, SineOscillator.DEFAULT_AMPLITUDE);
@@ -49,6 +50,7 @@ public class ModuleVCO implements IModule {
 				vco.frequency.getMinimum(),
 				vco.frequency.getMaximum(),
 				SineOscillator.DEFAULT_FREQUENCY);
+		
 		frequency.connect(vco.frequency);
 		this.params.put(ModuleVCO.PARAM_FREQUENCY, frequency);
 	}
