@@ -47,12 +47,12 @@ public class SynthApp implements ISynthApp {
 		IModule out = PACFactory.getFactory().newOUT(synth);
 		synth.add(out);
 		
-//		// Add a wire between VCO and VCF
-//		IWire wire0 = PACFactory.getFactory().newWire();
-//		wire0.connect(vco.getOutput(ModuleVCO.OUTPUT_TRIANGLE));
-//		wire0.connect(vcf.getInput(ModuleVCF.INPUT_IN));
-//		synth.add(wire0);
-//		
+		// Add a wire between VCO and VCF
+		IWire wire0 = PACFactory.getFactory().newWire();
+		wire0.connect(vco.getOutput(ModuleVCO.OUTPUT_TRIANGLE));
+		wire0.connect(vcf.getInput(ModuleVCF.INPUT_IN));
+		synth.add(wire0);
+		
 		
 		// Add a wire between CVF and OUT
 		IWire wire1 = PACFactory.getFactory().newWire();
