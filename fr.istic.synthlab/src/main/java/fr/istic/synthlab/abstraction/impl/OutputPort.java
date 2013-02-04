@@ -23,8 +23,8 @@ public class OutputPort implements IOutputPort {
 		this.port = new UnitOutputPort(name);
 	}
 
-	public OutputPort(UnitOutputPort jSynPort) {
-		this.name = jSynPort.getName();
+	public OutputPort(UnitOutputPort jSynPort, String name) {
+		this.name = name;
 		this.port = jSynPort;
 	}
 	

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.jsyn.unitgen.PulseOscillator;
 import com.jsyn.unitgen.SawtoothOscillator;
 import com.jsyn.unitgen.SineOscillator;
 import com.jsyn.unitgen.SquareOscillator;
@@ -31,10 +30,10 @@ public class ModuleVCO implements IModule {
 
 	private static final String MODULE_NAME = "VCO";
 
-	public static final String OUT_SINE_NAME = "Out Sine";
-	public static final String OUT_SAWTOOTH_NAME = "Out Saw Tooth";
-	public static final String OUT_SQUARE_NAME = "Out Square";
-	public static final String OUT_TRIANGLE_NAME = "Out Triangle";
+	public static final String OUT_SINE_NAME = "Sine";
+	public static final String OUT_SAWTOOTH_NAME = "SawTooth";
+	public static final String OUT_SQUARE_NAME = "Square";
+	public static final String OUT_TRIANGLE_NAME = "Triangle";
 	
 	public static final String AMPLITUDE_NAME = "Ampl";
 	public static final String FREQUENCY_NAME = "Fn";

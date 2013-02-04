@@ -109,8 +109,7 @@ public class AFactory implements IFactory {
 
 	@Override
 	public IOutputPort newOutputPort(String name, UnitOutputPort output) {
-		IOutputPort port = new OutputPort(output);
-		port.setName(name);
+		IOutputPort port = new OutputPort(output, name);
 		return port;
 	}
 	
