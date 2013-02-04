@@ -23,14 +23,12 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 
 	private List<IPModule> modules;
 	private JPanel modulePanel;
-	private JPanel wirePanel;
 	
 	public PSynthesizer(ICSynthesizer control) {
 		super();
 		ctrl = control;
 		modules = new ArrayList<IPModule>();
 		modulePanel = new JPanel();
-		wirePanel = new JPanel();
 		
 		configView();
 		defineCallbacks();
