@@ -45,9 +45,8 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 		
 		modulePanel.setOpaque(false);
 		modulePanel.setLayout(null);
-		modulePanel.setPreferredSize(new Dimension(1000, 500));
-		modulePanel.setBackground(Color.BLUE);
-		modulePanel.setBounds(15, 15, 1000, 500);
+		modulePanel.setPreferredSize(new Dimension(1400, 500));
+		modulePanel.setBounds(15, 15, 1400, 500);
 		this.add(modulePanel, new Integer(0));
 		
 		this.setBorder(BorderFactory.createTitledBorder(getClass().getSimpleName()));

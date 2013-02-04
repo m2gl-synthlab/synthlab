@@ -53,8 +53,8 @@ public class PModule extends JPanel implements IPModule {
 	  }               
 
 	private void configView() {
-		width = 300;
-		height = 400;
+		width = 350;
+		height =250;
 		this.setSize(width, height);
 		this.setPreferredSize(this.getSize());
 		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
