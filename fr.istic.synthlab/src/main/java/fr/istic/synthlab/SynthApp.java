@@ -7,8 +7,6 @@ import fr.istic.synthlab.abstraction.impl.ModuleVCF;
 import fr.istic.synthlab.abstraction.impl.ModuleVCO;
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.controller.ICSynthesizer;
-import fr.istic.synthlab.controller.ICWire;
-import fr.istic.synthlab.controller.impl.CWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 /**
@@ -41,13 +39,13 @@ public class SynthApp implements ISynthApp {
 		vco.getParameter(ModuleVCO.PARAM_FREQUENCY).setValue(200);
 		synth.add(vco);
 		
-		// Add a OUT module
-		IModule out = PACFactory.getFactory().newOUT();
-		synth.add(out);
-		
 		// Add a VCF module
 		IModule vcf = PACFactory.getFactory().newVCF();
 		synth.add(vcf);
+
+		// Add a OUT module
+		IModule out = PACFactory.getFactory().newOUT();
+		synth.add(out);
 		
 		// Add a wire between VCO and VCF
 		IWire wire0 = PACFactory.getFactory().newWire();

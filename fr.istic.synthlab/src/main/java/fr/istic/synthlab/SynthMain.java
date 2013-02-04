@@ -31,11 +31,11 @@ public class SynthMain {
 		
 		// Create the main frame
 		SynthFrame frame = new SynthFrame();
-		frame.setTitle("Synthlab - G");
+		frame.setTitle("Synthlab - G2");
 		
 		// Configure the application
 		app.setDisplaySynthCommand(new DisplayCommand(app, frame));
-		app.setUndisplaySynthCommand(new UndisplayCommand(app, frame));
+		app.setUndisplaySynthCommand(new UndisplayCommand(frame));
 
 		// Create a default synthesizer
 		app.newSynth();

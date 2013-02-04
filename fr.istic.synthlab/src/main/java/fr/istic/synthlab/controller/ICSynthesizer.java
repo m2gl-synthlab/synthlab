@@ -1,7 +1,6 @@
 package fr.istic.synthlab.controller;
 
 import fr.istic.synthlab.abstraction.ISynthesizer;
-import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.presentation.IPSynthesizer;
 
 public interface ICSynthesizer extends ISynthesizer {

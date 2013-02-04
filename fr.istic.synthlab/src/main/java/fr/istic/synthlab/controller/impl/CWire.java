@@ -1,7 +1,5 @@
 package fr.istic.synthlab.controller.impl;
 
-import javax.swing.JPanel;
-
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.impl.Wire;

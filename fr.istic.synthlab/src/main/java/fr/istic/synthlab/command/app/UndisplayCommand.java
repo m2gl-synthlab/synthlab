@@ -1,6 +1,5 @@
 package fr.istic.synthlab.command.app;
 
-import fr.istic.synthlab.ISynthApp;
 import fr.istic.synthlab.ISynthFrame;
 import fr.istic.synthlab.command.ICommand;
 
@@ -9,11 +8,9 @@ import fr.istic.synthlab.command.ICommand;
  */
 public class UndisplayCommand implements ICommand {
 
-	private ISynthApp synthApp;
 	private ISynthFrame synthFrame;
 
-	public UndisplayCommand(ISynthApp synthApp, ISynthFrame synthFrame) {
-		this.synthApp = synthApp;
+	public UndisplayCommand(ISynthFrame synthFrame) {
 		this.synthFrame = synthFrame;
 	}
 

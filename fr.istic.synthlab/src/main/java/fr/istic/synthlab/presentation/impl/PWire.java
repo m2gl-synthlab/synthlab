@@ -1,17 +1,14 @@
 package fr.istic.synthlab.presentation.impl;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import fr.istic.synthlab.LinesComponent;
 import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.presentation.IPInputPort;
 import fr.istic.synthlab.presentation.IPOutputPort;
 import fr.istic.synthlab.presentation.IPWire;
+import fr.istic.synthlab.presentation.util.LinesComponent;
 
 public class PWire extends LinesComponent implements IPWire {
 
