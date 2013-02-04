@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.jsyn.JSyn;
 import com.jsyn.engine.SynthesisEngine;
+import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.ISynthesizer;
@@ -44,13 +45,17 @@ public class Synthesizer implements ISynthesizer {
 	@Override
 	public void add(IModule module) {
 		modules.add(module);
-		this.synth.add(module.getJSyn());
+		for(UnitGenerator gen : module.getJSyn()){
+			this.synth.add(gen);
+		}
 	}
 
 	@Override
 	public void remove(IModule module) {
-		modules.add(module);
-		this.synth.remove(module.getJSyn());
+		modules.remove(module);
+		for(UnitGenerator gen : module.getJSyn()){
+			this.synth.remove(gen);
+		}
 	}
 	
 	@Override

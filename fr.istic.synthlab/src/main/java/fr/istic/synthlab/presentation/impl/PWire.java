@@ -17,6 +17,12 @@ public class PWire extends LinesComponent implements IPWire {
 	private static final long serialVersionUID = 433233331577188149L;
 	
 	private ICWire ctrl;
+	private int inputx;
+	private int inputy;
+	private int outputx;
+	private int outputy;
+	private int height;
+	private int width;
 	
 	/**
 	 * @param control
@@ -40,11 +46,6 @@ public class PWire extends LinesComponent implements IPWire {
 	public ICWire getControl() {
 		return ctrl;
 	}
-
-	private int inputx = 0;
-	private int inputy = 0;
-	private int outputx = 0;
-	private int outputy = 0;
 	@Override
 	public void connect(IPInputPort inputPortPresentation, IPOutputPort outputPortPresentation) {
 		
@@ -58,10 +59,8 @@ public class PWire extends LinesComponent implements IPWire {
 		outputy = ((JPanel)outputPortPresentation).getParent().getY()
 				+((JPanel)outputPortPresentation).getY();
 		
-
 		drawWire(inputx, inputy, outputx, outputy);
 
-	
 	}
 
 	public int getx() {
@@ -108,26 +107,59 @@ public class PWire extends LinesComponent implements IPWire {
 	
 	private void drawWire(int x1, int y1, int x2, int y2){
 		clearLines();
-		int dx;
-		if(x1<x2) dx =  x2-x1;
-		else dx = inputx-outputx;
 		
-		int dy;
-		if(y1<y2) dy =  y2-y1;
-		else {
-			dy = y1-y2;
-			dy=-dy;
-		}
-		
-		this.setPreferredSize(new Dimension(dx, dy));
-		
-		if(x1<x2){
-		this.addLine(0, 0, dx, dy);
+		if(outputx > inputx){
+			width = outputx-inputx;
 		} else {
-			this.addLine(dx,0, 0, dy);
+			width = inputx-outputx;
 		}
-		validate();
-		repaint();
+		
+		if(outputy > inputy){
+			height = outputy-inputy;
+		} else {
+			height = inputy-outputy;
+		}
+		
+		this.setPreferredSize(new Dimension(width, height));
+				
+		if(inputx<outputx){
+			this.addLine(0, 0, width, height);
+		} else {
+			this.addLine(width,0, 0, height);
+		}
+		
+//		
+//		clearLines();
+//		int dx;
+//		if(x1<x2) dx =  x2-x1;
+//		else dx = inputx-outputx;
+//		
+//		int dy;
+//		if(y1<y2) dy =  y2-y1;
+//		else {
+//			dy = y1-y2;
+//			dy=-dy;
+//		}
+//		
+//		this.setPreferredSize(new Dimension(dx, dy));
+//		
+//		if(x1<x2){
+//		this.addLine(0, 0, dx, dy);
+//		} else {
+//			this.addLine(dx,0, 0, dy);
+//		}
+//		validate();
+//		repaint();
+	}
+	
+
+	public int getHeight() {
+		return height;
+	}
+	
+	@Override
+	public int getWidth() {
+		return width;
 	}
 	
 }

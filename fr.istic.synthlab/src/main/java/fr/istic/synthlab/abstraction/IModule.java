@@ -1,5 +1,7 @@
 package fr.istic.synthlab.abstraction;
 
+import java.util.List;
+
 import com.jsyn.unitgen.UnitGenerator;
 
 /**
@@ -8,12 +10,12 @@ import com.jsyn.unitgen.UnitGenerator;
 public interface IModule {
 
 	/**
-	 * Return the jSyn component
-	 * 
-	 * @return jSyn component
-	 */
-	public UnitGenerator getJSyn();
 
+	 * Return the jSyn components
+	 * @return jSyn components
+	 */
+	public List<UnitGenerator> getJSyn();
+	
 	/**
 	 * Start the module
 	 */

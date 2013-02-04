@@ -1,6 +1,8 @@
 package fr.istic.synthlab.abstraction.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.jsyn.unitgen.FilterLowPass;
@@ -66,8 +68,10 @@ public class ModuleVCF implements IModule {
 	}
 
 	@Override
-	public UnitGenerator getJSyn() {
-		return vcf;
+	public List<UnitGenerator> getJSyn() {
+		List<UnitGenerator> generators = new ArrayList<UnitGenerator>();
+		generators.add(vcf);
+		return generators;
 	}
 	
 	@Override

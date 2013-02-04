@@ -149,6 +149,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	 */
 	private void configureView() {
 		// parametrage de la JFrame
+		this.getContentPane().setBackground(Color.WHITE);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1400, 880);
 		Container con = getContentPane();

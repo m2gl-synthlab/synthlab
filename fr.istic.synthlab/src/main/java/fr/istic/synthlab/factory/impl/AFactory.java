@@ -125,9 +125,8 @@ public class AFactory implements IFactory {
 
 	@Override
 	public IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output) {
-		IOutputPort port = new OutputPort(output);
+		IOutputPort port = new OutputPort(output, name);
 		port.setModule(mod);
-		port.setName(name);
 		return port;
 	}
 	

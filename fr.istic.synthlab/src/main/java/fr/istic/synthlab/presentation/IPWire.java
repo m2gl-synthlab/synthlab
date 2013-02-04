@@ -19,4 +19,7 @@ public interface IPWire {
 
 	public void c2pConnectOut(IPOutputPort outputPortPresentation);
 	public void c2pConnectIn(IPInputPort inputPortPresentation);
+	
+	public int getWidth();
+	public int getHeight();
 }

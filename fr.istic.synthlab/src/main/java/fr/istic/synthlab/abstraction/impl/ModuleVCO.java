@@ -1,9 +1,14 @@
 package fr.istic.synthlab.abstraction.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.jsyn.unitgen.SawtoothOscillator;
 import com.jsyn.unitgen.SineOscillator;
+import com.jsyn.unitgen.SquareOscillator;
+import com.jsyn.unitgen.TriangleOscillator;
 import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.IInputPort;
@@ -15,19 +20,29 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleVCO implements IModule {
 
-	public static final int OUTPUT_OUT = 0;
+	public static final int OUTPUT_SAWTOOTH = 3;
+	public static final int OUTPUT_SINE = 2;
+	public static final int OUTPUT_TRIANGLE = 1;
+	public static final int OUTPUT_SQUARE = 0;
 
 	public static final int PARAM_AMPLITUDE = 0;
 	public static final int PARAM_FREQUENCY = 1;
 	public static final int PARAM_WIDTH = 2;
 
 	private static final String MODULE_NAME = "VCO";
+
+	public static final String OUT_SINE_NAME = "Sine";
+	public static final String OUT_SAWTOOTH_NAME = "SawTooth";
+	public static final String OUT_SQUARE_NAME = "Square";
+	public static final String OUT_TRIANGLE_NAME = "Triangle";
 	
-	public static final String OUT_NAME = "Out";
 	public static final String AMPLITUDE_NAME = "Ampl";
 	public static final String FREQUENCY_NAME = "Fn";
-	
-	private SineOscillator vco;
+
+	private SquareOscillator vcoSquare;
+	private TriangleOscillator vcoTriangle;
+	private SineOscillator vcoSine;
+	private SawtoothOscillator vcoSawtooth;
 
 	private Map<Integer, IInputPort> inputs;
 	private Map<Integer, IOutputPort> outputs;
@@ -36,29 +51,47 @@ public class ModuleVCO implements IModule {
 	private ISynthesizer parentSynth;
 
 	public ModuleVCO(String name) {
-		this.vco = new SineOscillator();
+		this.vcoSquare =  new SquareOscillator();
+		this.vcoTriangle =  new TriangleOscillator();
+		this.vcoSine =  new SineOscillator();
+		this.vcoSawtooth =  new SawtoothOscillator();
 
 		this.outputs = new HashMap<Integer, IOutputPort>();
 		this.inputs = new HashMap<Integer, IInputPort>();
 		this.params = new HashMap<Integer, IParameter>();
 
-		this.outputs.put(ModuleVCO.OUTPUT_OUT, PACFactory.getFactory().newOutputPort(this, OUT_NAME, vco.getOutput()));
+		this.outputs.put(ModuleVCO.OUTPUT_SQUARE, PACFactory.getFactory().newOutputPort(this, OUT_SQUARE_NAME, vcoSquare.getOutput()));
+		this.outputs.put(ModuleVCO.OUTPUT_TRIANGLE, PACFactory.getFactory().newOutputPort(this, OUT_TRIANGLE_NAME, vcoTriangle.getOutput()));
+		this.outputs.put(ModuleVCO.OUTPUT_SINE, PACFactory.getFactory().newOutputPort(this, OUT_SINE_NAME, vcoSine.getOutput()));
+		this.outputs.put(ModuleVCO.OUTPUT_SAWTOOTH, PACFactory.getFactory().newOutputPort(this, OUT_SAWTOOTH_NAME, vcoSawtooth.getOutput()));
 
 		IParameter amplitude = PACFactory.getFactory().newParameter(this, AMPLITUDE_NAME, 0, 1, SineOscillator.DEFAULT_AMPLITUDE);
-		amplitude.connect(vco.amplitude);
+		amplitude.connect(vcoSquare.amplitude);
+		amplitude.connect(vcoTriangle.amplitude);
+		amplitude.connect(vcoSine.amplitude);
+		amplitude.connect(vcoSawtooth.amplitude);
 		this.params.put(ModuleVCO.PARAM_AMPLITUDE, amplitude);
 
 		IParameter frequency = PACFactory.getFactory().newParameter(this, FREQUENCY_NAME,
-				vco.frequency.getMinimum(),
-				vco.frequency.getMaximum(),
+				vcoSquare.frequency.getMinimum(),
+				vcoSquare.frequency.getMaximum(),
 				SineOscillator.DEFAULT_FREQUENCY);
-		frequency.connect(vco.frequency);
+		
+		frequency.connect(vcoSquare.frequency);
+		frequency.connect(vcoTriangle.frequency);
+		frequency.connect(vcoSine.frequency);
+		frequency.connect(vcoSawtooth.frequency);
 		this.params.put(ModuleVCO.PARAM_FREQUENCY, frequency);
 	}
 
 	@Override
-	public UnitGenerator getJSyn() {
-		return vco;
+	public List<UnitGenerator> getJSyn() {
+		List<UnitGenerator> generators = new ArrayList<UnitGenerator>();
+		generators.add(vcoSquare);
+		generators.add(vcoTriangle);
+		generators.add(vcoSine);
+		generators.add(vcoSawtooth);
+		return generators;
 	}
 
 	@Override
@@ -68,12 +101,18 @@ public class ModuleVCO implements IModule {
 
 	@Override
 	public void start() {
-		this.vco.start();
+		this.vcoSquare.start();
+		this.vcoTriangle.start();
+		this.vcoSine.start();
+		this.vcoSawtooth.start();
 	}
 
 	@Override
 	public void stop() {
-		this.vco.stop();
+		this.vcoSquare.stop();
+		this.vcoTriangle.stop();
+		this.vcoSine.stop();
+		this.vcoSawtooth.stop();
 	}
 
 	@Override

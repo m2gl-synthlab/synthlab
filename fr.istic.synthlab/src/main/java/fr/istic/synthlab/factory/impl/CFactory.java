@@ -112,9 +112,8 @@ public class CFactory implements IFactory {
 
 	@Override
 	public IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output) {
-		IOutputPort port = new COutputPort(output);
+		IOutputPort port = new COutputPort(output, name);
 		port.setModule(mod);
-		port.setName(name);
 		return port;
 	}
 	

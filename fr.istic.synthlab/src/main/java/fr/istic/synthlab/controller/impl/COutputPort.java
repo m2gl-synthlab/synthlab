@@ -17,8 +17,8 @@ public class COutputPort extends OutputPort implements ICOutputPort{
 		this.pres = PACFactory.getPFactory().newOutputPort(this);
 	}
 	
-	public COutputPort(UnitOutputPort output) {
-		super(output);
+	public COutputPort(UnitOutputPort output, String name) {
+		super(output, name);
 		this.pres = PACFactory.getPFactory().newOutputPort(this);
 	}
 
