@@ -1,13 +1,11 @@
 package fr.istic.synthlab.presentation.impl;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
@@ -98,6 +96,7 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 		
 		modulePanel.add((JPanel) module);
 
+		//TODO : beurk positionnement à la main
 		((JPanel)module).setBounds(((modules.size())*(module.getWidth()+5)), 5, module.getWidth(), module.getHeight());
 		
 		modules.add(module);
@@ -110,16 +109,15 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 
 	@Override
 	public void c2pAddModuleOk(IPModule module) {
+		
 	}
 	
-	int i =0;
+	int i=0;
 	@Override
 	public void c2pAddWire(IPWire wire) {
-		((JComponent) wire).setOpaque(false);
-		this.add((Component) wire, new Integer(++i));
-	
-		((Component) wire).setBounds(wire.getx()+63, wire.gety()+53, wire.getWidth(), wire.getHeight());
 		
+		this.add((PWire) wire, new Integer(++i));
+		System.out.println("c2pAddWire Adding wire");
 		validate();
 		repaint();
 	}

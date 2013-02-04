@@ -35,7 +35,6 @@ public class CModuleVCO extends ModuleVCO implements ICModule {
 		IOutputPort outputSawtooth = this.getOutput(OUTPUT_SAWTOOTH);
 		pres.addOutputPort(((ICOutputPort) outputSawtooth).getPresentation());
 
-
 	}
 
 	@Override

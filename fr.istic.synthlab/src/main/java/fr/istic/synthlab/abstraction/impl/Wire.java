@@ -26,14 +26,18 @@ public class Wire implements IWire {
 
 	@Override
 	public void connect(IInputPort port) {
-		this.input = port;
-		connect();
+		if (input == null) {
+			this.input = port;
+			connect();
+		}
 	}
 
 	@Override
 	public void connect(IOutputPort port) {
-		this.output = port;
-		connect();
+		if (output == null) {
+			this.output = port;
+			connect();
+		}
 	}
 
 	/**
@@ -42,6 +46,20 @@ public class Wire implements IWire {
 	private void connect() {
 		if (output != null && input != null)
 			this.output.connect(input);
+	}
+
+	@Override
+	public void disconnect(IInputPort port) {
+		if(this.getOutput() != null){
+			port.disconnect(getOutput());
+		}
+	}
+
+	@Override
+	public void disconnect(IOutputPort port) {
+		if(this.getInput() != null){
+			port.disconnect(getInput());
+		}
 	}
 
 }

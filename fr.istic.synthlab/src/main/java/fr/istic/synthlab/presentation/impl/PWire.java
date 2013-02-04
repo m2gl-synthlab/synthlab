@@ -1,165 +1,117 @@
 package fr.istic.synthlab.presentation.impl;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
 
 import javax.swing.JPanel;
 
-import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.presentation.IPInputPort;
-import fr.istic.synthlab.presentation.IPModule;
 import fr.istic.synthlab.presentation.IPOutputPort;
 import fr.istic.synthlab.presentation.IPWire;
-import fr.istic.synthlab.presentation.util.LinesComponent;
 
-public class PWire extends LinesComponent implements IPWire {
+public class PWire extends JPanel implements IPWire {
 
 	private static final long serialVersionUID = 433233331577188149L;
-	
+
 	private ICWire ctrl;
-	private int inputx;
-	private int inputy;
-	private int outputx;
-	private int outputy;
-	private int height;
-	private int width;
-	
+
+	private Point posInput;
+	private Point posOutput;
+
+	private Color color;
+
+
 	/**
 	 * @param control
 	 */
 	public PWire(ICWire control) {
-		super();
 		this.ctrl = control;
 		configView();
 		defineCallbacks();
-		
 	}
 
 	private void configView() {
+		posInput = new Point();
+		posOutput = new Point();
 	}
 
 	private void defineCallbacks() {
-	
+
 	}
-	
+
 	@Override
 	public ICWire getControl() {
 		return ctrl;
-	}
-	@Override
-	public void connect(IPInputPort inputPortPresentation, IPOutputPort outputPortPresentation) {
-		
-		
-		inputx = (((JPanel)inputPortPresentation).getParent().getX())
-				+(((JPanel)inputPortPresentation).getX());
-		inputy = ((JPanel)inputPortPresentation).getParent().getY()
-				+((JPanel)inputPortPresentation).getY();
-		outputx = ((JPanel)outputPortPresentation).getParent().getX()
-				+((JPanel)outputPortPresentation).getX();
-		outputy = ((JPanel)outputPortPresentation).getParent().getY()
-				+((JPanel)outputPortPresentation).getY();
-		
-		drawWire(inputx, inputy, outputx, outputy);
-
-	}
-
-	public int getx() {
-		if(inputx < outputx)
-			return inputx;
-		else
-			return outputx;
-	}
-
-	public int gety() {
-		if(inputy < outputy)
-			return inputy;
-		else
-			return outputy;
 	}
 
 	@Override
 	public void c2pConnectOut(IPOutputPort outputPort) {
 		System.out.println("Connecting to out");
-		
-		PModule pMod = (PModule)((ICModule)outputPort.getControl().getModule()).getPresentation();
-		
-		outputx = pMod.getX() + ((POutputPort)outputPort).getX();
-		outputy = pMod.getY() + ((POutputPort)outputPort).getY();
-		
-		System.out.println("output : "+ outputx +","+outputx);
-		drawWire(inputx, inputy, outputx, outputy);
+
+		posOutput = ((JPanel) outputPort).getLocation();
+		Point offsetModule = ((JPanel) outputPort).getParent().getLocation();
+
+		posOutput.x += offsetModule.x;
+		posOutput.y += offsetModule.y;
+
+		System.out.println("output : " + posOutput.x + "," + posOutput.y);
+
+		updateDisplay();
 	}
 
 	@Override
 	public void c2pConnectIn(IPInputPort inputPort) {
 		System.out.println("Connecting to In");
 
-		PModule pMod = (PModule)((ICModule)inputPort.getControl().getModule()).getPresentation();
-		
-		
-		inputx = pMod.getX()+((PInputPort)inputPort).getX();
-		inputy = pMod.getY()+((PInputPort)inputPort).getY();
+		posInput = ((JPanel) inputPort).getLocation();
+		Point offsetModule = ((JPanel) inputPort).getParent().getLocation();
 
-		System.out.println("output : "+ inputx +","+inputy);
-		drawWire(inputx, inputy, outputx, outputy);
-	}
-	
-	
-	private void drawWire(int x1, int y1, int x2, int y2){
-		clearLines();
-		
-		if(outputx > inputx){
-			width = outputx-inputx;
-		} else {
-			width = inputx-outputx;
-		}
-		
-		if(outputy > inputy){
-			height = outputy-inputy;
-		} else {
-			height = inputy-outputy;
-		}
-		
-		this.setPreferredSize(new Dimension(width, height));
-				
-		if(inputx<outputx){
-			this.addLine(0, 0, width, height);
-		} else {
-			this.addLine(width,0, 0, height);
-		}
-		
-//		
-//		clearLines();
-//		int dx;
-//		if(x1<x2) dx =  x2-x1;
-//		else dx = inputx-outputx;
-//		
-//		int dy;
-//		if(y1<y2) dy =  y2-y1;
-//		else {
-//			dy = y1-y2;
-//			dy=-dy;
-//		}
-//		
-//		this.setPreferredSize(new Dimension(dx, dy));
-//		
-//		if(x1<x2){
-//		this.addLine(0, 0, dx, dy);
-//		} else {
-//			this.addLine(dx,0, 0, dy);
-//		}
-//		validate();
-//		repaint();
-	}
-	
+		posInput.x += offsetModule.x;
+		posInput.y += offsetModule.y;
 
-	public int getHeight() {
-		return height;
+//		System.out.println("input : " + posInput.x + "," + posInput.y);
+
+		updateDisplay();
+	}
+
+	@Override
+	public void updateDisplay() {
+		System.out.println("Updating wire " + posInput + " " + posOutput);
+
+		Rectangle r = new Rectangle(posInput);
+		r.add(posOutput);
+
+		setPreferredSize(r.getSize());
+		setBounds(r);
+
+		setPreferredSize(new Dimension(r.width, r.height));
+		repaint();
+		validate();
+
 	}
 	
 	@Override
-	public int getWidth() {
-		return width;
+	public void paint(Graphics g) {
+		System.out.println("painting");
+		
+		g.setColor(Color.BLACK);
+		g.drawLine(posInput.x, posInput.y, posOutput.x, posOutput.y);
 	}
-	
+
+	@Override
+	public void c2pDisconnectIn(IPInputPort pInputPort) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void c2pDisconnectOut(IPOutputPort pOutputPort) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
