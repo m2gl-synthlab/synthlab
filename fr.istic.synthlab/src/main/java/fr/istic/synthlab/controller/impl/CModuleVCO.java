@@ -26,6 +26,9 @@ public class CModuleVCO extends ModuleVCO implements ICModule {
 		IOutputPort output = this.getOutput(OUTPUT_OUT);
 		pres.addOutputPort(((ICOutputPort) output).getPresentation());
 
+		IOutputPort output1 = this.getOutput(OUTPUT_OUT1);
+		pres.addOutputPort(((ICOutputPort) output1).getPresentation());
+
 
 	}
 

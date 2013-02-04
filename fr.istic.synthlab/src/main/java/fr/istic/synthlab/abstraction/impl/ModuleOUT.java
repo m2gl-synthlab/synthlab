@@ -1,6 +1,8 @@
 package fr.istic.synthlab.abstraction.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.jsyn.unitgen.ChannelOut;
@@ -53,8 +55,10 @@ public class ModuleOUT implements IModule {
 	}
 
 	@Override
-	public UnitGenerator getJSyn() {
-		return this.vca;
+	public List<UnitGenerator> getJSyn() {
+		List<UnitGenerator> generators = new ArrayList<UnitGenerator>();
+		generators.add(vca);
+		return generators;
 	}
 
 	@Override

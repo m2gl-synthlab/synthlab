@@ -59,6 +59,8 @@ public class SynthApp implements ISynthApp {
 		wire1.connect(vcf.getOutput(ModuleVCF.OUTPUT_OUT));
 		wire1.connect(out.getInput(ModuleOUT.INPUT_IN));
 		synth.add(wire1);
+		
+		
 
 	}
 
