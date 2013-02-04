@@ -73,7 +73,6 @@ public class PWire extends JPanel implements IPWire {
 		posInput.x += offsetModule.x;
 		posInput.y += offsetModule.y;
 
-
 		updateDisplay();
 	}
 
