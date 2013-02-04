@@ -19,9 +19,10 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
+import com.alee.laf.toolbar.ToolbarStyle;
+import com.alee.laf.toolbar.WebToolBar;
 import com.softsynth.jsyn.view102.UsageDisplay;
 
 import fr.istic.synthlab.command.ICommand;
@@ -50,7 +51,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private JMenuItem menuItemQuit, menuItemDoc, menuItemAbout;
 
 	// Toolbar
-	private JToolBar toolBar = new JToolBar();
+	private WebToolBar toolBar = new WebToolBar();
 	private String[] iconFiles = { "res/default.png", "res/wire.png", "res/module.png", "res/play.png", "res/pause.png", "res/record.png" };
 	private String[] buttonLabels = { "Default", "Wire", "Module", "Play", "Pause", "Record" };
 	private Image[] icons = new Image[iconFiles.length];
@@ -123,6 +124,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		this.setJMenuBar(mainMenuBar);
 
 		// instanciation des boutons de la toolbar
+		toolBar.setToolbarStyle(ToolbarStyle.attached);
 		Container frameContainer = getContentPane();
 		frameContainer.setLayout(new BorderLayout());
 		for (int i = 0; i < buttonLabels.length; ++i) {

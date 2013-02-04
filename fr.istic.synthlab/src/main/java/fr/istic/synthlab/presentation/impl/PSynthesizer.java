@@ -9,6 +9,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import com.alee.laf.panel.WebPanel;
+
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.presentation.IPModule;
 import fr.istic.synthlab.presentation.IPSynthesizer;
@@ -39,14 +41,11 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 
 
 	private void configView() {
-		
 		modulePanel.setOpaque(false);
 		modulePanel.setLayout(null);
 		modulePanel.setPreferredSize(new Dimension(1400, 500));
 		modulePanel.setBounds(15, 15, 1400, 500);
 		this.add(modulePanel, new Integer(0));
-		
-		this.setBorder(BorderFactory.createTitledBorder(getClass().getSimpleName()));
 	}
 
 	private void defineCallbacks() {
@@ -94,14 +93,14 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 	@Override
 	public void c2pAddModule(IPModule module) {
 		
-		modulePanel.add((JPanel) module);
+		modulePanel.add((WebPanel) module);
 
 		//TODO : beurk positionnement à la main
-		((JPanel)module).setBounds(((modules.size())*(module.getWidth()+5)), 5, module.getWidth(), module.getHeight());
+		((WebPanel)module).setBounds(((modules.size())*(module.getWidth()+5)), 5, module.getWidth(), module.getHeight());
 		
 		modules.add(module);
-		((JPanel)module).validate();
-		((JPanel)module).repaint();
+		((WebPanel)module).validate();
+		((WebPanel)module).repaint();
 		
 		validate();
 		repaint();
