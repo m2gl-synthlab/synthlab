@@ -54,9 +54,6 @@ public class PWire extends LinesComponent implements IPWire {
 				+((JPanel)outputPortPresentation).getX();
 		outputy = ((JPanel)outputPortPresentation).getParent().getY()
 				+((JPanel)outputPortPresentation).getY();
-
-		System.out.println("INPUT : x="+(((JPanel)inputPortPresentation).getParent().getX())+"  "+(((JPanel)inputPortPresentation).getX())+" y="+gety());
-		System.out.println("OUTPUT : x="+outputx+ " y="+outputy);
 		
 		int diffx;
 		if(inputx<outputx) diffx =  outputx-inputx;
@@ -69,7 +66,6 @@ public class PWire extends LinesComponent implements IPWire {
 			diffy = inputy-outputy;
 			diffy=-diffy;
 		}
-		System.out.println("diffy=" + diffy);
 		
 		this.setPreferredSize(new Dimension(diffx, diffy));
 		
