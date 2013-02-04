@@ -151,11 +151,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	 */
 	private void configureView() {
 		// parametrage de la JFrame
-		this.getContentPane().setBackground(Color.WHITE);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1400, 880);
-		Container con = getContentPane();
-		con.setBackground(new Color(139,69,19));
+		getContentPane().setBackground(Color.GRAY);
 		
 		
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
