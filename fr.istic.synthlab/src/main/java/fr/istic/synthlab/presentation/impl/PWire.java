@@ -1,6 +1,7 @@
 package fr.istic.synthlab.presentation.impl;
 
 import java.awt.BasicStroke;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -69,17 +70,25 @@ public class PWire extends JPanel implements IPWire {
 	public void updateDisplay() {
 
 		posOutput = new Point(((JPanel) outputPort).getX(), ((JPanel) outputPort).getY());
+
 		
-		posOutput.x += ((JPanel) outputPort).getParent().getX();
-		posOutput.y += ((JPanel) outputPort).getParent().getY();
-
-		System.out.println("output : " + posOutput.x + "," + posOutput.y);
-
+		Component c2 = (JPanel) outputPort;
+		while(!(c2.getParent() instanceof PSynthesizer)){
+			posOutput.x += c2.getParent().getX();
+			posOutput.y += c2.getParent().getY();
+			c2=c2.getParent();
+			System.out.println(c2.getClass()+"output : " + posOutput.x + "," + posOutput.y);
+		}
 		
 		posInput = new Point(((JPanel) inputPort).getX(), ((JPanel) inputPort).getY());
-
-		posInput.x += ((JPanel) inputPort).getParent().getX();
-		posInput.y += ((JPanel) inputPort).getParent().getY();
+		
+		Component c = (JPanel) inputPort;
+		while(!(c.getParent() instanceof PSynthesizer)){
+			posInput.x += c.getParent().getX();
+			posInput.y += c.getParent().getY();
+			c=c.getParent();
+		}
+		
 
 		System.out.println("input : " + posInput.x + "," + posInput.y);
 		
@@ -104,7 +113,7 @@ public class PWire extends JPanel implements IPWire {
 
 		setPreferredSize(new Dimension(width, height));
 
-		setBounds(x+55, y+53, width, height);
+		setBounds(x+(POutputPort.width/2), y+(POutputPort.height/2), width, height);
 		repaint();
 		validate();
 	}

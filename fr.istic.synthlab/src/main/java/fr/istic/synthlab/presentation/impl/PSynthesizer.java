@@ -1,34 +1,32 @@
 package fr.istic.synthlab.presentation.impl;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
+import javax.swing.JInternalFrame;
 
-import com.alee.laf.panel.WebPanel;
+import com.alee.laf.desktoppane.WebDesktopPane;
 
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.presentation.IPModule;
 import fr.istic.synthlab.presentation.IPSynthesizer;
 import fr.istic.synthlab.presentation.IPWire;
 
-public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
+public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
 
 	private static final long serialVersionUID = -1444696064954307756L;
 	private ICSynthesizer ctrl;
 
 	private List<IPModule> modules;
-	private JPanel modulePanel;
+//	private JPanel modulePanel;
 	
 	
 	public PSynthesizer(ICSynthesizer control) {
 		super();
 		ctrl = control;
 		modules = new ArrayList<IPModule>();
-		modulePanel = new JPanel();
+//		modulePanel = new JPanel();
 		
 		configView();
 		defineCallbacks();
@@ -38,11 +36,12 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 
 
 	private void configView() {
-		modulePanel.setOpaque(false);
-		modulePanel.setLayout(null);
-		modulePanel.setPreferredSize(new Dimension(1400, 500));
-		modulePanel.setBounds(15, 15, 1400, 500);
-		this.add(modulePanel, new Integer(0));
+		this.setBackground(Color.DARK_GRAY);
+//		modulePanel.setOpaque(false);
+//		modulePanel.setLayout(null);
+//		modulePanel.setPreferredSize(new Dimension(1400, 500));
+//		modulePanel.setBounds(15, 15, 1400, 500);
+//		this.add(modulePanel, new Integer(0));
 	}
 
 	private void defineCallbacks() {
@@ -75,29 +74,29 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 
 	@Override
 	public void c2pStart() {
-		this.setBackground(Color.GREEN);
+//		this.setBackground(Color.GREEN);
 		validate();
 		repaint();
 	}
 
 	@Override
 	public void c2pStop() {
-		this.setBackground(Color.RED);
+//		this.setBackground(Color.RED);
 		validate();
 		repaint();
 	}
 
 	@Override
 	public void c2pAddModule(IPModule module) {
-		
-		modulePanel.add((WebPanel) module);
+		((JInternalFrame) module).setVisible(true);
+		this.add((JInternalFrame) module,0);
 
 		//TODO : beurk positionnement à la main
-		((WebPanel)module).setBounds(((modules.size())*(module.getWidth()+5)), 5, module.getWidth(), module.getHeight());
+		((JInternalFrame)module).setBounds(((modules.size())*(module.getWidth()+5)), 5, module.getWidth(), module.getHeight());
 		
 		modules.add(module);
-		((WebPanel)module).validate();
-		((WebPanel)module).repaint();
+		((JInternalFrame)module).validate();
+		((JInternalFrame)module).repaint();
 		
 		validate();
 		repaint();

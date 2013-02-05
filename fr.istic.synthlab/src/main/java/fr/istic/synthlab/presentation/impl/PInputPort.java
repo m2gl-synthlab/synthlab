@@ -16,6 +16,8 @@ public class PInputPort extends JPanel implements MouseListener, IPInputPort {
 
 	private static final long serialVersionUID = -3189854166979295463L;
 
+	public static int width = 80;
+	public static int height = 80;
 	private ICInputPort ctrl;
 	private JLabel image;
 	
@@ -29,7 +31,7 @@ public class PInputPort extends JPanel implements MouseListener, IPInputPort {
 	}
 
 	private void configView() {
-		this.setSize(100, 100);
+		this.setSize(width, height);
 		JPanel pane = new JPanel();
 		image = new JLabel(new ImageIcon("res/input.png"));
 		image.addMouseListener(this);

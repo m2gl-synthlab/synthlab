@@ -15,6 +15,9 @@ import fr.istic.synthlab.presentation.IPOutputPort;
 public class POutputPort extends JPanel implements MouseListener, IPOutputPort {
 	
 	private static final long serialVersionUID = 4664436294243269232L;
+
+	public static int width = 80;
+	public static int height = 80;
 	
 	private ICOutputPort ctrl;
 
@@ -28,7 +31,7 @@ public class POutputPort extends JPanel implements MouseListener, IPOutputPort {
 	}
 
 	private void configView() {
-		this.setSize(100, 100);
+		this.setSize(width, height);
 		JPanel pane = new JPanel();
 		image = new JLabel(new ImageIcon("res/output.png"));
 		image.addMouseListener(this);

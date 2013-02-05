@@ -26,8 +26,6 @@ public class CModuleVCF extends ModuleVCF implements ICModule {
 
 		wires = new ArrayList<ICWire>();
 		
-		IInputPort input = this.getInput(INPUT_IN);
-		pres.addInputPort(((ICInputPort) input).getPresentation());
 
 		IParameter amplitude = this.getParameter(PARAM_AMPLITUDE);
 		pres.addParameter(((ICParameter) amplitude).getPresentation());
@@ -36,6 +34,9 @@ public class CModuleVCF extends ModuleVCF implements ICModule {
 		pres.addParameter(((ICParameter) frequency).getPresentation());
 
 
+		IInputPort input = this.getInput(INPUT_IN);
+		pres.addInputPort(((ICInputPort) input).getPresentation());
+		
 		IOutputPort output = this.getOutput(OUTPUT_OUT);
 		pres.addOutputPort(((ICOutputPort) output).getPresentation());
 	}

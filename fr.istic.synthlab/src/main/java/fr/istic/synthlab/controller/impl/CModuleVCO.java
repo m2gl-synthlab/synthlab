@@ -26,14 +26,16 @@ public class CModuleVCO extends ModuleVCO implements ICModule {
 
 		wires = new ArrayList<ICWire>();
 		
-		IInputPort inputModulation = this.getInput(INPUT_MOD_FREQ);
-		pres.addInputPort(((ICInputPort) inputModulation).getPresentation());
+		
 		
 		IParameter amplitude = this.getParameter(PARAM_AMPLITUDE);
 		pres.addParameter(((ICParameter) amplitude).getPresentation());
 		
 		IParameter frequency = this.getParameter(PARAM_FREQUENCY);
 		pres.addParameter(((ICParameter) frequency).getPresentation());
+		
+		IInputPort inputModulation = this.getInput(INPUT_MOD_FREQ);
+		pres.addInputPort(((ICInputPort) inputModulation).getPresentation());
 		
 		IOutputPort outputSquare = this.getOutput(OUTPUT_SQUARE);
 		pres.addOutputPort(((ICOutputPort) outputSquare).getPresentation());

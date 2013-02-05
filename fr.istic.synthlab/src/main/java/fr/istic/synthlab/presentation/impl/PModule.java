@@ -1,13 +1,14 @@
 package fr.istic.synthlab.presentation.impl;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.util.List;
 
-import com.alee.laf.panel.WebPanel;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+
+import com.alee.laf.desktoppane.WebInternalFrame;
 
 import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICWire;
@@ -19,81 +20,49 @@ import fr.istic.synthlab.presentation.IPParameter;
 /**
  * Presentation of a module
  */
-public class PModule extends WebPanel implements IPModule {
+public class PModule extends WebInternalFrame implements IPModule {
 
 	private static final long serialVersionUID = -8519084219674310285L;
 	private ICModule ctrl;
 	private int width;
 	private int height;
-
-	private int px;
-	private int py;
-
+	
 	/**
 	 * @param control
 	 */
 	public PModule(ICModule control) {
+		super(control.getName(), false, true, false, false);
+		
 		this.ctrl = control;
 		configView();
 		defineCallbacks();
 	}
 
 	private void configView() {
+		this.setBackground(Color.GRAY);
 		this.setLayout(new FlowLayout());
-		this.setUndecorated(false);
-		this.setRound(20);
+		this.setAutoscrolls(true);
+
 		width = 350;
 		height = 350;
-		this.addMouseListener(new MouseListener() {
+		
+		
+		this.addAncestorListener(new AncestorListener() {
 			@Override
-			public void mouseReleased(MouseEvent e) {
-
+			public void ancestorAdded(AncestorEvent event) {}
+			@Override
+			public void ancestorRemoved(AncestorEvent event) {}
+			
+			@Override
+			public void ancestorMoved(AncestorEvent event) {
+	            List<ICWire> wires = ctrl.getWires();
+	            for(ICWire wire : wires){
+	            	if(wire!=null){
+	            		System.out.println("wire="+wire);
+	            		wire.getPresentation().updateDisplay();
+	            	}
+	            }
 			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				if (contains(e.getPoint())) {
-					px = e.getLocationOnScreen().x - getX();
-					py = e.getLocationOnScreen().y - getY();
-				}
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// no use
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// no use
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// no use
-			}
-		});
-
-		this.addMouseMotionListener(new MouseMotionListener() {
-
-			@Override
-			public void mouseMoved(MouseEvent e) {
-				// no use
-			}
-
-			@Override
-		    public void mouseDragged(MouseEvent e) {
-		            setLocation(e.getLocationOnScreen().x - px, e.getLocationOnScreen().y - py);
-		            px = e.getLocationOnScreen().x - getX();
-		            py = e.getLocationOnScreen().y - getY();
-		            List<ICWire> wires = ctrl.getWires();
-		            for(ICWire wire : wires){
-		            	if(wire!=null){
-		            		System.out.println("wire="+wire);
-		            		wire.getPresentation().updateDisplay();
-		            	}
-		            }
-		    }
 		});
 	}
 
