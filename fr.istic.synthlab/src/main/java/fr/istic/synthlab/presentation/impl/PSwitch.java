@@ -36,7 +36,7 @@ public class PSwitch extends JPanel implements IPParameter {
 	}
 
 	private void configView() {
-		imageMute="res/mute.png";
+		imageMute="res/unmute.png";
 
 		this.setSize(100, 100);
 		this.setPreferredSize(this.getSize());
