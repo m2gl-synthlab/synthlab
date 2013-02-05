@@ -3,6 +3,7 @@ package fr.istic.synthlab.presentation.impl;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -17,6 +18,9 @@ import fr.istic.synthlab.controller.ICParameter;
 import fr.istic.synthlab.presentation.IPParameter;
 
 public class PSwitch extends JPanel implements IPParameter {
+	
+	private String imageMute;
+
 
 	private static final long serialVersionUID = 7359022086561577171L;
 
@@ -32,6 +36,8 @@ public class PSwitch extends JPanel implements IPParameter {
 	}
 
 	private void configView() {
+		imageMute="res/mute.png";
+
 		this.setSize(100, 100);
 		this.setPreferredSize(this.getSize());
 		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
@@ -41,10 +47,11 @@ public class PSwitch extends JPanel implements IPParameter {
 
 			public void paintComponent(Graphics g){
 			    try {
-			      Image img = ImageIO.read(new File("res/mute.png"));
+			    	
+			    	Image img = ImageIO.read(new File(imageMute));
+			      
 			      g.drawImage(img, 0, 0,this.getWidth(),this.getHeight(), this);
-			      //Pour une image de fond
-			      //g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+			
 			    } catch (IOException e) {
 			      e.printStackTrace();
 			    }               
@@ -59,13 +66,25 @@ public class PSwitch extends JPanel implements IPParameter {
 	}
 
 	private void defineCallbacks() {
+		
 		toggle.addChangeListener(new ChangeListener() {
+
 			@Override
 			public void stateChanged(ChangeEvent e) {
+				
+
 				double value = ctrl.getMin(); 
-				if (toggle.getModel().isSelected())
+				imageMute="res/unmute.png";
+				
+
+				if (toggle.getModel().isSelected()){
+					imageMute="res/mute.png";
+
 					value = ctrl.getMax();
+				}
 				ctrl.p2cSetValue(value);
+				
+				toggle.repaint();
 			}
 		});
 	}
