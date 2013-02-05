@@ -55,8 +55,9 @@ public class PModule extends WebInternalFrame implements IPModule {
 
 		width = 350;
 		height = 350;
-		
-		
+	}
+	
+	private void defineCallbacks() {
 		this.addAncestorListener(new AncestorListener() {
 			@Override
 			public void ancestorAdded(AncestorEvent event) {}
@@ -74,18 +75,8 @@ public class PModule extends WebInternalFrame implements IPModule {
 			}
 		});
 	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	private void defineCallbacks() {
-	}
-
+	
+	
 	@Override
 	public ICModule getControl() {
 		return ctrl;
@@ -105,6 +96,14 @@ public class PModule extends WebInternalFrame implements IPModule {
 	@Override
 	public void addParameter(IPParameter presentation) {
 		panelParameters.add((Component) presentation);
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public int getWidth() {
+		return width;
 	}
 
 }

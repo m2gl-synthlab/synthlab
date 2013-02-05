@@ -1,6 +1,7 @@
 package fr.istic.synthlab.presentation.impl;
 
 import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -24,8 +25,8 @@ public class PWire extends JPanel implements IPWire {
 	private Point posOutput;
 	private int height = 0;
 	private int width = 0;
-	private IPInputPort inputPort;
-	private IPOutputPort outputPort;
+	private PInputPort inputPort;
+	private POutputPort outputPort;
 	
 
 	/**
@@ -53,7 +54,7 @@ public class PWire extends JPanel implements IPWire {
 	@Override
 	public void c2pConnectOut(IPOutputPort outputPort) {
 		System.out.println("Connecting to out");
-		this.outputPort = outputPort;
+		this.outputPort = (POutputPort) outputPort;
 		if(inputPort != null)
 			updateDisplay();
 	}
@@ -61,7 +62,7 @@ public class PWire extends JPanel implements IPWire {
 	@Override
 	public void c2pConnectIn(IPInputPort inputPort) {
 		System.out.println("Connecting to In");
-		this.inputPort = inputPort;
+		this.inputPort = (PInputPort) inputPort;
 		if(outputPort != null)
 			updateDisplay();
 	}
@@ -69,10 +70,9 @@ public class PWire extends JPanel implements IPWire {
 	@Override
 	public void updateDisplay() {
 
-		posOutput = new Point(((JPanel) outputPort).getX(), ((JPanel) outputPort).getY());
+		posOutput = new Point(outputPort.getX(), outputPort.getY());
 
-		
-		Component c2 = (JPanel) outputPort;
+		Component c2 = outputPort;
 		while(!(c2.getParent() instanceof PSynthesizer)){
 			posOutput.x += c2.getParent().getX();
 			posOutput.y += c2.getParent().getY();
@@ -80,16 +80,15 @@ public class PWire extends JPanel implements IPWire {
 			System.out.println(c2.getClass()+"output : " + posOutput.x + "," + posOutput.y);
 		}
 		
-		posInput = new Point(((JPanel) inputPort).getX(), ((JPanel) inputPort).getY());
+		posInput = new Point(inputPort.getX(), inputPort.getY());
 		
-		Component c = (JPanel) inputPort;
+		Component c = inputPort;
 		while(!(c.getParent() instanceof PSynthesizer)){
 			posInput.x += c.getParent().getX();
 			posInput.y += c.getParent().getY();
 			c=c.getParent();
 		}
 		
-
 		System.out.println("input : " + posInput.x + "," + posInput.y);
 		
 		int x = 0;
@@ -120,7 +119,6 @@ public class PWire extends JPanel implements IPWire {
 
 	@Override
 	public void paint(Graphics g) {
-		System.out.println("painting");
 
 		Graphics2D g2 = (Graphics2D) g;
 	    g2.setStroke(new BasicStroke(3));
@@ -133,7 +131,7 @@ public class PWire extends JPanel implements IPWire {
 			}
 		} else {
 			if (posInput.y > posOutput.y) {
-				g2.drawLine(width, 0, height, 0);  
+				g2.drawLine(0, height, width, 0 );  
 			} else {
 				g2.drawLine(0, 0, width, height);  
 			}
