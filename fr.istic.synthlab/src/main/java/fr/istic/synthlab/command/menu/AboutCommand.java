@@ -8,7 +8,6 @@ import fr.istic.synthlab.command.ICommand;
 public class AboutCommand implements ICommand {
 
 	public void execute() {
-		// TODO Auto-generated method stub
 		System.out.println("Command "+this.getClass().getSimpleName()+" not implemented...");
 		JOptionPane.showMessageDialog(new JFrame("About"),
 				"        SynthLab/Groupe 2\n" +

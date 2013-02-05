@@ -39,27 +39,27 @@ public class PFactory implements IPFactory {
 
 	@Override
 	public IPModule newVCO(ICModule control) {
-		return new PModule(control); // TODO
+		return new PModule(control); // TODO Ameliorer Presentation
 	}
 
 	@Override
 	public IPModule newVCF(ICModule control) {
-		return new PModule(control); // TODO
+		return new PModule(control); // TODO Ameliorer Presentation
 	}
 
 	@Override
 	public IPModule newOUT(ICModule control) {
-		return new PModule(control); // TODO
+		return new PModule(control); // TODO Ameliorer Presentation
 	}
 
 	@Override
 	public IPWire newWire(ICWire control) {
-		return new PWire(control); // TODO
+		return new PWire(control); // TODO Ameliorer Presentation
 	}
 
 	@Override
 	public IPOutputPort newOutputPort(ICOutputPort control) {
-		return new POutputPort(control); // TODO
+		return new POutputPort(control); // TODO Ameliorer Presentation
 	}
 
 	@Override

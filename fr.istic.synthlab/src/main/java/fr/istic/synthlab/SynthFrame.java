@@ -40,24 +40,25 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	// constantes pour les boutons de la toolbar
 	private static final int BUTTON_DEFAULT = 0;
 	private static final int BUTTON_WIRE = 1;
-	private static final int BUTTON_MODULE = 2;
+//	private static final int BUTTON_MODULE = 2;
 
-	private static final int BUTTON_PLAY = 3;
-	private static final int BUTTON_PAUSE = 4;
-	private static final int BUTTON_RECORD = 5;
+	private static final int BUTTON_PLAY = 2;
+	private static final int BUTTON_PAUSE = 3;
+//	private static final int BUTTON_RECORD = 5;
 
 	private IPSynthesizer pres;
 
 	// Menu
 	private JMenuBar mainMenuBar;
-	private JMenu menuFile, menuHelp;
+	private JMenu menuFile, menuAdd, menuHelp;
 	private JMenuItem menuItemNew, menuItemOpen, menuItemSave;
 	private JMenuItem menuItemQuit, menuItemDoc, menuItemAbout;
+	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT, menuItemAddModuleVCF;
 
 	// Toolbar
 	private WebToolBar toolBar = new WebToolBar();
-	private String[] iconFiles = { "res/default.png", "res/wire.png", "res/module.png", "res/play.png", "res/pause.png", "res/record.png" };
-	private String[] buttonLabels = { "Default", "Wire", "Module", "Play", "Pause", "Record" };
+	private String[] iconFiles = { "res/default.png", "res/wire.png", "res/play.png", "res/pause.png" };
+	private String[] buttonLabels = { "Default", "Wire", "Play", "Pause" };
 	private Image[] icons = new Image[iconFiles.length];
 	private JButton[] buttons = new JButton[buttonLabels.length];
 	
@@ -72,6 +73,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand toolbarDefaultCommand;
 	private ICommand toolbarWireCommand;
 	private ICommand toolbarModuleCommand;
+
+	private ICommand addModuleOUTCommand;
+	private ICommand addModuleVCOCommand;
+	private ICommand addModuleVCFCommand;
 
 	private ICommand toolbarPlayCommand;
 	private ICommand toolbarPauseCommand;
@@ -107,6 +112,17 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuFile.add(menuItemSave);
 		menuFile.add(menuItemQuit);
 		
+		// -------------------------- Add Menu --------------------------
+		menuAdd = new JMenu("Add");
+
+		menuItemAddModuleOUT = new JMenuItem("OUT Module");
+		menuItemAddModuleVCO = new JMenuItem("VCO Module");
+		menuItemAddModuleVCF = new JMenuItem("VCF Module");
+
+		menuAdd.add(menuItemAddModuleOUT);
+		menuAdd.add(menuItemAddModuleVCO);
+		menuAdd.add(menuItemAddModuleVCF);
+		
 		// -------------------------- Help Menu --------------------------
 		menuHelp = new JMenu("Help");
 
@@ -120,6 +136,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		
 		// ajout des menus a la barre de menus
 		mainMenuBar.add(menuFile);
+		mainMenuBar.add(menuAdd);
 		mainMenuBar.add(menuHelp);
 		this.setJMenuBar(mainMenuBar);
 
@@ -218,6 +235,30 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 					quitSynthCommand.execute();
 			}
 		});
+		menuItemAddModuleOUT.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (addModuleOUTCommand != null)
+					addModuleOUTCommand.execute();
+			}
+		});
+		menuItemAddModuleVCO.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (addModuleVCOCommand != null)
+					addModuleVCOCommand.execute();
+			}
+		});
+		menuItemAddModuleVCF.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (addModuleVCFCommand != null)
+					addModuleVCFCommand.execute();
+			}
+		});
 		menuItemDoc.addActionListener(new ActionListener() {
 
 			@Override
@@ -251,13 +292,13 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			}
 		});
 
-		buttons[BUTTON_MODULE].addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (toolbarModuleCommand != null)
-					toolbarModuleCommand.execute();
-			}
-		});
+//		buttons[BUTTON_MODULE].addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				if (toolbarModuleCommand != null)
+//					toolbarModuleCommand.execute();
+//			}
+//		});
 		
 
 		buttons[BUTTON_PLAY].addActionListener(new ActionListener() {
@@ -278,13 +319,13 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		});
 		
 
-		buttons[BUTTON_RECORD].addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (toolbarRecordCommand != null)
-					toolbarRecordCommand.execute();
-			}
-		});
+//		buttons[BUTTON_RECORD].addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				if (toolbarRecordCommand != null)
+//					toolbarRecordCommand.execute();
+//			}
+//		});
 		
 	}
 
@@ -411,5 +452,18 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		this.toolbarRecordCommand = toolbarRecordCommand;
 	}
 
+	
+	public void setAddModuleVCOCommand(ICommand addModuleVCOCommand) {
+		this.addModuleVCOCommand = addModuleVCOCommand;
+	}
+	public void setAddModuleVCFCommand(ICommand addModuleVCFCommand) {
+		this.addModuleVCFCommand = addModuleVCFCommand;
+	}
+	public void setAddModuleOUTCommand(ICommand addModuleOUTCommand) {
+		this.addModuleOUTCommand = addModuleOUTCommand;
+	}
+	
+	
+	
 
 }

@@ -111,7 +111,6 @@ public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
 		((JInternalFrame) module).setVisible(true);
 		this.add((JInternalFrame) module,0);
 
-		//TODO : beurk positionnement à la main
 		((JInternalFrame)module).setBounds(((modules.size())*(module.getWidth()+5)), 5, module.getWidth(), module.getHeight());
 		
 		modules.add(module);

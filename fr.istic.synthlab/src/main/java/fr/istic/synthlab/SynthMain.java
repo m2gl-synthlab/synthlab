@@ -5,6 +5,9 @@ import com.alee.laf.WebLookAndFeel;
 import fr.istic.synthlab.command.app.DisplayCommand;
 import fr.istic.synthlab.command.app.UndisplayCommand;
 import fr.istic.synthlab.command.menu.AboutCommand;
+import fr.istic.synthlab.command.menu.AddModuleOUTCommand;
+import fr.istic.synthlab.command.menu.AddModuleVCFCommand;
+import fr.istic.synthlab.command.menu.AddModuleVCOCommand;
 import fr.istic.synthlab.command.menu.DocumentationCommand;
 import fr.istic.synthlab.command.menu.NewSynthCommand;
 import fr.istic.synthlab.command.menu.OpenSynthCommand;
@@ -51,9 +54,14 @@ public class SynthMain {
 		frame.setAboutSynthCommand(new AboutCommand());
 		frame.setToolbarDefaultCommand(new ToolbarDefaultCommand());
 		frame.setToolbarWireCommand(new ToolbarWireCommand(app.getSynthesizer()));
-		frame.setToolbarModuleCommand(new ToolbarModuleCommand());
+		frame.setToolbarModuleCommand(new ToolbarModuleCommand(app.getSynthesizer()));
 		frame.setToolbarPlayCommand(new ToolbarPlayCommand(app.getSynthesizer().getPresentation()));
 		frame.setToolbarPauseCommand(new ToolbarPauseCommand(app.getSynthesizer().getPresentation()));
+
+		frame.setAddModuleOUTCommand(new AddModuleOUTCommand(app.getSynthesizer()));
+		frame.setAddModuleVCOCommand(new AddModuleVCOCommand(app.getSynthesizer()));
+		frame.setAddModuleVCFCommand(new AddModuleVCFCommand(app.getSynthesizer()));
+		
 //		frame.setToolbarRecordCommand(new ToolbarRecordCommand());
 		
 		// Start the application
