@@ -42,7 +42,9 @@ public class COutputPort extends OutputPort implements ICOutputPort{
 	@Override
 	public void p2cConnect() {
 		if(wire == null){
+		
 			wire = getModule().getSynthesizer().getCurrentWire();
+			
 			wire.connect(this);
 		}
 	}

@@ -2,6 +2,7 @@ package fr.istic.synthlab;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -296,6 +297,9 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	 */
 	@Override
 	public void displaySynth(IPSynthesizer presentation) {
+		if(pres!=null)
+		this.remove((PSynthesizer) pres);
+
 		pres = presentation;
 		this.add((PSynthesizer) pres);
 		this.setVisible(true);
@@ -308,7 +312,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	 */
 	@Override
 	public void quitSynth() {
-		this.setVisible(false);
+		this.setVisible(false); 
 	}
 
 	/**

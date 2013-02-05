@@ -58,6 +58,7 @@ public class POutputPort extends JPanel implements MouseListener, IPOutputPort {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("POutputPort clicked");
+		
 		ctrl.p2cConnect();
 	}
 

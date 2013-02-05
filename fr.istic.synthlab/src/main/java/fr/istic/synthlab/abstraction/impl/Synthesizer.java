@@ -90,6 +90,10 @@ public class Synthesizer implements ISynthesizer {
 		}
 	}
 
+	public List<IModule> getModules() {
+		return modules;
+	}
+
 	@Override
 	public void stopModule(IModule module) {
 		// this.synth.stopUnit(module.getJSyn());
