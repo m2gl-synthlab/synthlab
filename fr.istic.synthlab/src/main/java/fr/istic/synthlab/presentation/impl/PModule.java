@@ -2,22 +2,20 @@ package fr.istic.synthlab.presentation.impl;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.File;
-import java.io.IOException;
+import java.util.List;
 
-import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+
+import com.alee.laf.desktoppane.WebInternalFrame;
 
 import fr.istic.synthlab.controller.ICModule;
+import fr.istic.synthlab.controller.ICSynthesizer;
+import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.presentation.IPInputPort;
 import fr.istic.synthlab.presentation.IPModule;
 import fr.istic.synthlab.presentation.IPOutputPort;
@@ -26,104 +24,72 @@ import fr.istic.synthlab.presentation.IPParameter;
 /**
  * Presentation of a module
  */
-public class PModule extends JPanel implements IPModule {
+public class PModule extends WebInternalFrame implements IPModule {
 
 	private static final long serialVersionUID = -8519084219674310285L;
 	private ICModule ctrl;
+	private JPanel panelParameters;
+	private JPanel panelInputPorts;
+	private JPanel panelOutputPorts;
 	private int width;
 	private int height;
-
-	private int px;
-	private int py;
-
-	private Point origin;
-
+	
 	/**
 	 * @param control
 	 */
 	public PModule(ICModule control) {
+		super("Module " + control.getName(), false, true, false, false);
+		
 		this.ctrl = control;
 		configView();
 		defineCallbacks();
 	}
 
-	public void paintComponent(Graphics g) {
-		try {
-			Image img = ImageIO.read(new File("res/synthe.png"));
-			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-			// Pour une image de fond
-			// g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
 	private void configView() {
-		width = 350;
-		height = 250;
-		this.setSize(width, height);
-		this.setPreferredSize(this.getSize());
-		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
-		Border border = this.getBorder();
 		this.setBackground(Color.GRAY);
-		this.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
+		panelParameters = new JPanel();
+		panelInputPorts = new JPanel();
+		panelOutputPorts = new JPanel();
+		this.setLayout(new BoxLayout(this.getContentPane(),BoxLayout.PAGE_AXIS));
+		this.setAutoscrolls(true);
+		this.getContentPane().add(panelParameters,0);
+		this.getContentPane().add(panelInputPorts,1);
+		this.getContentPane().add(panelOutputPorts,2);
 
-			}
-
+		width = 350;
+		height = 350;
+	}
+	
+	private void defineCallbacks() {
+		this.addAncestorListener(new AncestorListener() {
 			@Override
-			public void mousePressed(MouseEvent e) {
-				if (contains(e.getPoint())) {
-					px = e.getLocationOnScreen().x - getX();
-					py = e.getLocationOnScreen().y - getY();
-				}
-			}
-
+			public void ancestorAdded(AncestorEvent event) {}
 			@Override
-			public void mouseExited(MouseEvent e) {
-				// no use
-			}
-
+			public void ancestorRemoved(AncestorEvent event) {}
+			
 			@Override
-			public void mouseEntered(MouseEvent e) {
-				// no use
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// no use
+			public void ancestorMoved(AncestorEvent event) {
+	            List<ICWire> wires = ctrl.getWires();
+	            for(ICWire wire : wires){
+	            	if(wire!=null){
+	            		wire.getPresentation().updateDisplay();
+	            	}
+	            }
 			}
 		});
-
+		
 		this.addMouseMotionListener(new MouseMotionListener() {
-
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				// no use
+				((PSynthesizer)((ICSynthesizer)getControl().getSynthesizer()).getPresentation()).dispatchEvent(e);
 			}
-
 			@Override
-		    public void mouseDragged(MouseEvent e) {
-		            setLocation(e.getLocationOnScreen().x - px, e.getLocationOnScreen().y - py);
-		            px = e.getLocationOnScreen().x - getX();
-		            py = e.getLocationOnScreen().y - getY();
-		        
-		    }
+			public void mouseDragged(MouseEvent e) {
+			}
 		});
 	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	private void defineCallbacks() {
-	}
-
+	
+	
 	@Override
 	public ICModule getControl() {
 		return ctrl;
@@ -131,18 +97,26 @@ public class PModule extends JPanel implements IPModule {
 
 	@Override
 	public void addInputPort(IPInputPort presentation) {
-		add((PInputPort) presentation);
+		panelInputPorts.add((PInputPort) presentation);
 
 	}
 
 	@Override
 	public void addOutputPort(IPOutputPort presentation) {
-		add((POutputPort) presentation);
+		panelOutputPorts.add((POutputPort) presentation);
 	}
 
 	@Override
 	public void addParameter(IPParameter presentation) {
-		add((Component) presentation);
+		panelParameters.add((Component) presentation);
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public int getWidth() {
+		return width;
 	}
 
 }

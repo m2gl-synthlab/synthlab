@@ -2,6 +2,7 @@ package fr.istic.synthlab;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -19,9 +20,13 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 
+import com.alee.extended.statusbar.WebMemoryBar;
+import com.alee.extended.statusbar.WebStatusBar;
+import com.alee.extended.statusbar.WebStatusLabel;
+import com.alee.laf.toolbar.ToolbarStyle;
+import com.alee.laf.toolbar.WebToolBar;
 import com.softsynth.jsyn.view102.UsageDisplay;
 
 import fr.istic.synthlab.command.ICommand;
@@ -50,7 +55,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private JMenuItem menuItemQuit, menuItemDoc, menuItemAbout;
 
 	// Toolbar
-	private JToolBar toolBar = new JToolBar();
+	private WebToolBar toolBar = new WebToolBar();
 	private String[] iconFiles = { "res/default.png", "res/wire.png", "res/module.png", "res/play.png", "res/pause.png", "res/record.png" };
 	private String[] buttonLabels = { "Default", "Wire", "Module", "Play", "Pause", "Record" };
 	private Image[] icons = new Image[iconFiles.length];
@@ -72,10 +77,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand toolbarPauseCommand;
 	private ICommand toolbarRecordCommand;
 
-	
-	// Debug
-	private UsageDisplay usage;
-	
 	
 	public SynthFrame() {
 		this.initComponents();
@@ -123,6 +124,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		this.setJMenuBar(mainMenuBar);
 
 		// instanciation des boutons de la toolbar
+		toolBar.setToolbarStyle(ToolbarStyle.attached);
 		Container frameContainer = getContentPane();
 		frameContainer.setLayout(new BorderLayout());
 		for (int i = 0; i < buttonLabels.length; ++i) {
@@ -139,9 +141,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 		frameContainer.add(BorderLayout.NORTH, toolBar);
 		
-		// Debug
-		usage = new UsageDisplay();
-		frameContainer.add(BorderLayout.SOUTH, usage);
 	}
 
 	/**
@@ -149,12 +148,20 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	 */
 	private void configureView() {
 		// parametrage de la JFrame
-		this.getContentPane().setBackground(Color.WHITE);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1400, 880);
-		Container con = getContentPane();
-		con.setBackground(new Color(139,69,19));
+		getContentPane().setBackground(Color.GRAY);
+
+		WebStatusBar statusBar = new WebStatusBar();
+		WebMemoryBar memoryBar = new WebMemoryBar();
+		memoryBar.setShowMaximumMemory(false);
+		statusBar.add(memoryBar);
+		statusBar.add(new WebStatusLabel("Synthesizer ready"));
 		
+		getContentPane().add(BorderLayout.SOUTH, statusBar);
+		
+		//TODO remonter les evenements start et stop
 		
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height/ 2 - this.getSize().height / 2);
@@ -290,6 +297,9 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	 */
 	@Override
 	public void displaySynth(IPSynthesizer presentation) {
+		if(pres!=null)
+		this.remove((PSynthesizer) pres);
+
 		pres = presentation;
 		this.add((PSynthesizer) pres);
 		this.setVisible(true);
@@ -302,7 +312,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	 */
 	@Override
 	public void quitSynth() {
-		this.setVisible(false);
+		this.setVisible(false); 
 	}
 
 	/**

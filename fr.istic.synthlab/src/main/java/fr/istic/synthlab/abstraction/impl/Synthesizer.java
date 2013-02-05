@@ -21,6 +21,7 @@ public class Synthesizer implements ISynthesizer {
 	private List<IModule> modules;
 
 	private IWire currentWire;
+	
 	/**
 	 * Constructor
 	 */
@@ -60,7 +61,6 @@ public class Synthesizer implements ISynthesizer {
 	
 	@Override
 	public void add(IWire wire) {
-		
 	}
 
 	@Override
@@ -87,6 +87,10 @@ public class Synthesizer implements ISynthesizer {
 				mod.stop();
 			}
 		}
+	}
+
+	public List<IModule> getModules() {
+		return modules;
 	}
 
 	@Override

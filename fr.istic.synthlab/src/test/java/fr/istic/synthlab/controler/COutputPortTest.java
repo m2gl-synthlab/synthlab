@@ -35,7 +35,7 @@ public class COutputPortTest extends TestCase {
 	public void testCOutputPortUnitOutputPortInt() {
 		UnitOutputPort iop2=new UnitOutputPort("test");
 
-		iop=new COutputPort(iop2,4);
+		iop=new COutputPort(iop2,4, "out");
 		assertEquals(iop2, iop.getJSyn());
 
 		assertEquals(4, iop.getDefaultPart());

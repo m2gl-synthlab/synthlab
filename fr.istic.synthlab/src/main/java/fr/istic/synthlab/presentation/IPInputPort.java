@@ -10,4 +10,6 @@ public interface IPInputPort{
 	 * @return the controller
 	 */
 	public ICInputPort getControl();
+	
+	public void c2pSetName();
 }

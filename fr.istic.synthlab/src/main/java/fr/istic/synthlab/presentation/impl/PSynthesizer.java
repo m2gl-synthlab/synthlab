@@ -2,56 +2,71 @@ package fr.istic.synthlab.presentation.impl;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
+import javax.swing.JInternalFrame;
 
+import com.alee.laf.desktoppane.WebDesktopPane;
+
+import fr.istic.synthlab.abstraction.IInputPort;
+import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.controller.ICSynthesizer;
+import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.presentation.IPModule;
 import fr.istic.synthlab.presentation.IPSynthesizer;
 import fr.istic.synthlab.presentation.IPWire;
 
-public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
+public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
 
 	private static final long serialVersionUID = -1444696064954307756L;
 	private ICSynthesizer ctrl;
 
 	private List<IPModule> modules;
-	private JPanel background;
-	private JPanel modulePanel;
 	
 	
 	public PSynthesizer(ICSynthesizer control) {
 		super();
 		ctrl = control;
 		modules = new ArrayList<IPModule>();
-		modulePanel = new JPanel();
-		background = new JPanel();
 		
 		configView();
 		defineCallbacks();
-		
 	}
 	
-
-
 	private void configView() {
-		
-		modulePanel.setOpaque(false);
-		modulePanel.setLayout(null);
-		modulePanel.setPreferredSize(new Dimension(1400, 500));
-		modulePanel.setBounds(15, 15, 1400, 500);
-		this.add(modulePanel, new Integer(0));
-		
-		this.setBorder(BorderFactory.createTitledBorder(getClass().getSimpleName()));
+		this.setBackground(Color.DARK_GRAY);
 	}
 
 	private void defineCallbacks() {
+
+		addMouseMotionListener(new MouseMotionListener() {
+			
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				// Gestion du currentWire
+				if(ctrl.getCurrentWire() != null){
+					IInputPort input = ctrl.getCurrentWire().getInput();
+					IOutputPort output = ctrl.getCurrentWire().getOutput();
+					
+					Point mouse = getMousePosition(true);
+					
+					if(input == null && output != null){
+						((ICWire)getControl().getCurrentWire()).getPresentation().setInputPoint(mouse);
+					}
+					if(output == null && input != null){
+						((ICWire)getControl().getCurrentWire()).getPresentation().setOutputPoint(mouse);
+					}
+				}
+			}
+			
+			@Override
+			public void mouseDragged(MouseEvent e) {}
+		});
+		
 	}
 	
 	@Override
@@ -81,28 +96,27 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 
 	@Override
 	public void c2pStart() {
-		this.setBackground(Color.GREEN);
 		validate();
 		repaint();
 	}
 
 	@Override
 	public void c2pStop() {
-		this.setBackground(Color.RED);
 		validate();
 		repaint();
 	}
 
 	@Override
 	public void c2pAddModule(IPModule module) {
-		
-		modulePanel.add((JPanel) module);
+		((JInternalFrame) module).setVisible(true);
+		this.add((JInternalFrame) module,0);
 
-		((JPanel)module).setBounds(((modules.size())*(module.getWidth()+5)), 5, module.getWidth(), module.getHeight());
+		//TODO : beurk positionnement à la main
+		((JInternalFrame)module).setBounds(((modules.size())*(module.getWidth()+5)), 5, module.getWidth(), module.getHeight());
 		
 		modules.add(module);
-		((JPanel)module).validate();
-		((JPanel)module).repaint();
+		((JInternalFrame)module).validate();
+		((JInternalFrame)module).repaint();
 		
 		validate();
 		repaint();
@@ -110,16 +124,14 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 
 	@Override
 	public void c2pAddModuleOk(IPModule module) {
+		
 	}
 	
-	int i =0;
+	int i=0;
 	@Override
 	public void c2pAddWire(IPWire wire) {
-		((JComponent) wire).setOpaque(false);
-		this.add((Component) wire, new Integer(++i));
-	
-		((Component) wire).setBounds(wire.getx()+63, wire.gety()+53, wire.getWidth(), wire.getHeight());
-		
+		this.add((PWire) wire, new Integer(++i));
+		System.out.println("c2pAddWire Adding wire");
 		validate();
 		repaint();
 	}

@@ -109,7 +109,7 @@ public class AFactory implements IFactory {
 
 	@Override
 	public IInputPort newInputPort(IModule mod, String name, UnitInputPort input) {
-		IInputPort port = new InputPort(input);
+		IInputPort port = new InputPort(input, name);
 		port.setModule(mod);
 		port.setName(name);
 		return port;
@@ -117,7 +117,7 @@ public class AFactory implements IFactory {
 	
 	@Override
 	public IInputPort newInputPort(IModule mod, String name, UnitInputPort input, int part) {
-		IInputPort port = new InputPort(input, part);
+		IInputPort port = new InputPort(input, part, name);
 		port.setModule(mod);
 		port.setName(name);
 		return port;
@@ -131,7 +131,7 @@ public class AFactory implements IFactory {
 	}
 	
 	public IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output, int part) {
-		IOutputPort port = new OutputPort(output, part);
+		IOutputPort port = new OutputPort(output, part, name);
 		port.setModule(mod);
 		port.setName(name);
 		return port;

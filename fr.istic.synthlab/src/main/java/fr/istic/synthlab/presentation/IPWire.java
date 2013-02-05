@@ -1,7 +1,8 @@
 package fr.istic.synthlab.presentation;
 
-import fr.istic.synthlab.controller.ICWire;
+import java.awt.Point;
 
+import fr.istic.synthlab.controller.ICWire;
 
 public interface IPWire {
 	/**
@@ -11,15 +12,48 @@ public interface IPWire {
 	 */
 	public ICWire getControl();
 
-	public void connect(IPInputPort inputPortPresentation,
-			IPOutputPort outputPortPresentation);
+	/**
+	 * Refresh the wire view
+	 */
+	public void updateDisplay();
 	
-	public int getx();
-	public int gety();
+	/**
+	 * React to a connection
+	 * @param pOutputPort
+	 */
+	public void c2pConnectOut(IPOutputPort pOutputPort);
 
-	public void c2pConnectOut(IPOutputPort outputPortPresentation);
-	public void c2pConnectIn(IPInputPort inputPortPresentation);
+
+	/**
+	 * React to a connection
+	 * @param pInputPort
+	 */
+	public void c2pConnectIn(IPInputPort pInputPort);
+
+	/**
+	 * React to a disconnection
+	 * @param pInputPort
+	 */
+	public void c2pDisconnectIn(IPInputPort pInputPort);
+
+	/**
+	 * React to a disconnection
+	 * @param pOutputPort
+	 */
+	public void c2pDisconnectOut(IPOutputPort pOutputPort);
+
+	/**
+	 * Set a position for the input pin of the wire
+	 * 
+	 * @param mouse
+	 */
+	public void setInputPoint(Point mouse);
 	
-	public int getWidth();
-	public int getHeight();
+	/**
+	 * Set a position for the output pin of the wire
+	 * 
+	 * @param mouse
+	 */
+	public void setOutputPoint(Point mouse);
+
 }

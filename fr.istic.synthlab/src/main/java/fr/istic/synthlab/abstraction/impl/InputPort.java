@@ -21,15 +21,15 @@ public class InputPort implements IInputPort {
 		this.name = name;
 	}
 
-	public InputPort(UnitInputPort jSynPort) {
+	public InputPort(UnitInputPort jSynPort, String name) {
 		this.port = jSynPort;
-		this.name = jSynPort.getName();
+		this.name = name;
 	}
-	
-	public InputPort(UnitInputPort jSynPort, int part) {
+
+	public InputPort(UnitInputPort jSynPort, int part, String name) {
 		this.port = jSynPort;
 		this.defaultPart = part;
-		this.name = jSynPort.getName();
+		this.name = name;
 	}
 
 	@Override
@@ -49,14 +49,17 @@ public class InputPort implements IInputPort {
 
 	@Override
 	public void connect(IOutputPort outPort) {
-		if(!port.isConnected())
-			port.connect(this.defaultPart, outPort.getJSyn(), outPort.getDefaultPart());
+		if (!port.isConnected())
+			port.connect(this.defaultPart, outPort.getJSyn(),
+					outPort.getDefaultPart());
 	}
 
 	@Override
 	public void disconnect(IOutputPort outPort) {
-		if(port.isConnected())
+		if (port.isConnected()) {
 			port.disconnect(outPort.getJSyn());
+			System.out.println("Input disconnected");
+		}
 	}
 
 	@Override

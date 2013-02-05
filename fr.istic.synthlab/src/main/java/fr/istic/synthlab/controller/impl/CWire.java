@@ -4,6 +4,7 @@ import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.impl.Wire;
 import fr.istic.synthlab.controller.ICInputPort;
+import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICOutputPort;
 import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -14,9 +15,7 @@ import fr.istic.synthlab.presentation.IPWire;
 public class CWire extends Wire implements ICWire {
 
 	private IPWire pres;
-	private IPInputPort inputPortPresentation;
-	private IPOutputPort outputPortPresentation;
-	
+
 	public CWire() {
 		this.pres = PACFactory.getPFactory().newWire(this);
 	}
@@ -25,46 +24,35 @@ public class CWire extends Wire implements ICWire {
 	public IPWire getPresentation() {
 		return pres;
 	}
-	
-	
 
-//	public void connect(ICPort port){
-//		if(port instanceof OutputPort){
-//			super.connect((OutputPort)port);
-//		} else {
-//			super.connect((InputPort)port);
-//			
-//		}
-//		((JPanel)port.getPresentation()).getX();
-//		((JPanel)port.getPresentation()).getY();
-//		
-//		port.getPresentation().connect(pres);
-//	}
-	
 	@Override
 	public void connect(IInputPort port) {
 		super.connect(port);
-		// TODO : Inform view
-		inputPortPresentation = ((ICInputPort) port).getPresentation();
-		if(outputPortPresentation != null){
-			connect();
-		}
-		pres.c2pConnectIn(inputPortPresentation);
+		IPInputPort pInputPort = ((ICInputPort) port).getPresentation();
+		((ICModule)((ICInputPort) port).getModule()).addWire(this);
+		pres.c2pConnectIn(pInputPort);
 	}
-	
+
 	@Override
 	public void connect(IOutputPort port) {
 		super.connect(port);
-		// TODO : Inform view
-		outputPortPresentation = ((ICOutputPort) port).getPresentation();
-		if(inputPortPresentation != null){
-			connect();
-		}
+		IPOutputPort pOutputPort = ((ICOutputPort) port).getPresentation();
+		((ICModule)((ICOutputPort) port).getModule()).addWire(this);
+		pres.c2pConnectOut(pOutputPort);
+	}
 
-		pres.c2pConnectOut(outputPortPresentation);
+	@Override
+	public void disconnect(IInputPort port) {
+		super.disconnect(port);
+		IPInputPort pInputPort = ((ICInputPort) port).getPresentation();
+		pres.c2pDisconnectIn(pInputPort);
+	}
+
+	@Override
+	public void disconnect(IOutputPort port) {
+		super.disconnect(port);
+		IPOutputPort pOutputPort = ((ICOutputPort) port).getPresentation();
+		pres.c2pDisconnectOut(pOutputPort);
 	}
 	
-	public void connect(){
-		pres.connect(inputPortPresentation, outputPortPresentation);
-	}
 }

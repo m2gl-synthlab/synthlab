@@ -1,5 +1,7 @@
 package fr.istic.synthlab;
 
+import com.alee.laf.WebLookAndFeel;
+
 import fr.istic.synthlab.command.app.DisplayCommand;
 import fr.istic.synthlab.command.app.UndisplayCommand;
 import fr.istic.synthlab.command.menu.AboutCommand;
@@ -20,7 +22,7 @@ import fr.istic.synthlab.factory.impl.PFactory;
 
 public class SynthMain {
 	public static void main(String[] args) {
-		
+		WebLookAndFeel.install();
 		// Initialize factories
 		PACFactory.setAFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
