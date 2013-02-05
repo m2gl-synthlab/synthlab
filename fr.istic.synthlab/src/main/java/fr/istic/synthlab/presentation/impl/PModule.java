@@ -15,6 +15,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.presentation.IPInputPort;
@@ -63,6 +64,7 @@ public class PModule extends JPanel implements IPModule {
 		this.setSize(width, height);
 		this.setPreferredSize(this.getSize());
 		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
+		Border border = this.getBorder();
 		this.setBackground(Color.GRAY);
 		this.addMouseListener(new MouseListener() {
 			@Override
