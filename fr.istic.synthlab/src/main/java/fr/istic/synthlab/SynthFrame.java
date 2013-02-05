@@ -21,7 +21,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
-import com.alee.extended.layout.ToolbarLayout;
 import com.alee.extended.statusbar.WebMemoryBar;
 import com.alee.extended.statusbar.WebStatusBar;
 import com.alee.extended.statusbar.WebStatusLabel;
@@ -77,10 +76,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand toolbarPauseCommand;
 	private ICommand toolbarRecordCommand;
 
-	
-	// Debug
-	private UsageDisplay usage;
-	
 	
 	public SynthFrame() {
 		this.initComponents();
@@ -145,9 +140,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 		frameContainer.add(BorderLayout.NORTH, toolBar);
 		
-		// Debug
-		//usage = new UsageDisplay();
-		//frameContainer.add(BorderLayout.SOUTH, usage);
 	}
 
 	/**
@@ -169,7 +161,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		getContentPane().add(BorderLayout.SOUTH, statusBar);
 		
 		//TODO remonter les evenements start et stop
-		
 		
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height/ 2 - this.getSize().height / 2);

@@ -2,6 +2,8 @@ package fr.istic.synthlab.presentation.impl;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -12,6 +14,7 @@ import javax.swing.event.AncestorListener;
 import com.alee.laf.desktoppane.WebInternalFrame;
 
 import fr.istic.synthlab.controller.ICModule;
+import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.presentation.IPInputPort;
 import fr.istic.synthlab.presentation.IPModule;
@@ -72,6 +75,20 @@ public class PModule extends WebInternalFrame implements IPModule {
 	            		wire.getPresentation().updateDisplay();
 	            	}
 	            }
+			}
+		});
+		
+		this.addMouseMotionListener(new MouseMotionListener() {
+			
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				((PSynthesizer)((ICSynthesizer)getControl().getSynthesizer()).getPresentation()).dispatchEvent(e);
+			}
+			
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 	}

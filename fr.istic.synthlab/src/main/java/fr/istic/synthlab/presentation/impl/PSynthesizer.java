@@ -1,6 +1,10 @@
 package fr.istic.synthlab.presentation.impl;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +12,10 @@ import javax.swing.JInternalFrame;
 
 import com.alee.laf.desktoppane.WebDesktopPane;
 
+import fr.istic.synthlab.abstraction.IInputPort;
+import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.controller.ICSynthesizer;
+import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.presentation.IPModule;
 import fr.istic.synthlab.presentation.IPSynthesizer;
 import fr.istic.synthlab.presentation.IPWire;
@@ -19,32 +26,53 @@ public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
 	private ICSynthesizer ctrl;
 
 	private List<IPModule> modules;
-//	private JPanel modulePanel;
 	
 	
 	public PSynthesizer(ICSynthesizer control) {
 		super();
 		ctrl = control;
 		modules = new ArrayList<IPModule>();
-//		modulePanel = new JPanel();
 		
 		configView();
 		defineCallbacks();
-		
 	}
 	
-
-
 	private void configView() {
 		this.setBackground(Color.DARK_GRAY);
-//		modulePanel.setOpaque(false);
-//		modulePanel.setLayout(null);
-//		modulePanel.setPreferredSize(new Dimension(1400, 500));
-//		modulePanel.setBounds(15, 15, 1400, 500);
-//		this.add(modulePanel, new Integer(0));
 	}
 
 	private void defineCallbacks() {
+
+		addMouseMotionListener(new MouseMotionListener() {
+			
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				// Gestion du currentWire
+				IInputPort input = ctrl.getCurrentWire().getInput();
+				IOutputPort output = ctrl.getCurrentWire().getOutput();
+				
+				Point offset = ((Component) e.getSource()).getLocation();
+
+				Point mouse = e.getPoint();
+				
+				
+				Point coord = new Point(mouse.x + offset.x, mouse.y + offset.y);
+				
+				if(input == null && output != null){
+					((ICWire)getControl().getCurrentWire()).getPresentation().setInputPoint(coord);
+				}
+				if(output == null && input != null){
+					((ICWire)getControl().getCurrentWire()).getPresentation().setOutputPoint(coord);
+				}
+			}
+			
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 	}
 	
 	@Override
@@ -74,14 +102,12 @@ public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
 
 	@Override
 	public void c2pStart() {
-//		this.setBackground(Color.GREEN);
 		validate();
 		repaint();
 	}
 
 	@Override
 	public void c2pStop() {
-//		this.setBackground(Color.RED);
 		validate();
 		repaint();
 	}
