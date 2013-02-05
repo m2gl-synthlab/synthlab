@@ -21,6 +21,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import com.alee.extended.layout.ToolbarLayout;
+import com.alee.extended.statusbar.WebMemoryBar;
+import com.alee.extended.statusbar.WebStatusBar;
+import com.alee.extended.statusbar.WebStatusLabel;
 import com.alee.laf.toolbar.ToolbarStyle;
 import com.alee.laf.toolbar.WebToolBar;
 import com.softsynth.jsyn.view102.UsageDisplay;
@@ -142,8 +146,8 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		frameContainer.add(BorderLayout.NORTH, toolBar);
 		
 		// Debug
-		usage = new UsageDisplay();
-		frameContainer.add(BorderLayout.SOUTH, usage);
+		//usage = new UsageDisplay();
+		//frameContainer.add(BorderLayout.SOUTH, usage);
 	}
 
 	/**
@@ -155,6 +159,16 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1400, 880);
 		getContentPane().setBackground(Color.GRAY);
+
+		WebStatusBar statusBar = new WebStatusBar();
+		WebMemoryBar memoryBar = new WebMemoryBar();
+		memoryBar.setShowMaximumMemory(false);
+		statusBar.add(memoryBar);
+		statusBar.add(new WebStatusLabel("Synthesizer ready"));
+		
+		getContentPane().add(BorderLayout.SOUTH, statusBar);
+		
+		//TODO remonter les evenements start et stop
 		
 		
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
