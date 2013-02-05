@@ -35,7 +35,7 @@ public class PModule extends WebInternalFrame implements IPModule {
 	 * @param control
 	 */
 	public PModule(ICModule control) {
-		super(control.getName(), false, true, false, false);
+		super("Module " + control.getName(), false, true, false, false);
 		
 		this.ctrl = control;
 		configView();
