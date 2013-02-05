@@ -5,8 +5,10 @@ import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.ModuleOUT;
 import fr.istic.synthlab.abstraction.impl.ModuleVCF;
 import fr.istic.synthlab.abstraction.impl.ModuleVCO;
+import fr.istic.synthlab.abstraction.impl.Synthesizer;
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.controller.ICSynthesizer;
+import fr.istic.synthlab.controller.impl.CSynthesizer;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 /**
@@ -29,9 +31,9 @@ public class SynthApp implements ISynthApp {
 	@Override
 	public void newSynth() {
 		// Replace the current synthesizer with a new one
+		
 		this.synth = (ICSynthesizer) PACFactory.getFactory().newSynthesizer();
-
-
+		
 		displayCmd.execute();
 		
 		// Add a VCO module
@@ -59,6 +61,7 @@ public class SynthApp implements ISynthApp {
 		wire1.connect(vcf.getOutput(ModuleVCF.OUTPUT_OUT));
 		wire1.connect(out.getInput(ModuleOUT.INPUT_IN));
 		synth.add(wire1);
+		
 		
 		
 

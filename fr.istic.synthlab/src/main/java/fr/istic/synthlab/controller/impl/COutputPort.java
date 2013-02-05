@@ -58,7 +58,6 @@ public class COutputPort extends OutputPort implements ICOutputPort {
 			wire.disconnect(inputPort);
 		}
 		super.disconnect(inputPort);
-		
 	}
 
 	@Override
