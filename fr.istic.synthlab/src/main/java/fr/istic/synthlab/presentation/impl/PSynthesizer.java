@@ -48,29 +48,23 @@ public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				// Gestion du currentWire
-				IInputPort input = ctrl.getCurrentWire().getInput();
-				IOutputPort output = ctrl.getCurrentWire().getOutput();
-				
-				Point offset = ((Component) e.getSource()).getLocation();
-
-				Point mouse = e.getPoint();
-				
-				
-				Point coord = new Point(mouse.x + offset.x, mouse.y + offset.y);
-				
-				if(input == null && output != null){
-					((ICWire)getControl().getCurrentWire()).getPresentation().setInputPoint(coord);
-				}
-				if(output == null && input != null){
-					((ICWire)getControl().getCurrentWire()).getPresentation().setOutputPoint(coord);
+				if(ctrl.getCurrentWire() != null){
+					IInputPort input = ctrl.getCurrentWire().getInput();
+					IOutputPort output = ctrl.getCurrentWire().getOutput();
+					
+					Point mouse = getMousePosition(true);
+					
+					if(input == null && output != null){
+						((ICWire)getControl().getCurrentWire()).getPresentation().setInputPoint(mouse);
+					}
+					if(output == null && input != null){
+						((ICWire)getControl().getCurrentWire()).getPresentation().setOutputPoint(mouse);
+					}
 				}
 			}
 			
 			@Override
-			public void mouseDragged(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void mouseDragged(MouseEvent e) {}
 		});
 		
 	}

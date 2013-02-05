@@ -60,8 +60,10 @@ public class OutputPort implements IOutputPort {
 
 	@Override
 	public void disconnect(IInputPort inputPort) {
-		if(port.isConnected())
+		if(port.isConnected()){
 			port.disconnect(inputPort.getJSyn());
+			System.out.println("Output disconnected");
+		}
 	}
 
 	@Override

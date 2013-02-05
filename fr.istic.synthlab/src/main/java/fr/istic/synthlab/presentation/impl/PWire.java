@@ -6,8 +6,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 
@@ -28,7 +26,7 @@ public class PWire extends JPanel implements IPWire {
 	private int width = 0;
 	private PInputPort inputPort;
 	private POutputPort outputPort;
-	
+
 	/**
 	 * @param control
 	 */
@@ -43,7 +41,7 @@ public class PWire extends JPanel implements IPWire {
 	}
 
 	private void defineCallbacks() {
-		
+
 	}
 
 	@Override
@@ -53,53 +51,53 @@ public class PWire extends JPanel implements IPWire {
 
 	@Override
 	public void c2pConnectOut(IPOutputPort outputPort) {
-		System.out.println("Connecting to out");
+		// System.out.println("Connecting to out");
 		this.outputPort = (POutputPort) outputPort;
-		if(inputPort != null)
+		if (inputPort != null) {
+			setVisible(true);
 			updateDisplay();
+		}
 	}
 
 	@Override
 	public void c2pConnectIn(IPInputPort inputPort) {
-		System.out.println("Connecting to In");
+		// System.out.println("Connecting to In");
 		this.inputPort = (PInputPort) inputPort;
-		if(outputPort != null)
+		if (outputPort != null) {
+			setVisible(true);
 			updateDisplay();
+		}
 	}
 
 	@Override
 	public void updateDisplay() {
 
-		
-		if( outputPort != null){
+		if (outputPort != null) {
 			posOutput = new Point(outputPort.getX(), outputPort.getY());
-	
+
 			Component c2 = outputPort;
-			while(!(c2.getParent() instanceof PSynthesizer)){
+			while (!(c2.getParent() instanceof PSynthesizer)) {
 				posOutput.x += c2.getParent().getX();
 				posOutput.y += c2.getParent().getY();
-				c2=c2.getParent();
-				System.out.println(c2.getClass()+"output : " + posOutput.x + "," + posOutput.y);
+				c2 = c2.getParent();
 			}
-		}else{
-			
+		} else {
+
 		}
 
-		if( inputPort != null){
+		if (inputPort != null) {
 			posInput = new Point(inputPort.getX(), inputPort.getY());
-			
+
 			Component c = inputPort;
-			while(!(c.getParent() instanceof PSynthesizer)){
+			while (!(c.getParent() instanceof PSynthesizer)) {
 				posInput.x += c.getParent().getX();
 				posInput.y += c.getParent().getY();
-				c=c.getParent();
+				c = c.getParent();
 			}
-		}else{
-			
+		} else {
+
 		}
-		
-		System.out.println("input : " + posInput.x + "," + posInput.y);
-		
+
 		int x = 0;
 		int y = 0;
 
@@ -121,7 +119,7 @@ public class PWire extends JPanel implements IPWire {
 
 		setPreferredSize(new Dimension(width, height));
 
-		setBounds(x+(POutputPort.width/2), y+(POutputPort.height/2), width, height);
+		setBounds(x + (POutputPort.width / 2), y + (POutputPort.height / 2), width, height);
 		repaint();
 		validate();
 	}
@@ -130,8 +128,8 @@ public class PWire extends JPanel implements IPWire {
 	public void paint(Graphics g) {
 
 		Graphics2D g2 = (Graphics2D) g;
-	    g2.setStroke(new BasicStroke(3));
-	    
+		g2.setStroke(new BasicStroke(3));
+
 		if (posInput.x > posOutput.x) {
 			if (posInput.y > posOutput.y) {
 				g2.drawLine(0, 0, width, height);
@@ -140,36 +138,48 @@ public class PWire extends JPanel implements IPWire {
 			}
 		} else {
 			if (posInput.y > posOutput.y) {
-				g2.drawLine(0, height, width, 0 );  
+				g2.drawLine(0, height, width, 0);
 			} else {
-				g2.drawLine(0, 0, width, height);  
+				g2.drawLine(0, 0, width, height);
 			}
 		}
 	}
 
 	@Override
 	public void c2pDisconnectIn(IPInputPort pInputPort) {
-		// TODO Auto-generated method stub
-
+		// Si le cable est encore attaché a l'output
+		if (getControl().getOutput() != null) {
+			// On set le cable courrant du synthetiseur
+			getControl().getInput().getModule().getSynthesizer().setCurrentWire(getControl());
+			inputPort = null;
+			updateDisplay();
+		} else {
+			this.setVisible(false);
+		}
 	}
 
 	@Override
 	public void c2pDisconnectOut(IPOutputPort pOutputPort) {
-		// TODO Auto-generated method stub
-
+		// Si le cable est encore attaché a l'output
+		if (getControl().getInput() != null) {
+			// On set le cable courrant du synthetiseur
+			getControl().getOutput().getModule().getSynthesizer().setCurrentWire(getControl());
+			outputPort = null;
+			updateDisplay();
+		} else {
+			this.setVisible(false);
+		}
 	}
 
 	@Override
 	public void setInputPoint(Point mouse) {
 		posInput = mouse;
-
 		updateDisplay();
 	}
 
 	@Override
 	public void setOutputPoint(Point mouse) {
 		posOutput = mouse;
-
 		updateDisplay();
 	}
 

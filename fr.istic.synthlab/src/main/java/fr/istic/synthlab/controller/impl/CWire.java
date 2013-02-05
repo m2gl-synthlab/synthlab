@@ -28,7 +28,6 @@ public class CWire extends Wire implements ICWire {
 	@Override
 	public void connect(IInputPort port) {
 		super.connect(port);
-
 		IPInputPort pInputPort = ((ICInputPort) port).getPresentation();
 		((ICModule)((ICInputPort) port).getModule()).addWire(this);
 		pres.c2pConnectIn(pInputPort);
@@ -37,17 +36,14 @@ public class CWire extends Wire implements ICWire {
 	@Override
 	public void connect(IOutputPort port) {
 		super.connect(port);
-
 		IPOutputPort pOutputPort = ((ICOutputPort) port).getPresentation();
 		((ICModule)((ICOutputPort) port).getModule()).addWire(this);
 		pres.c2pConnectOut(pOutputPort);
 	}
 
-
 	@Override
 	public void disconnect(IInputPort port) {
 		super.disconnect(port);
-
 		IPInputPort pInputPort = ((ICInputPort) port).getPresentation();
 		pres.c2pDisconnectIn(pInputPort);
 	}
@@ -55,7 +51,6 @@ public class CWire extends Wire implements ICWire {
 	@Override
 	public void disconnect(IOutputPort port) {
 		super.disconnect(port);
-
 		IPOutputPort pOutputPort = ((ICOutputPort) port).getPresentation();
 		pres.c2pDisconnectOut(pOutputPort);
 	}

@@ -61,7 +61,6 @@ public class Synthesizer implements ISynthesizer {
 	
 	@Override
 	public void add(IWire wire) {
-		
 	}
 
 	@Override

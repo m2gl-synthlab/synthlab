@@ -53,6 +53,7 @@ public class Wire implements IWire {
 		if(this.getOutput() != null){
 			port.disconnect(getOutput());
 		}
+		input = null;
 	}
 
 	@Override
@@ -60,6 +61,7 @@ public class Wire implements IWire {
 		if(this.getInput() != null){
 			port.disconnect(getInput());
 		}
+		output = null;
 	}
 
 }
