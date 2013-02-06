@@ -2,11 +2,8 @@ package fr.istic.synthlab.abstraction;
 
 import junit.framework.TestCase;
 
-import com.jsyn.scope.AudioScope;
-import com.jsyn.unitgen.FourWayFade;
 import com.jsyn.unitgen.SineOscillator;
 
-import fr.istic.synthlab.abstraction.impl.ModuleOUT;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -27,17 +24,12 @@ public class ModuleTest extends TestCase {
 		SineOscillator osc = new SineOscillator();
 		synth.getJSyn().add(osc);
 		
-		IModule out = PACFactory.getFactory().newOUT(synth);
+		IModuleOUT out = PACFactory.getFactory().newOUT(synth);
 		synth.add(out);
-		osc.output.connect(out.getInput(ModuleOUT.INPUT_IN).getJSyn());
+		osc.output.connect(out.getInput().getJSyn());
 
-		AudioScope scope = new AudioScope(synth.getJSyn());
-//		scope.
-		
 		synth.start();
 		while (true) {
-			System.out.println("out : "
-					+ ((FourWayFade)out.getJSyn().get(1)).output.get());
 			System.out.println("osc : " + osc.output.get());
 		}
 	}

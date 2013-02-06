@@ -61,7 +61,7 @@ public class POutputPort extends JPanel implements IPOutputPort {
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				((PModule)((ICModule)getControl().getModule()).getPresentation()).dispatchEvent(e);
+				((APModule)((ICModule)getControl().getModule()).getPresentation()).dispatchEvent(e);
 			}
 			@Override
 			public void mouseDragged(MouseEvent e) {

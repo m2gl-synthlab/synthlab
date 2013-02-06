@@ -1,7 +1,6 @@
 package fr.istic.synthlab.presentation.impl;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -108,14 +107,14 @@ public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
 
 	@Override
 	public void c2pAddModule(IPModule module) {
-		((JInternalFrame) module).setVisible(true);
+		((APModule) module).setVisible(true);
 		this.add((JInternalFrame) module,0);
 
-		((JInternalFrame)module).setBounds(((modules.size())*(module.getWidth()+5)), 5, module.getWidth(), module.getHeight());
+		((APModule)module).setBounds(((modules.size())*(module.getWidth()+5)), 5, module.getWidth(), module.getHeight());
 		
 		modules.add(module);
-		((JInternalFrame)module).validate();
-		((JInternalFrame)module).repaint();
+		((APModule)module).validate();
+		((APModule)module).repaint();
 		
 		validate();
 		repaint();

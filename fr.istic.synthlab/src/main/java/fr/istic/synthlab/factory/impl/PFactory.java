@@ -2,6 +2,8 @@ package fr.istic.synthlab.factory.impl;
 
 import fr.istic.synthlab.controller.ICInputPort;
 import fr.istic.synthlab.controller.ICModule;
+import fr.istic.synthlab.controller.ICModuleOUT;
+import fr.istic.synthlab.controller.ICModuleVCO;
 import fr.istic.synthlab.controller.ICOutputPort;
 import fr.istic.synthlab.controller.ICParameter;
 import fr.istic.synthlab.controller.ICSynthesizer;
@@ -9,12 +11,16 @@ import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.factory.IPFactory;
 import fr.istic.synthlab.presentation.IPInputPort;
 import fr.istic.synthlab.presentation.IPModule;
+import fr.istic.synthlab.presentation.IPModuleOUT;
+import fr.istic.synthlab.presentation.IPModuleVCO;
 import fr.istic.synthlab.presentation.IPOutputPort;
 import fr.istic.synthlab.presentation.IPParameter;
 import fr.istic.synthlab.presentation.IPSynthesizer;
 import fr.istic.synthlab.presentation.IPWire;
 import fr.istic.synthlab.presentation.impl.PInputPort;
 import fr.istic.synthlab.presentation.impl.PModule;
+import fr.istic.synthlab.presentation.impl.PModuleOUT;
+import fr.istic.synthlab.presentation.impl.PModuleVCO;
 import fr.istic.synthlab.presentation.impl.POutputPort;
 import fr.istic.synthlab.presentation.impl.PParameter;
 import fr.istic.synthlab.presentation.impl.PSwitch;
@@ -38,8 +44,8 @@ public class PFactory implements IPFactory {
 	}
 
 	@Override
-	public IPModule newVCO(ICModule control) {
-		return new PModule(control); // TODO Ameliorer Presentation
+	public IPModuleVCO newVCO(ICModuleVCO control) {
+		return new PModuleVCO(control); // TODO Ameliorer Presentation
 	}
 
 	@Override
@@ -48,8 +54,8 @@ public class PFactory implements IPFactory {
 	}
 
 	@Override
-	public IPModule newOUT(ICModule control) {
-		return new PModule(control); // TODO Ameliorer Presentation
+	public IPModuleOUT newOUT(ICModuleOUT control) {
+		return new PModuleOUT(control);
 	}
 
 	@Override

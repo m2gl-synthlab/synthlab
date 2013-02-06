@@ -12,13 +12,13 @@ import com.jsyn.unitgen.TriangleOscillator;
 import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.IInputPort;
-import fr.istic.synthlab.abstraction.IModule;
+import fr.istic.synthlab.abstraction.IModuleVCO;
 import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.IParameter;
 import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
-public class ModuleVCO implements IModule {
+public class ModuleVCO extends AModule implements IModuleVCO {
 
 	public static final int INPUT_MOD_FREQ = 0;
 	
@@ -52,9 +52,8 @@ public class ModuleVCO implements IModule {
 	private Map<Integer, IOutputPort> outputs;
 	private Map<Integer, IParameter> params;
 
-	private ISynthesizer parentSynth;
-
-	public ModuleVCO(String name) {
+	public ModuleVCO(ISynthesizer synth) {
+		super(MODULE_NAME, synth);
 		this.vcoSquare =  new SquareOscillator();
 		this.vcoTriangle =  new TriangleOscillator();
 		this.vcoSine =  new SineOscillator();
@@ -135,14 +134,5 @@ public class ModuleVCO implements IModule {
 		return params.get(identifier);
 	}
 
-	@Override
-	public ISynthesizer getSynthesizer() {
-		return parentSynth;
-	}
-
-	@Override
-	public void setSynthesizer(ISynthesizer synth) {
-		parentSynth = synth;
-	}
 
 }
