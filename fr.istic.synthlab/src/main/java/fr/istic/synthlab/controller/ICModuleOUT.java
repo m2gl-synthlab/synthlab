@@ -26,5 +26,4 @@ public interface ICModuleOUT extends ICModule, IModuleOUT {
 	 * @param gain
 	 */
 	public void p2cGainChanged(double gain);
-
 }

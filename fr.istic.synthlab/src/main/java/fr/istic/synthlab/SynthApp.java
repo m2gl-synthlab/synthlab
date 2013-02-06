@@ -9,6 +9,7 @@ import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
+
 /**
  * Application
  */
