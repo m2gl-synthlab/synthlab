@@ -1,19 +1,20 @@
 package fr.istic.synthlab.presentation.impl;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
 
 import com.alee.laf.desktoppane.WebDesktopPane;
 
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IOutputPort;
+import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.presentation.IPModule;
@@ -106,10 +107,12 @@ public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
 		repaint();
 	}
 
+	private int z=0;
 	@Override
 	public void c2pAddModule(IPModule module) {
 		((JInternalFrame) module).setVisible(true);
-		this.add((JInternalFrame) module,0);
+		this.add((JInternalFrame) module);
+		this.setLayer(((JInternalFrame) module), 0);
 
 		((JInternalFrame)module).setBounds(((modules.size())*(module.getWidth()+5)), 5, module.getWidth(), module.getHeight());
 		
@@ -129,7 +132,8 @@ public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
 	int i=0;
 	@Override
 	public void c2pAddWire(IPWire wire) {
-		this.add((PWire) wire, new Integer(++i));
+		
+		this.add((PWire) wire);
 		System.out.println("c2pAddWire Adding wire");
 		validate();
 		repaint();

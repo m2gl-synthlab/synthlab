@@ -7,11 +7,16 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
+import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 
+import fr.istic.synthlab.controller.ICModule;
+import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.presentation.IPInputPort;
 import fr.istic.synthlab.presentation.IPOutputPort;
+import fr.istic.synthlab.presentation.IPSynthesizer;
 import fr.istic.synthlab.presentation.IPWire;
 
 public class PWire extends JPanel implements IPWire {
@@ -118,8 +123,12 @@ public class PWire extends JPanel implements IPWire {
 		}
 
 		setPreferredSize(new Dimension(width, height));
-
 		setBounds(x + (POutputPort.width / 2), y + (POutputPort.height / 2), width, height);
+		
+		ICSynthesizer synth = (ICSynthesizer) outputPort.getControl().getModule().getSynthesizer();
+		IPSynthesizer presSynth = synth.getPresentation();
+		((JDesktopPane) presSynth).setLayer(this, 0, 0);
+		
 		repaint();
 		validate();
 	}
