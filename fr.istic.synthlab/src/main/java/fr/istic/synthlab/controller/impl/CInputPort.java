@@ -2,9 +2,10 @@ package fr.istic.synthlab.controller.impl;
 
 import com.jsyn.ports.UnitInputPort;
 
-import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.InputPort;
+import fr.istic.synthlab.command.ICommand;
+import fr.istic.synthlab.command.toolbar.ToolbarWireCommand;
 import fr.istic.synthlab.controller.ICInputPort;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.IPInputPort;
@@ -54,6 +55,13 @@ public class CInputPort extends InputPort implements ICInputPort {
 		} else {
 			System.out.println("wire cinputport not null");
 		}
+		
+		ICommand wireCommand=new ToolbarWireCommand(getModule().getSynthesizer());
+		if(getModule().getSynthesizer().getCurrentWire().getInput()!=null &&
+				getModule().getSynthesizer().getCurrentWire().getOutput()!=null){
+		wireCommand.execute();
+		System.out.println("EXECUTE");
+		}
 	}
 	
 
@@ -61,6 +69,7 @@ public class CInputPort extends InputPort implements ICInputPort {
 	@Override
 	public void p2cDisconnect() {
 		if(getWire() != null){
+			
 			getWire().disconnect();
 		}
 	}

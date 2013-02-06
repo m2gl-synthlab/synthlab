@@ -62,6 +62,7 @@ public class SynthMain {
 		frame.setAddModuleVCOCommand(new AddModuleVCOCommand(app.getSynthesizer()));
 		frame.setAddModuleVCFCommand(new AddModuleVCFCommand(app.getSynthesizer()));
 		
+		frame.startWire();
 //		frame.setToolbarRecordCommand(new ToolbarRecordCommand());
 		
 		// Start the application

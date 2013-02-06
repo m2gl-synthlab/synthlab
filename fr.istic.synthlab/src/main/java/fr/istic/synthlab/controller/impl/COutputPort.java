@@ -5,6 +5,8 @@ import com.jsyn.ports.UnitOutputPort;
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.OutputPort;
+import fr.istic.synthlab.command.ICommand;
+import fr.istic.synthlab.command.toolbar.ToolbarWireCommand;
 import fr.istic.synthlab.controller.ICOutputPort;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.IPOutputPort;
@@ -47,6 +49,12 @@ public class COutputPort extends OutputPort implements ICOutputPort {
 				this.setWire(currentWire);
 				getWire().connect(this);
 			}
+		}
+		ICommand wireCommand=new ToolbarWireCommand(getModule().getSynthesizer());
+		if(getModule().getSynthesizer().getCurrentWire().getInput()!=null &&
+				getModule().getSynthesizer().getCurrentWire().getOutput()!=null){
+		wireCommand.execute();
+		System.out.println("EXECUTE");
 		}
 	}
 	
