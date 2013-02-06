@@ -5,6 +5,8 @@ import com.jsyn.ports.UnitOutputPort;
 
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModule;
+import fr.istic.synthlab.abstraction.IModuleOUT;
+import fr.istic.synthlab.abstraction.IModuleVCO;
 import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.IParameter;
 import fr.istic.synthlab.abstraction.ISynthesizer;
@@ -14,9 +16,9 @@ public interface IFactory {
 
 	ISynthesizer newSynthesizer();
 	
-	IModule newVCO(ISynthesizer synth);
+	IModuleVCO newVCO(ISynthesizer synth);
 	IModule newVCF(ISynthesizer synth);
-	IModule newOUT(ISynthesizer synth);
+	IModuleOUT newOUT(ISynthesizer synth);
 	
 	IParameter newParameter(IModule mod, String name, double min, double max, double value);
 	IParameter newSwitch(IModule mod, String string, boolean value);

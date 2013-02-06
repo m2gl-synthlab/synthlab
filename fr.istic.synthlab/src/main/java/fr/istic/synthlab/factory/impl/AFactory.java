@@ -5,6 +5,8 @@ import com.jsyn.ports.UnitOutputPort;
 
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModule;
+import fr.istic.synthlab.abstraction.IModuleOUT;
+import fr.istic.synthlab.abstraction.IModuleVCO;
 import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.IParameter;
 import fr.istic.synthlab.abstraction.ISynthesizer;
@@ -41,23 +43,9 @@ public class AFactory implements IFactory {
 		return syn;
 	}
 
-	public IModule newModule(ISynthesizer synth, String name) {
-		if (name == MODULE_VCO) {
-			return newVCO(synth);
-		}
-		if (name == MODULE_OUT) {
-			return newOUT(synth);
-		}
-		if (name == MODULE_VCF) {
-			return newVCF(synth);
-		}
-		return null;
-	}
-
 	@Override
-	public IModule newVCO(ISynthesizer synth) {
-		IModule module = new ModuleVCO(MODULE_VCO);
-		module.setSynthesizer(synth);
+	public IModuleVCO newVCO(ISynthesizer synth) {
+		IModuleVCO module = new ModuleVCO(synth);
 		return module;
 	}
 
@@ -69,9 +57,8 @@ public class AFactory implements IFactory {
 	}
 
 	@Override
-	public IModule newOUT(ISynthesizer synth) {
-		IModule module = new ModuleOUT(MODULE_OUT);
-		module.setSynthesizer(synth);
+	public IModuleOUT newOUT(ISynthesizer synth) {
+		IModuleOUT module = new ModuleOUT(synth);
 		return module;
 	}
 

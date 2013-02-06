@@ -1,14 +1,12 @@
 package fr.istic.synthlab;
 
 import fr.istic.synthlab.abstraction.IModule;
+import fr.istic.synthlab.abstraction.IModuleOUT;
 import fr.istic.synthlab.abstraction.IWire;
-import fr.istic.synthlab.abstraction.impl.ModuleOUT;
 import fr.istic.synthlab.abstraction.impl.ModuleVCF;
 import fr.istic.synthlab.abstraction.impl.ModuleVCO;
-import fr.istic.synthlab.abstraction.impl.Synthesizer;
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.controller.ICSynthesizer;
-import fr.istic.synthlab.controller.impl.CSynthesizer;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 /**
@@ -35,6 +33,10 @@ public class SynthApp implements ISynthApp {
 		this.synth = (ICSynthesizer) PACFactory.getFactory().newSynthesizer();
 		
 		displayCmd.execute();
+
+		// Add a OUT module
+		IModuleOUT out = PACFactory.getFactory().newOUT(synth);
+		synth.add(out);
 		
 		// Add a VCO module
 		IModule vco = PACFactory.getFactory().newVCO(synth);
@@ -45,9 +47,6 @@ public class SynthApp implements ISynthApp {
 		IModule vcf = PACFactory.getFactory().newVCF(synth);
 		synth.add(vcf);
 
-		// Add a OUT module
-		IModule out = PACFactory.getFactory().newOUT(synth);
-		synth.add(out);
 		
 		// Add a wire between VCO and VCF
 		IWire wire0 = PACFactory.getFactory().newWire();
@@ -57,16 +56,10 @@ public class SynthApp implements ISynthApp {
 		
 		
 		// Add a wire between CVF and OUT
-		IWire wire1 = PACFactory.getFactory().newWire();
-		wire1.connect(vcf.getOutput(ModuleVCF.OUTPUT_OUT));
-		wire1.connect(out.getInput(ModuleOUT.INPUT_IN));
-		synth.add(wire1);
-		
-		//wire1.disconnect();
-		
-		
-		
-
+//		IWire wire1 = PACFactory.getFactory().newWire();
+//		wire1.connect(vcf.getOutput(ModuleVCF.OUTPUT_OUT));
+//		wire1.connect(out.getInput(ModuleOUT.INPUT_IN));
+//		synth.add(wire1);
 	}
 
 	@Override

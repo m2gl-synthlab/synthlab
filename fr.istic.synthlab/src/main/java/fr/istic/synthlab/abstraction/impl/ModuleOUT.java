@@ -1,118 +1,108 @@
 package fr.istic.synthlab.abstraction.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.jsyn.unitgen.ChannelOut;
-import com.jsyn.unitgen.FourWayFade;
+import com.jsyn.unitgen.UnitFilter;
 import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.IInputPort;
-import fr.istic.synthlab.abstraction.IModule;
-import fr.istic.synthlab.abstraction.IOutputPort;
-import fr.istic.synthlab.abstraction.IParameter;
+import fr.istic.synthlab.abstraction.IModuleOUT;
 import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
-public class ModuleOUT implements IModule {
-
-	public static final int INPUT_IN = 0;
-	
-	public static final int PARAM_GAIN = 0;
-	public static final int PARAM_SWITCH_ON_OFF = 1;
+public class ModuleOUT extends AModule implements IModuleOUT {
 
 	private static final String MODULE_NAME = "OUT";
-
 	private static final String IN_NAME = "In";
-	private static final String GAIN_NAME = "Gain";
-	private static final String MUTE_NAME = "Mute";
 
-	private ISynthesizer parentSynth;
-	
-	private ChannelOut vca;
-	private FourWayFade fader;
-	private Map<Integer, IInputPort> inputs;
-	private Map<Integer, IParameter> params;
+	private ChannelOut out;
+	private AttenuationFilter fade;
 
-	public ModuleOUT(String name) {
-		this.vca = new ChannelOut();
-		this.fader = new FourWayFade();
+	private IInputPort in;
+	private boolean isMute;
+
+	public ModuleOUT(ISynthesizer synth) {
+		super(MODULE_NAME, synth);
+		System.out.println("ModuleOUT initialized");
+
+		this.out = new ChannelOut();
+		this.fade = new AttenuationFilter();
+
+		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME, fade.input);
+		this.fade.attenuationValue = 0;
+
+		fade.output.connect(out.input);
 		
-		this.inputs = new HashMap<Integer, IInputPort>();
-		this.params = new HashMap<Integer, IParameter>();
-	
-		this.inputs.put(ModuleOUT.INPUT_IN, PACFactory.getFactory().newInputPort(this, IN_NAME, fader.input, 1));
-		
-		fader.fade.setMinimum(-1);
-		fader.output.connect(vca.input);
-		
-		IParameter gain = PACFactory.getFactory().newParameter(this, GAIN_NAME, fader.fade.getMinimum(),12,0);
-		gain.connect(fader.fade);
-		this.params.put(ModuleOUT.PARAM_GAIN, gain);
-		
-		IParameter switchOnOff = PACFactory.getFactory().newSwitch(this, MUTE_NAME, false);
-		switchOnOff.connect(vca.input);
-		this.params.put(ModuleOUT.PARAM_SWITCH_ON_OFF, switchOnOff);
 	}
 
 	@Override
 	public List<UnitGenerator> getJSyn() {
 		List<UnitGenerator> generators = new ArrayList<UnitGenerator>();
-		generators.add(vca);
-		generators.add(fader);
+		generators.add(out);
+		generators.add(fade);
 		return generators;
 	}
 
 	@Override
-	public String getName() {
-		return MODULE_NAME;
-	}
-
-	@Override
 	public void start() {
-		vca.start();
+		out.start();
 	}
 
 	@Override
 	public void stop() {
-		vca.stop();
+		out.stop();
 	}
 
 	@Override
-	public IOutputPort getOutput(int identifier) {
-		System.err.println("No Output in " + getClass().getSimpleName());
-		return null;
+	public void setAttenuation(double value) {
+		fade.attenuationValue = value;
 	}
 
 	@Override
-	public IInputPort getInput(int identifier) {
-		return inputs.get(identifier);
+	public double getAttenuation() {
+		return fade.attenuationValue;
 	}
 
 	@Override
-	public IParameter getParameter(int identifier) {
-		return params.get(identifier);
+	public IInputPort getInput() {
+		return this.in;
 	}
 
 	@Override
-	public ISynthesizer getSynthesizer() {
-		return parentSynth;
+	public void setMute(boolean mute) {
+		this.isMute = mute;
 	}
 
 	@Override
-	public void setSynthesizer(ISynthesizer synth) {
-		parentSynth = synth;
+	public boolean isMute() {
+		return isMute;
+	}
+
+	private class AttenuationFilter extends UnitFilter {
+		double attenuationValue = 0;
+
+		@Override
+		public void generate(int start, int limit) {
+			// Get signal arrays from ports.
+			double[] inputs = input.getValues();
+			double[] outputs = output.getValues();
+
+			for (int i = start; i < limit; i++) {
+				double x = inputs[i];
+				outputs[i] = 20 * Math.log(attenuationValue/x); // TODO : Check if ok
+				System.out.println(attenuationValue + " " +i + " = " + outputs[i]);
+			}
+		}
+
 	}
 	
 	@Override
 	public List<IWire> getWires() {
 		List<IWire> wires = new ArrayList<IWire>();
-		for(IInputPort inputPort : inputs.values()){
-			wires.add(inputPort.getWire());
-		}
+		wires.add(in.getWire());
 		return wires;
 	}
 

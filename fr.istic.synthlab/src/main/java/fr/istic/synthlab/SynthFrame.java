@@ -2,7 +2,6 @@ package fr.istic.synthlab;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -27,7 +26,6 @@ import com.alee.extended.statusbar.WebStatusBar;
 import com.alee.extended.statusbar.WebStatusLabel;
 import com.alee.laf.toolbar.ToolbarStyle;
 import com.alee.laf.toolbar.WebToolBar;
-import com.softsynth.jsyn.view102.UsageDisplay;
 
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.presentation.IPSynthesizer;

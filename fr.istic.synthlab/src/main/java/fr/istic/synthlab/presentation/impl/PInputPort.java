@@ -2,7 +2,6 @@ package fr.istic.synthlab.presentation.impl;
 
 import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.BorderFactory;
@@ -13,6 +12,7 @@ import javax.swing.JPanel;
 import fr.istic.synthlab.controller.ICInputPort;
 import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.presentation.IPInputPort;
+import fr.istic.synthlab.presentation.util.SimpleMouseListener;
 
 public class PInputPort extends JPanel implements IPInputPort {
 
@@ -44,9 +44,9 @@ public class PInputPort extends JPanel implements IPInputPort {
 	}
 
 	private void defineCallbacks() {
-		this.addMouseListener(new MouseListener() {
+		this.addMouseListener(new SimpleMouseListener() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
+			public void mouseClicked(MouseEvent e) {
 				System.out.println("PInputPort clicked");
 				if(ctrl.getWire() != null){
 					System.out.println("ctrl.getWire() != null");
@@ -56,20 +56,12 @@ public class PInputPort extends JPanel implements IPInputPort {
 					ctrl.p2cConnect();
 				}
 			}
-			@Override
-			public void mouseReleased(MouseEvent arg0) {}
-			@Override
-			public void mousePressed(MouseEvent arg0) {}
-			@Override
-			public void mouseExited(MouseEvent arg0) {}
-			@Override
-			public void mouseEntered(MouseEvent arg0) {}
 		});
 		
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				((PModule)((ICModule)getControl().getModule()).getPresentation()).dispatchEvent(e);
+				((APModule)((ICModule)getControl().getModule()).getPresentation()).dispatchEvent(e);
 			}
 			@Override
 			public void mouseDragged(MouseEvent e) {
