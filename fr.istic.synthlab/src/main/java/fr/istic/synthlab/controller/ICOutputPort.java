@@ -14,5 +14,5 @@ public interface ICOutputPort extends IOutputPort {
 
 	void p2cConnect();
 
-	public IWire getWire();
+	public void p2cDisconnect();
 }

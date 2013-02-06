@@ -14,6 +14,7 @@ import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.IParameter;
 import fr.istic.synthlab.abstraction.ISynthesizer;
+import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleOUT implements IModule {
@@ -104,6 +105,15 @@ public class ModuleOUT implements IModule {
 	@Override
 	public void setSynthesizer(ISynthesizer synth) {
 		parentSynth = synth;
+	}
+	
+	@Override
+	public List<IWire> getWires() {
+		List<IWire> wires = new ArrayList<IWire>();
+		for(IInputPort inputPort : inputs.values()){
+			wires.add(inputPort.getWire());
+		}
+		return wires;
 	}
 
 }

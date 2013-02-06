@@ -62,6 +62,8 @@ public class SynthApp implements ISynthApp {
 		wire1.connect(out.getInput(ModuleOUT.INPUT_IN));
 		synth.add(wire1);
 		
+		//wire1.disconnect();
+		
 		
 		
 

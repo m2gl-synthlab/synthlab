@@ -12,7 +12,6 @@ import fr.istic.synthlab.presentation.IPOutputPort;
 public class COutputPort extends OutputPort implements ICOutputPort {
 
 	private IPOutputPort pres;
-	private IWire wire;
 
 	public COutputPort(String name) {
 		super(name);
@@ -42,27 +41,20 @@ public class COutputPort extends OutputPort implements ICOutputPort {
 
 	@Override
 	public void p2cConnect() {
-		if (wire == null) {
+		if (getWire() == null) {
 			IWire currentWire = getModule().getSynthesizer().getCurrentWire();
 			if (currentWire != null && currentWire.getOutput() == null) {
-				wire = currentWire;
-				wire.connect(this);
+				this.setWire(currentWire);
+				getWire().connect(this);
 			}
 		}
 	}
 	
 	@Override
-	public void disconnect(IInputPort inputPort) {
-		System.out.println("COutputport deco in");
-		if(wire != null){
-			wire.disconnect(inputPort);
+	public void p2cDisconnect() {
+		if(getWire() != null){
+			getWire().disconnect();
 		}
-		super.disconnect(inputPort);
-	}
-
-	@Override
-	public IWire getWire() {
-		return wire;
 	}
 
 }

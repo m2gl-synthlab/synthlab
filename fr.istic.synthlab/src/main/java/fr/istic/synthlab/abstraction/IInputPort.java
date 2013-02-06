@@ -27,20 +27,6 @@ public interface IInputPort {// extends ConnectableInput, GettablePort, Settable
 	public String getName();
 
 	/**
-	 * Connect to the given output port
-	 * 
-	 * @param outPort
-	 */
-	public void connect(IOutputPort outPort);
-
-	/**
-	 * Disconnect from the given output port
-	 * 
-	 * @param outPort
-	 */
-	public void disconnect(IOutputPort outPort);
-
-	/**
 	 * Set a new value to the port
 	 * 
 	 * @param value
@@ -98,5 +84,8 @@ public interface IInputPort {// extends ConnectableInput, GettablePort, Settable
 	 * @return the module
 	 */
 	public void setModule(IModule mod);
+	
+	public IWire getWire();
+	public void setWire(IWire wire);
 	
 }

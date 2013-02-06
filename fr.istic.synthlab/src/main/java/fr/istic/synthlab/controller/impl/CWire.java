@@ -6,6 +6,7 @@ import fr.istic.synthlab.abstraction.impl.Wire;
 import fr.istic.synthlab.controller.ICInputPort;
 import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICOutputPort;
+import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.IPInputPort;
@@ -29,7 +30,7 @@ public class CWire extends Wire implements ICWire {
 	public void connect(IInputPort port) {
 		super.connect(port);
 		IPInputPort pInputPort = ((ICInputPort) port).getPresentation();
-		((ICModule)((ICInputPort) port).getModule()).addWire(this);
+//		((ICModule)((ICInputPort) port).getModule()).addWire(this);
 		pres.c2pConnectIn(pInputPort);
 	}
 
@@ -37,22 +38,17 @@ public class CWire extends Wire implements ICWire {
 	public void connect(IOutputPort port) {
 		super.connect(port);
 		IPOutputPort pOutputPort = ((ICOutputPort) port).getPresentation();
-		((ICModule)((ICOutputPort) port).getModule()).addWire(this);
+//		((ICModule)((ICOutputPort) port).getModule()).addWire(this);
 		pres.c2pConnectOut(pOutputPort);
 	}
 
 	@Override
-	public void disconnect(IInputPort port) {
-		super.disconnect(port);
-		IPInputPort pInputPort = ((ICInputPort) port).getPresentation();
-		pres.c2pDisconnectIn(pInputPort);
-	}
-
-	@Override
-	public void disconnect(IOutputPort port) {
-		super.disconnect(port);
-		IPOutputPort pOutputPort = ((ICOutputPort) port).getPresentation();
-		pres.c2pDisconnectOut(pOutputPort);
+	public void disconnect() {
+		System.out.println("CWire disconnect");
+		ICSynthesizer synth = ((ICSynthesizer)this.getInput().getModule().getSynthesizer());
+		synth.getPresentation().removeWire(pres);
+		pres = null;
+		super.disconnect();
 	}
 	
 }

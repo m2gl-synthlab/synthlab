@@ -13,6 +13,7 @@ import javax.swing.event.AncestorListener;
 
 import com.alee.laf.desktoppane.WebInternalFrame;
 
+import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.ICWire;
@@ -69,10 +70,10 @@ public class PModule extends WebInternalFrame implements IPModule {
 			
 			@Override
 			public void ancestorMoved(AncestorEvent event) {
-	            List<ICWire> wires = ctrl.getWires();
-	            for(ICWire wire : wires){
+	            List<IWire> wires = ctrl.getWires();
+	            for(IWire wire : wires){
 	            	if(wire!=null){
-	            		wire.getPresentation().updateDisplay();
+	            		(((ICWire) wire).getPresentation()).updateDisplay();
 	            	}
 	            }
 			}

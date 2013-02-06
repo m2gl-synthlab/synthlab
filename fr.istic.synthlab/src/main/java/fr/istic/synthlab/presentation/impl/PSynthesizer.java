@@ -146,4 +146,11 @@ public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
 		repaint();
 	}
 
+	@Override
+	public void removeWire(IPWire pres) {
+		this.remove((PWire)pres);
+		validate();
+		repaint();
+	}
+
 }

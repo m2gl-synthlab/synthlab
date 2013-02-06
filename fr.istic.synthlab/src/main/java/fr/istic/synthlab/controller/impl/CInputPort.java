@@ -49,19 +49,20 @@ public class CInputPort extends InputPort implements ICInputPort {
 				wire.connect(this);
 			}
 		}
-	}
-	
-	@Override
-	public void disconnect(IOutputPort outputPort) {
-		System.out.println("CInputport disconect out");
-		super.disconnect(outputPort);
-		if(wire != null){
-			wire.disconnect(outputPort);
+		if(wire == null){
+			System.out.println("wire cinputport null");
+		} else {
+			System.out.println("wire cinputport not null");
 		}
 	}
+	
+
+	
 	@Override
-	public IWire getWire() {
-		return wire;
+	public void p2cDisconnect() {
+		if(getWire() != null){
+			getWire().disconnect();
+		}
 	}
 
 	

@@ -18,14 +18,10 @@ import fr.istic.synthlab.presentation.IPModule;
 public class CModuleVCF extends ModuleVCF implements ICModule {
 
 	private IPModule pres;
-	private List<ICWire> wires;
 
 	public CModuleVCF(String name) {
 		super(name);
 		this.pres = PACFactory.getPFactory().newVCF(this);
-
-		wires = new ArrayList<ICWire>();
-		
 
 		IParameter amplitude = this.getParameter(PARAM_AMPLITUDE);
 		pres.addParameter(((ICParameter) amplitude).getPresentation());
@@ -45,15 +41,4 @@ public class CModuleVCF extends ModuleVCF implements ICModule {
 	public IPModule getPresentation() {
 		return pres;
 	}
-	
-	@Override
-	public List<ICWire> getWires() {
-		return wires;
-	}
-
-	@Override
-	public void addWire(ICWire cWire) {
-		wires.add(cWire);
-	}
-
 }

@@ -70,4 +70,6 @@ public interface IModule {
 	 * @return the Synthesizer
 	 */
 	public void setSynthesizer(ISynthesizer synth);
+	
+	public List<IWire> getWires() ;
 }

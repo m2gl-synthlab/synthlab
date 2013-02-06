@@ -13,9 +13,4 @@ public interface ICModule extends IModule{
 	 * @return presentation
 	 */
 	public IPModule  getPresentation();
-
-	public List<ICWire> getWires();
-
-	public void addWire(ICWire cWire);
-	
 }

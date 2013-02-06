@@ -8,6 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICOutputPort;
@@ -44,9 +45,19 @@ public class POutputPort extends JPanel implements IPOutputPort {
 	private void defineCallbacks() {
 		this.addMouseListener(new MouseListener() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				System.out.println("POutputPort clicked");
-				ctrl.p2cConnect();
+			public void mouseClicked(MouseEvent e) {
+//				System.out.println("POutputPort clicked");
+//				if(SwingUtilities.isRightMouseButton(e)){
+//					System.out.println("right click!!");
+//				}
+				
+				if(ctrl.getWire() != null){
+					System.out.println("ctrl.getWire() != null");
+					ctrl.p2cDisconnect();
+				} else {
+					System.out.println("ctrl.getWire() = null");
+					ctrl.p2cConnect();
+				}
 			}
 			@Override
 			public void mouseReleased(MouseEvent arg0) {}

@@ -83,4 +83,7 @@ public interface IOutputPort {// extends ConnectableInput, GettablePort{
 	 * @return the module
 	 */
 	public void setModule(IModule mod);
+	
+	public IWire getWire();
+	public void setWire(IWire wire);
 }

@@ -16,15 +16,11 @@ import fr.istic.synthlab.presentation.IPModule;
 public class CModuleOUT extends ModuleOUT implements ICModule{
 
 	private IPModule pres;
-	private List<ICWire> wires;
 
 	public CModuleOUT(String name) {
 		super(name);
 		this.pres = PACFactory.getPFactory().newOUT(this);
 	
-		wires = new ArrayList<ICWire>();
-		
-		
 		IParameter gain = this.getParameter(PARAM_GAIN);
 		pres.addParameter(((ICParameter) gain).getPresentation());
 		
@@ -40,15 +36,4 @@ public class CModuleOUT extends ModuleOUT implements ICModule{
 	public IPModule getPresentation() {
 		return pres;
 	}
-
-	@Override
-	public List<ICWire> getWires() {
-		return wires;
-	}
-	
-	@Override
-	public void addWire(ICWire cWire) {
-		wires.add(cWire);
-	}
-	
 }

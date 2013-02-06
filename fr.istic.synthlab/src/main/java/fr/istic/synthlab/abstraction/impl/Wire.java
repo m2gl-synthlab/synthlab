@@ -44,24 +44,23 @@ public class Wire implements IWire {
 	 * Try to connect the 2 ports
 	 */
 	private void connect() {
-		if (output != null && input != null)
+		if (output != null && input != null){
 			this.output.connect(input);
+			output.setWire(this);
+			input.setWire(this);
+		}
 	}
 
 	@Override
-	public void disconnect(IInputPort port) {
-		if(this.getOutput() != null){
-			port.disconnect(getOutput());
+	public void disconnect() {
+		System.out.println("Wire disconnect");
+		if((output != null)&&(input != null)){
+			System.out.println("Wire disconnect ports not null");
+			output.disconnect(input);
+			output.setWire(null);
+			input.setWire(null);
 		}
-		input = null;
-	}
-
-	@Override
-	public void disconnect(IOutputPort port) {
-		if(this.getInput() != null){
-			port.disconnect(getInput());
-		}
-		output = null;
+		input.getModule().getSynthesizer().remove(this);
 	}
 
 }

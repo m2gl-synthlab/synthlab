@@ -5,6 +5,7 @@ import com.jsyn.ports.UnitInputPort;
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.IOutputPort;
+import fr.istic.synthlab.abstraction.IWire;
 
 public class InputPort implements IInputPort {
 
@@ -12,6 +13,8 @@ public class InputPort implements IInputPort {
 	private int defaultPart = 0;
 	private UnitInputPort port;
 	private IModule parentModule;
+	
+	private IWire wire;
 
 	/**
 	 * @param name
@@ -45,21 +48,6 @@ public class InputPort implements IInputPort {
 	@Override
 	public String getName() {
 		return this.name;
-	}
-
-	@Override
-	public void connect(IOutputPort outPort) {
-		if (!port.isConnected())
-			port.connect(this.defaultPart, outPort.getJSyn(),
-					outPort.getDefaultPart());
-	}
-
-	@Override
-	public void disconnect(IOutputPort outPort) {
-		if (port.isConnected()) {
-			port.disconnect(outPort.getJSyn());
-			System.out.println("Input disconnected");
-		}
 	}
 
 	@Override
@@ -101,5 +89,16 @@ public class InputPort implements IInputPort {
 	public void setModule(IModule mod) {
 		parentModule = mod;
 	}
+
+	@Override
+	public IWire getWire() {
+		return wire;
+	}
+
+	@Override
+	public void setWire(IWire wire) {
+		this.wire = wire;
+	}
+	
 
 }
