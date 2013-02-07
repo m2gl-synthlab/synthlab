@@ -60,7 +60,6 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	@Override
 	public void setAttenuation(double value) {
-		
 		fade.attenuationValue = value;
 	}
 
