@@ -20,16 +20,8 @@ import fr.istic.synthlab.controller.ICInputPort;
 import fr.istic.synthlab.controller.ICModuleOUT;
 import fr.istic.synthlab.presentation.IPModuleOUT;
 
-
-
 /**
  * Presentation for a OUT module
-=======
-import fr.istic.synthlab.presentation.util.SimpleMouseListener;
-
-/**
- * Presentation of a module
->>>>>>> Test d'une nouvelle technique pour les modules
  */
 public class PModuleOUT extends APModule implements IPModuleOUT {
 

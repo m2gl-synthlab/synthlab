@@ -63,11 +63,9 @@ public abstract class APModule extends WebInternalFrame implements IPModule {
 		});
 
 	}
-		
 	@Override
 	public void addInputPort(IPInputPort presentation) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

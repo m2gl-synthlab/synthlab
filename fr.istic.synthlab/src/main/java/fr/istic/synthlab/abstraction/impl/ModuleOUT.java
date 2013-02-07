@@ -34,7 +34,8 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 		this.out = new ChannelOut();
 		this.fade = new AttenuationFilter();
 
-		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME, fade.input);
+		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME,
+				fade.input);
 		this.fade.attenuationValue = 0;
 
 		fade.output.connect(out.input);
@@ -113,6 +114,5 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 				// see : http://fr.wikipedia.org/wiki/Niveau_(audio)
 			}
 		}
-		
 	}
 }
