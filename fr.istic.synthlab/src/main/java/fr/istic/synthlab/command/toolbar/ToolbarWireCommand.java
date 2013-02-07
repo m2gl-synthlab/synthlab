@@ -29,14 +29,14 @@ public class ToolbarWireCommand implements ICommand {
 			if(in == null){
 				if(out != null){
 					// On disconnect
-					this.synth.getCurrentWire().disconnect(out);
+					this.synth.getCurrentWire().disconnect();
 					System.out.println("Disconnect out");
 				}
 			}
 			if(out == null){
 				if(in != null){
 					// On disconnect
-					this.synth.getCurrentWire().disconnect(in);
+					this.synth.getCurrentWire().disconnect();
 					System.out.println("Disconnect in");
 				}
 			}

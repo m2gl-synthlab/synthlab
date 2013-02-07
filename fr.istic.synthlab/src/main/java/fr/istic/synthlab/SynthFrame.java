@@ -37,11 +37,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 	// constantes pour les boutons de la toolbar
 	private static final int BUTTON_DEFAULT = 0;
-	private static final int BUTTON_WIRE = 1;
 //	private static final int BUTTON_MODULE = 2;
 
-	private static final int BUTTON_PLAY = 2;
-	private static final int BUTTON_PAUSE = 3;
+	private static final int BUTTON_PLAY = 1;
+	private static final int BUTTON_PAUSE = 2;
 //	private static final int BUTTON_RECORD = 5;
 
 	private IPSynthesizer pres;
@@ -55,8 +54,8 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 	// Toolbar
 	private WebToolBar toolBar = new WebToolBar();
-	private String[] iconFiles = { "res/default.png", "res/wire.png", "res/play.png", "res/pause.png" };
-	private String[] buttonLabels = { "Default", "Wire", "Play", "Pause" };
+	private String[] iconFiles = { "res/default.png", "res/play.png", "res/pause.png" };
+	private String[] buttonLabels = { "Default", "Play", "Pause" };
 	private Image[] icons = new Image[iconFiles.length];
 	private JButton[] buttons = new JButton[buttonLabels.length];
 	
@@ -92,6 +91,8 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	 */
 	private void initComponents() {
 		// instanciation de la barre de menu
+		
+	
 		mainMenuBar = new JMenuBar();
 
 		// -------------------------- File Menu --------------------------
@@ -282,14 +283,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			}
 		});
 		
-		buttons[BUTTON_WIRE].addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (toolbarWireCommand != null)
-					toolbarWireCommand.execute();
-			}
-		});
-
+		
 //		buttons[BUTTON_MODULE].addActionListener(new ActionListener() {
 //			@Override
 //			public void actionPerformed(ActionEvent e) {
@@ -459,6 +453,13 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	}
 	public void setAddModuleOUTCommand(ICommand addModuleOUTCommand) {
 		this.addModuleOUTCommand = addModuleOUTCommand;
+	}
+
+	public void startWire() {
+		if (toolbarWireCommand != null)
+			toolbarWireCommand.execute();
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

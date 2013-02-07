@@ -6,12 +6,18 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
+import javax.swing.JDesktopPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
+import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.presentation.IPInputPort;
 import fr.istic.synthlab.presentation.IPOutputPort;
+import fr.istic.synthlab.presentation.IPSynthesizer;
 import fr.istic.synthlab.presentation.IPWire;
 
 public class PWire extends JPanel implements IPWire {
@@ -41,7 +47,20 @@ public class PWire extends JPanel implements IPWire {
 	}
 
 	private void defineCallbacks() {
-
+		this.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
 	}
 
 	@Override
@@ -118,8 +137,12 @@ public class PWire extends JPanel implements IPWire {
 		}
 
 		setPreferredSize(new Dimension(width, height));
-
 		setBounds(x + (POutputPort.width / 2), y + (POutputPort.height / 2), width, height);
+		
+		ICSynthesizer synth = (ICSynthesizer) outputPort.getControl().getModule().getSynthesizer();
+		IPSynthesizer presSynth = synth.getPresentation();
+		((JDesktopPane) presSynth).setLayer(this, 0, 0);
+		
 		repaint();
 		validate();
 	}

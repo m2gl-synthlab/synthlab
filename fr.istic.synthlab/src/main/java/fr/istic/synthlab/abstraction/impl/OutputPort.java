@@ -5,6 +5,7 @@ import com.jsyn.ports.UnitOutputPort;
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.IOutputPort;
+import fr.istic.synthlab.abstraction.IWire;
 
 
 /**
@@ -15,6 +16,7 @@ public class OutputPort implements IOutputPort {
 	private String name;
 	private UnitOutputPort port;
 	private int defaultPart = 0;
+	private IWire wire;
 	
 	private IModule parentModule;
 
@@ -54,16 +56,21 @@ public class OutputPort implements IOutputPort {
 
 	@Override
 	public void connect(IInputPort inputPort) {
-		if(!port.isConnected())
+		System.out.println("Output going to be connected");
+		if(!port.isConnected()){
+			System.out.println("!port.isConnected()");
 			port.connect(this.defaultPart, inputPort.getJSyn(), inputPort.getDefaultPart());
+			
+		}
+		if(port.isConnected()){
+			System.out.println("Output connected"); //TODO resoudre ce mystere ou bug de JSyn...
+		}
 	}
 
 	@Override
 	public void disconnect(IInputPort inputPort) {
-		if(port.isConnected()){
-			port.disconnect(inputPort.getJSyn());
-			System.out.println("Output disconnected");
-		}
+		System.out.println("Output going to be disconnected");
+		port.disconnectAll();
 	}
 
 	@Override
@@ -94,6 +101,16 @@ public class OutputPort implements IOutputPort {
 	@Override
 	public void setModule(IModule mod) {
 		parentModule = mod;
+	}
+	
+	@Override
+	public IWire getWire() {
+		return wire;
+	}
+
+	@Override
+	public void setWire(IWire wire) {
+		this.wire = wire;
 	}
 
 }

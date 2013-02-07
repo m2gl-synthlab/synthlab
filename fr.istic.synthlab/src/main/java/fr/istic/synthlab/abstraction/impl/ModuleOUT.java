@@ -10,6 +10,7 @@ import com.jsyn.unitgen.UnitGenerator;
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModuleOUT;
 import fr.istic.synthlab.abstraction.ISynthesizer;
+import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleOUT extends AModule implements IModuleOUT {
@@ -96,6 +97,13 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 			}
 		}
 		
+	}
+	
+	@Override
+	public List<IWire> getWires() {
+		List<IWire> wires = new ArrayList<IWire>();
+		wires.add(in.getWire());
+		return wires;
 	}
 
 }

@@ -15,4 +15,6 @@ public interface ICInputPort extends IInputPort {
 	public void p2cConnect();
 
 	public IWire getWire();
+
+	public void p2cDisconnect();
 }

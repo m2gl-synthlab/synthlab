@@ -2,16 +2,11 @@ package fr.istic.synthlab.presentation.impl;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.util.List;
-
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
 
 import com.alee.laf.desktoppane.WebInternalFrame;
 
 import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICSynthesizer;
-import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.presentation.IPInputPort;
 import fr.istic.synthlab.presentation.IPModule;
 import fr.istic.synthlab.presentation.IPOutputPort;
@@ -28,22 +23,22 @@ public abstract class APModule extends WebInternalFrame implements IPModule {
 		this.ctrl = control;
 		
 		
-		this.addAncestorListener(new AncestorListener() {
-			@Override
-			public void ancestorAdded(AncestorEvent event) {}
-			@Override
-			public void ancestorRemoved(AncestorEvent event) {}
-			
-			@Override
-			public void ancestorMoved(AncestorEvent event) {
-	            List<ICWire> wires = ctrl.getWires();
-	            for(ICWire wire : wires){
-	            	if(wire!=null){
-	            		wire.getPresentation().updateDisplay();
-	            	}
-	            }
-			}
-		});
+//		this.addAncestorListener(new AncestorListener() {
+//			@Override
+//			public void ancestorAdded(AncestorEvent event) {}
+//			@Override
+//			public void ancestorRemoved(AncestorEvent event) {}
+//			
+//			@Override
+//			public void ancestorMoved(AncestorEvent event) {
+//	            List<ICWire> wires = ctrl.getWires();
+//	            for(ICWire wire : wires){
+//	            	if(wire!=null){
+//	            		wire.getPresentation().updateDisplay();
+//	            	}
+//	            }
+//			}
+//		});
 		
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override

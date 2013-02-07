@@ -75,4 +75,6 @@ public interface IPSynthesizer {
 	 */
 	public void c2pAddWire(IPWire presentation);
 
+	public void removeWire(IPWire pres);
+
 }

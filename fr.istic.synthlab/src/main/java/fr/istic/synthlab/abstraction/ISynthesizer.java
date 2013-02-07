@@ -68,5 +68,7 @@ public interface ISynthesizer {
 
 	public IWire getCurrentWire();
 	public void setCurrentWire(IWire wire);
+
+	public void remove(IWire wire);
 	
 }

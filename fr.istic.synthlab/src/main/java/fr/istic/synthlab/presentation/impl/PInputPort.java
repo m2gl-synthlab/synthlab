@@ -48,7 +48,13 @@ public class PInputPort extends JPanel implements IPInputPort {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("PInputPort clicked");
-				ctrl.p2cConnect();
+				if(ctrl.getWire() != null){
+					System.out.println("ctrl.getWire() != null");
+					ctrl.p2cDisconnect();
+				} else {
+					System.out.println("ctrl.getWire() = null");
+					ctrl.p2cConnect();
+				}
 			}
 		});
 		

@@ -19,6 +19,7 @@ public class Synthesizer implements ISynthesizer {
 	private com.jsyn.Synthesizer synth;
 
 	private List<IModule> modules;
+	private List<IWire> wires;
 
 	private IWire currentWire;
 	
@@ -28,6 +29,7 @@ public class Synthesizer implements ISynthesizer {
 	public Synthesizer() {
 		this.synth = JSyn.createSynthesizer();
 		modules = new ArrayList<IModule>();
+		wires = new ArrayList<IWire>();
 	}
 
 	/**
@@ -61,6 +63,7 @@ public class Synthesizer implements ISynthesizer {
 	
 	@Override
 	public void add(IWire wire) {
+		wires.add(wire);
 	}
 
 	@Override
@@ -112,6 +115,13 @@ public class Synthesizer implements ISynthesizer {
 	@Override
 	public void setCurrentWire(IWire wire) {
 		currentWire = wire;
+	}
+
+	//TODO SERT A RIEN
+	@Override
+	public void remove(IWire wire) {
+		wires.remove(wire);
+		wire = null;
 	}
 	
 

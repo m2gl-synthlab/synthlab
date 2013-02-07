@@ -16,6 +16,7 @@ import fr.istic.synthlab.abstraction.IModuleVCO;
 import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.IParameter;
 import fr.istic.synthlab.abstraction.ISynthesizer;
+import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleVCO extends AModule implements IModuleVCO {
@@ -134,5 +135,17 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 		return params.get(identifier);
 	}
 
+
+	@Override
+	public List<IWire> getWires() {
+		List<IWire> wires = new ArrayList<IWire>();
+		for(IInputPort inputPort : inputs.values()){
+			wires.add(inputPort.getWire());
+		}
+		for(IOutputPort outputPort : outputs.values()){
+			wires.add(outputPort.getWire());
+		}
+		return wires;
+	}
 
 }
