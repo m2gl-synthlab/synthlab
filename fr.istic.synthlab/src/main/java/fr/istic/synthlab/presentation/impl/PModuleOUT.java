@@ -1,6 +1,5 @@
 package fr.istic.synthlab.presentation.impl;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -34,8 +33,8 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 	private PInputPort inputPort;
 
 	private int width;
-
 	private int height;
+	
 	/**
 	 * @param control
 	 */
@@ -48,15 +47,17 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 	}
 
 	private void configView() {
+		
 		this.setBackground(Color.GRAY);
-		JPanel panelGain = new JPanel(new BorderLayout());
+		
+		JPanel panelGain = new JPanel();
 		JPanel panelInput = new JPanel();
 		JPanel panelMute = new JPanel();
 
 		model = new DoubleBoundedRangeModel("model", 4200, -30, 12, ctrl.getAttenuation());
 		gainRotary = new RotaryTextController(model, 1);
-		panelGain.add(gainRotary,BorderLayout.CENTER);
-		panelGain.add(new JLabel("Gain"), BorderLayout.NORTH);
+		panelGain.add(gainRotary);
+		panelGain.add(new JLabel("Gain"));
 
 		muteSwitch = new WebSwitch();
 		muteSwitch.setRound(4);
@@ -75,7 +76,7 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		Dimension size = new Dimension(150, 250);
 		this.setPreferredSize(size);
 
-		// FIXME : Not sure if it's the better way to define the size...
+		// TODO : Not sure if it's the better way to define the size...
 		width = size.width;
 		height = size.height;
 

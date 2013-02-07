@@ -35,33 +35,6 @@ public interface IModule {
 	public String getName();
 
 	/**
-	 * Return the input port designed by identifier
-	 * 
-	 * @param identifier
-	 * @return the outputPort
-	 */
-	@Deprecated
-	public IInputPort getInput(int identifier);
-
-	/**
-	 * Return the output port designed by identifier
-	 * 
-	 * @param identifier
-	 * @return the outputPort
-	 */
-	@Deprecated
-	public IOutputPort getOutput(int identifier);
-
-	/**
-	 * Return the parameter designed by identifier
-	 * 
-	 * @param identifier
-	 * @return the parameter
-	 */
-	@Deprecated
-	public IParameter getParameter(int identifier);
-
-	/**
 	 * Return the Synthesizer witch contains the current module
 	 * 
 	 * @return the Synthesizer
@@ -77,6 +50,7 @@ public interface IModule {
 
 	/**
 	 * Return the list of wire connected to the module
+	 * 
 	 * @return list of wires
 	 */
 	public List<IWire> getWires();

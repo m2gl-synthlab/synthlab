@@ -92,21 +92,6 @@ public class ModuleVCF implements IModule {
 	}
 
 	@Override
-	public IInputPort getInput(int identifier) {
-		return inputs.get(identifier);
-	}
-
-	@Override
-	public IOutputPort getOutput(int identifier) {
-		return outputs.get(identifier);
-	}
-
-	@Override
-	public IParameter getParameter(int identifier) {
-		return params.get(identifier);
-	}
-
-	@Override
 	public ISynthesizer getSynthesizer() {
 		return parentSynth;
 	}

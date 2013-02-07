@@ -1,17 +1,16 @@
-
 package fr.istic.synthlab.abstraction;
 
 public interface IModuleVCO extends IModule {
 
 	/**
-	 * Set the octave value (between 0 and 8)
+	 * Set the octave value (between -5 and 5)
 	 * 
 	 * @param value
 	 */
 	public void setOctave(int value);
 
 	/**
-	 * Return the octave value (between 0 and 8)
+	 * Return the octave value (between -5 and 5)
 	 * 
 	 * @param value
 	 */
@@ -30,35 +29,35 @@ public interface IModuleVCO extends IModule {
 	 * @param value
 	 */
 	public double getTone();
-	
+
 	/**
 	 * Return the fm port of the VCO module
 	 * 
 	 * @return fm input
 	 */
 	public IInputPort getInputFm();
-	
+
 	/**
 	 * Return the Square output port of the VCO module
 	 * 
 	 * @return square output
 	 */
 	public IOutputPort getOutputSquare();
-	
+
 	/**
 	 * Return the Triangle output port of the VCO module
 	 * 
 	 * @return triangle output
 	 */
 	public IOutputPort getOutputTriangle();
-	
+
 	/**
 	 * Return the Sine output port of the VCO module
 	 * 
 	 * @return sine output
 	 */
 	public IOutputPort getOutputSine();
-	
+
 	/**
 	 * Return the Sawtooth output port of the VCO module
 	 * 

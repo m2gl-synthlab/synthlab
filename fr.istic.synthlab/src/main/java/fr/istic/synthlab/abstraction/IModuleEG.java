@@ -29,7 +29,7 @@ public interface IModuleEG extends IModule {
 	 * @param substainTime
 	 */
 	void setSustain(double substainTime);
-	
+
 	/**
 	 * Get the sustain time for the module
 	 */
@@ -37,6 +37,7 @@ public interface IModuleEG extends IModule {
 
 	/**
 	 * Set the release time for the module
+	 * 
 	 * @param releaseTime
 	 */
 	public void setRelease(double releaseTime);
@@ -59,6 +60,5 @@ public interface IModuleEG extends IModule {
 	 * @return output
 	 */
 	public IOutputPort getOutput();
-
 
 }

@@ -12,9 +12,8 @@ public interface IParameter {
 	 * 
 	 * @return the name
 	 */
-	public String getName();	
-	
-	
+	public String getName();
+
 	/**
 	 * Set the value of this parameter
 	 * 
@@ -52,16 +51,17 @@ public interface IParameter {
 	 * Return the maximum value of the parameter
 	 */
 	public double getMax();
-	
-	
+
 	/**
 	 * Connect the parametter to the given port
+	 * 
 	 * @param input
 	 */
 	public void connect(UnitInputPort input);
-	
+
 	/**
-	 * Return the port 
+	 * Return the port
+	 * 
 	 * @param input
 	 */
 	public UnitInputPort getPort();

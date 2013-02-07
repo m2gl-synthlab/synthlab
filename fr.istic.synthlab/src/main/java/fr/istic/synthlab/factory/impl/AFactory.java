@@ -5,6 +5,7 @@ import com.jsyn.ports.UnitOutputPort;
 
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModule;
+import fr.istic.synthlab.abstraction.IModuleEG;
 import fr.istic.synthlab.abstraction.IModuleOUT;
 import fr.istic.synthlab.abstraction.IModuleVCO;
 import fr.istic.synthlab.abstraction.IOutputPort;
@@ -12,6 +13,7 @@ import fr.istic.synthlab.abstraction.IParameter;
 import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.InputPort;
+import fr.istic.synthlab.abstraction.impl.ModuleEG;
 import fr.istic.synthlab.abstraction.impl.ModuleOUT;
 import fr.istic.synthlab.abstraction.impl.ModuleVCF;
 import fr.istic.synthlab.abstraction.impl.ModuleVCO;
@@ -20,6 +22,7 @@ import fr.istic.synthlab.abstraction.impl.Parameter;
 import fr.istic.synthlab.abstraction.impl.Switch;
 import fr.istic.synthlab.abstraction.impl.Synthesizer;
 import fr.istic.synthlab.abstraction.impl.Wire;
+import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.factory.IFactory;
 
 public class AFactory implements IFactory {
@@ -61,6 +64,12 @@ public class AFactory implements IFactory {
 		return module;
 	}
 
+	@Override
+	public IModuleEG newEG(ICSynthesizer synth) {
+		IModuleEG module = new ModuleEG(synth);
+		return module;
+	}
+	
 	@Override
 	public IParameter newParameter(IModule mod, String name, double min, double max, double val) {
 		IParameter parameter = new Parameter(name, min, max, val);
@@ -122,5 +131,7 @@ public class AFactory implements IFactory {
 		port.setName(name);
 		return port;
 	}
+
+
 
 }

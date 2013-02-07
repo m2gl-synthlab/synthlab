@@ -10,7 +10,6 @@ import com.jsyn.unitgen.UnitGenerator;
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
-import fr.istic.synthlab.factory.impl.PACFactory;
 
 /**
  * Implementation of a Synthesizer
@@ -79,7 +78,6 @@ public class Synthesizer implements ISynthesizer {
 
 	@Override
 	public void startModule(IModule module) {
-		// this.synth.startUnit(module.getJSyn());
 		module.start();
 	}
 
@@ -99,7 +97,6 @@ public class Synthesizer implements ISynthesizer {
 
 	@Override
 	public void stopModule(IModule module) {
-		// this.synth.stopUnit(module.getJSyn());
 		module.stop();
 	}
 

@@ -94,7 +94,7 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 		Dimension size = new Dimension(350, 350);
 		this.setPreferredSize(size);
 
-		// FIXME : Not sure if it's the better way to define the size...
+		// TODO : Not sure if it's the better way to define the size...
 		width = 350;
 		height = 350;
 	}

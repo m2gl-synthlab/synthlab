@@ -51,7 +51,7 @@ public interface ISynthesizer {
 	 * @param module
 	 */
 	public void add(IModule module);
-	
+
 	/**
 	 * Add a wire to the synthesizer
 	 * 
@@ -66,9 +66,11 @@ public interface ISynthesizer {
 	 */
 	public void remove(IModule module);
 
+	// TODO : Still in use ? need comments
 	public IWire getCurrentWire();
+
 	public void setCurrentWire(IWire wire);
 
 	public void remove(IWire wire);
-	
+
 }

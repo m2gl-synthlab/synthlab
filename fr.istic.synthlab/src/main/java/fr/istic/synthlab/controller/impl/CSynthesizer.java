@@ -1,7 +1,6 @@
 package fr.istic.synthlab.controller.impl;
 
 import fr.istic.synthlab.abstraction.IModule;
-import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.Synthesizer;
 import fr.istic.synthlab.controller.ICModule;
@@ -13,7 +12,7 @@ import fr.istic.synthlab.presentation.IPSynthesizer;
 public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 
 	private IPSynthesizer pres;
-	
+
 	public CSynthesizer() {
 		super();
 		this.pres = PACFactory.getPFactory().newSynthesizer(this);
@@ -82,8 +81,6 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	public void p2cAddModule(ICModule module) {
 		// TODO : Do some check here
 		this.add(module);
-
-		// Inform the presentation
 		pres.c2pAddModuleOk(module.getPresentation());
 	}
 
@@ -93,12 +90,5 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 		this.remove(module);
 		pres.c2pRemoveModuleOk(module.getPresentation());
 	}
-
-	/**
-	 * p2cStart p2cStop
-	 * 
-	 * p2cAddModule(ICModule module) p2cRemoveModule(ICModule module) p2cStart
-	 * p2cStart p2cStart
-	 */
 
 }

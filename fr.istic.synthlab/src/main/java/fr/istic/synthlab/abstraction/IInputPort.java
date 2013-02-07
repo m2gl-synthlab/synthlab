@@ -5,7 +5,8 @@ import com.jsyn.ports.UnitInputPort;
 /**
  * Interface for a module's input port
  */
-public interface IInputPort {// extends ConnectableInput, GettablePort, SettablePort{
+public interface IInputPort {// extends ConnectableInput, GettablePort,
+								// SettablePort{
 
 	/**
 	 * Return the jSyn output port component
@@ -17,8 +18,8 @@ public interface IInputPort {// extends ConnectableInput, GettablePort, Settable
 	/**
 	 * Set the port's name
 	 */
-	public void setName(String name);	
-	
+	public void setName(String name);
+
 	/**
 	 * Return the port's name
 	 * 
@@ -62,30 +63,40 @@ public interface IInputPort {// extends ConnectableInput, GettablePort, Settable
 	 * @return part count
 	 */
 	public int getNumParts();
-	
+
 	/**
 	 * Return the default part
 	 * 
 	 * @return default part number
 	 */
 	public int getDefaultPart();
-	
-	
+
 	/**
-	 * Return the module witch contains the current port 
+	 * Return the module witch contains the current port
 	 * 
 	 * @return the module
 	 */
-	public IModule getModule();	
-	
+	public IModule getModule();
+
 	/**
-	 * Set the module witch contains the current port 
+	 * Set the module witch contains the current port
 	 * 
 	 * @return the module
 	 */
 	public void setModule(IModule mod);
-	
+
+	/**
+	 * Return the connected wire if any
+	 * 
+	 * @return the connected wire
+	 */
 	public IWire getWire();
+
+	/**
+	 * Set a connected wire
+	 * 
+	 * @param wire
+	 */
 	public void setWire(IWire wire);
-	
+
 }

@@ -24,8 +24,11 @@ import fr.istic.synthlab.presentation.IPParameter;
 public abstract class APModule extends WebInternalFrame implements IPModule {
 
 	private static final long serialVersionUID = -7353924524014867459L;
+	
 	private ICModule ctrl;
 
+	//TODO : Put height and width here
+	
 	public APModule(ICModule control) {
 		super(control.getName(), false, true, false, false);
 		this.ctrl = control;
