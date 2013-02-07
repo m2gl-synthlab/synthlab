@@ -56,40 +56,40 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 		this.setBackground(Color.GRAY);
 		JPanel panelParams = new JPanel();
 		JPanel panelInput = new JPanel();
-		JPanel panelMute = new JPanel();
+		JPanel panelOutput = new JPanel();
 
 		octaveModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_OCTAVE_NAME,
-				9, 0, 9, ctrl.getOctave());
-		panelParams.add(new RotaryTextController(octaveModel, 2));
+				10, -5, 5, ctrl.getOctave());
+		panelParams.add(new RotaryTextController(octaveModel, 4));
 
-		toneModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_TONE_NAME,
-				40, -1, 1, ctrl.getTone());
-		panelParams.add(new RotaryTextController(toneModel, 2));
+		toneModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_TONE_NAME, 100,
+				-1, 1, ctrl.getTone());
+		panelParams.add(new RotaryTextController(toneModel, 4));
 
 		fm = (PInputPort) ((ICInputPort) ctrl.getInputFm()).getPresentation();
 		panelInput.add(fm);
 
 		outputSquare = (POutputPort) ((ICOutputPort) ctrl.getOutputSquare())
 				.getPresentation();
-		panelInput.add(outputSquare);
+		panelOutput.add(outputSquare);
 
 		outputTriangle = (POutputPort) ((ICOutputPort) ctrl.getOutputTriangle())
 				.getPresentation();
-		panelInput.add(outputTriangle);
+		panelOutput.add(outputTriangle);
 
 		outputSine = (POutputPort) ((ICOutputPort) ctrl.getOutputSine())
 				.getPresentation();
-		panelInput.add(outputSine);
+		panelOutput.add(outputSine);
 
 		outputSawtooth = (POutputPort) ((ICOutputPort) ctrl.getOutputSawtooth())
 				.getPresentation();
-		panelInput.add(outputSawtooth);
+		panelOutput.add(outputSawtooth);
 
 		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
 		this.setAutoscrolls(true);
 		this.getContentPane().add(panelParams, 0);
-		this.getContentPane().add(panelMute, 1);
-		this.getContentPane().add(panelInput, 2);
+		this.getContentPane().add(panelInput, 1);
+		this.getContentPane().add(panelOutput, 2);
 
 		Dimension size = new Dimension(350, 350);
 		this.setPreferredSize(size);
@@ -112,10 +112,10 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 		octaveModel.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				ctrl.p2cOctaveChanged(octaveModel.getValue());
+				ctrl.p2cOctaveChanged((int) octaveModel.getDoubleValue());
 			}
 		});
-		
+
 		toneModel.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
@@ -143,7 +143,7 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 
 	@Override
 	public void c2pSetOctaveValue(int octave) {
-		octaveModel.setValue(octave);
+		octaveModel.setDoubleValue(octave);
 	}
 
 	@Override

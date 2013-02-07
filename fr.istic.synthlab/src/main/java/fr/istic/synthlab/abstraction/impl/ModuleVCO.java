@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jsyn.ports.UnitOutputPort;
-import com.jsyn.unitgen.LineOut;
 import com.jsyn.unitgen.SawtoothOscillator;
 import com.jsyn.unitgen.SineOscillator;
 import com.jsyn.unitgen.SquareOscillator;
@@ -31,7 +30,7 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 	public static final String PARAM_OCTAVE_NAME = "Octave";
 	public static final String PARAM_TONE_NAME = "Tone";
 	
-	public static final double DEFAULT_FREQUENCY_MIN = 27.5; // La, 4 octaves en dessous de la fondamentale
+	public static final double DEFAULT_FREQUENCY_MIN = 800; // 800 Hz
 
 	private FrequencyGenerator frequencyGen;
 
@@ -45,7 +44,6 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 	private TriangleOscillator vcoTriangle;
 	private SineOscillator vcoSine;
 	private SawtoothOscillator vcoSawtooth;
-	private LineOut lineOut;
 
 	public ModuleVCO(ISynthesizer synth) {
 		super(MODULE_NAME, synth);
@@ -84,7 +82,6 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 		generators.add(vcoSine);
 		generators.add(vcoSawtooth);
 		generators.add(frequencyGen);
-		generators.add(lineOut);
 		return generators;
 	}
 
@@ -95,7 +92,6 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 		this.vcoSine.start();
 		this.vcoSawtooth.start();
 		this.frequencyGen.start();
-		lineOut.start();
 	}
 
 	@Override
@@ -153,7 +149,7 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 	}
 
 	private class FrequencyGenerator extends UnitFilter {
-		int octave = 4; // Value between 0 and 9
+		int octave = 0; // Value between -5 and 5
 		double tone = 0.0; // Value between -1.0 and 1.0
 
 		UnitOutputPort outputSquare = new UnitOutputPort(OUT_SQUARE_NAME);
