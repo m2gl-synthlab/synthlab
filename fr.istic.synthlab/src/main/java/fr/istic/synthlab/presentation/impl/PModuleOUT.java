@@ -11,7 +11,6 @@ import javax.swing.event.ChangeListener;
 
 import com.alee.extended.button.WebSwitch;
 import com.jsyn.swing.DoubleBoundedRangeModel;
-import com.jsyn.swing.ExponentialRangeModel;
 import com.jsyn.swing.RotaryTextController;
 
 import fr.istic.synthlab.controller.ICInputPort;
@@ -55,7 +54,7 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		JPanel panelInput = new JPanel();
 		JPanel panelMute = new JPanel();
 
-		model = new ExponentialRangeModel("model", 10000 , -1, 12, ctrl.getAttenuation());
+		model = new DoubleBoundedRangeModel("model", 10000 , -30, 12, ctrl.getAttenuation());
 		gainRotary = new RotaryTextController(model, 2);
 		panelGain.add(gainRotary);
 		
