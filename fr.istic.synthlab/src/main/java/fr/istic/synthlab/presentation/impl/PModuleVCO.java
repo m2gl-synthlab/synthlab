@@ -1,22 +1,23 @@
 package fr.istic.synthlab.presentation.impl;
 
 import java.awt.Color;
-import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-import com.alee.extended.button.WebSwitch;
-import com.alee.laf.slider.WebSlider;
+import com.jsyn.swing.DoubleBoundedRangeModel;
+import com.jsyn.swing.RotaryTextController;
 
+import fr.istic.synthlab.controller.ICInputPort;
 import fr.istic.synthlab.controller.ICModuleVCO;
+import fr.istic.synthlab.controller.ICOutputPort;
 import fr.istic.synthlab.controller.ICSynthesizer;
-import fr.istic.synthlab.presentation.IPInputPort;
 import fr.istic.synthlab.presentation.IPModuleVCO;
-import fr.istic.synthlab.presentation.IPOutputPort;
-import fr.istic.synthlab.presentation.IPParameter;
 
 /**
  * Presentation of a module
@@ -24,26 +25,27 @@ import fr.istic.synthlab.presentation.IPParameter;
 public class PModuleVCO extends APModule implements IPModuleVCO {
 
 	private static final long serialVersionUID = -8519084219674310285L;
-	
+
 	private ICModuleVCO ctrl;
-	
-//
-//	private WebSlider gainSlider;
-//	private WebSwitch muteSwitch;
-//	private PInputPort inputPort;
-	
-	private JPanel panelParameters;
-	private JPanel panelInputPorts;
-	private JPanel panelOutputPorts;
+
+	private DoubleBoundedRangeModel octaveModel;
+	private RotaryTextController octaveRotary;
+	private PInputPort fm;
+	private POutputPort outputSquare;
+	private POutputPort outputTriangle;
+	private POutputPort outputSine;
+	private POutputPort outputSawtooth;
+
 	private int width;
 	private int height;
-	
+
 	/**
 	 * @param control
 	 */
 	public PModuleVCO(ICModuleVCO control) {
 		super(control);
-		
+		System.out.println("PModuleVCO initialized");
+
 		this.ctrl = control;
 		configView();
 		defineCallbacks();
@@ -51,21 +53,47 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 
 	private void configView() {
 		this.setBackground(Color.GRAY);
-		panelParameters = new JPanel();
-		panelInputPorts = new JPanel();
-		panelOutputPorts = new JPanel();
-		
-		this.setLayout(new BoxLayout(this.getContentPane(),BoxLayout.PAGE_AXIS));
+		JPanel panelParams = new JPanel();
+		JPanel panelInput = new JPanel();
+		JPanel panelMute = new JPanel();
+
+		octaveModel = new DoubleBoundedRangeModel("model", 1, 0, 8, ctrl.getOctave());
+		octaveRotary = new RotaryTextController(octaveModel, 2);
+		panelParams.add(octaveRotary);
+
+		fm = (PInputPort) ((ICInputPort) ctrl.getInputFm()).getPresentation();
+		panelInput.add(fm);
+
+		outputSquare = (POutputPort) ((ICOutputPort) ctrl.getOutputSquare())
+				.getPresentation();
+		panelInput.add(outputSquare);
+
+		outputTriangle = (POutputPort) ((ICOutputPort) ctrl.getOutputTriangle())
+				.getPresentation();
+		panelInput.add(outputTriangle);
+
+		outputSine = (POutputPort) ((ICOutputPort) ctrl.getOutputSine())
+				.getPresentation();
+		panelInput.add(outputSine);
+
+		outputSawtooth = (POutputPort) ((ICOutputPort) ctrl.getOutputSawtooth())
+				.getPresentation();
+		panelInput.add(outputSawtooth);
+
+		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
 		this.setAutoscrolls(true);
-		this.getContentPane().add(panelParameters,0);
-		this.getContentPane().add(panelInputPorts,1);
-		this.getContentPane().add(panelOutputPorts,2);
+		this.getContentPane().add(panelParams, 0);
+		this.getContentPane().add(panelMute, 1);
+		this.getContentPane().add(panelInput, 2);
+
+		Dimension size = new Dimension(350, 350);
+		this.setPreferredSize(size);
 
 		// FIXME : Not sure if it's the better way to define the size...
 		width = 350;
 		height = 350;
 	}
-	
+
 	public int getHeight() {
 		return height;
 	}
@@ -73,64 +101,43 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 	public int getWidth() {
 		return width;
 	}
-	
+
 	private void defineCallbacks() {
-//		this.addAncestorListener(new AncestorListener() {
-//			@Override
-//			public void ancestorAdded(AncestorEvent event) {}
-//			@Override
-//			public void ancestorRemoved(AncestorEvent event) {}
-//			
-//			@Override
-//			public void ancestorMoved(AncestorEvent event) {
-//	            List<ICWire> wires = ctrl.getWires();
-//	            for(ICWire wire : wires){
-//	            	if(wire!=null){
-//	            		wire.getPresentation().updateDisplay();
-//	            	}
-//	            }
-//			}
-//		});
-		
+		// Slider change listener
+		octaveModel.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				ctrl.p2cOctaveChanged(octaveModel.getValue());
+			}
+		});
+
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				((PSynthesizer)((ICSynthesizer)getControl().getSynthesizer()).getPresentation()).dispatchEvent(e);
+				((PSynthesizer) ((ICSynthesizer) getControl().getSynthesizer())
+						.getPresentation()).dispatchEvent(e);
 			}
+
 			@Override
 			public void mouseDragged(MouseEvent e) {
 			}
 		});
 	}
-	
-	
+
 	@Override
 	public ICModuleVCO getControl() {
 		return ctrl;
 	}
 
 	@Override
-	public void addInputPort(IPInputPort presentation) {
-		panelInputPorts.add((PInputPort) presentation);
-
+	public void c2pSetOctaveValue(int octave) {
+		octaveModel.setValue(octave);
 	}
 
 	@Override
-	public void addOutputPort(IPOutputPort presentation) {
-		panelOutputPorts.add((POutputPort) presentation);
-	}
-
-	@Override
-	public void addParameter(IPParameter presentation) {
-		panelParameters.add((Component) presentation);
-	}
-
-
-
-	@Override
-	public void c2pDoSomething() {
+	public void c2pSetToneValue(double tone) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
