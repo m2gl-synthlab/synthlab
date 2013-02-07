@@ -30,13 +30,11 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	public ModuleOUT(ISynthesizer synth) {
 		super(MODULE_NAME, synth);
-		System.out.println("ModuleOUT initialized");
 
 		this.out = new ChannelOut();
 		this.fade = new AttenuationFilter();
 
-		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME,
-				fade.input);
+		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME, fade.input);
 		this.fade.attenuationValue = 0;
 
 		fade.output.connect(out.input);
@@ -80,10 +78,8 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 		this.isMute = mute;
 		if(isMute()){
 			stop();
-			System.out.println("stop");
 		}else{
 			start();
-			System.out.println("start");
 		}
 	}
 

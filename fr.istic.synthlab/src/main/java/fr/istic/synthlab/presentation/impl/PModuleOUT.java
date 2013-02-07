@@ -1,11 +1,13 @@
 package fr.istic.synthlab.presentation.impl;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -41,7 +43,6 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 	 */
 	public PModuleOUT(ICModuleOUT control) {
 		super(control);
-		System.out.println("PModuleOUT initialized");
 
 		this.ctrl = control;
 		configView();
@@ -50,35 +51,35 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 
 	private void configView() {
 		this.setBackground(Color.GRAY);
-		JPanel panelGain = new JPanel();
+		JPanel panelGain = new JPanel(new BorderLayout());
 		JPanel panelInput = new JPanel();
 		JPanel panelMute = new JPanel();
 
-		model = new DoubleBoundedRangeModel("model", 10000, -30, 12,
-				ctrl.getAttenuation());
-		gainRotary = new RotaryTextController(model, 2);
-		panelGain.add(gainRotary);
+		model = new DoubleBoundedRangeModel("model", 4200, -30, 12, ctrl.getAttenuation());
+		gainRotary = new RotaryTextController(model, 1);
+		panelGain.add(gainRotary,BorderLayout.CENTER);
+		panelGain.add(new JLabel("Gain"), BorderLayout.NORTH);
 
 		muteSwitch = new WebSwitch();
 		muteSwitch.setRound(4);
+		muteSwitch.setSelected(!ctrl.isMute());
 		panelMute.add(muteSwitch);
 
-		inputPort = (PInputPort) ((ICInputPort) ctrl.getInput())
-				.getPresentation();
+		inputPort = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
 		panelInput.add(inputPort);
 
 		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
 		this.setAutoscrolls(true);
 		this.getContentPane().add(panelGain, 0);
-		this.getContentPane().add(panelMute, 1);
-		this.getContentPane().add(panelInput, 2);
+		this.getContentPane().add(panelInput, 1);
+		this.getContentPane().add(panelMute, 2);
 
-		Dimension size = new Dimension(350, 350);
+		Dimension size = new Dimension(150, 250);
 		this.setPreferredSize(size);
 
 		// FIXME : Not sure if it's the better way to define the size...
-		width = 350;
-		height = 350;
+		width = size.width;
+		height = size.height;
 
 	}
 
@@ -100,10 +101,9 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 			}
 		});
 
-		muteSwitch.addActionListener(new ActionListener(){
+		muteSwitch.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("mute clicked");
 				ctrl.p2cMute();
 			}
 		});
@@ -111,12 +111,12 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 
 	@Override
 	public void c2pMute() {
-		this.muteSwitch.setSelected(true);
+		this.muteSwitch.setSelected(false);
 	}
 
 	@Override
 	public void c2pUnmute() {
-		this.muteSwitch.setSelected(false);
+		this.muteSwitch.setSelected(true);
 	}
 
 	@Override
