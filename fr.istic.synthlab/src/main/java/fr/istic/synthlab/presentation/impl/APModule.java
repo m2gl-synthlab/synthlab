@@ -29,27 +29,6 @@ public abstract class APModule extends WebInternalFrame implements IPModule {
 	public APModule(ICModule control) {
 		super(control.getName(), false, true, false, false);
 		this.ctrl = control;
-<<<<<<< HEAD
-		
-		
-		this.addAncestorListener(new AncestorListener() {
-			@Override
-			public void ancestorAdded(AncestorEvent event) {}
-			@Override
-			public void ancestorRemoved(AncestorEvent event) {}
-			
-			@Override
-			public void ancestorMoved(AncestorEvent event) {
-	            List<IWire> wires = ctrl.getWires();
-	            for(IWire wire : wires){
-	            	if(wire!=null){
-	            		((ICWire) wire).getPresentation().updateDisplay();
-	            	}
-	            }
-			}
-		});
-		
-=======
 
 		this.addAncestorListener(new AncestorListener() {
 			@Override
@@ -71,7 +50,6 @@ public abstract class APModule extends WebInternalFrame implements IPModule {
 			}
 		});
 
->>>>>>> OUT Terminé (sauf tunning graphique) + Ajout commentaires
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
