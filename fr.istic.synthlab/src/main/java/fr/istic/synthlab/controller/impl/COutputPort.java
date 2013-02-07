@@ -2,7 +2,6 @@ package fr.istic.synthlab.controller.impl;
 
 import com.jsyn.ports.UnitOutputPort;
 
-import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.OutputPort;
 import fr.istic.synthlab.command.ICommand;

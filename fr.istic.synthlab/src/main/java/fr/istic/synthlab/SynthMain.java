@@ -6,6 +6,7 @@ import fr.istic.synthlab.command.app.DisplayCommand;
 import fr.istic.synthlab.command.app.UndisplayCommand;
 import fr.istic.synthlab.command.menu.AboutCommand;
 import fr.istic.synthlab.command.menu.AddModuleOUTCommand;
+import fr.istic.synthlab.command.menu.AddModuleVCACommand;
 import fr.istic.synthlab.command.menu.AddModuleVCFCommand;
 import fr.istic.synthlab.command.menu.AddModuleVCOCommand;
 import fr.istic.synthlab.command.menu.DocumentationCommand;
@@ -14,7 +15,6 @@ import fr.istic.synthlab.command.menu.OpenSynthCommand;
 import fr.istic.synthlab.command.menu.QuitSynthCommand;
 import fr.istic.synthlab.command.menu.SaveSynthCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarDefaultCommand;
-import fr.istic.synthlab.command.toolbar.ToolbarModuleCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarPauseCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarPlayCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarWireCommand;
@@ -54,12 +54,12 @@ public class SynthMain {
 		frame.setAboutSynthCommand(new AboutCommand());
 		frame.setToolbarDefaultCommand(new ToolbarDefaultCommand());
 		frame.setToolbarWireCommand(new ToolbarWireCommand(app.getSynthesizer()));
-		frame.setToolbarModuleCommand(new ToolbarModuleCommand(app.getSynthesizer()));
 		frame.setToolbarPlayCommand(new ToolbarPlayCommand(app.getSynthesizer().getPresentation()));
 		frame.setToolbarPauseCommand(new ToolbarPauseCommand(app.getSynthesizer().getPresentation()));
 
 		frame.setAddModuleOUTCommand(new AddModuleOUTCommand(app.getSynthesizer()));
 		frame.setAddModuleVCOCommand(new AddModuleVCOCommand(app.getSynthesizer()));
+		frame.setAddModuleVCACommand(new AddModuleVCACommand(app.getSynthesizer()));
 		frame.setAddModuleVCFCommand(new AddModuleVCFCommand(app.getSynthesizer()));
 		
 		frame.startWire();

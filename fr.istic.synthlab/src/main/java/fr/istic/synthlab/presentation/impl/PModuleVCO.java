@@ -8,9 +8,6 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import com.alee.extended.button.WebSwitch;
-import com.alee.laf.slider.WebSlider;
-
 import fr.istic.synthlab.controller.ICModuleVCO;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.presentation.IPInputPort;

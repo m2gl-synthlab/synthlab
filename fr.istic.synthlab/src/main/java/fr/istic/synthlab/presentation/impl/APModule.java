@@ -15,12 +15,10 @@ import fr.istic.synthlab.presentation.IPParameter;
 public abstract class APModule extends WebInternalFrame implements IPModule {
 
 	private static final long serialVersionUID = -7353924524014867459L;
-	private ICModule ctrl;
-	
 	public APModule(ICModule control) {
 		super(control.getName(), false, true, false, false);
 		System.out.println("APModule initialized");
-		this.ctrl = control;
+		
 		
 		
 //		this.addAncestorListener(new AncestorListener() {

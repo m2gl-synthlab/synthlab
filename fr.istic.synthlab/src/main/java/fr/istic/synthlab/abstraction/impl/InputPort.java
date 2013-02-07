@@ -4,7 +4,6 @@ import com.jsyn.ports.UnitInputPort;
 
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModule;
-import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.IWire;
 
 public class InputPort implements IInputPort {

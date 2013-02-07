@@ -11,7 +11,6 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.ICWire;
