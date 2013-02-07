@@ -2,7 +2,8 @@ package fr.istic.synthlab.presentation.impl;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -16,17 +17,16 @@ import com.jsyn.swing.RotaryTextController;
 import fr.istic.synthlab.controller.ICInputPort;
 import fr.istic.synthlab.controller.ICModuleOUT;
 import fr.istic.synthlab.presentation.IPModuleOUT;
-import fr.istic.synthlab.presentation.util.SimpleMouseListener;
 
 /**
- * Presentation of a module
+ * Presentation for a OUT module
  */
 public class PModuleOUT extends APModule implements IPModuleOUT {
 
 	private static final long serialVersionUID = -8519084219674310285L;
-	
+
 	private ICModuleOUT ctrl;
-	
+
 	private DoubleBoundedRangeModel model;
 	private RotaryTextController gainRotary;
 	private WebSwitch muteSwitch;
@@ -35,7 +35,7 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 	private int width;
 
 	private int height;
-	
+
 	/**
 	 * @param control
 	 */
@@ -54,17 +54,19 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		JPanel panelInput = new JPanel();
 		JPanel panelMute = new JPanel();
 
-		model = new DoubleBoundedRangeModel("model", 10000 , -30, 12, ctrl.getAttenuation());
+		model = new DoubleBoundedRangeModel("model", 10000, -30, 12,
+				ctrl.getAttenuation());
 		gainRotary = new RotaryTextController(model, 2);
 		panelGain.add(gainRotary);
-		
-		muteSwitch = new WebSwitch ();
-		muteSwitch.setRound ( 4 );
-        panelMute.add(muteSwitch);
-        
-		inputPort = (PInputPort) ((ICInputPort)ctrl.getInput()).getPresentation();
+
+		muteSwitch = new WebSwitch();
+		muteSwitch.setRound(4);
+		panelMute.add(muteSwitch);
+
+		inputPort = (PInputPort) ((ICInputPort) ctrl.getInput())
+				.getPresentation();
 		panelInput.add(inputPort);
-		
+
 		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
 		this.setAutoscrolls(true);
 		this.getContentPane().add(panelGain, 0);
@@ -77,9 +79,9 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		// FIXME : Not sure if it's the better way to define the size...
 		width = 350;
 		height = 350;
-		
+
 	}
-	
+
 	public int getHeight() {
 		return height;
 	}
@@ -89,7 +91,7 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 	}
 
 	private void defineCallbacks() {
-		
+
 		// Slider change listener
 		model.addChangeListener(new ChangeListener() {
 			@Override
@@ -97,11 +99,11 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 				ctrl.p2cGainChanged(model.getDoubleValue());
 			}
 		});
-		
-		muteSwitch.addMouseListener(new SimpleMouseListener() {
+
+		muteSwitch.addActionListener(new ActionListener(){
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				super.mouseClicked(e);
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("mute clicked");
 				ctrl.p2cMute();
 			}
 		});
@@ -111,7 +113,7 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 	public void c2pMute() {
 		this.muteSwitch.setSelected(true);
 	}
-	
+
 	@Override
 	public void c2pUnmute() {
 		this.muteSwitch.setSelected(false);

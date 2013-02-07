@@ -1,5 +1,8 @@
 package fr.istic.synthlab.abstraction;
 
+/**
+ * Interface for a OUT Module
+ */
 public interface IModuleOUT extends IModule {
 
 	/**
