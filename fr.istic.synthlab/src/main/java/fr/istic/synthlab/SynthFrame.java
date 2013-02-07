@@ -453,16 +453,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	}
 	public void setAddModuleOUTCommand(ICommand addModuleOUTCommand) {
 		this.addModuleOUTCommand = addModuleOUTCommand;
-	}
-
-	public void startWire() {
-		if (toolbarWireCommand != null)
-			toolbarWireCommand.execute();
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
-	
+	}	
 
 }

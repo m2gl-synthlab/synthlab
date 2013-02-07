@@ -134,8 +134,7 @@ public class PWire extends JPanel implements IPWire {
 		setBounds(x + (POutputPort.width / 2), y + (POutputPort.height / 2),
 				width, height);
 
-		ICSynthesizer synth = (ICSynthesizer) outputPort.getControl()
-				.getModule().getSynthesizer();
+		ICSynthesizer synth = (ICSynthesizer) outputPort.getControl().getModule().getSynthesizer();
 		IPSynthesizer presSynth = synth.getPresentation();
 		((JDesktopPane) presSynth).setLayer(this, 0, 0);
 

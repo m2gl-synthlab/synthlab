@@ -1,5 +1,7 @@
 package fr.istic.synthlab.controller;
 
+import java.util.List;
+
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.presentation.IPModule;
 

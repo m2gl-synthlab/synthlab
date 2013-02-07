@@ -4,15 +4,20 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 
 import com.alee.extended.button.WebSwitch;
 import com.alee.laf.slider.WebSlider;
 
+import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.controller.ICModuleVCO;
 import fr.istic.synthlab.controller.ICSynthesizer;
+import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.presentation.IPInputPort;
 import fr.istic.synthlab.presentation.IPModuleVCO;
 import fr.istic.synthlab.presentation.IPOutputPort;
@@ -27,10 +32,10 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 	
 	private ICModuleVCO ctrl;
 	
-//
-//	private WebSlider gainSlider;
-//	private WebSwitch muteSwitch;
-//	private PInputPort inputPort;
+
+	private WebSlider gainSlider;
+	private WebSwitch muteSwitch;
+	private PInputPort inputPort;
 	
 	private JPanel panelParameters;
 	private JPanel panelInputPorts;
@@ -75,22 +80,22 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 	}
 	
 	private void defineCallbacks() {
-//		this.addAncestorListener(new AncestorListener() {
-//			@Override
-//			public void ancestorAdded(AncestorEvent event) {}
-//			@Override
-//			public void ancestorRemoved(AncestorEvent event) {}
-//			
-//			@Override
-//			public void ancestorMoved(AncestorEvent event) {
-//	            List<ICWire> wires = ctrl.getWires();
-//	            for(ICWire wire : wires){
-//	            	if(wire!=null){
-//	            		wire.getPresentation().updateDisplay();
-//	            	}
-//	            }
-//			}
-//		});
+		this.addAncestorListener(new AncestorListener() {
+			@Override
+			public void ancestorAdded(AncestorEvent event) {}
+			@Override
+			public void ancestorRemoved(AncestorEvent event) {}
+			
+			@Override
+			public void ancestorMoved(AncestorEvent event) {
+	            List<IWire> wires = ctrl.getWires();
+	            for(IWire wire : wires){
+	            	if(wire!=null){
+	            		((ICWire) wire).getPresentation().updateDisplay();
+	            	}
+	            }
+			}
+		});
 		
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override

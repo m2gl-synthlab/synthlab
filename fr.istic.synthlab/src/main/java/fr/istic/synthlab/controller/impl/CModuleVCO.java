@@ -1,5 +1,8 @@
 package fr.istic.synthlab.controller.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.IParameter;
@@ -9,6 +12,7 @@ import fr.istic.synthlab.controller.ICInputPort;
 import fr.istic.synthlab.controller.ICModuleVCO;
 import fr.istic.synthlab.controller.ICOutputPort;
 import fr.istic.synthlab.controller.ICParameter;
+import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.IPModule;
 import fr.istic.synthlab.presentation.IPModuleVCO;
@@ -48,11 +52,9 @@ public class CModuleVCO extends ModuleVCO implements ICModuleVCO {
 	public IPModule getPresentation() {
 		return pres;
 	}
-
 	@Override
 	public void p2cDoSomething() {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

@@ -13,6 +13,7 @@ public class CModuleOUT extends ModuleOUT implements ICModuleOUT {
 
 	private IPModuleOUT pres;
 
+
 	public CModuleOUT(ISynthesizer synth) {
 		super(synth);
 		this.pres = PACFactory.getPFactory().newOUT(this);
@@ -33,5 +34,4 @@ public class CModuleOUT extends ModuleOUT implements ICModuleOUT {
 	public IPModuleOUT getPresentation() {
 		return this.pres;
 	}
-
 }

@@ -1,17 +1,18 @@
 package fr.istic.synthlab.presentation.impl;
 
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICOutputPort;
 import fr.istic.synthlab.presentation.IPOutputPort;
-import fr.istic.synthlab.presentation.util.SimpleMouseListener;
 
 public class POutputPort extends JPanel implements IPOutputPort {
 	
@@ -42,7 +43,7 @@ public class POutputPort extends JPanel implements IPOutputPort {
 	}
 
 	private void defineCallbacks() {
-		this.addMouseListener(new SimpleMouseListener() {
+		this.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 //				System.out.println("POutputPort clicked");
@@ -58,6 +59,14 @@ public class POutputPort extends JPanel implements IPOutputPort {
 					ctrl.p2cConnect();
 				}
 			}
+			@Override
+			public void mouseReleased(MouseEvent arg0) {}
+			@Override
+			public void mousePressed(MouseEvent arg0) {}
+			@Override
+			public void mouseExited(MouseEvent arg0) {}
+			@Override
+			public void mouseEntered(MouseEvent arg0) {}
 		});
 		
 		this.addMouseMotionListener(new MouseMotionListener() {
