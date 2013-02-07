@@ -7,14 +7,12 @@ import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JComponent;
 import javax.swing.JInternalFrame;
 
 import com.alee.laf.desktoppane.WebDesktopPane;
 
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IOutputPort;
-import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.presentation.IPModule;
