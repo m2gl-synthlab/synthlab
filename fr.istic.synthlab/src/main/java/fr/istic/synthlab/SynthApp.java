@@ -2,6 +2,7 @@ package fr.istic.synthlab;
 
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.IModuleOUT;
+import fr.istic.synthlab.abstraction.IModuleVCO;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.ModuleVCF;
 import fr.istic.synthlab.abstraction.impl.ModuleVCO;
@@ -40,20 +41,20 @@ public class SynthApp implements ISynthApp {
 		synth.add(out);
 		
 		// Add a VCO module
-		IModule vco = PACFactory.getFactory().newVCO(synth);
+		IModuleVCO vco = PACFactory.getFactory().newVCO(synth);
 		vco.getParameter(ModuleVCO.PARAM_FREQUENCY).setValue(200);
 		synth.add(vco);
-		
-		// Add a VCF module
-		IModule vcf = PACFactory.getFactory().newVCF(synth);
-		synth.add(vcf);
+//		
+//		// Add a VCF module
+//		IModule vcf = PACFactory.getFactory().newVCF(synth);
+//		synth.add(vcf);
 
 		
 		// Add a wire between VCO and VCF
-		IWire wire0 = PACFactory.getFactory().newWire();
-		wire0.connect(vco.getOutput(ModuleVCO.OUTPUT_TRIANGLE));
-		wire0.connect(vcf.getInput(ModuleVCF.INPUT_IN));
-		synth.add(wire0);
+//		IWire wire0 = PACFactory.getFactory().newWire();
+//		wire0.connect(vco.getOutput(ModuleVCO.OUTPUT_TRIANGLE));
+//		wire0.connect(vcf.getInput(ModuleVCF.INPUT_IN));
+//		synth.add(wire0);
 		
 		
 		// Add a wire between CVF and OUT
