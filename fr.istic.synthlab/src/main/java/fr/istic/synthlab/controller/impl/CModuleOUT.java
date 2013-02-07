@@ -20,7 +20,6 @@ public class CModuleOUT extends ModuleOUT implements ICModuleOUT {
 
 	public CModuleOUT(ISynthesizer synth) {
 		super(synth);
-		System.out.println("CModuleOUT initialized");
 		this.pres = PACFactory.getPFactory().newOUT(this);
 	}
 
