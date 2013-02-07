@@ -12,8 +12,6 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JDesktopPane;
 import javax.swing.JPanel;
 
-import fr.istic.synthlab.abstraction.ISynthesizer;
-import fr.istic.synthlab.abstraction.impl.Synthesizer;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.presentation.IPInputPort;
@@ -52,18 +50,23 @@ public class PWire extends JPanel implements IPWire {
 	}
 
 	private void defineCallbacks() {
-//		this.addMouseListener(new SimpleMouseListener() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				ICSynthesizer synth = null;
-//				if(inputPort!=null){
-//					synth = (ICSynthesizer) inputPort.getControl().getModule().getSynthesizer();
-//				} else {
-//					synth = (ICSynthesizer) outputPort.getControl().getModule().getSynthesizer();
-//				}
-//				((PSynthesizer)synth.getPresentation()).dispatchEvent(e);
-//			}
-//		});
+		this.addMouseListener(new SimpleMouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ICSynthesizer synth = null;
+				if(inputPort!=null){
+					synth = (ICSynthesizer) inputPort.getControl().getModule().getSynthesizer();
+				} else {
+					synth = (ICSynthesizer) outputPort.getControl().getModule().getSynthesizer();
+				}
+				
+				e.translatePoint(getLocation().x, getLocation().y);
+				
+				((JDesktopPane) synth.getPresentation()).setLayer(PWire.this, 0, -1);
+				((PSynthesizer)synth.getPresentation()).dispatchEvent(e);
+				((JDesktopPane) synth.getPresentation()).setLayer(PWire.this, 0, 0);
+			}
+		});
 		
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override
