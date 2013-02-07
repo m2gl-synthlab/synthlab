@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jsyn.ports.UnitOutputPort;
+import com.jsyn.unitgen.LineOut;
 import com.jsyn.unitgen.SawtoothOscillator;
 import com.jsyn.unitgen.SineOscillator;
 import com.jsyn.unitgen.SquareOscillator;
@@ -26,8 +27,11 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 	private static final String OUT_SAWTOOTH_NAME = "SawTooth";
 	private static final String OUT_SQUARE_NAME = "Square";
 	private static final String OUT_TRIANGLE_NAME = "Triangle";
-	private static final String PARAM_OCTAVE_NAME = "Octave";
-	private static final String PARAM_TONE_NAME = "Tone";
+	
+	public static final String PARAM_OCTAVE_NAME = "Octave";
+	public static final String PARAM_TONE_NAME = "Tone";
+	
+	public static final double DEFAULT_FREQUENCY_MIN = 27.5; // La, 4 octaves en dessous de la fondamentale
 
 	private FrequencyGenerator frequencyGen;
 
@@ -41,6 +45,7 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 	private TriangleOscillator vcoTriangle;
 	private SineOscillator vcoSine;
 	private SawtoothOscillator vcoSawtooth;
+	private LineOut lineOut;
 
 	public ModuleVCO(ISynthesizer synth) {
 		super(MODULE_NAME, synth);
@@ -79,6 +84,7 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 		generators.add(vcoSine);
 		generators.add(vcoSawtooth);
 		generators.add(frequencyGen);
+		generators.add(lineOut);
 		return generators;
 	}
 
@@ -89,6 +95,7 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 		this.vcoSine.start();
 		this.vcoSawtooth.start();
 		this.frequencyGen.start();
+		lineOut.start();
 	}
 
 	@Override
@@ -146,29 +153,37 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 	}
 
 	private class FrequencyGenerator extends UnitFilter {
-		int octave = 3; // Value between 0 and 8
-		double tone = 0.0;
+		int octave = 4; // Value between 0 and 9
+		double tone = 0.0; // Value between -1.0 and 1.0
 
 		UnitOutputPort outputSquare = new UnitOutputPort(OUT_SQUARE_NAME);
 		UnitOutputPort outputTriangle = new UnitOutputPort(OUT_TRIANGLE_NAME);
 		UnitOutputPort outputSine = new UnitOutputPort(OUT_SINE_NAME);
 		UnitOutputPort outputSawtooth = new UnitOutputPort(OUT_SAWTOOTH_NAME);
 
+		public FrequencyGenerator() {
+			this.addPort(outputSquare);
+			this.addPort(outputTriangle);
+			this.addPort(outputSine);
+			this.addPort(outputSawtooth);
+		}
+		
 		@Override
 		public void generate(int start, int limit) {
 			// Get signal arrays from ports.
 			double[] inputs = input.getValues();
 			double[] outputsSquare = outputSquare.getValues();
 			double[] outputsTriangle = outputTriangle.getValues();
-			double[] outputsSine = outputTriangle.getValues();
-			double[] outputsSawtooth = outputTriangle.getValues();
+			double[] outputsSine = outputSine.getValues();
+			double[] outputsSawtooth = outputSawtooth.getValues();
 
 			for (int i = start; i < limit; i++) {
 				double x = inputs[i];
-				outputsSquare[i] = Math.pow(2,octave);
-				outputsTriangle[i] = Math.pow(2,octave);
-				outputsSine[i] = Math.pow(2,octave);
-				outputsSawtooth[i] = Math.pow(2,octave);
+				double frequency = Math.pow(2,octave+tone+x) * DEFAULT_FREQUENCY_MIN;
+				outputsSquare[i] = frequency;
+				outputsTriangle[i] = frequency;
+				outputsSine[i] = frequency;
+				outputsSawtooth[i] = frequency;
 			}
 		}
 

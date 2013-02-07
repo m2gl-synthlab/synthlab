@@ -13,6 +13,7 @@ import javax.swing.event.ChangeListener;
 import com.jsyn.swing.DoubleBoundedRangeModel;
 import com.jsyn.swing.RotaryTextController;
 
+import fr.istic.synthlab.abstraction.impl.ModuleVCO;
 import fr.istic.synthlab.controller.ICInputPort;
 import fr.istic.synthlab.controller.ICModuleVCO;
 import fr.istic.synthlab.controller.ICOutputPort;
@@ -29,7 +30,7 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 	private ICModuleVCO ctrl;
 
 	private DoubleBoundedRangeModel octaveModel;
-	private RotaryTextController octaveRotary;
+	private DoubleBoundedRangeModel toneModel;
 	private PInputPort fm;
 	private POutputPort outputSquare;
 	private POutputPort outputTriangle;
@@ -57,9 +58,13 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 		JPanel panelInput = new JPanel();
 		JPanel panelMute = new JPanel();
 
-		octaveModel = new DoubleBoundedRangeModel("model", 1, 0, 8, ctrl.getOctave());
-		octaveRotary = new RotaryTextController(octaveModel, 2);
-		panelParams.add(octaveRotary);
+		octaveModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_OCTAVE_NAME,
+				9, 0, 9, ctrl.getOctave());
+		panelParams.add(new RotaryTextController(octaveModel, 2));
+
+		toneModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_TONE_NAME,
+				40, -1, 1, ctrl.getTone());
+		panelParams.add(new RotaryTextController(toneModel, 2));
 
 		fm = (PInputPort) ((ICInputPort) ctrl.getInputFm()).getPresentation();
 		panelInput.add(fm);
@@ -110,6 +115,13 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 				ctrl.p2cOctaveChanged(octaveModel.getValue());
 			}
 		});
+		
+		toneModel.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				ctrl.p2cToneChanged(toneModel.getDoubleValue());
+			}
+		});
 
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override
@@ -136,8 +148,7 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 
 	@Override
 	public void c2pSetToneValue(double tone) {
-		// TODO Auto-generated method stub
-
+		toneModel.setDoubleValue(tone);
 	}
 
 }
