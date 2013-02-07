@@ -8,10 +8,12 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.util.List;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JPanel;
 
+import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.presentation.IPInputPort;
@@ -35,6 +37,7 @@ public class PWire extends JPanel implements IPWire {
 	private int width = 0;
 	private PInputPort inputPort;
 	private POutputPort outputPort;
+	private ICSynthesizer synth = null;
 
 	/**
 	 * @param control
@@ -54,30 +57,36 @@ public class PWire extends JPanel implements IPWire {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ICSynthesizer synth = null;
-				if(inputPort!=null){
-					synth = (ICSynthesizer) inputPort.getControl().getModule().getSynthesizer();
+				if (inputPort != null) {
+					synth = (ICSynthesizer) inputPort.getControl().getModule()
+							.getSynthesizer();
 				} else {
-					synth = (ICSynthesizer) outputPort.getControl().getModule().getSynthesizer();
+					synth = (ICSynthesizer) outputPort.getControl().getModule()
+							.getSynthesizer();
 				}
-				
+
 				e.translatePoint(getLocation().x, getLocation().y);
-				
-				((JDesktopPane) synth.getPresentation()).setLayer(PWire.this, 0, -1);
-				((PSynthesizer)synth.getPresentation()).dispatchEvent(e);
-				((JDesktopPane) synth.getPresentation()).setLayer(PWire.this, 0, 0);
+
+				((JDesktopPane) synth.getPresentation()).setLayer(PWire.this,
+						0, -1);
+				((PSynthesizer) synth.getPresentation()).dispatchEvent(e);
+				((JDesktopPane) synth.getPresentation()).setLayer(PWire.this,
+						0, 0);
 			}
 		});
-		
+
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				ICSynthesizer synth = null;
-				if(inputPort!=null){
-					synth = (ICSynthesizer) inputPort.getControl().getModule().getSynthesizer();
+				if (inputPort != null) {
+					synth = (ICSynthesizer) inputPort.getControl().getModule()
+							.getSynthesizer();
 				} else {
-					synth = (ICSynthesizer) outputPort.getControl().getModule().getSynthesizer();
+					synth = (ICSynthesizer) outputPort.getControl().getModule()
+							.getSynthesizer();
 				}
-				((PSynthesizer)synth.getPresentation()).dispatchEvent(e);
+				((PSynthesizer) synth.getPresentation()).dispatchEvent(e);
 			}
 
 			@Override
@@ -113,7 +122,6 @@ public class PWire extends JPanel implements IPWire {
 
 	@Override
 	public void updateDisplay() {
-		ICSynthesizer synth = null;
 		if (outputPort != null) {
 			posOutput = new Point(outputPort.getX(), outputPort.getY());
 
@@ -123,8 +131,8 @@ public class PWire extends JPanel implements IPWire {
 				posOutput.y += c2.getParent().getY();
 				c2 = c2.getParent();
 			}
-			synth = (ICSynthesizer) outputPort.getControl()
-					.getModule().getSynthesizer();
+			synth = (ICSynthesizer) outputPort.getControl().getModule()
+					.getSynthesizer();
 		}
 
 		if (inputPort != null) {
@@ -136,9 +144,9 @@ public class PWire extends JPanel implements IPWire {
 				posInput.y += c.getParent().getY();
 				c = c.getParent();
 			}
-			synth = (ICSynthesizer) inputPort.getControl()
-					.getModule().getSynthesizer();
-		} 
+			synth = (ICSynthesizer) inputPort.getControl().getModule()
+					.getSynthesizer();
+		}
 
 		int x = 0;
 		int y = 0;
@@ -166,6 +174,7 @@ public class PWire extends JPanel implements IPWire {
 		IPSynthesizer presSynth = synth.getPresentation();
 		((JDesktopPane) presSynth).setLayer(this, 0, 0);
 
+		
 		repaint();
 		validate();
 	}
@@ -229,6 +238,18 @@ public class PWire extends JPanel implements IPWire {
 	public void setOutputPoint(Point mouse) {
 		posOutput = mouse;
 		updateDisplay();
+	}
+	
+	public void setOnTop(boolean isOnTop){
+		IPSynthesizer presSynth = synth.getPresentation();
+		if(isOnTop){
+			((JDesktopPane) presSynth).setLayer(this, 0, 0);
+		} else {
+			((JDesktopPane) presSynth).setLayer(this, 0, -1);
+		}
+		
+		repaint();
+		validate();
 	}
 
 }

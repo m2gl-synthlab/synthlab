@@ -55,5 +55,7 @@ public interface IPWire {
 	 * @param mouse
 	 */
 	public void setOutputPoint(Point mouse);
+	
+	public void setOnTop(boolean isOnTop);
 
 }

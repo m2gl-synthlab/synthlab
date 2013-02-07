@@ -1,5 +1,7 @@
 package fr.istic.synthlab.presentation.impl;
 
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.util.List;
@@ -33,6 +35,27 @@ public abstract class APModule extends WebInternalFrame implements IPModule {
 		super(control.getName(), false, true, false, false);
 		this.ctrl = control;
 
+		this.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				for(IWire w : ctrl.getWires()){
+					if(w!=null){
+						((ICWire)w).getPresentation().setOnTop(false);
+					}
+				}
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				for(IWire w : ctrl.getWires()){
+					if(w!=null){
+						((ICWire)w).getPresentation().setOnTop(true);
+					}
+				}
+			}
+		});
+		
 		// deplacement du module
 		this.addAncestorListener(new AncestorListener() {
 			@Override
