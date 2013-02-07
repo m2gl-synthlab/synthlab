@@ -10,7 +10,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.alee.extended.button.WebSwitch;
-import com.alee.laf.slider.WebSlider;
+import com.jsyn.swing.DoubleBoundedRangeModel;
+import com.jsyn.swing.ExponentialRangeModel;
+import com.jsyn.swing.RotaryTextController;
 
 import fr.istic.synthlab.controller.ICInputPort;
 import fr.istic.synthlab.controller.ICModuleOUT;
@@ -26,7 +28,8 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 	
 	private ICModuleOUT ctrl;
 	
-	private WebSlider gainSlider;
+	private DoubleBoundedRangeModel model;
+	private RotaryTextController gainRotary;
 	private WebSwitch muteSwitch;
 	private PInputPort inputPort;
 
@@ -51,12 +54,10 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		JPanel panelGain = new JPanel();
 		JPanel panelInput = new JPanel();
 		JPanel panelMute = new JPanel();
-		
-		
-		gainSlider = new WebSlider(WebSlider.VERTICAL);
-		gainSlider.setMinimum(-1);
-		gainSlider.setMaximum(12);
-		panelGain.add(gainSlider);
+
+		model = new ExponentialRangeModel("model", 10000 , -1, 12, ctrl.getAttenuation());
+		gainRotary = new RotaryTextController(model, 2);
+		panelGain.add(gainRotary);
 		
 		muteSwitch = new WebSwitch ();
 		muteSwitch.setRound ( 4 );
@@ -91,10 +92,10 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 	private void defineCallbacks() {
 		
 		// Slider change listener
-		gainSlider.addChangeListener(new ChangeListener() {
+		model.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				ctrl.p2cGainChanged(gainSlider.getValue());
+				ctrl.p2cGainChanged(model.getDoubleValue());
 			}
 		});
 		
