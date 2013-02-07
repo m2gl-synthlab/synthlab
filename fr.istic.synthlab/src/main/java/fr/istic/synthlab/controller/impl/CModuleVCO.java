@@ -20,7 +20,6 @@ public class CModuleVCO extends ModuleVCO implements ICModuleVCO {
 	public IPModuleVCO getPresentation() {
 		return pres;
 	}
-
 	@Override
 	public void p2cOctaveChanged(int octave) {
 		setOctave(octave);

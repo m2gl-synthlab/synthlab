@@ -105,12 +105,11 @@ public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
 		repaint();
 	}
 
-	private int z=0;
+	
 	@Override
 	public void c2pAddModule(IPModule module) {
 		((APModule) module).setVisible(true);
-		this.add((JInternalFrame) module);
-		this.setLayer(((JInternalFrame) module), 0);
+		this.add((JInternalFrame) module,0);
 
 		((APModule)module).setBounds(((modules.size())*(module.getWidth()+5)), 5, module.getWidth(), module.getHeight());
 		

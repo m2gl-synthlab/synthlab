@@ -78,6 +78,4 @@ public class PInputPort extends JPanel implements IPInputPort {
 		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
 	}
 
-
-
 }
