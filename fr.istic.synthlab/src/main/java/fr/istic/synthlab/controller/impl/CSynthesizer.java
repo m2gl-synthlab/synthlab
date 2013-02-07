@@ -53,7 +53,7 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 		super.add(wire);
 		pres.c2pAddWire(((ICWire) wire).getPresentation());
 	}
-	
+
 	@Override
 	public IWire getCurrentWire() {
 		return super.getCurrentWire();
@@ -61,12 +61,13 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 
 	@Override
 	public void setCurrentWire(IWire wire) {
-		ICWire cWire = (ICWire) wire;
-		pres.c2pAddWire(cWire.getPresentation());
+		if (wire != null) {
+			ICWire cWire = (ICWire) wire;
+			pres.c2pAddWire(cWire.getPresentation());
+		}
 		super.setCurrentWire(wire);
 	}
-	
-	
+
 	@Override
 	public void p2cStart() {
 		this.start();
@@ -81,8 +82,8 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	public void p2cAddModule(ICModule module) {
 		// TODO : Do some check here
 		this.add(module);
-		
-		//Inform the presentation
+
+		// Inform the presentation
 		pres.c2pAddModuleOk(module.getPresentation());
 	}
 
