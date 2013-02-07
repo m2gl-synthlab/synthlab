@@ -36,7 +36,6 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 	private static final long serialVersionUID = -8519084219674310285L;
 
 	private ICModuleOUT ctrl;
-
 	private DoubleBoundedRangeModel model;
 	private RotaryTextController gainRotary;
 	private WebSwitch muteSwitch;

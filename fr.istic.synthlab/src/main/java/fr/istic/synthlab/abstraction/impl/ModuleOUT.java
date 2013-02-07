@@ -60,6 +60,7 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	@Override
 	public void setAttenuation(double value) {
+		
 		fade.attenuationValue = value;
 	}
 
@@ -113,6 +114,6 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 				// see : http://fr.wikipedia.org/wiki/Niveau_(audio)
 			}
 		}
-
+		
 	}
 }
