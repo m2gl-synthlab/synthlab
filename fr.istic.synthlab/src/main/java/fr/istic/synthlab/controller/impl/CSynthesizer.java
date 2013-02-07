@@ -1,6 +1,7 @@
 package fr.istic.synthlab.controller.impl;
 
 import fr.istic.synthlab.abstraction.IModule;
+import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.Synthesizer;
 import fr.istic.synthlab.controller.ICModule;
@@ -12,11 +13,10 @@ import fr.istic.synthlab.presentation.IPSynthesizer;
 public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 
 	private IPSynthesizer pres;
-
+	
 	public CSynthesizer() {
 		super();
 		this.pres = PACFactory.getPFactory().newSynthesizer(this);
-
 		stop();
 	}
 

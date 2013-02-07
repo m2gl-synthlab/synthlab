@@ -39,8 +39,7 @@ public class AFactory implements IFactory {
 
 	@Override
 	public ISynthesizer newSynthesizer() {
-		ISynthesizer syn = new Synthesizer();
-		return syn;
+		return new Synthesizer();
 	}
 
 	@Override

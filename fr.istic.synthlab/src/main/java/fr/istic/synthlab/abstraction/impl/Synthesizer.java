@@ -23,7 +23,6 @@ public class Synthesizer implements ISynthesizer {
 	private List<IWire> wires;
 
 	private IWire currentWire;
-	
 	/**
 	 * Constructor
 	 */
@@ -40,6 +39,7 @@ public class Synthesizer implements ISynthesizer {
 		this.synth = jSynSynth;
 		modules = new ArrayList<IModule>();
 	}
+	
 
 	@Override
 	public com.jsyn.Synthesizer getJSyn() {

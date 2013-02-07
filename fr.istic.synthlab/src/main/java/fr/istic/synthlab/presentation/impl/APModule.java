@@ -30,6 +30,7 @@ public abstract class APModule extends WebInternalFrame implements IPModule {
 		super(control.getName(), false, true, false, false);
 		this.ctrl = control;
 
+		// deplacement du module
 		this.addAncestorListener(new AncestorListener() {
 			@Override
 			public void ancestorAdded(AncestorEvent event) {
