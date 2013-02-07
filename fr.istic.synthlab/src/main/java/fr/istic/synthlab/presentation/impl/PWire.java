@@ -84,7 +84,9 @@ public class PWire extends JPanel implements IPWire {
 
 	@Override
 	public void updateDisplay() {
-
+		ICSynthesizer synth = null;
+		
+		
 		if (outputPort != null) {
 			posOutput = new Point(outputPort.getX(), outputPort.getY());
 
@@ -94,6 +96,8 @@ public class PWire extends JPanel implements IPWire {
 				posOutput.y += c2.getParent().getY();
 				c2 = c2.getParent();
 			}
+
+			synth = (ICSynthesizer) outputPort.getControl().getModule().getSynthesizer();
 		} else {
 
 		}
@@ -107,6 +111,8 @@ public class PWire extends JPanel implements IPWire {
 				posInput.y += c.getParent().getY();
 				c = c.getParent();
 			}
+
+			synth = (ICSynthesizer) inputPort.getControl().getModule().getSynthesizer();
 		} else {
 
 		}
@@ -134,8 +140,6 @@ public class PWire extends JPanel implements IPWire {
 		setBounds(x + (POutputPort.width / 2), y + (POutputPort.height / 2),
 				width, height);
 
-		ICSynthesizer synth = (ICSynthesizer) outputPort.getControl()
-				.getModule().getSynthesizer();
 		IPSynthesizer presSynth = synth.getPresentation();
 		((JDesktopPane) presSynth).setLayer(this, 0, 0);
 
