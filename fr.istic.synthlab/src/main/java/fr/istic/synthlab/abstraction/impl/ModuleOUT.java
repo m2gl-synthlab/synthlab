@@ -34,7 +34,6 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 		this.fade.attenuationValue = 0;
 
 		fade.output.connect(out.input);
-		
 	}
 
 	@Override
@@ -57,6 +56,7 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	@Override
 	public void setAttenuation(double value) {
+		
 		fade.attenuationValue = value;
 	}
 
@@ -81,7 +81,7 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 	}
 
 	private class AttenuationFilter extends UnitFilter {
-		double attenuationValue = 0;
+		double attenuationValue = 0; // Value between -1 and 1
 
 		@Override
 		public void generate(int start, int limit) {
@@ -91,11 +91,11 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 			for (int i = start; i < limit; i++) {
 				double x = inputs[i];
-				outputs[i] = 20 * Math.log(attenuationValue/x); // TODO : Check if ok
+				outputs[i] = x * attenuationValue; // TODO : Check if ok -> probably not
 				System.out.println(attenuationValue + " " +i + " = " + outputs[i]);
 			}
 		}
-
+		
 	}
 
 }
