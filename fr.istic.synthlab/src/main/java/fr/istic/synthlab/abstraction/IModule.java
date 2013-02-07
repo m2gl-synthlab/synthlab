@@ -10,12 +10,13 @@ import com.jsyn.unitgen.UnitGenerator;
 public interface IModule {
 
 	/**
-
+	 * 
 	 * Return the jSyn components
+	 * 
 	 * @return jSyn components
 	 */
 	public List<UnitGenerator> getJSyn();
-	
+
 	/**
 	 * Start the module
 	 */
@@ -39,6 +40,7 @@ public interface IModule {
 	 * @param identifier
 	 * @return the outputPort
 	 */
+	@Deprecated
 	public IInputPort getInput(int identifier);
 
 	/**
@@ -47,6 +49,7 @@ public interface IModule {
 	 * @param identifier
 	 * @return the outputPort
 	 */
+	@Deprecated
 	public IOutputPort getOutput(int identifier);
 
 	/**
@@ -55,6 +58,7 @@ public interface IModule {
 	 * @param identifier
 	 * @return the parameter
 	 */
+	@Deprecated
 	public IParameter getParameter(int identifier);
 
 	/**
@@ -70,6 +74,10 @@ public interface IModule {
 	 * @return the Synthesizer
 	 */
 	public void setSynthesizer(ISynthesizer synth);
-	
-	public List<IWire> getWires() ;
+
+	/**
+	 * Return the list of wire connected to the module
+	 * @return list of wires
+	 */
+	public List<IWire> getWires();
 }

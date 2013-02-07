@@ -6,6 +6,9 @@ import fr.istic.synthlab.controller.ICModuleOUT;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.IPModuleOUT;
 
+/**
+ * Controller for the OUT module
+ */
 public class CModuleOUT extends ModuleOUT implements ICModuleOUT {
 
 	private IPModuleOUT pres;
@@ -14,25 +17,11 @@ public class CModuleOUT extends ModuleOUT implements ICModuleOUT {
 		super(synth);
 		System.out.println("CModuleOUT initialized");
 		this.pres = PACFactory.getPFactory().newOUT(this);
-		
-		// IParameter gain = this.getParameter(PARAM_GAIN);
-		// pres.addParameter(((ICParameter) gain).getPresentation());
-		//
-		// IParameter switchOnOff = this.getParameter(PARAM_SWITCH_ON_OFF);
-		// pres.addParameter(((ICParameter) switchOnOff).getPresentation());
-		//
-		// IInputPort input = this.getInput(INPUT_IN);
-		// pres.addInputPort(((ICInputPort) input).getPresentation());
 	}
 
 	@Override
 	public void p2cMute() {
 		setMute(!isMute());
-		if (isMute()) {
-			pres.c2pMute();
-		} else {
-			pres.c2pUnmute();
-		}
 	}
 
 	@Override
