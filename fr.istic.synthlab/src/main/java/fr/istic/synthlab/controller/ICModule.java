@@ -1,7 +1,5 @@
 package fr.istic.synthlab.controller;
 
-import java.util.List;
-
 import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.presentation.IPModule;
 
@@ -16,4 +14,6 @@ public interface ICModule extends IModule {
 	 * @return presentation
 	 */
 	public IPModule getPresentation();
+
+	public void p2cClosing();
 }

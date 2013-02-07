@@ -54,12 +54,10 @@ public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
 				
 				JPanel panelPorts = (JPanel) ((JInternalFrame)getComponentAt(x,y)).getContentPane().getComponentAt(e.getPoint());
 				e.translatePoint(-panelPorts.getLocation().x, -panelPorts.getLocation().y);
-//				panelPorts.setBackground(Color.cyan);
 				
 					Component panelPort = panelPorts.getComponentAt(e.getPoint());
 					while(panelPort!=null){
 						e.translatePoint(-panelPort.getLocation().x, -panelPort.getLocation().y);
-//						panelPort.setBackground(Color.PINK);
 						if((panelPort.getComponentAt(e.getPoint()) != null) && (panelPort.getComponentAt(e.getPoint()) instanceof JPanel)){
 							panelPort = panelPort.getComponentAt(e.getPoint());
 						} else {

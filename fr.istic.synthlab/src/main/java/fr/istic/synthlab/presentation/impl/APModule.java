@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
+import javax.swing.event.InternalFrameEvent;
 
 import com.alee.laf.desktoppane.WebInternalFrame;
 
@@ -19,6 +20,7 @@ import fr.istic.synthlab.presentation.IPInputPort;
 import fr.istic.synthlab.presentation.IPModule;
 import fr.istic.synthlab.presentation.IPOutputPort;
 import fr.istic.synthlab.presentation.IPParameter;
+import fr.istic.synthlab.presentation.util.SimpleInternalFrameListener;
 
 /**
  * Abstract class for a module presentation
@@ -34,22 +36,26 @@ public abstract class APModule extends WebInternalFrame implements IPModule {
 	public APModule(ICModule control) {
 		super(control.getName(), false, true, false, false);
 		this.ctrl = control;
+		this.setFocusable(true);
+		
+		this.addInternalFrameListener(new SimpleInternalFrameListener() {
+			@Override
+			public void internalFrameClosing(InternalFrameEvent e) {
+				ctrl.p2cClosing();
+			}
+		});
 
 		this.addFocusListener(new FocusListener() {
 			
 			@Override
 			public void focusLost(FocusEvent e) {
-				for(IWire w : ctrl.getWires()){
-					if(w!=null){
-						((ICWire)w).getPresentation().setOnTop(false);
-					}
-				}
 			}
 			
 			@Override
 			public void focusGained(FocusEvent e) {
 				for(IWire w : ctrl.getWires()){
 					if(w!=null){
+						//TODO : Set wire Z position to this Z position+1
 						((ICWire)w).getPresentation().setOnTop(true);
 					}
 				}
@@ -88,7 +94,7 @@ public abstract class APModule extends WebInternalFrame implements IPModule {
 			public void mouseDragged(MouseEvent e) {
 			}
 		});
-
+		
 	}
 	@Override
 	public void addInputPort(IPInputPort presentation) {
@@ -104,5 +110,11 @@ public abstract class APModule extends WebInternalFrame implements IPModule {
 	public void addParameter(IPParameter presentation) {
 		// TODO Auto-generated method stub
 	}
+	
+	@Override
+	public int getDefaultCloseOperation() {
 
+		return super.getDefaultCloseOperation();
+	}
+	
 }

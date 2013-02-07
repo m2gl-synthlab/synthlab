@@ -34,4 +34,9 @@ public class CModuleOUT extends ModuleOUT implements ICModuleOUT {
 		pres.c2pSetGainValue(getAttenuation());
 	}
 
+	@Override
+	public void p2cClosing() {
+		System.out.println("Closing not implemented");
+	}
+
 }

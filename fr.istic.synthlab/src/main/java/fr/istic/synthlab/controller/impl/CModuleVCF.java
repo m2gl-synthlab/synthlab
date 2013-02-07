@@ -18,4 +18,9 @@ public class CModuleVCF extends ModuleVCF implements ICModule {
 	public IPModule getPresentation() {
 		return pres;
 	}
+
+	@Override
+	public void p2cClosing() {
+		System.out.println("Closing not implemented");
+	}
 }

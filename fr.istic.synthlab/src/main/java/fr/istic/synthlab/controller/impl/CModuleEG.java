@@ -48,4 +48,9 @@ public class CModuleEG extends ModuleEG implements ICModuleEG {
 		pres.c2pSetReleaseValue(getRelease());
 	}
 
+	@Override
+	public void p2cClosing() {
+		System.out.println("Closing not implemented");
+	}
+
 }

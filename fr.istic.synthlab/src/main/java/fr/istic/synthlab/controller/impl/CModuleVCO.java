@@ -31,4 +31,9 @@ public class CModuleVCO extends ModuleVCO implements ICModuleVCO {
 		setTone(tone);
 		pres.c2pSetToneValue(getTone());
 	}
+
+	@Override
+	public void p2cClosing() {
+		System.out.println("Closing not implemented");
+	}
 }
