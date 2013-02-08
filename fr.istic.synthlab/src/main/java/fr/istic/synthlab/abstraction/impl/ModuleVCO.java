@@ -31,21 +31,25 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 	public static final String PARAM_OCTAVE_NAME = "Octave";
 	public static final String PARAM_TONE_NAME = "Tone";
 	
-	public static final double DEFAULT_FREQUENCY_MIN = 1; // 800 Hz
+	public static final double DEFAULT_FREQUENCY_MIN = 1; // 1 Hz
 
+	// Générateur Perso
 	private FrequencyGenerator frequencyGen;
 
+	// Input & Output du module
 	private IInputPort fm;
 	private IOutputPort outputSquare;
 	private IOutputPort outputTriangle;
 	private IOutputPort outputSine;
 	private IOutputPort outputSawtooth;
 
+	// Générateurs de fréquence JSyn
 	private SquareOscillator vcoSquare;
 	private TriangleOscillator vcoTriangle;
 	private SineOscillator vcoSine;
 	private SawtoothOscillator vcoSawtooth;
 	
+	// Valeur de la fréquence
 	private double frequency;
 	private ICommand displayFrequencyCmd;
 
@@ -53,16 +57,20 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 		super(MODULE_NAME, synth);
 		System.out.println("ModuleVCO initialized");
 		
+		// Création des générateurs JSyn
 		this.vcoSquare = new SquareOscillator();
 		this.vcoTriangle = new TriangleOscillator();
 		this.vcoSine = new SineOscillator();
 		this.vcoSawtooth = new SawtoothOscillator();
 
+		// Création du générateur perso
 		this.frequencyGen = new FrequencyGenerator();
 
+		// Création d'un port d'entrée sur le générateur perso
 		this.fm = PACFactory.getFactory().newInputPort(this, IN_MOD_FREQ_NAME,
 				frequencyGen.input);
 
+		// Création des ports de sortie des générateurs JSsyn
 		this.outputSquare = PACFactory.getFactory().newOutputPort(this,
 				OUT_SQUARE_NAME, vcoSquare.output);
 		this.outputTriangle = PACFactory.getFactory().newOutputPort(this,
@@ -72,6 +80,7 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 		this.outputSawtooth = PACFactory.getFactory().newOutputPort(this,
 				OUT_SAWTOOTH_NAME, vcoSawtooth.output);
 
+		// Connection du générateur perso aux générateurs JSyn
 		frequencyGen.outputSquare.connect(vcoSquare.frequency);
 		frequencyGen.outputTriangle.connect(vcoTriangle.frequency);
 		frequencyGen.outputSine.connect(vcoSine.frequency);
@@ -161,6 +170,7 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 		int octave = 0; // Value between 0 and 14
 		double tone = 0.0; // Value between -1.0 and 1.0
 
+		// Input & Output du générateur perso
 		UnitInputPort input = new UnitInputPort(IN_MOD_FREQ_NAME);
 		UnitOutputPort outputSquare = new UnitOutputPort(OUT_SQUARE_NAME);
 		UnitOutputPort outputTriangle = new UnitOutputPort(OUT_TRIANGLE_NAME);
@@ -168,6 +178,7 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 		UnitOutputPort outputSawtooth = new UnitOutputPort(OUT_SAWTOOTH_NAME);
 
 		public FrequencyGenerator() {
+			this.addPort(input);
 			this.addPort(outputSquare);
 			this.addPort(outputTriangle);
 			this.addPort(outputSine);
@@ -184,8 +195,11 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 			double[] outputsSawtooth = outputSawtooth.getValues();
 
 			for (int i = start; i < limit; i++) {
+				// Valeur du port d'entrée
 				double x = inputs[i];
+				// Calcul de la fréquence
 				frequency = Math.pow(2,octave+tone+x);
+				// Application de la fréquence sur les ports de sortie
 				outputsSquare[i] = frequency;
 				outputsTriangle[i] = frequency;
 				outputsSine[i] = frequency;
