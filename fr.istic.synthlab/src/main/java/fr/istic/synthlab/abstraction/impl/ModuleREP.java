@@ -31,8 +31,6 @@ public class ModuleREP extends AModule implements IModuleREP {
 
 	private Map<Integer, IOutputPort> outputs;
 
-
-
 	public ModuleREP(ISynthesizer synth) {
 		super(MODULE_NAME, synth);
 
