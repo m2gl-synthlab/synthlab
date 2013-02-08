@@ -36,10 +36,8 @@ public class ModuleAudioScope extends AModule implements IModuleAudioScope {
 		this.scope = new AudioScope(synth.getJSyn());
 		this.adapter = new IdentityFilter();
 
-		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME,
-				adapter.input);
-		this.out = PACFactory.getFactory().newOutputPort(this, OUT_NAME,
-				adapter.output);
+		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME, adapter.input);
+		this.out = PACFactory.getFactory().newOutputPort(this, OUT_NAME, adapter.output);
 
 		this.scope.addProbe(this.out.getJSyn());
 		this.scope.setTriggerMode(AudioScope.TriggerMode.NORMAL);
@@ -64,12 +62,12 @@ public class ModuleAudioScope extends AModule implements IModuleAudioScope {
 
 	@Override
 	public IInputPort getInput() {
-		return this.in;
+		return in;
 	}
 
 	@Override
 	public IOutputPort getOutput() {
-		return this.out;
+		return out;
 	}
 
 	@Override
@@ -83,14 +81,14 @@ public class ModuleAudioScope extends AModule implements IModuleAudioScope {
 		if (in.getWire() != null) {
 			wires.add(in.getWire());
 		}
-		if (in.getWire() != null) {
+		if (out.getWire() != null) {
 			wires.add(out.getWire());
 		}
 		return wires;
 	}
 
 	/**
-	 * Attenuation Filter
+	 * Identity Filter
 	 */
 	private class IdentityFilter extends UnitFilter {
 
