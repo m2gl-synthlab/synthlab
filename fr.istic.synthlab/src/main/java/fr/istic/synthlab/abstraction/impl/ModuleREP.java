@@ -1,10 +1,12 @@
 package fr.istic.synthlab.abstraction.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import com.jsyn.ports.UnitInputPort;
+import com.jsyn.ports.UnitOutputPort;
+import com.jsyn.unitgen.ChannelOut;
+import com.jsyn.unitgen.UnitFilter;
 import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.IInputPort;
@@ -22,32 +24,40 @@ public class ModuleREP extends AModule implements IModuleREP {
 	private static final String OUT2_NAME = "Out2";
 	private static final String OUT3_NAME = "Out3";
 
-	private static final int OUT1 = 0;
-	private static final int OUT2 = 1;
-	private static final int OUT3 = 2;
-
 	private IInputPort in;
-	private IOutputPort out1, out2, out3;
-
-	private Map<Integer, IOutputPort> outputs;
+	private IOutputPort output1;
+	private IOutputPort output2;
+	private IOutputPort output3;
+	private Identitygenerator none_output;
 
 	public ModuleREP(ISynthesizer synth) {
 		super(MODULE_NAME, synth);
 
-		this.outputs = new HashMap<Integer, IOutputPort>();
+		this.none_output = new Identitygenerator();
+		
+		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME,
+				none_output.input);
 
-		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME);
-		this.out1 = PACFactory.getFactory().newOutputPort(this, OUT1_NAME);
-		this.out2 = PACFactory.getFactory().newOutputPort(this, OUT2_NAME);
-		this.out3 = PACFactory.getFactory().newOutputPort(this, OUT3_NAME);
-
-		this.outputs.put(ModuleREP.OUT1, PACFactory.getFactory().newOutputPort(this, OUT1_NAME, out1.getJSyn()));
-		this.outputs.put(ModuleREP.OUT2, PACFactory.getFactory().newOutputPort(this, OUT2_NAME, out2.getJSyn() ));
-		this.outputs.put(ModuleREP.OUT3, PACFactory.getFactory().newOutputPort(this, OUT3_NAME, out3.getJSyn()));
-
-		out1.connect(in);
-		out2.connect(in);
-		out3.connect(in);		
+		this.output1 = PACFactory.getFactory().newOutputPort(this,
+				OUT1_NAME, none_output.output1);
+		this.output2 = PACFactory.getFactory().newOutputPort(this,
+				OUT2_NAME, none_output.output2);
+		this.output3 = PACFactory.getFactory().newOutputPort(this,
+				OUT3_NAME, none_output.output3);
+		
+		
+		
+//		synth.getJSyn().add(this.out1);
+//		synth.getJSyn().add(this.out2);
+//		synth.getJSyn().add(this.out3);
+//		synth.getJSyn().add(this.none_input);
+//		
+//		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME, none_input.getInput());
+//		
+//		none_input.output.connect(out1.input);
+//		none_input.output.connect(out2.input);
+//		none_input.output.connect(out3.input);
+			
 	}
 
 	@Override
@@ -73,6 +83,38 @@ public class ModuleREP extends AModule implements IModuleREP {
 
 	}
 
+	// crée un input Jsyn sans effet
+	private class Identitygenerator extends UnitGenerator {
+
+		UnitOutputPort output1 = new UnitOutputPort(OUT1_NAME);
+		UnitOutputPort output2 = new UnitOutputPort(OUT2_NAME);
+		UnitOutputPort output3 = new UnitOutputPort(OUT2_NAME);
+		UnitInputPort input = new UnitInputPort(IN_NAME);
+
+		public Identitygenerator() {
+			this.addPort(output1);
+			this.addPort(output2);
+			this.addPort(output3);
+			this.addPort(input);
+		}
+		
+		@Override
+		public void generate(int start, int limit) {
+			// Get signal arrays from ports.
+			double[] inputs = input.getValues();
+			double[] outputs1 = output1.getValues();
+			double[] outputs2 = output2.getValues();
+			double[] outputs3 = output3.getValues();
+
+			for (int i = start; i < limit; i++) {
+				double x = inputs[i];
+				outputs1[i] = x;
+				outputs2[i] = x;
+				outputs3[i] = x;
+			}
+		}
+	}
+	
 	@Override
 	public List<IWire> getWires() {
 
@@ -80,14 +122,14 @@ public class ModuleREP extends AModule implements IModuleREP {
 		if (in.getWire() != null) {
 			wires.add(in.getWire());
 		}
-		if (out1.getWire() != null) {
-			wires.add(out1.getWire());
+		if (output1.getWire() != null) {
+			wires.add(output1.getWire());
 		}
-		if (out2.getWire() != null) {
-			wires.add(out2.getWire());
+		if (output2.getWire() != null) {
+			wires.add(output2.getWire());
 		}
-		if (out3.getWire() != null) {
-			wires.add(out3.getWire());
+		if (output3.getWire() != null) {
+			wires.add(output3.getWire());
 		}
 		return wires;
 	}
@@ -99,15 +141,15 @@ public class ModuleREP extends AModule implements IModuleREP {
 	}
 
 	public IOutputPort getOut1(){
-		return out1;
+		return output1;
 	}
 	
 	public IOutputPort getOut2(){
-		return out2;
+		return output2;
 	}
 	
 	public IOutputPort getOut3(){
-		return out3;
+		return output3;
 	}
 
 }

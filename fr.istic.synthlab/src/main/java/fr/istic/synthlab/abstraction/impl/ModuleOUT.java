@@ -26,6 +26,7 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 	private AttenuationFilter fade;
 
 	private IInputPort in;
+	
 	private boolean isMute;
 
 	public ModuleOUT(ISynthesizer synth) {
