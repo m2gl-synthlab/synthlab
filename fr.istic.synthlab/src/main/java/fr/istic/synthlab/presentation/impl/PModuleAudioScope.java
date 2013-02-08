@@ -52,7 +52,7 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 		AudioScopeView scope = new AudioScopeView();
 		model = ctrl.getModel();
 		scope.setModel(model);
-		scope.setControlsVisible(true);
+		scope.setControlsVisible(false);
 		panelScope.add(scope);
 
 		inputPort = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
@@ -65,7 +65,7 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 		this.getContentPane().add(panelScope, 0);
 		this.getContentPane().add(panelPort, 1);
 
-		Dimension size = new Dimension(700, 500);
+		Dimension size = new Dimension(600, 400);
 		this.setPreferredSize(size);
 
 		// TODO : Not sure if it's the better way to define the size...
