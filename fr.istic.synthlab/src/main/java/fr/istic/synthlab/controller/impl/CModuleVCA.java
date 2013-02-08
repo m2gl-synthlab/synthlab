@@ -22,13 +22,13 @@ public class CModuleVCA extends ModuleVCA implements ICModuleVCA {
 		this.presentation = PACFactory.getPFactory().newVCA(this);
 		
 		//PARAM_AMPLITUDE et OUTPUT_SQUARE = 0 par defaut
-		IParameter amplitude = this.getParameter(PARAM_AMPLITUDE);
+		IParameter amplitude = this.getParameter(AM);
 		presentation.addParameter(((ICParameter) amplitude).getPresentation());
 				
-		IInputPort inputAmplitudeModulation = this.getInput(PARAM_AMPLITUDE);
+		IInputPort inputAmplitudeModulation = this.getInput(AM);
 		presentation.addInputPort(((ICInputPort) inputAmplitudeModulation).getPresentation());
 		
-		IInputPort inputModule = this.getInput(PARAM_AMPLITUDE);
+		IInputPort inputModule = this.getInput(AM);
 		presentation.addInputPort(((ICInputPort) inputModule).getPresentation());
 
 		IOutputPort outputVCA = this.getOutput(OUTPUT_SQUARE);
