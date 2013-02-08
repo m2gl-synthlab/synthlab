@@ -1,4 +1,3 @@
-
 package fr.istic.synthlab.abstraction;
 
 import fr.istic.synthlab.command.ICommand;
@@ -6,14 +5,14 @@ import fr.istic.synthlab.command.ICommand;
 public interface IModuleVCO extends IModule {
 
 	/**
-	 * Set the octave value (between -5 and 5)
+	 * Set the octave value (between 0 and 14)
 	 * 
 	 * @param value
 	 */
 	public void setOctave(int value);
 
 	/**
-	 * Return the octave value (between -5 and 5)
+	 * Return the octave value (between 0 and 14)
 	 * 
 	 * @param value
 	 */
@@ -32,7 +31,7 @@ public interface IModuleVCO extends IModule {
 	 * @param value
 	 */
 	public double getTone();
-	
+
 	/**
 	 * Return the frequency value (between 0 and 32768)
 	 * 
@@ -74,11 +73,12 @@ public interface IModuleVCO extends IModule {
 	 * @return sawtooth output
 	 */
 	public IOutputPort getOutputSawtooth();
-	
+
 	/**
 	 * Set the display frequency command
 	 * 
-	 * @param cmd Display Frequency command
+	 * @param cmd
+	 *            Display Frequency command
 	 */
 	public void setDisplayFrequencyCmd(ICommand cmd);
 }

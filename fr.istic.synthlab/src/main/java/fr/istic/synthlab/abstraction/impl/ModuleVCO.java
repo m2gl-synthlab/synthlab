@@ -31,8 +31,6 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 	public static final String PARAM_OCTAVE_NAME = "Octave";
 	public static final String PARAM_TONE_NAME = "Tone";
 	
-	public static final double DEFAULT_FREQUENCY_MIN = 1; // 1 Hz
-
 	// Générateur Perso
 	private FrequencyGenerator frequencyGen;
 

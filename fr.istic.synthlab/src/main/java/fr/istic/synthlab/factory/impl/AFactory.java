@@ -66,8 +66,7 @@ public class AFactory implements IFactory {
 
 	@Override
 	public IModule newVCF(ISynthesizer synth) {
-		IModule module = new ModuleVCF(MODULE_VCF);
-		module.setSynthesizer(synth);
+		IModule module = new ModuleVCF(synth);
 		return module;
 	}
 

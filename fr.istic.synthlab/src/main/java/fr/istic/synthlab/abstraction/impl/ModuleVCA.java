@@ -46,6 +46,7 @@ public class ModuleVCA extends AModule implements IModuleVCA {
 		this.none_output = new IdentityFilter();
 		this.none_input = new IdentityFilter();
 		this.none_input_am = new IdentityFilter();
+		
 		// Ajout du port OUTPUT
 		this.output = PACFactory.getFactory().newOutputPort(this, OUTPUT_NAME,
 				none_output.getOutput());
