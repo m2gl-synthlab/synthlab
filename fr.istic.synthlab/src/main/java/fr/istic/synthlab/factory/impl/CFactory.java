@@ -9,6 +9,7 @@ import fr.istic.synthlab.abstraction.IModuleAudioScope;
 import fr.istic.synthlab.abstraction.IModuleEG;
 import fr.istic.synthlab.abstraction.IModuleOUT;
 import fr.istic.synthlab.abstraction.IModuleREP;
+import fr.istic.synthlab.abstraction.IModuleVCA;
 import fr.istic.synthlab.abstraction.IModuleVCO;
 import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.IParameter;
@@ -20,6 +21,7 @@ import fr.istic.synthlab.controller.impl.CModuleAudioScope;
 import fr.istic.synthlab.controller.impl.CModuleEG;
 import fr.istic.synthlab.controller.impl.CModuleOUT;
 import fr.istic.synthlab.controller.impl.CModuleREP;
+import fr.istic.synthlab.controller.impl.CModuleVCA;
 import fr.istic.synthlab.controller.impl.CModuleVCF;
 import fr.istic.synthlab.controller.impl.CModuleVCO;
 import fr.istic.synthlab.controller.impl.COutputPort;
@@ -32,6 +34,7 @@ import fr.istic.synthlab.factory.IFactory;
 public class CFactory implements IFactory {
 
 	public static final String MODULE_VCO = "VCO";
+	public static final String MODULE_VCA = "VCA";
 	public static final String MODULE_OUT = "OUT";
 	public static final String MODULE_VCF = "VCF";
 
@@ -52,6 +55,12 @@ public class CFactory implements IFactory {
 	@Override
 	public IModuleVCO newVCO(ISynthesizer synth) {
 		IModuleVCO module = new CModuleVCO(synth);
+		return module;
+	}
+
+	@Override
+	public IModuleVCA newVCA(ISynthesizer synth) {
+		IModuleVCA module = new CModuleVCA(synth);
 		return module;
 	}
 
@@ -149,5 +158,6 @@ public class CFactory implements IFactory {
 		port.setName(name);
 		return port;
 	}
+
 
 }
