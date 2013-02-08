@@ -83,6 +83,9 @@ public class ModuleAudioScope extends AModule implements IModuleAudioScope {
 		if (in.getWire() != null) {
 			wires.add(in.getWire());
 		}
+		if (in.getWire() != null) {
+			wires.add(out.getWire());
+		}
 		return wires;
 	}
 
