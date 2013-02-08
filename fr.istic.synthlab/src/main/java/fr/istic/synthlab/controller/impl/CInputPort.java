@@ -4,8 +4,6 @@ import com.jsyn.ports.UnitInputPort;
 
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.InputPort;
-import fr.istic.synthlab.command.ICommand;
-import fr.istic.synthlab.command.toolbar.ToolbarWireCommand;
 import fr.istic.synthlab.controller.ICInputPort;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.IPInputPort;
@@ -13,7 +11,6 @@ import fr.istic.synthlab.presentation.IPInputPort;
 public class CInputPort extends InputPort implements ICInputPort {
 
 	private IPInputPort pres;
-	private IWire wire;
 	
 	public CInputPort(String name) {
 		super(name);
@@ -43,24 +40,21 @@ public class CInputPort extends InputPort implements ICInputPort {
 
 	@Override
 	public void p2cConnect() {
-		if (wire == null) {
+		System.out.println("CInputPort p2cConnect");
+		if (getWire() == null) {
 			IWire currentWire = getModule().getSynthesizer().getCurrentWire();
-			if (currentWire != null && currentWire.getInput() == null) {
-				wire = currentWire;
-				wire.connect(this);
+			if(currentWire == null){
+				getModule().getSynthesizer().setCurrentWire(PACFactory.getFactory().newWire());
+				currentWire = getModule().getSynthesizer().getCurrentWire();
 			}
-		}
-		if(wire == null){
-			System.out.println("wire cinputport null");
-		} else {
-			System.out.println("wire cinputport not null");
-		}
-		
-		ICommand wireCommand=new ToolbarWireCommand(getModule().getSynthesizer());
-		if(getModule().getSynthesizer().getCurrentWire().getInput()!=null &&
-				getModule().getSynthesizer().getCurrentWire().getOutput()!=null){
-		wireCommand.execute();
-		System.out.println("EXECUTE");
+			
+			if (currentWire.getInput() == null) {
+				this.setWire(currentWire);
+				currentWire.connect(this);
+				if(currentWire.getOutput() != null){
+					getModule().getSynthesizer().setCurrentWire(null);
+				}
+			}
 		}
 	}
 	

@@ -467,4 +467,5 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			toolbarWireCommand.execute();
 	}
 
+
 }

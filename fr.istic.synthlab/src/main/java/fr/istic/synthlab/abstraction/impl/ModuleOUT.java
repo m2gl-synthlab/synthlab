@@ -13,6 +13,10 @@ import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
+/**
+ * OUT Module
+ * Send the input attenuated signal to the sound card.
+ */
 public class ModuleOUT extends AModule implements IModuleOUT {
 
 	private static final String MODULE_NAME = "OUT";
@@ -26,7 +30,6 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	public ModuleOUT(ISynthesizer synth) {
 		super(MODULE_NAME, synth);
-		System.out.println("ModuleOUT initialized");
 
 		this.out = new ChannelOut();
 		this.fade = new AttenuationFilter();
@@ -73,6 +76,11 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 	@Override
 	public void setMute(boolean mute) {
 		this.isMute = mute;
+		if(isMute()){
+			stop();
+		}else{
+			start();
+		}
 	}
 
 	@Override
@@ -80,6 +88,16 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 		return isMute;
 	}
 
+	@Override
+	public List<IWire> getWires() {
+		List<IWire> wires = new ArrayList<IWire>();
+		wires.add(in.getWire());
+		return wires;
+	}
+	
+	/**
+	 * Attenuation Filter
+	 */
 	private class AttenuationFilter extends UnitFilter {
 		double attenuationValue = 0; // Value between -inf and 12
 
@@ -91,18 +109,10 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 			for (int i = start; i < limit; i++) {
 				double x = inputs[i];
-				outputs[i] = Math.pow(10, attenuationValue/20) * x; // TODO : Check if ok -> probably not
-				System.out.println(attenuationValue + " " +i + " = " + outputs[i]);
+				outputs[i] = Math.pow(10, attenuationValue / 20) * x;
+				// see : http://fr.wikipedia.org/wiki/Niveau_(audio)
 			}
 		}
-		
-	}
-	
-	@Override
-	public List<IWire> getWires() {
-		List<IWire> wires = new ArrayList<IWire>();
-		wires.add(in.getWire());
-		return wires;
-	}
 
+	}
 }
