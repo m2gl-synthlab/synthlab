@@ -28,6 +28,7 @@ import com.alee.laf.toolbar.ToolbarStyle;
 import com.alee.laf.toolbar.WebToolBar;
 
 import fr.istic.synthlab.command.ICommand;
+import fr.istic.synthlab.command.menu.AddModuleAudioScopeCommand;
 import fr.istic.synthlab.presentation.IPSynthesizer;
 import fr.istic.synthlab.presentation.impl.PSynthesizer;
 
@@ -36,12 +37,12 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private static final long serialVersionUID = -7577358239451859975L;
 
 	// constantes pour les boutons de la toolbar
-	private static final int BUTTON_DEFAULT = 0;
-//	private static final int BUTTON_MODULE = 2;
+//	private static final int BUTTON_DEFAULT = 0;
+	// private static final int BUTTON_MODULE = 2;
 
-	private static final int BUTTON_PLAY = 1;
-	private static final int BUTTON_PAUSE = 2;
-//	private static final int BUTTON_RECORD = 5;
+	private static final int BUTTON_PLAY = 0;
+	private static final int BUTTON_PAUSE = 1;
+	// private static final int BUTTON_RECORD = 5;
 
 	private IPSynthesizer pres;
 
@@ -50,15 +51,15 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private JMenu menuFile, menuAdd, menuHelp;
 	private JMenuItem menuItemNew, menuItemOpen, menuItemSave;
 	private JMenuItem menuItemQuit, menuItemDoc, menuItemAbout;
-	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT, menuItemAddModuleVCF;
+	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT,
+		menuItemAddModuleVCF,menuItemAddModuleEG, menuItemAddModuleAudioScope;
 
 	// Toolbar
 	private WebToolBar toolBar = new WebToolBar();
-	private String[] iconFiles = { "res/default.png", "res/play.png", "res/pause.png" };
-	private String[] buttonLabels = { "Default", "Play", "Pause" };
+	private String[] iconFiles = { "res/play.png", "res/pause.png" };
+	private String[] buttonLabels = { "Play", "Pause" };
 	private Image[] icons = new Image[iconFiles.length];
 	private JButton[] buttons = new JButton[buttonLabels.length];
-	
 
 	// Command
 	private ICommand newSynthCommand;
@@ -67,19 +68,16 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand quitSynthCommand;
 	private ICommand docSynthCommand;
 	private ICommand aboutSynthCommand;
-	private ICommand toolbarDefaultCommand;
-	private ICommand toolbarWireCommand;
-	private ICommand toolbarModuleCommand;
 
 	private ICommand addModuleOUTCommand;
 	private ICommand addModuleVCOCommand;
 	private ICommand addModuleVCFCommand;
+	private ICommand addModuleEGCommand;
+	private ICommand addModuleAudioScopeCommand;
 
 	private ICommand toolbarPlayCommand;
 	private ICommand toolbarPauseCommand;
-	private ICommand toolbarRecordCommand;
 
-	
 	public SynthFrame() {
 		this.initComponents();
 		this.configureView();
@@ -91,14 +89,13 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	 */
 	private void initComponents() {
 		// instanciation de la barre de menu
-		
-	
+
 		mainMenuBar = new JMenuBar();
 
 		// -------------------------- File Menu --------------------------
 		menuFile = new JMenu("File");
 
-//		this.add(new UsageDisplay());
+		// this.add(new UsageDisplay());
 		// instanciation des items
 		menuItemNew = new JMenuItem("New");
 		menuItemOpen = new JMenuItem("Open");
@@ -110,18 +107,22 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuFile.add(menuItemOpen);
 		menuFile.add(menuItemSave);
 		menuFile.add(menuItemQuit);
-		
+
 		// -------------------------- Add Menu --------------------------
 		menuAdd = new JMenu("Add");
 
 		menuItemAddModuleOUT = new JMenuItem("OUT Module");
 		menuItemAddModuleVCO = new JMenuItem("VCO Module");
 		menuItemAddModuleVCF = new JMenuItem("VCF Module");
+		menuItemAddModuleEG = new JMenuItem("EG Module");
+		menuItemAddModuleAudioScope = new JMenuItem("AudioScope Module");
 
 		menuAdd.add(menuItemAddModuleOUT);
 		menuAdd.add(menuItemAddModuleVCO);
 		menuAdd.add(menuItemAddModuleVCF);
-		
+		menuAdd.add(menuItemAddModuleEG);
+		menuAdd.add(menuItemAddModuleAudioScope);
+
 		// -------------------------- Help Menu --------------------------
 		menuHelp = new JMenu("Help");
 
@@ -132,7 +133,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		// ajout des items au menu Help
 		menuHelp.add(menuItemDoc);
 		menuHelp.add(menuItemAbout);
-		
+
 		// ajout des menus a la barre de menus
 		mainMenuBar.add(menuFile);
 		mainMenuBar.add(menuAdd);
@@ -145,7 +146,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		frameContainer.setLayout(new BorderLayout());
 		for (int i = 0; i < buttonLabels.length; ++i) {
 			try {
-				Image img = ImageIO.read( new File(iconFiles[i]) );
+				Image img = ImageIO.read(new File(iconFiles[i]));
 				icons[i] = img.getScaledInstance(25, 25, Image.SCALE_DEFAULT);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -156,7 +157,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		}
 
 		frameContainer.add(BorderLayout.NORTH, toolBar);
-		
+
 	}
 
 	/**
@@ -174,13 +175,14 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		memoryBar.setShowMaximumMemory(false);
 		statusBar.add(memoryBar);
 		statusBar.add(new WebStatusLabel("Synthesizer ready"));
-		
+
 		getContentPane().add(BorderLayout.SOUTH, statusBar);
-		
-		//TODO remonter les evenements start et stop
-		
+
+		// TODO remonter les evenements start et stop
+
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height/ 2 - this.getSize().height / 2);
+		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height
+				/ 2 - this.getSize().height / 2);
 		this.setResizable(true);
 
 		// ajout des raccourcis clavier au elements du menu
@@ -258,6 +260,22 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 					addModuleVCFCommand.execute();
 			}
 		});
+		menuItemAddModuleEG.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (addModuleEGCommand != null)
+					addModuleEGCommand.execute();
+			}
+		});
+		menuItemAddModuleAudioScope.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (addModuleAudioScopeCommand != null)
+					addModuleAudioScopeCommand.execute();
+			}
+		});
 		menuItemDoc.addActionListener(new ActionListener() {
 
 			@Override
@@ -274,24 +292,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 					aboutSynthCommand.execute();
 			}
 		});
-		
-		buttons[BUTTON_DEFAULT].addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (toolbarDefaultCommand != null)
-					toolbarDefaultCommand.execute();
-			}
-		});
-		
-		
-//		buttons[BUTTON_MODULE].addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				if (toolbarModuleCommand != null)
-//					toolbarModuleCommand.execute();
-//			}
-//		});
-		
 
 		buttons[BUTTON_PLAY].addActionListener(new ActionListener() {
 			@Override
@@ -300,7 +300,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 					toolbarPlayCommand.execute();
 			}
 		});
-		
 
 		buttons[BUTTON_PAUSE].addActionListener(new ActionListener() {
 			@Override
@@ -309,43 +308,22 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 					toolbarPauseCommand.execute();
 			}
 		});
-		
 
-//		buttons[BUTTON_RECORD].addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				if (toolbarRecordCommand != null)
-//					toolbarRecordCommand.execute();
-//			}
-//		});
-		
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * fr.istic.synthlab.ISynthFrame#displaySynth(fr.istic.synthlab.presentation
-	 * .IPSynthesizer)
-	 */
 	@Override
 	public void displaySynth(IPSynthesizer presentation) {
-		if(pres!=null)
-		this.remove((PSynthesizer) pres);
+		if (pres != null)
+			this.remove((PSynthesizer) pres);
 
 		pres = presentation;
 		this.add((PSynthesizer) pres);
 		this.setVisible(true);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.istic.synthlab.ISynthFrame#quitSynth()
-	 */
 	@Override
 	public void quitSynth() {
-		this.setVisible(false); 
+		this.setVisible(false);
 	}
 
 	/**
@@ -397,37 +375,13 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	}
 
 	/**
-	 * @param toolbarDefaultCommand
-	 *            the toolbarDefaultCommand to set
-	 */
-	public void setToolbarDefaultCommand(ICommand toolbarDefaultCommand) {
-		this.toolbarDefaultCommand = toolbarDefaultCommand;
-	}
-	
-	/**
-	 * @param toolbarDefaultWire
-	 *            the toolbarWireCommand to set
-	 */
-	public void setToolbarWireCommand(ICommand toolbarWireCommand) {
-		this.toolbarWireCommand = toolbarWireCommand;
-	}
-	
-	/**
-	 * @param toolbarModuleCommand
-	 *            the toolbarModuleCommand to set
-	 */
-	public void setToolbarModuleCommand(ICommand toolbarModuleCommand) {
-		this.toolbarModuleCommand = toolbarModuleCommand;
-	}
-	
-	/**
 	 * @param toolbarModuleCommand
 	 *            the toolbarModuleCommand to set
 	 */
 	public void setToolbarPlayCommand(ICommand toolbarPlayCommand) {
 		this.toolbarPlayCommand = toolbarPlayCommand;
 	}
-	
+
 	/**
 	 * @param toolbarModuleCommand
 	 *            the toolbarModuleCommand to set
@@ -437,22 +391,35 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	}
 
 	/**
-	 * @param toolbarModuleCommand
-	 *            the toolbarModuleCommand to set
+	 * @param addModuleVCOCommand
 	 */
-	public void setToolbarRecordCommand(ICommand toolbarRecordCommand) {
-		this.toolbarRecordCommand = toolbarRecordCommand;
-	}
-
-	
 	public void setAddModuleVCOCommand(ICommand addModuleVCOCommand) {
 		this.addModuleVCOCommand = addModuleVCOCommand;
 	}
+
+	/**
+	 * @param addModuleVCFCommand
+	 */
 	public void setAddModuleVCFCommand(ICommand addModuleVCFCommand) {
 		this.addModuleVCFCommand = addModuleVCFCommand;
 	}
+
+	/**
+	 * @param addModuleOUTCommand
+	 */
 	public void setAddModuleOUTCommand(ICommand addModuleOUTCommand) {
 		this.addModuleOUTCommand = addModuleOUTCommand;
-	}	
+	}
 
+	/**
+	 * @param addModuleEGCommand
+	 */
+	public void setAddModuleEGCommand(ICommand addModuleEGCommand) {
+		this.addModuleEGCommand = addModuleEGCommand;
+	}
+
+	public void setAddModuleAudioScopeCommand(AddModuleAudioScopeCommand addModuleAudioScopeCommand) {
+		this.addModuleAudioScopeCommand = addModuleAudioScopeCommand;
+		
+	}
 }

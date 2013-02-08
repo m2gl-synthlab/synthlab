@@ -5,6 +5,8 @@ import com.alee.laf.WebLookAndFeel;
 import fr.istic.synthlab.command.app.DisplayCommand;
 import fr.istic.synthlab.command.app.UndisplayCommand;
 import fr.istic.synthlab.command.menu.AboutCommand;
+import fr.istic.synthlab.command.menu.AddModuleAudioScopeCommand;
+import fr.istic.synthlab.command.menu.AddModuleEGCommand;
 import fr.istic.synthlab.command.menu.AddModuleOUTCommand;
 import fr.istic.synthlab.command.menu.AddModuleVCFCommand;
 import fr.istic.synthlab.command.menu.AddModuleVCOCommand;
@@ -13,8 +15,6 @@ import fr.istic.synthlab.command.menu.NewSynthCommand;
 import fr.istic.synthlab.command.menu.OpenSynthCommand;
 import fr.istic.synthlab.command.menu.QuitSynthCommand;
 import fr.istic.synthlab.command.menu.SaveSynthCommand;
-import fr.istic.synthlab.command.toolbar.ToolbarDefaultCommand;
-import fr.istic.synthlab.command.toolbar.ToolbarModuleCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarPauseCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarPlayCommand;
 import fr.istic.synthlab.factory.impl.AFactory;
@@ -51,14 +51,14 @@ public class SynthMain {
 		frame.setQuitSynthCommand(new QuitSynthCommand(app));
 		frame.setDocSynthCommand(new DocumentationCommand());
 		frame.setAboutSynthCommand(new AboutCommand());
-		frame.setToolbarDefaultCommand(new ToolbarDefaultCommand());
-		frame.setToolbarModuleCommand(new ToolbarModuleCommand(app.getSynthesizer()));
 		frame.setToolbarPlayCommand(new ToolbarPlayCommand(app.getSynthesizer().getPresentation()));
 		frame.setToolbarPauseCommand(new ToolbarPauseCommand(app.getSynthesizer().getPresentation()));
 
 		frame.setAddModuleOUTCommand(new AddModuleOUTCommand(app.getSynthesizer()));
 		frame.setAddModuleVCOCommand(new AddModuleVCOCommand(app.getSynthesizer()));
 		frame.setAddModuleVCFCommand(new AddModuleVCFCommand(app.getSynthesizer()));
+		frame.setAddModuleEGCommand(new AddModuleEGCommand(app.getSynthesizer()));
+		frame.setAddModuleAudioScopeCommand(new AddModuleAudioScopeCommand(app.getSynthesizer()));
 		
 		// Start the application
 		app.startSynth();

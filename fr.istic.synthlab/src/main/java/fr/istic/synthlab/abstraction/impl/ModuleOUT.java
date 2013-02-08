@@ -30,9 +30,10 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	public ModuleOUT(ISynthesizer synth) {
 		super(MODULE_NAME, synth);
-
 		this.out = new ChannelOut();
 		this.fade = new AttenuationFilter();
+		synth.getJSyn().add(this.out);
+		synth.getJSyn().add(this.fade);
 
 		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME, fade.input);
 		this.fade.attenuationValue = 0;
@@ -91,7 +92,9 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 	@Override
 	public List<IWire> getWires() {
 		List<IWire> wires = new ArrayList<IWire>();
-		wires.add(in.getWire());
+		if (in.getWire() != null) {
+			wires.add(in.getWire());
+		}
 		return wires;
 	}
 	

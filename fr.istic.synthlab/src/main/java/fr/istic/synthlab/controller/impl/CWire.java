@@ -4,7 +4,6 @@ import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.impl.Wire;
 import fr.istic.synthlab.controller.ICInputPort;
-import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICOutputPort;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.ICWire;

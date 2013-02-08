@@ -33,6 +33,6 @@ public interface IWire {
 	 */
 	public void connect(IOutputPort port);
 	
-
+	// TODO : Maybe a cable could be half disconnected ? need comments
 	public void disconnect();
 }

@@ -9,6 +9,18 @@ public interface IPModuleVCO extends IPModule {
 	 */
 	public ICModuleVCO getControl();
 	
-	public void c2pDoSomething();
+	/**
+	 * Called by the controller to inform the presentation of the new octave value
+	 * 
+	 * @param octave
+	 */
+	public void c2pSetOctaveValue(int octave);
+	
+	/**
+	 * Called by the controller to inform the presentation of the new tone value
+	 * 
+	 * @param tone
+	 */
+	public void c2pSetToneValue(double tone);
 
 }

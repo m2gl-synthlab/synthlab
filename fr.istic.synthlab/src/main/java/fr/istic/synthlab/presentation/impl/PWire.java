@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JPanel;
@@ -34,6 +35,7 @@ public class PWire extends JPanel implements IPWire {
 	private int width = 0;
 	private PInputPort inputPort;
 	private POutputPort outputPort;
+	private ICSynthesizer synth = null;
 
 	/**
 	 * @param control
@@ -52,7 +54,35 @@ public class PWire extends JPanel implements IPWire {
 		this.addMouseListener(new SimpleMouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				ICSynthesizer synth = null;
+				if (inputPort != null) {
+					synth = (ICSynthesizer) inputPort.getControl().getModule().getSynthesizer();
+				} else {
+					synth = (ICSynthesizer) outputPort.getControl().getModule().getSynthesizer();
+				}
 
+				e.translatePoint(getLocation().x, getLocation().y);
+
+				((JDesktopPane) synth.getPresentation()).setLayer(PWire.this, 0, -1);
+				((PSynthesizer) synth.getPresentation()).dispatchEvent(e);
+				((JDesktopPane) synth.getPresentation()).setLayer(PWire.this, 0, 0);
+			}
+		});
+
+		this.addMouseMotionListener(new MouseMotionListener() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				ICSynthesizer synth = null;
+				if (inputPort != null) {
+					synth = (ICSynthesizer) inputPort.getControl().getModule().getSynthesizer();
+				} else {
+					synth = (ICSynthesizer) outputPort.getControl().getModule().getSynthesizer();
+				}
+				((PSynthesizer) synth.getPresentation()).dispatchEvent(e);
+			}
+
+			@Override
+			public void mouseDragged(MouseEvent e) {
 			}
 		});
 	}
@@ -84,7 +114,6 @@ public class PWire extends JPanel implements IPWire {
 
 	@Override
 	public void updateDisplay() {
-
 		if (outputPort != null) {
 			posOutput = new Point(outputPort.getX(), outputPort.getY());
 
@@ -94,8 +123,7 @@ public class PWire extends JPanel implements IPWire {
 				posOutput.y += c2.getParent().getY();
 				c2 = c2.getParent();
 			}
-		} else {
-
+			synth = (ICSynthesizer) outputPort.getControl().getModule().getSynthesizer();
 		}
 
 		if (inputPort != null) {
@@ -107,8 +135,7 @@ public class PWire extends JPanel implements IPWire {
 				posInput.y += c.getParent().getY();
 				c = c.getParent();
 			}
-		} else {
-
+			synth = (ICSynthesizer) inputPort.getControl().getModule().getSynthesizer();
 		}
 
 		int x = 0;
@@ -131,14 +158,12 @@ public class PWire extends JPanel implements IPWire {
 		}
 
 		setPreferredSize(new Dimension(width, height));
-		setBounds(x + (POutputPort.width / 2), y + (POutputPort.height / 2),
-				width, height);
+		setBounds(x + (POutputPort.width / 2), y + (POutputPort.height / 2), width, height);
 
-		ICSynthesizer synth = (ICSynthesizer) outputPort.getControl()
-				.getModule().getSynthesizer();
 		IPSynthesizer presSynth = synth.getPresentation();
 		((JDesktopPane) presSynth).setLayer(this, 0, 0);
 
+		
 		repaint();
 		validate();
 	}
@@ -202,6 +227,18 @@ public class PWire extends JPanel implements IPWire {
 	public void setOutputPoint(Point mouse) {
 		posOutput = mouse;
 		updateDisplay();
+	}
+	
+	public void setOnTop(boolean isOnTop){
+		IPSynthesizer presSynth = synth.getPresentation();
+		if(isOnTop){
+			((JDesktopPane) presSynth).setLayer(this, 0, 0);
+		} else {
+			((JDesktopPane) presSynth).setLayer(this, 0, -1);
+		}
+		
+		repaint();
+		validate();
 	}
 
 }

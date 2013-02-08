@@ -26,12 +26,19 @@ public interface IModuleEG extends IModule {
 	public double getDecay();
 
 	/**
+	 * @param substainTime
+	 */
+	void setSustain(double substainTime);
+
+	/**
 	 * Get the sustain time for the module
 	 */
-	public double getSubstain();
+	public double getSustain();
 
 	/**
 	 * Set the release time for the module
+	 * 
+	 * @param releaseTime
 	 */
 	public void setRelease(double releaseTime);
 

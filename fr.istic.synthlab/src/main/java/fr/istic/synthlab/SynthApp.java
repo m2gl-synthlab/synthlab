@@ -1,11 +1,7 @@
 package fr.istic.synthlab;
 
-import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.IModuleOUT;
 import fr.istic.synthlab.abstraction.IModuleVCO;
-import fr.istic.synthlab.abstraction.IWire;
-import fr.istic.synthlab.abstraction.impl.ModuleVCF;
-import fr.istic.synthlab.abstraction.impl.ModuleVCO;
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -42,7 +38,6 @@ public class SynthApp implements ISynthApp {
 		
 		// Add a VCO module
 		IModuleVCO vco = PACFactory.getFactory().newVCO(synth);
-		vco.getParameter(ModuleVCO.PARAM_FREQUENCY).setValue(200);
 		synth.add(vco);
 //		
 //		// Add a VCF module

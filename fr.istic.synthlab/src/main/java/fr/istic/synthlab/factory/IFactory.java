@@ -5,12 +5,15 @@ import com.jsyn.ports.UnitOutputPort;
 
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModule;
+import fr.istic.synthlab.abstraction.IModuleAudioScope;
+import fr.istic.synthlab.abstraction.IModuleEG;
 import fr.istic.synthlab.abstraction.IModuleOUT;
 import fr.istic.synthlab.abstraction.IModuleVCO;
 import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.IParameter;
 import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
+import fr.istic.synthlab.controller.ICSynthesizer;
 
 public interface IFactory {
 
@@ -19,6 +22,8 @@ public interface IFactory {
 	IModuleVCO newVCO(ISynthesizer synth);
 	IModule newVCF(ISynthesizer synth);
 	IModuleOUT newOUT(ISynthesizer synth);
+	IModuleEG newEG(ICSynthesizer synth);
+	IModuleAudioScope newAudioScope(ICSynthesizer synth);
 	
 	IParameter newParameter(IModule mod, String name, double min, double max, double value);
 	IParameter newSwitch(IModule mod, String string, boolean value);
@@ -30,4 +35,6 @@ public interface IFactory {
 	IInputPort newInputPort(IModule mod, String name, UnitInputPort input, int part);
 	IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output);
 	IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output, int part);
+
+
 }
