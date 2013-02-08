@@ -18,8 +18,10 @@ public class CModuleREP  extends ModuleREP implements ICModuleREP {
 		return null;
 	}
 
-	
-	
-	
-	
+	@Override
+	public void p2cClosing() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
