@@ -44,7 +44,8 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 	private TriangleOscillator vcoTriangle;
 	private SineOscillator vcoSine;
 	private SawtoothOscillator vcoSawtooth;
-	public double frequency;
+	
+	private double frequency;
 
 	public ModuleVCO(ISynthesizer synth) {
 		super(MODULE_NAME, synth);
