@@ -2,6 +2,7 @@ package fr.istic.synthlab.factory.impl;
 
 import fr.istic.synthlab.controller.ICInputPort;
 import fr.istic.synthlab.controller.ICModule;
+import fr.istic.synthlab.controller.ICModuleAudioScope;
 import fr.istic.synthlab.controller.ICModuleEG;
 import fr.istic.synthlab.controller.ICModuleOUT;
 import fr.istic.synthlab.controller.ICModuleVCO;
@@ -12,6 +13,7 @@ import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.factory.IPFactory;
 import fr.istic.synthlab.presentation.IPInputPort;
 import fr.istic.synthlab.presentation.IPModule;
+import fr.istic.synthlab.presentation.IPModuleAudioScope;
 import fr.istic.synthlab.presentation.IPModuleEG;
 import fr.istic.synthlab.presentation.IPModuleOUT;
 import fr.istic.synthlab.presentation.IPModuleVCO;
@@ -21,6 +23,7 @@ import fr.istic.synthlab.presentation.IPSynthesizer;
 import fr.istic.synthlab.presentation.IPWire;
 import fr.istic.synthlab.presentation.impl.PInputPort;
 import fr.istic.synthlab.presentation.impl.PModule;
+import fr.istic.synthlab.presentation.impl.PModuleAudioScope;
 import fr.istic.synthlab.presentation.impl.PModuleEG;
 import fr.istic.synthlab.presentation.impl.PModuleOUT;
 import fr.istic.synthlab.presentation.impl.PModuleVCO;
@@ -66,7 +69,14 @@ public class PFactory implements IPFactory {
 		return new PModuleEG(control);
 	}
 	
+	@Override
+	public IPModuleAudioScope newAudioScope(ICModuleAudioScope control) {
+		return new PModuleAudioScope(control);
+	}
 
+
+	
+	
 	@Override
 	public IPWire newWire(ICWire control) {
 		return new PWire(control); // TODO Ameliorer Presentation

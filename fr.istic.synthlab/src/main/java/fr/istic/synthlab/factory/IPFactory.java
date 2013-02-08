@@ -2,6 +2,7 @@ package fr.istic.synthlab.factory;
 
 import fr.istic.synthlab.controller.ICInputPort;
 import fr.istic.synthlab.controller.ICModule;
+import fr.istic.synthlab.controller.ICModuleAudioScope;
 import fr.istic.synthlab.controller.ICModuleEG;
 import fr.istic.synthlab.controller.ICModuleOUT;
 import fr.istic.synthlab.controller.ICModuleVCO;
@@ -11,6 +12,7 @@ import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.ICWire;
 import fr.istic.synthlab.presentation.IPInputPort;
 import fr.istic.synthlab.presentation.IPModule;
+import fr.istic.synthlab.presentation.IPModuleAudioScope;
 import fr.istic.synthlab.presentation.IPModuleEG;
 import fr.istic.synthlab.presentation.IPModuleOUT;
 import fr.istic.synthlab.presentation.IPModuleVCO;
@@ -33,6 +35,8 @@ public interface IPFactory {
 
 	IPModuleEG newEG(ICModuleEG control);
 
+	IPModuleAudioScope newAudioScope(ICModuleAudioScope control);
+
 	// Connectivity
 	IPWire newWire(ICWire control);
 
@@ -46,5 +50,6 @@ public interface IPFactory {
 
 	@Deprecated
 	IPParameter newSwitch(ICParameter cSwitch);
+
 
 }

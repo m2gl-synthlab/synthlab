@@ -1,6 +1,7 @@
 package fr.istic.synthlab.controller.impl;
 
 import fr.istic.synthlab.abstraction.ISynthesizer;
+import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.ModuleOUT;
 import fr.istic.synthlab.controller.ICModuleOUT;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -36,7 +37,9 @@ public class CModuleOUT extends ModuleOUT implements ICModuleOUT {
 
 	@Override
 	public void p2cClosing() {
-		System.out.println("Closing not implemented");
+		for(IWire w : this.getWires()){
+			w.disconnect();
+		}
 	}
 
 }

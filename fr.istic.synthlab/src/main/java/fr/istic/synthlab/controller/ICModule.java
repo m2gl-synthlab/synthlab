@@ -15,5 +15,8 @@ public interface ICModule extends IModule {
 	 */
 	public IPModule getPresentation();
 
+	/**
+	 * Called when the presentation is closing
+	 */
 	public void p2cClosing();
 }

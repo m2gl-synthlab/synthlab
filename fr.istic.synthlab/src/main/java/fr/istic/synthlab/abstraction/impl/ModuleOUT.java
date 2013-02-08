@@ -92,7 +92,9 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 	@Override
 	public List<IWire> getWires() {
 		List<IWire> wires = new ArrayList<IWire>();
-		wires.add(in.getWire());
+		if (in.getWire() != null) {
+			wires.add(in.getWire());
+		}
 		return wires;
 	}
 	

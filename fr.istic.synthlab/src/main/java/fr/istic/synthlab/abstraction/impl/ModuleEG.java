@@ -25,8 +25,10 @@ public class ModuleEG extends AModule implements IModuleEG {
 	private IInputPort gate;
 	private IOutputPort out;
 
-	private double attack; 	// Time in seconds for the rising stage of the envelope to go from 0.0 to 1.0.
-	private double decay; 	// Time in seconds for the falling stage to go from 0 dB to -96 dB.
+	private double attack; // Time in seconds for the rising stage of the
+							// envelope to go from 0.0 to 1.0.
+	private double decay; // Time in seconds for the falling stage to go from 0
+							// dB to -96 dB.
 	private double sustain; // Level for the sustain stage.
 	private double release; // Time in seconds to go from 0 dB to -96 dB.
 
@@ -37,8 +39,10 @@ public class ModuleEG extends AModule implements IModuleEG {
 
 		adsr = new EnvelopeDAHDSR();
 
-		this.gate = PACFactory.getFactory().newInputPort(this, IN_NAME,	adsr.input);
-		this.out = PACFactory.getFactory().newOutputPort(this, OUT_NAME,adsr.output);
+		this.gate = PACFactory.getFactory().newInputPort(this, IN_NAME,
+				adsr.input);
+		this.out = PACFactory.getFactory().newOutputPort(this, OUT_NAME,
+				adsr.output);
 
 		setAttack(adsr.attack.get());
 		setDecay(adsr.decay.get());
@@ -121,8 +125,12 @@ public class ModuleEG extends AModule implements IModuleEG {
 	@Override
 	public List<IWire> getWires() {
 		List<IWire> wires = new ArrayList<IWire>();
-		wires.add(gate.getWire());
-		wires.add(out.getWire());
+		if (gate.getWire() != null) {
+			wires.add(gate.getWire());
+		}
+		if (out.getWire() != null) {
+			wires.add(out.getWire());
+		}
 		return wires;
 	}
 

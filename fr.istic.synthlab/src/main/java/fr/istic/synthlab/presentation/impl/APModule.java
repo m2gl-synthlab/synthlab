@@ -110,11 +110,6 @@ public abstract class APModule extends WebInternalFrame implements IPModule {
 	public void addParameter(IPParameter presentation) {
 		// TODO Auto-generated method stub
 	}
-	
-	@Override
-	public int getDefaultCloseOperation() {
 
-		return super.getDefaultCloseOperation();
-	}
 	
 }

@@ -1,6 +1,7 @@
 package fr.istic.synthlab.controller.impl;
 
 import fr.istic.synthlab.abstraction.ISynthesizer;
+import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.ModuleEG;
 import fr.istic.synthlab.controller.ICModuleEG;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -50,7 +51,9 @@ public class CModuleEG extends ModuleEG implements ICModuleEG {
 
 	@Override
 	public void p2cClosing() {
-		System.out.println("Closing not implemented");
+		for(IWire w : this.getWires()){
+			w.disconnect();
+		}
 	}
 
 }

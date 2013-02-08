@@ -5,6 +5,7 @@ import com.alee.laf.WebLookAndFeel;
 import fr.istic.synthlab.command.app.DisplayCommand;
 import fr.istic.synthlab.command.app.UndisplayCommand;
 import fr.istic.synthlab.command.menu.AboutCommand;
+import fr.istic.synthlab.command.menu.AddModuleAudioScopeCommand;
 import fr.istic.synthlab.command.menu.AddModuleEGCommand;
 import fr.istic.synthlab.command.menu.AddModuleOUTCommand;
 import fr.istic.synthlab.command.menu.AddModuleVCFCommand;
@@ -57,6 +58,7 @@ public class SynthMain {
 		frame.setAddModuleVCOCommand(new AddModuleVCOCommand(app.getSynthesizer()));
 		frame.setAddModuleVCFCommand(new AddModuleVCFCommand(app.getSynthesizer()));
 		frame.setAddModuleEGCommand(new AddModuleEGCommand(app.getSynthesizer()));
+		frame.setAddModuleAudioScopeCommand(new AddModuleAudioScopeCommand(app.getSynthesizer()));
 		
 		// Start the application
 		app.startSynth();

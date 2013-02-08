@@ -1,6 +1,7 @@
 package fr.istic.synthlab.controller.impl;
 
 import fr.istic.synthlab.abstraction.ISynthesizer;
+import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.ModuleVCO;
 import fr.istic.synthlab.controller.ICModuleVCO;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -34,6 +35,8 @@ public class CModuleVCO extends ModuleVCO implements ICModuleVCO {
 
 	@Override
 	public void p2cClosing() {
-		System.out.println("Closing not implemented");
+		for(IWire w : this.getWires()){
+			w.disconnect();
+		}
 	}
 }

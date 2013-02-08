@@ -5,6 +5,7 @@ import com.jsyn.ports.UnitOutputPort;
 
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModule;
+import fr.istic.synthlab.abstraction.IModuleAudioScope;
 import fr.istic.synthlab.abstraction.IModuleEG;
 import fr.istic.synthlab.abstraction.IModuleOUT;
 import fr.istic.synthlab.abstraction.IModuleVCO;
@@ -14,6 +15,7 @@ import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.controller.ICSynthesizer;
 import fr.istic.synthlab.controller.impl.CInputPort;
+import fr.istic.synthlab.controller.impl.CModuleAudioScope;
 import fr.istic.synthlab.controller.impl.CModuleEG;
 import fr.istic.synthlab.controller.impl.CModuleOUT;
 import fr.istic.synthlab.controller.impl.CModuleVCF;
@@ -69,6 +71,13 @@ public class CFactory implements IFactory {
 		IModuleEG module = new CModuleEG(synth);
 		return module;
 	}
+	
+	@Override
+	public IModuleAudioScope newAudioScope(ICSynthesizer synth) {
+		IModuleAudioScope module = new CModuleAudioScope(synth);
+		return module;
+	}
+	
 
 	@Override
 	public IParameter newParameter(IModule mod, String name, double min, double max, double value) {
@@ -132,6 +141,7 @@ public class CFactory implements IFactory {
 		port.setName(name);
 		return port;
 	}
+
 
 
 }

@@ -50,7 +50,7 @@ public class PModuleEG extends APModule implements IPModuleEG {
 		JPanel panelRotary = new JPanel();
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();
-		
+
 		attackModel = new DoubleBoundedRangeModel("attack", 100, 0, 10, ctrl.getAttack());
 		decayModel = new DoubleBoundedRangeModel("decay", 100, 0, 10, ctrl.getDecay());
 		sustainModel = new DoubleBoundedRangeModel("sustain", 100, 0, 10, ctrl.getSustain());

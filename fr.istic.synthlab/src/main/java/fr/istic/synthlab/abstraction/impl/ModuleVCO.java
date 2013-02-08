@@ -188,11 +188,21 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 	@Override
 	public List<IWire> getWires() {
 		List<IWire> wires = new ArrayList<IWire>();
-		wires.add(fm.getWire());
-		wires.add(outputSquare.getWire());
-		wires.add(outputTriangle.getWire());
-		wires.add(outputSine.getWire());
-		wires.add(outputSawtooth.getWire());
+		if (fm.getWire() != null) {
+			wires.add(fm.getWire());
+		}
+		if (outputSquare.getWire() != null) {
+			wires.add(outputSquare.getWire());
+		}
+		if (outputTriangle.getWire() != null) {
+			wires.add(outputTriangle.getWire());
+		}
+		if (outputSine.getWire() != null) {
+			wires.add(outputSine.getWire());
+		}
+		if (outputSawtooth.getWire() != null) {
+			wires.add(outputSawtooth.getWire());
+		}
 		return wires;
 	}
 

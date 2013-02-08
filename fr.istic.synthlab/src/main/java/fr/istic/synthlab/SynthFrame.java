@@ -28,6 +28,7 @@ import com.alee.laf.toolbar.ToolbarStyle;
 import com.alee.laf.toolbar.WebToolBar;
 
 import fr.istic.synthlab.command.ICommand;
+import fr.istic.synthlab.command.menu.AddModuleAudioScopeCommand;
 import fr.istic.synthlab.presentation.IPSynthesizer;
 import fr.istic.synthlab.presentation.impl.PSynthesizer;
 
@@ -51,7 +52,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private JMenuItem menuItemNew, menuItemOpen, menuItemSave;
 	private JMenuItem menuItemQuit, menuItemDoc, menuItemAbout;
 	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT,
-		menuItemAddModuleVCF,menuItemAddModuleEG;
+		menuItemAddModuleVCF,menuItemAddModuleEG, menuItemAddModuleAudioScope;
 
 	// Toolbar
 	private WebToolBar toolBar = new WebToolBar();
@@ -72,6 +73,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand addModuleVCOCommand;
 	private ICommand addModuleVCFCommand;
 	private ICommand addModuleEGCommand;
+	private ICommand addModuleAudioScopeCommand;
 
 	private ICommand toolbarPlayCommand;
 	private ICommand toolbarPauseCommand;
@@ -113,11 +115,13 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuItemAddModuleVCO = new JMenuItem("VCO Module");
 		menuItemAddModuleVCF = new JMenuItem("VCF Module");
 		menuItemAddModuleEG = new JMenuItem("EG Module");
+		menuItemAddModuleAudioScope = new JMenuItem("AudioScope Module");
 
 		menuAdd.add(menuItemAddModuleOUT);
 		menuAdd.add(menuItemAddModuleVCO);
 		menuAdd.add(menuItemAddModuleVCF);
 		menuAdd.add(menuItemAddModuleEG);
+		menuAdd.add(menuItemAddModuleAudioScope);
 
 		// -------------------------- Help Menu --------------------------
 		menuHelp = new JMenu("Help");
@@ -264,6 +268,14 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 					addModuleEGCommand.execute();
 			}
 		});
+		menuItemAddModuleAudioScope.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (addModuleAudioScopeCommand != null)
+					addModuleAudioScopeCommand.execute();
+			}
+		});
 		menuItemDoc.addActionListener(new ActionListener() {
 
 			@Override
@@ -404,5 +416,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	 */
 	public void setAddModuleEGCommand(ICommand addModuleEGCommand) {
 		this.addModuleEGCommand = addModuleEGCommand;
+	}
+
+	public void setAddModuleAudioScopeCommand(AddModuleAudioScopeCommand addModuleAudioScopeCommand) {
+		this.addModuleAudioScopeCommand = addModuleAudioScopeCommand;
+		
 	}
 }

@@ -6,8 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -28,7 +28,6 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 
 	private ICModuleOUT ctrl;
 	private DoubleBoundedRangeModel model;
-	private RotaryTextController gainRotary;
 	private WebSwitch muteSwitch;
 	private PInputPort inputPort;
 
@@ -55,9 +54,9 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		JPanel panelMute = new JPanel();
 
 		model = new DoubleBoundedRangeModel("model", 4200, -30, 12, ctrl.getAttenuation());
-		gainRotary = new RotaryTextController(model, 1);
+		RotaryTextController gainRotary = new RotaryTextController(model, 1);
+		gainRotary.setBorder(new TitledBorder("Gain"));
 		panelGain.add(gainRotary);
-		panelGain.add(new JLabel("Gain"));
 
 		muteSwitch = new WebSwitch();
 		muteSwitch.setRound(4);
@@ -73,7 +72,7 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		this.getContentPane().add(panelInput, 1);
 		this.getContentPane().add(panelMute, 2);
 
-		Dimension size = new Dimension(150, 250);
+		Dimension size = new Dimension(150, 270);
 		this.setPreferredSize(size);
 
 		// TODO : Not sure if it's the better way to define the size...
