@@ -8,6 +8,7 @@ import fr.istic.synthlab.abstraction.IModule;
 import fr.istic.synthlab.abstraction.IModuleAudioScope;
 import fr.istic.synthlab.abstraction.IModuleEG;
 import fr.istic.synthlab.abstraction.IModuleOUT;
+import fr.istic.synthlab.abstraction.IModuleREP;
 import fr.istic.synthlab.abstraction.IModuleVCO;
 import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.IParameter;
@@ -24,7 +25,8 @@ public interface IFactory {
 	IModuleOUT newOUT(ISynthesizer synth);
 	IModuleEG newEG(ICSynthesizer synth);
 	IModuleAudioScope newAudioScope(ICSynthesizer synth);
-	
+	IModuleREP newREP(ICSynthesizer synth);
+
 	IParameter newParameter(IModule mod, String name, double min, double max, double value);
 	IParameter newSwitch(IModule mod, String string, boolean value);
 	IInputPort newInputPort(IModule mod, String name);
@@ -35,6 +37,5 @@ public interface IFactory {
 	IInputPort newInputPort(IModule mod, String name, UnitInputPort input, int part);
 	IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output);
 	IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output, int part);
-
 
 }

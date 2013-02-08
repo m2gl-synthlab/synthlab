@@ -8,6 +8,7 @@ import fr.istic.synthlab.command.menu.AboutCommand;
 import fr.istic.synthlab.command.menu.AddModuleAudioScopeCommand;
 import fr.istic.synthlab.command.menu.AddModuleEGCommand;
 import fr.istic.synthlab.command.menu.AddModuleOUTCommand;
+import fr.istic.synthlab.command.menu.AddModuleREPCommand;
 import fr.istic.synthlab.command.menu.AddModuleVCFCommand;
 import fr.istic.synthlab.command.menu.AddModuleVCOCommand;
 import fr.istic.synthlab.command.menu.DocumentationCommand;
@@ -59,7 +60,8 @@ public class SynthMain {
 		frame.setAddModuleVCFCommand(new AddModuleVCFCommand(app.getSynthesizer()));
 		frame.setAddModuleEGCommand(new AddModuleEGCommand(app.getSynthesizer()));
 		frame.setAddModuleAudioScopeCommand(new AddModuleAudioScopeCommand(app.getSynthesizer()));
-		
+		frame.setAddModuleREPCommand(new AddModuleREPCommand(app.getSynthesizer()));
+
 		// Start the application
 		app.startSynth();
 	}
