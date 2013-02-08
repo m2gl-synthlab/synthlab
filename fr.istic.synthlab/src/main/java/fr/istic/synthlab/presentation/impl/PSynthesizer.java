@@ -132,7 +132,6 @@ public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
 		repaint();
 	}
 
-	
 	@Override
 	public void c2pAddModule(IPModule module) {
 		((APModule) module).setVisible(true);

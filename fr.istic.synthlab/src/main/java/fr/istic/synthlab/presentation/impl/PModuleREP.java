@@ -75,7 +75,7 @@ public class PModuleREP extends APModule implements IPModuleREP {
 		this.getContentPane().add(panelInput, 0);
 		this.getContentPane().add(panelOutput, 1);
 		
-		Dimension size = new Dimension(150, 450);
+		Dimension size = new Dimension(300, 250);
 		this.setPreferredSize(size);
 
 		// TODO : Not sure if it's the better way to define the size...

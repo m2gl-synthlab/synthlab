@@ -210,6 +210,6 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 			wires.add(outputSawtooth.getWire());
 		}
 		return wires;
-	}
 
+	}
 }

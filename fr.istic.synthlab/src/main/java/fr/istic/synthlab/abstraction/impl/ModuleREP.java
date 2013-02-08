@@ -57,8 +57,8 @@ public class ModuleREP extends AModule implements IModuleREP {
 
 	@Override
 	public List<UnitGenerator> getJSyn() {
-		// TODO Auto-generated method stub
-		return null;
+		List<UnitGenerator> generators = new ArrayList<UnitGenerator>();
+		return generators;
 	}
 
 	@Override

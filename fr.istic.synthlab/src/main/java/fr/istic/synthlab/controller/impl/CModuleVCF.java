@@ -5,6 +5,7 @@ import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.IPModule;
 
+
 public class CModuleVCF extends ModuleVCF implements ICModule {
 
 	private IPModule pres;
@@ -24,3 +25,4 @@ public class CModuleVCF extends ModuleVCF implements ICModule {
 		System.out.println("Closing not implemented");
 	}
 }
+

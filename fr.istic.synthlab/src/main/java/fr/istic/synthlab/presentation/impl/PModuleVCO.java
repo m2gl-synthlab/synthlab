@@ -61,8 +61,6 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();
 
-		
-		
 		octaveModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_OCTAVE_NAME,
 				14, 0, 14, ctrl.getOctave());
 		panelParams.add(new RotaryTextController(octaveModel, 4));

@@ -48,9 +48,10 @@ public class Synthesizer implements ISynthesizer {
 	@Override
 	public void add(IModule module) {
 		modules.add(module);
-		for(UnitGenerator gen : module.getJSyn()){
-			this.synth.add(gen);
-		}
+		if ( module.getJSyn() !=null)
+			for(UnitGenerator gen : module.getJSyn())
+				this.synth.add(gen);
+		
 	}
 
 	@Override
