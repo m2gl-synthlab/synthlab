@@ -137,7 +137,7 @@ public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
 		((APModule) module).setVisible(true);
 		this.add((JInternalFrame) module,0);
 
-		((APModule)module).setBounds(((modules.size())*(module.getWidth()+5)), 5, module.getWidth(), module.getHeight());
+		((APModule)module).setBounds(10, 10, module.getWidth(), module.getHeight());
 		
 		modules.add(module);
 		((APModule)module).validate();
