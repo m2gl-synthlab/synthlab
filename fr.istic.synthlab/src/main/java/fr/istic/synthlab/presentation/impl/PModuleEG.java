@@ -10,6 +10,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.jsyn.swing.DoubleBoundedRangeModel;
+import com.jsyn.swing.ExponentialRangeModel;
 import com.jsyn.swing.RotaryTextController;
 
 import fr.istic.synthlab.controller.ICInputPort;
@@ -51,10 +52,10 @@ public class PModuleEG extends APModule implements IPModuleEG {
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();
 
-		attackModel = new DoubleBoundedRangeModel("attack", 100, 0, 10, ctrl.getAttack());
-		decayModel = new DoubleBoundedRangeModel("decay", 100, 0, 10, ctrl.getDecay());
-		sustainModel = new DoubleBoundedRangeModel("sustain", 100, 0, 10, ctrl.getSustain());
-		releaseModel = new DoubleBoundedRangeModel("release", 100, 0, 10, ctrl.getRelease());
+		attackModel = new ExponentialRangeModel("attack", 100, 0, 10, ctrl.getAttack());
+		decayModel = new ExponentialRangeModel("decay", 100, 0, 10, ctrl.getDecay());
+		sustainModel = new ExponentialRangeModel("sustain", 100, 0, 5, ctrl.getSustain());
+		releaseModel = new ExponentialRangeModel("release", 100, 0, 10, ctrl.getRelease());
 		
 		RotaryTextController attackRotary = new RotaryTextController(attackModel, 2);
 		RotaryTextController decayRotary = new RotaryTextController(decayModel, 2);
