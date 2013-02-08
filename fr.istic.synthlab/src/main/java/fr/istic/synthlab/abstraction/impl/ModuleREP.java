@@ -75,22 +75,39 @@ public class ModuleREP extends AModule implements IModuleREP {
 
 	@Override
 	public List<IWire> getWires() {
+
 		List<IWire> wires = new ArrayList<IWire>();
-		wires.add(in.getWire());
-		for(IOutputPort outputPort : outputs.values()){
-			wires.add(outputPort.getWire());
+		if (in.getWire() != null) {
+			wires.add(in.getWire());
+		}
+		if (out1.getWire() != null) {
+			wires.add(out1.getWire());
+		}
+		if (out2.getWire() != null) {
+			wires.add(out2.getWire());
+		}
+		if (out3.getWire() != null) {
+			wires.add(out3.getWire());
 		}
 		return wires;
 	}
 
 	@Override
-	public IInputPort getInput() {
+	public IInputPort getIn() {
 		// TODO Auto-generated method stub
 		return in;
 	}
+
+	public IOutputPort getOut1(){
+		return out1;
+	}
 	
-	public IOutputPort getOutput(int ref){
-		return outputs.get(ref);
+	public IOutputPort getOut2(){
+		return out2;
+	}
+	
+	public IOutputPort getOut3(){
+		return out3;
 	}
 
 }

@@ -5,15 +5,29 @@ public interface IModuleREP extends IModule {
 	/**
 	 * Return the input port of the REP module
 	 * 
-	 * @return input
+	 * @return in
 	 */
-	public IInputPort getInput();
+	public IInputPort getIn();
 	
 	/**
-	 * Return one output port of the REP module
+	 * Return out1 port of the REP module
 	 * 
-	 * @return outputs[ref]
+	 * @return out1
 	 */
-	public IOutputPort getOutput(int ref);
+	public IOutputPort getOut1();
+	
+	/**
+	 * Return out1 port of the REP module
+	 * 
+	 * @return out2
+	 */
+	public IOutputPort getOut2();
+	
+	/**
+	 * Return out1 port of the REP module
+	 * 
+	 * @return out3
+	 */
+	public IOutputPort getOut3();
 
 }
