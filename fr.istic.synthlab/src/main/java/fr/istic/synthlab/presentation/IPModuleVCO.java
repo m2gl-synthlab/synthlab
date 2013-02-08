@@ -22,5 +22,12 @@ public interface IPModuleVCO extends IPModule {
 	 * @param tone
 	 */
 	public void c2pSetToneValue(double tone);
+	
+	/**
+	 * Called by the controller to inform the presentation of the new frequency value
+	 * 
+	 * @param frequency
+	 */
+	public void c2pSetFrequencyValue(double frequency);
 
 }

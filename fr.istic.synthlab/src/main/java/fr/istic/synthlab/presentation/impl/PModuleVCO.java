@@ -38,7 +38,7 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 	private POutputPort outputSine;
 	private POutputPort outputSawtooth;
 	
-	JLabel frequency;
+	JLabel frequencyLabel;
 
 	private int width;
 	private int height;
@@ -64,14 +64,15 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 		
 		
 		octaveModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_OCTAVE_NAME,
-				20, -10, 10, ctrl.getOctave());
+				14, 0, 14, ctrl.getOctave());
 		panelParams.add(new RotaryTextController(octaveModel, 4));
 
 		toneModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_TONE_NAME, 100,	-1, 1, ctrl.getTone());
 		panelParams.add(new RotaryTextController(toneModel, 4));
 		
-		frequency = new JLabel();
-		panelParams.add(frequency);
+		frequencyLabel = new JLabel();
+		frequencyLabel.setText(""+ctrl.getFrequency());
+		panelParams.add(frequencyLabel);
 
 		fm = (PInputPort) ((ICInputPort) ctrl.getInputFm()).getPresentation();
 		panelInput.add(fm);
@@ -152,6 +153,11 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 	@Override
 	public void c2pSetToneValue(double tone) {
 		toneModel.setDoubleValue(tone);
+	}
+
+	@Override
+	public void c2pSetFrequencyValue(double frequency) {
+		frequencyLabel.setText("" + frequency);
 	}
 
 }

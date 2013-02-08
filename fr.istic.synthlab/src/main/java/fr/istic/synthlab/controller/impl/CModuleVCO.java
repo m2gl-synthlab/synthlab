@@ -21,16 +21,19 @@ public class CModuleVCO extends ModuleVCO implements ICModuleVCO {
 	public IPModuleVCO getPresentation() {
 		return pres;
 	}
+	
 	@Override
 	public void p2cOctaveChanged(int octave) {
 		setOctave(octave);
 		pres.c2pSetOctaveValue(getOctave());
+		pres.c2pSetFrequencyValue(getFrequency());
 	}
 
 	@Override
 	public void p2cToneChanged(double tone) {
 		setTone(tone);
 		pres.c2pSetToneValue(getTone());
+		pres.c2pSetFrequencyValue(getFrequency());
 	}
 
 	@Override

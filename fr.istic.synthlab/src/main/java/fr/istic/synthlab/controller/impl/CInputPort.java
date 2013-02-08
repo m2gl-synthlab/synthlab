@@ -55,7 +55,7 @@ public class CInputPort extends InputPort implements ICInputPort {
 					getModule().getSynthesizer().setCurrentWire(null);
 				}
 			}
-		}
+		}		
 	}
 	
 

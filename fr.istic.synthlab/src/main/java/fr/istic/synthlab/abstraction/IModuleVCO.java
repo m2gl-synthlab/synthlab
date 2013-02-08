@@ -29,6 +29,13 @@ public interface IModuleVCO extends IModule {
 	 * @param value
 	 */
 	public double getTone();
+	
+	/**
+	 * Return the frequency value (between 0 and 32768)
+	 * 
+	 * @param value
+	 */
+	public double getFrequency();
 
 	/**
 	 * Return the fm port of the VCO module

@@ -30,7 +30,7 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 	public static final String PARAM_OCTAVE_NAME = "Octave";
 	public static final String PARAM_TONE_NAME = "Tone";
 	
-	public static final double DEFAULT_FREQUENCY_MIN = 800; // 800 Hz
+	public static final double DEFAULT_FREQUENCY_MIN = 1; // 800 Hz
 
 	private FrequencyGenerator frequencyGen;
 
@@ -44,11 +44,12 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 	private TriangleOscillator vcoTriangle;
 	private SineOscillator vcoSine;
 	private SawtoothOscillator vcoSawtooth;
+	public double frequency;
 
 	public ModuleVCO(ISynthesizer synth) {
 		super(MODULE_NAME, synth);
 		System.out.println("ModuleVCO initialized");
-
+		
 		this.vcoSquare = new SquareOscillator();
 		this.vcoTriangle = new TriangleOscillator();
 		this.vcoSine = new SineOscillator();
@@ -124,6 +125,11 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 	}
 	
 	@Override
+	public double getFrequency() {
+		return frequency;
+	}
+	
+	@Override
 	public IInputPort getInputFm() {
 		return fm;
 	}
@@ -149,7 +155,7 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 	}
 
 	private class FrequencyGenerator extends UnitFilter {
-		int octave = 0; // Value between -5 and 5
+		int octave = 0; // Value between 0 and 14
 		double tone = 0.0; // Value between -1.0 and 1.0
 
 		UnitOutputPort outputSquare = new UnitOutputPort(OUT_SQUARE_NAME);
@@ -175,7 +181,7 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 
 			for (int i = start; i < limit; i++) {
 				double x = inputs[i];
-				double frequency = Math.pow(2,octave+tone+x) * DEFAULT_FREQUENCY_MIN;
+				frequency = Math.pow(2,octave+tone+x);
 				outputsSquare[i] = frequency;
 				outputsTriangle[i] = frequency;
 				outputsSine[i] = frequency;
