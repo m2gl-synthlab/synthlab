@@ -32,19 +32,19 @@ public class CModuleEG extends ModuleEG implements ICModuleEG {
 
 	@Override
 	public void p2cDecayChanged(double decay) {
-		setAttack(decay);
+		setDecay(decay);
 		pres.c2pSetDecayValue(getDecay());
 	}
 
 	@Override
 	public void p2cSustainChanged(double sustain) {
-		setAttack(sustain);
+		setSustain(sustain);
 		pres.c2pSetSustainValue(getSustain());
 	}
 
 	@Override
 	public void p2cReleaseChanged(double release) {
-		setAttack(release);
+		setRelease(release);
 		pres.c2pSetReleaseValue(getRelease());
 	}
 
