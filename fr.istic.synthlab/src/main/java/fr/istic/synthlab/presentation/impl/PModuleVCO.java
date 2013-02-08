@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -36,6 +37,8 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 	private POutputPort outputTriangle;
 	private POutputPort outputSine;
 	private POutputPort outputSawtooth;
+	
+	JLabel frequency;
 
 	private int width;
 	private int height;
@@ -58,31 +61,31 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();
 
+		
+		
 		octaveModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_OCTAVE_NAME,
-				10, -5, 5, ctrl.getOctave());
+				20, -10, 10, ctrl.getOctave());
 		panelParams.add(new RotaryTextController(octaveModel, 4));
 
-		toneModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_TONE_NAME, 100,
-				-1, 1, ctrl.getTone());
+		toneModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_TONE_NAME, 100,	-1, 1, ctrl.getTone());
 		panelParams.add(new RotaryTextController(toneModel, 4));
+		
+		frequency = new JLabel();
+		panelParams.add(frequency);
 
 		fm = (PInputPort) ((ICInputPort) ctrl.getInputFm()).getPresentation();
 		panelInput.add(fm);
 
-		outputSquare = (POutputPort) ((ICOutputPort) ctrl.getOutputSquare())
-				.getPresentation();
+		outputSquare = (POutputPort) ((ICOutputPort) ctrl.getOutputSquare()).getPresentation();
 		panelOutput.add(outputSquare);
 
-		outputTriangle = (POutputPort) ((ICOutputPort) ctrl.getOutputTriangle())
-				.getPresentation();
+		outputTriangle = (POutputPort) ((ICOutputPort) ctrl.getOutputTriangle()).getPresentation();
 		panelOutput.add(outputTriangle);
 
-		outputSine = (POutputPort) ((ICOutputPort) ctrl.getOutputSine())
-				.getPresentation();
+		outputSine = (POutputPort) ((ICOutputPort) ctrl.getOutputSine()).getPresentation();
 		panelOutput.add(outputSine);
 
-		outputSawtooth = (POutputPort) ((ICOutputPort) ctrl.getOutputSawtooth())
-				.getPresentation();
+		outputSawtooth = (POutputPort) ((ICOutputPort) ctrl.getOutputSawtooth()).getPresentation();
 		panelOutput.add(outputSawtooth);
 
 		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
