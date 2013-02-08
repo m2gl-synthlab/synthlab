@@ -1,6 +1,8 @@
 
 package fr.istic.synthlab.abstraction;
 
+import fr.istic.synthlab.command.ICommand;
+
 public interface IModuleVCO extends IModule {
 
 	/**
@@ -72,4 +74,11 @@ public interface IModuleVCO extends IModule {
 	 * @return sawtooth output
 	 */
 	public IOutputPort getOutputSawtooth();
+	
+	/**
+	 * Set the display frequency command
+	 * 
+	 * @param cmd Display Frequency command
+	 */
+	public void setDisplayFrequencyCmd(ICommand cmd);
 }

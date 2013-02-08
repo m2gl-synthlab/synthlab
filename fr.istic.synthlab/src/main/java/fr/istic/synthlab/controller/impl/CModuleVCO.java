@@ -3,6 +3,7 @@ package fr.istic.synthlab.controller.impl;
 import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.abstraction.impl.ModuleVCO;
+import fr.istic.synthlab.command.abstraction.DisplayFrequencyCommand;
 import fr.istic.synthlab.controller.ICModuleVCO;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.IPModuleVCO;
@@ -14,7 +15,7 @@ public class CModuleVCO extends ModuleVCO implements ICModuleVCO {
 	public CModuleVCO(ISynthesizer synth) {
 		super(synth);
 		this.pres = PACFactory.getPFactory().newVCO(this);
-
+		super.setDisplayFrequencyCmd(new DisplayFrequencyCommand(this, pres));
 	}
 
 	@Override
@@ -26,14 +27,12 @@ public class CModuleVCO extends ModuleVCO implements ICModuleVCO {
 	public void p2cOctaveChanged(int octave) {
 		setOctave(octave);
 		pres.c2pSetOctaveValue(getOctave());
-		pres.c2pSetFrequencyValue(getFrequency());
 	}
 
 	@Override
 	public void p2cToneChanged(double tone) {
 		setTone(tone);
 		pres.c2pSetToneValue(getTone());
-		pres.c2pSetFrequencyValue(getFrequency());
 	}
 
 	@Override

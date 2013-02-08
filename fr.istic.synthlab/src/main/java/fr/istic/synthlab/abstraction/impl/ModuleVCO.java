@@ -3,12 +3,12 @@ package fr.istic.synthlab.abstraction.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jsyn.ports.UnitInputPort;
 import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.SawtoothOscillator;
 import com.jsyn.unitgen.SineOscillator;
 import com.jsyn.unitgen.SquareOscillator;
 import com.jsyn.unitgen.TriangleOscillator;
-import com.jsyn.unitgen.UnitFilter;
 import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.IInputPort;
@@ -16,6 +16,7 @@ import fr.istic.synthlab.abstraction.IModuleVCO;
 import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
+import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleVCO extends AModule implements IModuleVCO {
@@ -46,6 +47,7 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 	private SawtoothOscillator vcoSawtooth;
 	
 	private double frequency;
+	private ICommand displayFrequencyCmd;
 
 	public ModuleVCO(ISynthesizer synth) {
 		super(MODULE_NAME, synth);
@@ -155,10 +157,11 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 		return outputSawtooth;
 	}
 
-	private class FrequencyGenerator extends UnitFilter {
+	private class FrequencyGenerator extends UnitGenerator {
 		int octave = 0; // Value between 0 and 14
 		double tone = 0.0; // Value between -1.0 and 1.0
 
+		UnitInputPort input = new UnitInputPort(IN_MOD_FREQ_NAME);
 		UnitOutputPort outputSquare = new UnitOutputPort(OUT_SQUARE_NAME);
 		UnitOutputPort outputTriangle = new UnitOutputPort(OUT_TRIANGLE_NAME);
 		UnitOutputPort outputSine = new UnitOutputPort(OUT_SINE_NAME);
@@ -187,6 +190,8 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 				outputsTriangle[i] = frequency;
 				outputsSine[i] = frequency;
 				outputsSawtooth[i] = frequency;
+				if (displayFrequencyCmd != null)
+					displayFrequencyCmd.execute();
 			}
 		}
 
@@ -212,5 +217,10 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 		}
 		return wires;
 
+	}
+
+	@Override
+	public void setDisplayFrequencyCmd(ICommand cmd) {
+		this.displayFrequencyCmd = cmd;
 	}
 }
