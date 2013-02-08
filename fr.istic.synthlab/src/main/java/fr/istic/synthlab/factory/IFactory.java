@@ -9,6 +9,7 @@ import fr.istic.synthlab.abstraction.IModuleAudioScope;
 import fr.istic.synthlab.abstraction.IModuleEG;
 import fr.istic.synthlab.abstraction.IModuleOUT;
 import fr.istic.synthlab.abstraction.IModuleREP;
+import fr.istic.synthlab.abstraction.IModuleVCA;
 import fr.istic.synthlab.abstraction.IModuleVCO;
 import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.IParameter;
@@ -21,6 +22,7 @@ public interface IFactory {
 	ISynthesizer newSynthesizer();
 	
 	IModuleVCO newVCO(ISynthesizer synth);
+	IModuleVCA newVCA(ISynthesizer synth);
 	IModule newVCF(ISynthesizer synth);
 	IModuleOUT newOUT(ISynthesizer synth);
 	IModuleEG newEG(ICSynthesizer synth);
