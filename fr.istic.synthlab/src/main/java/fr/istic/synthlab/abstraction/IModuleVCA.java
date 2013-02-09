@@ -8,6 +8,18 @@ public interface IModuleVCA extends IModule {
 
 	IOutputPort getOutput();
 
-	IParameter getParameter();
+	/**
+	 * Set the attenuation value (between -30 and 12)
+	 * 
+	 * @param Attenuatuin value
+	 */
+	public void setAttenuationValue(double value);
+
+	/**
+	 * Return the attenuation value (between -30 and 12)
+	 * 
+	 * @param Attenuation value
+	 */
+	public double getAttenuationValue();
 
 }

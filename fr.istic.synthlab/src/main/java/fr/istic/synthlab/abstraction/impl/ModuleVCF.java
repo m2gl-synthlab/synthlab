@@ -17,7 +17,7 @@ public class ModuleVCF extends AModule implements IModuleVCF {
 
 	private static final String MODULE_NAME = "VCF";
 	private static final String IN_NAME = "Input";
-	private static final String IN_MOD_FREQ_NAME = "fm";
+	private static final String IN_MOD_FREQ_NAME = "FM";
 	private static final String OUT_NAME = "Output";
 
 	public static final String PARAM_CUT_FREQUENCY_NAME = "Cut Frequency";

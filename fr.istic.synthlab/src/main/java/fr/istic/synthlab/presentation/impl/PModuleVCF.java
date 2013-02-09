@@ -31,6 +31,7 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 
 	private DoubleBoundedRangeModel cutFrequencyModel;
 	private DoubleBoundedRangeModel resonanceModel;
+	
 	private PInputPort input;
 	private PInputPort fm;
 	private POutputPort output;

@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jsyn.ports.UnitInputPort;
-import com.jsyn.ports.UnitOutputPort;
+import com.jsyn.unitgen.UnitFilter;
 import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModuleVCA;
 import fr.istic.synthlab.abstraction.IOutputPort;
-import fr.istic.synthlab.abstraction.IParameter;
 import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -18,42 +17,36 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 public class ModuleVCA extends AModule implements IModuleVCA {
 
 	private static final String MODULE_NAME = "VCA";
-	public static final String INPUT_NAME = "INPUT";
-	public static final String INPUT_AM_NAME = "AM";
-	public static final String OUTPUT_NAME = "OUT";
+	private static final String INPUT_NAME = "Input";
+	private static final String INPUT_AM_NAME = "AM";
+	private static final String OUTPUT_NAME = "Output";
+	
 	public static final String AMPLITUDE_NAME = "Gain";
 
-	private IInputPort in, in_am;
-
+	// Input & Output du module
+	private IInputPort input, inputAm;
 	private IOutputPort output;
-	private Identitygenerator none_output;
-
-	private IParameter parameter;
-	public double frequency;
+	
+	// Generateur Perso
+	private AttenuationFilter attenuationFilter;
 
 	public ModuleVCA(ISynthesizer synth) {
 		super(MODULE_NAME, synth);
 
-		this.none_output = new Identitygenerator();
+		this.attenuationFilter = new AttenuationFilter();
 
 		// Ajout du port OUTPUT
 		this.output = PACFactory.getFactory().newOutputPort(this, OUTPUT_NAME,
-				none_output.output);
+				attenuationFilter.output);
 
 		// Ajout du port INPUT
-		this.in = PACFactory.getFactory().newInputPort(this, INPUT_NAME,
-				none_output.input1);
+		this.input = PACFactory.getFactory().newInputPort(this, INPUT_NAME,
+				attenuationFilter.input);
 
 		// Ajout du port AM
-		this.in_am = PACFactory.getFactory().newInputPort(this,
-				INPUT_AM_NAME, none_output.input2);
-
-		// TODO A REVOIR
-		this.parameter = PACFactory.getFactory().newParameter(this,
-				AMPLITUDE_NAME, 0, 1, 1);
+		this.inputAm = PACFactory.getFactory().newInputPort(this,
+				INPUT_AM_NAME, attenuationFilter.inputAm);
 		
-		this.amplify();
-
 	}
 
 	/**
@@ -85,40 +78,39 @@ public class ModuleVCA extends AModule implements IModuleVCA {
 		
 		System.out.println("AMPLIFIER-VCA");
 	}
-
-	// crée un input Jsyn sans effet
-	private class Identitygenerator extends UnitGenerator {
-
-		UnitOutputPort output = new UnitOutputPort(OUTPUT_NAME);
-		UnitInputPort input1 = new UnitInputPort(INPUT_NAME);
-		UnitInputPort input2 = new UnitInputPort(INPUT_AM_NAME);
-
-		public Identitygenerator() {
-			this.addPort(output);
-			this.addPort(input1);
-			this.addPort(input2);
-		}
+	
+	/**
+	 * Attenuation Filter
+	 */
+	private class AttenuationFilter extends UnitFilter {
+		double attenuationValue = 0; // Value between -30 and 12
 		
+		UnitInputPort inputAm = new UnitInputPort(INPUT_AM_NAME);
+		
+		public AttenuationFilter() {
+			this.addPort(inputAm);
+		}
+
 		@Override
 		public void generate(int start, int limit) {
 			// Get signal arrays from ports.
-			double[] inputs1 = input1.getValues();
-			double[] inputs2 = input2.getValues();
+			double[] inputs = input.getValues();
+			double[] inputsAm = inputAm.getValues();
 			double[] outputs = output.getValues();
 
 			for (int i = start; i < limit; i++) {
-				double x = inputs1[i];
-				double y = inputs2[i];
-				//TODO changer la formule
-				frequency = x*y;
-				outputs[i] = frequency;
+				double freq = inputs[i];
+				double am = inputsAm[i];
+				outputs[i] = Math.pow(10, (attenuationValue / 20) + am) * freq;
+				// see : http://fr.wikipedia.org/wiki/Niveau_(audio)
 			}
 		}
 	}
 
 	@Override
 	public List<UnitGenerator> getJSyn() {
-
+		List<UnitGenerator> generators = new ArrayList<UnitGenerator>();
+		generators.add(attenuationFilter);
 		return null;
 	}
 
@@ -129,40 +121,46 @@ public class ModuleVCA extends AModule implements IModuleVCA {
 
 	@Override
 	public void start() {
-
+		this.attenuationFilter.start();
 	}
 
 	@Override
 	public void stop() {
-
+		this.attenuationFilter.stop();
 	}
 
 	@Override
 	public IInputPort getInput() {
-		return in;
+		return input;
 	}
 
 	@Override
 	public IInputPort getInputAM() {
-		return in_am;
+		return inputAm;
 	}
+	
 	@Override
 	public IOutputPort getOutput() {
 		return output;
 	}
 
 	@Override
-	public IParameter getParameter() {
-		return parameter;
+	public List<IWire> getWires() {
+		List<IWire> wires = new ArrayList<IWire>();
+		wires.add(input.getWire());
+		wires.add(inputAm.getWire());
+		wires.add(output.getWire());
+		return wires;
 	}
 
 	@Override
-	public List<IWire> getWires() {
-		List<IWire> wires = new ArrayList<IWire>();
-		wires.add(in.getWire());
-		wires.add(in_am.getWire());
-		wires.add(output.getWire());
-		return wires;
+	public void setAttenuationValue(double value) {
+		this.attenuationFilter.attenuationValue = value;
+	}
+
+	@Override
+	public double getAttenuationValue() {
+		return this.attenuationFilter.attenuationValue;
 	}
 
 }

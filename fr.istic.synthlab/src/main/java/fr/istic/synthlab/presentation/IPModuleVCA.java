@@ -9,5 +9,10 @@ public interface IPModuleVCA extends IPModule {
 	 */
 	public ICModuleVCA getControl();
 	
-	public void c2pDoSomething();
+	/**
+	 * Called by the controller to inform the presentation of the new attenuation value
+	 * 
+	 * @param attenuation value
+	 */
+	public void c2pSetAttenuationValue(double attenuationValue);
 }
