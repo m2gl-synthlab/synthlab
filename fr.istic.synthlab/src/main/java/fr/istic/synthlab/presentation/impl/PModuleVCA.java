@@ -7,6 +7,7 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -61,7 +62,9 @@ public class PModuleVCA extends APModule implements IPModuleVCA {
 		attenuationModel = new DoubleBoundedRangeModel(
 				ModuleVCA.PARAM_AMPLITUDE_NAME, 4200, -30, 12,
 				ctrl.getAttenuationValue());
-		panelParams.add(new RotaryTextController(attenuationModel, 4));
+		RotaryTextController attenuationRotary = new RotaryTextController(attenuationModel, 4);
+		attenuationRotary.setBorder(new TitledBorder(ModuleVCA.PARAM_AMPLITUDE_NAME));
+		panelParams.add(attenuationRotary);
 
 		input = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
 		panelInput.add(input);
