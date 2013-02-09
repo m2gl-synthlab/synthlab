@@ -65,7 +65,7 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 				14, 0, 14, ctrl.getOctave());
 		panelParams.add(new RotaryTextController(octaveModel, 4));
 
-		toneModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_TONE_NAME, 1000, -1.0, 1.0, ctrl.getTone());
+		toneModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_TONE_NAME, 100, -1.0, 1.0, ctrl.getTone());
 		panelParams.add(new RotaryTextController(toneModel, 4));
 		
 		frequencyLabel = new JLabel();

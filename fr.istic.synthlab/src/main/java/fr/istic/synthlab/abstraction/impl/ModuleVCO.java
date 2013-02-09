@@ -202,7 +202,6 @@ public class ModuleVCO extends AModule implements IModuleVCO {
 				outputsTriangle[i] = frequency;
 				outputsSine[i] = frequency;
 				outputsSawtooth[i] = frequency;
-				System.out.println(x);
 			}
 			
 			if (displayFrequencyCmd != null)
