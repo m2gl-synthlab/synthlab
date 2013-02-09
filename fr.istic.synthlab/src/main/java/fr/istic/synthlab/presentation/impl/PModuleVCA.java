@@ -59,7 +59,7 @@ public class PModuleVCA extends APModule implements IPModuleVCA {
 		JPanel panelOutput = new JPanel();
 
 		attenuationModel = new DoubleBoundedRangeModel(
-				ModuleVCA.AMPLITUDE_NAME, 100, -30, 12,
+				ModuleVCA.PARAM_AMPLITUDE_NAME, 4200, -30, 12,
 				ctrl.getAttenuationValue());
 		panelParams.add(new RotaryTextController(attenuationModel, 4));
 

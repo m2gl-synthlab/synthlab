@@ -8,6 +8,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -63,10 +64,14 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 
 		octaveModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_OCTAVE_NAME,
 				14, 0, 14, ctrl.getOctave());
-		panelParams.add(new RotaryTextController(octaveModel, 4));
+		RotaryTextController octaveRotary = new RotaryTextController(octaveModel, 4);
+		octaveRotary.setBorder(new TitledBorder(ModuleVCO.PARAM_OCTAVE_NAME));
+		panelParams.add(octaveRotary);
 
 		toneModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_TONE_NAME, 100, -1.0, 1.0, ctrl.getTone());
-		panelParams.add(new RotaryTextController(toneModel, 4));
+		RotaryTextController toneRotary = new RotaryTextController(toneModel, 4);
+		toneRotary.setBorder(new TitledBorder(ModuleVCO.PARAM_TONE_NAME));
+		panelParams.add(toneRotary);
 		
 		frequencyLabel = new JLabel();
 		frequencyLabel.setText(""+ctrl.getFrequency());

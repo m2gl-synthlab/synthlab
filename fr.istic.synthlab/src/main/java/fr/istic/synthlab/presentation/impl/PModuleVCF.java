@@ -7,6 +7,7 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -31,11 +32,11 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 
 	private DoubleBoundedRangeModel cutFrequencyModel;
 	private DoubleBoundedRangeModel resonanceModel;
-	
+
 	private PInputPort input;
 	private PInputPort fm;
 	private POutputPort output;
-	
+
 	private int width;
 	private int height;
 
@@ -57,20 +58,30 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();
 
-		cutFrequencyModel = new DoubleBoundedRangeModel(ModuleVCF.PARAM_CUT_FREQUENCY_NAME,
-				100, 0, 22000, ctrl.getCutFrequency());
-		panelParams.add(new RotaryTextController(cutFrequencyModel, 4));
+		cutFrequencyModel = new DoubleBoundedRangeModel(
+				ModuleVCF.PARAM_CUT_FREQUENCY_NAME, 100, 0, 22000,
+				ctrl.getCutFrequency());
+		RotaryTextController cutRotary = new RotaryTextController(
+				cutFrequencyModel, 4);
+		cutRotary.setBorder(new TitledBorder(ModuleVCF.PARAM_CUT_FREQUENCY_NAME));
+		panelParams.add(cutRotary);
 
-		resonanceModel = new DoubleBoundedRangeModel(ModuleVCF.PARAM_RESONANCE_NAME, 100, 0, 100, ctrl.getResonance());
-		panelParams.add(new RotaryTextController(resonanceModel, 4));
-		
+		resonanceModel = new DoubleBoundedRangeModel(
+				ModuleVCF.PARAM_RESONANCE_NAME, 100, 0, 100,
+				ctrl.getResonance());
+		RotaryTextController resonanceRotary = new RotaryTextController(
+				resonanceModel, 4);
+		resonanceRotary.setBorder(new TitledBorder(ModuleVCF.PARAM_RESONANCE_NAME));
+		panelParams.add(resonanceRotary);
+
 		input = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
 		panelInput.add(input);
-		
+
 		fm = (PInputPort) ((ICInputPort) ctrl.getInputFm()).getPresentation();
 		panelInput.add(fm);
 
-		output = (POutputPort) ((ICOutputPort) ctrl.getOutput()).getPresentation();
+		output = (POutputPort) ((ICOutputPort) ctrl.getOutput())
+				.getPresentation();
 		panelOutput.add(output);
 
 		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
