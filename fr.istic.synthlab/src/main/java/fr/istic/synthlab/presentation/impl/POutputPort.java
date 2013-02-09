@@ -8,7 +8,6 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICOutputPort;

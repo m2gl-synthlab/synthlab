@@ -7,7 +7,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import fr.istic.synthlab.controller.ICInputPort;
-import fr.istic.synthlab.controller.ICModule;
 import fr.istic.synthlab.controller.ICModuleREP;
 import fr.istic.synthlab.controller.ICOutputPort;
 import fr.istic.synthlab.presentation.IPModuleREP;

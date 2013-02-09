@@ -6,20 +6,14 @@ import java.util.List;
 import com.jsyn.ports.UnitInputPort;
 import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.FilterLowPass;
-import com.jsyn.unitgen.SawtoothOscillator;
-import com.jsyn.unitgen.SineOscillator;
-import com.jsyn.unitgen.SquareOscillator;
-import com.jsyn.unitgen.TriangleOscillator;
 import com.jsyn.unitgen.UnitFilter;
 import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.IInputPort;
 import fr.istic.synthlab.abstraction.IModuleVCF;
-import fr.istic.synthlab.abstraction.IModuleVCO;
 import fr.istic.synthlab.abstraction.IOutputPort;
 import fr.istic.synthlab.abstraction.ISynthesizer;
 import fr.istic.synthlab.abstraction.IWire;
-import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleVCF extends AModule implements IModuleVCF {
@@ -55,30 +49,33 @@ public class ModuleVCF extends AModule implements IModuleVCF {
 
 		// Création des ports d'entrée sur le filtre perso
 		this.input = PACFactory.getFactory().newInputPort(this, IN_NAME,
-				filter.input);
+				filterJSyn.input);
 		this.fm = PACFactory.getFactory().newInputPort(this, IN_MOD_FREQ_NAME,
-				filter.fm);
+				filterJSyn.Q);
 
 		// Création du port de sortie sur le filtre perso
 		this.output = PACFactory.getFactory().newOutputPort(this, OUT_NAME,
-				filter.output);
+				filterJSyn.output);
 	}
 
 	@Override
 	public List<UnitGenerator> getJSyn() {
 		List<UnitGenerator> generators = new ArrayList<UnitGenerator>();
 		generators.add(filter);
+		generators.add(filterJSyn);
 		return generators;
 	}
 
 	@Override
 	public void start() {
 		this.filter.start();
+		this.filterJSyn.start();
 	}
 
 	@Override
 	public void stop() {
 		this.filter.stop();
+		this.filterJSyn.start();
 	}
 
 	@Override
@@ -141,10 +138,16 @@ public class ModuleVCF extends AModule implements IModuleVCF {
 			for (int i = start; i < limit; i++) {
 				// Valeur du port d'entrée
 				double x = inputs[i];
-				// Calcul de la fréquence
-				double frequency = Math.pow(2, x);
-				// Application de la fréquence sur les ports de sortie
-				outputs[i] = x;
+				// Calcul de la fréquence de coupure
+				double frequency = Math.pow(2, cutFrequency + x);
+				// Application du filtre
+				System.out.println(x);
+				if (x >= frequency) {
+					outputs[i] = 0;//Math.pow((24/20) + Math.log(x), 2);
+				} else {
+					outputs[i] = x;
+				}
+				
 			}
 		}
 
