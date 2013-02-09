@@ -3,10 +3,7 @@ package fr.istic.synthlab.abstraction.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jsyn.ports.UnitInputPort;
-import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.FilterLowPass;
-import com.jsyn.unitgen.UnitFilter;
 import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.IInputPort;
@@ -27,7 +24,7 @@ public class ModuleVCF extends AModule implements IModuleVCF {
 	public static final String PARAM_RESONANCE_NAME = "Resonance";
 
 	// Filtre Perso
-	private Filter filter;
+//	private Filter filter;
 
 	// Input & Output du module
 	private IInputPort input;
@@ -45,7 +42,7 @@ public class ModuleVCF extends AModule implements IModuleVCF {
 		this.filterJSyn = new FilterLowPass();
 
 		// Création du générateur perso
-		this.filter = new Filter();
+//		this.filter = new Filter();
 
 		// Création des ports d'entrée sur le filtre perso
 		this.input = PACFactory.getFactory().newInputPort(this, IN_NAME,
@@ -61,41 +58,42 @@ public class ModuleVCF extends AModule implements IModuleVCF {
 	@Override
 	public List<UnitGenerator> getJSyn() {
 		List<UnitGenerator> generators = new ArrayList<UnitGenerator>();
-		generators.add(filter);
+//		generators.add(filter);
 		generators.add(filterJSyn);
 		return generators;
 	}
 
 	@Override
 	public void start() {
-		this.filter.start();
+//		this.filter.start();
 		this.filterJSyn.start();
 	}
 
 	@Override
 	public void stop() {
-		this.filter.stop();
+//		this.filter.stop();
 		this.filterJSyn.start();
 	}
 
 	@Override
 	public void setCutFrequency(double value) {
-		this.filter.cutFrequency = value;
+		this.filterJSyn.frequency.set(value);
 	}
 
 	@Override
 	public double getCutFrequency() {
-		return this.filter.cutFrequency;
+		return this.filterJSyn.frequency.get();
 	}
 
 	@Override
 	public void setResonance(double value) {
-		this.filter.resonance = value;
+//		this.filter.resonance = value;
 	}
 
 	@Override
 	public double getResonance() {
-		return this.filter.resonance;
+//		return this.filter.resonance;
+		return 0;
 	}
 
 	@Override
@@ -113,45 +111,45 @@ public class ModuleVCF extends AModule implements IModuleVCF {
 		return output;
 	}
 
-	private class Filter extends UnitFilter {
-		double cutFrequency = 0.0; // Value between 0 and 32768
-		double resonance = 0.0; // Value between 0 and 100
-
-		// Input & Output du filtre perso
-		UnitInputPort input = new UnitInputPort(IN_NAME);
-		UnitInputPort fm = new UnitInputPort(IN_MOD_FREQ_NAME);
-		UnitOutputPort output = new UnitOutputPort(OUT_NAME);
-
-		public Filter() {
-			this.addPort(input);
-			this.addPort(fm);
-			this.addPort(output);
-		}
-
-		@Override
-		public void generate(int start, int limit) {
-			// Get signal arrays from ports.
-			double[] inputs = this.input.getValues();
-			double[] fm = this.fm.getValues();
-			double[] outputs = this.output.getValues();
-
-			for (int i = start; i < limit; i++) {
-				// Valeur du port d'entrée
-				double x = inputs[i];
-				// Calcul de la fréquence de coupure
-				double frequency = Math.pow(2, cutFrequency + x);
-				// Application du filtre
-				System.out.println(x);
-				if (x >= frequency) {
-					outputs[i] = 0;//Math.pow((24/20) + Math.log(x), 2);
-				} else {
-					outputs[i] = x;
-				}
-				
-			}
-		}
-
-	}
+//	private class Filter extends UnitFilter {
+//		double cutFrequency = 0.0; // Value between 0 and 32768
+//		double resonance = 0.0; // Value between 0 and 100
+//
+//		// Input & Output du filtre perso
+//		UnitInputPort input = new UnitInputPort(IN_NAME);
+//		UnitInputPort fm = new UnitInputPort(IN_MOD_FREQ_NAME);
+//		UnitOutputPort output = new UnitOutputPort(OUT_NAME);
+//
+//		public Filter() {
+//			this.addPort(input);
+//			this.addPort(fm);
+//			this.addPort(output);
+//		}
+//
+//		@Override
+//		public void generate(int start, int limit) {
+//			// Get signal arrays from ports.
+//			double[] inputs = this.input.getValues();
+//			double[] fm = this.fm.getValues();
+//			double[] outputs = this.output.getValues();
+//
+//			for (int i = start; i < limit; i++) {
+//				// Valeur du port d'entrée
+//				double x = inputs[i];
+//				// Calcul de la fréquence de coupure
+//				double frequency = Math.pow(2, cutFrequency + x);
+//				// Application du filtre
+//				System.out.println(x);
+//				if (x >= frequency) {
+//					outputs[i] = 0;// Math.pow((24/20) + Math.log(x), 2);
+//				} else {
+//					outputs[i] = x;
+//				}
+//
+//			}
+//		}
+//
+//	}
 
 	@Override
 	public List<IWire> getWires() {
