@@ -31,58 +31,67 @@ public class ModuleVCF extends AModule implements IModuleVCF {
 	private IInputPort fm;
 	private IOutputPort output;
 
-	// Filtre de fréquence JSyn
-	private FilterLowPass filterJSyn;
+	// Filtres de fréquence JSyn
+	private FilterLowPass filterJSyn1;
+	private FilterLowPass filterJSyn2;
 
 	public ModuleVCF(ISynthesizer synth) {
 		super(MODULE_NAME, synth);
 		System.out.println("ModuleVCF initialized");
 
-		// Création du filtre JSyn
-		this.filterJSyn = new FilterLowPass();
+		// Création des filtres JSyn
+		this.filterJSyn1 = new FilterLowPass();
+		this.filterJSyn2 = new FilterLowPass();
+		
+		// Conection des filtres JSyn
+		this.filterJSyn1.output.connect(this.filterJSyn2.input);
 
-		// Création du générateur perso
+		// Création du filtre perso
 //		this.filter = new Filter();
 
-		// Création des ports d'entrée sur le filtre perso
+		// Création des ports d'entrée sur le filtre JSyn 1
 		this.input = PACFactory.getFactory().newInputPort(this, IN_NAME,
-				filterJSyn.input);
+				filterJSyn1.input);
 		this.fm = PACFactory.getFactory().newInputPort(this, IN_MOD_FREQ_NAME,
-				filterJSyn.Q);
+				filterJSyn1.Q);
 
-		// Création du port de sortie sur le filtre perso
+		// Création du port de sortie sur le filtre JSyn 2
 		this.output = PACFactory.getFactory().newOutputPort(this, OUT_NAME,
-				filterJSyn.output);
+				filterJSyn2.output);
 	}
 
 	@Override
 	public List<UnitGenerator> getJSyn() {
 		List<UnitGenerator> generators = new ArrayList<UnitGenerator>();
 //		generators.add(filter);
-		generators.add(filterJSyn);
+		generators.add(filterJSyn1);
+		generators.add(filterJSyn2);
 		return generators;
 	}
 
 	@Override
 	public void start() {
 //		this.filter.start();
-		this.filterJSyn.start();
+		this.filterJSyn1.start();
+		this.filterJSyn2.start();
 	}
 
 	@Override
 	public void stop() {
 //		this.filter.stop();
-		this.filterJSyn.start();
+		this.filterJSyn1.stop();
+		this.filterJSyn2.stop();
 	}
 
 	@Override
 	public void setCutFrequency(double value) {
-		this.filterJSyn.frequency.set(value);
+		this.filterJSyn1.frequency.set(value);
+		this.filterJSyn2.frequency.set(value);
 	}
 
 	@Override
 	public double getCutFrequency() {
-		return this.filterJSyn.frequency.get();
+		return this.filterJSyn1.frequency.get();
 	}
 
 	@Override
