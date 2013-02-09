@@ -1,6 +1,6 @@
 package fr.istic.synthlab;
 
-import fr.istic.synthlab.presentation.IPSynthesizer;
+import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 
 public interface ISynthFrame {
 

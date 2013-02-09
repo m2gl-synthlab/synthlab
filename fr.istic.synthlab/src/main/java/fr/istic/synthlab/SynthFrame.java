@@ -30,15 +30,15 @@ import com.alee.laf.toolbar.WebToolBar;
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.command.menu.AddModuleAudioScopeCommand;
 import fr.istic.synthlab.command.menu.AddModuleREPCommand;
-import fr.istic.synthlab.presentation.IPSynthesizer;
-import fr.istic.synthlab.presentation.impl.PSynthesizer;
+import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
+import fr.istic.synthlab.presentation.synthesizer.PSynthesizer;
 
 public class SynthFrame extends JFrame implements ISynthFrame {
 
 	private static final long serialVersionUID = -7577358239451859975L;
 
 	// constantes pour les boutons de la toolbar
-//	private static final int BUTTON_DEFAULT = 0;
+	// private static final int BUTTON_DEFAULT = 0;
 	// private static final int BUTTON_MODULE = 2;
 
 	private static final int BUTTON_PLAY = 0;
@@ -53,7 +53,9 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private JMenuItem menuItemNew, menuItemOpen, menuItemSave;
 	private JMenuItem menuItemQuit, menuItemDoc, menuItemAbout;
 	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT,
-		menuItemAddModuleVCF,menuItemAddModuleEG, menuItemAddModuleAudioScope, menuItemAddModuleREP, menuItemAddModuleVCA;
+			menuItemAddModuleVCF, menuItemAddModuleEG,
+			menuItemAddModuleAudioScope, menuItemAddModuleREP,
+			menuItemAddModuleVCA;
 
 	// Toolbar
 	private WebToolBar toolBar = new WebToolBar();
@@ -69,8 +71,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand quitSynthCommand;
 	private ICommand docSynthCommand;
 	private ICommand aboutSynthCommand;
-	private ICommand toolbarDefaultCommand;
-	private ICommand toolbarWireCommand;
 	private ICommand addModuleOUTCommand;
 	private ICommand addModuleVCOCommand;
 	private ICommand addModuleVCACommand;
@@ -78,7 +78,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand addModuleEGCommand;
 	private ICommand addModuleAudioScopeCommand;
 	private ICommand addModuleREPCommand;
-	
+
 	private ICommand toolbarPlayCommand;
 	private ICommand toolbarPauseCommand;
 
@@ -122,7 +122,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuItemAddModuleEG = new JMenuItem("EG Module");
 		menuItemAddModuleAudioScope = new JMenuItem("AudioScope Module");
 		menuItemAddModuleREP = new JMenuItem("REP Module");
-		
+
 		menuAdd.add(menuItemAddModuleOUT);
 		menuAdd.add(menuItemAddModuleVCO);
 		menuAdd.add(menuItemAddModuleVCA);
@@ -399,32 +399,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	}
 
 	/**
-<<<<<<< HEAD
-=======
-	 * @param toolbarDefaultCommand
-	 *            the toolbarDefaultCommand to set
-	 */
-	public void setToolbarDefaultCommand(ICommand toolbarDefaultCommand) {
-		this.toolbarDefaultCommand = toolbarDefaultCommand;
-	}
-	
-	/**
-	 * @param toolbarDefaultWire
-	 *            the toolbarWireCommand to set
-	 */
-	public void setToolbarWireCommand(ICommand toolbarWireCommand) {
-		this.toolbarWireCommand = toolbarWireCommand;
-	}
-	
-	/**
-	 * @param toolbarModuleCommand
-	 *            the toolbarModuleCommand to set
-	 */
-	public void setToolbarModuleCommand(ICommand toolbarModuleCommand) {
-	}
-	
-	/**
->>>>>>> clem
 	 * @param toolbarModuleCommand
 	 *            the toolbarModuleCommand to set
 	 */
@@ -446,13 +420,23 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	public void setToolbarRecordCommand(ICommand toolbarRecordCommand) {
 	}
 
-	
+	/**
+	 * @param addModuleVCOCommand
+	 */
 	public void setAddModuleVCOCommand(ICommand addModuleVCOCommand) {
 		this.addModuleVCOCommand = addModuleVCOCommand;
 	}
+
+	/**
+	 * @param addModuleVCACommand
+	 */
 	public void setAddModuleVCACommand(ICommand addModuleVCACommand) {
 		this.addModuleVCACommand = addModuleVCACommand;
 	}
+
+	/**
+	 * @param addModuleVCFCommand
+	 */
 	public void setAddModuleVCFCommand(ICommand addModuleVCFCommand) {
 		this.addModuleVCFCommand = addModuleVCFCommand;
 	}
@@ -471,15 +455,18 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		this.addModuleEGCommand = addModuleEGCommand;
 	}
 
-	public void setAddModuleAudioScopeCommand(AddModuleAudioScopeCommand addModuleAudioScopeCommand) {
+	/**
+	 * @param addModuleAudioScopeCommand
+	 */
+	public void setAddModuleAudioScopeCommand(
+			AddModuleAudioScopeCommand addModuleAudioScopeCommand) {
 		this.addModuleAudioScopeCommand = addModuleAudioScopeCommand;
-		
 	}
 
 	/**
 	 * @param addModuleREPCommand
 	 */
 	public void setAddModuleREPCommand(AddModuleREPCommand addModuleREPCommand) {
-		this.addModuleREPCommand = addModuleREPCommand;		
+		this.addModuleREPCommand = addModuleREPCommand;
 	}
 }

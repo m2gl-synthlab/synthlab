@@ -1,7 +1,7 @@
 package fr.istic.synthlab.command.toolbar;
 
 import fr.istic.synthlab.command.ICommand;
-import fr.istic.synthlab.presentation.IPSynthesizer;
+import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 
 public class ToolbarPauseCommand implements ICommand {
 

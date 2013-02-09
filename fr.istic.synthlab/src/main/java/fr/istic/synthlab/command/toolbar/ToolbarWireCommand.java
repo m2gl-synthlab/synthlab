@@ -1,9 +1,9 @@
 package fr.istic.synthlab.command.toolbar;
 
-import fr.istic.synthlab.abstraction.IInputPort;
-import fr.istic.synthlab.abstraction.IOutputPort;
-import fr.istic.synthlab.abstraction.ISynthesizer;
-import fr.istic.synthlab.abstraction.IWire;
+import fr.istic.synthlab.abstraction.port.IInputPort;
+import fr.istic.synthlab.abstraction.port.IOutputPort;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
+import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.factory.impl.PACFactory;
 

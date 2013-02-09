@@ -4,8 +4,8 @@ import com.jsyn.ports.UnitOutputPort;
 
 import junit.framework.TestCase;
 
-import fr.istic.synthlab.controller.ICOutputPort;
-import fr.istic.synthlab.controller.impl.COutputPort;
+import fr.istic.synthlab.controller.port.COutputPort;
+import fr.istic.synthlab.controller.port.ICOutputPort;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
 

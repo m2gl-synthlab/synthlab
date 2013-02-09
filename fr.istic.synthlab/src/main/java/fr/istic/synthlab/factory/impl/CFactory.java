@@ -3,32 +3,29 @@ package fr.istic.synthlab.factory.impl;
 import com.jsyn.ports.UnitInputPort;
 import com.jsyn.ports.UnitOutputPort;
 
-import fr.istic.synthlab.abstraction.IInputPort;
-import fr.istic.synthlab.abstraction.IModule;
-import fr.istic.synthlab.abstraction.IModuleAudioScope;
-import fr.istic.synthlab.abstraction.IModuleEG;
-import fr.istic.synthlab.abstraction.IModuleOUT;
-import fr.istic.synthlab.abstraction.IModuleREP;
-import fr.istic.synthlab.abstraction.IModuleVCA;
-import fr.istic.synthlab.abstraction.IModuleVCO;
-import fr.istic.synthlab.abstraction.IOutputPort;
-import fr.istic.synthlab.abstraction.IParameter;
-import fr.istic.synthlab.abstraction.ISynthesizer;
-import fr.istic.synthlab.abstraction.IWire;
-import fr.istic.synthlab.controller.ICSynthesizer;
-import fr.istic.synthlab.controller.impl.CInputPort;
-import fr.istic.synthlab.controller.impl.CModuleAudioScope;
-import fr.istic.synthlab.controller.impl.CModuleEG;
-import fr.istic.synthlab.controller.impl.CModuleOUT;
-import fr.istic.synthlab.controller.impl.CModuleREP;
-import fr.istic.synthlab.controller.impl.CModuleVCA;
-import fr.istic.synthlab.controller.impl.CModuleVCF;
-import fr.istic.synthlab.controller.impl.CModuleVCO;
-import fr.istic.synthlab.controller.impl.COutputPort;
-import fr.istic.synthlab.controller.impl.CParameter;
-import fr.istic.synthlab.controller.impl.CSwitch;
-import fr.istic.synthlab.controller.impl.CSynthesizer;
-import fr.istic.synthlab.controller.impl.CWire;
+import fr.istic.synthlab.abstraction.module.IModule;
+import fr.istic.synthlab.abstraction.module.audioscope.IModuleAudioScope;
+import fr.istic.synthlab.abstraction.module.eg.IModuleEG;
+import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
+import fr.istic.synthlab.abstraction.module.rep.IModuleREP;
+import fr.istic.synthlab.abstraction.module.vca.IModuleVCA;
+import fr.istic.synthlab.abstraction.module.vco.IModuleVCO;
+import fr.istic.synthlab.abstraction.port.IInputPort;
+import fr.istic.synthlab.abstraction.port.IOutputPort;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
+import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope;
+import fr.istic.synthlab.controller.module.eg.CModuleEG;
+import fr.istic.synthlab.controller.module.out.CModuleOUT;
+import fr.istic.synthlab.controller.module.rep.CModuleREP;
+import fr.istic.synthlab.controller.module.vca.CModuleVCA;
+import fr.istic.synthlab.controller.module.vcf.CModuleVCF;
+import fr.istic.synthlab.controller.module.vco.CModuleVCO;
+import fr.istic.synthlab.controller.port.CInputPort;
+import fr.istic.synthlab.controller.port.COutputPort;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
+import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
+import fr.istic.synthlab.controller.wire.CWire;
 import fr.istic.synthlab.factory.IFactory;
 
 public class CFactory implements IFactory {
@@ -94,19 +91,6 @@ public class CFactory implements IFactory {
 		return module;
 	}
 	
-
-	@Override
-	public IParameter newParameter(IModule mod, String name, double min, double max, double value) {
-		IParameter param = new CParameter(name, min, max, value);
-		return param;
-	}
-
-	@Override
-	public IParameter newSwitch(IModule mod, String name, boolean value) {
-		IParameter param = new CSwitch(name, value);
-		return param;
-	}
-
 	@Override
 	public IInputPort newInputPort(IModule mod, String name) {
 		IInputPort port = new CInputPort(name);

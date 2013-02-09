@@ -3,19 +3,18 @@ package fr.istic.synthlab.factory;
 import com.jsyn.ports.UnitInputPort;
 import com.jsyn.ports.UnitOutputPort;
 
-import fr.istic.synthlab.abstraction.IInputPort;
-import fr.istic.synthlab.abstraction.IModule;
-import fr.istic.synthlab.abstraction.IModuleAudioScope;
-import fr.istic.synthlab.abstraction.IModuleEG;
-import fr.istic.synthlab.abstraction.IModuleOUT;
-import fr.istic.synthlab.abstraction.IModuleREP;
-import fr.istic.synthlab.abstraction.IModuleVCA;
-import fr.istic.synthlab.abstraction.IModuleVCO;
-import fr.istic.synthlab.abstraction.IOutputPort;
-import fr.istic.synthlab.abstraction.IParameter;
-import fr.istic.synthlab.abstraction.ISynthesizer;
-import fr.istic.synthlab.abstraction.IWire;
-import fr.istic.synthlab.controller.ICSynthesizer;
+import fr.istic.synthlab.abstraction.module.IModule;
+import fr.istic.synthlab.abstraction.module.audioscope.IModuleAudioScope;
+import fr.istic.synthlab.abstraction.module.eg.IModuleEG;
+import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
+import fr.istic.synthlab.abstraction.module.rep.IModuleREP;
+import fr.istic.synthlab.abstraction.module.vca.IModuleVCA;
+import fr.istic.synthlab.abstraction.module.vco.IModuleVCO;
+import fr.istic.synthlab.abstraction.port.IInputPort;
+import fr.istic.synthlab.abstraction.port.IOutputPort;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
+import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 
 public interface IFactory {
 
@@ -29,8 +28,6 @@ public interface IFactory {
 	IModuleAudioScope newAudioScope(ICSynthesizer synth);
 	IModuleREP newREP(ICSynthesizer synth);
 
-	IParameter newParameter(IModule mod, String name, double min, double max, double value);
-	IParameter newSwitch(IModule mod, String string, boolean value);
 	IInputPort newInputPort(IModule mod, String name);
 	IOutputPort newOutputPort(IModule mod, String name);
 	IWire newWire();

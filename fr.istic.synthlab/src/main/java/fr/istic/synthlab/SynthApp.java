@@ -1,9 +1,9 @@
 package fr.istic.synthlab;
 
-import fr.istic.synthlab.abstraction.IModuleOUT;
-import fr.istic.synthlab.abstraction.IModuleVCO;
+import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
+import fr.istic.synthlab.abstraction.module.vco.IModuleVCO;
 import fr.istic.synthlab.command.ICommand;
-import fr.istic.synthlab.controller.ICSynthesizer;
+import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.factory.impl.PACFactory;
 //github.com/m2gl-synthlab/synthlab.git/
 

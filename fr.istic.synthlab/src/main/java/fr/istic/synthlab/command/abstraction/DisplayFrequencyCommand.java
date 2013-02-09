@@ -1,8 +1,8 @@
 package fr.istic.synthlab.command.abstraction;
 
-import fr.istic.synthlab.abstraction.IModuleVCO;
+import fr.istic.synthlab.abstraction.module.vco.IModuleVCO;
 import fr.istic.synthlab.command.ICommand;
-import fr.istic.synthlab.presentation.IPModuleVCO;
+import fr.istic.synthlab.presentation.module.vco.IPModuleVCO;
 
 /**
  * Command that display the synthesizer

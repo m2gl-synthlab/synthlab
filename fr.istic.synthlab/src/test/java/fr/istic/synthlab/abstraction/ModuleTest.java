@@ -4,6 +4,8 @@ import junit.framework.TestCase;
 
 import com.jsyn.unitgen.SineOscillator;
 
+import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
