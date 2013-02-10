@@ -33,11 +33,8 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 		super(MODULE_NAME, synth);
 		this.out = new ChannelOut();
 		this.attenuator = new AttenuationFilter();
-		synth.getJSyn().add(this.out);
-		synth.getJSyn().add(this.attenuator);
 
-		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME,
-				attenuator.input);
+		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME, attenuator.input);
 		this.attenuator.setAttenuation(0);
 
 		attenuator.output.connect(out.input);

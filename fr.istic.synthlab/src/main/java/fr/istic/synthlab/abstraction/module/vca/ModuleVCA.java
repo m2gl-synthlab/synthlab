@@ -28,24 +28,24 @@ public class ModuleVCA extends AModule implements IModuleVCA {
 	private IOutputPort output;
 	
 	// Generateur Perso
-	private AttenuationFilter attenuationFilter;
+	private AttenuationFilter attenuator;
 
 	public ModuleVCA(ISynthesizer synth) {
 		super(MODULE_NAME, synth);
 
-		this.attenuationFilter = new AttenuationFilter();
+		this.attenuator = new AttenuationFilter();
 
 		// Ajout du port OUTPUT
 		this.output = PACFactory.getFactory().newOutputPort(this, OUTPUT_NAME,
-				attenuationFilter.output);
+				attenuator.output);
 
 		// Ajout du port INPUT
 		this.input = PACFactory.getFactory().newInputPort(this, INPUT_NAME,
-				attenuationFilter.input);
+				attenuator.input);
 
 		// Ajout du port AM
 		this.inputAm = PACFactory.getFactory().newInputPort(this,
-				INPUT_AM_NAME, attenuationFilter.inputAm);
+				INPUT_AM_NAME, attenuator.inputAm);
 		
 	}
 
@@ -110,8 +110,8 @@ public class ModuleVCA extends AModule implements IModuleVCA {
 	@Override
 	public List<UnitGenerator> getJSyn() {
 		List<UnitGenerator> generators = new ArrayList<UnitGenerator>();
-		generators.add(attenuationFilter);
-		return null;
+		generators.add(attenuator);
+		return generators;
 	}
 
 	@Override
@@ -121,12 +121,13 @@ public class ModuleVCA extends AModule implements IModuleVCA {
 
 	@Override
 	public void start() {
-		this.attenuationFilter.start();
+		for (UnitGenerator gen : getJSyn())
+			getSynthesizer().getJSyn().add(gen);
 	}
-
+	
 	@Override
 	public void stop() {
-		this.attenuationFilter.stop();
+		this.attenuator.stop();
 	}
 
 	@Override
@@ -155,12 +156,12 @@ public class ModuleVCA extends AModule implements IModuleVCA {
 
 	@Override
 	public void setAttenuationValue(double value) {
-		this.attenuationFilter.attenuationValue = value;
+		this.attenuator.attenuationValue = value;
 	}
 
 	@Override
 	public double getAttenuationValue() {
-		return this.attenuationFilter.attenuationValue;
+		return this.attenuator.attenuationValue;
 	}
 
 }

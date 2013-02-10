@@ -15,7 +15,6 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	public CSynthesizer() {
 		super();
 		this.pres = PACFactory.getPFactory().newSynthesizer(this);
-		stop();
 	}
 
 	@Override
@@ -24,7 +23,6 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 		if (isRunning()) {
 			pres.c2pStart();
 		}
-
 	}
 
 	@Override
@@ -50,11 +48,6 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	public void add(IWire wire) {
 		super.add(wire);
 		pres.c2pAddWire(((ICWire) wire).getPresentation());
-	}
-
-	@Override
-	public IWire getCurrentWire() {
-		return super.getCurrentWire();
 	}
 
 	@Override

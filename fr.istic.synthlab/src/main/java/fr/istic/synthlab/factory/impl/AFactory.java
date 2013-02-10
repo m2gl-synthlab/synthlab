@@ -46,7 +46,7 @@ public class AFactory implements IFactory {
 
 	@Override
 	public ISynthesizer newSynthesizer() {
-		return new Synthesizer();
+		return Synthesizer.getInstance();
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class AFactory implements IFactory {
 		IModuleEG module = new ModuleEG(synth);
 		return module;
 	}
-	
+
 	@Override
 	public IModuleAudioScope newAudioScope(ICSynthesizer synth) {
 		IModuleAudioScope module = new ModuleAudioScope(synth);
@@ -90,20 +90,6 @@ public class AFactory implements IFactory {
 		IModuleREP module = new ModuleREP(synth);
 		return module;
 	}
-	
-	@Override
-	public IInputPort newInputPort(IModule mod, String name) {
-		IInputPort port = new InputPort(name);
-		port.setModule(mod);
-		return port;
-	}
-
-	@Override
-	public IOutputPort newOutputPort(IModule mod, String name) {
-		IOutputPort port = new OutputPort(name);
-		port.setModule(mod);
-		return port;
-	}
 
 	@Override
 	public IWire newWire() {
@@ -113,31 +99,14 @@ public class AFactory implements IFactory {
 
 	@Override
 	public IInputPort newInputPort(IModule mod, String name, UnitInputPort input) {
-		IInputPort port = new InputPort(input, name);
-		port.setModule(mod);
-		port.setName(name);
-		return port;
-	}
-	
-	@Override
-	public IInputPort newInputPort(IModule mod, String name, UnitInputPort input, int part) {
-		IInputPort port = new InputPort(input, part, name);
-		port.setModule(mod);
+		IInputPort port = new InputPort(name, input, mod);
 		port.setName(name);
 		return port;
 	}
 
 	@Override
 	public IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output) {
-		IOutputPort port = new OutputPort(output, name);
-		port.setModule(mod);
-		return port;
-	}
-	
-	public IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output, int part) {
-		IOutputPort port = new OutputPort(output, part, name);
-		port.setModule(mod);
-		port.setName(name);
+		IOutputPort port = new OutputPort(name, output, mod);
 		return port;
 	}
 

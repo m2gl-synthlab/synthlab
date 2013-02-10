@@ -18,7 +18,7 @@ public class COutputPortTest extends TestCase {
 	}
 
 	public void testCOutputPortString() {
-		iop = new COutputPort("out1");
+		iop = new COutputPort("out1", null, null);
 		assertEquals("out1", iop.getName());
 		assertNotNull(iop.getPresentation());
 
@@ -26,20 +26,10 @@ public class COutputPortTest extends TestCase {
 
 	public void testCOutputPortUnitOutputPortString() {
 		UnitOutputPort iop2 = new UnitOutputPort("test");
-		iop = new COutputPort(iop2, "out2");
+		iop = new COutputPort("out2", iop2, null);
 		assertEquals("out2", iop.getName());
 		assertEquals(iop2, iop.getJSyn());
 
-		assertNotNull(iop.getPresentation());
-	}
-
-	public void testCOutputPortUnitOutputPortInt() {
-		UnitOutputPort iop2 = new UnitOutputPort("test");
-
-		iop = new COutputPort(iop2, 4, "out");
-		assertEquals(iop2, iop.getJSyn());
-
-		assertEquals(4, iop.getDefaultPart());
 		assertNotNull(iop.getPresentation());
 	}
 

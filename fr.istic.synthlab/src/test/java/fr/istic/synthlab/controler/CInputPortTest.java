@@ -18,7 +18,7 @@ public class CInputPortTest extends TestCase {
 	}
 
 	public void testCInputPortString() {
-		iop = new CInputPort("out1");
+		iop = new CInputPort("out1", null, null);
 		assertEquals("out1", iop.getName());
 		assertNotNull(iop.getPresentation());
 
@@ -26,19 +26,9 @@ public class CInputPortTest extends TestCase {
 
 	public void testCInputPortUnitInputPort() {
 		UnitInputPort iop2 = new UnitInputPort("test");
-		iop = new CInputPort(iop2, "iop");
+		iop = new CInputPort("iop", iop2, null);
 		assertEquals(iop2, iop.getJSyn());
 
-		assertNotNull(iop.getPresentation());
-	}
-
-	public void testCInputPortUnitInputPortInt() {
-		UnitInputPort iop2 = new UnitInputPort("test");
-
-		iop = new CInputPort(iop2, 4, "iop");
-		assertEquals(iop2, iop.getJSyn());
-
-		assertEquals(4, iop.getDefaultPart());
 		assertNotNull(iop.getPresentation());
 	}
 

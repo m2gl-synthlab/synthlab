@@ -28,13 +28,9 @@ public interface IFactory {
 	IModuleAudioScope newAudioScope(ICSynthesizer synth);
 	IModuleREP newREP(ICSynthesizer synth);
 
-	IInputPort newInputPort(IModule mod, String name);
-	IOutputPort newOutputPort(IModule mod, String name);
 	IWire newWire();
 
 	IInputPort newInputPort(IModule mod, String name, UnitInputPort input);
-	IInputPort newInputPort(IModule mod, String name, UnitInputPort input, int part);
 	IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output);
-	IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output, int part);
 
 }

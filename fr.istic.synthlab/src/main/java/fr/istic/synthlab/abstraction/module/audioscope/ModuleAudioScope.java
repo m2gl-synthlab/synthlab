@@ -3,6 +3,7 @@ package fr.istic.synthlab.abstraction.module.audioscope;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.scope.AudioScope;
 import com.jsyn.scope.AudioScopeModel;
 import com.jsyn.unitgen.UnitFilter;
@@ -39,7 +40,7 @@ public class ModuleAudioScope extends AModule implements IModuleAudioScope {
 		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME, adapter.input);
 		this.out = PACFactory.getFactory().newOutputPort(this, OUT_NAME, adapter.output);
 
-		this.scope.addProbe(this.out.getJSyn());
+		this.scope.addProbe((UnitOutputPort) this.out.getJSyn()); // TODO : cast ok ?
 		this.scope.setTriggerMode(AudioScope.TriggerMode.NORMAL);
 	}
 

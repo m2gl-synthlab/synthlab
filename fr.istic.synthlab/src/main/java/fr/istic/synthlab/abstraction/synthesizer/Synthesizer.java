@@ -4,23 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jsyn.JSyn;
-import com.jsyn.engine.SynthesisEngine;
 import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.module.IModule;
 import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.factory.impl.PACFactory;
 
 /**
  * Implementation of a Synthesizer
  */
 public class Synthesizer implements ISynthesizer {
-
+	protected static ISynthesizer instance;
+	
 	private com.jsyn.Synthesizer synth;
 
 	private List<IModule> modules;
 	private List<IWire> wires;
 
 	private IWire currentWire;
+	
+	/**
+	 * @return the synthesizer's instance
+	 */
+	public static ISynthesizer getInstance() {
+		if (instance == null) {
+			instance = PACFactory.getFactory().newSynthesizer();
+		}
+		return instance;
+	}
+	
 	/**
 	 * Constructor
 	 */
@@ -28,16 +40,8 @@ public class Synthesizer implements ISynthesizer {
 		this.synth = JSyn.createSynthesizer();
 		modules = new ArrayList<IModule>();
 		wires = new ArrayList<IWire>();
+		instance = this;
 	}
-
-	/**
-	 * Constructor
-	 */
-	public Synthesizer(SynthesisEngine jSynSynth) {
-		this.synth = jSynSynth;
-		modules = new ArrayList<IModule>();
-	}
-	
 
 	@Override
 	public com.jsyn.Synthesizer getJSyn() {
@@ -56,9 +60,8 @@ public class Synthesizer implements ISynthesizer {
 	@Override
 	public void remove(IModule module) {
 		modules.remove(module);
-		for(UnitGenerator gen : module.getJSyn()){
+		for(UnitGenerator gen : module.getJSyn())
 			this.synth.remove(gen);
-		}
 	}
 	
 	@Override

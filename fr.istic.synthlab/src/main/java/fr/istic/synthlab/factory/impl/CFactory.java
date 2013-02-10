@@ -30,11 +30,6 @@ import fr.istic.synthlab.factory.IFactory;
 
 public class CFactory implements IFactory {
 
-	public static final String MODULE_VCO = "VCO";
-	public static final String MODULE_VCA = "VCA";
-	public static final String MODULE_OUT = "OUT";
-	public static final String MODULE_VCF = "VCF";
-
 	private static final CFactory instance = new CFactory();
 
 	private CFactory() {
@@ -72,7 +67,7 @@ public class CFactory implements IFactory {
 		IModuleOUT module = new CModuleOUT(synth);
 		return module;
 	}
-	
+
 	@Override
 	public IModuleREP newREP(ICSynthesizer synth) {
 		IModuleREP module = new CModuleREP(synth);
@@ -84,25 +79,11 @@ public class CFactory implements IFactory {
 		IModuleEG module = new CModuleEG(synth);
 		return module;
 	}
-	
+
 	@Override
 	public IModuleAudioScope newAudioScope(ICSynthesizer synth) {
 		IModuleAudioScope module = new CModuleAudioScope(synth);
 		return module;
-	}
-	
-	@Override
-	public IInputPort newInputPort(IModule mod, String name) {
-		IInputPort port = new CInputPort(name);
-		port.setModule(mod);
-		return port;
-	}
-
-	@Override
-	public IOutputPort newOutputPort(IModule mod, String name) {
-		IOutputPort port = new COutputPort(name);
-		port.setModule(mod);
-		return port;
 	}
 
 	@Override
@@ -113,34 +94,14 @@ public class CFactory implements IFactory {
 
 	@Override
 	public IInputPort newInputPort(IModule mod, String name, UnitInputPort input) {
-		IInputPort port = new CInputPort(input, name);
-		port.setModule(mod);
-		port.setName(name);
-		return port;
-	}
-	
-	@Override
-	public IInputPort newInputPort(IModule mod, String name, UnitInputPort input, int part) {
-		IInputPort port = new CInputPort(input, part, name);
-		port.setModule(mod);
-		port.setName(name);
+		IInputPort port = new CInputPort(name, input, mod);
 		return port;
 	}
 
 	@Override
 	public IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output) {
-		IOutputPort port = new COutputPort(output, name);
-		port.setModule(mod);
+		IOutputPort port = new COutputPort(name, output, mod);
 		return port;
 	}
-	
-	@Override
-	public IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output, int part) {
-		IOutputPort port = new COutputPort(output, part, name);
-		port.setModule(mod);
-		port.setName(name);
-		return port;
-	}
-
 
 }

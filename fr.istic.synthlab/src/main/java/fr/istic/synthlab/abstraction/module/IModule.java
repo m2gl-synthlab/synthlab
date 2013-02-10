@@ -13,7 +13,6 @@ import fr.istic.synthlab.abstraction.wire.IWire;
 public interface IModule {
 
 	/**
-	 * 
 	 * Return the jSyn components
 	 * 
 	 * @return jSyn components
@@ -43,13 +42,6 @@ public interface IModule {
 	 * @return the Synthesizer
 	 */
 	public ISynthesizer getSynthesizer();
-
-	/**
-	 * Set the Synthesizer witch contains the current Synthesizer
-	 * 
-	 * @return the Synthesizer
-	 */
-	public void setSynthesizer(ISynthesizer synth);
 
 	/**
 	 * Return the list of wire connected to the module

@@ -12,6 +12,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JDesktopPane;
 import javax.swing.JPanel;
 
+import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.presentation.port.IPInputPort;
@@ -44,6 +45,7 @@ public class PWire extends JPanel implements IPWire {
 	 */
 	public PWire(ICWire control) {
 		this.ctrl = control;
+		synth = (ICSynthesizer) Synthesizer.getInstance();
 		configView();
 		defineCallbacks();
 	}
@@ -56,13 +58,6 @@ public class PWire extends JPanel implements IPWire {
 		this.addMouseListener(new SimpleMouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ICSynthesizer synth = null;
-				if (inputPort != null) {
-					synth = (ICSynthesizer) inputPort.getControl().getModule().getSynthesizer();
-				} else {
-					synth = (ICSynthesizer) outputPort.getControl().getModule().getSynthesizer();
-				}
-
 				e.translatePoint(getLocation().x, getLocation().y);
 
 				((JDesktopPane) synth.getPresentation()).setLayer(PWire.this, 0, -1);
@@ -74,12 +69,6 @@ public class PWire extends JPanel implements IPWire {
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				ICSynthesizer synth = null;
-				if (inputPort != null) {
-					synth = (ICSynthesizer) inputPort.getControl().getModule().getSynthesizer();
-				} else {
-					synth = (ICSynthesizer) outputPort.getControl().getModule().getSynthesizer();
-				}
 				((PSynthesizer) synth.getPresentation()).dispatchEvent(e);
 			}
 
@@ -96,7 +85,6 @@ public class PWire extends JPanel implements IPWire {
 
 	@Override
 	public void c2pConnectOut(IPOutputPort outputPort) {
-		// System.out.println("Connecting to out");
 		this.outputPort = (POutputPort) outputPort;
 		if (inputPort != null) {
 			setVisible(true);
@@ -106,7 +94,6 @@ public class PWire extends JPanel implements IPWire {
 
 	@Override
 	public void c2pConnectIn(IPInputPort inputPort) {
-		// System.out.println("Connecting to In");
 		this.inputPort = (PInputPort) inputPort;
 		if (outputPort != null) {
 			setVisible(true);
@@ -116,6 +103,7 @@ public class PWire extends JPanel implements IPWire {
 
 	@Override
 	public void updateDisplay() {
+		
 		if (outputPort != null) {
 			posOutput = new Point(outputPort.getX(), outputPort.getY());
 
@@ -125,7 +113,6 @@ public class PWire extends JPanel implements IPWire {
 				posOutput.y += c2.getParent().getY();
 				c2 = c2.getParent();
 			}
-			synth = (ICSynthesizer) outputPort.getControl().getModule().getSynthesizer();
 		}
 
 		if (inputPort != null) {
@@ -137,7 +124,6 @@ public class PWire extends JPanel implements IPWire {
 				posInput.y += c.getParent().getY();
 				c = c.getParent();
 			}
-			synth = (ICSynthesizer) inputPort.getControl().getModule().getSynthesizer();
 		}
 
 		int x = 0;
@@ -164,7 +150,6 @@ public class PWire extends JPanel implements IPWire {
 
 		IPSynthesizer presSynth = synth.getPresentation();
 		((JDesktopPane) presSynth).setLayer(this, 0, 0);
-
 		
 		repaint();
 		validate();
@@ -196,8 +181,7 @@ public class PWire extends JPanel implements IPWire {
 		// Si le cable est encore attaché a l'output
 		if (getControl().getOutput() != null) {
 			// On set le cable courrant du synthetiseur
-			getControl().getInput().getModule().getSynthesizer()
-					.setCurrentWire(getControl());
+			synth.setCurrentWire(getControl());
 			inputPort = null;
 			updateDisplay();
 		} else {
@@ -210,8 +194,7 @@ public class PWire extends JPanel implements IPWire {
 		// Si le cable est encore attaché a l'output
 		if (getControl().getInput() != null) {
 			// On set le cable courrant du synthetiseur
-			getControl().getOutput().getModule().getSynthesizer()
-					.setCurrentWire(getControl());
+			synth.setCurrentWire(getControl());
 			outputPort = null;
 			updateDisplay();
 		} else {

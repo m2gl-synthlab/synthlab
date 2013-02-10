@@ -152,8 +152,7 @@ public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
 		((APModule) module).setVisible(true);
 		this.add((JInternalFrame) module, 0);
 
-		((APModule) module).setBounds(10, 10, module.getWidth(),
-				module.getHeight());
+		((APModule) module).setBounds(10, 10, module.getWidth(), module.getHeight());
 
 		modules.add(module);
 		((APModule) module).validate();
@@ -168,13 +167,9 @@ public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
 
 	}
 
-	int i = 0;
-
 	@Override
 	public void c2pAddWire(IPWire wire) {
-
 		this.add((PWire) wire);
-		System.out.println("c2pAddWire Adding wire");
 		validate();
 		repaint();
 	}

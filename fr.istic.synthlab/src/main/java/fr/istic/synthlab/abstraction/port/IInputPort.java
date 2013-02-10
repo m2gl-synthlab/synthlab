@@ -1,105 +1,17 @@
 package fr.istic.synthlab.abstraction.port;
 
-import com.jsyn.ports.UnitInputPort;
-
-import fr.istic.synthlab.abstraction.module.IModule;
-import fr.istic.synthlab.abstraction.wire.IWire;
+import com.jsyn.ports.ConnectableInput;
 
 /**
  * Interface for a module's input port
  */
-public interface IInputPort {// extends ConnectableInput, GettablePort,
-								// SettablePort{
+public interface IInputPort extends IPort {
 
 	/**
-	 * Return the jSyn output port component
+	 * Return the jSyn input port component
 	 * 
-	 * @return
+	 * @return the JSyn component
 	 */
-	public UnitInputPort getJSyn();
-
-	/**
-	 * Set the port's name
-	 */
-	public void setName(String name);
-
-	/**
-	 * Return the port's name
-	 * 
-	 * @return the name
-	 */
-	public String getName();
-
-	/**
-	 * Set a new value to the port
-	 * 
-	 * @param value
-	 */
-	public void set(double value);
-
-	/**
-	 * Set a new value to the port on the given part
-	 * 
-	 * @param partNum
-	 * @param value
-	 */
-	public void set(int partNum, double value);
-
-	/**
-	 * Return the port's value
-	 * 
-	 * @return
-	 */
-	public double getValue();
-
-	/**
-	 * Return the port's value
-	 * 
-	 * @param partNum
-	 * @return
-	 */
-	public double getValue(int partNum);
-
-	/**
-	 * Return the number of part for this port (stereo = 2)
-	 * 
-	 * @return part count
-	 */
-	public int getNumParts();
-
-	/**
-	 * Return the default part
-	 * 
-	 * @return default part number
-	 */
-	public int getDefaultPart();
-
-	/**
-	 * Return the module witch contains the current port
-	 * 
-	 * @return the module
-	 */
-	public IModule getModule();
-
-	/**
-	 * Set the module witch contains the current port
-	 * 
-	 * @return the module
-	 */
-	public void setModule(IModule mod);
-
-	/**
-	 * Return the connected wire if any
-	 * 
-	 * @return the connected wire
-	 */
-	public IWire getWire();
-
-	/**
-	 * Set a connected wire
-	 * 
-	 * @param wire
-	 */
-	public void setWire(IWire wire);
+	public ConnectableInput getJSyn();
 
 }

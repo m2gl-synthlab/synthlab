@@ -1,5 +1,7 @@
 package fr.istic.synthlab.abstraction.wire;
 
+import fr.istic.synthlab.abstraction.exception.BadConnectionException;
+import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
 
@@ -26,16 +28,27 @@ public interface IWire {
 	 * Connect the wire with an input port
 	 * 
 	 * @param port
+	 * @throws PortAlreadyInUseException
+	 * @throws BadConnectionException 
 	 */
-	public void connect(IInputPort port);
+	public void connect(IInputPort port) throws PortAlreadyInUseException, BadConnectionException;
 
 	/**
 	 * Connect the wire with an output port
 	 * 
 	 * @param port
+	 * @throws PortAlreadyInUseException
+	 * @throws BadConnectionException 
 	 */
-	public void connect(IOutputPort port);
-	
+	public void connect(IOutputPort port) throws PortAlreadyInUseException, BadConnectionException;
+
+	/**
+	 * Return true if the cable is connected to an input and an output
+	 * 
+	 * @return the connection status
+	 */
+	public boolean isConnected();
+
 	// TODO : Maybe a cable could be half disconnected ? need comments
 	public void disconnect();
 }

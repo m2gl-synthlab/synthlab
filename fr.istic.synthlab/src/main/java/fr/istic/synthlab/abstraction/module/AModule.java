@@ -16,11 +16,6 @@ public abstract class AModule implements IModule{
 	}
 	
 	@Override
-	public void setSynthesizer(ISynthesizer synth) {
-		this.synth = synth;
-	}	
-	
-	@Override
 	public ISynthesizer getSynthesizer() {
 		return synth;
 	}
@@ -29,5 +24,4 @@ public abstract class AModule implements IModule{
 	public String getName() {
 		return name;
 	}
-
 }

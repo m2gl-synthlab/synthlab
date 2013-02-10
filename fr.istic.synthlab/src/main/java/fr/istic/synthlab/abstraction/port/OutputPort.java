@@ -1,114 +1,24 @@
 package fr.istic.synthlab.abstraction.port;
 
-import com.jsyn.ports.UnitOutputPort;
+import com.jsyn.ports.ConnectableOutput;
 
 import fr.istic.synthlab.abstraction.module.IModule;
-import fr.istic.synthlab.abstraction.wire.IWire;
-
 
 /**
  * Implementation of an output port
  */
-public class OutputPort implements IOutputPort {
+public class OutputPort extends Port implements IOutputPort {
 
-	private String name;
-	private UnitOutputPort port;
-	private int defaultPart = 0;
-	private IWire wire;
-	
-	private IModule parentModule;
+	private ConnectableOutput port;
 
-	/**
-	 * @param name
-	 */
-	public OutputPort(String name) {
-		this.name = name;
-		this.port = new UnitOutputPort(name);
-	}
-
-	public OutputPort(UnitOutputPort jSynPort, String name) {
-		this.name = name;
+	public OutputPort(String name, ConnectableOutput jSynPort, IModule module) {
+		super(name, module);
 		this.port = jSynPort;
-	}
-	
-	public OutputPort(UnitOutputPort jSynPort, int part, String name) {
-		this.port = jSynPort;
-		this.defaultPart = part;
-		this.name = name;
 	}
 
 	@Override
-	public UnitOutputPort getJSyn() {
+	public ConnectableOutput getJSyn() {
 		return this.port;
-	}
-
-	@Override
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	@Override
-	public String getName() {
-		return this.name;
-	}
-
-	@Override
-	public void connect(IInputPort inputPort) {
-		System.out.println("Output going to be connected");
-		if(!port.isConnected()){
-			System.out.println("!port.isConnected()");
-			port.connect(this.defaultPart, inputPort.getJSyn(), inputPort.getDefaultPart());
-			
-		}
-		if(port.isConnected()){
-			System.out.println("Output connected"); //TODO resoudre ce mystere ou bug de JSyn...
-		}
-	}
-
-	@Override
-	public void disconnect(IInputPort inputPort) {
-		System.out.println("Output going to be disconnected");
-		port.disconnectAll();
-	}
-
-	@Override
-	public double getValue() {
-		return port.get();
-	}
-
-	@Override
-	public double getValue(int partNum) {
-		return port.getValue(partNum);
-	}
-
-	@Override
-	public int getNumParts() {
-		return port.getNumParts();
-	}
-	
-	@Override
-	public int getDefaultPart() {
-		return defaultPart ;
-	}
-
-	@Override
-	public IModule getModule() {
-		return parentModule;
-	}
-
-	@Override
-	public void setModule(IModule mod) {
-		parentModule = mod;
-	}
-	
-	@Override
-	public IWire getWire() {
-		return wire;
-	}
-
-	@Override
-	public void setWire(IWire wire) {
-		this.wire = wire;
 	}
 
 }
