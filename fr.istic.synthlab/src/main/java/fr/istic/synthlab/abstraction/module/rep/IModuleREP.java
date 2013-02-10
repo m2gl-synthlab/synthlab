@@ -4,6 +4,9 @@ import fr.istic.synthlab.abstraction.module.IModule;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
 
+/**
+ * A module that replicate the input on the 3 output
+ */
 public interface IModuleREP extends IModule {
 
 	/**
@@ -11,27 +14,27 @@ public interface IModuleREP extends IModule {
 	 * 
 	 * @return in
 	 */
-	public IInputPort getIn();
-	
+	public IInputPort getInput();
+
 	/**
-	 * Return out1 port of the REP module
+	 * Return output1 port of the REP module
 	 * 
-	 * @return out1
+	 * @return output1
 	 */
-	public IOutputPort getOut1();
-	
+	public IOutputPort getOutput1();
+
 	/**
-	 * Return out1 port of the REP module
+	 * Return output2 port of the REP module
 	 * 
-	 * @return out2
+	 * @return output2
 	 */
-	public IOutputPort getOut2();
-	
+	public IOutputPort getOutput2();
+
 	/**
-	 * Return out1 port of the REP module
+	 * Return output3 port of the REP module
 	 * 
-	 * @return out3
+	 * @return output3
 	 */
-	public IOutputPort getOut3();
+	public IOutputPort getOutput3();
 
 }

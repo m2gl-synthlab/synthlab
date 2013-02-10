@@ -59,16 +59,16 @@ public class PModuleREP extends APModule implements IPModuleREP {
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();
 		
-		inputPort = (PInputPort) ((ICInputPort) ctrl.getIn()).getPresentation();
+		inputPort = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
 		panelInput.add(inputPort);
 		
-		out1 = (POutputPort) ((ICOutputPort) ctrl.getOut1()).getPresentation();
+		out1 = (POutputPort) ((ICOutputPort) ctrl.getOutput1()).getPresentation();
 		panelOutput.add(out1);
 		
-		out2 = (POutputPort) ((ICOutputPort) ctrl.getOut2()).getPresentation();
+		out2 = (POutputPort) ((ICOutputPort) ctrl.getOutput2()).getPresentation();
 		panelOutput.add(out2);
 		
-		out3 = (POutputPort) ((ICOutputPort) ctrl.getOut3()).getPresentation();
+		out3 = (POutputPort) ((ICOutputPort) ctrl.getOutput3()).getPresentation();
 		panelOutput.add(out3);
 		
 		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));

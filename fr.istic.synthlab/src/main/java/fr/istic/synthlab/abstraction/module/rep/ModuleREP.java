@@ -3,10 +3,9 @@ package fr.istic.synthlab.abstraction.module.rep;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jsyn.ports.UnitInputPort;
-import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.UnitGenerator;
 
+import fr.istic.synthlab.abstraction.filter.TriplePassThroughFilter;
 import fr.istic.synthlab.abstraction.module.AModule;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
@@ -26,22 +25,22 @@ public class ModuleREP extends AModule implements IModuleREP {
 	private IOutputPort output1;
 	private IOutputPort output2;
 	private IOutputPort output3;
-	private Identitygenerator none_output;
+	private TriplePassThroughFilter passThrough;
 
 	public ModuleREP(ISynthesizer synth) {
 		super(MODULE_NAME, synth);
 
-		this.none_output = new Identitygenerator();
-		
-		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME,
-				none_output.input);
+		this.passThrough = new TriplePassThroughFilter();
 
-		this.output1 = PACFactory.getFactory().newOutputPort(this,
-				OUT1_NAME, none_output.output1);
-		this.output2 = PACFactory.getFactory().newOutputPort(this,
-				OUT2_NAME, none_output.output2);
-		this.output3 = PACFactory.getFactory().newOutputPort(this,
-				OUT3_NAME, none_output.output3);
+		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME,
+				passThrough.getInput());
+
+		this.output1 = PACFactory.getFactory().newOutputPort(this, OUT1_NAME,
+				passThrough.getOutput1());
+		this.output2 = PACFactory.getFactory().newOutputPort(this, OUT2_NAME,
+				passThrough.getOutput2());
+		this.output3 = PACFactory.getFactory().newOutputPort(this, OUT3_NAME,
+				passThrough.getOutput3());
 
 	}
 
@@ -68,38 +67,6 @@ public class ModuleREP extends AModule implements IModuleREP {
 
 	}
 
-	// crée un input Jsyn sans effet
-	private class Identitygenerator extends UnitGenerator {
-
-		UnitOutputPort output1 = new UnitOutputPort(OUT1_NAME);
-		UnitOutputPort output2 = new UnitOutputPort(OUT2_NAME);
-		UnitOutputPort output3 = new UnitOutputPort(OUT2_NAME);
-		UnitInputPort input = new UnitInputPort(IN_NAME);
-
-		public Identitygenerator() {
-			this.addPort(output1);
-			this.addPort(output2);
-			this.addPort(output3);
-			this.addPort(input);
-		}
-		
-		@Override
-		public void generate(int start, int limit) {
-			// Get signal arrays from ports.
-			double[] inputs = input.getValues();
-			double[] outputs1 = output1.getValues();
-			double[] outputs2 = output2.getValues();
-			double[] outputs3 = output3.getValues();
-
-			for (int i = start; i < limit; i++) {
-				double x = inputs[i];
-				outputs1[i] = x;
-				outputs2[i] = x;
-				outputs3[i] = x;
-			}
-		}
-	}
-	
 	@Override
 	public List<IWire> getWires() {
 
@@ -120,20 +87,22 @@ public class ModuleREP extends AModule implements IModuleREP {
 	}
 
 	@Override
-	public IInputPort getIn() {
-		// TODO Auto-generated method stub
+	public IInputPort getInput() {
 		return in;
 	}
 
-	public IOutputPort getOut1(){
+	@Override
+	public IOutputPort getOutput1() {
 		return output1;
 	}
-	
-	public IOutputPort getOut2(){
+
+	@Override
+	public IOutputPort getOutput2() {
 		return output2;
 	}
-	
-	public IOutputPort getOut3(){
+
+	@Override
+	public IOutputPort getOutput3() {
 		return output3;
 	}
 
