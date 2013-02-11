@@ -87,7 +87,6 @@ public abstract class APModule extends WebPanel implements IPModule {
 				((JLayeredPane) presSynth).setLayer(APModule.this, 0, 0);
 				for (IWire w : ctrl.getWires()) {
 					if (w != null) {
-						// TODO : Set wire Z position to this Z position+1
 						((ICWire) w).getPresentation().setOnTop(true);
 					}
 				}
