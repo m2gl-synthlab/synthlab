@@ -2,12 +2,14 @@ package fr.istic.synthlab.presentation.port;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fr.istic.synthlab.controller.module.ICModule;
@@ -38,7 +40,9 @@ public class POutputPort extends JPanel implements IPOutputPort {
 		this.setOpaque(false);
 		this.setSize(width, height);
 		this.setPreferredSize(this.getSize());
-		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
+		this.setLayout(new FlowLayout(FlowLayout.CENTER));
+		JLabel name = new JLabel(ctrl.getName());
+		this.add(name);
 	}
 
 	private void defineCallbacks() {
@@ -63,12 +67,6 @@ public class POutputPort extends JPanel implements IPOutputPort {
 				repaint();
 				validate();
 			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				ctrl.p2cCanConnect();
-			}
-
 		});
 
 		/** Gestion du déplacement de la souris */
@@ -78,6 +76,13 @@ public class POutputPort extends JPanel implements IPOutputPort {
 				// Sert pour le déplacement du cable au dessus des elements
 				((APModule) ((ICModule) getControl().getModule())
 						.getPresentation()).dispatchEvent(e);
+				if (Math.pow((e.getX() - 40), 2) + Math.pow((e.getY() - 40), 2) < Math.pow(15, 2)) {
+					ctrl.p2cCanConnect();
+				} else {
+					clickState=CLICK_STATE_DEFAULT;
+					repaint();
+					validate();
+				}
 			}
 			@Override
 			public void mouseDragged(MouseEvent e) {}

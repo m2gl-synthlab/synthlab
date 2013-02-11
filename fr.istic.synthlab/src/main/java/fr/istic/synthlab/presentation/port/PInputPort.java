@@ -3,15 +3,17 @@ package fr.istic.synthlab.presentation.port;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import fr.istic.synthlab.controller.module.ICModule;
 import fr.istic.synthlab.controller.port.ICInputPort;
@@ -42,7 +44,9 @@ public class PInputPort extends JPanel implements IPInputPort {
 		this.setOpaque(false);
 		this.setSize(width, height);
 		this.setPreferredSize(this.getSize());
-		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
+		this.setLayout(new FlowLayout(FlowLayout.CENTER));
+		JLabel name = new JLabel(ctrl.getName());
+		this.add(name);
 	}
 
 	private void defineCallbacks() {
@@ -56,6 +60,10 @@ public class PInputPort extends JPanel implements IPInputPort {
 					} else {
 						ctrl.p2cConnect();
 					}
+				} else {
+					clickState=CLICK_STATE_DEFAULT;
+					repaint();
+					validate();
 				}
 			}
 
@@ -65,17 +73,15 @@ public class PInputPort extends JPanel implements IPInputPort {
 				repaint();
 				validate();
 			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				ctrl.p2cCanConnect();
-			}
 		});
 		
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				((APModule)((ICModule)getControl().getModule()).getPresentation()).dispatchEvent(e);
+				if (Math.pow((e.getX() - 40), 2) + Math.pow((e.getY() - 40), 2) < Math.pow(15, 2)) {
+					ctrl.p2cCanConnect();
+				}
 			}
 			@Override
 			public void mouseDragged(MouseEvent e) {
