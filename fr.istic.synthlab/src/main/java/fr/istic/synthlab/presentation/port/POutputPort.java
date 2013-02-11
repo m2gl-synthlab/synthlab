@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import fr.istic.synthlab.controller.module.ICModule;
 import fr.istic.synthlab.controller.port.ICOutputPort;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.util.SimpleMouseListener;
 
@@ -53,19 +54,12 @@ public class POutputPort extends JPanel implements IPOutputPort {
 			public void mouseClicked(MouseEvent e) {
 				if (Math.pow((e.getX() - 40), 2) + Math.pow((e.getY() - 40), 2) < Math
 						.pow(15, 2)) {
-					if (ctrl.getWire() != null) {
-						ctrl.p2cDisconnect();
-					} else {
-						ctrl.p2cConnect();
-					}
+					ctrl.p2cMouseClicked();
+				}else{
+					clickState=CLICK_STATE_DEFAULT;
+					repaint();
+					validate();
 				}
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				clickState=CLICK_STATE_DEFAULT;
-				repaint();
-				validate();
 			}
 		});
 

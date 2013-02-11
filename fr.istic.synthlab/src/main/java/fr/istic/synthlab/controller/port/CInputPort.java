@@ -77,8 +77,30 @@ public class CInputPort extends InputPort implements ICInputPort {
 				pres.c2pClickAllowed();
 			}
 		} else {
-			pres.c2pClickAllowed();
+			if(CSynthesizer.getInstance().getCurrentWire() == null){
+				pres.c2pClickAllowed();
+			} else {
+				pres.c2pClickNotAllowed();
+			}
 		}
 	}
+	
+	@Override
+	public void p2cMouseClicked() {
+		if(getWire() == null){
+			if(CSynthesizer.getInstance().getCurrentWire() != null){
+				if(CSynthesizer.getInstance().getCurrentWire().getOutput() != null){
+					p2cConnect();
+				}
+			}else{
+				p2cConnect();
+			}
+		} else {
+			if(CSynthesizer.getInstance().getCurrentWire() == null){
+				p2cDisconnect();
+			}
+		}
+	}
+
 
 }

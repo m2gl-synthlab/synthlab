@@ -19,4 +19,6 @@ public interface ICInputPort extends IInputPort {
 	public void p2cDisconnect();
 
 	public void p2cCanConnect();
+
+	public void p2cMouseClicked();
 }
