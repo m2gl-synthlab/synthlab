@@ -82,11 +82,11 @@ public class PModuleEG extends APModule implements IPModuleEG {
 		outputPort = (POutputPort) ((ICOutputPort) ctrl.getOutput()).getPresentation();
 		panelOutput.add(outputPort);
 		
-		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
+		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.setAutoscrolls(true);
-		this.getContentPane().add(panelRotary, 0);
-		this.getContentPane().add(panelInput, 1);
-		this.getContentPane().add(panelOutput, 2);
+		this.add(panelRotary, 0);
+		this.add(panelInput, 1);
+		this.add(panelOutput, 2);
 		
 		Dimension size = new Dimension(150, 450);
 		this.setPreferredSize(size);

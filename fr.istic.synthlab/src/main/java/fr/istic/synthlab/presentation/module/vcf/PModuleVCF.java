@@ -87,11 +87,11 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 				.getPresentation();
 		panelOutput.add(output);
 
-		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
+		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.setAutoscrolls(true);
-		this.getContentPane().add(panelParams, 0);
-		this.getContentPane().add(panelInput, 1);
-		this.getContentPane().add(panelOutput, 2);
+		this.add(panelParams, 0);
+		this.add(panelInput, 1);
+		this.add(panelOutput, 2);
 
 		Dimension size = new Dimension(350, 350);
 		this.setPreferredSize(size);

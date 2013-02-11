@@ -67,11 +67,11 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		inputPort = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
 		panelInput.add(inputPort);
 
-		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
 		this.setAutoscrolls(true);
-		this.getContentPane().add(panelGain, 0);
-		this.getContentPane().add(panelInput, 1);
-		this.getContentPane().add(panelMute, 2);
+		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		this.add(panelGain,0);
+		this.add(panelInput,1);
+		this.add(panelMute,2);
 
 		Dimension size = new Dimension(150, 270);
 		this.setPreferredSize(size);

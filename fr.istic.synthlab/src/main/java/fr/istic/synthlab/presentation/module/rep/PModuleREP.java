@@ -71,10 +71,10 @@ public class PModuleREP extends APModule implements IPModuleREP {
 		out3 = (POutputPort) ((ICOutputPort) ctrl.getOutput3()).getPresentation();
 		panelOutput.add(out3);
 		
-		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
+		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.setAutoscrolls(true);
-		this.getContentPane().add(panelInput, 0);
-		this.getContentPane().add(panelOutput, 1);
+		this.add(panelInput, 0);
+		this.add(panelOutput, 1);
 		
 		Dimension size = new Dimension(300, 250);
 		this.setPreferredSize(size);

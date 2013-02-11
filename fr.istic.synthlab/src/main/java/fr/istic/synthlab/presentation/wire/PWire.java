@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JDesktopPane;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
@@ -60,9 +61,9 @@ public class PWire extends JPanel implements IPWire {
 			public void mouseClicked(MouseEvent e) {
 				e.translatePoint(getLocation().x, getLocation().y);
 
-				((JDesktopPane) synth.getPresentation()).setLayer(PWire.this, 0, -1);
+				((JLayeredPane) synth.getPresentation()).setLayer(PWire.this, 0, -1);
 				((PSynthesizer) synth.getPresentation()).dispatchEvent(e);
-				((JDesktopPane) synth.getPresentation()).setLayer(PWire.this, 0, 0);
+				((JLayeredPane) synth.getPresentation()).setLayer(PWire.this, 0, 0);
 			}
 		});
 
@@ -152,7 +153,7 @@ public class PWire extends JPanel implements IPWire {
 		setBounds(x, y , width, height);
 
 		IPSynthesizer presSynth = synth.getPresentation();
-		((JDesktopPane) presSynth).setLayer(this, 0, 0);
+		((JLayeredPane) presSynth).setLayer(this, 0, 0);
 		
 		repaint();
 		validate();
@@ -221,9 +222,9 @@ public class PWire extends JPanel implements IPWire {
 	public void setOnTop(boolean isOnTop){
 		IPSynthesizer presSynth = synth.getPresentation();
 		if(isOnTop){
-			((JDesktopPane) presSynth).setLayer(this, 0, 0);
+			((JLayeredPane) presSynth).setLayer(this, 0, 0);
 		} else {
-			((JDesktopPane) presSynth).setLayer(this, 0, -1);
+			((JLayeredPane) presSynth).setLayer(this, 0, -1);
 		}
 		
 		repaint();
