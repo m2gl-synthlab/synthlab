@@ -38,8 +38,8 @@ public class SynthApp implements ISynthApp {
 		synth.add(out);
 		
 		// Add a VCO module
-		IModuleVCO vco = PACFactory.getFactory().newVCO(synth);
-		synth.add(vco);
+//		IModuleVCO vco = PACFactory.getFactory().newVCO(synth);
+//		synth.add(vco);
 //		
 //		// Add a VCF module
 //		IModule vcf = PACFactory.getFactory().newVCF(synth);

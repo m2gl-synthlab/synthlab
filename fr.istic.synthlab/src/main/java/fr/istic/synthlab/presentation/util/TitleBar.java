@@ -39,7 +39,7 @@ public class TitleBar extends WebPanel {
 		titleLbl = new JLabel("   " + module.getName());
 		this.add(titleLbl, BorderLayout.CENTER);
 
-		JLabel closeLbl = new JLabel("<html><b>X</b>&nbsp;&nbsp;</html>");
+		closeLbl = new JLabel("<html><b>X</b>&nbsp;&nbsp;</html>");
 		this.add(closeLbl, BorderLayout.EAST);
 	}
 
