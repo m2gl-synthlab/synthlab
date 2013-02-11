@@ -1,6 +1,10 @@
 package fr.istic.synthlab.presentation.port;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
@@ -17,13 +21,15 @@ import fr.istic.synthlab.presentation.util.SimpleMouseListener;
 public class PInputPort extends JPanel implements IPInputPort {
 
 	private static final long serialVersionUID = -3189854166979295463L;
+	private static final int CLICK_STATE_DEFAULT = 0;
+	private static final int CLICK_STATE_ALLOWED = 1;
+	private static final int CLICK_STATE_NOT_ALLOWED = 2;
 
 	public static int width = 80;
 	public static int height = 80;
 	private ICInputPort ctrl;
-	private JLabel image;
-	
-	
+
+	private int clickState; 
 
 	public PInputPort(ICInputPort control) {
 		ctrl = control;
@@ -35,11 +41,6 @@ public class PInputPort extends JPanel implements IPInputPort {
 	private void configView() {
 		this.setOpaque(false);
 		this.setSize(width, height);
-		JPanel pane = new JPanel();
-		image = new JLabel(new ImageIcon("res/input.png"));
-		pane.setLayout(new BorderLayout());
-		pane.add(image, BorderLayout.CENTER);
-		add(pane);
 		this.setPreferredSize(this.getSize());
 		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
 	}
@@ -48,14 +49,26 @@ public class PInputPort extends JPanel implements IPInputPort {
 		this.addMouseListener(new SimpleMouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("PInputPort clicked");
-				if(ctrl.getWire() != null){
-					System.out.println("ctrl.getWire() != null");
-					ctrl.p2cDisconnect();
-				} else {
-					System.out.println("ctrl.getWire() = null");
-					ctrl.p2cConnect();
+				if (Math.pow((e.getX() - 40), 2) + Math.pow((e.getY() - 40), 2) < Math
+						.pow(15, 2)) {
+					if (ctrl.getWire() != null) {
+						ctrl.p2cDisconnect();
+					} else {
+						ctrl.p2cConnect();
+					}
 				}
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				clickState=CLICK_STATE_DEFAULT;
+				repaint();
+				validate();
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				ctrl.p2cCanConnect();
 			}
 		});
 		
@@ -78,7 +91,39 @@ public class PInputPort extends JPanel implements IPInputPort {
 	public void c2pSetName() {
 		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
 	}
+	
+	@Override
+	public void paint(Graphics g) {
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setStroke(new BasicStroke(2));
+		g2d.drawOval(40 - 15, 40 - 15, 30, 30);
+		
+		if(clickState == CLICK_STATE_ALLOWED){
+			g2d.setColor(Color.GREEN);
+		} else if(clickState == CLICK_STATE_NOT_ALLOWED){
+			g2d.setColor(Color.RED);
+		} else {
+			g2d.setColor(new Color(0, 184, 73));
+		}
+		
+		g2d.fillOval(40 - 14, 40 - 14, 28, 28);
 
+		super.paint(g2d);
+	}
+
+	@Override
+	public void c2pClickAllowed() {
+		clickState = CLICK_STATE_ALLOWED;
+		repaint();
+		validate();
+	}
+
+	@Override
+	public void c2pClickNotAllowed() {
+		clickState = CLICK_STATE_NOT_ALLOWED;
+		repaint();
+		validate();
+	}
 
 
 }

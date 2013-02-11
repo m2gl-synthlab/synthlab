@@ -30,7 +30,6 @@ public class POutputPort extends JPanel implements IPOutputPort {
 	private int clickState; 
 	public POutputPort(ICOutputPort control) {
 		ctrl = control;
-
 		configView();
 		defineCallbacks();
 	}
@@ -38,7 +37,6 @@ public class POutputPort extends JPanel implements IPOutputPort {
 	private void configView() {
 		this.setOpaque(false);
 		this.setSize(width, height);
-
 		this.setPreferredSize(this.getSize());
 		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
 	}

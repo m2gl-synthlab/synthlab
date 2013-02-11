@@ -9,6 +9,7 @@ import fr.istic.synthlab.abstraction.port.InputPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.port.IPInputPort;
 
@@ -60,6 +61,23 @@ public class CInputPort extends InputPort implements ICInputPort {
 	public void p2cDisconnect() {
 		if (getWire() != null) {
 			getWire().disconnect();
+		}
+	}
+	
+	@Override
+	public void p2cCanConnect() {
+		if(getWire() == null){
+			if(CSynthesizer.getInstance().getCurrentWire() != null){
+				if(CSynthesizer.getInstance().getCurrentWire().getOutput() != null){
+					pres.c2pClickAllowed();
+				} else {
+					pres.c2pClickNotAllowed();
+				}
+			}else{
+				pres.c2pClickAllowed();
+			}
+		} else {
+			pres.c2pClickAllowed();
 		}
 	}
 
