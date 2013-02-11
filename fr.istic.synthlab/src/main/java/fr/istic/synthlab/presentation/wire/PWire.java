@@ -6,8 +6,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
@@ -21,7 +19,6 @@ import fr.istic.synthlab.presentation.port.PInputPort;
 import fr.istic.synthlab.presentation.port.POutputPort;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 import fr.istic.synthlab.presentation.synthesizer.PSynthesizer;
-import fr.istic.synthlab.presentation.util.SimpleMouseListener;
 
 /**
  * Presentation for a Wire
@@ -55,27 +52,7 @@ public class PWire extends JPanel implements IPWire {
 	}
 
 	private void defineCallbacks() {
-		this.addMouseListener(new SimpleMouseListener() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				e.translatePoint(getLocation().x, getLocation().y);
-
-				((JLayeredPane) synth.getPresentation()).setLayer(PWire.this, 0, -1);
-				((PSynthesizer) synth.getPresentation()).dispatchEvent(e);
-				((JLayeredPane) synth.getPresentation()).setLayer(PWire.this, 0, 0);
-			}
-		});
-
-		this.addMouseMotionListener(new MouseMotionListener() {
-			@Override
-			public void mouseMoved(MouseEvent e) {
-				((PSynthesizer) synth.getPresentation()).dispatchEvent(e);
-			}
-
-			@Override
-			public void mouseDragged(MouseEvent e) {
-			}
-		});
+		// DO NOT PUT ANYTHING HERE !!!
 	}
 
 	@Override

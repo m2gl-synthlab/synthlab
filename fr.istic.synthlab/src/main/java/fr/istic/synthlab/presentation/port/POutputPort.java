@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 
 import fr.istic.synthlab.controller.module.ICModule;
 import fr.istic.synthlab.controller.port.ICOutputPort;
-import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.util.SimpleMouseListener;
 
@@ -32,7 +31,6 @@ public class POutputPort extends JPanel implements IPOutputPort {
 	private ICOutputPort ctrl;
 
 	private int clickState; 
-	private JLabel image;
 
 	public POutputPort(ICOutputPort control) {
 		ctrl = control;
@@ -80,6 +78,7 @@ public class POutputPort extends JPanel implements IPOutputPort {
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
+				// Sert pour le déplacement du cable au dessus des elements
 				((APModule) ((ICModule) getControl().getModule())
 						.getPresentation()).dispatchEvent(e);
 			}

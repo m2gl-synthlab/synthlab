@@ -98,8 +98,7 @@ public abstract class APModule extends WebPanel implements IPModule {
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				((PSynthesizer) ((ICSynthesizer) getControl().getSynthesizer())
-						.getPresentation()).dispatchEvent(e);
+				((PSynthesizer) ((ICSynthesizer) getControl().getSynthesizer()).getPresentation()).dispatchEvent(e);
 			}
 
 			@Override

@@ -1,7 +1,6 @@
 package fr.istic.synthlab.presentation.module.eg;
 
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
@@ -35,9 +34,6 @@ public class PModuleEG extends APModule implements IPModuleEG {
 	private PInputPort gatePort;
 	private POutputPort outputPort;
 
-	private int width;
-	private int height;
-	
 	public PModuleEG(ICModuleEG control) {
 		super(control);
 		ctrl = control;
@@ -45,21 +41,20 @@ public class PModuleEG extends APModule implements IPModuleEG {
 		configView();
 		registerCallbacks();
 	}
-	// FIXME : 2 des potars ne sont pas affichés !!
+
 	private void configView() {
 		JPanel panelRotary = new JPanel();
-		JPanel panelInput = new JPanel();
+		JPanel panelPort = new JPanel();
 		JPanel panelOutput = new JPanel();
 
-
 		panelRotary.setOpaque(false);
-		panelInput.setOpaque(false);
+		panelPort.setOpaque(false);
 		panelOutput.setOpaque(false);
 	
-		attackModel = new ExponentialRangeModel("attack", 100, 0, 5, ctrl.getAttack());
-		decayModel = new ExponentialRangeModel("decay", 100, 0, 5, ctrl.getDecay());
-		sustainModel = new ExponentialRangeModel("sustain", 100, 0, 5, ctrl.getSustain());
-		releaseModel = new ExponentialRangeModel("release", 100, 0, 5, ctrl.getRelease());
+		attackModel = new ExponentialRangeModel("attack", 500, 0, 5, ctrl.getAttack());
+		decayModel = new ExponentialRangeModel("decay", 500, 0, 5, ctrl.getDecay());
+		sustainModel = new ExponentialRangeModel("sustain", 500, 0, 5, ctrl.getSustain());
+		releaseModel = new ExponentialRangeModel("release", 500, 0, 5, ctrl.getRelease());
 		
 		RotaryTextController attackRotary = new RotaryTextController(attackModel, 2);
 		RotaryTextController decayRotary = new RotaryTextController(decayModel, 2);
@@ -79,24 +74,22 @@ public class PModuleEG extends APModule implements IPModuleEG {
 		panelRotary.setPreferredSize(new Dimension(150, 200));
 		
 		gatePort = (PInputPort) ((ICInputPort) ctrl.getGateInput()).getPresentation();
-		panelInput.add(gatePort);
-		
 		outputPort = (POutputPort) ((ICOutputPort) ctrl.getOutput()).getPresentation();
-		panelOutput.add(outputPort);
+		panelPort.add(gatePort);
+		panelPort.add(outputPort);
 		
 		this.setAutoscrolls(true);
 		
 		super.setWidth(350);
-		super.setHeigth(350);
+		super.setHeigth(230);
 		
 		Dimension size = new Dimension(super.getWidth(), super.getHeigth());
 		this.setSize(size);
 		this.setPreferredSize(size);
 		
 		this.addTitleBar();
-		this.addPanel(panelRotary, 350, 100);
-		this.addPanel(panelInput, 350, 100);
-		this.addPanel(panelOutput, 350, 100);
+		this.addPanel(panelRotary, 350, 110);
+		this.addPanel(panelPort, 350, 100);
 		
 	}
 	

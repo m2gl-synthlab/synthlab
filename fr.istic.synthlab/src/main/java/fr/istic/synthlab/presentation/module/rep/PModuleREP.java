@@ -1,7 +1,6 @@
 package fr.istic.synthlab.presentation.module.rep;
 
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 
 import javax.swing.JPanel;
 
@@ -25,9 +24,6 @@ public class PModuleREP extends APModule implements IPModuleREP {
 	private POutputPort out2;
 	private POutputPort out3;
 	
-	private int width;
-	private int height;
-
 	public PModuleREP(ICModuleREP control) {
 		// TODO Auto-generated constructor stub
 		super(control);
@@ -63,7 +59,7 @@ public class PModuleREP extends APModule implements IPModuleREP {
 		
 		this.setAutoscrolls(true);
 		super.setWidth(350);
-		super.setHeigth(350);
+		super.setHeigth(230);
 		
 		Dimension size = new Dimension(super.getWidth(), super.getHeigth());
 		this.setSize(size);

@@ -1,14 +1,12 @@
 package fr.istic.synthlab.presentation.synthesizer;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JInternalFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
@@ -18,7 +16,6 @@ import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.module.IPModule;
-import fr.istic.synthlab.presentation.util.SimpleMouseListener;
 import fr.istic.synthlab.presentation.wire.IPWire;
 import fr.istic.synthlab.presentation.wire.PWire;
 
@@ -44,35 +41,35 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 
 	private void defineCallbacks() {
 
-		addMouseListener(new SimpleMouseListener() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int x = e.getPoint().x;
-				int y = e.getPoint().y;
-				e.translatePoint(
-						-(PSynthesizer.this.getComponentAt(x, y).getLocation().x),
-						-(PSynthesizer.this.getComponentAt(x, y).getLocation().y));
-
-				Component clickedComponent = getComponentAt(x, y);
-				if (clickedComponent != null && JInternalFrame.class.isInstance(clickedComponent)) {
-					JPanel panelPorts = (JPanel) ((JPanel) clickedComponent).getComponentAt(e.getPoint());
-					e.translatePoint(-panelPorts.getLocation().x,-panelPorts.getLocation().y);
-
-					Component panelPort = panelPorts.getComponentAt(e.getPoint());
-					while (panelPort != null) {
-						e.translatePoint(-panelPort.getLocation().x,-panelPort.getLocation().y);
-						if ((panelPort.getComponentAt(e.getPoint()) != null)
-								&& (panelPort.getComponentAt(e.getPoint()) instanceof JPanel)) {
-							panelPort = panelPort.getComponentAt(e.getPoint());
-						} else {
-							break;
-						}
-					}
-
-					panelPort.dispatchEvent(e);
-				}
-			}
-		});
+//		addMouseListener(new SimpleMouseListener() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				int x = e.getPoint().x;
+//				int y = e.getPoint().y;
+//				e.translatePoint(
+//						-(PSynthesizer.this.getComponentAt(x, y).getLocation().x),
+//						-(PSynthesizer.this.getComponentAt(x, y).getLocation().y));
+//
+//				Component clickedComponent = getComponentAt(x, y);
+//				if (clickedComponent != null && JInternalFrame.class.isInstance(clickedComponent)) {
+//					JPanel panelPorts = (JPanel) ((JPanel) clickedComponent).getComponentAt(e.getPoint());
+//					e.translatePoint(-panelPorts.getLocation().x,-panelPorts.getLocation().y);
+//
+//					Component panelPort = panelPorts.getComponentAt(e.getPoint());
+//					while (panelPort != null) {
+//						e.translatePoint(-panelPort.getLocation().x,-panelPort.getLocation().y);
+//						if ((panelPort.getComponentAt(e.getPoint()) != null)
+//								&& (panelPort.getComponentAt(e.getPoint()) instanceof JPanel)) {
+//							panelPort = panelPort.getComponentAt(e.getPoint());
+//						} else {
+//							break;
+//						}
+//					}
+//
+//					panelPort.dispatchEvent(e);
+//				}
+//			}
+//		});
 
 		addMouseMotionListener(new MouseMotionListener() {
 
@@ -181,14 +178,14 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 		repaint();
 	}
 
-	public void clickAt(int x, int y, MouseEvent e) {
-		e.translatePoint(-(this.getComponentAt(x, y).getLocation().x), -(this.getComponentAt(x, y).getLocation().y));
-		JPanel panelPorts = (JPanel) ((JInternalFrame) getComponentAt(x, y)).getContentPane().getComponentAt(e.getPoint());
-		e.translatePoint(-panelPorts.getLocation().x,
-				-panelPorts.getLocation().y);
-		JPanel panelPort = (JPanel) panelPorts.getComponentAt(e.getPoint());
-		e.translatePoint(-panelPort.getLocation().x, -panelPort.getLocation().y);
-		panelPort.dispatchEvent(e);
-	}
+//	public void clickAt(int x, int y, MouseEvent e) {
+//		e.translatePoint(-(this.getComponentAt(x, y).getLocation().x), -(this.getComponentAt(x, y).getLocation().y));
+//		JPanel panelPorts = (JPanel) ((JInternalFrame) getComponentAt(x, y)).getContentPane().getComponentAt(e.getPoint());
+//		e.translatePoint(-panelPorts.getLocation().x,
+//				-panelPorts.getLocation().y);
+//		JPanel panelPort = (JPanel) panelPorts.getComponentAt(e.getPoint());
+//		e.translatePoint(-panelPort.getLocation().x, -panelPort.getLocation().y);
+//		panelPort.dispatchEvent(e);
+//	}
 
 }

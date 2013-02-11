@@ -110,6 +110,7 @@ public class ModuleVCA extends AModule implements IModuleVCA {
 	@Override
 	public void setBaseAmplitudeValue(double value) {
 		this.baseAmplitude = value;
+		System.out.println(value);
 		this.baseAmplitudeModulator.inputAm.set(value/60);
 	}
 

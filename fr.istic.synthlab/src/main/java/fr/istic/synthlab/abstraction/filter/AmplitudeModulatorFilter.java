@@ -28,5 +28,4 @@ public class AmplitudeModulatorFilter extends UnitFilter {
 			outputs[i] = in * Convert.dB2V(mod) ; 
 		}
 	}
-	
 }
