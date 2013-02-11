@@ -29,52 +29,15 @@ public class TitleBar extends WebPanel {
 		this.setOpaque(false);
 		this.setLayout(new BorderLayout());
 		
-		this.setMargin(0);
+		this.setBorder(new MatteBorder(0, 0, 1, 0, Color.BLACK));
 		
-		MatteBorder border = new MatteBorder(0, 0, 1, 0, Color.BLACK);
-		this.setBorder(border);
+		JLabel titleLbl = new JLabel("   "+mod.getName());
+		this.add(titleLbl, BorderLayout.CENTER);
 		
-		JLabel title = new JLabel("   "+mod.getName());
-		this.add(title, BorderLayout.CENTER);
+		JLabel closeLbl = new JLabel("<html><b>X</b>&nbsp;&nbsp;</html>");
+		this.add(closeLbl, BorderLayout.EAST);
 		
-		BufferedImage img = null;
-		try {
-			img = ImageIO.read(new File("res/close.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		ImageIcon im = new ImageIcon(img.getScaledInstance(20, 20, ALLBITS));
-		
-		JLabel lab = new JLabel(im);
-		this.add(lab, BorderLayout.EAST);
-		
-		lab.addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
+		closeLbl.addMouseListener(new SimpleMouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				module.p2cClosing();
