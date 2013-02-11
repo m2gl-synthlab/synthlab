@@ -48,8 +48,6 @@ public class PModuleEG extends APModule implements IPModuleEG {
 	}
 	
 	private void configView() {
-
-		this.setBackground(Color.GRAY);
 		JPanel panelRotary = new JPanel();
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();

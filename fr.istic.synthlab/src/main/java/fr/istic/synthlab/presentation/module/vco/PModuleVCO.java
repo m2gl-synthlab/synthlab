@@ -60,11 +60,13 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 	}
 
 	private void configView() {
-		this.setBackground(Color.GRAY);
 		JPanel panelParams = new JPanel();
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();
-
+		panelParams.setOpaque(false);
+		panelInput.setOpaque(false);
+		panelOutput.setOpaque(false);
+		
 		octaveModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_OCTAVE_NAME,
 				14, 0, 14, ctrl.getOctave());
 		RotaryTextController octaveRotary = new RotaryTextController(octaveModel, 4);

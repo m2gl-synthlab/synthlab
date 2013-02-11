@@ -45,9 +45,6 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 	}
 
 	private void configView() {
-		
-		this.setBackground(Color.GRAY);
-		
 		JPanel panelScope= new JPanel();
 		JPanel panelPort = new JPanel();
 

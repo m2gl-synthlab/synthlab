@@ -54,8 +54,6 @@ public class PModuleREP extends APModule implements IPModuleREP {
 	}
 	
 	private void configView() {
-
-		this.setBackground(Color.GRAY);
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();
 		

@@ -7,10 +7,12 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.List;
 
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
+
+import com.alee.laf.panel.WebPanel;
 
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.controller.module.ICModule;
@@ -18,11 +20,12 @@ import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 import fr.istic.synthlab.presentation.synthesizer.PSynthesizer;
+import fr.istic.synthlab.presentation.util.TitleBar;
 
 /**
  * Abstract class for a module presentation
  */
-public abstract class APModule extends JPanel implements IPModule {
+public abstract class APModule extends WebPanel implements IPModule {
 
 	private static final long serialVersionUID = -7353924524014867459L;
 
@@ -35,11 +38,14 @@ public abstract class APModule extends JPanel implements IPModule {
 
 	public APModule(ICModule control) {
 		super();
-		// super(control.getName(), false, true, false, false);
 		this.ctrl = control;
+		this.add(new TitleBar(ctrl));
 		
 		this.setFocusable(true);
 		this.setVisible(true);
+
+		this.setUndecorated(false);
+		this.setRound(20);
 		
 		IPSynthesizer presSynth = ((ICSynthesizer)ctrl.getSynthesizer()).getPresentation();
 		((JLayeredPane) presSynth).setLayer(this, 0, -1);

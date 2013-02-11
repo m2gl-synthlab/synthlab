@@ -47,13 +47,13 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 	}
 
 	private void configView() {
-		
-		this.setBackground(Color.GRAY);
-		
 		JPanel panelGain = new JPanel();
+		panelGain.setOpaque(false);
 		JPanel panelInput = new JPanel();
+		panelInput.setOpaque(false);
 		JPanel panelMute = new JPanel();
-
+		panelMute.setOpaque(false);
+		
 		model = new DoubleBoundedRangeModel("model", 4200, -60, 12, ctrl.getAttenuation());
 		RotaryTextController gainRotary = new RotaryTextController(model, 1);
 		gainRotary.setBorder(new TitledBorder("Gain"));

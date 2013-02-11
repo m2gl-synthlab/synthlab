@@ -56,7 +56,6 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 	}
 
 	private void configView() {
-		this.setBackground(Color.GRAY);
 		JPanel panelParams = new JPanel();
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();

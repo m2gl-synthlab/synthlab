@@ -57,7 +57,6 @@ public class PModuleVCA extends APModule implements IPModuleVCA {
 	}
 
 	private void configView() {
-		this.setBackground(Color.GRAY);
 		JPanel panelParams = new JPanel();
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();
