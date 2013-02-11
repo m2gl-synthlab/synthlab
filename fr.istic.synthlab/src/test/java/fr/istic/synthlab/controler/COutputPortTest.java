@@ -1,8 +1,8 @@
 package fr.istic.synthlab.controler;
 
-import com.jsyn.ports.UnitOutputPort;
-
 import junit.framework.TestCase;
+
+import com.jsyn.ports.UnitOutputPort;
 
 import fr.istic.synthlab.controller.port.COutputPort;
 import fr.istic.synthlab.controller.port.ICOutputPort;

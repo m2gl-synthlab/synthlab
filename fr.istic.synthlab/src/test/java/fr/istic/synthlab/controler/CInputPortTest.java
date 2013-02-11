@@ -1,12 +1,13 @@
 package fr.istic.synthlab.controler;
 
+import junit.framework.TestCase;
+
 import com.jsyn.ports.UnitInputPort;
 
 import fr.istic.synthlab.controller.port.CInputPort;
 import fr.istic.synthlab.controller.port.ICInputPort;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
-import junit.framework.TestCase;
 
 public class CInputPortTest extends TestCase {
 

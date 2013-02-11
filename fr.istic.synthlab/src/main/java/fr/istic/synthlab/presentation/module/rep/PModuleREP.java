@@ -1,10 +1,8 @@
 package fr.istic.synthlab.presentation.module.rep;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import fr.istic.synthlab.controller.module.rep.ICModuleREP;
@@ -57,6 +55,9 @@ public class PModuleREP extends APModule implements IPModuleREP {
 	private void configView() {
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();
+		
+		panelInput.setOpaque(false);
+		panelOutput.setOpaque(false);
 		
 		inputPort = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
 		panelInput.add(inputPort);

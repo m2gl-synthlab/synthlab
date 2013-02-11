@@ -1,7 +1,7 @@
 package fr.istic.synthlab.abstraction;
 
-import fr.istic.synthlab.abstraction.util.Convert;
 import junit.framework.TestCase;
+import fr.istic.synthlab.abstraction.util.Convert;
 
 public class ConvertTest extends TestCase {
 

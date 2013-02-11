@@ -1,10 +1,8 @@
 package fr.istic.synthlab.presentation.module.audioscope;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import com.jsyn.scope.AudioScopeModel;
@@ -48,6 +46,9 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 	private void configView() {
 		JPanel panelScope= new JPanel();
 		JPanel panelPort = new JPanel();
+		
+		panelScope.setOpaque(false);
+		panelPort.setOpaque(false);
 
 		AudioScopeView scope = new AudioScopeView();
 		model = ctrl.getModel();

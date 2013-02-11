@@ -1,12 +1,10 @@
 package fr.istic.synthlab.presentation.module.vcf;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
@@ -61,6 +59,11 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();
 
+		panelParams.setOpaque(false);
+		panelInput.setOpaque(false);
+		panelOutput.setOpaque(false);
+		
+		
 		cutFrequencyModel = new DoubleBoundedRangeModel(
 				ModuleVCF.PARAM_CUT_FREQUENCY_NAME, 100, 0, 22000,
 				ctrl.getCutFrequency());

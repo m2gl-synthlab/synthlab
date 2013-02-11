@@ -3,8 +3,6 @@ package fr.istic.synthlab.abstraction.module.vca;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jsyn.ports.UnitInputPort;
-import com.jsyn.unitgen.UnitFilter;
 import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.filter.AmplitudeModulatorFilter;
@@ -98,9 +96,14 @@ public class ModuleVCA extends AModule implements IModuleVCA {
 	@Override
 	public List<IWire> getWires() {
 		List<IWire> wires = new ArrayList<IWire>();
-		wires.add(input.getWire());
-		wires.add(inputAm.getWire());
-		wires.add(output.getWire());
+		if(input.isInUse())
+			wires.add(input.getWire());
+
+		if(inputAm.isInUse())
+			wires.add(inputAm.getWire());
+
+		if(output.isInUse())
+			wires.add(output.getWire());
 		return wires;
 	}
 

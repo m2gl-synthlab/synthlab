@@ -1,10 +1,8 @@
 package fr.istic.synthlab.presentation.module.eg;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
@@ -53,8 +51,13 @@ public class PModuleEG extends APModule implements IPModuleEG {
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();
 
-		attackModel = new ExponentialRangeModel("attack", 100, 0, 5, ctrl.getAttack());
-		decayModel = new ExponentialRangeModel("decay", 100, 0, 5, ctrl.getDecay());
+
+		panelRotary.setOpaque(false);
+		panelInput.setOpaque(false);
+		panelOutput.setOpaque(false);
+	
+		attackModel = new ExponentialRangeModel("attack", 100, 0, 10, ctrl.getAttack());
+		decayModel = new ExponentialRangeModel("decay", 100, 0, 10, ctrl.getDecay());
 		sustainModel = new ExponentialRangeModel("sustain", 100, 0, 5, ctrl.getSustain());
 		releaseModel = new ExponentialRangeModel("release", 100, 0, 5, ctrl.getRelease());
 		
