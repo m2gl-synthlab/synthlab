@@ -39,7 +39,6 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 	private PInputPort fm;
 	private POutputPort outputSquare;
 	private POutputPort outputTriangle;
-	private POutputPort outputSine;
 	private POutputPort outputSawtooth;
 	
 	JLabel frequencyLabel;
@@ -88,9 +87,6 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 
 		outputTriangle = (POutputPort) ((ICOutputPort) ctrl.getOutputTriangle()).getPresentation();
 		panelOutput.add(outputTriangle);
-
-		outputSine = (POutputPort) ((ICOutputPort) ctrl.getOutputSine()).getPresentation();
-		panelOutput.add(outputSine);
 
 		outputSawtooth = (POutputPort) ((ICOutputPort) ctrl.getOutputSawtooth()).getPresentation();
 		panelOutput.add(outputSawtooth);

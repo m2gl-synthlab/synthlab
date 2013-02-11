@@ -3,7 +3,6 @@ package fr.istic.synthlab.abstraction.module.vco;
 import fr.istic.synthlab.abstraction.module.IModule;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
-import fr.istic.synthlab.command.ICommand;
 
 public interface IModuleVCO extends IModule {
 
@@ -64,24 +63,10 @@ public interface IModuleVCO extends IModule {
 	public IOutputPort getOutputTriangle();
 
 	/**
-	 * Return the Sine output port of the VCO module
-	 * 
-	 * @return sine output
-	 */
-	public IOutputPort getOutputSine();
-
-	/**
 	 * Return the Sawtooth output port of the VCO module
 	 * 
 	 * @return sawtooth output
 	 */
 	public IOutputPort getOutputSawtooth();
 
-	/**
-	 * Set the display frequency command
-	 * 
-	 * @param cmd
-	 *            Display Frequency command
-	 */
-	public void setDisplayFrequencyCmd(ICommand cmd);
 }

@@ -1,12 +1,13 @@
 package fr.istic.synthlab.abstraction.port;
 
 import fr.istic.synthlab.abstraction.module.IModule;
+import fr.istic.synthlab.abstraction.observer.Observable;
 import fr.istic.synthlab.abstraction.wire.IWire;
 
 /**
  * Interface for a module port
  */
-public interface IPort {
+public interface IPort extends Observable{
 
 	/**
 	 * Set the port's name
@@ -33,6 +34,13 @@ public interface IPort {
 	 * @return the connected wire
 	 */
 	public IWire getWire();
+	
+	/**
+	 * Tell if the port is in use
+	 * 
+	 * @return True if a wire is connected
+	 */
+	public boolean isInUse();
 
 	/**
 	 * Return the module witch contains the current port
