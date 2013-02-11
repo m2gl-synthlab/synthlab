@@ -4,6 +4,7 @@ import fr.istic.synthlab.abstraction.exception.BadConnectionException;
 import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
+import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
 
 /**
  * Class that represent a wire between two port
@@ -24,9 +25,14 @@ public class Wire implements IWire {
 	}
 
 	@Override
+	public boolean isConnected() {
+		return (this.output != null) && (this.input != null);
+	}
+
+	@Override
 	public void connect(IInputPort port) throws PortAlreadyInUseException, BadConnectionException {
 		if (input != null) {
-			throw new BadConnectionException("The wire is already connected to an output");
+			throw new BadConnectionException("The wire is already connected to an input");
 		} else {
 			if(port.getWire() != null){
 				throw new PortAlreadyInUseException("The port is already in use");
@@ -56,7 +62,6 @@ public class Wire implements IWire {
 	 */
 	private void connect() {
 		if (output != null && input != null) {
-			System.out.println(getClass().getSimpleName() + " connect()");
 			this.output.getJSyn().connect(input.getJSyn());
 			this.output.setWire(this);
 			this.input.setWire(this);
@@ -65,17 +70,12 @@ public class Wire implements IWire {
 
 	@Override
 	public void disconnect() {
-		if (output != null && input != null) {
+		if (isConnected()) {
 			this.output.getJSyn().disconnect(this.input.getJSyn());
 			this.output.setWire(null);
 			this.input.setWire(null);
 		}
-		input.getModule().getSynthesizer().remove(this);
-	}
-
-	@Override
-	public boolean isConnected() {
-		return (this.output != null) && (this.input != null);
+		Synthesizer.getInstance().remove(this);
 	}
 
 }

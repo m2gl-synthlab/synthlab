@@ -105,7 +105,8 @@ public class PWire extends JPanel implements IPWire {
 	public void updateDisplay() {
 		
 		if (outputPort != null) {
-			posOutput = new Point(outputPort.getX(), outputPort.getY());
+			//TODO : delete +1
+			posOutput = new Point(outputPort.getX() + (POutputPort.width / 2)+1, outputPort.getY()+ (POutputPort.height / 2)+1);
 
 			Component c2 = outputPort;
 			while (!(c2.getParent() instanceof PSynthesizer)) {
@@ -116,7 +117,8 @@ public class PWire extends JPanel implements IPWire {
 		}
 
 		if (inputPort != null) {
-			posInput = new Point(inputPort.getX(), inputPort.getY());
+			//TODO : delete +1
+			posInput = new Point(inputPort.getX() + (PInputPort.width / 2)+1, inputPort.getY() + + (PInputPort.height / 2)+1);
 
 			Component c = inputPort;
 			while (!(c.getParent() instanceof PSynthesizer)) {
@@ -146,7 +148,8 @@ public class PWire extends JPanel implements IPWire {
 		}
 
 		setPreferredSize(new Dimension(width, height));
-		setBounds(x + (POutputPort.width / 2), y + (POutputPort.height / 2), width, height);
+//		setBounds(x + (POutputPort.width / 2), y + (POutputPort.height / 2), width, height);
+		setBounds(x, y , width, height);
 
 		IPSynthesizer presSynth = synth.getPresentation();
 		((JDesktopPane) presSynth).setLayer(this, 0, 0);
@@ -163,6 +166,7 @@ public class PWire extends JPanel implements IPWire {
 
 		if (posInput.x > posOutput.x) {
 			if (posInput.y > posOutput.y) {
+				
 				g2.drawLine(0, 0, width, height);
 			} else {
 				g2.drawLine(0, height, width, 0);
