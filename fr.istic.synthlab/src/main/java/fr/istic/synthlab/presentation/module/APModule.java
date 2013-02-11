@@ -55,7 +55,6 @@ public abstract class APModule extends WebPanel implements IPModule {
 	
 		x=0;
 		y=25;
-		
 
 		IPSynthesizer presSynth = ((ICSynthesizer) ctrl.getSynthesizer())
 				.getPresentation();
@@ -63,12 +62,7 @@ public abstract class APModule extends WebPanel implements IPModule {
 
 		this.addFocusListener(new FocusListener() {
 			@Override
-			public void focusLost(FocusEvent e) {
-				System.out.println("focus lost");
-//				IPSynthesizer presSynth = ((ICSynthesizer) ctrl
-//						.getSynthesizer()).getPresentation();
-//				((JLayeredPane) presSynth).setLayer(APModule.this, 0, -1);
-			}
+			public void focusLost(FocusEvent e) {}
 			@Override
 			public void focusGained(FocusEvent e) {
 				System.out.println("focus gained");
