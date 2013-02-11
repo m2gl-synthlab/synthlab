@@ -23,15 +23,12 @@ public class POutputPort extends JPanel implements IPOutputPort {
 	private static final int CLICK_STATE_ALLOWED = 1;
 	private static final int CLICK_STATE_NOT_ALLOWED = 2;
 	
-	
-	
 	public static int width = 80;
 	public static int height = 80;
 
 	private ICOutputPort ctrl;
 
 	private int clickState; 
-
 	public POutputPort(ICOutputPort control) {
 		ctrl = control;
 
@@ -107,11 +104,13 @@ public class POutputPort extends JPanel implements IPOutputPort {
 		
 		if(clickState == CLICK_STATE_ALLOWED){
 			g2d.setColor(Color.GREEN);
-			g2d.fillOval(40 - 14, 40 - 14, 28, 28);
 		} else if(clickState == CLICK_STATE_NOT_ALLOWED){
 			g2d.setColor(Color.RED);
-			g2d.fillOval(40 - 14, 40 - 14, 28, 28);
+		} else {
+			g2d.setColor(new Color(184, 0, 18));
 		}
+		
+		g2d.fillOval(40 - 14, 40 - 14, 28, 28);
 
 		super.paint(g2d);
 	}
