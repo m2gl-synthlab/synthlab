@@ -47,16 +47,16 @@ public class PModuleEG extends APModule implements IPModuleEG {
 		configView();
 		registerCallbacks();
 	}
-	
+	// FIXME : 2 des potars ne sont pas affichés !!
 	private void configView() {
 		JPanel panelRotary = new JPanel();
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();
 
-		attackModel = new ExponentialRangeModel("attack", 100, 0, 10, ctrl.getAttack());
-		decayModel = new ExponentialRangeModel("decay", 100, 0, 10, ctrl.getDecay());
+		attackModel = new ExponentialRangeModel("attack", 100, 0, 5, ctrl.getAttack());
+		decayModel = new ExponentialRangeModel("decay", 100, 0, 5, ctrl.getDecay());
 		sustainModel = new ExponentialRangeModel("sustain", 100, 0, 5, ctrl.getSustain());
-		releaseModel = new ExponentialRangeModel("release", 100, 0, 10, ctrl.getRelease());
+		releaseModel = new ExponentialRangeModel("release", 100, 0, 5, ctrl.getRelease());
 		
 		RotaryTextController attackRotary = new RotaryTextController(attackModel, 2);
 		RotaryTextController decayRotary = new RotaryTextController(decayModel, 2);

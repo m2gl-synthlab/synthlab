@@ -1,12 +1,10 @@
 package fr.istic.synthlab.presentation.module.vca;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
@@ -30,11 +28,6 @@ public class PModuleVCA extends APModule implements IPModuleVCA {
 	private static final long serialVersionUID = -8784306925093530549L;
 
 	private ICModuleVCA ctrl;
-
-	//
-	// private WebSlider gainSlider;
-	// private WebSwitch muteSwitch;
-	// private PInputPort inputPort;
 
 	private DoubleBoundedRangeModel attenuationModel;
 
@@ -62,9 +55,7 @@ public class PModuleVCA extends APModule implements IPModuleVCA {
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();
 
-		attenuationModel = new DoubleBoundedRangeModel(
-				ModuleVCA.PARAM_AMPLITUDE_NAME, 4200, -30, 12,
-				ctrl.getAttenuationValue());
+		attenuationModel = new DoubleBoundedRangeModel(ModuleVCA.PARAM_AMPLITUDE_NAME, 7200, -60, 12, ctrl.getBaseAmplitudeValue());
 		RotaryTextController attenuationRotary = new RotaryTextController(attenuationModel, 4);
 		attenuationRotary.setBorder(new TitledBorder(ModuleVCA.PARAM_AMPLITUDE_NAME));
 		panelParams.add(attenuationRotary);

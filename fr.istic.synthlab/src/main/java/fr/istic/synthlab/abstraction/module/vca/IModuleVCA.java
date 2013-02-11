@@ -15,15 +15,15 @@ public interface IModuleVCA extends IModule {
 	/**
 	 * Set the attenuation value (between -30 and 12)
 	 * 
-	 * @param Attenuatuin value
+	 * @param Base Amplitude value
 	 */
-	public void setAttenuationValue(double value);
+	public void setBaseAmplitudeValue(double value);
 
 	/**
 	 * Return the attenuation value (between -30 and 12)
 	 * 
-	 * @param Attenuation value
+	 * @param Base Amplitude value
 	 */
-	public double getAttenuationValue();
+	public double getBaseAmplitudeValue();
 
 }

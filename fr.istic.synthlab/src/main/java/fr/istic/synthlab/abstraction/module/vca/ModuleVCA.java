@@ -7,6 +7,7 @@ import com.jsyn.ports.UnitInputPort;
 import com.jsyn.unitgen.UnitFilter;
 import com.jsyn.unitgen.UnitGenerator;
 
+import fr.istic.synthlab.abstraction.filter.AmplitudeModulatorFilter;
 import fr.istic.synthlab.abstraction.module.AModule;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
@@ -23,64 +24,42 @@ public class ModuleVCA extends AModule implements IModuleVCA {
 	
 	public static final String PARAM_AMPLITUDE_NAME = "Gain";
 
+	// Amplitude de base
+	private double baseAmplitude;
+	
 	// Input & Output du module
 	private IInputPort input, inputAm;
 	private IOutputPort output;
 	
-	// Generateur Perso
-	private AttenuationFilter attenuator;
-
+	// Modulateur d'amplitude 
+	private AmplitudeModulatorFilter baseAmplitudeModulator;
+	private AmplitudeModulatorFilter inputAmplitudeModulator;
+	
 	public ModuleVCA(ISynthesizer synth) {
 		super(MODULE_NAME, synth);
 
-		this.attenuator = new AttenuationFilter();
-
-		// Ajout du port OUTPUT
-		this.output = PACFactory.getFactory().newOutputPort(this, OUTPUT_NAME,
-				attenuator.output);
-
-		// Ajout du port INPUT
-		this.input = PACFactory.getFactory().newInputPort(this, INPUT_NAME,
-				attenuator.input);
-
-		// Ajout du port AM
-		this.inputAm = PACFactory.getFactory().newInputPort(this,
-				INPUT_AM_NAME, attenuator.inputAm);
+		this.baseAmplitude = 0;
 		
-	}
-	
-	/**
-	 * Attenuation Filter
-	 */
-	private class AttenuationFilter extends UnitFilter {
-		double attenuationValue = 0; // Value between -30 and 12
+		// Modulateur de base
+		this.baseAmplitudeModulator = new AmplitudeModulatorFilter(this.baseAmplitude);
+		// Modulateur sur entrée Am
+		this.inputAmplitudeModulator = new AmplitudeModulatorFilter(0);
 		
-		UnitInputPort inputAm = new UnitInputPort(INPUT_AM_NAME);
 		
-		public AttenuationFilter() {
-			this.addPort(inputAm);
-		}
+		this.baseAmplitudeModulator.inputAm.set(getBaseAmplitudeValue());
+		this.input = PACFactory.getFactory().newInputPort(this, INPUT_NAME, baseAmplitudeModulator.input); // Ajout du port INPUT
 
-		@Override
-		public void generate(int start, int limit) {
-			// Get signal arrays from ports.
-			double[] inputs = input.getValues();
-			double[] inputsAm = inputAm.getValues();
-			double[] outputs = output.getValues();
-
-			for (int i = start; i < limit; i++) {
-				double freq = inputs[i];
-				double am = inputsAm[i];
-				outputs[i] = Math.pow(10, (attenuationValue / 20) + am) * freq;
-				// see : http://fr.wikipedia.org/wiki/Niveau_(audio)
-			}
-		}
+		this.inputAmplitudeModulator.input.connect(baseAmplitudeModulator.output);
+		this.inputAm = PACFactory.getFactory().newInputPort(this, INPUT_AM_NAME, inputAmplitudeModulator.inputAm); // Ajout du port AM
+		this.output = PACFactory.getFactory().newOutputPort(this, OUTPUT_NAME, inputAmplitudeModulator.output); // Ajout du port OUTPUT
+		
 	}
 
 	@Override
 	public List<UnitGenerator> getJSyn() {
 		List<UnitGenerator> generators = new ArrayList<UnitGenerator>();
-		generators.add(attenuator);
+		generators.add(baseAmplitudeModulator);
+		generators.add(inputAmplitudeModulator);
 		return generators;
 	}
 
@@ -91,13 +70,14 @@ public class ModuleVCA extends AModule implements IModuleVCA {
 
 	@Override
 	public void start() {
-		for (UnitGenerator gen : getJSyn())
-			getSynthesizer().getJSyn().add(gen);
+		this.baseAmplitudeModulator.start();
+		this.inputAmplitudeModulator.start();
 	}
 	
 	@Override
 	public void stop() {
-		this.attenuator.stop();
+		this.baseAmplitudeModulator.stop();
+		this.inputAmplitudeModulator.stop();
 	}
 
 	@Override
@@ -125,13 +105,14 @@ public class ModuleVCA extends AModule implements IModuleVCA {
 	}
 
 	@Override
-	public void setAttenuationValue(double value) {
-		this.attenuator.attenuationValue = value;
+	public void setBaseAmplitudeValue(double value) {
+		this.baseAmplitude = value;
+		this.baseAmplitudeModulator.inputAm.set(value/60);
 	}
 
 	@Override
-	public double getAttenuationValue() {
-		return this.attenuator.attenuationValue;
+	public double getBaseAmplitudeValue() {
+		return this.baseAmplitude;
 	}
 
 }
