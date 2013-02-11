@@ -33,6 +33,7 @@ public class PInputPort extends JPanel implements IPInputPort {
 	}
 
 	private void configView() {
+		this.setOpaque(false);
 		this.setSize(width, height);
 		JPanel pane = new JPanel();
 		image = new JLabel(new ImageIcon("res/input.png"));
