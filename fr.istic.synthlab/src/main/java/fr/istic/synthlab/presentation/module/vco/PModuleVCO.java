@@ -1,11 +1,10 @@
 package fr.istic.synthlab.presentation.module.vco;
 
-import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
@@ -40,7 +39,7 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 	private POutputPort outputSquare;
 	private POutputPort outputTriangle;
 	private POutputPort outputSawtooth;
-	
+
 	JLabel frequencyLabel;
 
 	private int width;
@@ -59,43 +58,57 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 	}
 
 	private void configView() {
-		this.setBackground(Color.GRAY);
 		JPanel panelParams = new JPanel();
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();
+		panelParams.setOpaque(false);
+		panelInput.setOpaque(false);
+		panelOutput.setOpaque(false);
 
 		octaveModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_OCTAVE_NAME,
 				14, 0, 14, ctrl.getOctave());
-		RotaryTextController octaveRotary = new RotaryTextController(octaveModel, 4);
+		RotaryTextController octaveRotary = new RotaryTextController(
+				octaveModel, 4);
 		octaveRotary.setBorder(new TitledBorder(ModuleVCO.PARAM_OCTAVE_NAME));
 		panelParams.add(octaveRotary);
 
-		toneModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_TONE_NAME, 100, -1.0, 1.0, ctrl.getTone());
+		toneModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_TONE_NAME, 100,
+				-1.0, 1.0, ctrl.getTone());
 		RotaryTextController toneRotary = new RotaryTextController(toneModel, 4);
 		toneRotary.setBorder(new TitledBorder(ModuleVCO.PARAM_TONE_NAME));
 		panelParams.add(toneRotary);
-		
+
 		frequencyLabel = new JLabel();
-		frequencyLabel.setText(""+ctrl.getFrequency());
+		frequencyLabel.setText("" + ctrl.getFrequency());
 		panelParams.add(frequencyLabel);
 
 		fm = (PInputPort) ((ICInputPort) ctrl.getInputFm()).getPresentation();
 		panelInput.add(fm);
 
-		outputSquare = (POutputPort) ((ICOutputPort) ctrl.getOutputSquare()).getPresentation();
+		outputSquare = (POutputPort) ((ICOutputPort) ctrl.getOutputSquare())
+				.getPresentation();
 		panelOutput.add(outputSquare);
 
-		outputTriangle = (POutputPort) ((ICOutputPort) ctrl.getOutputTriangle()).getPresentation();
+		outputTriangle = (POutputPort) ((ICOutputPort) ctrl.getOutputTriangle())
+				.getPresentation();
 		panelOutput.add(outputTriangle);
 
 		outputSawtooth = (POutputPort) ((ICOutputPort) ctrl.getOutputSawtooth()).getPresentation();
 		panelOutput.add(outputSawtooth);
 
-		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
 		this.setAutoscrolls(true);
-		this.getContentPane().add(panelParams, 0);
-		this.getContentPane().add(panelInput, 1);
-		this.getContentPane().add(panelOutput, 2);
+
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 1;
+		this.add(panelParams, c);
+
+		c.gridy = 2;
+		this.add(panelInput, c);
+		
+		c.gridy = 3;
+		this.add(panelOutput, c);
 
 		Dimension size = new Dimension(350, 350);
 		this.setPreferredSize(size);

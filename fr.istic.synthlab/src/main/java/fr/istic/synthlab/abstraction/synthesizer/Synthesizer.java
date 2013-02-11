@@ -40,7 +40,8 @@ public class Synthesizer implements ISynthesizer {
 		this.synth = JSyn.createSynthesizer();
 		modules = new ArrayList<IModule>();
 		wires = new ArrayList<IWire>();
-		instance = this;
+		if(instance==null)
+			instance = this;
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package fr.istic.synthlab.presentation.module.audioscope;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -45,9 +46,6 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 	}
 
 	private void configView() {
-		
-		this.setBackground(Color.GRAY);
-		
 		JPanel panelScope= new JPanel();
 		JPanel panelPort = new JPanel();
 
@@ -62,10 +60,15 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 		panelPort.add(inputPort);
 		panelPort.add(outputPort);
 
-		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
 		this.setAutoscrolls(true);
-		this.getContentPane().add(panelScope, 0);
-		this.getContentPane().add(panelPort, 1);
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 1;
+		this.add(panelScope, c);
+		
+		c.gridy = 2;
+		this.add(panelPort, c);
 
 		Dimension size = new Dimension(600, 400);
 		this.setPreferredSize(size);

@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JInternalFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-
-import com.alee.laf.desktoppane.WebDesktopPane;
 
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
@@ -19,12 +18,11 @@ import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.module.IPModule;
-import fr.istic.synthlab.presentation.module.PModule;
 import fr.istic.synthlab.presentation.util.SimpleMouseListener;
 import fr.istic.synthlab.presentation.wire.IPWire;
 import fr.istic.synthlab.presentation.wire.PWire;
 
-public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
+public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 
 	private static final long serialVersionUID = -1444696064954307756L;
 	private ICSynthesizer ctrl;
@@ -57,8 +55,7 @@ public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
 
 				Component clickedComponent = getComponentAt(x, y);
 				if (clickedComponent != null && JInternalFrame.class.isInstance(clickedComponent)) {
-					JPanel panelPorts = (JPanel) ((JInternalFrame) clickedComponent).getContentPane()
-							.getComponentAt(e.getPoint());
+					JPanel panelPorts = (JPanel) ((JPanel) clickedComponent).getComponentAt(e.getPoint());
 					e.translatePoint(-panelPorts.getLocation().x,-panelPorts.getLocation().y);
 
 					Component panelPort = panelPorts.getComponentAt(e.getPoint());
@@ -145,8 +142,8 @@ public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
 	@Override
 	public void c2pAddModule(IPModule module) {
 		((APModule) module).setVisible(true);
-		this.add((JInternalFrame) module, 0);
-
+		this.add((JPanel) module, 0);
+		
 		((APModule) module).setBounds(10, 10, module.getWidth(), module.getHeight());
 
 		modules.add(module);
@@ -171,7 +168,8 @@ public class PSynthesizer extends WebDesktopPane implements IPSynthesizer {
 
 	@Override
 	public void c2pRemoveModuleOk(IPModule module) {
-		this.remove((PModule) module);
+		System.out.println("remove");
+		this.remove((APModule)module);
 		validate();
 		repaint();
 	}

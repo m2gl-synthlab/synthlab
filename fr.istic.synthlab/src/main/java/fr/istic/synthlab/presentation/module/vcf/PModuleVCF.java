@@ -2,6 +2,7 @@ package fr.istic.synthlab.presentation.module.vcf;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
@@ -56,7 +57,6 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 	}
 
 	private void configView() {
-		this.setBackground(Color.GRAY);
 		JPanel panelParams = new JPanel();
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();
@@ -70,7 +70,7 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 		panelParams.add(cutRotary);
 
 		resonanceModel = new DoubleBoundedRangeModel(
-				ModuleVCF.PARAM_RESONANCE_NAME, 100, 0, 100,
+				ModuleVCF.PARAM_RESONANCE_NAME, 100, 1, 50,
 				ctrl.getResonance());
 		RotaryTextController resonanceRotary = new RotaryTextController(
 				resonanceModel, 4);
@@ -87,11 +87,19 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 				.getPresentation();
 		panelOutput.add(output);
 
-		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.PAGE_AXIS));
 		this.setAutoscrolls(true);
-		this.getContentPane().add(panelParams, 0);
-		this.getContentPane().add(panelInput, 1);
-		this.getContentPane().add(panelOutput, 2);
+		
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 1;
+		this.add(panelParams, c);
+
+		c.gridy = 2;
+		this.add(panelInput, c);
+		
+		c.gridy = 3;
+		this.add(panelOutput, c);
 
 		Dimension size = new Dimension(350, 350);
 		this.setPreferredSize(size);

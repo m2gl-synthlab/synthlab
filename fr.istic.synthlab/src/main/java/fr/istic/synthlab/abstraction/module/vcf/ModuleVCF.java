@@ -96,13 +96,15 @@ public class ModuleVCF extends AModule implements IModuleVCF {
 
 	@Override
 	public void setResonance(double value) {
+		this.filterJSyn1.Q.set(value);
+//		this.filterJSyn2.Q.set(value);
 //		this.filter.resonance = value;
 	}
 
 	@Override
 	public double getResonance() {
 //		return this.filter.resonance;
-		return 0;
+		return this.filterJSyn1.Q.get();
 	}
 
 	@Override
