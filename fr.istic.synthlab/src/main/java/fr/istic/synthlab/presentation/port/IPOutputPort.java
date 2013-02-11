@@ -12,4 +12,8 @@ public interface IPOutputPort {
 	public ICOutputPort getControl();
 
 	public void c2pSetName();
+
+	public void c2pClickAllowed();
+
+	public void c2pClickNotAllowed();
 }
