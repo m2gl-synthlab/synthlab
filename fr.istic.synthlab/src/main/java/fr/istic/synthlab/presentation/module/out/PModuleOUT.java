@@ -55,7 +55,7 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		JPanel panelMute = new JPanel();
 		panelMute.setOpaque(false);
 		
-		model = new DoubleBoundedRangeModel("model", 4200, -60, 12, ctrl.getAttenuation());
+		model = new DoubleBoundedRangeModel("model", 7200, -60, 12, ctrl.getAttenuation());
 		RotaryTextController gainRotary = new RotaryTextController(model, 1);
 		gainRotary.setBorder(new TitledBorder("Gain"));
 		panelGain.add(gainRotary);
@@ -69,33 +69,18 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		panelInput.add(inputPort);
 
 		this.setAutoscrolls(true);
-		GridBagConstraints c = new GridBagConstraints();
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 0;
-		c.gridy = 1;
-		this.add(panelGain, c);
-
-		c.gridy = 2;
-		this.add(panelInput, c);
+		super.setWidth(150);
+		super.setHeigth(270);
 		
-		c.gridy = 3;
-		this.add(panelMute, c);
-
-		Dimension size = new Dimension(150, 270);
+		Dimension size = new Dimension(super.getWidth(), super.getHeigth());
+		this.setSize(size);
 		this.setPreferredSize(size);
+		
+		this.addTitleBar();
+		this.addPanel(panelGain, 150, 100);
+		this.addPanel(panelInput, 150, 100);
+		this.addPanel(panelMute, 150, 100);
 
-		// TODO : Not sure if it's the better way to define the size...
-		width = size.width;
-		height = size.height;
-
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public int getWidth() {
-		return width;
 	}
 
 	private void defineCallbacks() {

@@ -64,35 +64,24 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 		panelPort.add(outputPort);
 
 		this.setAutoscrolls(true);
-		GridBagConstraints c = new GridBagConstraints();
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 0;
-		c.gridy = 1;
-		this.add(panelScope, c);
 		
-		c.gridy = 2;
-		this.add(panelPort, c);
 
-		Dimension size = new Dimension(600, 400);
+		super.setWidth(350);
+		super.setHeigth(350);
+		
+		Dimension size = new Dimension(super.getWidth(), super.getHeigth());
+		this.setSize(size);
 		this.setPreferredSize(size);
-
-		// TODO : Not sure if it's the better way to define the size...
-		width = size.width;
-		height = size.height;
+		
+		this.addTitleBar();
+		this.addPanel(panelScope, 350, 100);
+		this.addPanel(panelPort, 350, 100);
 
 	}
 
 	private void defineCallbacks() {
 	}
 	
-	
-	public int getHeight() {
-		return height;
-	}
-
-	public int getWidth() {
-		return width;
-	}
 
 	@Override
 	public ICModuleAudioScope getControl() {
