@@ -41,16 +41,6 @@ public class PModuleREP extends APModule implements IPModuleREP {
 	public ICModuleREP getControl() {
 		return this.ctrl;
 	}
-
-	@Override
-	public int getHeight() {
-		return this.height;
-	}
-
-	@Override
-	public int getWidth() {
-		return this.width;
-	}
 	
 	private void configView() {
 		JPanel panelInput = new JPanel();
@@ -72,21 +62,16 @@ public class PModuleREP extends APModule implements IPModuleREP {
 		panelOutput.add(out3);
 		
 		this.setAutoscrolls(true);
-		GridBagConstraints c = new GridBagConstraints();
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 0;
-		c.gridy = 1;
-		this.add(panelInput, c);
+		super.setWidth(350);
+		super.setHeigth(350);
 		
-		c.gridy = 2;
-		this.add(panelOutput, c);
-		
-		Dimension size = new Dimension(300, 250);
+		Dimension size = new Dimension(super.getWidth(), super.getHeigth());
+		this.setSize(size);
 		this.setPreferredSize(size);
-
-		// TODO : Not sure if it's the better way to define the size...
-		this.width = size.width;
-		this.height = size.height;
+		
+		this.addTitleBar();
+		this.addPanel(panelInput, 350, 100);
+		this.addPanel(panelOutput, 350, 100);
 	}
 
 }

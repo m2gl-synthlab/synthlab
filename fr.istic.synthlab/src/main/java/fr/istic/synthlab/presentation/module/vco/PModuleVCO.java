@@ -42,9 +42,6 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 
 	JLabel frequencyLabel;
 
-	private int width;
-	private int height;
-
 	/**
 	 * @param control
 	 */
@@ -61,6 +58,7 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 		JPanel panelParams = new JPanel();
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();
+		
 		panelParams.setOpaque(false);
 		panelInput.setOpaque(false);
 		panelOutput.setOpaque(false);
@@ -98,33 +96,21 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 
 		this.setAutoscrolls(true);
 
-		GridBagConstraints c = new GridBagConstraints();
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 0;
-		c.gridy = 1;
-		this.add(panelParams, c);
 
-		c.gridy = 2;
-		this.add(panelInput, c);
+		super.setWidth(350);
+		super.setHeigth(350);
 		
-		c.gridy = 3;
-		this.add(panelOutput, c);
-
-		Dimension size = new Dimension(350, 350);
+		Dimension size = new Dimension(super.getWidth(), super.getHeigth());
+		this.setSize(size);
 		this.setPreferredSize(size);
-
-		// TODO : Not sure if it's the better way to define the size...
-		width = 350;
-		height = 350;
+		
+		this.addTitleBar();
+		this.addPanel(panelParams, 350, 100);
+		this.addPanel(panelInput, 350, 100);
+		this.addPanel(panelOutput, 350, 100);
 	}
 
-	public int getHeight() {
-		return height;
-	}
 
-	public int getWidth() {
-		return width;
-	}
 
 	private void defineCallbacks() {
 		// Slider change listener

@@ -1,7 +1,5 @@
 package fr.istic.synthlab.presentation.module;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
@@ -10,6 +8,7 @@ import java.awt.event.MouseMotionListener;
 import java.util.List;
 
 import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
@@ -32,51 +31,44 @@ public abstract class APModule extends WebPanel implements IPModule {
 
 	private ICModule ctrl;
 
+	private int width;
+	private int heigth;
+	
+	
 	int dX;
 	int dY;
+	
+	int x;
+	int y;
 
 	// TODO : Put height and width here
 
 	public APModule(ICModule control) {
 		super();
 		this.ctrl = control;
-
-		this.setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
-
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.weightx = 0.5;
-
-		c.gridx = 0;
-		c.gridy = 0;
-		this.add(new TitleBar(ctrl), c);
-
+		
 		this.setFocusable(true);
 		this.setVisible(true);
-
 		this.setUndecorated(false);
-		this.setRound(20);
+		this.setRound(7);
+		this.setLayout(null);
+	
+		x=0;
+		y=25;
+		
 
 		IPSynthesizer presSynth = ((ICSynthesizer) ctrl.getSynthesizer())
 				.getPresentation();
 		((JLayeredPane) presSynth).setLayer(this, 0, -1);
 
-		// this.addInternalFrameListener(new SimpleInternalFrameListener() {
-		// @Override
-		// public void internalFrameClosing(InternalFrameEvent e) {
-		// ctrl.p2cClosing();
-		// }
-		// });
-
 		this.addFocusListener(new FocusListener() {
 			@Override
 			public void focusLost(FocusEvent e) {
 				System.out.println("focus lost");
-				IPSynthesizer presSynth = ((ICSynthesizer) ctrl
-						.getSynthesizer()).getPresentation();
-				((JLayeredPane) presSynth).setLayer(APModule.this, 0, -1);
+//				IPSynthesizer presSynth = ((ICSynthesizer) ctrl
+//						.getSynthesizer()).getPresentation();
+//				((JLayeredPane) presSynth).setLayer(APModule.this, 0, -1);
 			}
-
 			@Override
 			public void focusGained(FocusEvent e) {
 				System.out.println("focus gained");
@@ -95,14 +87,6 @@ public abstract class APModule extends WebPanel implements IPModule {
 		// deplacement du module
 		this.addAncestorListener(new AncestorListener() {
 			@Override
-			public void ancestorAdded(AncestorEvent event) {
-			}
-
-			@Override
-			public void ancestorRemoved(AncestorEvent event) {
-			}
-
-			@Override
 			public void ancestorMoved(AncestorEvent event) {
 				List<IWire> wires = ctrl.getWires();
 				for (IWire wire : wires) {
@@ -111,6 +95,10 @@ public abstract class APModule extends WebPanel implements IPModule {
 					}
 				}
 			}
+			@Override
+			public void ancestorAdded(AncestorEvent event) {}
+			@Override
+			public void ancestorRemoved(AncestorEvent event) {}
 		});
 
 		this.addMouseMotionListener(new MouseMotionListener() {
@@ -130,13 +118,6 @@ public abstract class APModule extends WebPanel implements IPModule {
 		});
 
 		this.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
 			@Override
 			public void mousePressed(MouseEvent e) {
 				APModule.this.requestFocus();
@@ -144,28 +125,44 @@ public abstract class APModule extends WebPanel implements IPModule {
 					dX = e.getLocationOnScreen().x - getX();
 					dY = e.getLocationOnScreen().y - getY();
 				}
-
 			}
-
 			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
+			public void mouseReleased(MouseEvent e) {}
 			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
+			public void mouseExited(MouseEvent e) {}
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
+			public void mouseEntered(MouseEvent e) {}
+			@Override
+			public void mouseClicked(MouseEvent e) {}
 		});
+	}
+	
+	public void addPanel(JPanel panel, int width, int height){
+		panel.setBounds(x, y, width, height);
+		y += height;
+		this.add(panel);
+	}
+	
+	public void addTitleBar(){
+		TitleBar bar = new TitleBar(ctrl);
+		bar.setBounds(0, 5, width, 20);
+		this.add(bar);
+	}
 
+
+	public int getWidth() {
+		return width;
+	}
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeigth() {
+		return heigth;
+	}
+
+	public void setHeigth(int heigth) {
+		this.heigth = heigth;
 	}
 
 }

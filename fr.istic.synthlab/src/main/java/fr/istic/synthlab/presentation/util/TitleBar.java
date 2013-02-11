@@ -1,6 +1,7 @@
 package fr.istic.synthlab.presentation.util;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -10,6 +11,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.MatteBorder;
 
 import com.alee.laf.panel.WebPanel;
 
@@ -23,15 +26,16 @@ public class TitleBar extends WebPanel {
 	public TitleBar(ICModule mod){
 		super();
 		this.module = mod;
-		
 		this.setOpaque(false);
-		
-		//this.setSize(mod.getPresentation().getWidth(), 20);
 		this.setLayout(new BorderLayout());
 		
+		this.setMargin(0);
 		
-		this.add(new JLabel(mod.getName()), BorderLayout.WEST);
+		MatteBorder border = new MatteBorder(0, 0, 1, 0, Color.BLACK);
+		this.setBorder(border);
 		
+		JLabel title = new JLabel("   "+mod.getName());
+		this.add(title, BorderLayout.CENTER);
 		
 		BufferedImage img = null;
 		try {
@@ -39,7 +43,9 @@ public class TitleBar extends WebPanel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		ImageIcon im = new ImageIcon(img.getScaledInstance(20, 20, ALLBITS));
+		
 		JLabel lab = new JLabel(im);
 		this.add(lab, BorderLayout.EAST);
 		
@@ -71,13 +77,10 @@ public class TitleBar extends WebPanel {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
 				module.p2cClosing();
 				((ICSynthesizer)CSynthesizer.getInstance()).p2cRemoveModule(module) ;
 			}
 		});
-		
-		this.setOpaque(false);
 	}
 
 }
