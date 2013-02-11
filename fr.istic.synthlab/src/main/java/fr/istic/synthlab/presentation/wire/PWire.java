@@ -82,8 +82,7 @@ public class PWire extends JPanel implements IPWire {
 	public void updateDisplay() {
 		
 		if (outputPort != null) {
-			//TODO : delete +1
-			posOutput = new Point(outputPort.getX() + (POutputPort.width / 2)+1, outputPort.getY()+ (POutputPort.height / 2)+1);
+			posOutput = new Point(outputPort.getX() + (POutputPort.width / 2), outputPort.getY()+ (POutputPort.height / 2));
 
 			Component c2 = outputPort;
 			while (!(c2.getParent() instanceof PSynthesizer)) {
@@ -94,8 +93,7 @@ public class PWire extends JPanel implements IPWire {
 		}
 
 		if (inputPort != null) {
-			//TODO : delete +1
-			posInput = new Point(inputPort.getX() + (PInputPort.width / 2)+1, inputPort.getY() + + (PInputPort.height / 2)+1);
+			posInput = new Point(inputPort.getX() + (PInputPort.width / 2), inputPort.getY() + + (PInputPort.height / 2));
 
 			Component c = inputPort;
 			while (!(c.getParent() instanceof PSynthesizer)) {

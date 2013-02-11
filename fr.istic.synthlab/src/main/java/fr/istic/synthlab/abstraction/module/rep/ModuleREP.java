@@ -57,14 +57,12 @@ public class ModuleREP extends AModule implements IModuleREP {
 
 	@Override
 	public void start() {
-		// TODO Auto-generated method stub
-
+		this.passThrough.start();
 	}
 
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
-
+		this.passThrough.stop();
 	}
 
 	@Override

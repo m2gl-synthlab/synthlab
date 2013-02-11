@@ -49,6 +49,6 @@ public interface IWire {
 	 */
 	public boolean isConnected();
 
-	// TODO : Maybe a cable could be half disconnected ? need comments
+	// TODO : need comments
 	public void disconnect();
 }

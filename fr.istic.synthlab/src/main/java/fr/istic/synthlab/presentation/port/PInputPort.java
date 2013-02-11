@@ -1,7 +1,6 @@
 package fr.istic.synthlab.presentation.port;
 
 import java.awt.BasicStroke;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -10,10 +9,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 import fr.istic.synthlab.controller.module.ICModule;
 import fr.istic.synthlab.controller.port.ICInputPort;

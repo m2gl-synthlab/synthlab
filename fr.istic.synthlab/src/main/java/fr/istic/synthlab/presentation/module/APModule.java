@@ -59,7 +59,6 @@ public abstract class APModule extends WebPanel implements IPModule {
 
 		IPSynthesizer presSynth = ((ICSynthesizer) ctrl.getSynthesizer()).getPresentation();
 		((JLayeredPane) presSynth).setLayer(this, 0, -1);
-
 	}
 	
 	private void defineCallbacks() {

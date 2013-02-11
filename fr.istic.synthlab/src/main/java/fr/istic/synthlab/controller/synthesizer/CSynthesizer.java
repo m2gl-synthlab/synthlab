@@ -84,14 +84,12 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 
 	@Override
 	public void p2cAddModule(ICModule module) {
-		// TODO : Do some check here
 		this.add(module);
 		pres.c2pAddModuleOk(module.getPresentation());
 	}
 
 	@Override
 	public void p2cRemoveModule(ICModule module) {
-		// TODO : Do some check here
 		this.remove(module);
 		pres.c2pRemoveModuleOk(module.getPresentation());
 	}

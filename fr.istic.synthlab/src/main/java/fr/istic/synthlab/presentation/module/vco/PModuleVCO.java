@@ -122,18 +122,7 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 				ctrl.p2cToneChanged(toneModel.getDoubleValue());
 			}
 		});
-//
-//		this.addMouseMotionListener(new MouseMotionListener() {
-//			@Override
-//			public void mouseMoved(MouseEvent e) {
-//				((PSynthesizer) ((ICSynthesizer) getControl().getSynthesizer())
-//						.getPresentation()).dispatchEvent(e);
-//			}
-//
-//			@Override
-//			public void mouseDragged(MouseEvent e) {
-//			}
-//		});
+
 	}
 
 	@Override

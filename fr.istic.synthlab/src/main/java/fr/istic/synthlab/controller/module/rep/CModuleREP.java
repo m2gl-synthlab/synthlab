@@ -7,6 +7,8 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.module.IPModule;
 import fr.istic.synthlab.presentation.module.rep.IPModuleREP;
 
+//TODO : need comments
+
 public class CModuleREP  extends ModuleREP implements ICModuleREP {
 
 	private IPModuleREP pres;
@@ -18,7 +20,6 @@ public class CModuleREP  extends ModuleREP implements ICModuleREP {
 
 	@Override
 	public IPModule getPresentation() {
-		// TODO Auto-generated method stub
 		return this.pres;
 	}
 

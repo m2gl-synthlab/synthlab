@@ -69,7 +69,7 @@ public interface ISynthesizer {
 	 */
 	public void remove(IModule module);
 
-	// TODO : Still in use ? need comments
+	// TODO : need comments
 	public IWire getCurrentWire();
 
 	public void setCurrentWire(IWire wire);

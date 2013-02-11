@@ -58,7 +58,7 @@ public class PFactory implements IPFactory {
 
 	@Override
 	public IPModuleVCA newVCA(ICModuleVCA control) {
-		return new PModuleVCA(control); // TODO Ameliorer Presentation
+		return new PModuleVCA(control);
 	}
 
 	@Override
@@ -88,12 +88,12 @@ public class PFactory implements IPFactory {
 	
 	@Override
 	public IPWire newWire(ICWire control) {
-		return new PWire(control); // TODO Ameliorer Presentation
+		return new PWire(control);
 	}
 
 	@Override
 	public IPOutputPort newOutputPort(ICOutputPort control) {
-		return new POutputPort(control); // TODO Ameliorer Presentation
+		return new POutputPort(control);
 	}
 
 	@Override

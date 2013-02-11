@@ -40,7 +40,7 @@ public class ModuleAudioScope extends AModule implements IModuleAudioScope {
 		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME, adapter.input);
 		this.out = PACFactory.getFactory().newOutputPort(this, OUT_NAME, adapter.output);
 
-		this.scope.addProbe((UnitOutputPort) this.out.getJSyn()); // TODO : cast ok ?
+		this.scope.addProbe((UnitOutputPort) this.out.getJSyn());
 		this.scope.setTriggerMode(AudioScope.TriggerMode.NORMAL);
 	}
 

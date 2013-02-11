@@ -199,7 +199,6 @@ public class ModuleVCO extends AModule implements IModuleVCO, Observer<Port>{
 
 	@Override
 	public void update(Port subject) {
-		System.out.println("-------------- Connection !!");
 		// If the FM input port send a connection event
 		if(subject == fm){
 			// If it is in use
@@ -211,10 +210,10 @@ public class ModuleVCO extends AModule implements IModuleVCO, Observer<Port>{
 				
 			}else{
 				// Disconnect the frequency modulator and set the frequency
-				frequencyModulator.output.disconnectAll();
-//				vcoSquare.frequency.set(frequency);
-//				vcoTriangle.frequency.set(frequency);
-//				vcoSawtooth.frequency.set(frequency);
+				passThrough.output.disconnectAll();
+				vcoSquare.frequency.set(frequency);
+				vcoTriangle.frequency.set(frequency);
+				vcoSawtooth.frequency.set(frequency);
 			}
 				
 		}
