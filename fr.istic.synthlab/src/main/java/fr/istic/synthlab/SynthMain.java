@@ -54,8 +54,8 @@ public class SynthMain {
 		frame.setQuitSynthCommand(new QuitSynthCommand(app));
 		frame.setDocSynthCommand(new DocumentationCommand());
 		frame.setAboutSynthCommand(new AboutCommand());
-//		frame.setToolbarPlayCommand(new ToolbarPlayCommand(app.getSynthesizer().getPresentation()));
-//		frame.setToolbarPauseCommand(new ToolbarPauseCommand(app.getSynthesizer().getPresentation()));
+		frame.setToolbarPlayCommand(new ToolbarPlayCommand(app.getSynthesizer().getPresentation()));
+		frame.setToolbarPauseCommand(new ToolbarPauseCommand(app.getSynthesizer().getPresentation()));
 
 		frame.setAddModuleOUTCommand(new AddModuleOUTCommand(app.getSynthesizer()));
 		frame.setAddModuleVCOCommand(new AddModuleVCOCommand(app.getSynthesizer()));
