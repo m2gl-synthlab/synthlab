@@ -1,7 +1,6 @@
 package fr.istic.synthlab.presentation.module.audioscope;
 
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 
 import javax.swing.JPanel;
 
@@ -27,11 +26,6 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 	
 	private PInputPort inputPort;
 	private POutputPort outputPort;
-	
-	
-
-	private int width;
-	private int height;
 
 	/**
 	 * @param control
@@ -63,17 +57,16 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 
 		this.setAutoscrolls(true);
 		
-
-		super.setWidth(350);
-		super.setHeigth(350);
+		super.setWidth(630);
+		super.setHeigth(450);
 		
 		Dimension size = new Dimension(super.getWidth(), super.getHeigth());
 		this.setSize(size);
 		this.setPreferredSize(size);
 		
 		this.addTitleBar();
-		this.addPanel(panelScope, 350, 100);
-		this.addPanel(panelPort, 350, 100);
+		this.addPanel(panelScope, 630, 300);
+		this.addPanel(panelPort, 630, 120);
 
 	}
 
