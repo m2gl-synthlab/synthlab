@@ -61,6 +61,11 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();
 
+		panelParams.setOpaque(false);
+		panelInput.setOpaque(false);
+		panelOutput.setOpaque(false);
+		
+		
 		cutFrequencyModel = new DoubleBoundedRangeModel(
 				ModuleVCF.PARAM_CUT_FREQUENCY_NAME, 100, 0, 22000,
 				ctrl.getCutFrequency());

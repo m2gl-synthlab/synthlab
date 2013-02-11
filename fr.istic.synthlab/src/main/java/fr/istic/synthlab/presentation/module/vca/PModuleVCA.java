@@ -61,6 +61,10 @@ public class PModuleVCA extends APModule implements IPModuleVCA {
 		JPanel panelParams = new JPanel();
 		JPanel panelInput = new JPanel();
 		JPanel panelOutput = new JPanel();
+		
+		panelParams.setOpaque(false);
+		panelInput.setOpaque(false);
+		panelOutput.setOpaque(false);
 
 		attenuationModel = new DoubleBoundedRangeModel(
 				ModuleVCA.PARAM_AMPLITUDE_NAME, 4200, -30, 12,

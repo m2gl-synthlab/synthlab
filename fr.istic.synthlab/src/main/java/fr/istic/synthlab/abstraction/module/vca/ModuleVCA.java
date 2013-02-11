@@ -118,9 +118,14 @@ public class ModuleVCA extends AModule implements IModuleVCA {
 	@Override
 	public List<IWire> getWires() {
 		List<IWire> wires = new ArrayList<IWire>();
-		wires.add(input.getWire());
-		wires.add(inputAm.getWire());
-		wires.add(output.getWire());
+		if(input.isInUse())
+			wires.add(input.getWire());
+
+		if(inputAm.isInUse())
+			wires.add(inputAm.getWire());
+
+		if(output.isInUse())
+			wires.add(output.getWire());
 		return wires;
 	}
 

@@ -48,6 +48,9 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 	private void configView() {
 		JPanel panelScope= new JPanel();
 		JPanel panelPort = new JPanel();
+		
+		panelScope.setOpaque(false);
+		panelPort.setOpaque(false);
 
 		AudioScopeView scope = new AudioScopeView();
 		model = ctrl.getModel();
