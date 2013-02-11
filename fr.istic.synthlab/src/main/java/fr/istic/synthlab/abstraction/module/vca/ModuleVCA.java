@@ -48,36 +48,6 @@ public class ModuleVCA extends AModule implements IModuleVCA {
 				INPUT_AM_NAME, attenuator.inputAm);
 		
 	}
-
-	/**
-	 * fonction d'amplification du signal d'entr� par un facteur K
-	 * 
-	 */
-	public void amplify() {
-//		bufferOut = ByteBuffer.allocate(bufferIn.capacity());
-//		bufferIn.clear();
-//		bufferOut.clear();
-//		// bufferIn.rewind();
-//		while (bufferIn.hasRemaining()) {
-//			// System.out.println("current double: " + bufferIn.getDouble());
-//			// TODO Cela marche
-//			if (flagGain == false) {
-//				bufferOut.putDouble(bufferIn.getDouble() * amplifierK / 100);
-//			} else {
-//				bufferOut.putDouble(bufferIn.getDouble()
-//						* Math.pow(2,
-//								(amplifierK / 100)
-//										+ ((bufferInGain.getDouble()) / 65536))
-//						/ 2);
-//				// bufferOut.putDouble((amplifierK/100)*((bufferIn.getDouble()+(bufferInGain.getDouble()))/2));
-//				// 65536
-//			}
-//		}
-//		bufferIn.clear();
-//		bufferOut.flip();
-		
-		System.out.println("AMPLIFIER-VCA");
-	}
 	
 	/**
 	 * Attenuation Filter
