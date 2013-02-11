@@ -10,18 +10,21 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+
+import com.alee.laf.panel.WebPanel;
 
 import fr.istic.synthlab.controller.module.ICModule;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 
-public class TitleBar extends JPanel {
+public class TitleBar extends WebPanel {
 
 	ICModule module=null;
 	public TitleBar(ICModule mod){
 		super();
 		this.module = mod;
+		
+		this.setOpaque(false);
 		
 		//this.setSize(mod.getPresentation().getWidth(), 20);
 		this.setLayout(new BorderLayout());

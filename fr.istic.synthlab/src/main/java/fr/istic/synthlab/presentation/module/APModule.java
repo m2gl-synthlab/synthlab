@@ -1,5 +1,7 @@
 package fr.istic.synthlab.presentation.module;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
@@ -7,7 +9,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.List;
 
-import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
@@ -39,18 +40,27 @@ public abstract class APModule extends WebPanel implements IPModule {
 	public APModule(ICModule control) {
 		super();
 		this.ctrl = control;
-		this.add(new TitleBar(ctrl));
-		
+
+		this.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weightx = 0.5;
+
+		c.gridx = 0;
+		c.gridy = 0;
+		this.add(new TitleBar(ctrl), c);
+
 		this.setFocusable(true);
 		this.setVisible(true);
 
 		this.setUndecorated(false);
 		this.setRound(20);
-		
-		IPSynthesizer presSynth = ((ICSynthesizer)ctrl.getSynthesizer()).getPresentation();
+
+		IPSynthesizer presSynth = ((ICSynthesizer) ctrl.getSynthesizer())
+				.getPresentation();
 		((JLayeredPane) presSynth).setLayer(this, 0, -1);
-		
-		
+
 		// this.addInternalFrameListener(new SimpleInternalFrameListener() {
 		// @Override
 		// public void internalFrameClosing(InternalFrameEvent e) {
@@ -62,14 +72,16 @@ public abstract class APModule extends WebPanel implements IPModule {
 			@Override
 			public void focusLost(FocusEvent e) {
 				System.out.println("focus lost");
-				IPSynthesizer presSynth = ((ICSynthesizer)ctrl.getSynthesizer()).getPresentation();
+				IPSynthesizer presSynth = ((ICSynthesizer) ctrl
+						.getSynthesizer()).getPresentation();
 				((JLayeredPane) presSynth).setLayer(APModule.this, 0, -1);
 			}
 
 			@Override
 			public void focusGained(FocusEvent e) {
 				System.out.println("focus gained");
-				IPSynthesizer presSynth = ((ICSynthesizer)ctrl.getSynthesizer()).getPresentation();
+				IPSynthesizer presSynth = ((ICSynthesizer) ctrl
+						.getSynthesizer()).getPresentation();
 				for (IWire w : ctrl.getWires()) {
 					if (w != null) {
 						// TODO : Set wire Z position to this Z position+1
@@ -132,7 +144,7 @@ public abstract class APModule extends WebPanel implements IPModule {
 					dX = e.getLocationOnScreen().x - getX();
 					dY = e.getLocationOnScreen().y - getY();
 				}
-				
+
 			}
 
 			@Override

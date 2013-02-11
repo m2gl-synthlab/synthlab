@@ -2,6 +2,7 @@ package fr.istic.synthlab.presentation.module.out;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -68,10 +69,17 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		panelInput.add(inputPort);
 
 		this.setAutoscrolls(true);
-		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-		this.add(panelGain,0);
-		this.add(panelInput,1);
-		this.add(panelMute,2);
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 1;
+		this.add(panelGain, c);
+
+		c.gridy = 2;
+		this.add(panelInput, c);
+		
+		c.gridy = 3;
+		this.add(panelMute, c);
 
 		Dimension size = new Dimension(150, 270);
 		this.setPreferredSize(size);

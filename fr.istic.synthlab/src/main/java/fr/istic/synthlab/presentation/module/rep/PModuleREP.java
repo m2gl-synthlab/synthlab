@@ -2,6 +2,7 @@ package fr.istic.synthlab.presentation.module.rep;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -69,10 +70,15 @@ public class PModuleREP extends APModule implements IPModuleREP {
 		out3 = (POutputPort) ((ICOutputPort) ctrl.getOutput3()).getPresentation();
 		panelOutput.add(out3);
 		
-		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.setAutoscrolls(true);
-		this.add(panelInput, 0);
-		this.add(panelOutput, 1);
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 1;
+		this.add(panelInput, c);
+		
+		c.gridy = 2;
+		this.add(panelOutput, c);
 		
 		Dimension size = new Dimension(300, 250);
 		this.setPreferredSize(size);

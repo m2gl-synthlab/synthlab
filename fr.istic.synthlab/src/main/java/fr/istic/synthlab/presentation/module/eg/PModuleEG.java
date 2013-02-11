@@ -2,6 +2,7 @@ package fr.istic.synthlab.presentation.module.eg;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -80,11 +81,18 @@ public class PModuleEG extends APModule implements IPModuleEG {
 		outputPort = (POutputPort) ((ICOutputPort) ctrl.getOutput()).getPresentation();
 		panelOutput.add(outputPort);
 		
-		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.setAutoscrolls(true);
-		this.add(panelRotary, 0);
-		this.add(panelInput, 1);
-		this.add(panelOutput, 2);
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridx = 0;
+		c.gridy = 1;
+		this.add(panelRotary, c);
+
+		c.gridy = 2;
+		this.add(panelInput, c);
+		
+		c.gridy = 3;
+		this.add(panelOutput, c);
 		
 		Dimension size = new Dimension(150, 450);
 		this.setPreferredSize(size);
