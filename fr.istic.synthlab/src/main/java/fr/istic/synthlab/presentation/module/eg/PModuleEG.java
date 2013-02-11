@@ -83,7 +83,7 @@ public class PModuleEG extends APModule implements IPModuleEG {
 		super.setWidth(350);
 		super.setHeigth(230);
 		
-		Dimension size = new Dimension(super.getWidth(), super.getHeigth());
+		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
 		
@@ -127,29 +127,24 @@ public class PModuleEG extends APModule implements IPModuleEG {
 		return ctrl;
 	}
 
-
 	@Override
 	public void c2pSetAttackValue(double attack) {
-		// TODO Auto-generated method stub
-
+		attackModel.setDoubleValue(attack);
 	}
 
 	@Override
 	public void c2pSetDecayValue(double decay) {
-		// TODO Auto-generated method stub
-
+		decayModel.setDoubleValue(decay);
 	}
 
 	@Override
 	public void c2pSetSustainValue(double sustain) {
-		// TODO Auto-generated method stub
-
+		sustainModel.setDoubleValue(sustain);
 	}
 
 	@Override
 	public void c2pSetReleaseValue(double release) {
-		// TODO Auto-generated method stub
-
+		releaseModel.setDoubleValue(release);
 	}
 
 }

@@ -25,7 +25,6 @@ public class PModuleREP extends APModule implements IPModuleREP {
 	private POutputPort out3;
 	
 	public PModuleREP(ICModuleREP control) {
-		// TODO Auto-generated constructor stub
 		super(control);
 		System.out.println("PModuleREP initialized");
 
@@ -61,7 +60,7 @@ public class PModuleREP extends APModule implements IPModuleREP {
 		super.setWidth(350);
 		super.setHeigth(230);
 		
-		Dimension size = new Dimension(super.getWidth(), super.getHeigth());
+		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
 		

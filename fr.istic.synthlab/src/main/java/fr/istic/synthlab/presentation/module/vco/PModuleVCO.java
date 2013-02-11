@@ -1,8 +1,6 @@
 package fr.istic.synthlab.presentation.module.vco;
 
 import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,11 +15,9 @@ import fr.istic.synthlab.abstraction.module.vco.ModuleVCO;
 import fr.istic.synthlab.controller.module.vco.ICModuleVCO;
 import fr.istic.synthlab.controller.port.ICInputPort;
 import fr.istic.synthlab.controller.port.ICOutputPort;
-import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.port.PInputPort;
 import fr.istic.synthlab.presentation.port.POutputPort;
-import fr.istic.synthlab.presentation.synthesizer.PSynthesizer;
 
 /**
  * Presentation of a module
@@ -99,7 +95,7 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 		super.setWidth(350);
 		super.setHeigth(350);
 		
-		Dimension size = new Dimension(super.getWidth(), super.getHeigth());
+		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
 		

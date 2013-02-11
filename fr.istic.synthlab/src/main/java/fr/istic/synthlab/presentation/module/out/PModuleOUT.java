@@ -1,7 +1,6 @@
 package fr.istic.synthlab.presentation.module.out;
 
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -30,9 +29,6 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 	private DoubleBoundedRangeModel model;
 	private WebSwitch muteSwitch;
 	private PInputPort inputPort;
-
-	private int width;
-	private int height;
 	
 	/**
 	 * @param control
@@ -70,7 +66,7 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		super.setWidth(150);
 		super.setHeigth(270);
 		
-		Dimension size = new Dimension(super.getWidth(), super.getHeigth());
+		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
 		

@@ -1,9 +1,6 @@
 package fr.istic.synthlab.presentation.module.vca;
 
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
@@ -17,11 +14,9 @@ import fr.istic.synthlab.abstraction.module.vca.ModuleVCA;
 import fr.istic.synthlab.controller.module.vca.ICModuleVCA;
 import fr.istic.synthlab.controller.port.ICInputPort;
 import fr.istic.synthlab.controller.port.ICOutputPort;
-import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.port.PInputPort;
 import fr.istic.synthlab.presentation.port.POutputPort;
-import fr.istic.synthlab.presentation.synthesizer.PSynthesizer;
 
 public class PModuleVCA extends APModule implements IPModuleVCA {
 
@@ -34,9 +29,6 @@ public class PModuleVCA extends APModule implements IPModuleVCA {
 	private PInputPort input;
 	private PInputPort inputAM;
 	private POutputPort output;
-
-	private int width;
-	private int height;
 
 	/**
 	 * @param control
@@ -80,7 +72,7 @@ public class PModuleVCA extends APModule implements IPModuleVCA {
 		super.setWidth(350);
 		super.setHeigth(350);
 		
-		Dimension size = new Dimension(super.getWidth(), super.getHeigth());
+		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
 		

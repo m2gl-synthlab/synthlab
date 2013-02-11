@@ -3,7 +3,6 @@ package fr.istic.synthlab.presentation.module;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.List;
 
@@ -20,6 +19,7 @@ import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 import fr.istic.synthlab.presentation.synthesizer.PSynthesizer;
+import fr.istic.synthlab.presentation.util.SimpleMouseListener;
 import fr.istic.synthlab.presentation.util.TitleBar;
 
 /**
@@ -33,19 +33,20 @@ public abstract class APModule extends WebPanel implements IPModule {
 
 	private int width;
 	private int heigth;
-	
-	
 	int dX;
 	int dY;
-	
 	int x;
 	int y;
-
-	// TODO : Put height and width here
 
 	public APModule(ICModule control) {
 		super();
 		this.ctrl = control;
+
+		configView();
+		defineCallbacks();
+	}
+	
+	private void configView(){
 		
 		this.setFocusable(true);
 		this.setVisible(true);
@@ -56,10 +57,26 @@ public abstract class APModule extends WebPanel implements IPModule {
 		x=0;
 		y=25;
 
-		IPSynthesizer presSynth = ((ICSynthesizer) ctrl.getSynthesizer())
-				.getPresentation();
+		IPSynthesizer presSynth = ((ICSynthesizer) ctrl.getSynthesizer()).getPresentation();
 		((JLayeredPane) presSynth).setLayer(this, 0, -1);
 
+	}
+	
+	private void defineCallbacks() {
+		
+		/** Demande de focus */
+		this.addMouseListener(new SimpleMouseListener() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				APModule.this.requestFocus();
+				if (contains(e.getPoint())) {
+					dX = e.getLocationOnScreen().x - getX();
+					dY = e.getLocationOnScreen().y - getY();
+				}
+			}
+		});
+		
+		/** Gestion du focus */
 		this.addFocusListener(new FocusListener() {
 			@Override
 			public void focusLost(FocusEvent e) {}
@@ -78,7 +95,7 @@ public abstract class APModule extends WebPanel implements IPModule {
 			}
 		});
 
-		// deplacement du module
+		/** Gestion des déplacements */
 		this.addAncestorListener(new AncestorListener() {
 			@Override
 			public void ancestorMoved(AncestorEvent event) {
@@ -95,6 +112,7 @@ public abstract class APModule extends WebPanel implements IPModule {
 			public void ancestorRemoved(AncestorEvent event) {}
 		});
 
+		/** Gestion du déplacement du cable au dessus du module */
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
@@ -103,39 +121,29 @@ public abstract class APModule extends WebPanel implements IPModule {
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				setLocation(e.getLocationOnScreen().x - dX,
-						e.getLocationOnScreen().y - dY);
+				setLocation(e.getLocationOnScreen().x - dX,	e.getLocationOnScreen().y - dY);
 				dX = e.getLocationOnScreen().x - getX();
 				dY = e.getLocationOnScreen().y - getY();
 			}
 		});
 
-		this.addMouseListener(new MouseListener() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				APModule.this.requestFocus();
-				if (contains(e.getPoint())) {
-					dX = e.getLocationOnScreen().x - getX();
-					dY = e.getLocationOnScreen().y - getY();
-				}
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-			@Override
-			public void mouseExited(MouseEvent e) {}
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-			@Override
-			public void mouseClicked(MouseEvent e) {}
-		});
 	}
 	
+	/**
+	 * Add a panel the given dimension automatically
+	 * @param panel
+	 * @param width
+	 * @param height
+	 */
 	public void addPanel(JPanel panel, int width, int height){
 		panel.setBounds(x, y, width, height);
 		y += height;
 		this.add(panel);
 	}
 	
+	/**
+	 * Add the title bar
+	 */
 	public void addTitleBar(){
 		TitleBar bar = new TitleBar(ctrl);
 		bar.setBounds(0, 5, width, 20);
@@ -150,7 +158,7 @@ public abstract class APModule extends WebPanel implements IPModule {
 		this.width = width;
 	}
 
-	public int getHeigth() {
+	public int getHeight() {
 		return heigth;
 	}
 

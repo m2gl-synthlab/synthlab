@@ -60,7 +60,7 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 		super.setWidth(630);
 		super.setHeigth(450);
 		
-		Dimension size = new Dimension(super.getWidth(), super.getHeigth());
+		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
 		

@@ -65,6 +65,7 @@ public class Port implements IPort {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void addObserver(Observer<? extends Observable> o) {
 		observers.add((Observer<Port>) o);

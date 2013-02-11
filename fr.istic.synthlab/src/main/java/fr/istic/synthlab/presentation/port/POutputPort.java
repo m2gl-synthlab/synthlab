@@ -8,7 +8,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fr.istic.synthlab.controller.module.ICModule;
@@ -45,6 +44,8 @@ public class POutputPort extends JPanel implements IPOutputPort {
 	}
 
 	private void defineCallbacks() {
+		
+		/** Gestion du click */
 		this.addMouseListener(new SimpleMouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -72,6 +73,7 @@ public class POutputPort extends JPanel implements IPOutputPort {
 
 		});
 
+		/** Gestion du déplacement de la souris */
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
@@ -79,10 +81,8 @@ public class POutputPort extends JPanel implements IPOutputPort {
 				((APModule) ((ICModule) getControl().getModule())
 						.getPresentation()).dispatchEvent(e);
 			}
-
 			@Override
-			public void mouseDragged(MouseEvent e) {
-			}
+			public void mouseDragged(MouseEvent e) {}
 		});
 	}
 
