@@ -96,7 +96,8 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 
 	@Override
 	public void p2cDisconnectCurrentWire() {
-		getCurrentWire().disconnect();
+		if(getCurrentWire() != null)
+			getCurrentWire().disconnect();
 	}
 
 }

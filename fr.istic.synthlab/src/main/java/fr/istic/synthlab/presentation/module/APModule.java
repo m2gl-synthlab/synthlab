@@ -79,9 +79,7 @@ public abstract class APModule extends WebPanel implements IPModule {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (SwingUtilities.isRightMouseButton(e)) {
-					CSynthesizer.getInstance() .p2cDisconnectCurrentWire();
-				}
+				CSynthesizer.getInstance().p2cDisconnectCurrentWire();
 			}
 		});
 

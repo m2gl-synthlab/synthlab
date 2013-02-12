@@ -66,17 +66,15 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 			}
 
 			@Override
-			public void mouseDragged(MouseEvent e) {}
-			
-			
+			public void mouseDragged(MouseEvent e) {
+			}
+
 		});
-		
+
 		this.addMouseListener(new SimpleMouseListener() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				 if(SwingUtilities.isRightMouseButton(e)){
-					 ctrl.p2cDisconnectCurrentWire();
-				 }
+				ctrl.p2cDisconnectCurrentWire();
 			}
 		});
 
@@ -123,8 +121,9 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 	public void c2pAddModule(IPModule module) {
 		((APModule) module).setVisible(true);
 		this.add((JPanel) module, 0);
-		
-		((APModule) module).setBounds(10, 10, module.getWidth(), module.getHeight());
+
+		((APModule) module).setBounds(10, 10, module.getWidth(),
+				module.getHeight());
 
 		modules.add(module);
 		((APModule) module).validate();
@@ -149,7 +148,7 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 	@Override
 	public void c2pRemoveModuleOk(IPModule module) {
 		System.out.println("remove");
-		this.remove((APModule)module);
+		this.remove((APModule) module);
 		validate();
 		repaint();
 	}
