@@ -70,7 +70,7 @@ public class POutputPort extends JPanel implements IPOutputPort {
 				// Sert pour le déplacement du cable au dessus des elements
 				((APModule) ((ICModule) getControl().getModule())
 						.getPresentation()).dispatchEvent(e);
-				if (Math.pow((e.getX() - 40), 2) + Math.pow((e.getY() - 40), 2) < Math.pow(15, 2)) {
+				if (Math.pow((e.getX() - 40), 2) + Math.pow((e.getY() - 40), 2) < Math.pow(10, 2)) {
 					ctrl.p2cCanConnect();
 				} else {
 					clickState=CLICK_STATE_DEFAULT;
@@ -97,7 +97,7 @@ public class POutputPort extends JPanel implements IPOutputPort {
 	public void paint(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setStroke(new BasicStroke(2));
-		g2d.drawOval(40 - 15, 40 - 15, 30, 30);
+		g2d.drawOval(40 - 10, 40 - 10, 20, 20);
 		
 		if(clickState == CLICK_STATE_ALLOWED){
 			g2d.setColor(Color.GREEN);
@@ -107,7 +107,7 @@ public class POutputPort extends JPanel implements IPOutputPort {
 			g2d.setColor(new Color(184, 0, 18));
 		}
 		
-		g2d.fillOval(40 - 14, 40 - 14, 28, 28);
+		g2d.fillOval(40 - 9, 40 - 9, 18, 18);
 
 		super.paint(g2d);
 	}
