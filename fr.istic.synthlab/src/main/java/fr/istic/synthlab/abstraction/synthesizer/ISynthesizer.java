@@ -1,5 +1,7 @@
 package fr.istic.synthlab.abstraction.synthesizer;
 
+import java.util.List;
+
 import com.jsyn.Synthesizer;
 
 import fr.istic.synthlab.abstraction.module.IModule;
@@ -69,11 +71,28 @@ public interface ISynthesizer {
 	 */
 	public void remove(IModule module);
 
-	// TODO : need comments
+	/**
+	 * return the current wire drawn
+	 * @return
+	 */
 	public IWire getCurrentWire();
 
+	/**
+	 * set the current wire drawn
+	 * @param wire
+	 */
 	public void setCurrentWire(IWire wire);
 
+	/**
+	 * remove a wire from the synthesizer
+	 * @param wire
+	 */
 	public void remove(IWire wire);
+	
+	/**
+	 * Return the list of module of this synthesizer
+	 * @return
+	 */
+	public List<IModule> getModules();
 
 }

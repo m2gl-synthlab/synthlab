@@ -5,6 +5,7 @@ import java.util.List;
 
 import fr.istic.synthlab.abstraction.port.IPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 
 /**
  * Abstract class for modules.
@@ -16,7 +17,19 @@ public abstract class AModule implements IModule{
 	private List<IPort> ports;
 	
 	public AModule(String name, ISynthesizer synth) {
-		this.name = name;
+		if(CSynthesizer.getInstance().getModules().size() >0){
+			for (IModule module : CSynthesizer.getInstance().getModules()) {
+				if (module.getName().startsWith(name)) {
+					this.name = name
+							+ (Integer.parseInt(module.getName().substring(
+									name.length())) + 1);
+				} else {
+					this.name = name + "1";
+				}
+			}
+		} else {
+			this.name = name + "1";
+		}
 		this.synth = synth;
 		ports = new ArrayList<IPort>();
 	}

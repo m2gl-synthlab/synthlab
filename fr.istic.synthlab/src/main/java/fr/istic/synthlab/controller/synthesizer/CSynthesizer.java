@@ -106,14 +106,8 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	@Override
 	public void saveToXML() {
 		List<IModule> modules = getModules();
-		
 		WriteXMLFile writeToXML = new WriteXMLFile();
 		writeToXML.addModules(modules);
-		
-		
-		//List<IWire> wires = getWires();
-		
-		
 	}
 
 }

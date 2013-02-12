@@ -125,5 +125,4 @@ public class Synthesizer implements ISynthesizer {
 		wire = null;
 		currentWire = null;
 	}
-
 }
