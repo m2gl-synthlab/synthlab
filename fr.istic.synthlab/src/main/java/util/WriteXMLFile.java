@@ -51,7 +51,13 @@ public class WriteXMLFile {
 			transformer = transformerFactory.newTransformer();
 
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File("savedInstance.xml"));
+			
+			int i=1;
+			StreamResult result;
+			while (new File("savedInstance"+i+".xml").exists())
+				i++;
+			
+			result = new StreamResult(new File("savedInstance"+i+".xml"));
 
 			// Output to console for testing
 			StreamResult res = new StreamResult(System.out);
