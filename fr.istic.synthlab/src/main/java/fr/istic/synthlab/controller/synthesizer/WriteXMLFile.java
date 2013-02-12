@@ -92,7 +92,7 @@ public class WriteXMLFile {
 			
 			// Ajout des ports utilises du module
 			for(IWire wire : module.getWires()){
-				if(module.havePort(wire.getInput())){
+				if(module.containsPort(wire.getInput())){
 					// set le port
 					Element port = doc.createElement("port");
 					moduleName.appendChild(port);

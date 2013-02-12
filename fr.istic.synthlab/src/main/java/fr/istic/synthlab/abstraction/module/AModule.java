@@ -44,7 +44,7 @@ public abstract class AModule implements IModule{
 	}
 	
 	@Override
-	public boolean havePort(IPort port){
+	public boolean containsPort(IPort port){
 		if(ports.contains(port))
 			return true;
 		else

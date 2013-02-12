@@ -74,16 +74,20 @@ public class ModuleREP extends AModule implements IModuleREP {
 
 		List<IWire> wires = new ArrayList<IWire>();
 		if (in.getWire() != null) {
-			wires.add(in.getWire());
+			if(!wires.contains(in.getWire()))
+				wires.add(in.getWire());
 		}
 		if (output1.getWire() != null) {
-			wires.add(output1.getWire());
+			if(!wires.contains(output1.getWire()))
+				wires.add(output1.getWire());
 		}
 		if (output2.getWire() != null) {
-			wires.add(output2.getWire());
+			if(!wires.contains(output2.getWire()))
+				wires.add(output2.getWire());
 		}
 		if (output3.getWire() != null) {
-			wires.add(output3.getWire());
+			if(!wires.contains(output3.getWire()))
+				wires.add(output3.getWire());
 		}
 		return wires;
 	}

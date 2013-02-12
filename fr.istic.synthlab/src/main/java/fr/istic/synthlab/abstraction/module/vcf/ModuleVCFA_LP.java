@@ -157,13 +157,16 @@ public class ModuleVCFA_LP extends AModule implements IModuleVCF, Observer<Port>
 	public List<IWire> getWires() {
 		List<IWire> wires = new ArrayList<IWire>();
 		if (input.getWire() != null) {
-			wires.add(input.getWire());
+			if(!wires.contains(input.getWire()))
+				wires.add(input.getWire());
 		}
 		if (fm.getWire() != null) {
-			wires.add(fm.getWire());
+			if(!wires.contains(fm.getWire()))
+				wires.add(fm.getWire());
 		}
 		if (output.getWire() != null) {
-			wires.add(output.getWire());
+			if(!wires.contains(output.getWire()))
+				wires.add(output.getWire());
 		}
 		return wires;
 

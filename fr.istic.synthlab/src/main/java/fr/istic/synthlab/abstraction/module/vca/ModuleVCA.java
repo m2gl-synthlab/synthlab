@@ -103,13 +103,16 @@ public class ModuleVCA extends AModule implements IModuleVCA, Observer<Port> {
 	public List<IWire> getWires() {
 		List<IWire> wires = new ArrayList<IWire>();
 		if(input.isInUse())
-			wires.add(input.getWire());
+			if(!wires.contains(input.getWire()))
+				wires.add(input.getWire());
 
 		if(inputAm.isInUse())
-			wires.add(inputAm.getWire());
+			if(!wires.contains(inputAm.getWire()))
+				wires.add(inputAm.getWire());
 
 		if(output.isInUse())
-			wires.add(output.getWire());
+			if(!wires.contains(output.getWire()))
+				wires.add(output.getWire());
 		return wires;
 	}
 

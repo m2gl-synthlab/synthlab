@@ -181,16 +181,20 @@ public class ModuleVCO extends AModule implements IModuleVCO, Observer<Port>{
 	public List<IWire> getWires() {
 		List<IWire> wires = new ArrayList<IWire>();
 		if (fm.getWire() != null) {
-			wires.add(fm.getWire());
+			if(!wires.contains(fm.getWire()))
+				wires.add(fm.getWire());
 		}
 		if (outputSquare.getWire() != null) {
-			wires.add(outputSquare.getWire());
+			if(!wires.contains(outputSquare.getWire()))
+				wires.add(outputSquare.getWire());
 		}
 		if (outputTriangle.getWire() != null) {
-			wires.add(outputTriangle.getWire());
+			if(!wires.contains(outputTriangle.getWire()))
+				wires.add(outputTriangle.getWire());
 		}
 		if (outputSawtooth.getWire() != null) {
-			wires.add(outputSawtooth.getWire());
+			if(!wires.contains(outputSawtooth.getWire()))
+				wires.add(outputSawtooth.getWire());
 		}
 		return wires;
 

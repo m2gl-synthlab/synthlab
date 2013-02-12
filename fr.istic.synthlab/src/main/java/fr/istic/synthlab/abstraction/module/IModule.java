@@ -57,7 +57,7 @@ public interface IModule {
 	 * @param port
 	 * @return
 	 */
-	public boolean havePort(IPort port);
+	public boolean containsPort(IPort port);
 
 	/**
 	 * Add the given port to the list of module's ports

@@ -114,10 +114,12 @@ public class ModuleEG extends AModule implements IModuleEG {
 	public List<IWire> getWires() {
 		List<IWire> wires = new ArrayList<IWire>();
 		if (gate.getWire() != null) {
-			wires.add(gate.getWire());
+			if(!wires.contains(gate.getWire()))
+				wires.add(gate.getWire());
 		}
 		if (out.getWire() != null) {
-			wires.add(out.getWire());
+			if(!wires.contains(out.getWire()))
+				wires.add(out.getWire());
 		}
 		return wires;
 	}

@@ -108,4 +108,9 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 		writeToXML.saveModules(modules);
 	}
 
+	@Override
+	public void loadFromXML() {
+//		ReadXMLFile
+	}
+
 }

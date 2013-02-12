@@ -85,10 +85,12 @@ public class ModuleAudioScope extends AModule implements IModuleAudioScope {
 	public List<IWire> getWires() {
 		List<IWire> wires = new ArrayList<IWire>();
 		if (in.getWire() != null) {
-			wires.add(in.getWire());
+			if(!wires.contains(in.getWire()))
+				wires.add(in.getWire());
 		}
 		if (out.getWire() != null) {
-			wires.add(out.getWire());
+			if(!wires.contains(out.getWire()))
+				wires.add(out.getWire());
 		}
 		return wires;
 	}

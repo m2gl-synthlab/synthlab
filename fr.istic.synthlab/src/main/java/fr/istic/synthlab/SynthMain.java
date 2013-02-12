@@ -50,7 +50,7 @@ public class SynthMain {
   
 		// Configure the frame
 		frame.setNewSynthCommand(new NewSynthCommand(app));
-		frame.setOpenSynthCommand(new OpenSynthCommand());
+		frame.setOpenSynthCommand(new OpenSynthCommand(CSynthesizer.getInstance()));
 		frame.setSaveSynthCommand(new SaveSynthCommand(CSynthesizer.getInstance()));
 		frame.setQuitSynthCommand(new QuitSynthCommand(app));
 		frame.setDocSynthCommand(new DocumentationCommand());

@@ -95,7 +95,8 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 	public List<IWire> getWires() {
 		List<IWire> wires = new ArrayList<IWire>();
 		if (in.getWire() != null) {
-			wires.add(in.getWire());
+			if(!wires.contains(in.getWire()))
+				wires.add(in.getWire());
 		}
 		return wires;
 	}

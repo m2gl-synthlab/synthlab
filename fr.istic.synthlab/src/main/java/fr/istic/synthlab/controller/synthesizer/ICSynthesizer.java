@@ -35,7 +35,18 @@ public interface ICSynthesizer extends ISynthesizer {
 	 */
 	public void p2cRemoveModule(ICModule module);
 
+	/**
+	 * Disconnect the current wire
+	 */
 	public void p2cDisconnectCurrentWire();
 
+	/**
+	 * Save the current instance to an XML file
+	 */
 	public void saveToXML();
+	
+	/**
+	 * Load an instance from an XML file
+	 */
+	public void loadFromXML();
 }
