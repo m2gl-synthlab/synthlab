@@ -42,6 +42,10 @@ public class ModuleREP extends AModule implements IModuleREP {
 		this.output3 = PACFactory.getFactory().newOutputPort(this, OUT3_NAME,
 				passThrough.getOutput3());
 
+		addPort(in);
+		addPort(output1);
+		addPort(output2);
+		addPort(output3);
 	}
 
 	@Override

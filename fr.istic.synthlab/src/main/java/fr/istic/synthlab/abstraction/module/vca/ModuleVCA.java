@@ -59,6 +59,9 @@ public class ModuleVCA extends AModule implements IModuleVCA, Observer<Port> {
 		this.inputAm.addObserver(this);
 		this.output = PACFactory.getFactory().newOutputPort(this, OUTPUT_NAME, passThroughB.output); // Ajout du port OUTPUT
 		
+		addPort(input);
+		addPort(inputAm);
+		addPort(output);
 	}
 
 	@Override

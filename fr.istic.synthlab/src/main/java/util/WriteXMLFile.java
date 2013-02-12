@@ -51,12 +51,12 @@ public class WriteXMLFile {
 			transformer = transformerFactory.newTransformer();
 
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File("file2.xml"));
+			StreamResult result = new StreamResult(new File("savedInstance.xml"));
 
 			// Output to console for testing
-			 StreamResult res = new StreamResult(System.out);
+			// StreamResult res = new StreamResult(System.out);
 
-			transformer.transform(source, res);
+			transformer.transform(source, result);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

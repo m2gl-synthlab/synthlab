@@ -58,6 +58,10 @@ public class ModuleVCF extends AModule implements IModuleVCF {
 		// Création du port de sortie sur le filtre JSyn 2
 		this.output = PACFactory.getFactory().newOutputPort(this, OUT_NAME,
 				filterJSyn2.output);
+		
+		addPort(input);
+		addPort(fm);
+		addPort(output);
 	}
 
 	@Override

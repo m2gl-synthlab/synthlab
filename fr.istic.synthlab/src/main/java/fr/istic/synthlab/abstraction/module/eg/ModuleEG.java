@@ -35,6 +35,8 @@ public class ModuleEG extends AModule implements IModuleEG {
 		this.gate = PACFactory.getFactory().newInputPort(this, IN_NAME,	adsr.input);
 		this.out = PACFactory.getFactory().newOutputPort(this, OUT_NAME, adsr.output);
 
+		addPort(gate);
+		addPort(out);
 	}
 
 	@Override
