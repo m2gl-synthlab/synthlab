@@ -38,6 +38,8 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 		this.setAttenuation(0);
 
 		attenuator.output.connect(out.input);
+		
+		addPort(in);
 	}
 
 	@Override

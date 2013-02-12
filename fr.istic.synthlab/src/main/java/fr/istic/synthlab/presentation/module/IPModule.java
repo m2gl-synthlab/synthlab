@@ -1,5 +1,7 @@
 package fr.istic.synthlab.presentation.module;
 
+import java.awt.Point;
+
 import fr.istic.synthlab.controller.module.ICModule;
 
 /**
@@ -16,5 +18,7 @@ public interface IPModule {
 	public int getHeight();
 
 	public int getWidth();
+
+	public Point getPosition();
 
 }

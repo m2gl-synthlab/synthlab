@@ -43,6 +43,10 @@ public class ModuleAudioScope extends AModule implements IModuleAudioScope {
 		this.scope.addProbe((UnitOutputPort) this.out.getJSyn());
 		this.scope.setTriggerMode(AudioScope.TriggerMode.NORMAL);
 		this.start();
+
+		addPort(in);
+		addPort(out);
+		
 	}
 
 	@Override

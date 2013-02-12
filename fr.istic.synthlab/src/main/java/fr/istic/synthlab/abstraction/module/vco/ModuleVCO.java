@@ -89,6 +89,12 @@ public class ModuleVCO extends AModule implements IModuleVCO, Observer<Port>{
 		vcoSquare.frequency.set(frequency);
 		vcoTriangle.frequency.set(frequency);
 		vcoSawtooth.frequency.set(frequency);
+		
+		addPort(fm);
+		addPort(outputSawtooth);
+		addPort(outputSquare);
+		addPort(outputTriangle);
+		
 	}
 
 	@Override
