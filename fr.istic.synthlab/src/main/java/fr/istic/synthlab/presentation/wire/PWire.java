@@ -137,7 +137,9 @@ public class PWire extends JPanel implements IPWire {
 	public void paint(Graphics g) {
 
 		Graphics2D g2 = (Graphics2D) g;
-		g2.setStroke(new BasicStroke(3));
+		
+		//new BasicStroke("taille en pixel des cables")
+		g2.setStroke(new BasicStroke(30));
 
 		if (posInput.x > posOutput.x) {
 			if (posInput.y > posOutput.y) {
