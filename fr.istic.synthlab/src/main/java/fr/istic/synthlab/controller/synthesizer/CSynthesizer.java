@@ -100,17 +100,4 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 		if(getCurrentWire() != null)
 			getCurrentWire().disconnect();
 	}
-
-	@Override
-	public void saveToXML() {
-		List<IModule> modules = getModules();
-		WriteXMLFile writeToXML = new WriteXMLFile();
-		writeToXML.saveModules(modules);
-	}
-
-	@Override
-	public void loadFromXML() {
-//		ReadXMLFile
-	}
-
 }

@@ -48,4 +48,9 @@ public interface ISynthApp {
 	 */
 	public void setUndisplaySynthCommand(ICommand undisplaySynthCommand);
 
+	/**
+	 * Save the current instance to an XML file
+	 */
+	public void saveToXML();
+
 }

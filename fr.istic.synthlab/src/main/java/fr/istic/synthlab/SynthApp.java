@@ -1,8 +1,13 @@
 package fr.istic.synthlab;
 
+import java.util.List;
+
+import fr.istic.synthlab.abstraction.module.IModule;
 import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
 import fr.istic.synthlab.command.ICommand;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
+import fr.istic.synthlab.controller.synthesizer.WriteXMLFile;
 import fr.istic.synthlab.factory.impl.PACFactory;
 //github.com/m2gl-synthlab/synthlab.git/
 
@@ -30,7 +35,7 @@ public class SynthApp implements ISynthApp {
 		this.synth = (ICSynthesizer) PACFactory.getFactory().newSynthesizer();
 		displayCmd.execute();
 
-		// Add a OUT module
+		// Add an OUT module
 		IModuleOUT out = PACFactory.getFactory().newOUT(synth);
 		synth.add(out);
 		synth.start();
@@ -41,6 +46,18 @@ public class SynthApp implements ISynthApp {
 		this.synth = null;
 		undisplayCmd.execute();
 		System.exit(0);
+	}
+	
+	@Override
+	public void saveToXML() {
+		List<IModule> modules = CSynthesizer.getInstance().getModules();
+		WriteXMLFile writeToXML = new WriteXMLFile();
+		writeToXML.saveModules(modules);
+	}
+
+	@Override
+	public void loadFromXML() {
+//		ReadXMLFile
 	}
 
 	@Override
