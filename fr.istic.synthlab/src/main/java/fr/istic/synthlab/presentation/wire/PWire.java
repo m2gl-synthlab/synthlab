@@ -150,6 +150,7 @@ public class PWire extends JPanel implements IPWire {
 		// Création de la courbe
 		QuadCurve2D curve = new QuadCurve2D.Double(posInput.getX() - getX(), posInput.getY() - getY(), mid.getX(), mid.getY() , posOutput.getX() - getX(), posOutput.getY() - getY());
 		
+		
 		// Dessine la courbe avec des extrémité ronde
 		g2.setStroke(new BasicStroke(6, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
 		g2.draw(curve);
