@@ -2,8 +2,6 @@ package fr.istic.synthlab.controller.synthesizer;
 
 import java.util.List;
 
-import util.WriteXMLFile;
-
 import fr.istic.synthlab.abstraction.module.IModule;
 import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
