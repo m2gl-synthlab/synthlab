@@ -16,6 +16,7 @@ public class CModuleOUT extends ModuleOUT implements ICModuleOUT {
 	public CModuleOUT(ISynthesizer synth) {
 		super(synth);
 		this.pres = PACFactory.getPFactory().newOUT(this);
+		this.pres.c2pSetGainValue(getAttenuation());
 	}
 
 	@Override

@@ -8,16 +8,17 @@ import fr.istic.synthlab.presentation.module.vca.IPModuleVCA;
 
 public class CModuleVCA extends ModuleVCA implements ICModuleVCA {
 	
-	private IPModuleVCA presentation;
+	private IPModuleVCA pres;
 
 	public CModuleVCA(ISynthesizer synth) {
 		super(synth);
-		this.presentation = PACFactory.getPFactory().newVCA(this);
+		this.pres = PACFactory.getPFactory().newVCA(this);
+		this.pres.c2pSetAttenuationValue(getAttenuation());
 	}
 
 	@Override
 	public IPModuleVCA getPresentation() {
-		return presentation;
+		return pres;
 	}
 
 	@Override
@@ -30,7 +31,7 @@ public class CModuleVCA extends ModuleVCA implements ICModuleVCA {
 	@Override
 	public void p2cAttenuationValueChanged(double amplitude) {
 		setAttenuation(amplitude);
-		this.presentation.c2pSetAttenuationValue(getAttenuation());
+		this.pres.c2pSetAttenuationValue(getAttenuation());
 	}
 
 }

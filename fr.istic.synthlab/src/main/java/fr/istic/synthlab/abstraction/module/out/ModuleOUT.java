@@ -35,7 +35,7 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 		this.attenuator = new AttenuationFilter();
 
 		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME, attenuator.input);
-		this.attenuator.setAttenuation(0);
+		this.setAttenuation(0);
 
 		attenuator.output.connect(out.input);
 	}
@@ -60,8 +60,6 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	@Override
 	public void setAttenuation(double dbValue) {
-//		System.out.println("Attenuation = "+ dbValue +"dB");
-//		attenuator.setAttenuation(dbValue);
 		attenuator.setAttenuation(Convert.dB2V(dbValue));
 	}
 

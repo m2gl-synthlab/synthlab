@@ -32,10 +32,8 @@ public class ModuleEG extends AModule implements IModuleEG {
 
 		adsr = new EnvelopeDAHDSR();
 
-		this.gate = PACFactory.getFactory().newInputPort(this, IN_NAME,
-				adsr.input);
-		this.out = PACFactory.getFactory().newOutputPort(this, OUT_NAME,
-				adsr.output);
+		this.gate = PACFactory.getFactory().newInputPort(this, IN_NAME,	adsr.input);
+		this.out = PACFactory.getFactory().newOutputPort(this, OUT_NAME, adsr.output);
 
 	}
 
