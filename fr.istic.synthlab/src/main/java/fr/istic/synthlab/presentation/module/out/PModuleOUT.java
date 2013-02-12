@@ -107,6 +107,7 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 
 	@Override
 	public void c2pSetGainValue(double gain) {
+		model.setDoubleValue(gain);
 	}
 
 	@Override
