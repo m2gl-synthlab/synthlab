@@ -87,40 +87,43 @@ public class WriteXMLFile {
 			attrY.setValue(Double.toString(p.getY()));
 			moduleName.setAttributeNode(attrY);
 			
-			// Ajout des portus utilises du module
+			// Ajout des ports utilises du module
 			for(IWire wire : module.getWires()){
-				//if(wire.getInput() == module.)
-				System.out.println(wire.getInput());
-				System.out.println(wire.getOutput());
+				if(module.havePort(wire.getInput())){
+					// set le port
+					Element port = doc.createElement("port");
+					moduleName.appendChild(port);
+					
+					// Nom port
+					Attr attrPortName = doc.createAttribute("name");
+					attrPortName.setValue(wire.getInput().getName());
+					port.setAttributeNode(attrPortName);
+					
+					// Type port
+					Attr attrPortType = doc.createAttribute("type");
+					attrPortType.setValue("input");
+					port.setAttributeNode(attrPortType);
+					
+					// Connected to Module name
+					Attr attrPortConnectedToModuleName = doc.createAttribute("connectedToModuleName");
+					attrPortConnectedToModuleName.setValue(wire.getOutput().getModule().getName());
+					port.setAttributeNode(attrPortConnectedToModuleName);
+					
+					// Connected to Module port
+					Attr attrPortConnectedToModulePort = doc.createAttribute("connectedToModulePort");
+					attrPortConnectedToModulePort.setValue(wire.getOutput().getName());
+					port.setAttributeNode(attrPortConnectedToModulePort);
+					
+				}
 			}
 		}
 		saveToXML();
 	}
 	
-//	public void save() {
-//		try {
-//			// firstname elements
-//			Element firstname = doc.createElement("firstname");
-//			firstname.appendChild(doc.createTextNode("yong"));
-//			staff.appendChild(firstname);
-//
-//			// lastname elements
-//			Element lastname = doc.createElement("lastname");
-//			lastname.appendChild(doc.createTextNode("mook kim"));
-//			staff.appendChild(lastname);
-//
-//			// nickname elements
-//			Element nickname = doc.createElement("nickname");
-//			nickname.appendChild(doc.createTextNode("mkyong"));
-//			staff.appendChild(nickname);
-//
-//			// salary elements
-//			Element salary = doc.createElement("salary");
-//			salary.appendChild(doc.createTextNode("100000"));
-//			staff.appendChild(salary);
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+// STRUCTURE DU XML BATI :
+//	<modules>
+//		<module name="OUT" x="10" y="10">
+//			<port name="out" type="output" connectedToModuleName="" connectedToModulePort=""/>
+//			</module>
+//	</modules>
 }

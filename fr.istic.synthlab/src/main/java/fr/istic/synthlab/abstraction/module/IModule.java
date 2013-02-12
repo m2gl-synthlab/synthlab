@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jsyn.unitgen.UnitGenerator;
 
+import fr.istic.synthlab.abstraction.port.IPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 
@@ -49,4 +50,6 @@ public interface IModule {
 	 * @return list of wires
 	 */
 	public List<IWire> getWires();
+
+	public boolean havePort(IPort port);
 }
