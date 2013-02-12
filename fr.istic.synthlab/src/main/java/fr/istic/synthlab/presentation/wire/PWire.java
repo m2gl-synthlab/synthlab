@@ -1,11 +1,13 @@
 package fr.istic.synthlab.presentation.wire;
 
 import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.RenderingHints;
+import java.awt.geom.QuadCurve2D;
 
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
@@ -31,8 +33,6 @@ public class PWire extends JPanel implements IPWire {
 
 	private Point posInput;
 	private Point posOutput;
-	private int height = 0;
-	private int width = 0;
 	private PInputPort inputPort;
 	private POutputPort outputPort;
 	private ICSynthesizer synth = null;
@@ -49,6 +49,8 @@ public class PWire extends JPanel implements IPWire {
 
 	private void configView() {
 		setOpaque(false);
+		this.posInput = new Point();
+		this.posOutput = new Point();
 	}
 
 	private void defineCallbacks() {
@@ -81,6 +83,7 @@ public class PWire extends JPanel implements IPWire {
 	@Override
 	public void updateDisplay() {
 		
+		// Si le port de sortie est branché
 		if (outputPort != null) {
 			posOutput = new Point(outputPort.getX() + (POutputPort.width / 2), outputPort.getY()+ (POutputPort.height / 2));
 
@@ -91,7 +94,8 @@ public class PWire extends JPanel implements IPWire {
 				c2 = c2.getParent();
 			}
 		}
-
+		
+		// Si le port d'entrée est branché
 		if (inputPort != null) {
 			posInput = new Point(inputPort.getX() + (PInputPort.width / 2), inputPort.getY() + + (PInputPort.height / 2));
 
@@ -103,28 +107,26 @@ public class PWire extends JPanel implements IPWire {
 			}
 		}
 
-		int x = 0;
-		int y = 0;
+		// Calcule de la boite englobante
+		int x, y, w, h = 0;
 
 		if (posInput.x < posOutput.x) {
 			x = posInput.x;
-			width = posOutput.x - posInput.x;
+			w = posOutput.x - posInput.x;
 		} else {
 			x = posOutput.x;
-			width = posInput.x - posOutput.x;
+			w = posInput.x - posOutput.x;
 		}
 
 		if (posInput.y < posOutput.y) {
 			y = posInput.y;
-			height = posOutput.y - posInput.y;
+			h = posOutput.y - posInput.y;
 		} else {
 			y = posOutput.y;
-			height = posInput.y - posOutput.y;
+			h = posInput.y - posOutput.y;
 		}
 
-		setPreferredSize(new Dimension(width, height));
-//		setBounds(x + (POutputPort.width / 2), y + (POutputPort.height / 2), width, height);
-		setBounds(x, y , width, height);
+		setBounds(x-10, y-10 , w+20, h+20); // On ajoute une marge pour évité de coupé le cable
 
 		IPSynthesizer presSynth = synth.getPresentation();
 		((JLayeredPane) presSynth).setLayer(this, 0, 0);
@@ -135,26 +137,27 @@ public class PWire extends JPanel implements IPWire {
 
 	@Override
 	public void paint(Graphics g) {
-
+		super.paint(g);
 		Graphics2D g2 = (Graphics2D) g;
 		
-		//new BasicStroke("taille en pixel des cables")
-		g2.setStroke(new BasicStroke(3));
 
-		if (posInput.x > posOutput.x) {
-			if (posInput.y > posOutput.y) {
-				
-				g2.drawLine(0, 0, width, height);
-			} else {
-				g2.drawLine(0, height, width, 0);
-			}
-		} else {
-			if (posInput.y > posOutput.y) {
-				g2.drawLine(0, height, width, 0);
-			} else {
-				g2.drawLine(0, 0, width, height);
-			}
-		}
+		// Lisse l'affichage
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+		// Calcul d'un point centrale
+		Point mid = new Point(getWidth() / 2, getHeight()); // TODO : baissé Y en fonction de la taille du cable
+		
+		// Création de la courbe
+		QuadCurve2D curve = new QuadCurve2D.Double(posInput.getX() - getX(), posInput.getY() - getY(), mid.getX(), mid.getY() , posOutput.getX() - getX(), posOutput.getY() - getY());
+		
+		// Dessine la courbe avec des extrémité ronde
+		g2.setStroke(new BasicStroke(6, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
+		g2.draw(curve);
+		
+		// Ajoute un trait fin au centre
+		g2.setStroke(new BasicStroke(2));
+		g2.setColor(Color.GRAY);
+		g2.draw(curve);
 	}
 
 	@Override
