@@ -52,5 +52,10 @@ public interface ISynthApp {
 	 * Save the current instance to an XML file
 	 */
 	public void saveToXML();
+	
+	/**
+	 * Load an instance from an XML file
+	 */
+	public void loadFromXML();
 
 }

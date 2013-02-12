@@ -1,20 +1,19 @@
 package fr.istic.synthlab.command.menu;
 
-import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
+import fr.istic.synthlab.ISynthApp;
 import fr.istic.synthlab.command.ICommand;
-import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 
 public class OpenSynthCommand implements ICommand {
 
-	private ISynthesizer synth;
+	private ISynthApp app;
 	
-	public OpenSynthCommand(ISynthesizer synth){
-		this.synth = synth;
+	public OpenSynthCommand(ISynthApp app){
+		this.app = app;
 	}
 	
 	@Override
 	public void execute() {
-		((ICSynthesizer)synth).loadFromXML();
+		app.loadFromXML();
 	}
 
 }

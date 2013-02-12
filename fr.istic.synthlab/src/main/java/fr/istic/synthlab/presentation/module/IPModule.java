@@ -21,4 +21,6 @@ public interface IPModule {
 
 	public Point getPosition();
 
+	public void setPosition(Point point);
+
 }

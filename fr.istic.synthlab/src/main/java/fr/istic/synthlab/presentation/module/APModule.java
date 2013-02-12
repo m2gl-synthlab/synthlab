@@ -185,5 +185,9 @@ public abstract class APModule extends WebPanel implements IPModule {
 	public Point getPosition(){
 		return this.getLocation();
 	}
+	
+	public void setPosition(Point point){
+		this.setLocation(point);
+	}
 
 }

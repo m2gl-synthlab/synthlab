@@ -7,6 +7,7 @@ import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
+import fr.istic.synthlab.controller.synthesizer.ReadXMLFile;
 import fr.istic.synthlab.controller.synthesizer.WriteXMLFile;
 import fr.istic.synthlab.factory.impl.PACFactory;
 //github.com/m2gl-synthlab/synthlab.git/
@@ -57,7 +58,18 @@ public class SynthApp implements ISynthApp {
 
 	@Override
 	public void loadFromXML() {
-//		ReadXMLFile
+		ReadXMLFile readXML = new ReadXMLFile();
+		List<IModule> modules = readXML.getModules();
+		
+		synth.stop();
+		this.synth = (ICSynthesizer) PACFactory.getFactory().newSynthesizer();
+
+		for(IModule module : modules){
+			synth.add(module);
+		}
+
+		displayCmd.execute();
+		synth.start();
 	}
 
 	@Override
