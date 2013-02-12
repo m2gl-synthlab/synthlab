@@ -53,12 +53,7 @@ public class WriteXMLFile {
 
 			DOMSource source = new DOMSource(doc);
 			
-			int i=1;
-			StreamResult result;
-			while (new File("savedInstance"+i+".xml").exists())
-				i++;
-			
-			result = new StreamResult(new File("savedInstance"+i+".xml"));
+			StreamResult result = new StreamResult(new File("savedInstance.xml"));
 
 			// Output to console for testing
 			StreamResult res = new StreamResult(System.out);
