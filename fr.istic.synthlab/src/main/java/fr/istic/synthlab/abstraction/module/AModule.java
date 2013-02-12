@@ -17,19 +17,15 @@ public abstract class AModule implements IModule{
 	private List<IPort> ports;
 	
 	public AModule(String name, ISynthesizer synth) {
+		int nbModules = 0;
 		if(CSynthesizer.getInstance().getModules().size() >0){
 			for (IModule module : CSynthesizer.getInstance().getModules()) {
 				if (module.getName().startsWith(name)) {
-					this.name = name
-							+ (Integer.parseInt(module.getName().substring(
-									name.length())) + 1);
-				} else {
-					this.name = name + "1";
+					nbModules++;
 				}
 			}
-		} else {
-			this.name = name + "1";
 		}
+		this.name = name + " - " + ++nbModules;
 		this.synth = synth;
 		ports = new ArrayList<IPort>();
 	}
