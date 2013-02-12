@@ -66,22 +66,30 @@ public class WriteXMLFile {
 	public void addModules(List<IModule> modules) {
 		for(IModule module : modules){
 			
-			System.out.println(module.getName());
-			Element moduleName = doc.createElement(module.getName());
+			Element moduleName = doc.createElement("module");
 			rootElement.appendChild(moduleName);
 			
 			Point p = ((ICModule)module).getPresentation().getPosition();
 			System.out.println(p);
 			
+			// Nom module
+			Attr attrName = doc.createAttribute("name");
+			attrName.setValue(module.getName());
+			moduleName.setAttributeNode(attrName);
+			
+			// Position x
 			Attr attrX = doc.createAttribute("x");
 			attrX.setValue(Double.toString(p.getX()));
 			moduleName.setAttributeNode(attrX);
 			
+			// Position y
 			Attr attrY = doc.createAttribute("y");
 			attrY.setValue(Double.toString(p.getY()));
 			moduleName.setAttributeNode(attrY);
 			
+			// Ajout des portus utilises du module
 			for(IWire wire : module.getWires()){
+				//if(wire.getInput() == module.)
 				System.out.println(wire.getInput());
 				System.out.println(wire.getOutput());
 			}
