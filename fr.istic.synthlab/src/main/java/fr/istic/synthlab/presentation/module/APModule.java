@@ -1,5 +1,6 @@
 package fr.istic.synthlab.presentation.module;
 
+import java.awt.Point;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
@@ -179,6 +180,10 @@ public abstract class APModule extends WebPanel implements IPModule {
 
 	public void setHeigth(int heigth) {
 		this.heigth = heigth;
+	}
+	
+	public Point getPosition(){
+		return this.getLocation();
 	}
 
 }

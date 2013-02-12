@@ -1,7 +1,10 @@
 package fr.istic.synthlab.controller.synthesizer;
 
+import java.util.List;
+
+import util.WriteXMLFile;
+
 import fr.istic.synthlab.abstraction.module.IModule;
-import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.controller.module.ICModule;
@@ -98,6 +101,19 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	public void p2cDisconnectCurrentWire() {
 		if(getCurrentWire() != null)
 			getCurrentWire().disconnect();
+	}
+
+	@Override
+	public void saveToXML() {
+		List<IModule> modules = getModules();
+		
+		WriteXMLFile writeToXML = new WriteXMLFile();
+		writeToXML.addModules(modules);
+		
+		
+		//List<IWire> wires = getWires();
+		
+		
 	}
 
 }

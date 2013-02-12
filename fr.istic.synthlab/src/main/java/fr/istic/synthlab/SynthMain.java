@@ -20,6 +20,7 @@ import fr.istic.synthlab.command.menu.QuitSynthCommand;
 import fr.istic.synthlab.command.menu.SaveSynthCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarPauseCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarPlayCommand;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -50,7 +51,7 @@ public class SynthMain {
 		// Configure the frame
 		frame.setNewSynthCommand(new NewSynthCommand(app));
 		frame.setOpenSynthCommand(new OpenSynthCommand());
-		frame.setSaveSynthCommand(new SaveSynthCommand());
+		frame.setSaveSynthCommand(new SaveSynthCommand(CSynthesizer.getInstance()));
 		frame.setQuitSynthCommand(new QuitSynthCommand(app));
 		frame.setDocSynthCommand(new DocumentationCommand());
 		frame.setAboutSynthCommand(new AboutCommand());
