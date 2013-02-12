@@ -7,9 +7,9 @@ import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
-import fr.istic.synthlab.controller.synthesizer.ReadXMLFile;
-import fr.istic.synthlab.controller.synthesizer.WriteXMLFile;
 import fr.istic.synthlab.factory.impl.PACFactory;
+import fr.istic.synthlab.util.ReadXMLFile;
+import fr.istic.synthlab.util.WriteXMLFile;
 //github.com/m2gl-synthlab/synthlab.git/
 
 

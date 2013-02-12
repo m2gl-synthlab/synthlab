@@ -1,4 +1,4 @@
-package fr.istic.synthlab.controller.synthesizer;
+package fr.istic.synthlab.util;
 
 import java.awt.Point;
 import java.io.File;
@@ -22,6 +22,7 @@ import fr.istic.synthlab.controller.module.rep.CModuleREP;
 import fr.istic.synthlab.controller.module.vca.CModuleVCA;
 import fr.istic.synthlab.controller.module.vcf.CModuleVCFA_LP;
 import fr.istic.synthlab.controller.module.vco.CModuleVCO;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 
 public class ReadXMLFile {
 

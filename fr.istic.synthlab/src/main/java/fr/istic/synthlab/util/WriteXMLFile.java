@@ -1,5 +1,4 @@
-package fr.istic.synthlab.controller.synthesizer;
-
+package fr.istic.synthlab.util;
 
 import java.awt.Point;
 import java.io.File;
