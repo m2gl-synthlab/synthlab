@@ -52,7 +52,6 @@ public class ReadXMLFile {
 	}
 
 	public void loadSynthesizer() {
-		List<Object> modulesAndWires =  new ArrayList<Object>();
 		try {
 			NodeList nList = doc.getElementsByTagName("module");
 
@@ -112,20 +111,18 @@ public class ReadXMLFile {
 						module.setParameter(key, value);
 					}
 					modules.put(module.getName(), module);
-					modulesAndWires.add(module);
 					CSynthesizer.getInstance().add(module);
 				}
 				
-				for(IWire wire : portsToConnect.keySet()){
-					String moduleName = portsToConnect.get(wire)[0];
-					String portName = portsToConnect.get(wire)[1];
-					IModule moduleToConnect = modules.get(moduleName);
-					IPort port = moduleToConnect.getPortByName(portName);
-					wire.connect((IInputPort)port);
-					modulesAndWires.add(wire);
-					CSynthesizer.getInstance().add(wire);
-				}
+			}
+			for(IWire wire : portsToConnect.keySet()){
+				String moduleName = portsToConnect.get(wire)[0];
+				String portName = portsToConnect.get(wire)[1];
 				
+				IModule moduleToConnect = modules.get(moduleName);
+				IPort port = moduleToConnect.getPortByName(portName);
+				wire.connect((IInputPort)port);
+				CSynthesizer.getInstance().add(wire);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
