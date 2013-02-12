@@ -51,5 +51,16 @@ public interface IModule {
 	 */
 	public List<IWire> getWires();
 
+	/**
+	 * Indicate if the port is contained by the module or not
+	 * @param port
+	 * @return
+	 */
 	public boolean havePort(IPort port);
+
+	/**
+	 * Add the given port to the list of module's ports
+	 * @param port
+	 */
+	void addPort(IPort port);
 }

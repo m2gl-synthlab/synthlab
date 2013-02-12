@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.istic.synthlab.abstraction.port.IPort;
-import fr.istic.synthlab.abstraction.port.InputPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 
 /**
@@ -40,6 +39,7 @@ public abstract class AModule implements IModule{
 			return false;
 	}
 	
+	@Override
 	public void addPort(IPort port){
 		ports.add(port);
 	}
