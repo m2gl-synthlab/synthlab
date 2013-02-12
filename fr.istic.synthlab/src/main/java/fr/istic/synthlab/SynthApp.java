@@ -67,16 +67,7 @@ public class SynthApp implements ISynthApp {
 		displayCmd.execute();
 		
 		ReadXMLFile readXML = new ReadXMLFile();
-		List<Object> modules = readXML.getModules();
-		
-		for(Object moduleOrWire : modules){
-			if (moduleOrWire instanceof IWire){
-				synth.add((IWire)moduleOrWire);
-			}
-			if (moduleOrWire instanceof IModule){
-				synth.add((IModule)moduleOrWire);
-			}
-		}
+		readXML.loadSynthesizer();
 		
 		synth.start();
 	}

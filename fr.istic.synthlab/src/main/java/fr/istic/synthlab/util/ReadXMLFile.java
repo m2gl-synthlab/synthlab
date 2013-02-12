@@ -40,23 +40,18 @@ public class ReadXMLFile {
 		portsToConnect = new HashMap<IWire, String[]>();
 		modules = new HashMap<String, IModule>();
 		try {
-
 			File fXmlFile = new File("savedInstance.xml");
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
 					.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			doc = dBuilder.parse(fXmlFile);
-
-			// optional, but recommended
-			// read this -
-			// http://stackoverflow.com/questions/13786607/normalization-in-dom-parsing-with-java-how-does-it-work
 			doc.getDocumentElement().normalize();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public List<Object> getModules() {
+	public void loadSynthesizer() {
 		List<Object> modulesAndWires =  new ArrayList<Object>();
 		try {
 			NodeList nList = doc.getElementsByTagName("module");
@@ -93,23 +88,10 @@ public class ReadXMLFile {
 					
 					for (int i = 0; i < eElement.getElementsByTagName("port")
 							.getLength(); i++) {
-						System.out.println("name : "
-								+ ((Element) eElement.getElementsByTagName(
-										"port").item(i)).getAttribute("name"));
-						System.out.println("module port : "
-								+ ((Element) eElement.getElementsByTagName(
-										"port").item(i))
-										.getAttribute("connectedToModulePort"));
-						System.out.println("module name : "
-								+ ((Element) eElement.getElementsByTagName(
-										"port").item(i))
-										.getAttribute("connectedToModuleName"));
-						
 						String portName = ((Element) eElement.getElementsByTagName("port").item(i)).getAttribute("name");
 						
 						IWire wire = new CWire();
 						IOutputPort outport = (IOutputPort)module.getPortByName(portName);
-						System.out.println("outport "+ portName + "    " + outport);
 						wire.connect(outport);
 						
 						String[] str = {((Element) eElement.getElementsByTagName(
@@ -131,30 +113,23 @@ public class ReadXMLFile {
 					}
 					modules.put(module.getName(), module);
 					modulesAndWires.add(module);
+					CSynthesizer.getInstance().add(module);
 				}
 				
 				for(IWire wire : portsToConnect.keySet()){
 					String moduleName = portsToConnect.get(wire)[0];
 					String portName = portsToConnect.get(wire)[1];
-
-					System.out.println("moduleName"+moduleName);
-					System.out.println("portName"+portName);
-					
 					IModule moduleToConnect = modules.get(moduleName);
 					IPort port = moduleToConnect.getPortByName(portName);
 					wire.connect((IInputPort)port);
 					modulesAndWires.add(wire);
+					CSynthesizer.getInstance().add(wire);
 				}
-				
-				
-				
 				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		return modulesAndWires;
 	}
 
 }
