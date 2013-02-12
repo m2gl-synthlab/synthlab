@@ -128,9 +128,17 @@ public class WriteXMLFile {
 	}
 	
 // STRUCTURE DU XML BATI :
+//	<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 //	<modules>
-//		<module name="OUT" x="10" y="10">
-//			<port name="out" type="output" connectedToModuleName="" connectedToModulePort=""/>
-//			</module>
+//		<module name="OUT1" x="10.0" y="10.0">
+//			<port connectedToModuleName="VCA1" connectedToModulePort="Output" name="In" type="input"/>
+//		</module>
+//		<module name="VCO1" x="14.0" y="296.0"/>
+//		<module name="VCA1" x="482.0" y="300.0">
+//			<port connectedToModuleName="VCO1" connectedToModulePort="Square" name="Input" type="input"/>
+//		</module>
+//		<module name="VCA2" x="1010.0" y="64.0">
+//			<port connectedToModuleName="VCO1" connectedToModulePort="SawTooth" name="Input" type="input"/>
+//		</module>
 //	</modules>
 }
