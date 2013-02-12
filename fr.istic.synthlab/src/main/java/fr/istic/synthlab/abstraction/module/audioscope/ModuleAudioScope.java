@@ -6,7 +6,7 @@ import java.util.List;
 import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.scope.AudioScope;
 import com.jsyn.scope.AudioScopeModel;
-import com.jsyn.unitgen.UnitFilter;
+import com.jsyn.unitgen.PassThrough;
 import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.module.AModule;
@@ -27,7 +27,7 @@ public class ModuleAudioScope extends AModule implements IModuleAudioScope {
 	private static final String IN_NAME = "In";
 
 	private AudioScope scope;
-	private IdentityFilter adapter;
+	private PassThrough passThrough;
 
 	private IInputPort in;
 	private IOutputPort out;
@@ -35,19 +35,20 @@ public class ModuleAudioScope extends AModule implements IModuleAudioScope {
 	public ModuleAudioScope(ISynthesizer synth) {
 		super(MODULE_NAME, synth);
 		this.scope = new AudioScope(synth.getJSyn());
-		this.adapter = new IdentityFilter();
+		this.passThrough = new PassThrough();
 
-		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME, adapter.input);
-		this.out = PACFactory.getFactory().newOutputPort(this, OUT_NAME, adapter.output);
+		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME, passThrough.input);
+		this.out = PACFactory.getFactory().newOutputPort(this, OUT_NAME, passThrough.output);
 
 		this.scope.addProbe((UnitOutputPort) this.out.getJSyn());
 		this.scope.setTriggerMode(AudioScope.TriggerMode.NORMAL);
+		this.start();
 	}
 
 	@Override
 	public List<UnitGenerator> getJSyn() {
 		List<UnitGenerator> generators = new ArrayList<UnitGenerator>();
-		generators.add(adapter);
+		generators.add(passThrough);
 		return generators;
 	}
 
@@ -86,24 +87,6 @@ public class ModuleAudioScope extends AModule implements IModuleAudioScope {
 			wires.add(out.getWire());
 		}
 		return wires;
-	}
-
-	/**
-	 * Identity Filter
-	 */
-	private class IdentityFilter extends UnitFilter {
-
-		@Override
-		public void generate(int start, int limit) {
-			// Get signal arrays from ports.
-			double[] inputs = input.getValues();
-			double[] outputs = output.getValues();
-
-			for (int i = start; i < limit; i++) {
-				double x = inputs[i];
-				outputs[i] = x;
-			}
-		}
 	}
 
 }

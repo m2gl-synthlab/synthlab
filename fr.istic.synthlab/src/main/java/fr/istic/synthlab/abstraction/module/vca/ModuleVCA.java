@@ -3,13 +3,16 @@ package fr.istic.synthlab.abstraction.module.vca;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jsyn.unitgen.PassThrough;
 import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.filter.AmplitudeModulatorFilter;
+import fr.istic.synthlab.abstraction.filter.AttenuationFilter;
 import fr.istic.synthlab.abstraction.module.AModule;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
+import fr.istic.synthlab.abstraction.util.Convert;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
@@ -23,31 +26,35 @@ public class ModuleVCA extends AModule implements IModuleVCA {
 	public static final String PARAM_AMPLITUDE_NAME = "Gain";
 
 	// Amplitude de base
-	private double baseAmplitude;
+//	private double baseAmplitude;
 	
 	// Input & Output du module
 	private IInputPort input, inputAm;
 	private IOutputPort output;
 	
 	// Modulateur d'amplitude 
-	private AmplitudeModulatorFilter baseAmplitudeModulator;
+	private AttenuationFilter attenuator;
 	private AmplitudeModulatorFilter inputAmplitudeModulator;
+//	private PassThrough passThrough;
 	
 	public ModuleVCA(ISynthesizer synth) {
 		super(MODULE_NAME, synth);
 
-		this.baseAmplitude = 0;
 		
-		// Modulateur de base
-		this.baseAmplitudeModulator = new AmplitudeModulatorFilter(this.baseAmplitude);
+//		this.passThrough = new PassThrough();
+//		this.baseAmplitude = 0;
+		
+		// Attenuateur de base
+		this.attenuator = new AttenuationFilter();
+		this.attenuator.setAttenuation(0);
+		
 		// Modulateur sur entrée Am
 		this.inputAmplitudeModulator = new AmplitudeModulatorFilter(0);
 		
-		
-		this.baseAmplitudeModulator.inputAm.set(getBaseAmplitudeValue());
-		this.input = PACFactory.getFactory().newInputPort(this, INPUT_NAME, baseAmplitudeModulator.input); // Ajout du port INPUT
+		this.attenuator.setAttenuation(getAttenuation());
+		this.input = PACFactory.getFactory().newInputPort(this, INPUT_NAME, attenuator.input); // Ajout du port INPUT
 
-		this.inputAmplitudeModulator.input.connect(baseAmplitudeModulator.output);
+		this.inputAmplitudeModulator.input.connect(attenuator.output);
 		this.inputAm = PACFactory.getFactory().newInputPort(this, INPUT_AM_NAME, inputAmplitudeModulator.inputAm); // Ajout du port AM
 		this.output = PACFactory.getFactory().newOutputPort(this, OUTPUT_NAME, inputAmplitudeModulator.output); // Ajout du port OUTPUT
 		
@@ -56,7 +63,7 @@ public class ModuleVCA extends AModule implements IModuleVCA {
 	@Override
 	public List<UnitGenerator> getJSyn() {
 		List<UnitGenerator> generators = new ArrayList<UnitGenerator>();
-		generators.add(baseAmplitudeModulator);
+		generators.add(attenuator);
 		generators.add(inputAmplitudeModulator);
 		return generators;
 	}
@@ -68,13 +75,13 @@ public class ModuleVCA extends AModule implements IModuleVCA {
 
 	@Override
 	public void start() {
-		this.baseAmplitudeModulator.start();
+		this.attenuator.start();
 		this.inputAmplitudeModulator.start();
 	}
 	
 	@Override
 	public void stop() {
-		this.baseAmplitudeModulator.stop();
+		this.attenuator.stop();
 		this.inputAmplitudeModulator.stop();
 	}
 
@@ -108,15 +115,14 @@ public class ModuleVCA extends AModule implements IModuleVCA {
 	}
 
 	@Override
-	public void setBaseAmplitudeValue(double value) {
-		this.baseAmplitude = value;
-		System.out.println(value);
-		this.baseAmplitudeModulator.inputAm.set(value/60);
+	public void setAttenuation(double dbValue) { // dB
+//		this.baseAmplitude = dbValue;
+		this.attenuator.setAttenuation(Convert.dB2V(dbValue));
 	}
 
 	@Override
-	public double getBaseAmplitudeValue() {
-		return this.baseAmplitude;
+	public double getAttenuation() {
+		return Convert.v2Db(attenuator.getAttenuation());
 	}
 
 }

@@ -29,8 +29,8 @@ public class CModuleVCA extends ModuleVCA implements ICModuleVCA {
 
 	@Override
 	public void p2cAttenuationValueChanged(double amplitude) {
-		setBaseAmplitudeValue(amplitude);
-		this.presentation.c2pSetAttenuationValue(getBaseAmplitudeValue());
+		setAttenuation(amplitude);
+		this.presentation.c2pSetAttenuationValue(getAttenuation());
 	}
 
 }

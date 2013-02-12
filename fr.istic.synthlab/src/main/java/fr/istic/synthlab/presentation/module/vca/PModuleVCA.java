@@ -51,7 +51,7 @@ public class PModuleVCA extends APModule implements IPModuleVCA {
 		panelInput.setOpaque(false);
 		panelOutput.setOpaque(false);
 
-		attenuationModel = new DoubleBoundedRangeModel(ModuleVCA.PARAM_AMPLITUDE_NAME, 7200, -60, 12, ctrl.getBaseAmplitudeValue());
+		attenuationModel = new DoubleBoundedRangeModel(ModuleVCA.PARAM_AMPLITUDE_NAME, 7200, -60, 12, ctrl.getAttenuation());
 		RotaryTextController attenuationRotary = new RotaryTextController(attenuationModel, 4);
 		attenuationRotary.setBorder(new TitledBorder(ModuleVCA.PARAM_AMPLITUDE_NAME));
 		panelParams.add(attenuationRotary);
