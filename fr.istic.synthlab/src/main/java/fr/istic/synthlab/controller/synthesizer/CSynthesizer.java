@@ -13,14 +13,14 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 
 	private IPSynthesizer pres;
 
+	private static ICSynthesizer instance;
 	/**
 	 * @return the synthesizer's instance
 	 */
-	public static ISynthesizer getInstance() {
+	public static ICSynthesizer getInstance() {
 		if (instance == null) {
-			instance = PACFactory.getFactory().newSynthesizer();
+			instance = (ICSynthesizer) PACFactory.getFactory().newSynthesizer();
 		}
-		System.out.println(instance);
 		return instance;
 	}
 	
@@ -92,6 +92,11 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	public void p2cRemoveModule(ICModule module) {
 		this.remove(module);
 		pres.c2pRemoveModuleOk(module.getPresentation());
+	}
+
+	@Override
+	public void p2cDisconnectCurrentWire() {
+		getCurrentWire().disconnect();
 	}
 
 }

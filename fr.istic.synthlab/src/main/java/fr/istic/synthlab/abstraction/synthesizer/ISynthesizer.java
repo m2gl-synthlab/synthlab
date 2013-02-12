@@ -1,5 +1,7 @@
 package fr.istic.synthlab.abstraction.synthesizer;
 
+import java.util.List;
+
 import com.jsyn.Synthesizer;
 
 import fr.istic.synthlab.abstraction.module.IModule;

@@ -9,13 +9,16 @@ import java.util.List;
 
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.module.IPModule;
+import fr.istic.synthlab.presentation.util.SimpleMouseListener;
 import fr.istic.synthlab.presentation.wire.IPWire;
 import fr.istic.synthlab.presentation.wire.PWire;
 
@@ -64,6 +67,17 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 
 			@Override
 			public void mouseDragged(MouseEvent e) {}
+			
+			
+		});
+		
+		this.addMouseListener(new SimpleMouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				 if(SwingUtilities.isRightMouseButton(e)){
+					 ctrl.p2cDisconnectCurrentWire();
+				 }
+			}
 		});
 
 	}

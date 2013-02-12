@@ -119,12 +119,11 @@ public class Synthesizer implements ISynthesizer {
 		currentWire = wire;
 	}
 
-	//TODO SERT A RIEN
 	@Override
 	public void remove(IWire wire) {
 		wires.remove(wire);
 		wire = null;
+		currentWire = null;
 	}
-	
 
 }

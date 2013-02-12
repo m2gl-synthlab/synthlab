@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
@@ -15,6 +16,7 @@ import com.alee.laf.panel.WebPanel;
 
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.controller.module.ICModule;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
@@ -45,24 +47,25 @@ public abstract class APModule extends WebPanel implements IPModule {
 		configView();
 		defineCallbacks();
 	}
-	
-	private void configView(){
-		
+
+	private void configView() {
+
 		this.setFocusable(true);
 		this.setVisible(true);
 		this.setUndecorated(false);
 		this.setRound(7);
 		this.setLayout(null);
-	
-		x=0;
-		y=25;
 
-		IPSynthesizer presSynth = ((ICSynthesizer) ctrl.getSynthesizer()).getPresentation();
+		x = 0;
+		y = 25;
+
+		IPSynthesizer presSynth = ((ICSynthesizer) ctrl.getSynthesizer())
+				.getPresentation();
 		((JLayeredPane) presSynth).setLayer(this, 0, -1);
 	}
-	
+
 	private void defineCallbacks() {
-		
+
 		/** Demande de focus */
 		this.addMouseListener(new SimpleMouseListener() {
 			@Override
@@ -73,12 +76,21 @@ public abstract class APModule extends WebPanel implements IPModule {
 					dY = e.getLocationOnScreen().y - getY();
 				}
 			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if (SwingUtilities.isRightMouseButton(e)) {
+					CSynthesizer.getInstance() .p2cDisconnectCurrentWire();
+				}
+			}
 		});
-		
+
 		/** Gestion du focus */
 		this.addFocusListener(new FocusListener() {
 			@Override
-			public void focusLost(FocusEvent e) {}
+			public void focusLost(FocusEvent e) {
+			}
+
 			@Override
 			public void focusGained(FocusEvent e) {
 				System.out.println("focus gained");
@@ -91,6 +103,7 @@ public abstract class APModule extends WebPanel implements IPModule {
 					}
 				}
 			}
+
 		});
 
 		/** Gestion des déplacements */
@@ -104,54 +117,61 @@ public abstract class APModule extends WebPanel implements IPModule {
 					}
 				}
 			}
+
 			@Override
-			public void ancestorAdded(AncestorEvent event) {}
+			public void ancestorAdded(AncestorEvent event) {
+			}
+
 			@Override
-			public void ancestorRemoved(AncestorEvent event) {}
+			public void ancestorRemoved(AncestorEvent event) {
+			}
 		});
 
 		/** Gestion du déplacement du cable au dessus du module */
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				((PSynthesizer) ((ICSynthesizer) getControl().getSynthesizer()).getPresentation()).dispatchEvent(e);
+				((PSynthesizer) ((ICSynthesizer) getControl().getSynthesizer())
+						.getPresentation()).dispatchEvent(e);
 			}
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				setLocation(e.getLocationOnScreen().x - dX,	e.getLocationOnScreen().y - dY);
+				setLocation(e.getLocationOnScreen().x - dX,
+						e.getLocationOnScreen().y - dY);
 				dX = e.getLocationOnScreen().x - getX();
 				dY = e.getLocationOnScreen().y - getY();
 			}
 		});
 
 	}
-	
+
 	/**
 	 * Add a panel the given dimension automatically
+	 * 
 	 * @param panel
 	 * @param width
 	 * @param height
 	 */
-	public void addPanel(JPanel panel, int width, int height){
+	public void addPanel(JPanel panel, int width, int height) {
 		panel.setBounds(x, y, width, height);
 		y += height;
 		this.add(panel);
 	}
-	
+
 	/**
 	 * Add the title bar
 	 */
-	public void addTitleBar(){
+	public void addTitleBar() {
 		TitleBar bar = new TitleBar(ctrl);
 		bar.setBounds(0, 5, width, 20);
 		this.add(bar);
 	}
 
-
 	public int getWidth() {
 		return width;
 	}
+
 	public void setWidth(int width) {
 		this.width = width;
 	}

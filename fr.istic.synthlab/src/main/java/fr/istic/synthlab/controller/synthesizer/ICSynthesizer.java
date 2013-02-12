@@ -34,4 +34,6 @@ public interface ICSynthesizer extends ISynthesizer {
 	 * @param module
 	 */
 	public void p2cRemoveModule(ICModule module);
+
+	public void p2cDisconnectCurrentWire();
 }

@@ -71,11 +71,17 @@ public class Wire implements IWire {
 	@Override
 	public void disconnect() {
 		if (isConnected()) {
+			System.out.println("disconnect wire");
 			this.output.getJSyn().disconnect(this.input.getJSyn());
-			this.output.setWire(null);
-			this.input.setWire(null);
 		}
+		if(this.output != null)
+			this.output.setWire(null);
+			
+		if(this.input != null)
+			this.input.setWire(null);
+		
 		Synthesizer.getInstance().remove(this);
+
 	}
 
 }
