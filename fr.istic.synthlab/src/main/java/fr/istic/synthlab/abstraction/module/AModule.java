@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
@@ -71,10 +70,10 @@ public abstract class AModule implements IModule{
 	}
 	
 	@Override
-	public IInputPort getPortByName(String portName){
+	public IPort getPortByName(String portName){
 		for(IPort port : ports){
 			if(port.getName().equals(portName)){
-				return (IInputPort) port;
+				return port;
 			}
 		}
 		return null;

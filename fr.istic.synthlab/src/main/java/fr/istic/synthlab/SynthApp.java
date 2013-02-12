@@ -4,6 +4,7 @@ import java.util.List;
 
 import fr.istic.synthlab.abstraction.module.IModule;
 import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
+import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
@@ -62,15 +63,21 @@ public class SynthApp implements ISynthApp {
 	public void loadFromXML() {
 		synth.stop();
 		this.synth = (ICSynthesizer) PACFactory.getFactory().newSynthesizer();
-		
-		ReadXMLFile readXML = new ReadXMLFile();
-		List<IModule> modules = readXML.getModules();
-		
-		for(IModule module : modules){
-			synth.add(module);
-		}
 
 		displayCmd.execute();
+		
+		ReadXMLFile readXML = new ReadXMLFile();
+		List<Object> modules = readXML.getModules();
+		
+		for(Object moduleOrWire : modules){
+			if (moduleOrWire instanceof IWire){
+				synth.add((IWire)moduleOrWire);
+			}
+			if (moduleOrWire instanceof IModule){
+				synth.add((IModule)moduleOrWire);
+			}
+		}
+		
 		synth.start();
 	}
 

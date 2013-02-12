@@ -91,24 +91,24 @@ public class WriteXMLFile {
 			
 			// Ajout des ports utilises du module
 			for(IWire wire : module.getWires()){
-				if(module.containsPort(wire.getInput())){
+				if(module.containsPort(wire.getOutput())){
 					// set le port
 					Element port = doc.createElement("port");
 					moduleName.appendChild(port);
 					
 					// Nom port
 					Attr attrPortName = doc.createAttribute("name");
-					attrPortName.setValue(wire.getInput().getName());
+					attrPortName.setValue(wire.getOutput().getName());
 					port.setAttributeNode(attrPortName);
 					
 					// Connected to Module name
 					Attr attrPortConnectedToModuleName = doc.createAttribute("connectedToModuleName");
-					attrPortConnectedToModuleName.setValue(wire.getOutput().getModule().getName());
+					attrPortConnectedToModuleName.setValue(wire.getInput().getModule().getName());
 					port.setAttributeNode(attrPortConnectedToModuleName);
 					
 					// Connected to Module port
 					Attr attrPortConnectedToModulePort = doc.createAttribute("connectedToModulePort");
-					attrPortConnectedToModulePort.setValue(wire.getOutput().getName());
+					attrPortConnectedToModulePort.setValue(wire.getInput().getName());
 					port.setAttributeNode(attrPortConnectedToModulePort);
 					
 				}

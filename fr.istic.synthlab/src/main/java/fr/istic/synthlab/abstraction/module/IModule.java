@@ -84,5 +84,5 @@ public interface IModule {
 	 * @param portName
 	 * @return
 	 */
-	public IInputPort getPortByName(String portName);
+	public IPort getPortByName(String portName);
 }
