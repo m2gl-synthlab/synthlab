@@ -69,4 +69,10 @@ public interface IModuleVCO extends IModule {
 	 */
 	public IOutputPort getOutputSawtooth();
 
+	/**
+	 * Set the frequency
+	 * @param value
+	 */
+	void setFrequency(Double value);
+
 }

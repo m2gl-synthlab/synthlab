@@ -41,7 +41,7 @@ public class ModuleEG extends AModule implements IModuleEG {
 
 	@Override
 	public void setAttack(double attackTime) {
-		setParameter("attackTime", attackTime);
+		getParameters().put("attackTime", attackTime);
 		adsr.attack.set(attackTime);
 	}
 
@@ -52,7 +52,7 @@ public class ModuleEG extends AModule implements IModuleEG {
 
 	@Override
 	public void setDecay(double decayTime) {
-		setParameter("decayTime", decayTime);
+		getParameters().put("decayTime", decayTime);
 		adsr.decay.set(decayTime);
 	}
 
@@ -63,7 +63,7 @@ public class ModuleEG extends AModule implements IModuleEG {
 
 	@Override
 	public void setSustain(double substainTime) {
-		setParameter("substainTime", substainTime);
+		getParameters().put("substainTime", substainTime);
 		adsr.sustain.set(substainTime);
 	}
 
@@ -74,7 +74,7 @@ public class ModuleEG extends AModule implements IModuleEG {
 
 	@Override
 	public void setRelease(double releaseTime) {
-		setParameter("releaseTime", releaseTime);
+		getParameters().put("releaseTime", releaseTime);
 		adsr.release.set(releaseTime);
 	}
 

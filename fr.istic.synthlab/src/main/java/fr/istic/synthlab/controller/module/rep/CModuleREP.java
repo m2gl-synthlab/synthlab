@@ -29,5 +29,9 @@ public class CModuleREP  extends ModuleREP implements ICModuleREP {
 			w.disconnect();
 		}		
 	}
+	
+	@Override
+	public void setParameter(String key, Double value){}
+
 
 }

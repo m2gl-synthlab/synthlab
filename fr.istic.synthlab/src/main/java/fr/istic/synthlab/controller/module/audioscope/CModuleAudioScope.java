@@ -30,5 +30,8 @@ public class CModuleAudioScope extends ModuleAudioScope implements ICModuleAudio
 		}
 	}
 
+	@Override
+	public void setParameter(String key, Double value){}
+
 
 }

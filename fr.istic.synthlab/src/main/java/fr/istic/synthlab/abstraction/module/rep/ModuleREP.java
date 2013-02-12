@@ -68,7 +68,7 @@ public class ModuleREP extends AModule implements IModuleREP {
 	public void stop() {
 		this.passThrough.stop();
 	}
-
+	
 	@Override
 	public List<IWire> getWires() {
 

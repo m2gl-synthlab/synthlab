@@ -33,5 +33,14 @@ public class CModuleVCA extends ModuleVCA implements ICModuleVCA {
 		setAttenuation(amplitude);
 		this.pres.c2pSetAttenuationValue(getAttenuation());
 	}
+	
+
+	@Override
+	public void setParameter(String key, Double value){
+		if(key.equals("attenuation")){
+			p2cAttenuationValueChanged(value);
+		} 
+	}
+
 
 }

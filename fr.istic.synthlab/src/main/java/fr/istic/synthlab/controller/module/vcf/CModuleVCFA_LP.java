@@ -38,4 +38,16 @@ public class CModuleVCFA_LP extends ModuleVCFA_LP implements ICModuleVCF {
 			w.disconnect();
 		}
 	}
+	
+	
+	@Override
+	public void setParameter(String key, Double value){
+		if(key.equals("cutFrequency")){
+			p2cCutFrequencyChanged(value.intValue());
+		} else if (key.equals("resonance")){
+			p2cResonanceChanged(value);
+		} else if (key.equals("frequency")){
+			// TODO a enlever
+		}
+	}
 }

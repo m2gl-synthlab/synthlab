@@ -65,7 +65,7 @@ public class ModuleAudioScope extends AModule implements IModuleAudioScope {
 	public void stop() {
 		scope.stop();
 	}
-
+	
 	@Override
 	public IInputPort getInput() {
 		return in;

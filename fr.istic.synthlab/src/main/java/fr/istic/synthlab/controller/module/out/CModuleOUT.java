@@ -42,4 +42,10 @@ public class CModuleOUT extends ModuleOUT implements ICModuleOUT {
 		}
 	}
 
+	@Override
+	public void setParameter(String key, Double value){
+		if(key.equals("attenuation")){
+			p2cGainChanged(value);
+		} 
+	}
 }

@@ -1,6 +1,7 @@
 package fr.istic.synthlab.controller.module;
 
 import fr.istic.synthlab.abstraction.module.IModule;
+import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.presentation.module.IPModule;
 
 /**
@@ -19,4 +20,11 @@ public interface ICModule extends IModule {
 	 * Called when the presentation is closing
 	 */
 	public void p2cClosing();
+	
+	/**
+	 * Set the given parameter
+	 * @param key
+	 * @param value
+	 */
+	public void setParameter(String key, Double value);
 }

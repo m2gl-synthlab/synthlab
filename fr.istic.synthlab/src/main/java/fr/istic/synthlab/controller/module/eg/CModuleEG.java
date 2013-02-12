@@ -54,5 +54,19 @@ public class CModuleEG extends ModuleEG implements ICModuleEG {
 			w.disconnect();
 		}
 	}
+	
+	
+	@Override
+	public void setParameter(String key, Double value){
+		if(key.equals("attackTime")){
+			p2cAttackChanged(value);
+		} else if (key.equals("decayTime")){
+			p2cDecayChanged(value);
+		} else if (key.equals("substainTime")){
+			p2cSustainChanged(value);
+		}else if (key.equals("releaseTime")){
+			p2cReleaseChanged(value);
+		}
+	}
 
 }

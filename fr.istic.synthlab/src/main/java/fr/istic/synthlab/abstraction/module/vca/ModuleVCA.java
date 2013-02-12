@@ -83,7 +83,7 @@ public class ModuleVCA extends AModule implements IModuleVCA, Observer<Port> {
 		this.attenuator.stop();
 		this.inputAmplitudeModulator.stop();
 	}
-
+	
 	@Override
 	public IInputPort getInput() {
 		return input;
@@ -118,7 +118,7 @@ public class ModuleVCA extends AModule implements IModuleVCA, Observer<Port> {
 
 	@Override
 	public void setAttenuation(double value) {
-		setParameter("attenuation", (double) value);
+		getParameters().put("attenuation", (double) value);
 		this.attenuator.setAttenuation(Convert.dB2V(value));
 	}
 

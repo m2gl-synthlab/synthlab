@@ -109,7 +109,7 @@ public class ModuleVCFA_LP extends AModule implements IModuleVCF, Observer<Port>
 
 	@Override
 	public void setCutFrequency(int value) {
-		setParameter("cutFrequency", (double) value);
+		getParameters().put("cutFrequency", (double) value);
 		updateFrequency();
 	}
 
@@ -120,7 +120,7 @@ public class ModuleVCFA_LP extends AModule implements IModuleVCF, Observer<Port>
 
 	@Override
 	public void setResonance(double value) {
-		setParameter("resonance", (double) value);
+		getParameters().put("resonance", (double) value);
 		this.filterJSyn1.Q.set(value);
 //		this.filterJSyn2.Q.set(value);
 	}
@@ -136,6 +136,12 @@ public class ModuleVCFA_LP extends AModule implements IModuleVCF, Observer<Port>
 			filterJSyn1.frequency.set(getCutFrequency());
 			filterJSyn2.frequency.set(getCutFrequency());
 		}
+	}
+	
+	@Override
+	public void setFrequency(Double value) {
+		getParameters().put("frequency", value);
+		updateFrequency();
 	}
 	
 	@Override

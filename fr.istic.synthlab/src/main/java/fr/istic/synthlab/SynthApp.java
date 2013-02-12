@@ -33,6 +33,8 @@ public class SynthApp implements ISynthApp {
 	@Override
 	public void newSynth() {
 		// Replace the current synthesizer with a new one
+		if(this.synth != null)
+			synth.stop();
 		this.synth = (ICSynthesizer) PACFactory.getFactory().newSynthesizer();
 		displayCmd.execute();
 
@@ -58,12 +60,12 @@ public class SynthApp implements ISynthApp {
 
 	@Override
 	public void loadFromXML() {
+		synth.stop();
+		this.synth = (ICSynthesizer) PACFactory.getFactory().newSynthesizer();
+		
 		ReadXMLFile readXML = new ReadXMLFile();
 		List<IModule> modules = readXML.getModules();
 		
-		synth.stop();
-		this.synth = (ICSynthesizer) PACFactory.getFactory().newSynthesizer();
-
 		for(IModule module : modules){
 			synth.add(module);
 		}

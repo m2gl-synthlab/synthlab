@@ -59,10 +59,10 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 	public void stop() {
 		out.stop();
 	}
-
+	
 	@Override
 	public void setAttenuation(double value) {
-		setParameter("attenuation", (double) value);
+		getParameters().put("attenuation", (double) value);
 		this.attenuator.setAttenuation(Convert.dB2V(value));
 	}
 

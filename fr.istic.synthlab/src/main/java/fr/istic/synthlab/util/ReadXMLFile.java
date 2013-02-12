@@ -14,6 +14,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import fr.istic.synthlab.abstraction.module.IModule;
+import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.controller.module.ICModule;
 import fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope;
 import fr.istic.synthlab.controller.module.eg.CModuleEG;
@@ -23,6 +24,7 @@ import fr.istic.synthlab.controller.module.vca.CModuleVCA;
 import fr.istic.synthlab.controller.module.vcf.CModuleVCFA_LP;
 import fr.istic.synthlab.controller.module.vco.CModuleVCO;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
+import fr.istic.synthlab.controller.wire.CWire;
 
 public class ReadXMLFile {
 
@@ -96,7 +98,13 @@ public class ReadXMLFile {
 										"port").item(i))
 										.getAttribute("connectedToModuleName"));
 						
+						String portName = ((Element) eElement.getElementsByTagName("port").item(i)).getAttribute("name");
+						
+						IWire wire = new CWire();
+						wire.connect(module.getPortByName(portName));
+						//wire.connect(port);
 					}
+					
 					for (int i = 0; i < eElement.getElementsByTagName(
 							"parameter").getLength(); i++) {
 						System.out.println("key : "
@@ -107,6 +115,10 @@ public class ReadXMLFile {
 								+ ((Element) eElement.getElementsByTagName(
 										"parameter").item(i))
 										.getAttribute("value"));
+						
+						String key = ((Element) eElement.getElementsByTagName("parameter").item(i)).getAttribute("key");
+						Double value = Double.parseDouble(((Element) eElement.getElementsByTagName("parameter").item(i)).getAttribute("value"));
+						module.setParameter(key, value);
 					}
 					modules.add(module);
 				}

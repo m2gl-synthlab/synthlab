@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
@@ -57,11 +58,6 @@ public abstract class AModule implements IModule{
 	}
 	
 	@Override
-	public void setParameter(String key, Double value){
-		parameters.put(key, value);
-	}
-	
-	@Override
 	public Double getParameter(String key){
 		if (parameters.get(key) == null){
 			return 0.;
@@ -72,5 +68,15 @@ public abstract class AModule implements IModule{
 	@Override
 	public HashMap<String, Double> getParameters(){
 		return parameters;
+	}
+	
+	@Override
+	public IInputPort getPortByName(String portName){
+		for(IPort port : ports){
+			if(port.getName().equals(portName)){
+				return (IInputPort) port;
+			}
+		}
+		return null;
 	}
 }

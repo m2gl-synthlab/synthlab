@@ -22,7 +22,7 @@ public class CModuleVCO extends ModuleVCO implements ICModuleVCO {
 	public IPModuleVCO getPresentation() {
 		return pres;
 	}
-	
+
 	@Override
 	public void p2cOctaveChanged(int octave) {
 		setOctave(octave);
@@ -39,8 +39,20 @@ public class CModuleVCO extends ModuleVCO implements ICModuleVCO {
 
 	@Override
 	public void p2cClosing() {
-		for(IWire w : this.getWires()){
+		for (IWire w : this.getWires()) {
 			w.disconnect();
 		}
+	}
+
+	@Override
+	public void setParameter(String key, Double value) {
+		if (key.equals("octave")) {
+			p2cOctaveChanged(value.intValue());
+		} else if (key.equals("tone")) {
+			p2cToneChanged(value);
+		} else if (key.equals("frequency")) {
+			// TODO remove this parameter
+		}
+
 	}
 }

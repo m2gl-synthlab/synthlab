@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.jsyn.unitgen.UnitGenerator;
 
+import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
@@ -64,12 +65,6 @@ public interface IModule {
 	 * @param port
 	 */
 	public void addPort(IPort port);
-	
-	/**
-	 * Add the given parameter to the list of module's parameters
-	 * @param port
-	 */
-	public void setParameter(String key, Double value);
 
 	/**
 	 * return the asked parameter value
@@ -83,4 +78,11 @@ public interface IModule {
 	 * @return
 	 */
 	public HashMap<String, Double> getParameters();
+	
+	/**
+	 * Return a port by its name
+	 * @param portName
+	 * @return
+	 */
+	public IInputPort getPortByName(String portName);
 }
