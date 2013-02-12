@@ -54,9 +54,10 @@ public class WriteXMLFile {
 			StreamResult result = new StreamResult(new File("savedInstance.xml"));
 
 			// Output to console for testing
-			// StreamResult res = new StreamResult(System.out);
+			StreamResult res = new StreamResult(System.out);
 
 			transformer.transform(source, result);
+			transformer.transform(source, res);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
