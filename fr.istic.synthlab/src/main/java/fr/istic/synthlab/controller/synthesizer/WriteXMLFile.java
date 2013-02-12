@@ -71,7 +71,7 @@ public class WriteXMLFile {
 		}
 	}
 
-	public void addModules(List<IModule> modules) {
+	public void saveModules(List<IModule> modules) {
 		for(IModule module : modules){
 			
 			Element moduleName = doc.createElement("module");
@@ -107,11 +107,6 @@ public class WriteXMLFile {
 					attrPortName.setValue(wire.getInput().getName());
 					port.setAttributeNode(attrPortName);
 					
-					// Type port
-					Attr attrPortType = doc.createAttribute("type");
-					attrPortType.setValue("input");
-					port.setAttributeNode(attrPortType);
-					
 					// Connected to Module name
 					Attr attrPortConnectedToModuleName = doc.createAttribute("connectedToModuleName");
 					attrPortConnectedToModuleName.setValue(wire.getOutput().getModule().getName());
@@ -123,6 +118,22 @@ public class WriteXMLFile {
 					port.setAttributeNode(attrPortConnectedToModulePort);
 					
 				}
+			}
+			
+			for(String key : module.getParameters().keySet()){
+				// set le parametre
+				Element param = doc.createElement("parameter");
+				moduleName.appendChild(param);
+				
+				// Nom parametre
+				Attr attrParamName = doc.createAttribute("key");
+				attrParamName.setValue(key);
+				param.setAttributeNode(attrParamName);
+				
+				// Valeur parametre
+				Attr attrParamValue = doc.createAttribute("value");
+				attrParamValue.setValue(module.getParameters().get(key).toString());
+				param.setAttributeNode(attrParamValue);
 			}
 		}
 		saveToXML();

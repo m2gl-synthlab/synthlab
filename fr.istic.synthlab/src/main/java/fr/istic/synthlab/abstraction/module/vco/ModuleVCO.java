@@ -47,11 +47,6 @@ public class ModuleVCO extends AModule implements IModuleVCO, Observer<Port>{
 	private TriangleOscillator vcoTriangle;
 	private SawtoothOscillator vcoSawtooth;
 	
-	// Valeur de la fréquence
-	private int octave;
-	private double tone;
-	private double frequency;
-	
 	public ModuleVCO(ISynthesizer synth) {
 		super(MODULE_NAME, synth);
 		System.out.println("ModuleVCO initialized");
@@ -86,15 +81,14 @@ public class ModuleVCO extends AModule implements IModuleVCO, Observer<Port>{
 		this.setTone(0);
 		
 		// Set de la frequence de base
-		vcoSquare.frequency.set(frequency);
-		vcoTriangle.frequency.set(frequency);
-		vcoSawtooth.frequency.set(frequency);
+		vcoSquare.frequency.set(getFrequency());
+		vcoTriangle.frequency.set(getFrequency());
+		vcoSawtooth.frequency.set(getFrequency());
 		
 		addPort(fm);
 		addPort(outputSawtooth);
 		addPort(outputSquare);
 		addPort(outputTriangle);
-		
 	}
 
 	@Override
@@ -128,39 +122,39 @@ public class ModuleVCO extends AModule implements IModuleVCO, Observer<Port>{
 
 	@Override
 	public void setOctave(int value) {
-		this.octave = value;
+		setParameter("octave", (double) value);
 		updateFrequency();
 	}
 
 	@Override
 	public int getOctave() {
-		return this.octave;
+		return getParameter("octave").intValue();
 	}
 
 	@Override
 	public void setTone(double value) {
-		this.tone = value;
+		setParameter("tone", value);
 		updateFrequency();
 	}
 
 	@Override
 	public double getTone() {
-		return this.tone;
+		return getParameter("tone");
 	}
 	
 	private void updateFrequency() {
-		this.frequency = Math.pow(2,octave+tone);
-		this.frequencyModulator.setBaseFrequency(frequency);
+		setParameter("frequency", (double) Math.pow(2,getOctave()+getTone()));
+		this.frequencyModulator.setBaseFrequency(getFrequency());
 		if(!getInputFm().isInUse()){
-			vcoSquare.frequency.set(frequency);
-			vcoTriangle.frequency.set(frequency);
-			vcoSawtooth.frequency.set(frequency);
+			vcoSquare.frequency.set(getFrequency());
+			vcoTriangle.frequency.set(getFrequency());
+			vcoSawtooth.frequency.set(getFrequency());
 		}
 	}
 	
 	@Override
 	public double getFrequency() {
-		return frequency;
+		return getParameter("frequency").intValue();
 	}
 	
 	@Override
@@ -216,9 +210,9 @@ public class ModuleVCO extends AModule implements IModuleVCO, Observer<Port>{
 			}else{
 				// Disconnect the frequency modulator and set the frequency
 				passThrough.output.disconnectAll();
-				vcoSquare.frequency.set(frequency);
-				vcoTriangle.frequency.set(frequency);
-				vcoSawtooth.frequency.set(frequency);
+				vcoSquare.frequency.set(getFrequency());
+				vcoTriangle.frequency.set(getFrequency());
+				vcoSawtooth.frequency.set(getFrequency());
 			}
 				
 		}

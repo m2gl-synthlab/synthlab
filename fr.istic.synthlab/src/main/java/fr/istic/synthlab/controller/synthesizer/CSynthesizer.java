@@ -105,7 +105,7 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	public void saveToXML() {
 		List<IModule> modules = getModules();
 		WriteXMLFile writeToXML = new WriteXMLFile();
-		writeToXML.addModules(modules);
+		writeToXML.saveModules(modules);
 	}
 
 }

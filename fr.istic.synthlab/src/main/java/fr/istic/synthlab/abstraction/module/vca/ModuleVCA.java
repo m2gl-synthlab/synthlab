@@ -114,13 +114,14 @@ public class ModuleVCA extends AModule implements IModuleVCA, Observer<Port> {
 	}
 
 	@Override
-	public void setAttenuation(double dbValue) {
-		this.attenuator.setAttenuation(Convert.dB2V(dbValue));
+	public void setAttenuation(double value) {
+		setParameter("attenuation", (double) value);
+		this.attenuator.setAttenuation(Convert.dB2V(value));
 	}
 
 	@Override
 	public double getAttenuation() {
-		return Convert.v2Db(attenuator.getAttenuation());
+		return getParameter("attenuation").intValue();
 	}
 
 	@Override

@@ -61,13 +61,14 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 	}
 
 	@Override
-	public void setAttenuation(double dbValue) {
-		attenuator.setAttenuation(Convert.dB2V(dbValue));
+	public void setAttenuation(double value) {
+		setParameter("attenuation", (double) value);
+		this.attenuator.setAttenuation(Convert.dB2V(value));
 	}
 
 	@Override
 	public double getAttenuation() {
-		return Convert.v2Db(attenuator.getAttenuation());
+		return getParameter("attenuation").intValue();
 	}
 
 	@Override

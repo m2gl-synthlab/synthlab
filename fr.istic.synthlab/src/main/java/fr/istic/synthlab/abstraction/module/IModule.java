@@ -1,5 +1,6 @@
 package fr.istic.synthlab.abstraction.module;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.jsyn.unitgen.UnitGenerator;
@@ -62,5 +63,24 @@ public interface IModule {
 	 * Add the given port to the list of module's ports
 	 * @param port
 	 */
-	void addPort(IPort port);
+	public void addPort(IPort port);
+	
+	/**
+	 * Add the given parameter to the list of module's parameters
+	 * @param port
+	 */
+	public void setParameter(String key, Double value);
+
+	/**
+	 * return the asked parameter value
+	 * @param key
+	 * @return
+	 */
+	public Double getParameter(String key);
+
+	/**
+	 * Return the list of all parameters
+	 * @return
+	 */
+	public HashMap<String, Double> getParameters();
 }

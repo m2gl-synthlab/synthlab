@@ -39,10 +39,6 @@ public class ModuleVCFA_LP extends AModule implements IModuleVCF, Observer<Port>
 	private FilterLowPass filterJSyn1;
 	private FilterLowPass filterJSyn2;
 
-	// Valeur des params
-	private int cutFrequency;
-	private double resonance;
-
 	public ModuleVCFA_LP(ISynthesizer synth) {
 		super(MODULE_NAME, synth);
 		System.out.println("ModuleVCFA LP24 initialized");
@@ -81,8 +77,8 @@ public class ModuleVCFA_LP extends AModule implements IModuleVCF, Observer<Port>
 		this.setResonance(1);
 
 		// Set de la frequence de coupure de base
-		filterJSyn1.frequency.set(cutFrequency);
-		filterJSyn2.frequency.set(cutFrequency);
+		filterJSyn1.frequency.set(getCutFrequency());
+		filterJSyn2.frequency.set(getCutFrequency());
 	}
 
 	@Override
@@ -113,32 +109,32 @@ public class ModuleVCFA_LP extends AModule implements IModuleVCF, Observer<Port>
 
 	@Override
 	public void setCutFrequency(int value) {
-		this.cutFrequency = value;
+		setParameter("cutFrequency", (double) value);
 		updateFrequency();
 	}
 
 	@Override
 	public int getCutFrequency() {
-		return this.cutFrequency;
+		return getParameter("cutFrequency").intValue();
 	}
 
 	@Override
 	public void setResonance(double value) {
-		this.resonance = value;
+		setParameter("resonance", (double) value);
 		this.filterJSyn1.Q.set(value);
 //		this.filterJSyn2.Q.set(value);
 	}
 
 	@Override
 	public double getResonance() {
-		return this.resonance;
+		return getParameter("resonance").intValue();
 	}
 
 	private void updateFrequency() {
-		this.frequencyModulator.setBaseFrequency(cutFrequency);
+		this.frequencyModulator.setBaseFrequency(getCutFrequency());
 		if (!getInputFm().isInUse()) {
-			filterJSyn1.frequency.set(cutFrequency);
-			filterJSyn2.frequency.set(cutFrequency);
+			filterJSyn1.frequency.set(getCutFrequency());
+			filterJSyn2.frequency.set(getCutFrequency());
 		}
 	}
 	
@@ -186,8 +182,8 @@ public class ModuleVCFA_LP extends AModule implements IModuleVCF, Observer<Port>
 			} else {
 				// Disconnect the frequency modulator and set the frequency
 				passThrough.output.disconnectAll();
-				filterJSyn1.frequency.set(cutFrequency);
-				filterJSyn2.frequency.set(cutFrequency);
+				filterJSyn1.frequency.set(getCutFrequency());
+				filterJSyn2.frequency.set(getCutFrequency());
 			}
 
 		}
