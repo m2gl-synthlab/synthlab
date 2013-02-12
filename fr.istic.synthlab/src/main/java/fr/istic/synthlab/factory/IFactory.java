@@ -22,7 +22,7 @@ public interface IFactory {
 	
 	IModuleVCO newVCO(ISynthesizer synth);
 	IModuleVCA newVCA(ISynthesizer synth);
-	IModule newVCF(ISynthesizer synth);
+	IModule newVCFA_LP(ISynthesizer synth);
 	IModuleOUT newOUT(ISynthesizer synth);
 	IModuleEG newEG(ICSynthesizer synth);
 	IModuleAudioScope newAudioScope(ICSynthesizer synth);

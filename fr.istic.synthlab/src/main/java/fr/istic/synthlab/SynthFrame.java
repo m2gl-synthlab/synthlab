@@ -118,7 +118,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuItemAddModuleOUT = new JMenuItem("OUT Module");
 		menuItemAddModuleVCO = new JMenuItem("VCO Module");
 		menuItemAddModuleVCA = new JMenuItem("VCA Module");
-		menuItemAddModuleVCF = new JMenuItem("VCF Module");
+		menuItemAddModuleVCF = new JMenuItem("VCF LP24 Module");
 		menuItemAddModuleEG = new JMenuItem("EG Module");
 		menuItemAddModuleAudioScope = new JMenuItem("AudioScope Module");
 		menuItemAddModuleREP = new JMenuItem("REP Module");

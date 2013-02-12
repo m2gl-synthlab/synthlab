@@ -14,7 +14,7 @@ public class AddModuleVCFCommand implements ICommand {
 
 	@Override
 	public void execute() {
-		synth.add(PACFactory.getFactory().newVCF(synth));
+		synth.add(PACFactory.getFactory().newVCFA_LP(synth));
 	}
 
 }

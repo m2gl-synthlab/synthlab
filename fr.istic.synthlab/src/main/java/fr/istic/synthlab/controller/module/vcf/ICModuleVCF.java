@@ -12,7 +12,7 @@ public interface ICModuleVCF extends ICModule, IModuleVCF {
 	 * 
 	 * @param cut frequency
 	 */
-	public void p2cCutFrequencyChanged(double cutFrequency);
+	public void p2cCutFrequencyChanged(int cutFrequency);
 
 	/**
 	 * Called by the presentation when the resonance param changed

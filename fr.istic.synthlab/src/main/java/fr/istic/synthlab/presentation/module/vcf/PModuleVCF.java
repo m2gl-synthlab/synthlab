@@ -10,7 +10,7 @@ import javax.swing.event.ChangeListener;
 import com.jsyn.swing.DoubleBoundedRangeModel;
 import com.jsyn.swing.RotaryTextController;
 
-import fr.istic.synthlab.abstraction.module.vcf.ModuleVCF;
+import fr.istic.synthlab.abstraction.module.vcf.IModuleVCF;
 import fr.istic.synthlab.controller.module.vcf.ICModuleVCF;
 import fr.istic.synthlab.controller.port.ICInputPort;
 import fr.istic.synthlab.controller.port.ICOutputPort;
@@ -57,19 +57,19 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 		
 		
 		cutFrequencyModel = new DoubleBoundedRangeModel(
-				ModuleVCF.PARAM_CUT_FREQUENCY_NAME, 100, 0, 22000,
+				IModuleVCF.PARAM_CUT_FREQUENCY_NAME, 100, 0, 22000,
 				ctrl.getCutFrequency());
 		RotaryTextController cutRotary = new RotaryTextController(
 				cutFrequencyModel, 4);
-		cutRotary.setBorder(new TitledBorder(ModuleVCF.PARAM_CUT_FREQUENCY_NAME));
+		cutRotary.setBorder(new TitledBorder(IModuleVCF.PARAM_CUT_FREQUENCY_NAME));
 		panelParams.add(cutRotary);
 
 		resonanceModel = new DoubleBoundedRangeModel(
-				ModuleVCF.PARAM_RESONANCE_NAME, 100, 1, 50,
+				IModuleVCF.PARAM_RESONANCE_NAME, 100, 1, 50,
 				ctrl.getResonance());
 		RotaryTextController resonanceRotary = new RotaryTextController(
 				resonanceModel, 4);
-		resonanceRotary.setBorder(new TitledBorder(ModuleVCF.PARAM_RESONANCE_NAME));
+		resonanceRotary.setBorder(new TitledBorder(IModuleVCF.PARAM_RESONANCE_NAME));
 		panelParams.add(resonanceRotary);
 
 		input = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
@@ -102,7 +102,7 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 		cutFrequencyModel.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				ctrl.p2cCutFrequencyChanged(cutFrequencyModel.getDoubleValue());
+				ctrl.p2cCutFrequencyChanged((int) cutFrequencyModel.getDoubleValue());
 			}
 		});
 
@@ -132,7 +132,7 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 	}
 
 	@Override
-	public void c2pSetCutFrequencyValue(double cutFrequency) {
+	public void c2pSetCutFrequencyValue(int cutFrequency) {
 		cutFrequencyModel.setDoubleValue(cutFrequency);
 	}
 

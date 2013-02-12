@@ -8,28 +8,34 @@ import fr.istic.synthlab.abstraction.port.IOutputPort;
 public interface IModuleVCF extends IModule {
 
 	/**
-	 * Set the cut frequency (between 0 and 32768)
+	 * Constants
+	 */
+	public static final String PARAM_CUT_FREQUENCY_NAME = "Cut";
+	public static final String PARAM_RESONANCE_NAME = "Res";
+	
+	/**
+	 * Set the cut frequency (between 0 and 22000)
 	 * 
 	 * @param Cut frequency value
 	 */
-	public void setCutFrequency(double value);
+	public void setCutFrequency(int value);
 
 	/**
-	 * Return the cut frequency value (between 0 and 32768)
+	 * Return the cut frequency value (between 0 and 22000)
 	 * 
 	 * @param Cut frequency value
 	 */
-	public double getCutFrequency();
+	public int getCutFrequency();
 
 	/**
-	 * Set the resonance value (between 0 and 100)
+	 * Set the resonance value (between 0 and 1)
 	 * 
 	 * @param Resonance value
 	 */
 	public void setResonance(double value);
 
 	/**
-	 * Return the resonance value (between 0 and 100)
+	 * Return the resonance value (between 0 and 1)
 	 * 
 	 * @param Resonance value
 	 */

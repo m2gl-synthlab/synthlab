@@ -15,7 +15,7 @@ public interface IPModuleVCF extends IPModule {
 	 * 
 	 * @param cut frequency
 	 */
-	public void c2pSetCutFrequencyValue(double cutFrequency);
+	public void c2pSetCutFrequencyValue(int cutFrequency);
 	
 	/**
 	 * Called by the controller to inform the presentation of the new resonance value
