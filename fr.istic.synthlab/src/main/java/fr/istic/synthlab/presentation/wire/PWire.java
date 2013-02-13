@@ -125,9 +125,16 @@ public class PWire extends JPanel implements IPWire {
 			y = posOutput.y;
 //			h = posInput.y - posOutput.y;
 		}
-
+		
+		
+		if(getParent()==null){
+			JPanel pan=new JPanel();
+			pan.add(this);
+		}
 		setBounds(x-10, y-10 , w+20, getParent().getHeight()); // On ajoute une marge pour évité de coupé le cable
-
+		
+		
+			
 		IPSynthesizer presSynth = synth.getPresentation();
 		((JLayeredPane) presSynth).setLayer(this, 0, 0);
 		
