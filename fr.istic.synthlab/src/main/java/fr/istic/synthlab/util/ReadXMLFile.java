@@ -1,5 +1,6 @@
 package fr.istic.synthlab.util;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.io.File;
 import java.util.HashMap;
@@ -27,6 +28,7 @@ import fr.istic.synthlab.controller.module.vcf.CModuleVCFA_LP;
 import fr.istic.synthlab.controller.module.vco.CModuleVCO;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.controller.wire.CWire;
+import fr.istic.synthlab.controller.wire.ICWire;
 
 public class ReadXMLFile {
 
@@ -90,13 +92,27 @@ public class ReadXMLFile {
 						IOutputPort outport = (IOutputPort)module.getPortByName(portName);
 						wire.connect(outport);
 						
-						String[] str = {((Element) eElement.getElementsByTagName(
-								"port").item(i))
-								.getAttribute("connectedToModuleName"), 
+						String[] str = {
+								((Element) eElement.getElementsByTagName(
+										"port").item(i))
+										.getAttribute("connectedToModuleName"), 
 								
 								((Element) eElement.getElementsByTagName(
 										"port").item(i))
-										.getAttribute("connectedToModulePort")};
+										.getAttribute("connectedToModulePort"),
+										
+								((Element) eElement.getElementsByTagName(
+										"port").item(i))
+										.getAttribute("colorR"),
+										
+								((Element) eElement.getElementsByTagName(
+										"port").item(i))
+										.getAttribute("colorG"),
+										
+								((Element) eElement.getElementsByTagName(
+										"port").item(i))
+										.getAttribute("colorB")
+						};
 						
 						portsToConnect.put(wire,str);
 					}
@@ -115,18 +131,16 @@ public class ReadXMLFile {
 			for(IWire wire : portsToConnect.keySet()){
 				String moduleName = portsToConnect.get(wire)[0];
 				String portName = portsToConnect.get(wire)[1];
+				Color color = new Color(
+						Integer.parseInt(portsToConnect.get(wire)[2]),
+						Integer.parseInt(portsToConnect.get(wire)[3]),
+						Integer.parseInt(portsToConnect.get(wire)[4])
+				);
+				
+				((ICWire)wire).getPresentation().setColor(color);
 				
 				IModule moduleToConnect = modules.get(moduleName);
 				IPort port = moduleToConnect.getPortByName(portName);
-				System.out.println("module name "+moduleName);
-				System.out.println("module " + moduleToConnect
-						
-						
-					);
-
-				System.out.println("port name "+portName);
-
-				System.out.println("port "+port);
 				wire.connect((IInputPort)port);
 				CSynthesizer.getInstance().add(wire);
 			}

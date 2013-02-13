@@ -241,4 +241,14 @@ public class PWire extends JPanel implements IPWire {
 		validate();
 	}
 
+	@Override
+	public Color getColor() {
+		return currentColor;
+	}
+
+	@Override
+	public void setColor(Color color) {
+		currentColor = color;
+	}
+
 }
