@@ -13,6 +13,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.presentation.port.IPInputPort;
@@ -36,6 +37,8 @@ public class PWire extends JPanel implements IPWire {
 	private PInputPort inputPort;
 	private POutputPort outputPort;
 	private ICSynthesizer synth = null;
+	private Color currentColor = Color.BLACK;
+	
 
 	/**
 	 * @param control
@@ -45,6 +48,7 @@ public class PWire extends JPanel implements IPWire {
 		synth = (ICSynthesizer) Synthesizer.getInstance();
 		configView();
 		defineCallbacks();
+		currentColor = CSynthesizer.getInstance().getCurrentWireColor();
 	}
 
 	private void configView() {
@@ -178,7 +182,7 @@ public class PWire extends JPanel implements IPWire {
 		
 		// Dessine la courbe avec des extrémité ronde
 		g2.setStroke(new BasicStroke(6, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
-		g2.setColor(Color.BLACK);
+		g2.setColor(currentColor);
 		g2.draw(curve);
 		
 		// Ajoute un trait fin au centre

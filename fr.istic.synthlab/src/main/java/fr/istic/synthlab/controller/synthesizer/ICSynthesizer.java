@@ -1,5 +1,7 @@
 package fr.istic.synthlab.controller.synthesizer;
 
+import java.awt.Color;
+
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.controller.module.ICModule;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
@@ -39,4 +41,12 @@ public interface ICSynthesizer extends ISynthesizer {
 	 * Disconnect the current wire
 	 */
 	public void p2cDisconnectCurrentWire();
+
+	/**
+	 * set the current color for the next wire
+	 * @param currentWireColor
+	 */
+	public void setCurrentWireColor(Color currentWireColor);
+	
+	public Color getCurrentWireColor();
 }

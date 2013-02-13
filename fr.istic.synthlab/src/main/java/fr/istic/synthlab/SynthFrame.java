@@ -15,8 +15,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -25,15 +25,20 @@ import javax.swing.KeyStroke;
 import com.alee.extended.statusbar.WebMemoryBar;
 import com.alee.extended.statusbar.WebStatusBar;
 import com.alee.extended.statusbar.WebStatusLabel;
+import com.alee.laf.StyleConstants;
+import com.alee.laf.button.WebButton;
+import com.alee.laf.colorchooser.WebColorChooserDialog;
 import com.alee.laf.toolbar.ToolbarStyle;
 import com.alee.laf.toolbar.WebToolBar;
+import com.alee.utils.ImageUtils;
 
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.command.menu.AddModuleAudioScopeCommand;
 import fr.istic.synthlab.command.menu.AddModuleREPCommand;
+import fr.istic.synthlab.command.toolbar.ToolbarCurrentWireColorCommand;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 import fr.istic.synthlab.presentation.synthesizer.PSynthesizer;
-import fr.istic.synthlab.util.FilePreview;
 
 public class SynthFrame extends JFrame implements ISynthFrame {
 
@@ -60,7 +65,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			menuItemAddModuleVCA;
 
 	// Toolbar
-	private WebToolBar toolBar = new WebToolBar();
+	private WebToolBar toolBarStartStop = new WebToolBar();
 	private String[] iconFiles = { "res/play.png", "res/pause.png" };
 	private String[] buttonLabels = { "Play", "Pause" };
 	private Image[] icons = new Image[iconFiles.length];
@@ -83,6 +88,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 	private ICommand toolbarPlayCommand;
 	private ICommand toolbarPauseCommand;
+
+	private ICommand toolbarCurrentWireColorCommand;
+
+	private Color toolbarCurrentWireColor = Color.BLACK;
 
 	public SynthFrame() {
 		this.initComponents();
@@ -151,7 +160,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		this.setJMenuBar(mainMenuBar);
 
 		// instanciation des boutons de la toolbar
-		toolBar.setToolbarStyle(ToolbarStyle.attached);
+		toolBarStartStop.setToolbarStyle(ToolbarStyle.attached);
 		Container frameContainer = getContentPane();
 		frameContainer.setLayout(new BorderLayout());
 		for (int i = 0; i < buttonLabels.length; ++i) {
@@ -163,10 +172,46 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			}
 			buttons[i] = new JButton(new ImageIcon(icons[i]));
 			buttons[i].setToolTipText(buttonLabels[i]);
-			toolBar.add(buttons[i]);
+			toolBarStartStop.add(buttons[i]);
 		}
+		
+		
+		
+		final WebButton colorChooserButton = new WebButton ( "0, 0, 0", ImageUtils.createColorIcon ( Color.BLACK ) );
+        colorChooserButton.setLeftRightSpacing ( 0 );
+        colorChooserButton.addActionListener ( new ActionListener ()
+        {
+            private WebColorChooserDialog colorChooser = null;
+            private Color lastColor = Color.BLACK;
 
-		frameContainer.add(BorderLayout.NORTH, toolBar);
+            public void actionPerformed ( ActionEvent e )
+            {
+                if ( colorChooser == null )
+                {
+                    colorChooser = new WebColorChooserDialog(toolBarStartStop);
+                }
+                colorChooser.setColor ( lastColor );
+                colorChooser.setVisible ( true );
+
+                if ( colorChooser.getResult () == StyleConstants.OK_OPTION )
+                {
+                    Color color = colorChooser.getColor ();
+                    toolbarCurrentWireColor = color;
+                    toolbarCurrentWireColorCommand.execute();
+                    lastColor = color;
+
+                    colorChooserButton.setIcon ( ImageUtils.createColorIcon ( color ) );
+                    colorChooserButton.setText ( color.getRed () + ", " + color.getGreen () + ", " + color.getBlue () );
+                }
+            }
+        } );
+        
+        toolBarStartStop.addSpacing(50);
+		
+        toolBarStartStop.add(new JLabel("Color for your next cable :"));
+        toolBarStartStop.add(colorChooserButton);
+
+		frameContainer.add(BorderLayout.NORTH, toolBarStartStop);
 
 	}
 
@@ -470,5 +515,16 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	 */
 	public void setAddModuleREPCommand(AddModuleREPCommand addModuleREPCommand) {
 		this.addModuleREPCommand = addModuleREPCommand;
+	}
+	
+	/**
+	 * @param setCurrentWireColor
+	 */
+	public void setCurrentWireColorCommand(ToolbarCurrentWireColorCommand currentWireColorCommand) {
+		this.toolbarCurrentWireColorCommand = currentWireColorCommand;
+	}
+
+	public Color getCurrentWireColor() {
+		return toolbarCurrentWireColor ;
 	}
 }
