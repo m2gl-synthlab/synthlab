@@ -1,6 +1,6 @@
 package fr.istic.synthlab.command.menu;
 
-import javax.swing.JFileChooser;
+import java.awt.FileDialog;
 
 import fr.istic.synthlab.ISynthApp;
 import fr.istic.synthlab.ISynthFrame;
@@ -11,33 +11,26 @@ public class SaveSynthCommand implements ICommand {
 
 	private ISynthApp synthApp;
 	private ISynthFrame synthFrame;
-	private JFileChooser chooser;
+	private FileDialog chooser;
 
 	public SaveSynthCommand(ISynthApp synthApp, ISynthFrame synthFrame) {
 		this.synthApp = synthApp;
 		this.synthFrame = synthFrame;
-		this.chooser = new JFileChooser();
+		this.chooser = new FileDialog((SynthFrame) this.synthFrame, "Save as", FileDialog.SAVE);
 	}
 
 	@Override
 	public void execute() {
-		int returnVal = this.chooser.showSaveDialog((SynthFrame) synthFrame);
+		chooser.setVisible(true);
+		
+		String dir= chooser.getDirectory();
+		String file = chooser.getFile();
 
-		switch (returnVal) {
-		case JFileChooser.APPROVE_OPTION:
-
-			break;
-		case JFileChooser.CANCEL_OPTION:
-
-			break;
-		case JFileChooser.ERROR_OPTION:
-
-			break;
-
-		default:
-			break;
+		System.out.println("");
+		System.out.println("Save to : "+ dir+""+file);
+		if(file != null){
+			synthApp.saveToXML(dir, file);
 		}
-		synthApp.saveToXML();
 	}
 
 }

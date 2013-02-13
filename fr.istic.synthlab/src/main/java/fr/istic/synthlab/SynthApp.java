@@ -53,20 +53,20 @@ public class SynthApp implements ISynthApp {
 	}
 
 	@Override
-	public void saveToXML() {
+	public void saveToXML(String fileDir, String filename) {
 		List<IModule> modules = CSynthesizer.getInstance().getModules();
 
-		WriteXMLFile writeToXML = new WriteXMLFile(new File("savedInstance.synthlab"));
+		WriteXMLFile writeToXML = new WriteXMLFile(new File(filename));
 		writeToXML.saveModules(modules);
 
 	}
 
 	@Override
-	public void loadFromXML() {
+	public void loadFromXML(String dir, String file) {
 		synth.stop();
 		this.synth = (ICSynthesizer) PACFactory.getFactory().newSynthesizer();
 		displayCmd.execute();
-		ReadXMLFile readXML = new ReadXMLFile(new File("savedInstance.synthlab"));
+		ReadXMLFile readXML = new ReadXMLFile(new File(file));
 		readXML.loadSynthesizer();
 		synth.start();
 	}

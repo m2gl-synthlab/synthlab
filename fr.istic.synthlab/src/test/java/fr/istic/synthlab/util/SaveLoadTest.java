@@ -65,11 +65,11 @@ public class SaveLoadTest extends TestCase {
 		
 		
 
-		s.saveToXML();
+		s.saveToXML("", "test.synthlab");
 
 		
 		s.setSynthesizer(new CSynthesizer());
-		s.loadFromXML();
+		s.loadFromXML("", "test.synthlab");
 		assertEquals(3,s.getSynthesizer().getModules().size());
 		assertEquals("CModuleVCO",s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
 		assertEquals("CModuleVCA",s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
@@ -104,10 +104,10 @@ public void testSaveAndLoadSetAttenuation(){
 		
 		
 
-		s.saveToXML();
+		s.saveToXML("", "test.synthlab");
 		
 		s.setSynthesizer(new CSynthesizer());
-		s.loadFromXML();
+		s.loadFromXML("", "test.synthlab");
 		assertEquals(3,s.getSynthesizer().getModules().size());
 		assertEquals("CModuleVCO",s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
 		assertEquals("CModuleVCA",s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
@@ -161,10 +161,10 @@ public void testSaveAndLoadWire(){
 	
 	
 
-	s.saveToXML();
+	s.saveToXML("", "test.synthlab");
 	
 	s.setSynthesizer(new CSynthesizer());
-	s.loadFromXML();
+	s.loadFromXML("", "test.synthlab");
 	assertEquals(3,s.getSynthesizer().getModules().size());
 	assertEquals("CModuleVCO",s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
 	assertEquals("CModuleVCA",s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
@@ -220,10 +220,10 @@ public void testSaveAndLoadWireVCF(){
 	
 	
 
-	s.saveToXML();
+	s.saveToXML("", "test.synthlab");
 	
 	s.setSynthesizer(new CSynthesizer());
-	s.loadFromXML();
+	s.loadFromXML("", "test.synthlab");
 	assertEquals(3,s.getSynthesizer().getModules().size());
 	assertEquals("CModuleVCFA_LP",s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
 	assertEquals("CModuleVCA",s.getSynthesizer().getModules().get(1).getClass().getSimpleName());

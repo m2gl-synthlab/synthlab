@@ -51,11 +51,11 @@ public interface ISynthApp {
 	/**
 	 * Save the current instance to an XML file
 	 */
-	public void saveToXML();
+	public void saveToXML(String fileDir, String filename);
 	
 	/**
 	 * Load an instance from an XML file
 	 */
-	public void loadFromXML();
+	public void loadFromXML(String dir, String file);
 
 }
