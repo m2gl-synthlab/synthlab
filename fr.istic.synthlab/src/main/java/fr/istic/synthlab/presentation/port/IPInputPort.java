@@ -2,18 +2,13 @@ package fr.istic.synthlab.presentation.port;
 
 import fr.istic.synthlab.controller.port.ICInputPort;
 
+public interface IPInputPort extends IPPort {
 
-public interface IPInputPort{
 	/**
 	 * Return the presentation's controller
 	 * 
 	 * @return the controller
 	 */
 	public ICInputPort getControl();
-	
-	public void c2pSetName();
 
-	public void c2pClickAllowed();
-
-	public void c2pClickNotAllowed();
 }
