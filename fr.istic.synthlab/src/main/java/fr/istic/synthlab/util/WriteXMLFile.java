@@ -69,7 +69,7 @@ public class WriteXMLFile {
 
 	public void saveModules(List<IModule> modules) {
 		for(IModule module : modules){
-			
+			System.out.println(module);
 			Element moduleName = doc.createElement("module");
 			rootElement.appendChild(moduleName);
 			
@@ -93,7 +93,10 @@ public class WriteXMLFile {
 			
 			// Ajout des ports utilises du module
 			for(IWire wire : module.getWires()){
+				
 				if(module.containsPort(wire.getOutput())){
+					System.out.println("ENTER");
+
 					// set le port
 					Element port = doc.createElement("port");
 					moduleName.appendChild(port);

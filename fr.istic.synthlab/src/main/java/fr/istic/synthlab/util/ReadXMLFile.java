@@ -118,6 +118,15 @@ public class ReadXMLFile {
 				
 				IModule moduleToConnect = modules.get(moduleName);
 				IPort port = moduleToConnect.getPortByName(portName);
+				System.out.println("module name "+moduleName);
+				System.out.println("module " + moduleToConnect
+						
+						
+					);
+
+				System.out.println("port name "+portName);
+
+				System.out.println("port "+port);
 				wire.connect((IInputPort)port);
 				CSynthesizer.getInstance().add(wire);
 			}
