@@ -19,6 +19,7 @@ import org.w3c.dom.Element;
 import fr.istic.synthlab.abstraction.module.IModule;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.controller.module.ICModule;
+import fr.istic.synthlab.controller.wire.ICWire;
 
 public class WriteXMLFile {
 
@@ -114,6 +115,21 @@ public class WriteXMLFile {
 					attrPortConnectedToModulePort.setValue(wire.getInput().getName());
 					port.setAttributeNode(attrPortConnectedToModulePort);
 					
+					// Cable Color R
+					Attr attrPortColorR = doc.createAttribute("colorR");
+					attrPortColorR.setValue(((ICWire)wire).getPresentation().getColor().getRed()+"");
+					port.setAttributeNode(attrPortColorR);
+					
+					// Cable Color G
+					Attr attrPortColorG = doc.createAttribute("colorG");
+					attrPortColorG.setValue(((ICWire)wire).getPresentation().getColor().getGreen()+"");
+					port.setAttributeNode(attrPortColorG);
+					
+					// Cable Color B
+					Attr attrPortColorB = doc.createAttribute("colorB");
+					attrPortColorB.setValue(((ICWire)wire).getPresentation().getColor().getBlue()+"");
+					port.setAttributeNode(attrPortColorB);
+					
 				}
 			}
 			
@@ -135,19 +151,4 @@ public class WriteXMLFile {
 		}
 		saveToXML();
 	}
-	
-// STRUCTURE DU XML BATI :
-//	<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-//	<modules>
-//		<module name="OUT1" x="10.0" y="10.0">
-//			<port connectedToModuleName="VCA1" connectedToModulePort="Output" name="In" type="input"/>
-//		</module>
-//		<module name="VCO1" x="14.0" y="296.0"/>
-//		<module name="VCA1" x="482.0" y="300.0">
-//			<port connectedToModuleName="VCO1" connectedToModulePort="Square" name="Input" type="input"/>
-//		</module>
-//		<module name="VCA2" x="1010.0" y="64.0">
-//			<port connectedToModuleName="VCO1" connectedToModulePort="SawTooth" name="Input" type="input"/>
-//		</module>
-//	</modules>
 }

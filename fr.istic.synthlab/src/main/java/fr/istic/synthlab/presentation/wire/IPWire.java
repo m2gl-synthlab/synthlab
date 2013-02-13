@@ -1,5 +1,6 @@
 package fr.istic.synthlab.presentation.wire;
 
+import java.awt.Color;
 import java.awt.Point;
 
 import fr.istic.synthlab.controller.wire.ICWire;
@@ -59,5 +60,9 @@ public interface IPWire {
 	public void setOutputPoint(Point mouse);
 	
 	public void setOnTop(boolean isOnTop);
+
+	public Color getColor();
+
+	public void setColor(Color color);
 
 }
