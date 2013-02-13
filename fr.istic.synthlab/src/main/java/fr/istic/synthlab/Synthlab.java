@@ -34,7 +34,7 @@ import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
 
-public class SynthMain {
+public class Synthlab {
 	@SuppressWarnings("restriction")
 	public static void main(String[] args) {
 		// Set the look and feel
