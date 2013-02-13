@@ -1,7 +1,6 @@
 package fr.istic.synthlab.abstraction.module.mix;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import com.jsyn.unitgen.UnitGenerator;
@@ -11,7 +10,6 @@ import fr.istic.synthlab.abstraction.filter.QuadrupleMixFilter;
 import fr.istic.synthlab.abstraction.module.AModule;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
-import fr.istic.synthlab.abstraction.port.IPort;
 import fr.istic.synthlab.abstraction.util.Convert;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;

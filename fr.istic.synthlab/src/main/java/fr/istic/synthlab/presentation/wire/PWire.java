@@ -112,7 +112,8 @@ public class PWire extends JPanel implements IPWire {
 		}
 		
 		// Calcule de la boite englobante
-		int x, y, w, h = 0;
+		int x, y, w = 0;
+//		int h = 0;
 
 		if (posInput.x < posOutput.x) {
 			x = posInput.x;
@@ -152,21 +153,22 @@ public class PWire extends JPanel implements IPWire {
 		Graphics2D g2 = (Graphics2D) g;
 		
 		// Calcule de la boite englobante
-		int x, y, w, h = 0;
+//		int x, y = 0;
+		int w, h = 0;
 
 		if (posInput.x < posOutput.x) {
-			x = posInput.x;
+//			x = posInput.x;
 			w = posOutput.x - posInput.x;
 		} else {
-			x = posOutput.x;
+//			x = posOutput.x;
 			w = posInput.x - posOutput.x;
 		}
 
 		if (posInput.y < posOutput.y) {
-			y = posInput.y;
+//			y = posInput.y;
 			h = posOutput.y - posInput.y;
 		} else {
-			y = posOutput.y;
+//			y = posOutput.y;
 			h = posInput.y - posOutput.y;
 		}
 		

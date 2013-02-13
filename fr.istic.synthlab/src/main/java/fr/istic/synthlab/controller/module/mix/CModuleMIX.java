@@ -5,7 +5,6 @@ import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.module.IPModule;
 import fr.istic.synthlab.presentation.module.mix.IPModuleMIX;
-import fr.istic.synthlab.presentation.module.rep.IPModuleREP;
 
 public class CModuleMIX extends ModuleMIX implements ICModuleMIX {
 

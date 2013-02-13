@@ -114,18 +114,6 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 				ctrl.p2cResonanceChanged(resonanceModel.getDoubleValue());
 			}
 		});
-		//
-		// this.addMouseMotionListener(new MouseMotionListener() {
-		// @Override
-		// public void mouseMoved(MouseEvent e) {
-		// ((PSynthesizer) ((ICSynthesizer) getControl().getSynthesizer())
-		// .getPresentation()).dispatchEvent(e);
-		// }
-		//
-		// @Override
-		// public void mouseDragged(MouseEvent e) {
-		// }
-		// });
 	}
 
 	@Override

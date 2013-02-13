@@ -91,18 +91,6 @@ public class PModuleVCA extends APModule implements IPModuleVCA {
 						.getDoubleValue());
 			}
 		});
-
-//		this.addMouseMotionListener(new MouseMotionListener() {
-//			@Override
-//			public void mouseMoved(MouseEvent e) {
-//				((PSynthesizer) ((ICSynthesizer) getControl().getSynthesizer())
-//						.getPresentation()).dispatchEvent(e);
-//			}
-//
-//			@Override
-//			public void mouseDragged(MouseEvent e) {
-//			}
-//		});
 	}
 
 	@Override
