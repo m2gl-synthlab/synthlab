@@ -127,15 +127,13 @@ public class PWire extends JPanel implements IPWire {
 		}
 		
 		
-		if(getParent()!=null)
-		setBounds(x-10, y-10 , w+20, getParent().getHeight()); // On ajoute une marge pour évité de coupé le cable
-		
-		else {
+		if(getParent()==null){
 			JPanel pan=new JPanel();
 			pan.add(this);
-			setBounds(x-10, y-10 , w+20, getParent().getHeight()); // On ajoute une marge pour évité de coupé le cable
-
 		}
+		setBounds(x-10, y-10 , w+20, getParent().getHeight()); // On ajoute une marge pour évité de coupé le cable
+		
+		
 			
 		IPSynthesizer presSynth = synth.getPresentation();
 		((JLayeredPane) presSynth).setLayer(this, 0, 0);

@@ -2,7 +2,7 @@ package fr.istic.synthlab.presentation.port;
 
 import fr.istic.synthlab.controller.port.ICOutputPort;
 
-public interface IPOutputPort {
+public interface IPOutputPort extends IPPort {
 
 	/**
 	 * Return the presentation's controller
@@ -11,9 +11,4 @@ public interface IPOutputPort {
 	 */
 	public ICOutputPort getControl();
 
-	public void c2pSetName();
-
-	public void c2pClickAllowed();
-
-	public void c2pClickNotAllowed();
 }

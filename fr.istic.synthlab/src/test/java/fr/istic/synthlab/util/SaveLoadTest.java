@@ -16,6 +16,8 @@ import fr.istic.synthlab.controller.module.eg.CModuleEG;
 import fr.istic.synthlab.controller.module.eg.ICModuleEG;
 import fr.istic.synthlab.controller.module.vca.CModuleVCA;
 import fr.istic.synthlab.controller.module.vca.ICModuleVCA;
+import fr.istic.synthlab.controller.module.vcf.CModuleVCFA_LP;
+import fr.istic.synthlab.controller.module.vcf.ICModuleVCF;
 import fr.istic.synthlab.controller.module.vco.CModuleVCO;
 import fr.istic.synthlab.controller.module.vco.ICModuleVCO;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
@@ -63,11 +65,11 @@ public class SaveLoadTest extends TestCase {
 		
 		
 
-		s.saveToXML();
+		s.saveToXML("", "test.synthlab");
 
 		
 		s.setSynthesizer(new CSynthesizer());
-		s.loadFromXML();
+		s.loadFromXML("", "test.synthlab");
 		assertEquals(3,s.getSynthesizer().getModules().size());
 		assertEquals("CModuleVCO",s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
 		assertEquals("CModuleVCA",s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
@@ -81,6 +83,8 @@ public class SaveLoadTest extends TestCase {
 
 		
 	}
+	
+	
 	
 public void testSaveAndLoadSetAttenuation(){
 		
@@ -100,10 +104,10 @@ public void testSaveAndLoadSetAttenuation(){
 		
 		
 
-		s.saveToXML();
+		s.saveToXML("", "test.synthlab");
 		
 		s.setSynthesizer(new CSynthesizer());
-		s.loadFromXML();
+		s.loadFromXML("", "test.synthlab");
 		assertEquals(3,s.getSynthesizer().getModules().size());
 		assertEquals("CModuleVCO",s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
 		assertEquals("CModuleVCA",s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
@@ -157,16 +161,75 @@ public void testSaveAndLoadWire(){
 	
 	
 
-	s.saveToXML();
+	s.saveToXML("", "test.synthlab");
 	
 	s.setSynthesizer(new CSynthesizer());
-	s.loadFromXML();
+	s.loadFromXML("", "test.synthlab");
 	assertEquals(3,s.getSynthesizer().getModules().size());
 	assertEquals("CModuleVCO",s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
 	assertEquals("CModuleVCA",s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
 	assertEquals("CModuleEG",s.getSynthesizer().getModules().get(2).getClass().getSimpleName());
 	assertTrue(((CModuleVCA) s.getSynthesizer().getModules().get(1)).getInput().isInUse());
 	assertTrue(((CModuleVCO) s.getSynthesizer().getModules().get(0)).getOutputSquare().isInUse());
+
+
+
+
+	
+
+	
+}
+
+public void testSaveAndLoadWireVCF(){
+	
+	s.setSynthesizer(synth);
+	s.setDisplaySynthCommand(new DisplayCommand(sf));
+	s.setUndisplaySynthCommand(new UndisplayCommand(sf));
+	ICModuleVCF moduleVCF=new CModuleVCFA_LP();
+	ICModuleVCA moduleVCA=new CModuleVCA();
+	ICModuleEG moduleEG=new CModuleEG();
+
+	synth.add(moduleVCF);
+	synth.add(moduleVCA);
+	synth.add(moduleEG);
+	ICWire wire=new CWire();
+	JPanel panelToAdd=new JPanel();
+	panelToAdd.add((Component) wire.getPresentation());
+	
+	
+	try {
+		wire.connect(moduleVCF.getOutput());
+	
+	} catch (PortAlreadyInUseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (BadConnectionException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	try {
+		wire.connect(moduleVCA.getInput());
+	} catch (PortAlreadyInUseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (BadConnectionException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+	
+	
+
+	s.saveToXML("", "test.synthlab");
+	
+	s.setSynthesizer(new CSynthesizer());
+	s.loadFromXML("", "test.synthlab");
+	assertEquals(3,s.getSynthesizer().getModules().size());
+	assertEquals("CModuleVCFA_LP",s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
+	assertEquals("CModuleVCA",s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
+	assertEquals("CModuleEG",s.getSynthesizer().getModules().get(2).getClass().getSimpleName());
+	assertTrue(((CModuleVCA) s.getSynthesizer().getModules().get(1)).getInput().isInUse());
+	assertTrue(((CModuleVCFA_LP) s.getSynthesizer().getModules().get(0)).getOutput().isInUse());
 
 
 

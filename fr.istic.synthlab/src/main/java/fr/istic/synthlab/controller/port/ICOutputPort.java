@@ -3,19 +3,15 @@ package fr.istic.synthlab.controller.port;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
 import fr.istic.synthlab.presentation.port.IPOutputPort;
 
-public interface ICOutputPort extends IOutputPort {
+/**
+ * Interface for an OutputPort controller
+ */
+public interface ICOutputPort extends ICPort, IOutputPort {
+	
 	/**
 	 * Return the output port's presentation
 	 * 
 	 * @return presentation
 	 */
 	public IPOutputPort getPresentation();
-
-	void p2cConnect();
-
-	public void p2cDisconnect();
-
-	public void p2cCanConnect();
-
-	public void p2cMouseClicked();
 }

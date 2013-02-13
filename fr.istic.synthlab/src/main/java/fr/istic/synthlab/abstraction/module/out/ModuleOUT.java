@@ -51,7 +51,8 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	@Override
 	public void start() {
-		out.start();
+		if(!isMute)
+			out.start();
 	}
 
 	@Override

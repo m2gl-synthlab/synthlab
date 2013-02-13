@@ -70,7 +70,7 @@ public class POutputPort extends JPanel implements IPOutputPort {
 				((APModule) ((ICModule) getControl().getModule())
 						.getPresentation()).dispatchEvent(e);
 				if (Math.pow((e.getX() - 40), 2) + Math.pow((e.getY() - 40), 2) < Math.pow(10, 2)) {
-					ctrl.p2cCanConnect();
+					ctrl.p2cMouseHover();
 				} else {
 					clickState=CLICK_STATE_DEFAULT;
 					repaint();
@@ -85,11 +85,6 @@ public class POutputPort extends JPanel implements IPOutputPort {
 	@Override
 	public ICOutputPort getControl() {
 		return ctrl;
-	}
-
-	@Override
-	public void c2pSetName() {
-		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
 	}
 
 	@Override
@@ -110,18 +105,36 @@ public class POutputPort extends JPanel implements IPOutputPort {
 
 		super.paint(g2d);
 	}
+	
+	@Override
+	public void c2pNameChanged() {
+		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
+	}
+
 
 	@Override
-	public void c2pClickAllowed() {
+	public void c2pConnectionAllowed() {
 		clickState = CLICK_STATE_ALLOWED;
 		repaint();
 		validate();
 	}
 
 	@Override
-	public void c2pClickNotAllowed() {
+	public void c2pConnectionNotAllowed() {
 		clickState = CLICK_STATE_NOT_ALLOWED;
 		repaint();
 		validate();
+	}
+
+	@Override
+	public void c2pConnectionAttemptSucceed() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void c2pConnectionAttemptFailed() {
+		// TODO Auto-generated method stub
+		
 	}
 }
