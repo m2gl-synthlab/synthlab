@@ -30,13 +30,12 @@ public class QuadrupleMixFilter extends UnitGenerator {
 	public void generate(int start, int limit) {
 		double[] inputs1 = input1.getValues();
 		double[] inputs2 = input2.getValues();
+		double[] inputs3 = input3.getValues();
+		double[] inputs4 = input4.getValues();
 		double[] outputs = output.getValues();
 
 		for (int i = start; i < limit; i++) {
-			double x = inputs1[i];
-			outputs[i] = x;
-//			outputs2[i] = x;
-//			outputs3[i] = x;
+			outputs[i] = inputs1[i] + inputs2[i] + inputs3[i] + inputs4[i];
 		}
 	}
 

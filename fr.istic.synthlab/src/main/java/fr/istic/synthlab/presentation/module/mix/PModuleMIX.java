@@ -13,6 +13,8 @@ import fr.istic.synthlab.presentation.port.POutputPort;
 
 public class PModuleMIX extends APModule implements IPModuleMIX{
 
+	private static final long serialVersionUID = -1813495434910266229L;
+	
 	private ICModuleMIX ctrl;
 	private PInputPort inputPort1;
 	private PInputPort inputPort2;
