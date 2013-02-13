@@ -8,6 +8,8 @@ import fr.istic.synthlab.abstraction.module.audioscope.IModuleAudioScope;
 import fr.istic.synthlab.abstraction.module.audioscope.ModuleAudioScope;
 import fr.istic.synthlab.abstraction.module.eg.IModuleEG;
 import fr.istic.synthlab.abstraction.module.eg.ModuleEG;
+import fr.istic.synthlab.abstraction.module.mix.IModuleMIX;
+import fr.istic.synthlab.abstraction.module.mix.ModuleMIX;
 import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
 import fr.istic.synthlab.abstraction.module.out.ModuleOUT;
 import fr.istic.synthlab.abstraction.module.rep.IModuleREP;
@@ -88,6 +90,12 @@ public class AFactory implements IFactory {
 	@Override
 	public IModuleREP newREP() {
 		IModuleREP module = new ModuleREP();
+		return module;
+	}
+	
+	@Override
+	public IModule newMIX() {
+		IModuleMIX module = new ModuleMIX();
 		return module;
 	}
 

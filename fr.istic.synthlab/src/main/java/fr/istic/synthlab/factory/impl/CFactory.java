@@ -6,6 +6,7 @@ import com.jsyn.ports.UnitOutputPort;
 import fr.istic.synthlab.abstraction.module.IModule;
 import fr.istic.synthlab.abstraction.module.audioscope.IModuleAudioScope;
 import fr.istic.synthlab.abstraction.module.eg.IModuleEG;
+import fr.istic.synthlab.abstraction.module.mix.IModuleMIX;
 import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
 import fr.istic.synthlab.abstraction.module.rep.IModuleREP;
 import fr.istic.synthlab.abstraction.module.vca.IModuleVCA;
@@ -16,6 +17,7 @@ import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope;
 import fr.istic.synthlab.controller.module.eg.CModuleEG;
+import fr.istic.synthlab.controller.module.mix.CModuleMIX;
 import fr.istic.synthlab.controller.module.out.CModuleOUT;
 import fr.istic.synthlab.controller.module.rep.CModuleREP;
 import fr.istic.synthlab.controller.module.vca.CModuleVCA;
@@ -70,6 +72,12 @@ public class CFactory implements IFactory {
 	@Override
 	public IModuleREP newREP() {
 		IModuleREP module = new CModuleREP();
+		return module;
+	}
+
+	@Override
+	public IModule newMIX() {
+		IModuleMIX module = new CModuleMIX();
 		return module;
 	}
 
