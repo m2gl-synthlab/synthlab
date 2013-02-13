@@ -17,7 +17,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -66,11 +65,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			menuItemAddModuleVCA, menuItemAddModuleMIX ;
 
 	// Toolbar
-	private WebToolBar toolBarStartStop = new WebToolBar();
-	private String[] iconFiles = { "res/play.png", "res/pause.png" };
-	private String[] buttonLabels = { "Play", "Pause" };
-	private Image[] icons = new Image[iconFiles.length];
-	private JButton[] buttons = new JButton[buttonLabels.length];
+	private WebToolBar toolBar = new WebToolBar();
+	private String[] iconFiles = { "res/play.png", "res/stop.png" };
+	private String buttonPlayPauseLabel = "Play/Stop";
+	private JButton buttonPlayPause = new JButton();
 
 	// Command
 	private ICommand newSynthCommand;
@@ -95,6 +93,8 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand toolbarCurrentWireColorCommand;
 
 	private Color toolbarCurrentWireColor = Color.BLACK;
+	
+	private boolean isPlaying = false;
 
 	public SynthFrame() {
 		this.initComponents();
@@ -178,25 +178,22 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		this.setJMenuBar(mainMenuBar);
 
 		// instanciation des boutons de la toolbar
-		toolBarStartStop.setToolbarStyle(ToolbarStyle.attached);
+		toolBar.setToolbarStyle(ToolbarStyle.attached);
 		Container frameContainer = getContentPane();
 		frameContainer.setLayout(new BorderLayout());
-		for (int i = 0; i < buttonLabels.length; ++i) {
-			try {
-				Image img = ImageIO.read(new File(iconFiles[i]));
-				icons[i] = img.getScaledInstance(25, 25, Image.SCALE_DEFAULT);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			buttons[i] = new JButton(new ImageIcon(icons[i]));
-			buttons[i].setToolTipText(buttonLabels[i]);
-			toolBarStartStop.add(buttons[i]);
+		
+		Image img;
+		try {
+			img = ImageIO.read(new File(iconFiles[1]));
+			img = img.getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+			buttonPlayPause = new JButton(new ImageIcon(img));
+			buttonPlayPause.setToolTipText(buttonPlayPauseLabel);
+			toolBar.add(buttonPlayPause);
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 		
-		
-		
-		final WebButton colorChooserButton = new WebButton ( Color.GRAY.getRed()+", "+Color.GRAY.getGreen()+", "+ Color.GRAY.getBlue(), ImageUtils.createColorIcon ( Color.GRAY ) );
-        colorChooserButton.setLeftRightSpacing ( 0 );
+		final WebButton colorChooserButton = new WebButton ( "Next wire's color", ImageUtils.createColorIcon ( Color.GRAY ) );
         colorChooserButton.addActionListener ( new ActionListener ()
         {
             private WebColorChooserDialog colorChooser = null;
@@ -206,7 +203,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
             {
                 if ( colorChooser == null )
                 {
-                    colorChooser = new WebColorChooserDialog(toolBarStartStop);
+                    colorChooser = new WebColorChooserDialog(toolBar);
                 }
                 colorChooser.setColor ( lastColor );
                 colorChooser.setVisible ( true );
@@ -219,17 +216,13 @@ public class SynthFrame extends JFrame implements ISynthFrame {
                     lastColor = color;
 
                     colorChooserButton.setIcon ( ImageUtils.createColorIcon ( color ) );
-                    colorChooserButton.setText ( color.getRed () + ", " + color.getGreen () + ", " + color.getBlue () );
                 }
             }
         } );
         
-        toolBarStartStop.addSpacing(50);
-		
-        toolBarStartStop.add(new JLabel("Color for your next cable :"));
-        toolBarStartStop.add(colorChooserButton);
-
-		frameContainer.add(BorderLayout.NORTH, toolBarStartStop);
+        toolBar.add(colorChooserButton);
+        
+		frameContainer.add(BorderLayout.NORTH, toolBar);
 
 	}
 
@@ -398,22 +391,39 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			}
 		});
 
-		buttons[BUTTON_PLAY].addActionListener(new ActionListener() {
+		buttonPlayPause.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (toolbarPlayCommand != null)
-					toolbarPlayCommand.execute();
+				if(isPlaying){
+					if (toolbarPauseCommand != null){
+						toolbarPauseCommand.execute();
+						Image img;
+						try {
+							img = ImageIO.read(new File(iconFiles[0]));
+							img = img.getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+							buttonPlayPause.setIcon(new ImageIcon(img));
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+						isPlaying = !isPlaying;
+					}
+				} else {
+					if (toolbarPlayCommand != null){
+						toolbarPlayCommand.execute();
+						Image img;
+						try {
+							img = ImageIO.read(new File(iconFiles[1]));
+							img = img.getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+							buttonPlayPause.setIcon(new ImageIcon(img));
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+						isPlaying = !isPlaying;
+					}
+				}
+				
 			}
 		});
-
-		buttons[BUTTON_PAUSE].addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (toolbarPauseCommand != null)
-					toolbarPauseCommand.execute();
-			}
-		});
-
 	}
 
 	@Override
