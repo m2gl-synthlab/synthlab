@@ -2,6 +2,7 @@ package fr.istic.synthlab.factory.impl;
 
 import fr.istic.synthlab.controller.module.audioscope.ICModuleAudioScope;
 import fr.istic.synthlab.controller.module.eg.ICModuleEG;
+import fr.istic.synthlab.controller.module.mix.ICModuleMIX;
 import fr.istic.synthlab.controller.module.out.ICModuleOUT;
 import fr.istic.synthlab.controller.module.rep.ICModuleREP;
 import fr.istic.synthlab.controller.module.vca.ICModuleVCA;
@@ -15,6 +16,8 @@ import fr.istic.synthlab.presentation.module.audioscope.IPModuleAudioScope;
 import fr.istic.synthlab.presentation.module.audioscope.PModuleAudioScope;
 import fr.istic.synthlab.presentation.module.eg.IPModuleEG;
 import fr.istic.synthlab.presentation.module.eg.PModuleEG;
+import fr.istic.synthlab.presentation.module.mix.IPModuleMIX;
+import fr.istic.synthlab.presentation.module.mix.PModuleMIX;
 import fr.istic.synthlab.presentation.module.out.IPModuleOUT;
 import fr.istic.synthlab.presentation.module.out.PModuleOUT;
 import fr.istic.synthlab.presentation.module.rep.IPModuleREP;
@@ -86,6 +89,11 @@ public class PFactory implements IPFactory {
 	}
 	
 	@Override
+	public IPModuleMIX newMIX(ICModuleMIX control) {
+		return new PModuleMIX(control);
+	}
+	
+	@Override
 	public IPWire newWire(ICWire control) {
 		return new PWire(control);
 	}
@@ -99,4 +107,5 @@ public class PFactory implements IPFactory {
 	public IPInputPort newInputPort(ICInputPort control) {
 		return new PInputPort(control);
 	}
+
 }

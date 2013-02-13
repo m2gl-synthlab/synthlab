@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.jsyn.unitgen.ChannelOut;
 import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.filter.AttenuationFilter;
 import fr.istic.synthlab.abstraction.filter.QuadrupleMixFilter;
-import fr.istic.synthlab.abstraction.filter.TriplePassThroughFilter;
 import fr.istic.synthlab.abstraction.module.AModule;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
@@ -153,7 +151,7 @@ public class ModuleMIX  extends AModule implements IModuleMIX {
 	}
 
 	@Override
-	public IInputPort getInPut(int number) {
+	public IInputPort getInput(int number) {
 		switch (number){
 		case 1:
 			return this.in1;
@@ -168,7 +166,7 @@ public class ModuleMIX  extends AModule implements IModuleMIX {
 	}
 
 	@Override
-	public IOutputPort getOut() {
+	public IOutputPort getOutput() {
 		// TODO Auto-generated method stub
 		return null;
 	}

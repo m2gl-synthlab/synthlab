@@ -26,10 +26,12 @@ public interface IFactory {
 	IModuleEG newEG();
 	IModuleAudioScope newAudioScope();
 	IModuleREP newREP();
+	IModule newMIX();
 
 	IWire newWire();
 
 	IInputPort newInputPort(IModule mod, String name, UnitInputPort input);
 	IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output);
+
 
 }

@@ -14,14 +14,14 @@ public interface IModuleMIX extends IModule {
 	 * 
 	 * @return input
 	 */
-	public IInputPort getInPut(int number);
+	public IInputPort getInput(int number);
 
 	/**
 	 * Return the ouput port(number) of the MIX module
 	 * 
 	 * @return out
 	 */
-	public IOutputPort getOut();
+	public IOutputPort getOutput();
 
 	/**
 	 * Set the attenuation(number) value (between -inf and +12dB)
