@@ -29,6 +29,9 @@ import fr.istic.synthlab.factory.impl.PFactory;
 
 public class SynthMain {
 	public static void main(String[] args) {
+		
+
+				
 		WebLookAndFeel.install();
 		// Initialize factories
 		PACFactory.setAFactory(AFactory.getInstance());
@@ -71,5 +74,13 @@ public class SynthMain {
 		
 		// Start the application
 		app.startSynth();
+		
+		// Chargement du fichier ouvert
+		String filename = null;
+		if(args[0] != null){
+			filename = args[0];
+			app.loadFromXML("", filename);
+		}
+		
 	}
 }
