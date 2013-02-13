@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -37,7 +38,6 @@ import fr.istic.synthlab.command.menu.AddModuleAudioScopeCommand;
 import fr.istic.synthlab.command.menu.AddModuleMIXCommand;
 import fr.istic.synthlab.command.menu.AddModuleREPCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarCurrentWireColorCommand;
-import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 import fr.istic.synthlab.presentation.synthesizer.PSynthesizer;
 
@@ -126,25 +126,36 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuFile.add(menuItemQuit);
 
 		// -------------------------- Add Menu --------------------------
-		menuAdd = new JMenu("Add");
+		menuAdd = new JMenu("Add module");
 
-		menuItemAddModuleOUT = new JMenuItem("OUT Module");
-		menuItemAddModuleVCO = new JMenuItem("VCO Module");
-		menuItemAddModuleVCA = new JMenuItem("VCA Module");
-		menuItemAddModuleVCF = new JMenuItem("VCF LP24 Module");
-		menuItemAddModuleEG = new JMenuItem("EG Module");
-		menuItemAddModuleAudioScope = new JMenuItem("AudioScope Module");
-		menuItemAddModuleREP = new JMenuItem("REP Module");
-		menuItemAddModuleMIX = new JMenuItem("MIX Module");
+		menuItemAddModuleAudioScope = new JMenuItem("SCOP   | AudioScope");
+		menuItemAddModuleVCF = new JMenuItem("VCF-LP | Voltage-Controlled Filter Low-Pass");
+		menuItemAddModuleOUT = new JMenuItem("OUT    | Output on soundcard");
+		menuItemAddModuleVCO = new JMenuItem("VCO    | Voltage-Controlled Oscillator");
+		menuItemAddModuleVCA = new JMenuItem("VCA    | Voltage-Controlled Amplifier");
+		menuItemAddModuleREP = new JMenuItem("REP    | Replicator");
+		menuItemAddModuleMIX = new JMenuItem("MIX    | Mixer");
+		menuItemAddModuleEG  = new JMenuItem("EG     | Enveloppe generator");
+		
+		Font font = new Font(Font.MONOSPACED, Font.ROMAN_BASELINE, 11);
+		
+		menuItemAddModuleVCO.setFont(font);
+		menuItemAddModuleVCA.setFont(font);
+		menuItemAddModuleVCF.setFont(font);
+		menuItemAddModuleOUT.setFont(font);
+		menuItemAddModuleEG.setFont(font);
+		menuItemAddModuleMIX.setFont(font);
+		menuItemAddModuleREP.setFont(font);
+		menuItemAddModuleAudioScope.setFont(font);
 
-		menuAdd.add(menuItemAddModuleOUT);
 		menuAdd.add(menuItemAddModuleVCO);
 		menuAdd.add(menuItemAddModuleVCA);
 		menuAdd.add(menuItemAddModuleVCF);
+		menuAdd.add(menuItemAddModuleOUT);
 		menuAdd.add(menuItemAddModuleEG);
-		menuAdd.add(menuItemAddModuleAudioScope);
-		menuAdd.add(menuItemAddModuleREP);
 		menuAdd.add(menuItemAddModuleMIX);
+		menuAdd.add(menuItemAddModuleREP);
+		menuAdd.add(menuItemAddModuleAudioScope);
 		
 		// -------------------------- Help Menu --------------------------
 		menuHelp = new JMenu("Help");
