@@ -34,6 +34,7 @@ import com.alee.utils.ImageUtils;
 
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.command.menu.AddModuleAudioScopeCommand;
+import fr.istic.synthlab.command.menu.AddModuleMIXCommand;
 import fr.istic.synthlab.command.menu.AddModuleREPCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarCurrentWireColorCommand;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
@@ -62,7 +63,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT,
 			menuItemAddModuleVCF, menuItemAddModuleEG,
 			menuItemAddModuleAudioScope, menuItemAddModuleREP,
-			menuItemAddModuleVCA;
+			menuItemAddModuleVCA, menuItemAddModuleMIX ;
 
 	// Toolbar
 	private WebToolBar toolBarStartStop = new WebToolBar();
@@ -85,6 +86,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand addModuleEGCommand;
 	private ICommand addModuleAudioScopeCommand;
 	private ICommand addModuleREPCommand;
+	private ICommand addModuleMIXCommand;
 
 	private ICommand toolbarPlayCommand;
 	private ICommand toolbarPauseCommand;
@@ -133,6 +135,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuItemAddModuleEG = new JMenuItem("EG Module");
 		menuItemAddModuleAudioScope = new JMenuItem("AudioScope Module");
 		menuItemAddModuleREP = new JMenuItem("REP Module");
+		menuItemAddModuleMIX = new JMenuItem("MIX Module");
 
 		menuAdd.add(menuItemAddModuleOUT);
 		menuAdd.add(menuItemAddModuleVCO);
@@ -141,7 +144,8 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuAdd.add(menuItemAddModuleEG);
 		menuAdd.add(menuItemAddModuleAudioScope);
 		menuAdd.add(menuItemAddModuleREP);
-
+		menuAdd.add(menuItemAddModuleMIX);
+		
 		// -------------------------- Help Menu --------------------------
 		menuHelp = new JMenu("Help");
 
@@ -347,6 +351,14 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 					addModuleREPCommand.execute();
 			}
 		});
+		menuItemAddModuleMIX.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (addModuleMIXCommand != null)
+					addModuleMIXCommand.execute();
+			}
+		});
 		menuItemDoc.addActionListener(new ActionListener() {
 
 			@Override
@@ -516,6 +528,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	public void setAddModuleREPCommand(AddModuleREPCommand addModuleREPCommand) {
 		this.addModuleREPCommand = addModuleREPCommand;
 	}
+
+	public void setAddModuleMIXCommand(AddModuleMIXCommand addModuleMIXCommand) {
+		this.addModuleMIXCommand = addModuleMIXCommand;		
+	}
 	
 	/**
 	 * @param setCurrentWireColor
@@ -527,4 +543,5 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	public Color getCurrentWireColor() {
 		return toolbarCurrentWireColor ;
 	}
+
 }
