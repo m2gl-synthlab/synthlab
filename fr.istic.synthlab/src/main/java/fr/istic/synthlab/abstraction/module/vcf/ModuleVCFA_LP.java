@@ -78,6 +78,9 @@ public class ModuleVCFA_LP extends AModule implements IModuleVCF, Observer<Port>
 		// Set de la frequence de coupure de base
 		filterJSyn1.frequency.set(getCutFrequency());
 		filterJSyn2.frequency.set(getCutFrequency());
+		addPort(input);
+		addPort(fm);
+		addPort(output);
 	}
 
 	@Override
