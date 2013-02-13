@@ -106,7 +106,40 @@ public class PWire extends JPanel implements IPWire {
 				c = c.getParent();
 			}
 		}
+		
+		// Calcule de la boite englobante
+		int x, y, w, h = 0;
 
+		if (posInput.x < posOutput.x) {
+			x = posInput.x;
+			w = posOutput.x - posInput.x;
+		} else {
+			x = posOutput.x;
+			w = posInput.x - posOutput.x;
+		}
+
+		if (posInput.y < posOutput.y) {
+			y = posInput.y;
+//			h = posOutput.y - posInput.y;
+		} else {
+			y = posOutput.y;
+//			h = posInput.y - posOutput.y;
+		}
+
+		setBounds(x-10, y-10 , w+20, getParent().getHeight()); // On ajoute une marge pour évité de coupé le cable
+
+		IPSynthesizer presSynth = synth.getPresentation();
+		((JLayeredPane) presSynth).setLayer(this, 0, 0);
+		
+		repaint();
+		validate();
+	}
+
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		Graphics2D g2 = (Graphics2D) g;
+		
 		// Calcule de la boite englobante
 		int x, y, w, h = 0;
 
@@ -125,27 +158,12 @@ public class PWire extends JPanel implements IPWire {
 			y = posOutput.y;
 			h = posInput.y - posOutput.y;
 		}
-
-		setBounds(x-10, y-10 , w+20, h+20); // On ajoute une marge pour évité de coupé le cable
-
-		IPSynthesizer presSynth = synth.getPresentation();
-		((JLayeredPane) presSynth).setLayer(this, 0, 0);
 		
-		repaint();
-		validate();
-	}
-
-	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
-		Graphics2D g2 = (Graphics2D) g;
-		
-
 		// Lisse l'affichage
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		// Calcul d'un point centrale
-		Point mid = new Point(getWidth() / 2, getHeight()); // TODO : baissé Y en fonction de la taille du cable
+		Point mid = new Point(w / 2, h + w/2); // TODO : baissé Y en fonction de la taille du cable
 		
 		// Création de la courbe
 		QuadCurve2D curve = new QuadCurve2D.Double(posInput.getX() - getX(), posInput.getY() - getY(), mid.getX(), mid.getY() , posOutput.getX() - getX(), posOutput.getY() - getY());
@@ -153,10 +171,11 @@ public class PWire extends JPanel implements IPWire {
 		
 		// Dessine la courbe avec des extrémité ronde
 		g2.setStroke(new BasicStroke(6, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
+		g2.setColor(Color.BLACK);
 		g2.draw(curve);
 		
 		// Ajoute un trait fin au centre
-		g2.setStroke(new BasicStroke(2));
+		g2.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
 		g2.setColor(Color.GRAY);
 		g2.draw(curve);
 	}
