@@ -182,12 +182,12 @@ public class PWire extends JPanel implements IPWire {
 		
 		// Dessine la courbe avec des extrémité ronde
 		g2.setStroke(new BasicStroke(6, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
-		g2.setColor(currentColor);
+		g2.setColor(Color.BLACK);
 		g2.draw(curve);
 		
 		// Ajoute un trait fin au centre
 		g2.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
-		g2.setColor(Color.GRAY);
+		g2.setColor(currentColor);
 		g2.draw(curve);
 	}
 
