@@ -37,7 +37,6 @@ import fr.istic.synthlab.command.menu.AddModuleAudioScopeCommand;
 import fr.istic.synthlab.command.menu.AddModuleMIXCommand;
 import fr.istic.synthlab.command.menu.AddModuleREPCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarCurrentWireColorCommand;
-import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 import fr.istic.synthlab.presentation.synthesizer.PSynthesizer;
 
@@ -61,7 +60,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private JMenuItem menuItemNew, menuItemOpen, menuItemSave;
 	private JMenuItem menuItemQuit, menuItemDoc, menuItemAbout;
 	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT,
-			menuItemAddModuleVCF, menuItemAddModuleEG,
+			menuItemAddModuleVCFLP, menuItemAddModuleVCFHP, menuItemAddModuleEG,
 			menuItemAddModuleAudioScope, menuItemAddModuleREP,
 			menuItemAddModuleVCA, menuItemAddModuleMIX ;
 
@@ -82,7 +81,8 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand addModuleOUTCommand;
 	private ICommand addModuleVCOCommand;
 	private ICommand addModuleVCACommand;
-	private ICommand addModuleVCFCommand;
+	private ICommand addModuleVCFLPCommand;
+	private ICommand addModuleVCFHPCommand;
 	private ICommand addModuleEGCommand;
 	private ICommand addModuleAudioScopeCommand;
 	private ICommand addModuleREPCommand;
@@ -131,7 +131,8 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuItemAddModuleOUT = new JMenuItem("OUT Module");
 		menuItemAddModuleVCO = new JMenuItem("VCO Module");
 		menuItemAddModuleVCA = new JMenuItem("VCA Module");
-		menuItemAddModuleVCF = new JMenuItem("VCF LP24 Module");
+		menuItemAddModuleVCFLP = new JMenuItem("VCF LP24 Module");
+		menuItemAddModuleVCFHP = new JMenuItem("VCF HP24 Module");
 		menuItemAddModuleEG = new JMenuItem("EG Module");
 		menuItemAddModuleAudioScope = new JMenuItem("AudioScope Module");
 		menuItemAddModuleREP = new JMenuItem("REP Module");
@@ -140,7 +141,8 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuAdd.add(menuItemAddModuleOUT);
 		menuAdd.add(menuItemAddModuleVCO);
 		menuAdd.add(menuItemAddModuleVCA);
-		menuAdd.add(menuItemAddModuleVCF);
+		menuAdd.add(menuItemAddModuleVCFLP);
+		menuAdd.add(menuItemAddModuleVCFHP);
 		menuAdd.add(menuItemAddModuleEG);
 		menuAdd.add(menuItemAddModuleAudioScope);
 		menuAdd.add(menuItemAddModuleREP);
@@ -319,12 +321,20 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 					addModuleVCACommand.execute();
 			}
 		});
-		menuItemAddModuleVCF.addActionListener(new ActionListener() {
+		menuItemAddModuleVCFLP.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (addModuleVCFCommand != null)
-					addModuleVCFCommand.execute();
+				if (addModuleVCFLPCommand != null)
+					addModuleVCFLPCommand.execute();
+			}
+		});
+		menuItemAddModuleVCFHP.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (addModuleVCFHPCommand != null)
+					addModuleVCFHPCommand.execute();
 			}
 		});
 		menuItemAddModuleEG.addActionListener(new ActionListener() {
@@ -494,10 +504,17 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	}
 
 	/**
-	 * @param addModuleVCFCommand
+	 * @param addModuleVCFLPCommand
 	 */
-	public void setAddModuleVCFCommand(ICommand addModuleVCFCommand) {
-		this.addModuleVCFCommand = addModuleVCFCommand;
+	public void setAddModuleVCFLPCommand(ICommand addModuleVCFLPCommand) {
+		this.addModuleVCFLPCommand = addModuleVCFLPCommand;
+	}
+	
+	/**
+	 * @param addModuleVCFHPCommand
+	 */
+	public void setAddModuleVCFHPCommand(ICommand addModuleVCFHPCommand) {
+		this.addModuleVCFHPCommand = addModuleVCFHPCommand;
 	}
 
 	/**

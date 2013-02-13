@@ -1,6 +1,7 @@
 package fr.istic.synthlab.abstraction.module.mix;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.jsyn.unitgen.UnitGenerator;
@@ -10,6 +11,7 @@ import fr.istic.synthlab.abstraction.filter.QuadrupleMixFilter;
 import fr.istic.synthlab.abstraction.module.AModule;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
+import fr.istic.synthlab.abstraction.port.IPort;
 import fr.istic.synthlab.abstraction.util.Convert;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -168,13 +170,13 @@ public class ModuleMIX extends AModule implements IModuleMIX {
 	public double getAttenuation(int number) {
 		switch (number) {
 		case 1:
-			return Convert.v2Db(this.attenuator1.getAttenuation());
+			return getParameter("attenuation1");
 		case 2:
-			return Convert.v2Db(this.attenuator2.getAttenuation());
+			return getParameter("attenuation2");
 		case 3:
-			return Convert.v2Db(this.attenuator3.getAttenuation());
+			return getParameter("attenuation2");
 		case 4:
-			return Convert.v2Db(this.attenuator4.getAttenuation());
+			return getParameter("attenuation3");
 		}
 		return 0;
 	}

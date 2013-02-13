@@ -21,6 +21,7 @@ import fr.istic.synthlab.controller.module.mix.CModuleMIX;
 import fr.istic.synthlab.controller.module.out.CModuleOUT;
 import fr.istic.synthlab.controller.module.rep.CModuleREP;
 import fr.istic.synthlab.controller.module.vca.CModuleVCA;
+import fr.istic.synthlab.controller.module.vcf.CModuleVCFA_HP;
 import fr.istic.synthlab.controller.module.vcf.CModuleVCFA_LP;
 import fr.istic.synthlab.controller.module.vco.CModuleVCO;
 import fr.istic.synthlab.controller.port.CInputPort;
@@ -60,6 +61,12 @@ public class CFactory implements IFactory {
 	@Override
 	public IModule newVCFA_LP() {
 		IModule module = new CModuleVCFA_LP();
+		return module;
+	}
+	
+	@Override
+	public IModule newVCFA_HP() {
+		IModule module = new CModuleVCFA_HP();
 		return module;
 	}
 

@@ -4,9 +4,9 @@ import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
-public class AddModuleVCFCommand implements ICommand {
+public class AddModuleVCFLPCommand implements ICommand {
 
-	public AddModuleVCFCommand() {
+	public AddModuleVCFLPCommand() {
 	}
 
 	@Override

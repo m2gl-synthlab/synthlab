@@ -22,6 +22,7 @@ public interface IFactory {
 	IModuleVCO newVCO();
 	IModuleVCA newVCA();
 	IModule newVCFA_LP();
+	IModule newVCFA_HP();
 	IModuleOUT newOUT();
 	IModuleEG newEG();
 	IModuleAudioScope newAudioScope();

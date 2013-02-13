@@ -61,11 +61,5 @@ public interface IModuleVCF extends IModule {
 	 * @return output
 	 */
 	public IOutputPort getOutput();
-
-	/**
-	 * set the frequency
-	 * @param value
-	 */
-	void setFrequency(Double value);
 }
 

@@ -1,15 +1,15 @@
 package fr.istic.synthlab.controller.module.vcf;
 
-import fr.istic.synthlab.abstraction.module.vcf.ModuleVCFA_LP;
+import fr.istic.synthlab.abstraction.module.vcf.ModuleVCFA_HP;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.module.vcf.IPModuleVCF;
 
-public class CModuleVCFA_LP extends ModuleVCFA_LP implements ICModuleVCF {
+public class CModuleVCFA_HP extends ModuleVCFA_HP implements ICModuleVCF {
 
 	private IPModuleVCF pres;
 
-	public CModuleVCFA_LP() {
+	public CModuleVCFA_HP() {
 		super();
 		this.pres = PACFactory.getPFactory().newVCF(this);
 	}

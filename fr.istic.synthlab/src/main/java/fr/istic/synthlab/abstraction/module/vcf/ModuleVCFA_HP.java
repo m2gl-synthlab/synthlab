@@ -3,7 +3,7 @@ package fr.istic.synthlab.abstraction.module.vcf;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jsyn.unitgen.FilterLowPass;
+import com.jsyn.unitgen.FilterHighPass;
 import com.jsyn.unitgen.PassThrough;
 import com.jsyn.unitgen.UnitGenerator;
 
@@ -16,9 +16,9 @@ import fr.istic.synthlab.abstraction.port.Port;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
-public class ModuleVCFA_LP extends AModule implements IModuleVCF, Observer<Port> {
+public class ModuleVCFA_HP extends AModule implements IModuleVCF, Observer<Port> {
 
-	private static final String MODULE_NAME = "VCFA LP24";
+	private static final String MODULE_NAME = "VCFA HP24";
 	private static final String IN_NAME = "Input";
 	private static final String IN_MOD_FREQ_NAME = "FM";
 	private static final String OUT_NAME = "Output";
@@ -35,16 +35,16 @@ public class ModuleVCFA_LP extends AModule implements IModuleVCF, Observer<Port>
 	private IOutputPort output;
 
 	// Filtres de fréquence JSyn
-	private FilterLowPass filterJSyn1;
-	private FilterLowPass filterJSyn2;
+	private FilterHighPass filterJSyn1;
+	private FilterHighPass filterJSyn2;
 
-	public ModuleVCFA_LP() {
+	public ModuleVCFA_HP() {
 		super(MODULE_NAME);
-		System.out.println("ModuleVCFA LP24 initialized");
+		System.out.println("ModuleVCFA HP24 initialized");
 
 		// Création des filtres JSyn
-		this.filterJSyn1 = new FilterLowPass();
-		this.filterJSyn2 = new FilterLowPass();
+		this.filterJSyn1 = new FilterHighPass();
+		this.filterJSyn2 = new FilterHighPass();
 		
 		// Conection des filtres JSyn
 		this.filterJSyn1.output.connect(this.filterJSyn2.input);
@@ -111,7 +111,10 @@ public class ModuleVCFA_LP extends AModule implements IModuleVCF, Observer<Port>
 
 	@Override
 	public void setCutFrequency(int value) {
-		getParameters().put("cutFrequency", (double) value);
+		int freq = value;
+		if (freq < 40)
+			freq = 40;
+		getParameters().put("cutFrequency", (double) freq);
 		updateFrequency();
 	}
 
