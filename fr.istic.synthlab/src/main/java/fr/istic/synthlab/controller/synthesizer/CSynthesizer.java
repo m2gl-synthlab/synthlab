@@ -13,7 +13,7 @@ import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 
 	private IPSynthesizer pres;
-	private Color currentWireColor;
+	private Color currentWireColor = Color.GRAY;
 
 	private static ICSynthesizer instance;
 	/**
@@ -105,7 +105,6 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	@Override
 	public void setCurrentWireColor(Color currentWireColor) {
 		this.currentWireColor = currentWireColor;
-		System.out.println("COLOR"+currentWireColor);
 	}
 
 	@Override

@@ -117,6 +117,9 @@ public class WriteXMLFile {
 					
 					// Cable Color R
 					Attr attrPortColorR = doc.createAttribute("colorR");
+					
+					System.out.println(((ICWire)wire).getPresentation().getColor());
+					
 					attrPortColorR.setValue(((ICWire)wire).getPresentation().getColor().getRed()+"");
 					port.setAttributeNode(attrPortColorR);
 					

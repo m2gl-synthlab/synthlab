@@ -181,12 +181,12 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		
 		
 		
-		final WebButton colorChooserButton = new WebButton ( "0, 0, 0", ImageUtils.createColorIcon ( Color.BLACK ) );
+		final WebButton colorChooserButton = new WebButton ( Color.GRAY.getRed()+", "+Color.GRAY.getGreen()+", "+ Color.GRAY.getBlue(), ImageUtils.createColorIcon ( Color.GRAY ) );
         colorChooserButton.setLeftRightSpacing ( 0 );
         colorChooserButton.addActionListener ( new ActionListener ()
         {
             private WebColorChooserDialog colorChooser = null;
-            private Color lastColor = Color.BLACK;
+            private Color lastColor = Color.GRAY;
 
             public void actionPerformed ( ActionEvent e )
             {
