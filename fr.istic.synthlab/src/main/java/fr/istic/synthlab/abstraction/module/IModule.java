@@ -5,9 +5,7 @@ import java.util.List;
 
 import com.jsyn.unitgen.UnitGenerator;
 
-import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IPort;
-import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 
 /**
@@ -38,13 +36,6 @@ public interface IModule {
 	 * @return
 	 */
 	public String getName();
-
-	/**
-	 * Return the Synthesizer witch contains the current module
-	 * 
-	 * @return the Synthesizer
-	 */
-	public ISynthesizer getSynthesizer();
 
 	/**
 	 * Return the list of wire connected to the module

@@ -1,7 +1,6 @@
 package fr.istic.synthlab.controller.module;
 
 import fr.istic.synthlab.abstraction.module.IModule;
-import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.presentation.module.IPModule;
 
 /**

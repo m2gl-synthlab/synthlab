@@ -13,7 +13,6 @@ import fr.istic.synthlab.abstraction.observer.Observer;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
 import fr.istic.synthlab.abstraction.port.Port;
-import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.util.Convert;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -36,8 +35,8 @@ public class ModuleVCA extends AModule implements IModuleVCA, Observer<Port> {
 	private AmplitudeModulatorFilter inputAmplitudeModulator;
 	private PassThrough passThroughA, passThroughB;
 	
-	public ModuleVCA(ISynthesizer synth) {
-		super(MODULE_NAME, synth);
+	public ModuleVCA() {
+		super(MODULE_NAME);
 
 		passThroughA = new PassThrough();
 		passThroughB = new PassThrough();

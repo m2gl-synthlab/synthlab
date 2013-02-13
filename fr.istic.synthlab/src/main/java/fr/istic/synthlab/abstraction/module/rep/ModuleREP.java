@@ -9,7 +9,6 @@ import fr.istic.synthlab.abstraction.filter.TriplePassThroughFilter;
 import fr.istic.synthlab.abstraction.module.AModule;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
-import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
@@ -27,8 +26,8 @@ public class ModuleREP extends AModule implements IModuleREP {
 	private IOutputPort output3;
 	private TriplePassThroughFilter passThrough;
 
-	public ModuleREP(ISynthesizer synth) {
-		super(MODULE_NAME, synth);
+	public ModuleREP() {
+		super(MODULE_NAME);
 
 		this.passThrough = new TriplePassThroughFilter();
 

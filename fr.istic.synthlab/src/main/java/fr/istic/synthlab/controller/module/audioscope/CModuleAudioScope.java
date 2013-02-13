@@ -1,7 +1,6 @@
 package fr.istic.synthlab.controller.module.audioscope;
 
 import fr.istic.synthlab.abstraction.module.audioscope.ModuleAudioScope;
-import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.module.audioscope.IPModuleAudioScope;
@@ -13,8 +12,8 @@ public class CModuleAudioScope extends ModuleAudioScope implements ICModuleAudio
 
 	private IPModuleAudioScope pres;
 
-	public CModuleAudioScope(ISynthesizer synth) {
-		super(synth);
+	public CModuleAudioScope() {
+		super();
 		this.pres = PACFactory.getPFactory().newAudioScope(this);
 	}
 

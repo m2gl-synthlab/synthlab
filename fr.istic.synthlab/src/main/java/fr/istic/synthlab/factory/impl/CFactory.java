@@ -24,7 +24,6 @@ import fr.istic.synthlab.controller.module.vco.CModuleVCO;
 import fr.istic.synthlab.controller.port.CInputPort;
 import fr.istic.synthlab.controller.port.COutputPort;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
-import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.CWire;
 import fr.istic.synthlab.factory.IFactory;
 
@@ -45,44 +44,44 @@ public class CFactory implements IFactory {
 	}
 
 	@Override
-	public IModuleVCO newVCO(ISynthesizer synth) {
-		IModuleVCO module = new CModuleVCO(synth);
+	public IModuleVCO newVCO() {
+		IModuleVCO module = new CModuleVCO();
 		return module;
 	}
 
 	@Override
-	public IModuleVCA newVCA(ISynthesizer synth) {
-		IModuleVCA module = new CModuleVCA(synth);
+	public IModuleVCA newVCA() {
+		IModuleVCA module = new CModuleVCA();
 		return module;
 	}
 
 	@Override
-	public IModule newVCFA_LP(ISynthesizer synth) {
-		IModule module = new CModuleVCFA_LP(synth);
+	public IModule newVCFA_LP() {
+		IModule module = new CModuleVCFA_LP();
 		return module;
 	}
 
 	@Override
-	public IModuleOUT newOUT(ISynthesizer synth) {
-		IModuleOUT module = new CModuleOUT(synth);
+	public IModuleOUT newOUT() {
+		IModuleOUT module = new CModuleOUT();
 		return module;
 	}
 
 	@Override
-	public IModuleREP newREP(ICSynthesizer synth) {
-		IModuleREP module = new CModuleREP(synth);
+	public IModuleREP newREP() {
+		IModuleREP module = new CModuleREP();
 		return module;
 	}
 
 	@Override
-	public IModuleEG newEG(ICSynthesizer synth) {
-		IModuleEG module = new CModuleEG(synth);
+	public IModuleEG newEG() {
+		IModuleEG module = new CModuleEG();
 		return module;
 	}
 
 	@Override
-	public IModuleAudioScope newAudioScope(ICSynthesizer synth) {
-		IModuleAudioScope module = new CModuleAudioScope(synth);
+	public IModuleAudioScope newAudioScope() {
+		IModuleAudioScope module = new CModuleAudioScope();
 		return module;
 	}
 

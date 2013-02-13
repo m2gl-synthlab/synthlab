@@ -1,17 +1,9 @@
 package fr.istic.synthlab.presentation.synthesizer;
 
-import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.presentation.module.IPModule;
 import fr.istic.synthlab.presentation.wire.IPWire;
 
 public interface IPSynthesizer {
-
-	/**
-	 * Return the presentation's controller
-	 * 
-	 * @return the controller
-	 */
-	public ICSynthesizer getControl();
 
 	/**
 	 * Try to start the synthesizer

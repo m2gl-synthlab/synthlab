@@ -9,7 +9,6 @@ import com.jsyn.unitgen.UnitGenerator;
 import fr.istic.synthlab.abstraction.filter.AttenuationFilter;
 import fr.istic.synthlab.abstraction.module.AModule;
 import fr.istic.synthlab.abstraction.port.IInputPort;
-import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.util.Convert;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -29,8 +28,8 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	private boolean isMute;
 
-	public ModuleOUT(ISynthesizer synth) {
-		super(MODULE_NAME, synth);
+	public ModuleOUT() {
+		super(MODULE_NAME);
 		this.out = new ChannelOut();
 		this.attenuator = new AttenuationFilter();
 

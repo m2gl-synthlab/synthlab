@@ -71,7 +71,6 @@ public class Wire implements IWire {
 	@Override
 	public void disconnect() {
 		if (isConnected()) {
-			System.out.println("disconnect wire");
 			this.output.getJSyn().disconnect(this.input.getJSyn());
 		}
 		if(this.output != null)

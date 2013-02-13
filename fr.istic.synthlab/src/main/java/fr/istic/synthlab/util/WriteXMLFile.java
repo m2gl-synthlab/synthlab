@@ -24,8 +24,10 @@ public class WriteXMLFile {
 
 	private Document doc;
 	private Element rootElement;
+	private File directory;
 
-	public WriteXMLFile() {
+	public WriteXMLFile(File directory) {
+		this.directory = directory;
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory
 					.newInstance();
@@ -52,7 +54,7 @@ public class WriteXMLFile {
 
 			DOMSource source = new DOMSource(doc);
 			
-			StreamResult result = new StreamResult(new File("savedInstance.xml"));
+			StreamResult result = new StreamResult(directory);
 
 			// Output to console for testing
 			StreamResult res = new StreamResult(System.out);

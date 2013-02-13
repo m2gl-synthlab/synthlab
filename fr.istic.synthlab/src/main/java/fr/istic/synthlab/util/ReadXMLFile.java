@@ -2,9 +2,7 @@ package fr.istic.synthlab.util;
 
 import java.awt.Point;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -36,15 +34,14 @@ public class ReadXMLFile {
 	private HashMap<String, IModule> modules;
 	private HashMap<IWire, String[]> portsToConnect;
 
-	public ReadXMLFile() {
+	public ReadXMLFile(File file) {
 		portsToConnect = new HashMap<IWire, String[]>();
 		modules = new HashMap<String, IModule>();
 		try {
-			File fXmlFile = new File("savedInstance.xml");
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
 					.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			doc = dBuilder.parse(fXmlFile);
+			doc = dBuilder.parse(file);
 			doc.getDocumentElement().normalize();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,19 +60,19 @@ public class ReadXMLFile {
 					ICModule module = null;
 					
 					if(eElement.getAttribute("name").startsWith("VCO")){
-						module = new CModuleVCO(CSynthesizer.getInstance());
+						module = new CModuleVCO();
 					} else if (eElement.getAttribute("name").startsWith("VCA")){
-						module = new CModuleVCA(CSynthesizer.getInstance());
+						module = new CModuleVCA();
 					} else if (eElement.getAttribute("name").startsWith("OUT")){
-						module = new CModuleOUT(CSynthesizer.getInstance());
+						module = new CModuleOUT();
 					} else if (eElement.getAttribute("name").startsWith("EG")){
-						module = new CModuleEG(CSynthesizer.getInstance());
+						module = new CModuleEG();
 					} else if (eElement.getAttribute("name").startsWith("REP")){
-						module = new CModuleREP(CSynthesizer.getInstance());
+						module = new CModuleREP();
 					} else if (eElement.getAttribute("name").startsWith("VCFA LP24")){
-						module = new CModuleVCFA_LP(CSynthesizer.getInstance());
+						module = new CModuleVCFA_LP();
 					} else if (eElement.getAttribute("name").startsWith("AudioScope")){
-						module = new CModuleAudioScope(CSynthesizer.getInstance());
+						module = new CModuleAudioScope();
 					} else {
 						throw new Exception("Module not recognized in xml file");
 					}

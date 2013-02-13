@@ -1,5 +1,6 @@
 package fr.istic.synthlab.presentation.module;
 
+import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -17,10 +18,8 @@ import com.alee.laf.panel.WebPanel;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.controller.module.ICModule;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
-import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
-import fr.istic.synthlab.presentation.synthesizer.PSynthesizer;
 import fr.istic.synthlab.presentation.util.SimpleMouseListener;
 import fr.istic.synthlab.presentation.util.TitleBar;
 
@@ -59,8 +58,7 @@ public abstract class APModule extends WebPanel implements IPModule {
 		x = 0;
 		y = 25;
 
-		IPSynthesizer presSynth = ((ICSynthesizer) ctrl.getSynthesizer())
-				.getPresentation();
+		IPSynthesizer presSynth = CSynthesizer.getInstance().getPresentation();
 		((JLayeredPane) presSynth).setLayer(this, 0, -1);
 	}
 
@@ -92,8 +90,8 @@ public abstract class APModule extends WebPanel implements IPModule {
 			@Override
 			public void focusGained(FocusEvent e) {
 				System.out.println("focus gained");
-				IPSynthesizer presSynth = ((ICSynthesizer) ctrl
-						.getSynthesizer()).getPresentation();
+				IPSynthesizer presSynth = 
+						CSynthesizer.getInstance().getPresentation();
 				((JLayeredPane) presSynth).setLayer(APModule.this, 0, 0);
 				for (IWire w : ctrl.getWires()) {
 					if (w != null) {
@@ -129,8 +127,7 @@ public abstract class APModule extends WebPanel implements IPModule {
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				((PSynthesizer) ((ICSynthesizer) getControl().getSynthesizer())
-						.getPresentation()).dispatchEvent(e);
+				((Component) CSynthesizer.getInstance().getPresentation()).dispatchEvent(e);
 			}
 
 			@Override

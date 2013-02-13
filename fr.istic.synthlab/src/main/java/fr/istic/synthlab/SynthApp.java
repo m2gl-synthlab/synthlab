@@ -1,18 +1,18 @@
 package fr.istic.synthlab;
 
+import java.io.File;
 import java.util.List;
 
 import fr.istic.synthlab.abstraction.module.IModule;
 import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
-import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.util.ReadXMLFile;
 import fr.istic.synthlab.util.WriteXMLFile;
-//github.com/m2gl-synthlab/synthlab.git/
 
+//github.com/m2gl-synthlab/synthlab.git/
 
 /**
  * Application
@@ -25,7 +25,7 @@ public class SynthApp implements ISynthApp {
 
 	@Override
 	public void startSynth() {
-		if(synth == null){
+		if (synth == null) {
 			newSynth();
 		}
 		displayCmd.execute();
@@ -34,13 +34,13 @@ public class SynthApp implements ISynthApp {
 	@Override
 	public void newSynth() {
 		// Replace the current synthesizer with a new one
-		if(this.synth != null)
+		if (this.synth != null)
 			synth.stop();
 		this.synth = (ICSynthesizer) PACFactory.getFactory().newSynthesizer();
 		displayCmd.execute();
 
 		// Add an OUT module
-		IModuleOUT out = PACFactory.getFactory().newOUT(synth);
+		IModuleOUT out = PACFactory.getFactory().newOUT();
 		synth.add(out);
 		synth.start();
 	}
@@ -51,24 +51,23 @@ public class SynthApp implements ISynthApp {
 		undisplayCmd.execute();
 		System.exit(0);
 	}
-	
+
 	@Override
 	public void saveToXML() {
 		List<IModule> modules = CSynthesizer.getInstance().getModules();
-		WriteXMLFile writeToXML = new WriteXMLFile();
+
+		WriteXMLFile writeToXML = new WriteXMLFile(new File("savedInstance.synthlab"));
 		writeToXML.saveModules(modules);
+
 	}
 
 	@Override
 	public void loadFromXML() {
 		synth.stop();
 		this.synth = (ICSynthesizer) PACFactory.getFactory().newSynthesizer();
-
 		displayCmd.execute();
-		
-		ReadXMLFile readXML = new ReadXMLFile();
+		ReadXMLFile readXML = new ReadXMLFile(new File("savedInstance.synthlab"));
 		readXML.loadSynthesizer();
-		
 		synth.start();
 	}
 

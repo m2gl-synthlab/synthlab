@@ -13,7 +13,6 @@ import fr.istic.synthlab.abstraction.observer.Observer;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
 import fr.istic.synthlab.abstraction.port.Port;
-import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
@@ -39,8 +38,8 @@ public class ModuleVCFA_LP extends AModule implements IModuleVCF, Observer<Port>
 	private FilterLowPass filterJSyn1;
 	private FilterLowPass filterJSyn2;
 
-	public ModuleVCFA_LP(ISynthesizer synth) {
-		super(MODULE_NAME, synth);
+	public ModuleVCFA_LP() {
+		super(MODULE_NAME);
 		System.out.println("ModuleVCFA LP24 initialized");
 
 		// Création des filtres JSyn

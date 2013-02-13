@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 
 import fr.istic.synthlab.controller.module.ICModule;
 import fr.istic.synthlab.controller.port.ICOutputPort;
-import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.util.SimpleMouseListener;
 

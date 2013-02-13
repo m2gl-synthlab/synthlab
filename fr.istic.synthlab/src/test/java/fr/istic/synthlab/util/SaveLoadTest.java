@@ -40,11 +40,11 @@ public class SaveLoadTest extends TestCase {
 	public void testSaveAndLoad(){
 		
 		s.setSynthesizer(synth);
-		s.setDisplaySynthCommand(new DisplayCommand(s, sf));
+		s.setDisplaySynthCommand(new DisplayCommand(sf));
 		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
-		ICModuleVCO moduleVCO=new CModuleVCO(synth);
-		ICModuleVCA moduleVCA=new CModuleVCA(synth);
-		ICModuleEG moduleEG=new CModuleEG(synth);
+		ICModuleVCO moduleVCO=new CModuleVCO();
+		ICModuleVCA moduleVCA=new CModuleVCA();
+		ICModuleEG moduleEG=new CModuleEG();
 
 		synth.add(moduleVCO);
 		synth.add(moduleVCA);

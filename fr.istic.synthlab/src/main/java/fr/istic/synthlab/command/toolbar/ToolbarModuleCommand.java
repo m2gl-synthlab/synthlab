@@ -14,7 +14,7 @@ public class ToolbarModuleCommand implements ICommand {
 
 	@Override
 	public void execute() {
-		synth.add(PACFactory.getFactory().newVCO(synth));
+		synth.add(PACFactory.getFactory().newVCO());
 		System.out.println("Command "+this.getClass().getSimpleName()+" not implemented...");
 	}
 

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import fr.istic.synthlab.abstraction.port.IPort;
-import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
+import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 
 /**
@@ -14,13 +14,12 @@ import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 public abstract class AModule implements IModule{
 
 	private String name;
-	private ISynthesizer synth;
 	private List<IPort> ports;
 	private HashMap<String, Double> parameters;
 	
-	public AModule(String name, ISynthesizer synth) {
+	public AModule(String name) {
 		int nbModules = 0;
-		if(CSynthesizer.getInstance().getModules().size() >0){
+		if(Synthesizer.getInstance().getModules().size() >0){
 			for (IModule module : CSynthesizer.getInstance().getModules()) {
 				if (module.getName().startsWith(name)) {
 					nbModules++;
@@ -28,14 +27,8 @@ public abstract class AModule implements IModule{
 			}
 		}
 		this.name = name + " - " + ++nbModules;
-		this.synth = synth;
 		ports = new ArrayList<IPort>();
 		parameters = new HashMap<String, Double>();
-	}
-	
-	@Override
-	public ISynthesizer getSynthesizer() {
-		return synth;
 	}
 
 	@Override

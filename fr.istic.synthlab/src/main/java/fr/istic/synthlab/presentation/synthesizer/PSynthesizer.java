@@ -9,12 +9,10 @@ import java.util.List;
 
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
-import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.module.IPModule;
@@ -25,13 +23,11 @@ import fr.istic.synthlab.presentation.wire.PWire;
 public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 
 	private static final long serialVersionUID = -1444696064954307756L;
-	private ICSynthesizer ctrl;
 
 	private List<IPModule> modules;
 
-	public PSynthesizer(ICSynthesizer control) {
+	public PSynthesizer() {
 		super();
-		ctrl = control;
 		modules = new ArrayList<IPModule>();
 
 		configView();
@@ -49,17 +45,17 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				// Gestion du currentWire
-				if (ctrl.getCurrentWire() != null) {
-					IInputPort input = ctrl.getCurrentWire().getInput();
-					IOutputPort output = ctrl.getCurrentWire().getOutput();
+				if (CSynthesizer.getInstance().getCurrentWire() != null) {
+					IInputPort input = CSynthesizer.getInstance().getCurrentWire().getInput();
+					IOutputPort output = CSynthesizer.getInstance().getCurrentWire().getOutput();
 
 					Point mouse = getMousePosition(true);
 					if (input == null && output != null) {
-						((ICWire) getControl().getCurrentWire())
+						((ICWire) CSynthesizer.getInstance().getCurrentWire())
 								.getPresentation().setInputPoint(mouse);
 					}
 					if (output == null && input != null) {
-						((ICWire) getControl().getCurrentWire())
+						((ICWire) CSynthesizer.getInstance().getCurrentWire())
 								.getPresentation().setOutputPoint(mouse);
 					}
 				}
@@ -74,35 +70,30 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 		this.addMouseListener(new SimpleMouseListener() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				ctrl.p2cDisconnectCurrentWire();
+				CSynthesizer.getInstance().p2cDisconnectCurrentWire();
 			}
 		});
 
 	}
 
 	@Override
-	public ICSynthesizer getControl() {
-		return ctrl;
-	}
-
-	@Override
 	public void start() {
-		this.getControl().p2cStart();
+		CSynthesizer.getInstance().p2cStart();
 	}
 
 	@Override
 	public void stop() {
-		this.getControl().p2cStop();
+		CSynthesizer.getInstance().p2cStop();
 	}
 
 	@Override
 	public void addModule(IPModule module) {
-		this.getControl().p2cAddModule(module.getControl());
+		CSynthesizer.getInstance().p2cAddModule(module.getControl());
 	}
 
 	@Override
 	public void removeModule(IPModule module) {
-		this.getControl().p2cRemoveModule(module.getControl());
+		CSynthesizer.getInstance().p2cRemoveModule(module.getControl());
 	}
 
 	@Override

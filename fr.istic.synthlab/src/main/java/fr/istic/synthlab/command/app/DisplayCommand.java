@@ -1,19 +1,17 @@
 package fr.istic.synthlab.command.app;
 
-import fr.istic.synthlab.ISynthApp;
 import fr.istic.synthlab.ISynthFrame;
 import fr.istic.synthlab.command.ICommand;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 
 /**
  * Command that display the synthesizer
  */
 public class DisplayCommand implements ICommand {
 
-	private ISynthApp synthApp;
 	private ISynthFrame synthFrame;
 
-	public DisplayCommand(ISynthApp synthApp, ISynthFrame synthFrame) {
-		this.synthApp = synthApp;
+	public DisplayCommand(ISynthFrame synthFrame) {
 		this.synthFrame = synthFrame;
 	}
 
@@ -24,6 +22,6 @@ public class DisplayCommand implements ICommand {
 	 */
 	@Override
 	public void execute() {
-		synthFrame.displaySynth(synthApp.getSynthesizer().getPresentation());
+		synthFrame.displaySynth(CSynthesizer.getInstance().getPresentation());
 	}
 }

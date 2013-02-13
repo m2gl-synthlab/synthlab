@@ -14,19 +14,18 @@ import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
-import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 
 public interface IFactory {
 
 	ISynthesizer newSynthesizer();
 	
-	IModuleVCO newVCO(ISynthesizer synth);
-	IModuleVCA newVCA(ISynthesizer synth);
-	IModule newVCFA_LP(ISynthesizer synth);
-	IModuleOUT newOUT(ISynthesizer synth);
-	IModuleEG newEG(ICSynthesizer synth);
-	IModuleAudioScope newAudioScope(ICSynthesizer synth);
-	IModuleREP newREP(ICSynthesizer synth);
+	IModuleVCO newVCO();
+	IModuleVCA newVCA();
+	IModule newVCFA_LP();
+	IModuleOUT newOUT();
+	IModuleEG newEG();
+	IModuleAudioScope newAudioScope();
+	IModuleREP newREP();
 
 	IWire newWire();
 

@@ -12,7 +12,7 @@ import com.jsyn.unitgen.UnitGenerator;
 import fr.istic.synthlab.abstraction.module.AModule;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
-import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
+import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
@@ -32,9 +32,9 @@ public class ModuleAudioScope extends AModule implements IModuleAudioScope {
 	private IInputPort in;
 	private IOutputPort out;
 
-	public ModuleAudioScope(ISynthesizer synth) {
-		super(MODULE_NAME, synth);
-		this.scope = new AudioScope(synth.getJSyn());
+	public ModuleAudioScope() {
+		super(MODULE_NAME);
+		this.scope = new AudioScope(Synthesizer.getInstance().getJSyn());
 		this.passThrough = new PassThrough();
 
 		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME, passThrough.input);

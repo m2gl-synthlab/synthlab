@@ -1,7 +1,6 @@
 package fr.istic.synthlab.controller.module.out;
 
 import fr.istic.synthlab.abstraction.module.out.ModuleOUT;
-import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.module.out.IPModuleOUT;
@@ -13,8 +12,8 @@ public class CModuleOUT extends ModuleOUT implements ICModuleOUT {
 
 	private IPModuleOUT pres;
 
-	public CModuleOUT(ISynthesizer synth) {
-		super(synth);
+	public CModuleOUT() {
+		super();
 		this.pres = PACFactory.getPFactory().newOUT(this);
 		this.pres.c2pSetGainValue(getAttenuation());
 	}

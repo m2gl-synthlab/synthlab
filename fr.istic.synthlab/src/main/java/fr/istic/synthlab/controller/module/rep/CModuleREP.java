@@ -1,7 +1,6 @@
 package fr.istic.synthlab.controller.module.rep;
 
 import fr.istic.synthlab.abstraction.module.rep.ModuleREP;
-import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.module.IPModule;
@@ -13,8 +12,8 @@ public class CModuleREP  extends ModuleREP implements ICModuleREP {
 
 	private IPModuleREP pres;
 	
-	public CModuleREP(ISynthesizer synth) {
-		super(synth);
+	public CModuleREP() {
+		super();
 		this.pres = PACFactory.getPFactory().newREP(this);	
 	}
 

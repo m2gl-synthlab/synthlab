@@ -26,7 +26,7 @@ public class ModuleTest extends TestCase {
 		SineOscillator osc = new SineOscillator();
 		synth.getJSyn().add(osc);
 		
-		IModuleOUT out = PACFactory.getFactory().newOUT(synth);
+		IModuleOUT out = PACFactory.getFactory().newOUT();
 		synth.add(out);
 		osc.output.connect(out.getInput().getJSyn());
 

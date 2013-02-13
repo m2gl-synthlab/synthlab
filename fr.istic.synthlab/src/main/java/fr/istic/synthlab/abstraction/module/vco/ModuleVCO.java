@@ -15,7 +15,6 @@ import fr.istic.synthlab.abstraction.observer.Observer;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
 import fr.istic.synthlab.abstraction.port.Port;
-import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
@@ -47,8 +46,8 @@ public class ModuleVCO extends AModule implements IModuleVCO, Observer<Port>{
 	private TriangleOscillator vcoTriangle;
 	private SawtoothOscillator vcoSawtooth;
 	
-	public ModuleVCO(ISynthesizer synth) {
-		super(MODULE_NAME, synth);
+	public ModuleVCO() {
+		super(MODULE_NAME);
 		System.out.println("ModuleVCO initialized");
 		
 		// Création des générateurs JSyn
