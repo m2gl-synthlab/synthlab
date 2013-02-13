@@ -77,7 +77,7 @@ public class SynthMain {
 		
 		// Chargement du fichier ouvert
 		String filename = null;
-		if(args[0] != null){
+		if(args.length > 0){
 			filename = args[0];
 			app.loadFromXML("", filename);
 		}

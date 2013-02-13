@@ -13,7 +13,7 @@ import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 
 	private IPSynthesizer pres;
-	private Color currentWireColor;
+	private Color currentWireColor = Color.BLACK;
 
 	private static ICSynthesizer instance;
 	/**
