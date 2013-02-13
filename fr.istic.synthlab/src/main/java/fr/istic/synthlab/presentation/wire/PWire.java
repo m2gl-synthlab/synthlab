@@ -37,7 +37,7 @@ public class PWire extends JPanel implements IPWire {
 	private PInputPort inputPort;
 	private POutputPort outputPort;
 	private ICSynthesizer synth = null;
-	private Color currentColor = Color.BLACK;
+	private Color currentColor = null;
 	
 
 	/**
