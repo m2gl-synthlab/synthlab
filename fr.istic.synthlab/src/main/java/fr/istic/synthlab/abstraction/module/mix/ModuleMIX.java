@@ -194,13 +194,13 @@ public class ModuleMIX  extends AModule implements IModuleMIX {
 	public double getAttenuation(int number) {
 		switch(number){
 		case 1:
-			return getParameter("attenuation1").intValue(); 
+			return getParameter("attenuation1"); 
 		case 2:
-			return getParameter("attenuation2").intValue();
+			return getParameter("attenuation2");
 		case 3:
-			return getParameter("attenuation2").intValue();
+			return getParameter("attenuation2");
 		case 4:
-			return getParameter("attenuation3").intValue();
+			return getParameter("attenuation3");
 		}
 		return 0;
 	}

@@ -123,7 +123,7 @@ public class ModuleVCA extends AModule implements IModuleVCA, Observer<Port> {
 
 	@Override
 	public double getAttenuation() {
-		return getParameter("attenuation").intValue();
+		return getParameter("attenuation");
 	}
 
 	@Override

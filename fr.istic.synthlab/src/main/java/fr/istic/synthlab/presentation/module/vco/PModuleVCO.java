@@ -60,13 +60,11 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 
 		octaveModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_OCTAVE_NAME,
 				14, 0, 14, ctrl.getOctave());
-		RotaryTextController octaveRotary = new RotaryTextController(
-				octaveModel, 4);
+		RotaryTextController octaveRotary = new RotaryTextController(octaveModel, 4);
 		octaveRotary.setBorder(new TitledBorder(ModuleVCO.PARAM_OCTAVE_NAME));
 		panelParams.add(octaveRotary);
 
-		toneModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_TONE_NAME, 100,
-				-1.0, 1.0, ctrl.getTone());
+		toneModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_TONE_NAME, 100,	-1.0, 1.0, ctrl.getTone());
 		RotaryTextController toneRotary = new RotaryTextController(toneModel, 4);
 		toneRotary.setBorder(new TitledBorder(ModuleVCO.PARAM_TONE_NAME));
 		panelParams.add(toneRotary);

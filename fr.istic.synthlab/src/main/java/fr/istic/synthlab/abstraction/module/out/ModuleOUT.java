@@ -68,7 +68,7 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	@Override
 	public double getAttenuation() {
-		return getParameter("attenuation").intValue();
+		return getParameter("attenuation");
 	}
 
 	@Override

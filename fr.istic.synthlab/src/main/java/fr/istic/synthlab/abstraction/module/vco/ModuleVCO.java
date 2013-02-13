@@ -153,7 +153,7 @@ public class ModuleVCO extends AModule implements IModuleVCO, Observer<Port>{
 	
 	@Override
 	public double getFrequency() {
-		return getParameter("frequency").intValue();
+		return getParameter("frequency");
 	}
 	
 	@Override

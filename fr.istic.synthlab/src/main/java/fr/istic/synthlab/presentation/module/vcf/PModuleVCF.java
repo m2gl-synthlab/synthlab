@@ -54,22 +54,23 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 		panelParams.setOpaque(false);
 		panelInput.setOpaque(false);
 		panelOutput.setOpaque(false);
-		
-		
+
 		cutFrequencyModel = new DoubleBoundedRangeModel(
 				IModuleVCF.PARAM_CUT_FREQUENCY_NAME, 100, 0, 22000,
 				ctrl.getCutFrequency());
 		RotaryTextController cutRotary = new RotaryTextController(
 				cutFrequencyModel, 4);
-		cutRotary.setBorder(new TitledBorder(IModuleVCF.PARAM_CUT_FREQUENCY_NAME));
+		cutRotary.setBorder(new TitledBorder(
+				IModuleVCF.PARAM_CUT_FREQUENCY_NAME));
 		panelParams.add(cutRotary);
 
 		resonanceModel = new DoubleBoundedRangeModel(
-				IModuleVCF.PARAM_RESONANCE_NAME, 100, 0, 50,
+				IModuleVCF.PARAM_RESONANCE_NAME, 490, 1, 50,
 				ctrl.getResonance());
 		RotaryTextController resonanceRotary = new RotaryTextController(
 				resonanceModel, 4);
-		resonanceRotary.setBorder(new TitledBorder(IModuleVCF.PARAM_RESONANCE_NAME));
+		resonanceRotary.setBorder(new TitledBorder(
+				IModuleVCF.PARAM_RESONANCE_NAME));
 		panelParams.add(resonanceRotary);
 
 		input = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
@@ -83,14 +84,14 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 		panelOutput.add(output);
 
 		this.setAutoscrolls(true);
-		
+
 		super.setWidth(350);
 		super.setHeigth(350);
-		
+
 		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
-		
+
 		this.addTitleBar();
 		this.addPanel(panelParams, 350, 100);
 		this.addPanel(panelInput, 350, 100);
@@ -102,7 +103,8 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 		cutFrequencyModel.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				ctrl.p2cCutFrequencyChanged((int) cutFrequencyModel.getDoubleValue());
+				ctrl.p2cCutFrequencyChanged((int) cutFrequencyModel
+						.getDoubleValue());
 			}
 		});
 
@@ -112,18 +114,18 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 				ctrl.p2cResonanceChanged(resonanceModel.getDoubleValue());
 			}
 		});
-//
-//		this.addMouseMotionListener(new MouseMotionListener() {
-//			@Override
-//			public void mouseMoved(MouseEvent e) {
-//				((PSynthesizer) ((ICSynthesizer) getControl().getSynthesizer())
-//						.getPresentation()).dispatchEvent(e);
-//			}
-//
-//			@Override
-//			public void mouseDragged(MouseEvent e) {
-//			}
-//		});
+		//
+		// this.addMouseMotionListener(new MouseMotionListener() {
+		// @Override
+		// public void mouseMoved(MouseEvent e) {
+		// ((PSynthesizer) ((ICSynthesizer) getControl().getSynthesizer())
+		// .getPresentation()).dispatchEvent(e);
+		// }
+		//
+		// @Override
+		// public void mouseDragged(MouseEvent e) {
+		// }
+		// });
 	}
 
 	@Override
