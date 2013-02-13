@@ -37,14 +37,17 @@ import fr.istic.synthlab.factory.impl.PFactory;
 public class SynthMain {
 	@SuppressWarnings("restriction")
 	public static void main(String[] args) {
+		// Set the look and feel
+		WebLookAndFeel.install();
+		
 		// Set the icon application
 		try {
 			Image imageIcon = ImageIO.read(new File("res/logo.png"));
-			com.apple.eawt.Application.getApplication().setDockIconImage(imageIcon);
+			if (System.getProperty("os.name").contains("Mac")) {
+				com.apple.eawt.Application.getApplication().setDockIconImage(imageIcon);
+			}
 		} catch (IOException e2) {e2.printStackTrace();}
 		
-		// Set the look and feel
-		WebLookAndFeel.install();
 		
 		// Initialize factories
 		PACFactory.setAFactory(AFactory.getInstance());
@@ -61,7 +64,6 @@ public class SynthMain {
 			Image imageIcon = ImageIO.read(new File("res/logo.png"));
 			frame.setIconImage(imageIcon);
 		} catch (IOException e2) {e2.printStackTrace();}
-		
 		
 		// Configure the application
 		app.setDisplaySynthCommand(new DisplayCommand(frame));
