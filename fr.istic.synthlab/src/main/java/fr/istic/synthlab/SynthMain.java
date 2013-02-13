@@ -1,6 +1,12 @@
 
 package fr.istic.synthlab;
 
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import com.alee.laf.WebLookAndFeel;
 
 import fr.istic.synthlab.command.app.DisplayCommand;
@@ -29,11 +35,17 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
 
 public class SynthMain {
+	@SuppressWarnings("restriction")
 	public static void main(String[] args) {
+		// Set the icon application
+		try {
+			Image imageIcon = ImageIO.read(new File("res/logo.png"));
+			com.apple.eawt.Application.getApplication().setDockIconImage(imageIcon);
+		} catch (IOException e2) {e2.printStackTrace();}
 		
-
-				
+		// Set the look and feel
 		WebLookAndFeel.install();
+		
 		// Initialize factories
 		PACFactory.setAFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
@@ -45,6 +57,11 @@ public class SynthMain {
 		// Create the main frame
 		SynthFrame frame = new SynthFrame();
 		frame.setTitle("Synthlab - G2");
+		try {
+			Image imageIcon = ImageIO.read(new File("res/logo.png"));
+			frame.setIconImage(imageIcon);
+		} catch (IOException e2) {e2.printStackTrace();}
+		
 		
 		// Configure the application
 		app.setDisplaySynthCommand(new DisplayCommand(frame));
