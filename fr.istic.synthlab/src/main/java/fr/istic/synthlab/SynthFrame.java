@@ -94,7 +94,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 	private Color toolbarCurrentWireColor = Color.BLACK;
 	
-	private boolean isPlaying = false;
+	private boolean isPlaying = true;
 
 	public SynthFrame() {
 		this.initComponents();
