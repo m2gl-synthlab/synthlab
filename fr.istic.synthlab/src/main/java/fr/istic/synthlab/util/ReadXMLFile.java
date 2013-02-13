@@ -84,9 +84,9 @@ public class ReadXMLFile {
 					Point p = new Point(x,y);
 					module.getPresentation().setPosition(p);
 					
-					for (int i = 0; i < eElement.getElementsByTagName("port")
+					for (int i = 0; i < eElement.getElementsByTagName("wire")
 							.getLength(); i++) {
-						String portName = ((Element) eElement.getElementsByTagName("port").item(i)).getAttribute("name");
+						String portName = ((Element) eElement.getElementsByTagName("wire").item(i)).getAttribute("outputPort");
 						
 						IWire wire = new CWire();
 						IOutputPort outport = (IOutputPort)module.getPortByName(portName);
@@ -94,23 +94,23 @@ public class ReadXMLFile {
 						
 						String[] str = {
 								((Element) eElement.getElementsByTagName(
-										"port").item(i))
-										.getAttribute("connectedToModuleName"), 
+										"wire").item(i))
+										.getAttribute("inputPortModuleName"), 
 								
 								((Element) eElement.getElementsByTagName(
-										"port").item(i))
-										.getAttribute("connectedToModulePort"),
+										"wire").item(i))
+										.getAttribute("inputPort"),
 										
 								((Element) eElement.getElementsByTagName(
-										"port").item(i))
+										"wire").item(i))
 										.getAttribute("colorR"),
 										
 								((Element) eElement.getElementsByTagName(
-										"port").item(i))
+										"wire").item(i))
 										.getAttribute("colorG"),
 										
 								((Element) eElement.getElementsByTagName(
-										"port").item(i))
+										"wire").item(i))
 										.getAttribute("colorB")
 						};
 						
