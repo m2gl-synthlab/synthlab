@@ -29,7 +29,7 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 	private DoubleBoundedRangeModel model;
 	private WebSwitch muteSwitch;
 	private PInputPort inputPort;
-	
+
 	/**
 	 * @param control
 	 */
@@ -48,8 +48,9 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		panelInput.setOpaque(false);
 		JPanel panelMute = new JPanel();
 		panelMute.setOpaque(false);
-		
-		model = new DoubleBoundedRangeModel("model", 7200, -60, 12, ctrl.getAttenuation());
+
+		model = new DoubleBoundedRangeModel("model", 7200, -60, 12,
+				ctrl.getAttenuation());
 		RotaryTextController gainRotary = new RotaryTextController(model, 1);
 		gainRotary.setBorder(new TitledBorder("Gain"));
 		panelGain.add(gainRotary);
@@ -59,17 +60,18 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		muteSwitch.setSelected(!ctrl.isMute());
 		panelMute.add(muteSwitch);
 
-		inputPort = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
+		inputPort = (PInputPort) ((ICInputPort) ctrl.getInput())
+				.getPresentation();
 		panelInput.add(inputPort);
 
 		this.setAutoscrolls(true);
 		super.setWidth(150);
 		super.setHeigth(270);
-		
+
 		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
-		
+
 		this.addTitleBar();
 		this.addPanel(panelGain, 150, 100);
 		this.addPanel(panelInput, 150, 100);
@@ -88,22 +90,18 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		});
 
 		muteSwitch.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ctrl.p2cMute();
 			}
 		});
-		
+
 	}
 
 	@Override
-	public void c2pMute() {
-		this.muteSwitch.setSelected(false);
-	}
-
-	@Override
-	public void c2pUnmute() {
-		this.muteSwitch.setSelected(true);
+	public void c2pMute(boolean mute) {
+		this.muteSwitch.setSelected(!mute);
 	}
 
 	@Override

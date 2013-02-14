@@ -26,18 +26,19 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	private IInputPort in;
 
-	private boolean isMute;
-
 	public ModuleOUT() {
 		super(MODULE_NAME);
 		this.out = new ChannelOut();
 		this.attenuator = new AttenuationFilter();
 
-		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME, attenuator.input);
+		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME,
+				attenuator.input);
 		this.setAttenuation(0);
 
 		attenuator.output.connect(out.input);
 		
+		setMute(false);
+
 		addPort(in);
 	}
 
@@ -51,7 +52,7 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	@Override
 	public void start() {
-		if(!isMute)
+		if (!isMute())
 			out.start();
 	}
 
@@ -59,7 +60,7 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 	public void stop() {
 		out.stop();
 	}
-	
+
 	@Override
 	public void setAttenuation(double value) {
 		getParameters().put("attenuation", (double) value);
@@ -78,24 +79,32 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	@Override
 	public void setMute(boolean mute) {
-		this.isMute = mute;
+		getParameters().put("mute", mute?1.0:0.0);
 		if (isMute()) {
-			stop();
+			try {
+				stop();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else {
-			start();
+			try {
+				start();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	@Override
 	public boolean isMute() {
-		return isMute;
+		return (getParameters().get("mute") == 1.0);
 	}
 
 	@Override
 	public List<IWire> getWires() {
 		List<IWire> wires = new ArrayList<IWire>();
 		if (in.getWire() != null) {
-			if(!wires.contains(in.getWire()))
+			if (!wires.contains(in.getWire()))
 				wires.add(in.getWire());
 		}
 		return wires;
