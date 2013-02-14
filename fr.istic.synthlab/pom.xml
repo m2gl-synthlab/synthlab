@@ -30,7 +30,7 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/jsyn-beta-16.5.14.jar</systemPath>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.mortennobel</groupId>
 			<artifactId>weblookandfeel</artifactId>
@@ -38,7 +38,13 @@
 			<version>1.4</version>
 			<systemPath>${project.basedir}/lib/WebLookAndFeel.jar</systemPath>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>com.apple</groupId>
+			<artifactId>AppleJavaExtensions</artifactId>
+			<version>1.4</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
