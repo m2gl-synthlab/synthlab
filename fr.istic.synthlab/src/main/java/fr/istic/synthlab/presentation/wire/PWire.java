@@ -53,8 +53,8 @@ public class PWire extends JPanel implements IPWire {
 
 	private void configView() {
 		setOpaque(false);
-		this.posInput = new Point();
-		this.posOutput = new Point();
+		this.posInput = new Point(0,0);
+		this.posOutput = new Point(0,0);
 	}
 
 	private void defineCallbacks() {
@@ -89,7 +89,7 @@ public class PWire extends JPanel implements IPWire {
 		
 		// Si le port de sortie est branché
 		if (outputPort != null) {
-			posOutput = new Point(outputPort.getX() + (POutputPort.WIDTH / 2), outputPort.getY()+ (POutputPort.HEIGHT / 2));
+			posOutput = new Point(outputPort.getX() + (POutputPort.WIDTH / 2), outputPort.getY() + (POutputPort.HEIGHT / 2));
 
 			Component c2 = outputPort;
 			while (!(c2.getParent() instanceof PSynthesizer)) {
@@ -101,7 +101,7 @@ public class PWire extends JPanel implements IPWire {
 		
 		// Si le port d'entrée est branché
 		if (inputPort != null) {
-			posInput = new Point(inputPort.getX() + (PInputPort.WIDTH / 2), inputPort.getY() + + (PInputPort.HEIGHT / 2));
+			posInput = new Point(inputPort.getX() + (PInputPort.WIDTH / 2), inputPort.getY() +  (PInputPort.HEIGHT / 2));
 
 			Component c = inputPort;
 			while (!(c.getParent() instanceof PSynthesizer)) {
@@ -113,7 +113,6 @@ public class PWire extends JPanel implements IPWire {
 		
 		// Calcule de la boite englobante
 		int x, y, w = 0;
-//		int h = 0;
 
 		if (posInput.x < posOutput.x) {
 			x = posInput.x;
@@ -125,10 +124,8 @@ public class PWire extends JPanel implements IPWire {
 
 		if (posInput.y < posOutput.y) {
 			y = posInput.y;
-//			h = posOutput.y - posInput.y;
 		} else {
 			y = posOutput.y;
-//			h = posInput.y - posOutput.y;
 		}
 		
 		
@@ -138,8 +135,6 @@ public class PWire extends JPanel implements IPWire {
 		}
 		setBounds(x-10, y-10 , w+20, getParent().getHeight()); // On ajoute une marge pour évité de coupé le cable
 		
-		
-			
 		IPSynthesizer presSynth = synth.getPresentation();
 		((JLayeredPane) presSynth).setLayer(this, 0, 0);
 		
@@ -153,22 +148,17 @@ public class PWire extends JPanel implements IPWire {
 		Graphics2D g2 = (Graphics2D) g;
 		
 		// Calcule de la boite englobante
-//		int x, y = 0;
 		int w, h = 0;
 
 		if (posInput.x < posOutput.x) {
-//			x = posInput.x;
 			w = posOutput.x - posInput.x;
 		} else {
-//			x = posOutput.x;
 			w = posInput.x - posOutput.x;
 		}
 
 		if (posInput.y < posOutput.y) {
-//			y = posInput.y;
 			h = posOutput.y - posInput.y;
 		} else {
-//			y = posOutput.y;
 			h = posInput.y - posOutput.y;
 		}
 		
