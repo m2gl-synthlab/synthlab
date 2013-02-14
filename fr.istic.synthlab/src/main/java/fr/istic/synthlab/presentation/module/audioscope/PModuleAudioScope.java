@@ -58,14 +58,14 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 		this.setAutoscrolls(true);
 		
 		super.setWidth(630);
-		super.setHeigth(350);
+		super.setHeigth(360);
 		
 		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
 		
 		this.addTitleBar();
-		this.addPanel(panelScope, 630, 250);
+		this.addPanel(panelScope, 630, 260);
 		this.addPanel(panelPort, 630, 60);
 
 	}
