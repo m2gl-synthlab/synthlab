@@ -608,7 +608,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			this.remove((PSynthesizer) pres);
 
 		pres = presentation;
+//		JScrollPane scrollPane = new JScrollPane();
 		this.add((PSynthesizer) pres);
+//		scrollPane.setViewportView((PSynthesizer) pres);
+		
 		this.setVisible(true);
 	}
 

@@ -13,12 +13,7 @@ public interface IPModuleOUT extends IPModule {
 	/**
 	 * Called by the controller to inform the presentation of the new mute value
 	 */
-	public void c2pMute();
-
-	/**
-	 * Called by the controller to inform the presentation of the new mute value
-	 */
-	public void c2pUnmute();
+	public void c2pMute(boolean value);
 
 	/**
 	 * Called by the controller to inform the presentation of the new gain value
