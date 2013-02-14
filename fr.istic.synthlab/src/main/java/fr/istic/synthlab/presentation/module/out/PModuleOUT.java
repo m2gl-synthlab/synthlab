@@ -52,6 +52,7 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		model = new DoubleBoundedRangeModel("model", 7200, -60, 12,
 				ctrl.getAttenuation());
 		RotaryTextController gainRotary = new RotaryTextController(model, 1);
+		gainRotary.setOpaque(false);
 		gainRotary.setBorder(new TitledBorder("Gain"));
 		panelGain.add(gainRotary);
 
@@ -65,17 +66,17 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		panelInput.add(inputPort);
 
 		this.setAutoscrolls(true);
-		super.setWidth(150);
-		super.setHeigth(270);
+		super.setWidth(100);
+		super.setHeigth(220);
 
 		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
 
 		this.addTitleBar();
-		this.addPanel(panelGain, 150, 100);
-		this.addPanel(panelInput, 150, 100);
-		this.addPanel(panelMute, 150, 100);
+		this.addPanel(panelGain, 100, 100);
+		this.addPanel(panelMute, 100, 30);
+		this.addPanel(panelInput, 100, 60);
 
 	}
 
