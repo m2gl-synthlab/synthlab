@@ -19,16 +19,24 @@ public class CModuleVCFA_HP extends ModuleVCFA_HP implements ICModuleVCF {
 		return pres;
 	}
 	
-	@Override
-	public void p2cCutFrequencyChanged(int cutFrequency) {
+	private void changeCutFrequency(int cutFrequency) {
 		setCutFrequency(cutFrequency);
 		pres.c2pSetCutFrequencyValue(getCutFrequency());
 	}
 
-	@Override
-	public void p2cResonanceChanged(double resonance) {
+	private void changeResonance(double resonance) {
 		setResonance(resonance);
 		pres.c2pSetResonanceValue(getResonance());
+	}
+	
+	@Override
+	public void p2cCutFrequencyChanged(int cutFrequency) {
+		changeCutFrequency(cutFrequency);
+	}
+
+	@Override
+	public void p2cResonanceChanged(double resonance) {
+		changeResonance(resonance);
 	}
 
 	@Override
@@ -38,13 +46,12 @@ public class CModuleVCFA_HP extends ModuleVCFA_HP implements ICModuleVCF {
 		}
 	}
 	
-	
 	@Override
 	public void setParameter(String key, Double value){
 		if(key.equals("cutFrequency")){
-			p2cCutFrequencyChanged(value.intValue());
+			changeCutFrequency(value.intValue());
 		} else if (key.equals("resonance")){
-			p2cResonanceChanged(value);
+			changeResonance(value);
 		}
 	}
 }

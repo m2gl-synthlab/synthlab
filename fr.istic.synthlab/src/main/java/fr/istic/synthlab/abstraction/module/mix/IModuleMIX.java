@@ -26,18 +26,58 @@ public interface IModuleMIX extends IModule {
 	/**
 	 * Set the attenuation(number) value (between -inf and +12dB)
 	 * 
-	 * @param numero
 	 * @param value
 	 */
-	public void setAttenuation(int number, double value);
+	public void setAttenuation1(double value);
+	
+	/**
+	 * Set the attenuation(number) value (between -inf and +12dB)
+	 * 
+	 * @param value
+	 */
+	public void setAttenuation2(double value);
+	
+	/**
+	 * Set the attenuation(number) value (between -inf and +12dB)
+	 * 
+	 * @param value
+	 */
+	public void setAttenuation3(double value);
+	
+	/**
+	 * Set the attenuation(number) value (between -inf and +12dB)
+	 * 
+	 * @param value
+	 */
+	public void setAttenuation4(double value);
 	
 	
 	/**
 	 * Return the attenuation(number) value (between -inf and +12dB)
 	 * 
-	 * @param numero
 	 * @return value
 	 */
-	public double getAttenuation(int number);
+	public double getAttenuation1();
+	
+	/**
+	 * Return the attenuation(number) value (between -inf and +12dB)
+	 * 
+	 * @return value
+	 */
+	public double getAttenuation2();
+	
+	/**
+	 * Return the attenuation(number) value (between -inf and +12dB)
+	 * 
+	 * @return value
+	 */
+	public double getAttenuation3();
+	
+	/**
+	 * Return the attenuation(number) value (between -inf and +12dB)
+	 * 
+	 * @return value
+	 */
+	public double getAttenuation4();
 
 }
