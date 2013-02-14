@@ -37,7 +37,7 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 		attenuator.output.connect(out.input);
 		
-		setMute(false);
+		getParameters().put("mute", 1.0);
 
 		addPort(in);
 	}
