@@ -4,12 +4,10 @@ import java.awt.Dimension;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.jsyn.swing.DoubleBoundedRangeModel;
-import com.jsyn.swing.RotaryTextController;
 
 import fr.istic.synthlab.abstraction.module.vco.ModuleVCO;
 import fr.istic.synthlab.controller.module.vco.ICModuleVCO;
@@ -18,6 +16,7 @@ import fr.istic.synthlab.controller.port.ICOutputPort;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.port.PInputPort;
 import fr.istic.synthlab.presentation.port.POutputPort;
+import fr.istic.synthlab.presentation.util.RotaryTextController;
 
 /**
  * Presentation of a module
@@ -61,12 +60,10 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 		octaveModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_OCTAVE_NAME,
 				14, 0, 14, ctrl.getOctave());
 		RotaryTextController octaveRotary = new RotaryTextController(octaveModel, 4);
-		octaveRotary.setBorder(new TitledBorder(ModuleVCO.PARAM_OCTAVE_NAME));
 		panelParams.add(octaveRotary);
 
 		toneModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_TONE_NAME, 100,	-1.0, 1.0, ctrl.getTone());
 		RotaryTextController toneRotary = new RotaryTextController(toneModel, 4);
-		toneRotary.setBorder(new TitledBorder(ModuleVCO.PARAM_TONE_NAME));
 		panelParams.add(toneRotary);
 
 		frequencyLabel = new JLabel();

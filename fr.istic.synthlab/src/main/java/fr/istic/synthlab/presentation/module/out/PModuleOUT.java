@@ -11,7 +11,7 @@ import javax.swing.event.ChangeListener;
 
 import com.alee.extended.button.WebSwitch;
 import com.jsyn.swing.DoubleBoundedRangeModel;
-import com.jsyn.swing.RotaryTextController;
+import fr.istic.synthlab.presentation.util.RotaryTextController;
 
 import fr.istic.synthlab.controller.module.out.ICModuleOUT;
 import fr.istic.synthlab.controller.port.ICInputPort;
@@ -53,7 +53,6 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 				ctrl.getAttenuation());
 		RotaryTextController gainRotary = new RotaryTextController(model, 1);
 		gainRotary.setOpaque(false);
-		gainRotary.setBorder(new TitledBorder("Gain"));
 		panelGain.add(gainRotary);
 
 		muteSwitch = new WebSwitch();

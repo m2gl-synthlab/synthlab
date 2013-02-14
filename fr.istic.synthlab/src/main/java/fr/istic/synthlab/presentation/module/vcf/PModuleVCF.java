@@ -3,12 +3,10 @@ package fr.istic.synthlab.presentation.module.vcf;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.jsyn.swing.DoubleBoundedRangeModel;
-import com.jsyn.swing.RotaryTextController;
 
 import fr.istic.synthlab.abstraction.module.vcf.IModuleVCF;
 import fr.istic.synthlab.controller.module.vcf.ICModuleVCF;
@@ -17,6 +15,7 @@ import fr.istic.synthlab.controller.port.ICOutputPort;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.port.PInputPort;
 import fr.istic.synthlab.presentation.port.POutputPort;
+import fr.istic.synthlab.presentation.util.RotaryTextController;
 
 /**
  * Presentation of a module
@@ -60,8 +59,6 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 				ctrl.getCutFrequency());
 		RotaryTextController cutRotary = new RotaryTextController(
 				cutFrequencyModel, 4);
-		cutRotary.setBorder(new TitledBorder(
-				IModuleVCF.PARAM_CUT_FREQUENCY_NAME));
 		panelParams.add(cutRotary);
 
 		resonanceModel = new DoubleBoundedRangeModel(
@@ -69,8 +66,6 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 				ctrl.getResonance());
 		RotaryTextController resonanceRotary = new RotaryTextController(
 				resonanceModel, 4);
-		resonanceRotary.setBorder(new TitledBorder(
-				IModuleVCF.PARAM_RESONANCE_NAME));
 		panelParams.add(resonanceRotary);
 
 		input = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();

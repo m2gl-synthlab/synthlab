@@ -3,13 +3,11 @@ package fr.istic.synthlab.presentation.module.eg;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.jsyn.swing.DoubleBoundedRangeModel;
 import com.jsyn.swing.ExponentialRangeModel;
-import com.jsyn.swing.RotaryTextController;
 
 import fr.istic.synthlab.controller.module.eg.ICModuleEG;
 import fr.istic.synthlab.controller.port.ICInputPort;
@@ -17,6 +15,7 @@ import fr.istic.synthlab.controller.port.ICOutputPort;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.port.PInputPort;
 import fr.istic.synthlab.presentation.port.POutputPort;
+import fr.istic.synthlab.presentation.util.RotaryTextController;
 
 /**
  * Presentation for an EG module
@@ -60,11 +59,6 @@ public class PModuleEG extends APModule implements IPModuleEG {
 		RotaryTextController decayRotary = new RotaryTextController(decayModel, 2);
 		RotaryTextController sustainRotary = new RotaryTextController(sustainModel, 2);
 		RotaryTextController releaseRotary = new RotaryTextController(releaseModel, 2);
-
-		attackRotary.setBorder(new TitledBorder("Attack"));
-		decayRotary.setBorder(new TitledBorder("Decay"));
-		sustainRotary.setBorder(new TitledBorder("Sustain"));
-		releaseRotary.setBorder(new TitledBorder("Release"));
 		
 		panelRotary.add(attackRotary);
 		panelRotary.add(decayRotary);

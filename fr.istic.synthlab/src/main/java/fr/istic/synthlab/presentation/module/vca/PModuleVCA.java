@@ -3,12 +3,10 @@ package fr.istic.synthlab.presentation.module.vca;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.jsyn.swing.DoubleBoundedRangeModel;
-import com.jsyn.swing.RotaryTextController;
 
 import fr.istic.synthlab.abstraction.module.vca.ModuleVCA;
 import fr.istic.synthlab.controller.module.vca.ICModuleVCA;
@@ -17,6 +15,7 @@ import fr.istic.synthlab.controller.port.ICOutputPort;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.port.PInputPort;
 import fr.istic.synthlab.presentation.port.POutputPort;
+import fr.istic.synthlab.presentation.util.RotaryTextController;
 
 public class PModuleVCA extends APModule implements IPModuleVCA {
 
@@ -53,7 +52,6 @@ public class PModuleVCA extends APModule implements IPModuleVCA {
 
 		attenuationModel = new DoubleBoundedRangeModel(ModuleVCA.PARAM_AMPLITUDE_NAME, 7200, -60, 12, ctrl.getAttenuation());
 		RotaryTextController attenuationRotary = new RotaryTextController(attenuationModel, 4);
-		attenuationRotary.setBorder(new TitledBorder(ModuleVCA.PARAM_AMPLITUDE_NAME));
 		panelParams.add(attenuationRotary);
 
 		input = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
