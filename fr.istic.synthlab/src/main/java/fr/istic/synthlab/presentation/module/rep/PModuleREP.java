@@ -36,35 +36,31 @@ public class PModuleREP extends APModule implements IPModuleREP {
 	}
 	
 	private void configView() {
-		JPanel panelInput = new JPanel();
-		JPanel panelOutput = new JPanel();
+		JPanel panelInputOutput = new JPanel();
 		
-		panelInput.setOpaque(false);
-		panelOutput.setOpaque(false);
+		panelInputOutput.setOpaque(false);
 		
 		inputPort = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
-		panelInput.add(inputPort);
+		panelInputOutput.add(inputPort);
 		
 		out1 = (POutputPort) ((ICOutputPort) ctrl.getOutput1()).getPresentation();
-		panelOutput.add(out1);
+		panelInputOutput.add(out1);
 		
 		out2 = (POutputPort) ((ICOutputPort) ctrl.getOutput2()).getPresentation();
-		panelOutput.add(out2);
+		panelInputOutput.add(out2);
 		
 		out3 = (POutputPort) ((ICOutputPort) ctrl.getOutput3()).getPresentation();
-		panelOutput.add(out3);
+		panelInputOutput.add(out3);
 		
-		this.setAutoscrolls(true);
-		super.setWidth(350);
-		super.setHeigth(230);
+		super.setWidth(270);
+		super.setHeigth(100);
 		
 		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
 		
 		this.addTitleBar();
-		this.addPanel(panelInput, 350, 100);
-		this.addPanel(panelOutput, 350, 100);
+		this.addPanel(panelInputOutput, 270, 60);
 	}
 
 }

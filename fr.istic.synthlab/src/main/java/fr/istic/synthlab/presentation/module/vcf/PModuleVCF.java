@@ -48,12 +48,10 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 
 	private void configView() {
 		JPanel panelParams = new JPanel();
-		JPanel panelInput = new JPanel();
-		JPanel panelOutput = new JPanel();
+		JPanel panelInputOutput = new JPanel();
 
 		panelParams.setOpaque(false);
-		panelInput.setOpaque(false);
-		panelOutput.setOpaque(false);
+		panelInputOutput.setOpaque(false);
 
 		cutFrequencyModel = new DoubleBoundedRangeModel(
 				IModuleVCF.PARAM_CUT_FREQUENCY_NAME, 100, 0, 22000,
@@ -74,28 +72,25 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 		panelParams.add(resonanceRotary);
 
 		input = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
-		panelInput.add(input);
+		panelInputOutput.add(input);
 
 		fm = (PInputPort) ((ICInputPort) ctrl.getInputFm()).getPresentation();
-		panelInput.add(fm);
+		panelInputOutput.add(fm);
 
 		output = (POutputPort) ((ICOutputPort) ctrl.getOutput())
 				.getPresentation();
-		panelOutput.add(output);
+		panelInputOutput.add(output);
 
-		this.setAutoscrolls(true);
-
-		super.setWidth(350);
-		super.setHeigth(350);
+		super.setWidth(200);
+		super.setHeigth(200);
 
 		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
 
 		this.addTitleBar();
-		this.addPanel(panelParams, 350, 100);
-		this.addPanel(panelInput, 350, 100);
-		this.addPanel(panelOutput, 350, 100);
+		this.addPanel(panelParams, 200, 100);
+		this.addPanel(panelInputOutput, 200, 100);
 	}
 
 	private void defineCallbacks() {

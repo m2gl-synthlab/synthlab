@@ -52,7 +52,6 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		model = new DoubleBoundedRangeModel("model", 7200, -60, 12,
 				ctrl.getAttenuation());
 		RotaryTextController gainRotary = new RotaryTextController(model, 1);
-		gainRotary.setOpaque(false);
 		gainRotary.setBorder(new TitledBorder("Gain"));
 		panelGain.add(gainRotary);
 

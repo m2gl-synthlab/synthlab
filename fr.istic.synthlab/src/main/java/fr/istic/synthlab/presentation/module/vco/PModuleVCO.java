@@ -88,15 +88,15 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 		panelInputOutput.add(outputSawtooth);
 
 		super.setWidth(270);
-		super.setHeigth(240);
+		super.setHeigth(220);
 		
 		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
 		
 		this.addTitleBar();
-		this.addPanel(panelParams, 270, 115);
-		this.addPanel(panelFrequency, 270, 25);
+		this.addPanel(panelParams, 270, 110);
+		this.addPanel(panelFrequency, 270, 20);
 		this.addPanel(panelInputOutput, 270, 60);
 	}
 
