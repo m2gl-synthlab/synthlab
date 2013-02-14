@@ -8,9 +8,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
-import fr.istic.synthlab.controller.module.ICModule;
 import fr.istic.synthlab.controller.port.ICOutputPort;
-import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.util.SimpleMouseListener;
 
 public class POutputPort extends PPort implements IPOutputPort {
@@ -63,9 +61,6 @@ public class POutputPort extends PPort implements IPOutputPort {
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				// Sert pour le déplacement du cable au dessus des elements
-				((APModule) ((ICModule) getControl().getModule())
-						.getPresentation()).dispatchEvent(e);
 				if (Math.pow((e.getX() - (WIDTH)/2), 2) + Math.pow((e.getY() - (HEIGHT)/2), 2) < Math.pow(10, 2)) {
 					ctrl.p2cMouseHover();
 				} else {

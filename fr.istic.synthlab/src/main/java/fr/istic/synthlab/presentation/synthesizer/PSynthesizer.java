@@ -1,9 +1,11 @@
 package fr.istic.synthlab.presentation.synthesizer;
 
+import java.awt.AWTEvent;
 import java.awt.Color;
 import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.event.AWTEventListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +18,6 @@ import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.module.IPModule;
-import fr.istic.synthlab.presentation.util.SimpleMouseListener;
 import fr.istic.synthlab.presentation.wire.IPWire;
 import fr.istic.synthlab.presentation.wire.PWire;
 
@@ -29,7 +30,6 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 	public PSynthesizer() {
 		super();
 		modules = new ArrayList<IPModule>();
-
 		configView();
 		defineCallbacks();
 	}
@@ -41,9 +41,10 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 	private void defineCallbacks() {
 
 		/** Gestion de l'affichage du cable en cours */
-		this.addMouseMotionListener(new MouseMotionListener() {
+		Toolkit kit = Toolkit.getDefaultToolkit();
+		kit.addAWTEventListener(new AWTEventListener() {
 			@Override
-			public void mouseMoved(MouseEvent e) {
+			public void eventDispatched(AWTEvent event) {
 				// Gestion du currentWire
 				if (CSynthesizer.getInstance().getCurrentWire() != null) {
 					IInputPort input = CSynthesizer.getInstance().getCurrentWire().getInput();
@@ -61,19 +62,21 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 				}
 			}
 
+		}, AWTEvent.MOUSE_MOTION_EVENT_MASK);
+
+		/** Gestion des cliques */
+		kit.addAWTEventListener(new AWTEventListener() {
 			@Override
-			public void mouseDragged(MouseEvent e) {
+			public void eventDispatched(AWTEvent event) {
+				if(event instanceof MouseEvent){
+					MouseEvent clickEvent = (MouseEvent) event;
+	                /** Suppression du cable avec le bouton droit ou gauche de la souris */
+					if( clickEvent.getButton() == MouseEvent.BUTTON1 || clickEvent.getButton() == MouseEvent.BUTTON3){
+						CSynthesizer.getInstance().p2cDisconnectCurrentWire();
+					}
+	            }
 			}
-
-		});
-
-		this.addMouseListener(new SimpleMouseListener() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				CSynthesizer.getInstance().p2cDisconnectCurrentWire();
-			}
-		});
-
+		}, AWTEvent.MOUSE_EVENT_MASK);
 	}
 
 	@Override

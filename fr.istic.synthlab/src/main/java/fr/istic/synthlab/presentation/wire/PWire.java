@@ -176,10 +176,13 @@ public class PWire extends JPanel implements IPWire {
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		// Calcul d'un point centrale
-		Point mid = new Point(w / 2, h + w/2);
+		Point mid = new Point(w/2, h + w/4);
 		
 		// Création de la courbe
-		QuadCurve2D curve = new QuadCurve2D.Double(posInput.getX() - getX(), posInput.getY() - getY(), mid.getX(), mid.getY() , posOutput.getX() - getX(), posOutput.getY() - getY());
+		QuadCurve2D curve = new QuadCurve2D.Double(
+				posInput.getX() - getX(), posInput.getY() - getY(),
+				mid.getX(), mid.getY() ,
+				posOutput.getX() - getX(), posOutput.getY() - getY());
 		
 		
 		// Dessine la courbe avec des extrémité ronde
