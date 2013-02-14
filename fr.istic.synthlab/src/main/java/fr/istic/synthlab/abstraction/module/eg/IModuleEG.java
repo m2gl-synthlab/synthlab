@@ -10,6 +10,14 @@ import fr.istic.synthlab.abstraction.port.IOutputPort;
 public interface IModuleEG extends IModule {
 
 	/**
+	 * Parameters name
+	 */
+	public static final String PARAM_NAME_ATTACK = "Attack";
+	public static final String PARAM_NAME_DECAY = "Decay";
+	public static final String PARAM_NAME_SUSTAIN = "Substain";
+	public static final String PARAM_NAME_RELEASE = "Release";
+	
+	/**
 	 * Set the attack time for the module
 	 */
 	public void setAttack(double attackTime);

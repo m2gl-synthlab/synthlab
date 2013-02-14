@@ -9,7 +9,7 @@ import javax.swing.event.ChangeListener;
 
 import com.jsyn.swing.DoubleBoundedRangeModel;
 
-import fr.istic.synthlab.abstraction.module.vco.ModuleVCO;
+import fr.istic.synthlab.abstraction.module.vco.IModuleVCO;
 import fr.istic.synthlab.controller.module.vco.ICModuleVCO;
 import fr.istic.synthlab.controller.port.ICInputPort;
 import fr.istic.synthlab.controller.port.ICOutputPort;
@@ -57,12 +57,12 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 		panelFrequency.setOpaque(false);
 		panelInputOutput.setOpaque(false);
 		
-		octaveModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_OCTAVE_NAME,
+		octaveModel = new DoubleBoundedRangeModel(IModuleVCO.PARAM_NAME_OCTAVE,
 				14, 0, 14, ctrl.getOctave());
 		RotaryTextController octaveRotary = new RotaryTextController(octaveModel, 4);
 		panelParams.add(octaveRotary);
 
-		toneModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_TONE_NAME, 100,	-1.0, 1.0, ctrl.getTone());
+		toneModel = new DoubleBoundedRangeModel(IModuleVCO.PARAM_NAME_TONE, 100,	-1.0, 1.0, ctrl.getTone());
 		RotaryTextController toneRotary = new RotaryTextController(toneModel, 4);
 		panelParams.add(toneRotary);
 

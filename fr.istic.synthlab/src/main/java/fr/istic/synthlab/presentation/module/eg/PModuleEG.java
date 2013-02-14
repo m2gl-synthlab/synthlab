@@ -9,6 +9,7 @@ import javax.swing.event.ChangeListener;
 import com.jsyn.swing.DoubleBoundedRangeModel;
 import com.jsyn.swing.ExponentialRangeModel;
 
+import fr.istic.synthlab.abstraction.module.eg.IModuleEG;
 import fr.istic.synthlab.controller.module.eg.ICModuleEG;
 import fr.istic.synthlab.controller.port.ICInputPort;
 import fr.istic.synthlab.controller.port.ICOutputPort;
@@ -50,10 +51,10 @@ public class PModuleEG extends APModule implements IPModuleEG {
 		panelPort.setOpaque(false);
 		panelOutput.setOpaque(false);
 	
-		attackModel = new ExponentialRangeModel("attack", 500, 0, 5, ctrl.getAttack());
-		decayModel = new ExponentialRangeModel("decay", 500, 0, 5, ctrl.getDecay());
-		sustainModel = new ExponentialRangeModel("sustain", 500, 0, 5, ctrl.getSustain());
-		releaseModel = new ExponentialRangeModel("release", 500, 0, 5, ctrl.getRelease());
+		attackModel = new ExponentialRangeModel(IModuleEG.PARAM_NAME_ATTACK, 500, 0, 5, ctrl.getAttack());
+		decayModel = new ExponentialRangeModel(IModuleEG.PARAM_NAME_DECAY, 500, 0, 5, ctrl.getDecay());
+		sustainModel = new ExponentialRangeModel(IModuleEG.PARAM_NAME_SUSTAIN, 500, 0, 5, ctrl.getSustain());
+		releaseModel = new ExponentialRangeModel(IModuleEG.PARAM_NAME_RELEASE, 500, 0, 5, ctrl.getRelease());
 		
 		RotaryTextController attackRotary = new RotaryTextController(attackModel, 2);
 		RotaryTextController decayRotary = new RotaryTextController(decayModel, 2);

@@ -8,7 +8,7 @@ import javax.swing.event.ChangeListener;
 
 import com.jsyn.swing.DoubleBoundedRangeModel;
 
-import fr.istic.synthlab.abstraction.module.vca.ModuleVCA;
+import fr.istic.synthlab.abstraction.module.vca.IModuleVCA;
 import fr.istic.synthlab.controller.module.vca.ICModuleVCA;
 import fr.istic.synthlab.controller.port.ICInputPort;
 import fr.istic.synthlab.controller.port.ICOutputPort;
@@ -50,7 +50,7 @@ public class PModuleVCA extends APModule implements IPModuleVCA {
 		panelInput.setOpaque(false);
 		panelOutput.setOpaque(false);
 
-		attenuationModel = new DoubleBoundedRangeModel(ModuleVCA.PARAM_AMPLITUDE_NAME, 7200, -60, 12, ctrl.getAttenuation());
+		attenuationModel = new DoubleBoundedRangeModel(IModuleVCA.PARAM_NAME_GAIN, 7200, -60, 12, ctrl.getAttenuation());
 		RotaryTextController attenuationRotary = new RotaryTextController(attenuationModel, 4);
 		panelParams.add(attenuationRotary);
 

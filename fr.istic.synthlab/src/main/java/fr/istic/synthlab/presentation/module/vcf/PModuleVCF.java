@@ -55,14 +55,14 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 		panelOutput.setOpaque(false);
 
 		cutFrequencyModel = new DoubleBoundedRangeModel(
-				IModuleVCF.PARAM_CUT_FREQUENCY_NAME, 100, 0, 22000,
+				IModuleVCF.PARAM_NAME_CUT_FREQUENCY, 100, 0, 22000,
 				ctrl.getCutFrequency());
 		RotaryTextController cutRotary = new RotaryTextController(
 				cutFrequencyModel, 4);
 		panelParams.add(cutRotary);
 
 		resonanceModel = new DoubleBoundedRangeModel(
-				IModuleVCF.PARAM_RESONANCE_NAME, 490, 1, 50,
+				IModuleVCF.PARAM_NAME_RESONANCE, 490, 1, 50,
 				ctrl.getResonance());
 		RotaryTextController resonanceRotary = new RotaryTextController(
 				resonanceModel, 4);

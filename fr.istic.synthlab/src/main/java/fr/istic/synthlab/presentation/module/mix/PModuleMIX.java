@@ -8,6 +8,7 @@ import javax.swing.event.ChangeListener;
 
 import com.jsyn.swing.DoubleBoundedRangeModel;
 
+import fr.istic.synthlab.abstraction.module.mix.IModuleMIX;
 import fr.istic.synthlab.controller.module.mix.ICModuleMIX;
 import fr.istic.synthlab.controller.port.ICInputPort;
 import fr.istic.synthlab.controller.port.ICOutputPort;
@@ -76,32 +77,29 @@ public class PModuleMIX extends APModule implements IPModuleMIX {
 				.getPresentation();
 		panelOutput.add(output);
 
-		modelGain1 = new DoubleBoundedRangeModel("modelGain1", 7200, -60, 12,
-				ctrl.getAttenuation1());
+		modelGain1 = new DoubleBoundedRangeModel(IModuleMIX.PARAM_NAME_GAIN1,
+				7200, -60, 12, ctrl.getAttenuation1());
 		RotaryTextController gainRotary1 = new RotaryTextController(modelGain1,
 				1);
 		panelGains.add(gainRotary1);
 
-		 modelGain2 = new DoubleBoundedRangeModel("modelGain2", 7200, -60, 12,
-		 ctrl.getAttenuation2());
-		 RotaryTextController gainRotary2 = new
-		 RotaryTextController(modelGain2,
-		 1);
-		 panelGains.add(gainRotary2);
-		
-		 modelGain3 = new DoubleBoundedRangeModel("modelGain3", 7200, -60, 12,
-		 ctrl.getAttenuation3());
-		 RotaryTextController gainRotary3 = new
-		 RotaryTextController(modelGain3,
-		 1);
-		 panelGains.add(gainRotary3);
-		
-		 modelGain4 = new DoubleBoundedRangeModel("modelGain4", 7200, -60, 12,
-		 ctrl.getAttenuation4());
-		 RotaryTextController gainRotary4 = new
-		 RotaryTextController(modelGain4,
-		 1);
-		 panelGains.add(gainRotary4);
+		modelGain2 = new DoubleBoundedRangeModel(IModuleMIX.PARAM_NAME_GAIN2,
+				7200, -60, 12, ctrl.getAttenuation2());
+		RotaryTextController gainRotary2 = new RotaryTextController(modelGain2,
+				1);
+		panelGains.add(gainRotary2);
+
+		modelGain3 = new DoubleBoundedRangeModel(IModuleMIX.PARAM_NAME_GAIN3,
+				7200, -60, 12, ctrl.getAttenuation3());
+		RotaryTextController gainRotary3 = new RotaryTextController(modelGain3,
+				1);
+		panelGains.add(gainRotary3);
+
+		modelGain4 = new DoubleBoundedRangeModel(IModuleMIX.PARAM_NAME_GAIN4,
+				7200, -60, 12, ctrl.getAttenuation4());
+		RotaryTextController gainRotary4 = new RotaryTextController(modelGain4,
+				1);
+		panelGains.add(gainRotary4);
 
 		this.setAutoscrolls(true);
 		super.setWidth(350);
