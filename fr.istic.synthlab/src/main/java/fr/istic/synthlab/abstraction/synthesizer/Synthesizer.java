@@ -45,9 +45,11 @@ public class Synthesizer implements ISynthesizer {
 
 	@Override
 	public com.jsyn.Synthesizer getJSyn() {
+		
 		return synth;
 	}
 
+	
 	@Override
 	public void add(IModule module) {
 		modules.add(module);
@@ -124,4 +126,11 @@ public class Synthesizer implements ISynthesizer {
 		wire = null;
 		currentWire = null;
 	}
+
+	
+	public List<IWire> getWires() {//pour les tests
+		return wires;
+	}
+
+
 }
