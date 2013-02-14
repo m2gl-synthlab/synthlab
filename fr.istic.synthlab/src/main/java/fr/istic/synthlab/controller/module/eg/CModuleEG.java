@@ -23,28 +23,44 @@ public class CModuleEG extends ModuleEG implements ICModuleEG {
 		return this.pres;
 	}
 
-	@Override
-	public void p2cAttackChanged(double attack) {
+	private void changeAttack(double attack) {
 		setAttack(attack);
 		pres.c2pSetAttackValue(getAttack());
 	}
 
-	@Override
-	public void p2cDecayChanged(double decay) {
+	private void changeDecay(double decay) {
 		setDecay(decay);
 		pres.c2pSetDecayValue(getDecay());
 	}
 
-	@Override
-	public void p2cSustainChanged(double sustain) {
+	private void changeSustain(double sustain) {
 		setSustain(sustain);
 		pres.c2pSetSustainValue(getSustain());
 	}
 
-	@Override
-	public void p2cReleaseChanged(double release) {
+	private void changeRelease(double release) {
 		setRelease(release);
 		pres.c2pSetReleaseValue(getRelease());
+	}
+	
+	@Override
+	public void p2cAttackChanged(double attack) {
+		changeAttack(attack);
+	}
+
+	@Override
+	public void p2cDecayChanged(double decay) {
+		changeDecay(decay);
+	}
+
+	@Override
+	public void p2cSustainChanged(double sustain) {
+		changeSustain(sustain);
+	}
+
+	@Override
+	public void p2cReleaseChanged(double release) {
+		changeRelease(release);
 	}
 
 	@Override
@@ -54,17 +70,16 @@ public class CModuleEG extends ModuleEG implements ICModuleEG {
 		}
 	}
 	
-	
 	@Override
 	public void setParameter(String key, Double value){
 		if(key.equals("attackTime")){
-			p2cAttackChanged(value);
+			changeAttack(value);
 		} else if (key.equals("decayTime")){
-			p2cDecayChanged(value);
+			changeDecay(value);
 		} else if (key.equals("substainTime")){
-			p2cSustainChanged(value);
+			changeSustain(value);
 		}else if (key.equals("releaseTime")){
-			p2cReleaseChanged(value);
+			changeRelease(value);
 		}
 	}
 

@@ -27,11 +27,15 @@ public class CModuleOUT extends ModuleOUT implements ICModuleOUT {
 	public void p2cMute() {
 		setMute(!isMute());
 	}
+	
+	private void changeGain(double gain) {
+		setAttenuation(gain);
+		pres.c2pSetGainValue(getAttenuation());
+	}
 
 	@Override
 	public void p2cGainChanged(double gain) {
-		setAttenuation(gain);
-		pres.c2pSetGainValue(getAttenuation());
+		changeGain(gain);
 	}
 
 	@Override
@@ -44,7 +48,7 @@ public class CModuleOUT extends ModuleOUT implements ICModuleOUT {
 	@Override
 	public void setParameter(String key, Double value){
 		if(key.equals("attenuation")){
-			p2cGainChanged(value);
+			changeGain(value);
 		} 
 	}
 }

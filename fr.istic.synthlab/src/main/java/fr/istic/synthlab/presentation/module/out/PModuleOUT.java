@@ -93,6 +93,7 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 				ctrl.p2cMute();
 			}
 		});
+		
 	}
 
 	@Override

@@ -51,10 +51,10 @@ public class ModuleMIX extends AModule implements IModuleMIX {
 		this.in4 = PACFactory.getFactory().newInputPort(this, IN4_NAME,
 				attenuator4.input);
 
-		this.setAttenuation(1, 0);
-		this.setAttenuation(2, 0);
-		this.setAttenuation(3, 0);
-		this.setAttenuation(4, 0);
+		this.setAttenuation1(-4);
+		this.setAttenuation2(-4);
+		this.setAttenuation3(-4);
+		this.setAttenuation4(-4);
 
 		this.attenuator1.output.connect(mixer.getInput1());
 		this.attenuator2.output.connect(mixer.getInput2());
@@ -147,36 +147,47 @@ public class ModuleMIX extends AModule implements IModuleMIX {
 	}
 
 	@Override
-	public void setAttenuation(int number, double value) {
-		switch (number) {
-		case 1:
-			this.attenuator1.setAttenuation(Convert.dB2V(value));
-			break;
-		case 2:
-			this.attenuator2.setAttenuation(Convert.dB2V(value));
-			break;
-		case 3:
-			this.attenuator3.setAttenuation(Convert.dB2V(value));
-			break;
-		case 4:
-			this.attenuator4.setAttenuation(Convert.dB2V(value));
-			break;
-		}
+	public void setAttenuation1(double value) {
+		this.getParameters().put("attenuation1", value);
+		this.attenuator1.setAttenuation(Convert.dB2V(value));
 	}
 
 	@Override
-	public double getAttenuation(int number) {
-		switch (number) {
-		case 1:
-			return getParameter("attenuation1");
-		case 2:
-			return getParameter("attenuation2");
-		case 3:
-			return getParameter("attenuation2");
-		case 4:
-			return getParameter("attenuation3");
-		}
-		return 0;
+	public void setAttenuation2(double value) {
+		this.getParameters().put("attenuation2", value);
+		this.attenuator2.setAttenuation(Convert.dB2V(value));
+	}
+
+	@Override
+	public void setAttenuation3(double value) {
+		this.getParameters().put("attenuation3", value);
+		this.attenuator3.setAttenuation(Convert.dB2V(value));
+	}
+
+	@Override
+	public void setAttenuation4(double value) {
+		this.getParameters().put("attenuation4", value);
+		this.attenuator4.setAttenuation(Convert.dB2V(value));
+	}
+
+	@Override
+	public double getAttenuation1() {
+		return getParameter("attenuation1");
+	}
+	
+	@Override
+	public double getAttenuation2() {
+		return getParameter("attenuation2");
+	}
+	
+	@Override
+	public double getAttenuation3() {
+		return getParameter("attenuation3");
+	}
+	
+	@Override
+	public double getAttenuation4() {
+		return getParameter("attenuation4");
 	}
 
 }

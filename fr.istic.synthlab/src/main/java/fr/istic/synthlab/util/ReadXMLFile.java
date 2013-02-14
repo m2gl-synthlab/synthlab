@@ -21,6 +21,7 @@ import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.controller.module.ICModule;
 import fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope;
 import fr.istic.synthlab.controller.module.eg.CModuleEG;
+import fr.istic.synthlab.controller.module.mix.CModuleMIX;
 import fr.istic.synthlab.controller.module.out.CModuleOUT;
 import fr.istic.synthlab.controller.module.rep.CModuleREP;
 import fr.istic.synthlab.controller.module.vca.CModuleVCA;
@@ -78,6 +79,8 @@ public class ReadXMLFile {
 						module = new CModuleVCFA_HP();
 					} else if (eElement.getAttribute("name").startsWith("AudioScope")){
 						module = new CModuleAudioScope();
+					} else if (eElement.getAttribute("name").startsWith("MIX")){
+						module = new CModuleMIX();
 					} else {
 						throw new Exception("Module not recognized in xml file");
 					}
