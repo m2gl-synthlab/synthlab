@@ -16,7 +16,7 @@ import fr.istic.synthlab.controller.module.eg.CModuleEG;
 import fr.istic.synthlab.controller.module.eg.ICModuleEG;
 import fr.istic.synthlab.controller.module.vca.CModuleVCA;
 import fr.istic.synthlab.controller.module.vca.ICModuleVCA;
-import fr.istic.synthlab.controller.module.vcf.CModuleVCFA_LP;
+import fr.istic.synthlab.controller.module.vcf.CModuleVCF_LP;
 import fr.istic.synthlab.controller.module.vcf.ICModuleVCF;
 import fr.istic.synthlab.controller.module.vco.CModuleVCO;
 import fr.istic.synthlab.controller.module.vco.ICModuleVCO;
@@ -185,7 +185,7 @@ public void testSaveAndLoadWireVCF(){
 	s.setSynthesizer(synth);
 	s.setDisplaySynthCommand(new DisplayCommand(sf));
 	s.setUndisplaySynthCommand(new UndisplayCommand(sf));
-	ICModuleVCF moduleVCF=new CModuleVCFA_LP();
+	ICModuleVCF moduleVCF=new CModuleVCF_LP();
 	ICModuleVCA moduleVCA=new CModuleVCA();
 	ICModuleEG moduleEG=new CModuleEG();
 
@@ -229,7 +229,7 @@ public void testSaveAndLoadWireVCF(){
 	assertEquals("CModuleVCA",s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
 	assertEquals("CModuleEG",s.getSynthesizer().getModules().get(2).getClass().getSimpleName());
 	assertTrue(((CModuleVCA) s.getSynthesizer().getModules().get(1)).getInput().isInUse());
-	assertTrue(((CModuleVCFA_LP) s.getSynthesizer().getModules().get(0)).getOutput().isInUse());
+	assertTrue(((CModuleVCF_LP) s.getSynthesizer().getModules().get(0)).getOutput().isInUse());
 
 
 

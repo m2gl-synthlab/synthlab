@@ -25,8 +25,8 @@ import fr.istic.synthlab.controller.module.mix.CModuleMIX;
 import fr.istic.synthlab.controller.module.out.CModuleOUT;
 import fr.istic.synthlab.controller.module.rep.CModuleREP;
 import fr.istic.synthlab.controller.module.vca.CModuleVCA;
-import fr.istic.synthlab.controller.module.vcf.CModuleVCFA_HP;
-import fr.istic.synthlab.controller.module.vcf.CModuleVCFA_LP;
+import fr.istic.synthlab.controller.module.vcf.CModuleVCF_HP;
+import fr.istic.synthlab.controller.module.vcf.CModuleVCF_LP;
 import fr.istic.synthlab.controller.module.vco.CModuleVCO;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.controller.wire.CWire;
@@ -74,9 +74,9 @@ public class ReadXMLFile {
 					} else if (eElement.getAttribute("name").startsWith("REP")){
 						module = new CModuleREP();
 					} else if (eElement.getAttribute("name").startsWith("VCFA LP24")){
-						module = new CModuleVCFA_LP();
+						module = new CModuleVCF_LP();
 					} else if (eElement.getAttribute("name").startsWith("VCFA HP24")){
-						module = new CModuleVCFA_HP();
+						module = new CModuleVCF_HP();
 					} else if (eElement.getAttribute("name").startsWith("AudioScope")){
 						module = new CModuleAudioScope();
 					} else if (eElement.getAttribute("name").startsWith("MIX")){
