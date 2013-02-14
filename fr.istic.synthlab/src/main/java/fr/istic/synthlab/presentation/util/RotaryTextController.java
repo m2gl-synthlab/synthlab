@@ -14,7 +14,7 @@ public class RotaryTextController extends com.jsyn.swing.RotaryTextController {
 	public RotaryTextController(DoubleBoundedRangeModel model, int textSize) {
 		super(model, textSize);
 		this.setBorder(new TitledBorder(
-				"ooo"));
+				model.getName()));
 		for (int i = this.getComponentCount()-1; i>=0; i--) {
 			Component c = this.getComponent(i);
 			if (c instanceof JPanel)
