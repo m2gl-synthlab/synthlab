@@ -94,7 +94,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand toolbarPauseCommand;
 	private ICommand toolbarCurrentWireColorCommand;
 
-	private Color toolbarCurrentWireColor = Color.BLACK;
+	private Color toolbarCurrentWireColor;
 	private boolean isPlaying = true;
 
 	public SynthFrame() {
@@ -257,20 +257,21 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		colorButtonYellow = new WebButton(
 				ImageUtils.createColorIcon(Color.YELLOW));
 
-		colorChooserButton = new WebButton("Next wire's color",
-				ImageUtils.createColorIcon(Color.GRAY));
+		colorChooserButton = new WebButton("Curent color",
+				ImageUtils.createColorIcon(CSynthesizer.getInstance().getCurrentWireColor()));
 
 		toolBar.add(colorButtonBlack);
 		toolBar.add(colorButtonGray);
+		toolBar.add(colorButtonWhite);
+		
+		toolBar.add(colorButtonPink);
+		toolBar.add(colorButtonRed);
+		toolBar.add(colorButtonMagenta);
 		toolBar.add(colorButtonBlue);
 		toolBar.add(colorButtonCyan);
 		toolBar.add(colorButtonGreen);
-		toolBar.add(colorButtonMagenta);
-		toolBar.add(colorButtonOrange);
-		toolBar.add(colorButtonPink);
-		toolBar.add(colorButtonRed);
-		toolBar.add(colorButtonWhite);
 		toolBar.add(colorButtonYellow);
+		toolBar.add(colorButtonOrange);
 
 		toolBar.add(colorChooserButton);
 		frameContainer.add(BorderLayout.NORTH, toolBar);
@@ -587,8 +588,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		colorChooserButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				WebColorChooserDialog colorChooser = new WebColorChooserDialog(toolBar);
-				colorChooser.setColor(CSynthesizer.getInstance().getCurrentWireColor());
+				WebColorChooserDialog colorChooser = new WebColorChooserDialog(
+						toolBar);
+				colorChooser.setColor(CSynthesizer.getInstance()
+						.getCurrentWireColor());
 				colorChooser.setVisible(true);
 
 				if (colorChooser.getResult() == StyleConstants.OK_OPTION) {
@@ -764,7 +767,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	public Color getCurrentWireColor() {
 		return toolbarCurrentWireColor;
 	}
-	
+
 	private void setCurrentWireColor(Color color) {
 		toolbarCurrentWireColor = color;
 		colorChooserButton.setIcon(ImageUtils
