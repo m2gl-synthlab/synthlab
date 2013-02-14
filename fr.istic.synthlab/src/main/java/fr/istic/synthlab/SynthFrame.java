@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -45,20 +44,12 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 	private static final long serialVersionUID = -7577358239451859975L;
 
-	// constantes pour les boutons de la toolbar
-	// private static final int BUTTON_DEFAULT = 0;
-	// private static final int BUTTON_MODULE = 2;
-
-	private static final int BUTTON_PLAY = 0;
-	private static final int BUTTON_PAUSE = 1;
-	// private static final int BUTTON_RECORD = 5;
-
 	private IPSynthesizer pres;
 
 	// Menu
 	private JMenuBar mainMenuBar;
 	private JMenu menuFile, menuAdd, menuHelp;
-	private JMenuItem menuItemNew, menuItemOpen, menuItemSave;
+	private JMenuItem menuItemNew, menuItemOpen, menuItemSave, menuItemSaveAs;
 	private JMenuItem menuItemQuit, menuItemDoc, menuItemAbout;
 	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT,
 			menuItemAddModuleVCFLP, menuItemAddModuleVCFHP, menuItemAddModuleEG,
@@ -70,10 +61,23 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private String[] iconFiles = { "res/play.png", "res/stop.png" };
 	private String buttonPlayPauseLabel = "Play/Stop";
 	private JButton buttonPlayPause = new JButton();
+	private JButton buttonOUT, buttonVCO, buttonVCA, buttonVCFLP, buttonVCFHP;
+	private JButton buttonEG, buttonMIX, buttonREP, buttonSCOP;
+	private String[] tooltipTexts = {
+			"Voltage-Controlled Oscillator",
+			"Voltage-Controlled Amplifier",
+			"Voltage-Controlled Filter Low-Pass",
+			"Voltage-Controlled Filter High-Pass",
+			"Enveloppe generator",
+			"Mixer",
+			"Replicator",
+			"Output on soundcard",
+			"AudioScope"};
 
 	// Command
 	private ICommand newSynthCommand;
 	private ICommand saveSynthCommand;
+	private ICommand saveAsSynthCommand;
 	private ICommand openSynthCommand;
 	private ICommand quitSynthCommand;
 	private ICommand docSynthCommand;
@@ -87,14 +91,11 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand addModuleAudioScopeCommand;
 	private ICommand addModuleREPCommand;
 	private ICommand addModuleMIXCommand;
-
 	private ICommand toolbarPlayCommand;
 	private ICommand toolbarPauseCommand;
-
 	private ICommand toolbarCurrentWireColorCommand;
 
 	private Color toolbarCurrentWireColor = Color.BLACK;
-	
 	private boolean isPlaying = true;
 
 	public SynthFrame() {
@@ -117,50 +118,53 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		// this.add(new UsageDisplay());
 		// instanciation des items
 		menuItemNew = new JMenuItem("New");
-		menuItemOpen = new JMenuItem("Open");
+		menuItemOpen = new JMenuItem("Open...");
 		menuItemSave = new JMenuItem("Save");
+		menuItemSaveAs = new JMenuItem("Save as...");
 		menuItemQuit = new JMenuItem("Quit");
 
 		// ajout des items au menu File
 		menuFile.add(menuItemNew);
 		menuFile.add(menuItemOpen);
 		menuFile.add(menuItemSave);
+		menuFile.add(menuItemSaveAs);
 		menuFile.add(menuItemQuit);
 
 		// -------------------------- Add Menu --------------------------
 		menuAdd = new JMenu("Add module");
 
-		menuItemAddModuleAudioScope = new JMenuItem("SCOP   | AudioScope");
-		menuItemAddModuleVCFLP = new JMenuItem("VCF-LP | Voltage-Controlled Filter Low-Pass");
-		menuItemAddModuleVCFHP = new JMenuItem("VCF-HP | Voltage-Controlled Filter High-Pass");
-		menuItemAddModuleOUT = new JMenuItem("OUT    | Output on soundcard");
-		menuItemAddModuleVCO = new JMenuItem("VCO    | Voltage-Controlled Oscillator");
-		menuItemAddModuleVCA = new JMenuItem("VCA    | Voltage-Controlled Amplifier");
-		menuItemAddModuleREP = new JMenuItem("REP    | Replicator");
-		menuItemAddModuleMIX = new JMenuItem("MIX    | Mixer");
-		menuItemAddModuleEG  = new JMenuItem("EG     | Enveloppe generator");
+		menuItemAddModuleVCO = new JMenuItem("VCO    | "+tooltipTexts[0]);
+		menuItemAddModuleVCA = new JMenuItem("VCA    | "+tooltipTexts[1]);
+		menuItemAddModuleVCFLP = new JMenuItem("VCF-LP | "+tooltipTexts[2]);
+		menuItemAddModuleVCFHP = new JMenuItem("VCF-HP | "+tooltipTexts[3]);
+		menuItemAddModuleEG  = new JMenuItem("EG     | "+tooltipTexts[4]);
+		menuItemAddModuleMIX = new JMenuItem("MIX    | "+tooltipTexts[5]);
+		menuItemAddModuleREP = new JMenuItem("REP    | "+tooltipTexts[6]);
+		menuItemAddModuleAudioScope = new JMenuItem("SCOP   | "+tooltipTexts[8]);
+		menuItemAddModuleOUT = new JMenuItem("OUT    | "+tooltipTexts[7]);
 		
 		Font font = new Font(Font.MONOSPACED, Font.ROMAN_BASELINE, 11);
-		
 		menuItemAddModuleVCO.setFont(font);
 		menuItemAddModuleVCA.setFont(font);
 		menuItemAddModuleVCFLP.setFont(font);
 		menuItemAddModuleVCFHP.setFont(font);
-		menuItemAddModuleOUT.setFont(font);
 		menuItemAddModuleEG.setFont(font);
 		menuItemAddModuleMIX.setFont(font);
 		menuItemAddModuleREP.setFont(font);
+		menuItemAddModuleOUT.setFont(font);
 		menuItemAddModuleAudioScope.setFont(font);
+		
 		menuAdd.add(menuItemAddModuleVCO);
 		menuAdd.add(menuItemAddModuleVCA);
 		menuAdd.add(menuItemAddModuleVCFLP);
 		menuAdd.add(menuItemAddModuleVCFHP);
-		menuAdd.add(menuItemAddModuleOUT);
 		menuAdd.add(menuItemAddModuleEG);
 		menuAdd.add(menuItemAddModuleMIX);
 		menuAdd.add(menuItemAddModuleREP);
+		menuAdd.add(menuItemAddModuleOUT);
 		menuAdd.add(menuItemAddModuleAudioScope);
 		
+
 		// -------------------------- Help Menu --------------------------
 		menuHelp = new JMenu("Help");
 
@@ -179,6 +183,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		this.setJMenuBar(mainMenuBar);
 
 		// instanciation des boutons de la toolbar
+        toolBar.addSpacing(7);
 		toolBar.setToolbarStyle(ToolbarStyle.attached);
 		Container frameContainer = getContentPane();
 		frameContainer.setLayout(new BorderLayout());
@@ -193,6 +198,48 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		
+
+        toolBar.addSpacing(3);
+        toolBar.addSeparator();
+        toolBar.addSpacing(7);
+        
+        
+        buttonVCO = new JButton("VCO");
+        buttonVCA = new JButton("VCA");
+        buttonVCFLP = new JButton("VCF-LP");
+        buttonVCFHP = new JButton("VCF-HP");
+        buttonEG = new JButton("EG");
+        buttonMIX = new JButton("MIX");
+        buttonREP = new JButton("REP");
+        buttonOUT = new JButton("OUT");
+        buttonSCOP = new JButton("SCOP");
+        
+        buttonVCO.setToolTipText(tooltipTexts[0]);
+        buttonVCA.setToolTipText(tooltipTexts[1]);
+        buttonVCFLP.setToolTipText(tooltipTexts[2]);
+        buttonVCFHP.setToolTipText(tooltipTexts[3]);
+        buttonEG.setToolTipText(tooltipTexts[4]);
+        buttonMIX.setToolTipText(tooltipTexts[5]);
+        buttonREP.setToolTipText(tooltipTexts[6]);
+        buttonOUT.setToolTipText(tooltipTexts[7]);
+        buttonSCOP.setToolTipText(tooltipTexts[8]);
+        
+        toolBar.add(buttonVCO);
+        toolBar.add(buttonVCA);
+        toolBar.add(buttonVCFLP);
+        toolBar.add(buttonVCFHP);
+        toolBar.add(buttonEG);
+        toolBar.add(buttonMIX);
+        toolBar.add(buttonREP);
+        toolBar.add(buttonOUT);
+        toolBar.add(buttonSCOP);
+
+
+        toolBar.addSpacing(3);
+        toolBar.addSeparator();
+        toolBar.addSpacing(7);
+		
 		
 		final WebButton colorChooserButton = new WebButton ( "Next wire's color", ImageUtils.createColorIcon ( Color.GRAY ) );
         colorChooserButton.addActionListener ( new ActionListener ()
@@ -222,7 +269,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
         } );
         
         toolBar.add(colorChooserButton);
-        
 		frameContainer.add(BorderLayout.NORTH, toolBar);
 
 	}
@@ -241,7 +287,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		WebMemoryBar memoryBar = new WebMemoryBar();
 		memoryBar.setShowMaximumMemory(false);
 		statusBar.add(memoryBar);
-		statusBar.add(new WebStatusLabel("Synthesizer ready"));
 
 		getContentPane().add(BorderLayout.SOUTH, statusBar);
 
@@ -252,13 +297,15 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 				/ 2 - this.getSize().height / 2);
 		this.setResizable(true);
 
-		// ajout des raccourcis clavier au elements du menu
+		// ajout des raccourcis clavier aux elements du menu
 		menuItemNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
 				ActionEvent.CTRL_MASK));
 		menuItemOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 				ActionEvent.CTRL_MASK));
 		menuItemSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
 				ActionEvent.CTRL_MASK));
+		menuItemSaveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+				ActionEvent.SHIFT_MASK+ActionEvent.CTRL_MASK));
 		menuItemQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
 				ActionEvent.CTRL_MASK));
 		menuItemDoc.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,
@@ -272,109 +319,135 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	 */
 	private void defineCallbacks() {
 		menuItemNew.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (newSynthCommand != null)
 					newSynthCommand.execute();
 			}
 		});
+		
 		menuItemOpen.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (openSynthCommand != null)
 					openSynthCommand.execute();
 			}
 		});
+		
 		menuItemSave.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (saveSynthCommand != null)
 					saveSynthCommand.execute();
 			}
+		});	
+		
+		menuItemSaveAs.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (saveAsSynthCommand != null)
+					saveAsSynthCommand.execute();
+			}
 		});
+		
 		menuItemQuit.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (quitSynthCommand != null)
 					quitSynthCommand.execute();
 			}
 		});
-		menuItemAddModuleOUT.addActionListener(new ActionListener() {
-
+		
+		ActionListener listenerOUT = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (addModuleOUTCommand != null)
 					addModuleOUTCommand.execute();
 			}
-		});
-		menuItemAddModuleVCO.addActionListener(new ActionListener() {
-
+		};
+		menuItemAddModuleOUT.addActionListener(listenerOUT);
+		buttonOUT.addActionListener(listenerOUT);
+		
+		ActionListener listenerVCO = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (addModuleVCOCommand != null)
 					addModuleVCOCommand.execute();
 			}
-		});
-		menuItemAddModuleVCA.addActionListener(new ActionListener() {
-
+		};
+		menuItemAddModuleVCO.addActionListener(listenerVCO);
+		buttonVCO.addActionListener(listenerVCO);
+		
+		ActionListener listenerVCA = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (addModuleVCACommand != null)
 					addModuleVCACommand.execute();
 			}
-		});
-		menuItemAddModuleVCFLP.addActionListener(new ActionListener() {
-
+		};
+		menuItemAddModuleVCA.addActionListener(listenerVCA);
+		buttonVCA.addActionListener(listenerVCA);
+		
+		ActionListener listenerVCFLP = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (addModuleVCFLPCommand != null)
 					addModuleVCFLPCommand.execute();
 			}
-		});
-		menuItemAddModuleVCFHP.addActionListener(new ActionListener() {
-
+		};
+		menuItemAddModuleVCFLP.addActionListener(listenerVCFLP);
+		buttonVCFLP.addActionListener(listenerVCFLP);
+		
+		ActionListener listenerVCFHP = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (addModuleVCFHPCommand != null)
 					addModuleVCFHPCommand.execute();
 			}
-		});
-		menuItemAddModuleEG.addActionListener(new ActionListener() {
-
+		};
+		menuItemAddModuleVCFHP.addActionListener(listenerVCFHP);
+		buttonVCFHP.addActionListener(listenerVCFHP);
+		
+		ActionListener listenerEG = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (addModuleEGCommand != null)
 					addModuleEGCommand.execute();
 			}
-		});
-		menuItemAddModuleAudioScope.addActionListener(new ActionListener() {
-
+		};
+		menuItemAddModuleEG.addActionListener(listenerEG);
+		buttonEG.addActionListener(listenerEG);
+		
+		ActionListener listenerSCOP = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (addModuleAudioScopeCommand != null)
 					addModuleAudioScopeCommand.execute();
 			}
-		});
-		menuItemAddModuleREP.addActionListener(new ActionListener() {
-
+		};
+		menuItemAddModuleAudioScope.addActionListener(listenerSCOP);
+		buttonSCOP.addActionListener(listenerSCOP);
+		
+		ActionListener listenerREP = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (addModuleREPCommand != null)
 					addModuleREPCommand.execute();
 			}
-		});
-		menuItemAddModuleMIX.addActionListener(new ActionListener() {
-
+		};
+		menuItemAddModuleREP.addActionListener(listenerREP);
+		buttonREP.addActionListener(listenerREP);
+		
+		ActionListener listenerMIX = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (addModuleMIXCommand != null)
 					addModuleMIXCommand.execute();
 			}
-		});
+		};
+		menuItemAddModuleMIX.addActionListener(listenerMIX);
+		buttonMIX.addActionListener(listenerMIX);
+		
 		menuItemDoc.addActionListener(new ActionListener() {
 
 			@Override
@@ -458,6 +531,14 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		this.saveSynthCommand = saveSynthCommand;
 	}
 
+	/**
+	 * @param saveAsSynthCommand
+	 *            the saveAsSynthCommand to set
+	 */
+	public void setSaveAsSynthCommand(ICommand saveAsSynthCommand) {
+		this.saveAsSynthCommand = saveAsSynthCommand;
+	}
+	
 	/**
 	 * @param openSynthCommand
 	 *            the openSynthCommand to set

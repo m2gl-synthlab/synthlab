@@ -2,6 +2,9 @@ package fr.istic.synthlab.command.menu;
 
 import java.awt.FileDialog;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import fr.istic.synthlab.ISynthApp;
 import fr.istic.synthlab.ISynthFrame;
 import fr.istic.synthlab.SynthFrame;
@@ -16,7 +19,8 @@ public class OpenSynthCommand implements ICommand {
 	public OpenSynthCommand(ISynthApp app, ISynthFrame synthFrame) {
 		this.app = app;
 		this.synthFrame = synthFrame;
-		this.chooser = new FileDialog((SynthFrame) this.synthFrame, "Open file", FileDialog.LOAD);
+		this.chooser = new FileDialog((SynthFrame) this.synthFrame,
+				"Open a Synthlab File", FileDialog.LOAD);
 	}
 
 	@Override
@@ -27,8 +31,13 @@ public class OpenSynthCommand implements ICommand {
 		String dir = chooser.getDirectory();
 		String file = chooser.getFile();
 		if (file != null) {
-			app.loadFromXML(dir, file);
+			if (file.endsWith(".synthlab")) {
+				((JFrame) synthFrame).setTitle("SynthlabG2 - " + dir + file);
+				app.loadFromXML(dir, file);
+			} else {
+				JOptionPane.showMessageDialog(((JFrame) synthFrame),"Select a \'.synthlab\' file please.");
+				this.execute();
+			}
 		}
 	}
-
 }

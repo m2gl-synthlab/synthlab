@@ -48,11 +48,6 @@ public class ModuleREP extends AModule implements IModuleREP {
 	}
 
 	@Override
-	public String getName() {
-		return MODULE_NAME;
-	}
-
-	@Override
 	public List<UnitGenerator> getJSyn() {
 		List<UnitGenerator> generators = new ArrayList<UnitGenerator>();
 		generators.add(passThrough);

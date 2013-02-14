@@ -57,5 +57,11 @@ public interface ISynthApp {
 	 * Load an instance from an XML file
 	 */
 	public void loadFromXML(String dir, String file);
+	
+	/**
+	 * Return the path of the current instance
+	 * @return
+	 */
+	public String[] getCurrentFile();
 
 }

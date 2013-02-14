@@ -22,6 +22,7 @@ public class SynthApp implements ISynthApp {
 	private ICSynthesizer synth;
 	private ICommand displayCmd;
 	private ICommand undisplayCmd;
+	private String[] currentFile={null, null};
 
 	@Override
 	public void startSynth() {
@@ -42,6 +43,10 @@ public class SynthApp implements ISynthApp {
 		// Add an OUT module
 		IModuleOUT out = PACFactory.getFactory().newOUT();
 		synth.add(out);
+
+		currentFile[0]=null;
+		currentFile[1]=null;
+		
 		synth.start();
 	}
 
@@ -56,8 +61,11 @@ public class SynthApp implements ISynthApp {
 	public void saveToXML(String fileDir, String filename) {
 		List<IModule> modules = CSynthesizer.getInstance().getModules();
 
-		WriteXMLFile writeToXML = new WriteXMLFile(new File(filename));
+		WriteXMLFile writeToXML = new WriteXMLFile(new File(fileDir+filename));
 		writeToXML.saveModules(modules);
+		
+		currentFile[0]=fileDir;
+		currentFile[1]=filename;
 
 	}
 
@@ -66,8 +74,13 @@ public class SynthApp implements ISynthApp {
 		synth.stop();
 		this.synth = (ICSynthesizer) PACFactory.getFactory().newSynthesizer();
 		displayCmd.execute();
-		ReadXMLFile readXML = new ReadXMLFile(new File(file));
+		
+		ReadXMLFile readXML = new ReadXMLFile(new File(dir+file));
 		readXML.loadSynthesizer();
+		
+		currentFile[0]=dir;
+		currentFile[1]=file;
+		
 		synth.start();
 	}
 
@@ -89,5 +102,10 @@ public class SynthApp implements ISynthApp {
 	@Override
 	public void setUndisplaySynthCommand(ICommand undisplaySynthCommand) {
 		this.undisplayCmd = undisplaySynthCommand;
+	}
+
+	@Override
+	public String[] getCurrentFile() {
+		return currentFile;
 	}
 }

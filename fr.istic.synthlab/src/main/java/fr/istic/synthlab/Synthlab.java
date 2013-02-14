@@ -25,6 +25,7 @@ import fr.istic.synthlab.command.menu.DocumentationCommand;
 import fr.istic.synthlab.command.menu.NewSynthCommand;
 import fr.istic.synthlab.command.menu.OpenSynthCommand;
 import fr.istic.synthlab.command.menu.QuitSynthCommand;
+import fr.istic.synthlab.command.menu.SaveAsSynthCommand;
 import fr.istic.synthlab.command.menu.SaveSynthCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarCurrentWireColorCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarPauseCommand;
@@ -59,7 +60,7 @@ public class Synthlab {
 		
 		// Create the main frame
 		SynthFrame frame = new SynthFrame();
-		frame.setTitle("Synthlab - G2");
+		frame.setTitle("SynthlabG2 - untitled");
 		try {
 			Image imageIcon = ImageIO.read(new File("res/logo.png"));
 			frame.setIconImage(imageIcon);
@@ -73,9 +74,10 @@ public class Synthlab {
 		app.newSynth();
   
 		// Configure the frame
-		frame.setNewSynthCommand(new NewSynthCommand(app));
+		frame.setNewSynthCommand(new NewSynthCommand(app, frame));
 		frame.setOpenSynthCommand(new OpenSynthCommand(app, frame));
 		frame.setSaveSynthCommand(new SaveSynthCommand(app, frame));
+		frame.setSaveAsSynthCommand(new SaveAsSynthCommand(app, frame));
 		frame.setQuitSynthCommand(new QuitSynthCommand(app));
 		frame.setDocSynthCommand(new DocumentationCommand());
 		frame.setAboutSynthCommand(new AboutCommand());

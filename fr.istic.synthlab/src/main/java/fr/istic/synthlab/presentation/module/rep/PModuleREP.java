@@ -26,8 +26,6 @@ public class PModuleREP extends APModule implements IPModuleREP {
 	
 	public PModuleREP(ICModuleREP control) {
 		super(control);
-		System.out.println("PModuleREP initialized");
-
 		this.ctrl = control;
 		configView();
 	}

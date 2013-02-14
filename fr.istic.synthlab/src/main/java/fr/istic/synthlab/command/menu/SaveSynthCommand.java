@@ -2,6 +2,8 @@ package fr.istic.synthlab.command.menu;
 
 import java.awt.FileDialog;
 
+import javax.swing.JFrame;
+
 import fr.istic.synthlab.ISynthApp;
 import fr.istic.synthlab.ISynthFrame;
 import fr.istic.synthlab.SynthFrame;
@@ -16,20 +18,30 @@ public class SaveSynthCommand implements ICommand {
 	public SaveSynthCommand(ISynthApp synthApp, ISynthFrame synthFrame) {
 		this.synthApp = synthApp;
 		this.synthFrame = synthFrame;
-		this.chooser = new FileDialog((SynthFrame) this.synthFrame, "Save as", FileDialog.SAVE);
+		this.chooser = new FileDialog((SynthFrame) this.synthFrame, "Save as",
+				FileDialog.SAVE);
 	}
 
 	@Override
 	public void execute() {
-		chooser.setVisible(true);
-		
-		String dir= chooser.getDirectory();
-		String file = chooser.getFile();
+		String[] currentFile = synthApp.getCurrentFile();
 
-		System.out.println("");
-		System.out.println("Save to : "+ dir+""+file);
-		if(file != null){
-			synthApp.saveToXML(dir, file);
+		if (currentFile[1] != null) {
+			synthApp.saveToXML(currentFile[0], currentFile[1]);
+		} else {
+			chooser.setFile("untitled.synthlab");
+
+			chooser.setVisible(true);
+
+			String dir = chooser.getDirectory();
+			String file = chooser.getFile();
+
+			if (file != null) {
+				if (!file.endsWith(".synthlab"))
+					file = file + ".synthlab";
+				synthApp.saveToXML(dir, file);
+				((JFrame) synthFrame).setTitle("SynthlabG2 - " + dir + file);
+			}
 		}
 	}
 
