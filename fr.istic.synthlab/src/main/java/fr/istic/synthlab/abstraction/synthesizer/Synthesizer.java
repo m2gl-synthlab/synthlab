@@ -128,9 +128,6 @@ public class Synthesizer implements ISynthesizer {
 	}
 
 	
-	public List<IWire> getWires() {//pour les tests
-		return wires;
-	}
-
+	
 
 }
