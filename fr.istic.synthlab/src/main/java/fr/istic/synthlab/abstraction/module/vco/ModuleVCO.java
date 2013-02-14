@@ -26,9 +26,6 @@ public class ModuleVCO extends AModule implements IModuleVCO, Observer<Port>{
 	private static final String OUT_SQUARE_NAME = "Square";
 	private static final String OUT_TRIANGLE_NAME = "Triangle";
 	
-	public static final String PARAM_OCTAVE_NAME = "Octave";
-	public static final String PARAM_TONE_NAME = "Tone";
-	
 	// Générateur Perso
 	private FrequencyModulatorFilter frequencyModulator;
 

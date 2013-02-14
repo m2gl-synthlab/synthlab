@@ -10,6 +10,14 @@ import fr.istic.synthlab.abstraction.port.IOutputPort;
 public interface IModuleMIX extends IModule {
 
 	/**
+	 * Parameters name
+	 */
+	public static final String PARAM_NAME_GAIN1 = "Gain1";
+	public static final String PARAM_NAME_GAIN2 = "Gain2";
+	public static final String PARAM_NAME_GAIN3 = "Gain3";
+	public static final String PARAM_NAME_GAIN4 = "Gain4";
+	
+	/**
 	 * Return the input port 1 of the MIX module
 	 * 
 	 * @return input

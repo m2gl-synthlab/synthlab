@@ -24,8 +24,6 @@ public class ModuleVCA extends AModule implements IModuleVCA, Observer<Port> {
 	private static final String INPUT_AM_NAME = "AM";
 	private static final String OUTPUT_NAME = "Output";
 	
-	public static final String PARAM_AMPLITUDE_NAME = "Gain";
-
 	// Input & Output du module
 	private IInputPort input, inputAm;
 	private IOutputPort output;

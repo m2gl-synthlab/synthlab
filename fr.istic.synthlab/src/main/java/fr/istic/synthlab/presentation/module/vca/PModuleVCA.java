@@ -3,20 +3,19 @@ package fr.istic.synthlab.presentation.module.vca;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.jsyn.swing.DoubleBoundedRangeModel;
-import com.jsyn.swing.RotaryTextController;
 
-import fr.istic.synthlab.abstraction.module.vca.ModuleVCA;
+import fr.istic.synthlab.abstraction.module.vca.IModuleVCA;
 import fr.istic.synthlab.controller.module.vca.ICModuleVCA;
 import fr.istic.synthlab.controller.port.ICInputPort;
 import fr.istic.synthlab.controller.port.ICOutputPort;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.port.PInputPort;
 import fr.istic.synthlab.presentation.port.POutputPort;
+import fr.istic.synthlab.presentation.util.RotaryTextController;
 
 public class PModuleVCA extends APModule implements IPModuleVCA {
 
@@ -44,42 +43,36 @@ public class PModuleVCA extends APModule implements IPModuleVCA {
 
 	private void configView() {
 		JPanel panelParams = new JPanel();
-		JPanel panelInput = new JPanel();
-		JPanel panelOutput = new JPanel();
+		JPanel panelInputOutput = new JPanel();
 		
 		panelParams.setOpaque(false);
-		panelInput.setOpaque(false);
-		panelOutput.setOpaque(false);
+		panelInputOutput.setOpaque(false);
 
-		attenuationModel = new DoubleBoundedRangeModel(ModuleVCA.PARAM_AMPLITUDE_NAME, 7200, -60, 12, ctrl.getAttenuation());
+		attenuationModel = new DoubleBoundedRangeModel(IModuleVCA.PARAM_NAME_GAIN, 7200, -60, 12, ctrl.getAttenuation());
 		RotaryTextController attenuationRotary = new RotaryTextController(attenuationModel, 4);
-		attenuationRotary.setBorder(new TitledBorder(ModuleVCA.PARAM_AMPLITUDE_NAME));
 		panelParams.add(attenuationRotary);
 
 		input = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
-		panelInput.add(input);
+		panelInputOutput.add(input);
 
 		inputAM = (PInputPort) ((ICInputPort) ctrl.getInputAM())
 				.getPresentation();
-		panelInput.add(inputAM);
+		panelInputOutput.add(inputAM);
 
 		output = (POutputPort) ((ICOutputPort) ctrl.getOutput())
 				.getPresentation();
-		panelOutput.add(output);
+		panelInputOutput.add(output);
 
-		this.setAutoscrolls(true);
-
-		super.setWidth(350);
-		super.setHeigth(350);
+		super.setWidth(200);
+		super.setHeigth(200);
 		
 		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
 		
 		this.addTitleBar();
-		this.addPanel(panelParams, 350, 100);
-		this.addPanel(panelInput, 350, 100);
-		this.addPanel(panelOutput, 350, 100);
+		this.addPanel(panelParams, 200, 100);
+		this.addPanel(panelInputOutput, 200, 100);
 	}
 
 	private void defineCallbacks() {

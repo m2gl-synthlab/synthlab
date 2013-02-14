@@ -257,7 +257,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		colorButtonYellow = new WebButton(
 				ImageUtils.createColorIcon(Color.YELLOW));
 
-		colorChooserButton = new WebButton("Curent color",
+		colorChooserButton = new WebButton("Current color",
 				ImageUtils.createColorIcon(CSynthesizer.getInstance().getCurrentWireColor()));
 
 		toolBar.add(colorButtonBlack);

@@ -4,9 +4,6 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import junit.framework.TestCase;
-
-import com.jsyn.unitgen.PassThrough;
-
 import fr.istic.synthlab.abstraction.module.IModule;
 import fr.istic.synthlab.abstraction.module.out.ModuleOUT;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
@@ -16,7 +13,6 @@ import fr.istic.synthlab.abstraction.wire.Wire;
 import fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope;
 import fr.istic.synthlab.controller.module.eg.CModuleEG;
 import fr.istic.synthlab.controller.module.out.CModuleOUT;
-import fr.istic.synthlab.controller.wire.CWire;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;

@@ -6,6 +6,12 @@ import fr.istic.synthlab.abstraction.port.IOutputPort;
 
 public interface IModuleVCA extends IModule {
 
+	/**
+	 * Parameters name
+	 */
+	public static final String PARAM_NAME_GAIN = "Gain";
+	
+	// TODO comment
 	IInputPort getInput();
 
 	IInputPort getInputAM();
