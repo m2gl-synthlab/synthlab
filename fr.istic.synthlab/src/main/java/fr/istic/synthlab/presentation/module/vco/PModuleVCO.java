@@ -90,17 +90,17 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 		this.setAutoscrolls(true);
 
 
-		super.setWidth(350);
-		super.setHeigth(350);
+		super.setWidth(270);
+		super.setHeigth(260);
 		
 		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
 		
 		this.addTitleBar();
-		this.addPanel(panelParams, 350, 100);
-		this.addPanel(panelInput, 350, 100);
-		this.addPanel(panelOutput, 350, 100);
+		this.addPanel(panelParams, 270, 100);
+		this.addPanel(panelInput, 270, 60);
+		this.addPanel(panelOutput, 270, 60);
 	}
 
 

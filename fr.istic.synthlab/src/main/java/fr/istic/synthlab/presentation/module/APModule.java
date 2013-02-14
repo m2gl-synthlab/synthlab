@@ -89,7 +89,6 @@ public abstract class APModule extends WebPanel implements IPModule {
 
 			@Override
 			public void focusGained(FocusEvent e) {
-				System.out.println("focus gained");
 				IPSynthesizer presSynth = 
 						CSynthesizer.getInstance().getPresentation();
 				((JLayeredPane) presSynth).setLayer(APModule.this, 0, 0);
