@@ -29,7 +29,6 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 	public PSynthesizer() {
 		super();
 		modules = new ArrayList<IPModule>();
-
 		configView();
 		defineCallbacks();
 	}

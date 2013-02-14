@@ -15,8 +15,8 @@ public abstract class PPort extends JPanel implements IPPort{
 	private Color strokeColor = Color.BLACK;
 	private Color fillColor = Color.WHITE;
 	
-	public static final int WIDTH = 80;
-	public static final int HEIGHT = 80;
+	public static final int WIDTH = 60;
+	public static final int HEIGHT = 70;
 	public static final int RADIUS = 25;
 
 	@Override

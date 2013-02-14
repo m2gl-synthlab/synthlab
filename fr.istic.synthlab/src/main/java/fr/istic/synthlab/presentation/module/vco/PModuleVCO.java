@@ -51,13 +51,13 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 
 	private void configView() {
 		JPanel panelParams = new JPanel();
-		JPanel panelInput = new JPanel();
-		JPanel panelOutput = new JPanel();
+		JPanel panelFrequency = new JPanel();
+		JPanel panelInputOutput = new JPanel();
 		
 		panelParams.setOpaque(false);
-		panelInput.setOpaque(false);
-		panelOutput.setOpaque(false);
-
+		panelFrequency.setOpaque(false);
+		panelInputOutput.setOpaque(false);
+		
 		octaveModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_OCTAVE_NAME,
 				14, 0, 14, ctrl.getOctave());
 		RotaryTextController octaveRotary = new RotaryTextController(octaveModel, 4);
@@ -71,36 +71,33 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 
 		frequencyLabel = new JLabel();
 		frequencyLabel.setText("" + ctrl.getFrequency());
-		panelParams.add(frequencyLabel);
+		panelFrequency.add(frequencyLabel);
 
 		fm = (PInputPort) ((ICInputPort) ctrl.getInputFm()).getPresentation();
-		panelInput.add(fm);
+		panelInputOutput.add(fm);
 
 		outputSquare = (POutputPort) ((ICOutputPort) ctrl.getOutputSquare())
 				.getPresentation();
-		panelOutput.add(outputSquare);
+		panelInputOutput.add(outputSquare);
 
 		outputTriangle = (POutputPort) ((ICOutputPort) ctrl.getOutputTriangle())
 				.getPresentation();
-		panelOutput.add(outputTriangle);
+		panelInputOutput.add(outputTriangle);
 
 		outputSawtooth = (POutputPort) ((ICOutputPort) ctrl.getOutputSawtooth()).getPresentation();
-		panelOutput.add(outputSawtooth);
-
-		this.setAutoscrolls(true);
-
+		panelInputOutput.add(outputSawtooth);
 
 		super.setWidth(270);
-		super.setHeigth(260);
+		super.setHeigth(240);
 		
 		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
 		
 		this.addTitleBar();
-		this.addPanel(panelParams, 270, 100);
-		this.addPanel(panelInput, 270, 60);
-		this.addPanel(panelOutput, 270, 60);
+		this.addPanel(panelParams, 270, 115);
+		this.addPanel(panelFrequency, 270, 25);
+		this.addPanel(panelInputOutput, 270, 60);
 	}
 
 
@@ -140,7 +137,7 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 
 	@Override
 	public void c2pSetFrequencyValue(double frequency) {
-		frequencyLabel.setText(String.format("%.2f", frequency));
+		frequencyLabel.setText(""+String.format("%.2f", frequency)+" Hz");
 	}
 
 }
