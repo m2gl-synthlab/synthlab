@@ -36,6 +36,7 @@ import fr.istic.synthlab.command.menu.AddModuleAudioScopeCommand;
 import fr.istic.synthlab.command.menu.AddModuleMIXCommand;
 import fr.istic.synthlab.command.menu.AddModuleREPCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarCurrentWireColorCommand;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 import fr.istic.synthlab.presentation.synthesizer.PSynthesizer;
 
@@ -51,9 +52,9 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private JMenuItem menuItemNew, menuItemOpen, menuItemSave, menuItemSaveAs;
 	private JMenuItem menuItemQuit, menuItemDoc, menuItemAbout;
 	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT,
-			menuItemAddModuleVCFLP, menuItemAddModuleVCFHP, menuItemAddModuleEG,
-			menuItemAddModuleAudioScope, menuItemAddModuleREP,
-			menuItemAddModuleVCA, menuItemAddModuleMIX ;
+			menuItemAddModuleVCFLP, menuItemAddModuleVCFHP,
+			menuItemAddModuleEG, menuItemAddModuleAudioScope,
+			menuItemAddModuleREP, menuItemAddModuleVCA, menuItemAddModuleMIX;
 
 	// Toolbar
 	private WebToolBar toolBar = new WebToolBar();
@@ -62,16 +63,15 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private JButton buttonPlayPause = new JButton();
 	private JButton buttonOUT, buttonVCO, buttonVCA, buttonVCFLP, buttonVCFHP;
 	private JButton buttonEG, buttonMIX, buttonREP, buttonSCOP;
-	private String[] tooltipTexts = {
-			"Voltage-Controlled Oscillator",
+	private WebButton colorButtonBlack, colorButtonGray, colorButtonBlue,
+			colorButtonCyan, colorButtonGreen, colorButtonMagenta,
+			colorButtonOrange, colorButtonPink, colorButtonRed,
+			colorButtonWhite, colorButtonYellow, colorChooserButton;
+	private String[] tooltipTexts = { "Voltage-Controlled Oscillator",
 			"Voltage-Controlled Amplifier",
 			"Voltage-Controlled Filter Low-Pass",
-			"Voltage-Controlled Filter High-Pass",
-			"Enveloppe generator",
-			"Mixer",
-			"Replicator",
-			"Output on soundcard",
-			"AudioScope"};
+			"Voltage-Controlled Filter High-Pass", "Enveloppe generator",
+			"Mixer", "Replicator", "Output on soundcard", "AudioScope" };
 
 	// Command
 	private ICommand newSynthCommand;
@@ -132,16 +132,17 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		// -------------------------- Add Menu --------------------------
 		menuAdd = new JMenu("Add module");
 
-		menuItemAddModuleVCO = new JMenuItem("VCO    | "+tooltipTexts[0]);
-		menuItemAddModuleVCA = new JMenuItem("VCA    | "+tooltipTexts[1]);
-		menuItemAddModuleVCFLP = new JMenuItem("VCF-LP | "+tooltipTexts[2]);
-		menuItemAddModuleVCFHP = new JMenuItem("VCF-HP | "+tooltipTexts[3]);
-		menuItemAddModuleEG  = new JMenuItem("EG     | "+tooltipTexts[4]);
-		menuItemAddModuleMIX = new JMenuItem("MIX    | "+tooltipTexts[5]);
-		menuItemAddModuleREP = new JMenuItem("REP    | "+tooltipTexts[6]);
-		menuItemAddModuleAudioScope = new JMenuItem("SCOP   | "+tooltipTexts[8]);
-		menuItemAddModuleOUT = new JMenuItem("OUT    | "+tooltipTexts[7]);
-		
+		menuItemAddModuleVCO = new JMenuItem("VCO    | " + tooltipTexts[0]);
+		menuItemAddModuleVCA = new JMenuItem("VCA    | " + tooltipTexts[1]);
+		menuItemAddModuleVCFLP = new JMenuItem("VCF-LP | " + tooltipTexts[2]);
+		menuItemAddModuleVCFHP = new JMenuItem("VCF-HP | " + tooltipTexts[3]);
+		menuItemAddModuleEG = new JMenuItem("EG     | " + tooltipTexts[4]);
+		menuItemAddModuleMIX = new JMenuItem("MIX    | " + tooltipTexts[5]);
+		menuItemAddModuleREP = new JMenuItem("REP    | " + tooltipTexts[6]);
+		menuItemAddModuleAudioScope = new JMenuItem("SCOP   | "
+				+ tooltipTexts[8]);
+		menuItemAddModuleOUT = new JMenuItem("OUT    | " + tooltipTexts[7]);
+
 		Font font = new Font(Font.MONOSPACED, Font.ROMAN_BASELINE, 11);
 		menuItemAddModuleVCO.setFont(font);
 		menuItemAddModuleVCA.setFont(font);
@@ -152,7 +153,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuItemAddModuleREP.setFont(font);
 		menuItemAddModuleOUT.setFont(font);
 		menuItemAddModuleAudioScope.setFont(font);
-		
+
 		menuAdd.add(menuItemAddModuleVCO);
 		menuAdd.add(menuItemAddModuleVCA);
 		menuAdd.add(menuItemAddModuleVCFLP);
@@ -162,7 +163,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuAdd.add(menuItemAddModuleREP);
 		menuAdd.add(menuItemAddModuleOUT);
 		menuAdd.add(menuItemAddModuleAudioScope);
-		
 
 		// -------------------------- Help Menu --------------------------
 		menuHelp = new JMenu("Help");
@@ -182,11 +182,11 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		this.setJMenuBar(mainMenuBar);
 
 		// instanciation des boutons de la toolbar
-        toolBar.addSpacing(7);
+		toolBar.addSpacing(7);
 		toolBar.setToolbarStyle(ToolbarStyle.attached);
 		Container frameContainer = getContentPane();
 		frameContainer.setLayout(new BorderLayout());
-		
+
 		Image img;
 		try {
 			img = ImageIO.read(new File(iconFiles[1]));
@@ -197,77 +197,82 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
 
-        toolBar.addSpacing(3);
-        toolBar.addSeparator();
-        toolBar.addSpacing(7);
-        
-        
-        buttonVCO = new JButton("VCO");
-        buttonVCA = new JButton("VCA");
-        buttonVCFLP = new JButton("VCF-LP");
-        buttonVCFHP = new JButton("VCF-HP");
-        buttonEG = new JButton("EG");
-        buttonMIX = new JButton("MIX");
-        buttonREP = new JButton("REP");
-        buttonOUT = new JButton("OUT");
-        buttonSCOP = new JButton("SCOP");
-        
-        buttonVCO.setToolTipText(tooltipTexts[0]);
-        buttonVCA.setToolTipText(tooltipTexts[1]);
-        buttonVCFLP.setToolTipText(tooltipTexts[2]);
-        buttonVCFHP.setToolTipText(tooltipTexts[3]);
-        buttonEG.setToolTipText(tooltipTexts[4]);
-        buttonMIX.setToolTipText(tooltipTexts[5]);
-        buttonREP.setToolTipText(tooltipTexts[6]);
-        buttonOUT.setToolTipText(tooltipTexts[7]);
-        buttonSCOP.setToolTipText(tooltipTexts[8]);
-        
-        toolBar.add(buttonVCO);
-        toolBar.add(buttonVCA);
-        toolBar.add(buttonVCFLP);
-        toolBar.add(buttonVCFHP);
-        toolBar.add(buttonEG);
-        toolBar.add(buttonMIX);
-        toolBar.add(buttonREP);
-        toolBar.add(buttonOUT);
-        toolBar.add(buttonSCOP);
+		toolBar.addSpacing(3);
+		toolBar.addSeparator();
+		toolBar.addSpacing(7);
 
+		// -------------------------- Toolbar Modules --------------------------
 
-        toolBar.addSpacing(3);
-        toolBar.addSeparator();
-        toolBar.addSpacing(7);
-		
-		
-		final WebButton colorChooserButton = new WebButton ( "Next wire's color", ImageUtils.createColorIcon ( Color.GRAY ) );
-        colorChooserButton.addActionListener ( new ActionListener ()
-        {
-            private WebColorChooserDialog colorChooser = null;
-            private Color lastColor = Color.GRAY;
+		buttonVCO = new JButton("VCO");
+		buttonVCA = new JButton("VCA");
+		buttonVCFLP = new JButton("VCF-LP");
+		buttonVCFHP = new JButton("VCF-HP");
+		buttonEG = new JButton("EG");
+		buttonMIX = new JButton("MIX");
+		buttonREP = new JButton("REP");
+		buttonOUT = new JButton("OUT");
+		buttonSCOP = new JButton("SCOP");
 
-            public void actionPerformed ( ActionEvent e )
-            {
-                if ( colorChooser == null )
-                {
-                    colorChooser = new WebColorChooserDialog(toolBar);
-                }
-                colorChooser.setColor ( lastColor );
-                colorChooser.setVisible ( true );
+		buttonVCO.setToolTipText(tooltipTexts[0]);
+		buttonVCA.setToolTipText(tooltipTexts[1]);
+		buttonVCFLP.setToolTipText(tooltipTexts[2]);
+		buttonVCFHP.setToolTipText(tooltipTexts[3]);
+		buttonEG.setToolTipText(tooltipTexts[4]);
+		buttonMIX.setToolTipText(tooltipTexts[5]);
+		buttonREP.setToolTipText(tooltipTexts[6]);
+		buttonOUT.setToolTipText(tooltipTexts[7]);
+		buttonSCOP.setToolTipText(tooltipTexts[8]);
 
-                if ( colorChooser.getResult () == StyleConstants.OK_OPTION )
-                {
-                    Color color = colorChooser.getColor ();
-                    toolbarCurrentWireColor = color;
-                    toolbarCurrentWireColorCommand.execute();
-                    lastColor = color;
+		toolBar.add(buttonVCO);
+		toolBar.add(buttonVCA);
+		toolBar.add(buttonVCFLP);
+		toolBar.add(buttonVCFHP);
+		toolBar.add(buttonEG);
+		toolBar.add(buttonMIX);
+		toolBar.add(buttonREP);
+		toolBar.add(buttonOUT);
+		toolBar.add(buttonSCOP);
 
-                    colorChooserButton.setIcon ( ImageUtils.createColorIcon ( color ) );
-                }
-            }
-        } );
-        
-        toolBar.add(colorChooserButton);
+		toolBar.addSpacing(3);
+		toolBar.addSeparator();
+		toolBar.addSpacing(7);
+
+		// -------------------------- Toolbar Colors --------------------------
+		colorButtonBlack = new WebButton(
+				ImageUtils.createColorIcon(Color.BLACK));
+		colorButtonGray = new WebButton(ImageUtils.createColorIcon(Color.GRAY));
+		colorButtonBlue = new WebButton(ImageUtils.createColorIcon(Color.BLUE));
+		colorButtonCyan = new WebButton(ImageUtils.createColorIcon(Color.CYAN));
+		colorButtonGreen = new WebButton(
+				ImageUtils.createColorIcon(Color.GREEN));
+		colorButtonMagenta = new WebButton(
+				ImageUtils.createColorIcon(Color.MAGENTA));
+		colorButtonOrange = new WebButton(
+				ImageUtils.createColorIcon(Color.ORANGE));
+		colorButtonPink = new WebButton(ImageUtils.createColorIcon(Color.PINK));
+		colorButtonRed = new WebButton(ImageUtils.createColorIcon(Color.RED));
+		colorButtonWhite = new WebButton(
+				ImageUtils.createColorIcon(Color.WHITE));
+		colorButtonYellow = new WebButton(
+				ImageUtils.createColorIcon(Color.YELLOW));
+
+		colorChooserButton = new WebButton("Next wire's color",
+				ImageUtils.createColorIcon(Color.GRAY));
+
+		toolBar.add(colorButtonBlack);
+		toolBar.add(colorButtonGray);
+		toolBar.add(colorButtonBlue);
+		toolBar.add(colorButtonCyan);
+		toolBar.add(colorButtonGreen);
+		toolBar.add(colorButtonMagenta);
+		toolBar.add(colorButtonOrange);
+		toolBar.add(colorButtonPink);
+		toolBar.add(colorButtonRed);
+		toolBar.add(colorButtonWhite);
+		toolBar.add(colorButtonYellow);
+
+		toolBar.add(colorChooserButton);
 		frameContainer.add(BorderLayout.NORTH, toolBar);
 
 	}
@@ -304,7 +309,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuItemSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
 				ActionEvent.CTRL_MASK));
 		menuItemSaveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
-				ActionEvent.SHIFT_MASK+ActionEvent.CTRL_MASK));
+				ActionEvent.SHIFT_MASK + ActionEvent.CTRL_MASK));
 		menuItemQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
 				ActionEvent.CTRL_MASK));
 		menuItemDoc.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,
@@ -324,7 +329,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 					newSynthCommand.execute();
 			}
 		});
-		
+
 		menuItemOpen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -332,15 +337,15 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 					openSynthCommand.execute();
 			}
 		});
-		
+
 		menuItemSave.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (saveSynthCommand != null)
 					saveSynthCommand.execute();
 			}
-		});	
-		
+		});
+
 		menuItemSaveAs.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -348,7 +353,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 					saveAsSynthCommand.execute();
 			}
 		});
-		
+
 		menuItemQuit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -356,7 +361,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 					quitSynthCommand.execute();
 			}
 		});
-		
+
 		ActionListener listenerOUT = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -366,7 +371,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		};
 		menuItemAddModuleOUT.addActionListener(listenerOUT);
 		buttonOUT.addActionListener(listenerOUT);
-		
+
 		ActionListener listenerVCO = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -376,7 +381,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		};
 		menuItemAddModuleVCO.addActionListener(listenerVCO);
 		buttonVCO.addActionListener(listenerVCO);
-		
+
 		ActionListener listenerVCA = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -386,7 +391,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		};
 		menuItemAddModuleVCA.addActionListener(listenerVCA);
 		buttonVCA.addActionListener(listenerVCA);
-		
+
 		ActionListener listenerVCFLP = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -396,7 +401,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		};
 		menuItemAddModuleVCFLP.addActionListener(listenerVCFLP);
 		buttonVCFLP.addActionListener(listenerVCFLP);
-		
+
 		ActionListener listenerVCFHP = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -406,7 +411,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		};
 		menuItemAddModuleVCFHP.addActionListener(listenerVCFHP);
 		buttonVCFHP.addActionListener(listenerVCFHP);
-		
+
 		ActionListener listenerEG = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -416,7 +421,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		};
 		menuItemAddModuleEG.addActionListener(listenerEG);
 		buttonEG.addActionListener(listenerEG);
-		
+
 		ActionListener listenerSCOP = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -426,7 +431,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		};
 		menuItemAddModuleAudioScope.addActionListener(listenerSCOP);
 		buttonSCOP.addActionListener(listenerSCOP);
-		
+
 		ActionListener listenerREP = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -436,7 +441,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		};
 		menuItemAddModuleREP.addActionListener(listenerREP);
 		buttonREP.addActionListener(listenerREP);
-		
+
 		ActionListener listenerMIX = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -446,7 +451,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		};
 		menuItemAddModuleMIX.addActionListener(listenerMIX);
 		buttonMIX.addActionListener(listenerMIX);
-		
+
 		menuItemDoc.addActionListener(new ActionListener() {
 
 			@Override
@@ -467,13 +472,14 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		buttonPlayPause.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(isPlaying){
-					if (toolbarPauseCommand != null){
+				if (isPlaying) {
+					if (toolbarPauseCommand != null) {
 						toolbarPauseCommand.execute();
 						Image img;
 						try {
 							img = ImageIO.read(new File(iconFiles[0]));
-							img = img.getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+							img = img.getScaledInstance(25, 25,
+									Image.SCALE_DEFAULT);
 							buttonPlayPause.setIcon(new ImageIcon(img));
 						} catch (IOException e1) {
 							e1.printStackTrace();
@@ -481,12 +487,13 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 						isPlaying = !isPlaying;
 					}
 				} else {
-					if (toolbarPlayCommand != null){
+					if (toolbarPlayCommand != null) {
 						toolbarPlayCommand.execute();
 						Image img;
 						try {
 							img = ImageIO.read(new File(iconFiles[1]));
-							img = img.getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+							img = img.getScaledInstance(25, 25,
+									Image.SCALE_DEFAULT);
 							buttonPlayPause.setIcon(new ImageIcon(img));
 						} catch (IOException e1) {
 							e1.printStackTrace();
@@ -494,7 +501,100 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 						isPlaying = !isPlaying;
 					}
 				}
-				
+
+			}
+		});
+
+		// Toolbar colors ActionListeners
+		colorButtonBlack.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setCurrentWireColor(Color.BLACK);
+				toolbarCurrentWireColorCommand.execute();
+			}
+		});
+		colorButtonGray.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setCurrentWireColor(Color.GRAY);
+				toolbarCurrentWireColorCommand.execute();
+			}
+		});
+		colorButtonBlue.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setCurrentWireColor(Color.BLUE);
+				toolbarCurrentWireColorCommand.execute();
+			}
+		});
+		colorButtonCyan.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setCurrentWireColor(Color.CYAN);
+				toolbarCurrentWireColorCommand.execute();
+			}
+		});
+		colorButtonGreen.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setCurrentWireColor(Color.GREEN);
+				toolbarCurrentWireColorCommand.execute();
+			}
+		});
+		colorButtonMagenta.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setCurrentWireColor(Color.MAGENTA);
+				toolbarCurrentWireColorCommand.execute();
+			}
+		});
+		colorButtonOrange.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setCurrentWireColor(Color.ORANGE);
+				toolbarCurrentWireColorCommand.execute();
+			}
+		});
+		colorButtonPink.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setCurrentWireColor(Color.PINK);
+				toolbarCurrentWireColorCommand.execute();
+			}
+		});
+		colorButtonRed.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setCurrentWireColor(Color.RED);
+				toolbarCurrentWireColorCommand.execute();
+			}
+		});
+		colorButtonWhite.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setCurrentWireColor(Color.WHITE);
+				toolbarCurrentWireColorCommand.execute();
+			}
+		});
+		colorButtonYellow.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setCurrentWireColor(Color.YELLOW);
+				toolbarCurrentWireColorCommand.execute();
+			}
+		});
+
+		colorChooserButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				WebColorChooserDialog colorChooser = new WebColorChooserDialog(toolBar);
+				colorChooser.setColor(CSynthesizer.getInstance().getCurrentWireColor());
+				colorChooser.setVisible(true);
+
+				if (colorChooser.getResult() == StyleConstants.OK_OPTION) {
+					setCurrentWireColor(colorChooser.getColor());
+					toolbarCurrentWireColorCommand.execute();
+				}
 			}
 		});
 	}
@@ -537,7 +637,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	public void setSaveAsSynthCommand(ICommand saveAsSynthCommand) {
 		this.saveAsSynthCommand = saveAsSynthCommand;
 	}
-	
+
 	/**
 	 * @param openSynthCommand
 	 *            the openSynthCommand to set
@@ -612,7 +712,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	public void setAddModuleVCFLPCommand(ICommand addModuleVCFLPCommand) {
 		this.addModuleVCFLPCommand = addModuleVCFLPCommand;
 	}
-	
+
 	/**
 	 * @param addModuleVCFHPCommand
 	 */
@@ -650,18 +750,25 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	}
 
 	public void setAddModuleMIXCommand(AddModuleMIXCommand addModuleMIXCommand) {
-		this.addModuleMIXCommand = addModuleMIXCommand;		
+		this.addModuleMIXCommand = addModuleMIXCommand;
 	}
-	
+
 	/**
 	 * @param setCurrentWireColor
 	 */
-	public void setCurrentWireColorCommand(ToolbarCurrentWireColorCommand currentWireColorCommand) {
+	public void setCurrentWireColorCommand(
+			ToolbarCurrentWireColorCommand currentWireColorCommand) {
 		this.toolbarCurrentWireColorCommand = currentWireColorCommand;
 	}
 
 	public Color getCurrentWireColor() {
-		return toolbarCurrentWireColor ;
+		return toolbarCurrentWireColor;
+	}
+	
+	private void setCurrentWireColor(Color color) {
+		toolbarCurrentWireColor = color;
+		colorChooserButton.setIcon(ImageUtils
+				.createColorIcon(toolbarCurrentWireColor));
 	}
 
 }
