@@ -103,7 +103,27 @@ public class PInputPort extends PPort implements IPInputPort, IPPort{
 
 	@Override
 	public void c2pConnectionAttemptFailed() {
-		// TODO Auto-generated method stub
+		new Thread(){
+			@Override
+			public void run() {
+				super.run();
+				for(int i=0 ; i<2; i++){
+					setFillColor(CONNECTION_NOT_ALLOWED_COLOR);
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					setFillColor(DEFAULT_COLOR);
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				
+			}
+		}.start();
 		
 	}
 
