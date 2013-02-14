@@ -18,6 +18,7 @@ import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.module.IPModule;
+import fr.istic.synthlab.presentation.port.PPort;
 import fr.istic.synthlab.presentation.wire.IPWire;
 import fr.istic.synthlab.presentation.wire.PWire;
 
@@ -45,19 +46,22 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 		kit.addAWTEventListener(new AWTEventListener() {
 			@Override
 			public void eventDispatched(AWTEvent event) {
-				// Gestion du currentWire
-				if (CSynthesizer.getInstance().getCurrentWire() != null) {
-					IInputPort input = CSynthesizer.getInstance().getCurrentWire().getInput();
-					IOutputPort output = CSynthesizer.getInstance().getCurrentWire().getOutput();
-
-					Point mouse = getMousePosition(true);
-					if (input == null && output != null) {
-						((ICWire) CSynthesizer.getInstance().getCurrentWire())
-								.getPresentation().setInputPoint(mouse);
-					}
-					if (output == null && input != null) {
-						((ICWire) CSynthesizer.getInstance().getCurrentWire())
-								.getPresentation().setOutputPoint(mouse);
+				if(event instanceof MouseEvent){
+					// Gestion du currentWire
+					if (CSynthesizer.getInstance().getCurrentWire() != null) {
+						IInputPort input = CSynthesizer.getInstance().getCurrentWire().getInput();
+						IOutputPort output = CSynthesizer.getInstance().getCurrentWire().getOutput();
+	
+						Point mouse = ((PSynthesizer) CSynthesizer.getInstance().getPresentation()).getMousePosition(true);
+						
+						if (input == null && output != null) {
+							((ICWire) CSynthesizer.getInstance().getCurrentWire())
+									.getPresentation().setInputPoint(mouse);
+						}
+						if (output == null && input != null) {
+							((ICWire) CSynthesizer.getInstance().getCurrentWire())
+									.getPresentation().setOutputPoint(mouse);
+						}
 					}
 				}
 			}
@@ -70,9 +74,13 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 			public void eventDispatched(AWTEvent event) {
 				if(event instanceof MouseEvent){
 					MouseEvent clickEvent = (MouseEvent) event;
-	                /** Suppression du cable avec le bouton droit ou gauche de la souris */
-					if( clickEvent.getButton() == MouseEvent.BUTTON1 || clickEvent.getButton() == MouseEvent.BUTTON3){
-						CSynthesizer.getInstance().p2cDisconnectCurrentWire();
+					
+					if(!(event.getSource() instanceof PPort)){
+						
+		                /** Suppression du cable avec le bouton droit ou gauche de la souris */
+						if( clickEvent.getButton() == MouseEvent.BUTTON1 || clickEvent.getButton() == MouseEvent.BUTTON3){
+							CSynthesizer.getInstance().p2cDisconnectCurrentWire();
+						}
 					}
 	            }
 			}

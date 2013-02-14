@@ -49,33 +49,31 @@ public class PModuleMIX extends APModule implements IPModuleMIX {
 	}
 
 	private void configView() {
-		JPanel panelInput = new JPanel();
 		JPanel panelGains = new JPanel();
-		JPanel panelOutput = new JPanel();
+		JPanel panelInputOutput = new JPanel();
 
-		panelInput.setOpaque(false);
 		panelGains.setOpaque(false);
-		panelOutput.setOpaque(false);
+		panelInputOutput.setOpaque(false);
 
 		inputPort1 = (PInputPort) ((ICInputPort) ctrl.getInput(1))
 				.getPresentation();
-		panelInput.add(inputPort1);
+		panelInputOutput.add(inputPort1);
 
 		inputPort2 = (PInputPort) ((ICInputPort) ctrl.getInput(2))
 				.getPresentation();
-		panelInput.add(inputPort2);
+		panelInputOutput.add(inputPort2);
 
 		inputPort3 = (PInputPort) ((ICInputPort) ctrl.getInput(3))
 				.getPresentation();
-		panelInput.add(inputPort3);
+		panelInputOutput.add(inputPort3);
 
 		inputPort4 = (PInputPort) ((ICInputPort) ctrl.getInput(4))
 				.getPresentation();
-		panelInput.add(inputPort4);
+		panelInputOutput.add(inputPort4);
 
 		output = (POutputPort) ((ICOutputPort) ctrl.getOutput())
 				.getPresentation();
-		panelOutput.add(output);
+		panelInputOutput.add(output);
 
 		modelGain1 = new DoubleBoundedRangeModel(IModuleMIX.PARAM_NAME_GAIN1,
 				7200, -60, 12, ctrl.getAttenuation1());
@@ -102,17 +100,16 @@ public class PModuleMIX extends APModule implements IPModuleMIX {
 		panelGains.add(gainRotary4);
 
 		this.setAutoscrolls(true);
-		super.setWidth(350);
-		super.setHeigth(330);
+		super.setWidth(330);
+		super.setHeigth(200);
 
 		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
 
 		this.addTitleBar();
-		this.addPanel(panelInput, 350, 100);
-		this.addPanel(panelGains, 350, 100);
-		this.addPanel(panelOutput, 350, 100);
+		this.addPanel(panelGains, 330, 100);
+		this.addPanel(panelInputOutput, 330, 100);
 	}
 
 	private void defineCallbacks() {

@@ -73,9 +73,9 @@ public class ReadXMLFile {
 						module = new CModuleEG();
 					} else if (eElement.getAttribute("name").startsWith("REP")){
 						module = new CModuleREP();
-					} else if (eElement.getAttribute("name").startsWith("VCFA LP24")){
+					} else if (eElement.getAttribute("name").startsWith("VCF LP24")){
 						module = new CModuleVCF_LP();
-					} else if (eElement.getAttribute("name").startsWith("VCFA HP24")){
+					} else if (eElement.getAttribute("name").startsWith("VCF HP24")){
 						module = new CModuleVCF_HP();
 					} else if (eElement.getAttribute("name").startsWith("AudioScope")){
 						module = new CModuleAudioScope();

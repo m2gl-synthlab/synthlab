@@ -45,11 +45,9 @@ public class PModuleEG extends APModule implements IPModuleEG {
 	private void configView() {
 		JPanel panelRotary = new JPanel();
 		JPanel panelPort = new JPanel();
-		JPanel panelOutput = new JPanel();
 
 		panelRotary.setOpaque(false);
 		panelPort.setOpaque(false);
-		panelOutput.setOpaque(false);
 	
 		attackModel = new ExponentialRangeModel(IModuleEG.PARAM_NAME_ATTACK, 500, 0, 5, ctrl.getAttack());
 		decayModel = new ExponentialRangeModel(IModuleEG.PARAM_NAME_DECAY, 500, 0, 5, ctrl.getDecay());
@@ -75,16 +73,16 @@ public class PModuleEG extends APModule implements IPModuleEG {
 		
 		this.setAutoscrolls(true);
 		
-		super.setWidth(350);
-		super.setHeigth(230);
+		super.setWidth(290);
+		super.setHeigth(200);
 		
 		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
 		
 		this.addTitleBar();
-		this.addPanel(panelRotary, 350, 110);
-		this.addPanel(panelPort, 350, 100);
+		this.addPanel(panelRotary, 290, 100);
+		this.addPanel(panelPort, 290, 60);
 		
 	}
 	

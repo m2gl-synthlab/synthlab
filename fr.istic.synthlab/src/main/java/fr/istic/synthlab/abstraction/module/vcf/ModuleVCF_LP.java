@@ -18,7 +18,7 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleVCF_LP extends AModule implements IModuleVCF, Observer<Port> {
 
-	private static final String MODULE_NAME = "VCFA LP24";
+	private static final String MODULE_NAME = "VCF LP24";
 	private static final String IN_NAME = "Input";
 	private static final String IN_MOD_FREQ_NAME = "FM";
 	private static final String OUT_NAME = "Output";
