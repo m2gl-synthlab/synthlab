@@ -51,10 +51,10 @@ public class ModuleMIX extends AModule implements IModuleMIX {
 		this.in4 = PACFactory.getFactory().newInputPort(this, IN4_NAME,
 				attenuator4.input);
 
-		this.setAttenuation1(0);
-		this.setAttenuation2(0);
-		this.setAttenuation3(0);
-		this.setAttenuation4(0);
+		this.setAttenuation1(-4);
+		this.setAttenuation2(-4);
+		this.setAttenuation3(-4);
+		this.setAttenuation4(-4);
 
 		this.attenuator1.output.connect(mixer.getInput1());
 		this.attenuator2.output.connect(mixer.getInput2());
