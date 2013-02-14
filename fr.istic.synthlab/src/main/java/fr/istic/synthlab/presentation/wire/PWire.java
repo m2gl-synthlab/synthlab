@@ -89,7 +89,7 @@ public class PWire extends JPanel implements IPWire {
 		
 		// Si le port de sortie est branché
 		if (outputPort != null) {
-			posOutput = new Point(outputPort.getX() + (POutputPort.width / 2), outputPort.getY()+ (POutputPort.height / 2));
+			posOutput = new Point(outputPort.getX() + (POutputPort.WIDTH / 2), outputPort.getY()+ (POutputPort.HEIGHT / 2));
 
 			Component c2 = outputPort;
 			while (!(c2.getParent() instanceof PSynthesizer)) {
@@ -101,7 +101,7 @@ public class PWire extends JPanel implements IPWire {
 		
 		// Si le port d'entrée est branché
 		if (inputPort != null) {
-			posInput = new Point(inputPort.getX() + (PInputPort.width / 2), inputPort.getY() + + (PInputPort.height / 2));
+			posInput = new Point(inputPort.getX() + (PInputPort.WIDTH / 2), inputPort.getY() + + (PInputPort.HEIGHT / 2));
 
 			Component c = inputPort;
 			while (!(c.getParent() instanceof PSynthesizer)) {
@@ -176,7 +176,7 @@ public class PWire extends JPanel implements IPWire {
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		// Calcul d'un point centrale
-		Point mid = new Point(w / 2, h + w/2); // TODO : baissé Y en fonction de la taille du cable
+		Point mid = new Point(w / 2, h + w/2);
 		
 		// Création de la courbe
 		QuadCurve2D curve = new QuadCurve2D.Double(posInput.getX() - getX(), posInput.getY() - getY(), mid.getX(), mid.getY() , posOutput.getX() - getX(), posOutput.getY() - getY());

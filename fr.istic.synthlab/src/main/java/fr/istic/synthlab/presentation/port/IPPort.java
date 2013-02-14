@@ -1,5 +1,7 @@
 package fr.istic.synthlab.presentation.port;
 
+import java.awt.Color;
+
 import fr.istic.synthlab.controller.port.ICPort;
 
 /**
@@ -39,4 +41,27 @@ public interface IPPort {
 	 */
 	public void c2pConnectionAttemptFailed();
 
+	
+	
+	/**
+	 * Set the stroke color of the port
+	 * @param c
+	 */
+	public void setStrokeColor(Color c);
+	/**
+	 * Return the stroke color of the port
+	 * @return color
+	 */
+	public Color getStrokeColor();
+	/**
+	 * Set the port fill color
+	 * @param c
+	 */
+	public void setFillColor(Color c);
+	/**
+	 * return the port fill color
+	 * @return color
+	 */
+	public Color getFillColor();
+	
 }
