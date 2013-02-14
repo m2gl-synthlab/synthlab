@@ -22,18 +22,26 @@ public class CModuleVCO extends ModuleVCO implements ICModuleVCO {
 		return pres;
 	}
 
-	@Override
-	public void p2cOctaveChanged(int octave) {
+	private void changeOctave(int octave) {
 		setOctave(octave);
 		pres.c2pSetOctaveValue(getOctave());
 		pres.c2pSetFrequencyValue(getFrequency());
 	}
 
-	@Override
-	public void p2cToneChanged(double tone) {
+	private void changeTone(double tone) {
 		setTone(tone);
 		pres.c2pSetToneValue(getTone());
 		pres.c2pSetFrequencyValue(getFrequency());
+	}
+	
+	@Override
+	public void p2cOctaveChanged(int octave) {
+		changeOctave(octave);
+	}
+
+	@Override
+	public void p2cToneChanged(double tone) {
+		changeTone(tone);
 	}
 
 	@Override
@@ -46,11 +54,9 @@ public class CModuleVCO extends ModuleVCO implements ICModuleVCO {
 	@Override
 	public void setParameter(String key, Double value) {
 		if (key.equals("octave")) {
-			p2cOctaveChanged(value.intValue());
+			changeOctave(value.intValue());
 		} else if (key.equals("tone")) {
-			p2cToneChanged(value);
-		} else if (key.equals("frequency")) {
-			// TODO remove this parameter
+			changeTone(value);
 		}
 
 	}

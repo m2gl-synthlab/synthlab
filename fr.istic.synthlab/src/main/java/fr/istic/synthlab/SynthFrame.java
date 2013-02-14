@@ -24,7 +24,6 @@ import javax.swing.KeyStroke;
 
 import com.alee.extended.statusbar.WebMemoryBar;
 import com.alee.extended.statusbar.WebStatusBar;
-import com.alee.extended.statusbar.WebStatusLabel;
 import com.alee.laf.StyleConstants;
 import com.alee.laf.button.WebButton;
 import com.alee.laf.colorchooser.WebColorChooserDialog;

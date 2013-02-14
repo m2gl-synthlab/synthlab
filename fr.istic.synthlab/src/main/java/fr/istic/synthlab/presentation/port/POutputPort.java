@@ -1,48 +1,47 @@
 package fr.istic.synthlab.presentation.port;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import fr.istic.synthlab.controller.module.ICModule;
 import fr.istic.synthlab.controller.port.ICOutputPort;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.util.SimpleMouseListener;
 
-public class POutputPort extends JPanel implements IPOutputPort {
+public class POutputPort extends PPort implements IPOutputPort {
 
 	private static final long serialVersionUID = 4664436294243269232L;
-	private static final int CLICK_STATE_DEFAULT = 0;
-	private static final int CLICK_STATE_ALLOWED = 1;
-	private static final int CLICK_STATE_NOT_ALLOWED = 2;
 	
-	public static int width = 80;
-	public static int height = 80;
-
+	public static final Color DEFAULT_COLOR = new Color(81,107,163);
+	public static final Color DEFAULT_STROKE_COLOR = Color.BLACK;
+	public static final Color CONNECTION_ALLOWED_COLOR = new Color(0,160,0);
+	public static final Color CONNECTION_NOT_ALLOWED_COLOR = new Color(160,0,0);
+	
 	private ICOutputPort ctrl;
 
-	private int clickState; 
 	public POutputPort(ICOutputPort control) {
+		super();
 		ctrl = control;
 		configView();
 		defineCallbacks();
+		repaint();
+		validate();
 	}
 
 	private void configView() {
 		this.setOpaque(false);
-		this.setSize(width, height);
+		this.setSize(WIDTH, HEIGHT);
 		this.setPreferredSize(this.getSize());
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
 		JLabel name = new JLabel(ctrl.getName());
 		this.add(name);
+		setFillColor(DEFAULT_COLOR);
+		setStrokeColor(DEFAULT_STROKE_COLOR);
 	}
 
 	private void defineCallbacks() {
@@ -51,13 +50,11 @@ public class POutputPort extends JPanel implements IPOutputPort {
 		this.addMouseListener(new SimpleMouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (Math.pow((e.getX() - 40), 2) + Math.pow((e.getY() - 40), 2) < Math
-						.pow(15, 2)) {
+				if (Math.pow((e.getX() - (WIDTH)/2), 2) + Math.pow((e.getY() -(HEIGHT)/2), 2) < Math.pow(15, 2)) {
 					ctrl.p2cMouseClicked();
 				}else{
-					clickState=CLICK_STATE_DEFAULT;
-					repaint();
-					validate();
+					setFillColor(DEFAULT_COLOR);
+					setStrokeColor(DEFAULT_STROKE_COLOR);
 				}
 			}
 		});
@@ -69,12 +66,11 @@ public class POutputPort extends JPanel implements IPOutputPort {
 				// Sert pour le déplacement du cable au dessus des elements
 				((APModule) ((ICModule) getControl().getModule())
 						.getPresentation()).dispatchEvent(e);
-				if (Math.pow((e.getX() - 40), 2) + Math.pow((e.getY() - 40), 2) < Math.pow(10, 2)) {
+				if (Math.pow((e.getX() - (WIDTH)/2), 2) + Math.pow((e.getY() - (HEIGHT)/2), 2) < Math.pow(10, 2)) {
 					ctrl.p2cMouseHover();
 				} else {
-					clickState=CLICK_STATE_DEFAULT;
-					repaint();
-					validate();
+					setFillColor(DEFAULT_COLOR);
+					setStrokeColor(DEFAULT_STROKE_COLOR);
 				}
 			}
 			@Override
@@ -87,24 +83,6 @@ public class POutputPort extends JPanel implements IPOutputPort {
 		return ctrl;
 	}
 
-	@Override
-	public void paint(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setStroke(new BasicStroke(2));
-		g2d.drawOval(40 - 10, 40 - 10, 20, 20);
-		
-		if(clickState == CLICK_STATE_ALLOWED){
-			g2d.setColor(Color.GREEN);
-		} else if(clickState == CLICK_STATE_NOT_ALLOWED){
-			g2d.setColor(Color.RED);
-		} else {
-			g2d.setColor(new Color(184, 0, 18));
-		}
-		
-		g2d.fillOval(40 - 9, 40 - 9, 18, 18);
-
-		super.paint(g2d);
-	}
 	
 	@Override
 	public void c2pNameChanged() {
@@ -114,14 +92,14 @@ public class POutputPort extends JPanel implements IPOutputPort {
 
 	@Override
 	public void c2pConnectionAllowed() {
-		clickState = CLICK_STATE_ALLOWED;
+		this.setStrokeColor(CONNECTION_ALLOWED_COLOR);
 		repaint();
 		validate();
 	}
 
 	@Override
 	public void c2pConnectionNotAllowed() {
-		clickState = CLICK_STATE_NOT_ALLOWED;
+		this.setStrokeColor(CONNECTION_NOT_ALLOWED_COLOR);
 		repaint();
 		validate();
 	}

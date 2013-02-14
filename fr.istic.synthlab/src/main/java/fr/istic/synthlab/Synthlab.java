@@ -1,4 +1,3 @@
-
 package fr.istic.synthlab;
 
 import java.awt.Image;
@@ -36,43 +35,45 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
 
 public class Synthlab {
-	@SuppressWarnings("restriction")
 	public static void main(String[] args) {
 		// Set the look and feel
 		WebLookAndFeel.install();
-		
+
 		// Set the icon application
 		try {
 			Image imageIcon = ImageIO.read(new File("res/logo.png"));
 			if (System.getProperty("os.name").contains("Mac")) {
 				com.apple.eawt.Application.getApplication().setDockIconImage(imageIcon);
 			}
-		} catch (IOException e2) {e2.printStackTrace();}
-		
-		
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}
+
 		// Initialize factories
 		PACFactory.setAFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
-		
+
 		// Create the application
 		SynthApp app = new SynthApp();
-		
+
 		// Create the main frame
 		SynthFrame frame = new SynthFrame();
 		frame.setTitle("SynthlabG2 - untitled");
 		try {
 			Image imageIcon = ImageIO.read(new File("res/logo.png"));
 			frame.setIconImage(imageIcon);
-		} catch (IOException e2) {e2.printStackTrace();}
-		
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}
+
 		// Configure the application
 		app.setDisplaySynthCommand(new DisplayCommand(frame));
 		app.setUndisplaySynthCommand(new UndisplayCommand(frame));
 
 		// Create a default synthesizer
 		app.newSynth();
-  
+
 		// Configure the frame
 		frame.setNewSynthCommand(new NewSynthCommand(app, frame));
 		frame.setOpenSynthCommand(new OpenSynthCommand(app, frame));
@@ -84,7 +85,7 @@ public class Synthlab {
 		frame.setToolbarPlayCommand(new ToolbarPlayCommand(app.getSynthesizer().getPresentation()));
 		frame.setToolbarPauseCommand(new ToolbarPauseCommand(app.getSynthesizer().getPresentation()));
 		frame.setCurrentWireColorCommand(new ToolbarCurrentWireColorCommand(frame));
-		
+
 		frame.setAddModuleOUTCommand(new AddModuleOUTCommand());
 		frame.setAddModuleVCOCommand(new AddModuleVCOCommand());
 		frame.setAddModuleVCACommand(new AddModuleVCACommand());
@@ -94,16 +95,16 @@ public class Synthlab {
 		frame.setAddModuleAudioScopeCommand(new AddModuleAudioScopeCommand());
 		frame.setAddModuleREPCommand(new AddModuleREPCommand());
 		frame.setAddModuleMIXCommand(new AddModuleMIXCommand());
-		
+
 		// Start the application
 		app.startSynth();
-		
+
 		// Chargement du fichier ouvert
 		String filename = null;
-		if(args.length > 0){
+		if (args.length > 0) {
 			filename = args[0];
 			app.loadFromXML("", filename);
 		}
-		
+
 	}
 }
