@@ -9,7 +9,7 @@ import fr.istic.synthlab.abstraction.port.IInputPort;
 public interface IModuleOUT extends IModule {
 
 	/**
-	 * Start/Stop sending sound to the sound card. (
+	 * Start/Stop sending sound to the sound card
 	 */
 	public void setMute(boolean mute);
 

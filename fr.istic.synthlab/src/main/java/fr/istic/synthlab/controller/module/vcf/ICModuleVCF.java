@@ -8,14 +8,14 @@ import fr.istic.synthlab.presentation.module.vcf.IPModuleVCF;
 public interface ICModuleVCF extends ICModule, IModuleVCF {
 
 	/**
-	 * Called by the presentation when the cut frequency param change
+	 * Called by the presentation when the cut frequency parameter change
 	 * 
 	 * @param cut frequency
 	 */
 	public void p2cCutFrequencyChanged(int cutFrequency);
 
 	/**
-	 * Called by the presentation when the resonance param changed
+	 * Called by the presentation when the resonance parameter changed
 	 * 
 	 * @param resonance
 	 */

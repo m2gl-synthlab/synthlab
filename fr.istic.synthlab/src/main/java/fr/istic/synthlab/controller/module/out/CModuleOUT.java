@@ -22,15 +22,15 @@ public class CModuleOUT extends ModuleOUT implements ICModuleOUT {
 	public IPModuleOUT getPresentation() {
 		return this.pres;
 	}
-	
-	@Override
-	public void p2cMute() {
-		setMute(!isMute());
-	}
-	
+
 	private void changeGain(double gain) {
 		setAttenuation(gain);
 		pres.c2pSetGainValue(getAttenuation());
+	}
+
+	@Override
+	public void p2cMute() {
+		setMute(!isMute());
 	}
 
 	@Override
@@ -40,15 +40,19 @@ public class CModuleOUT extends ModuleOUT implements ICModuleOUT {
 
 	@Override
 	public void p2cClosing() {
-		for(IWire w : this.getWires()){
+		for (IWire w : this.getWires()) {
 			w.disconnect();
 		}
 	}
 
 	@Override
-	public void setParameter(String key, Double value){
-		if(key.equals("attenuation")){
+	public void setParameter(String key, Double value) {
+		if (key.equals("attenuation")) {
 			changeGain(value);
-		} 
+		} else if (key.equals("mute")) {
+			if (value == 1) {
+				pres.c2pMute(true);
+			}
+		}
 	}
 }

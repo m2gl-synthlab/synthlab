@@ -28,14 +28,14 @@ public interface IModuleVCF extends IModule {
 	public int getCutFrequency();
 
 	/**
-	 * Set the resonance value (between 0 and 1)
+	 * Set the resonance value (between 1 and 50)
 	 * 
 	 * @param Resonance value
 	 */
 	public void setResonance(double value);
 
 	/**
-	 * Return the resonance value (between 0 and 1)
+	 * Return the resonance value (between 1 and 50)
 	 * 
 	 * @param Resonance value
 	 */

@@ -17,8 +17,8 @@ import fr.istic.synthlab.abstraction.module.rep.ModuleREP;
 import fr.istic.synthlab.abstraction.module.vca.IModuleVCA;
 import fr.istic.synthlab.abstraction.module.vca.ModuleVCA;
 import fr.istic.synthlab.abstraction.module.vcf.IModuleVCF;
-import fr.istic.synthlab.abstraction.module.vcf.ModuleVCFA_HP;
-import fr.istic.synthlab.abstraction.module.vcf.ModuleVCFA_LP;
+import fr.istic.synthlab.abstraction.module.vcf.ModuleVCF_HP;
+import fr.istic.synthlab.abstraction.module.vcf.ModuleVCF_LP;
 import fr.istic.synthlab.abstraction.module.vco.IModuleVCO;
 import fr.istic.synthlab.abstraction.module.vco.ModuleVCO;
 import fr.istic.synthlab.abstraction.port.IInputPort;
@@ -66,13 +66,13 @@ public class AFactory implements IFactory {
 
 	@Override
 	public IModuleVCF newVCFA_LP() {
-		IModuleVCF module = new ModuleVCFA_LP();
+		IModuleVCF module = new ModuleVCF_LP();
 		return module;
 	}
 	
 	@Override
 	public IModuleVCF newVCFA_HP() {
-		IModuleVCF module = new ModuleVCFA_HP();
+		IModuleVCF module = new ModuleVCF_HP();
 		return module;
 	}
 
