@@ -1,4 +1,5 @@
 package fr.istic.synthlab.util;
+
 import java.awt.Component;
 
 import javax.swing.JPanel;
@@ -28,214 +29,175 @@ import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
 
-
 public class SaveLoadTest extends TestCase {
-	
+
 	ISynthApp s;
 	ICSynthesizer synth;
 	ISynthFrame sf;
-	public void setUp(){
-		
+
+	public void setUp() {
+
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 
-		s=new SynthApp();
-		synth=new CSynthesizer();
+		s = new SynthApp();
+		synth = new CSynthesizer();
 		s.setSynthesizer(synth);
-		sf=new SynthFrame();
-		
+		sf = new SynthFrame();
 
 	}
-	
-	public void testSaveAndLoadSetTone(){
-		
+
+	public void testSaveAndLoadSetTone() {
+
 		s.setSynthesizer(synth);
 		s.setDisplaySynthCommand(new DisplayCommand(sf));
 		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
-		ICModuleVCO moduleVCO=new CModuleVCO();
-		ICModuleVCA moduleVCA=new CModuleVCA();
-		ICModuleEG moduleEG=new CModuleEG();
+		ICModuleVCO moduleVCO = new CModuleVCO();
+		ICModuleVCA moduleVCA = new CModuleVCA();
+		ICModuleEG moduleEG = new CModuleEG();
 
 		synth.add(moduleVCO);
 		synth.add(moduleVCA);
 		synth.add(moduleEG);
-		
+
 		moduleVCO.setTone(0.4);
 
-		
-		
-
 		s.saveToXML("", "test.synthlab");
 
-		
 		s.setSynthesizer(new CSynthesizer());
 		s.loadFromXML("", "test.synthlab");
-		assertEquals(3,s.getSynthesizer().getModules().size());
-		assertEquals("CModuleVCO",s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
-		assertEquals("CModuleVCA",s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
-		assertEquals("CModuleEG",s.getSynthesizer().getModules().get(2).getClass().getSimpleName());
-		
-		assertEquals(168.0,((CModuleVCO) s.getSynthesizer().getModules().get(0)).getFrequency());
+		assertEquals(3, s.getSynthesizer().getModules().size());
+		assertEquals("CModuleVCO", s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
+		assertEquals("CModuleVCA", s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
+		assertEquals("CModuleEG", s.getSynthesizer().getModules().get(2).getClass().getSimpleName());
 
+		assertEquals(168.0, ((CModuleVCO) s.getSynthesizer().getModules().get(0)).getFrequency());
 
-
-		
-
-		
 	}
-	
-	
-	
-public void testSaveAndLoadSetAttenuation(){
-		
+
+	public void testSaveAndLoadSetAttenuation() {
+
 		s.setSynthesizer(synth);
 		s.setDisplaySynthCommand(new DisplayCommand(sf));
 		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
-		ICModuleVCO moduleVCO=new CModuleVCO();
-		ICModuleVCA moduleVCA=new CModuleVCA();
-		ICModuleEG moduleEG=new CModuleEG();
+		ICModuleVCO moduleVCO = new CModuleVCO();
+		ICModuleVCA moduleVCA = new CModuleVCA();
+		ICModuleEG moduleEG = new CModuleEG();
 
 		synth.add(moduleVCO);
 		synth.add(moduleVCA);
 		synth.add(moduleEG);
-		
+
 		moduleVCA.setAttenuation(7.0);
 
-		
-		
-
 		s.saveToXML("", "test.synthlab");
-		
+
 		s.setSynthesizer(new CSynthesizer());
 		s.loadFromXML("", "test.synthlab");
-		assertEquals(3,s.getSynthesizer().getModules().size());
-		assertEquals("CModuleVCO",s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
-		assertEquals("CModuleVCA",s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
-		assertEquals("CModuleEG",s.getSynthesizer().getModules().get(2).getClass().getSimpleName());
+		assertEquals(3, s.getSynthesizer().getModules().size());
+		assertEquals("CModuleVCO", s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
+		assertEquals("CModuleVCA", s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
+		assertEquals("CModuleEG", s.getSynthesizer().getModules().get(2).getClass().getSimpleName());
 
-		assertEquals(7.0,((CModuleVCA) s.getSynthesizer().getModules().get(1)).getAttenuation());
+		assertEquals(7.0, ((CModuleVCA) s.getSynthesizer().getModules().get(1)).getAttenuation());
 
-
-		
-
-		
 	}
 
-public void testSaveAndLoadWire(){
-	
-	s.setSynthesizer(synth);
-	s.setDisplaySynthCommand(new DisplayCommand(sf));
-	s.setUndisplaySynthCommand(new UndisplayCommand(sf));
-	ICModuleVCO moduleVCO=new CModuleVCO();
-	ICModuleVCA moduleVCA=new CModuleVCA();
-	ICModuleEG moduleEG=new CModuleEG();
+	public void testSaveAndLoadWire() {
 
-	synth.add(moduleVCO);
-	synth.add(moduleVCA);
-	synth.add(moduleEG);
-	ICWire wire=new CWire();
-	JPanel panelToAdd=new JPanel();
-	panelToAdd.add((Component) wire.getPresentation());
-	
-	
-	try {
-		wire.connect(moduleVCO.getOutputSquare());
-	
-	} catch (PortAlreadyInUseException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (BadConnectionException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	try {
-		wire.connect(moduleVCA.getInput());
-	} catch (PortAlreadyInUseException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (BadConnectionException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+		s.setSynthesizer(synth);
+		s.setDisplaySynthCommand(new DisplayCommand(sf));
+		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
+		ICModuleVCO moduleVCO = new CModuleVCO();
+		ICModuleVCA moduleVCA = new CModuleVCA();
+		ICModuleEG moduleEG = new CModuleEG();
 
-	
-	
+		synth.add(moduleVCO);
+		synth.add(moduleVCA);
+		synth.add(moduleEG);
+		ICWire wire = new CWire();
+		JPanel panelToAdd = new JPanel();
+		panelToAdd.add((Component) wire.getPresentation());
 
-	s.saveToXML("", "test.synthlab");
-	
-	s.setSynthesizer(new CSynthesizer());
-	s.loadFromXML("", "test.synthlab");
-	assertEquals(3,s.getSynthesizer().getModules().size());
-	assertEquals("CModuleVCO",s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
-	assertEquals("CModuleVCA",s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
-	assertEquals("CModuleEG",s.getSynthesizer().getModules().get(2).getClass().getSimpleName());
-	assertTrue(((CModuleVCA) s.getSynthesizer().getModules().get(1)).getInput().isInUse());
-	assertTrue(((CModuleVCO) s.getSynthesizer().getModules().get(0)).getOutputSquare().isInUse());
+		try {
+			wire.connect(moduleVCO.getOutputSquare());
 
+		} catch (PortAlreadyInUseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BadConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			wire.connect(moduleVCA.getInput());
+		} catch (PortAlreadyInUseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BadConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
+		s.saveToXML("", "test.synthlab");
 
+		s.setSynthesizer(new CSynthesizer());
+		s.loadFromXML("", "test.synthlab");
+		assertEquals(3, s.getSynthesizer().getModules().size());
+		assertEquals("CModuleVCO", s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
+		assertEquals("CModuleVCA", s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
+		assertEquals("CModuleEG", s.getSynthesizer().getModules().get(2).getClass().getSimpleName());
+		assertTrue(((CModuleVCA) s.getSynthesizer().getModules().get(1)).getInput().isInUse());
+		assertTrue(((CModuleVCO) s.getSynthesizer().getModules().get(0)).getOutputSquare().isInUse());
 
-	
-
-	
-}
-
-public void testSaveAndLoadWireVCF(){
-	
-	s.setSynthesizer(synth);
-	s.setDisplaySynthCommand(new DisplayCommand(sf));
-	s.setUndisplaySynthCommand(new UndisplayCommand(sf));
-	ICModuleVCF moduleVCF=new CModuleVCF_LP();
-	ICModuleVCA moduleVCA=new CModuleVCA();
-	ICModuleEG moduleEG=new CModuleEG();
-
-	synth.add(moduleVCF);
-	synth.add(moduleVCA);
-	synth.add(moduleEG);
-	ICWire wire=new CWire();
-	JPanel panelToAdd=new JPanel();
-	panelToAdd.add((Component) wire.getPresentation());
-	
-	
-	try {
-		wire.connect(moduleVCF.getOutput());
-	
-	} catch (PortAlreadyInUseException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (BadConnectionException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	try {
-		wire.connect(moduleVCA.getInput());
-	} catch (PortAlreadyInUseException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (BadConnectionException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
 	}
 
-	
-	
+	public void testSaveAndLoadWireVCF() {
 
-	s.saveToXML("", "test.synthlab");
-	
-	s.setSynthesizer(new CSynthesizer());
-	s.loadFromXML("", "test.synthlab");
-	assertEquals(3,s.getSynthesizer().getModules().size());
-	assertEquals("CModuleVCFA_LP",s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
-	assertEquals("CModuleVCA",s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
-	assertEquals("CModuleEG",s.getSynthesizer().getModules().get(2).getClass().getSimpleName());
-	assertTrue(((CModuleVCA) s.getSynthesizer().getModules().get(1)).getInput().isInUse());
-	assertTrue(((CModuleVCF_LP) s.getSynthesizer().getModules().get(0)).getOutput().isInUse());
+		s.setSynthesizer(synth);
+		s.setDisplaySynthCommand(new DisplayCommand(sf));
+		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
+		ICModuleVCF moduleVCF = new CModuleVCF_LP();
+		ICModuleVCA moduleVCA = new CModuleVCA();
+		ICModuleEG moduleEG = new CModuleEG();
 
+		synth.add(moduleVCF);
+		synth.add(moduleVCA);
+		synth.add(moduleEG);
+		ICWire wire = new CWire();
+		JPanel panelToAdd = new JPanel();
+		panelToAdd.add((Component) wire.getPresentation());
 
+		try {
+			wire.connect(moduleVCF.getOutput());
 
+		} catch (PortAlreadyInUseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BadConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			wire.connect(moduleVCA.getInput());
+		} catch (PortAlreadyInUseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BadConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-	
+		s.saveToXML("", "test.synthlab");
 
-	
-}
+		s.setSynthesizer(new CSynthesizer());
+		s.loadFromXML("", "test.synthlab");
+		assertEquals(3, s.getSynthesizer().getModules().size());
+		assertEquals("CModuleVCFA_LP", s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
+		assertEquals("CModuleVCA", s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
+		assertEquals("CModuleEG", s.getSynthesizer().getModules().get(2).getClass().getSimpleName());
+		assertTrue(((CModuleVCA) s.getSynthesizer().getModules().get(1)).getInput().isInUse());
+		assertTrue(((CModuleVCF_LP) s.getSynthesizer().getModules().get(0)).getOutput().isInUse());
+
+	}
 }

@@ -33,7 +33,7 @@ public class CModuleVCO extends ModuleVCO implements ICModuleVCO {
 		pres.c2pSetToneValue(getTone());
 		pres.c2pSetFrequencyValue(getFrequency());
 	}
-	
+
 	@Override
 	public void p2cOctaveChanged(int octave) {
 		changeOctave(octave);

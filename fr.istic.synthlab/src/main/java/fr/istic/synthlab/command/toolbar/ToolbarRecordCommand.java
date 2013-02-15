@@ -6,7 +6,7 @@ public class ToolbarRecordCommand implements ICommand {
 
 	@Override
 	public void execute() {
-		System.out.println("Command " + this.getClass().getSimpleName()	+ " not implemented...");
+		System.out.println("Command " + this.getClass().getSimpleName() + " not implemented...");
 	}
 
 }

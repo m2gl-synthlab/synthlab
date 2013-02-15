@@ -63,7 +63,7 @@ public class CFactory implements IFactory {
 		IModule module = new CModuleVCF_LP();
 		return module;
 	}
-	
+
 	@Override
 	public IModule newVCFA_HP() {
 		IModule module = new CModuleVCF_HP();

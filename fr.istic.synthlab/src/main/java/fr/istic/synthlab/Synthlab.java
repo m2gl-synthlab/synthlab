@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JScrollPane;
 
 import com.alee.laf.WebLookAndFeel;
 
@@ -96,9 +95,6 @@ public class Synthlab {
 		frame.setAddModuleAudioScopeCommand(new AddModuleAudioScopeCommand());
 		frame.setAddModuleREPCommand(new AddModuleREPCommand());
 		frame.setAddModuleMIXCommand(new AddModuleMIXCommand());
-
-		
-		JScrollPane scrolSynth = new JScrollPane(frame);
 		
 		// Start the application
 		app.startSynth();

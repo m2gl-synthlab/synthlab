@@ -5,18 +5,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.alee.extended.button.WebSwitch;
 import com.jsyn.swing.DoubleBoundedRangeModel;
-import com.jsyn.swing.RotaryTextController;
 
+import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
 import fr.istic.synthlab.controller.module.out.ICModuleOUT;
 import fr.istic.synthlab.controller.port.ICInputPort;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.port.PInputPort;
+import fr.istic.synthlab.presentation.util.RotaryTextController;
 
 /**
  * Presentation for a OUT module
@@ -49,10 +49,8 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		JPanel panelMute = new JPanel();
 		panelMute.setOpaque(false);
 
-		model = new DoubleBoundedRangeModel("model", 7200, -60, 12,
-				ctrl.getAttenuation());
+		model = new DoubleBoundedRangeModel(IModuleOUT.PARAM_NAME_GAIN, 7200, -60, 12, ctrl.getAttenuation());
 		RotaryTextController gainRotary = new RotaryTextController(model, 1);
-		gainRotary.setBorder(new TitledBorder("Gain"));
 		panelGain.add(gainRotary);
 
 		muteSwitch = new WebSwitch();
@@ -60,22 +58,21 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		muteSwitch.setSelected(!ctrl.isMute());
 		panelMute.add(muteSwitch);
 
-		inputPort = (PInputPort) ((ICInputPort) ctrl.getInput())
-				.getPresentation();
+		inputPort = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
 		panelInput.add(inputPort);
 
 		this.setAutoscrolls(true);
-		super.setWidth(150);
-		super.setHeigth(270);
+		super.setWidth(100);
+		super.setHeigth(220);
 
 		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
 
 		this.addTitleBar();
-		this.addPanel(panelGain, 150, 100);
-		this.addPanel(panelInput, 150, 100);
-		this.addPanel(panelMute, 150, 100);
+		this.addPanel(panelGain, 100, 100);
+		this.addPanel(panelMute, 100, 30);
+		this.addPanel(panelInput, 100, 60);
 
 	}
 
@@ -90,7 +87,7 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		});
 
 		muteSwitch.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ctrl.p2cMute();

@@ -18,8 +18,7 @@ public class SaveSynthCommand implements ICommand {
 	public SaveSynthCommand(ISynthApp synthApp, ISynthFrame synthFrame) {
 		this.synthApp = synthApp;
 		this.synthFrame = synthFrame;
-		this.chooser = new FileDialog((SynthFrame) this.synthFrame, "Save as",
-				FileDialog.SAVE);
+		this.chooser = new FileDialog((SynthFrame) this.synthFrame, "Save as", FileDialog.SAVE);
 	}
 
 	@Override

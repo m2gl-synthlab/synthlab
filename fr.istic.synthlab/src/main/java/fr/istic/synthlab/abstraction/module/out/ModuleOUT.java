@@ -20,6 +20,8 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	private static final String MODULE_NAME = "OUT";
 	private static final String IN_NAME = "In";
+	
+	protected static final boolean DEFAULT_STATE_MUTE = true;
 
 	private ChannelOut out;
 	private AttenuationFilter attenuator;
@@ -31,13 +33,13 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 		this.out = new ChannelOut();
 		this.attenuator = new AttenuationFilter();
 
-		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME,
-				attenuator.input);
+		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME, attenuator.input);
 		this.setAttenuation(0);
 
 		attenuator.output.connect(out.input);
-		
-		setMute(false);
+
+		// Set the default state
+		setMute(DEFAULT_STATE_MUTE);
 
 		addPort(in);
 	}
@@ -79,7 +81,7 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	@Override
 	public void setMute(boolean mute) {
-		getParameters().put("mute", mute?1.0:0.0);
+		getParameters().put("mute", mute ? 1.0 : 0.0);
 		if (isMute()) {
 			try {
 				stop();

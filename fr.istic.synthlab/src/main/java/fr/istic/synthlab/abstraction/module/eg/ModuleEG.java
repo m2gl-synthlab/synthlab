@@ -31,7 +31,7 @@ public class ModuleEG extends AModule implements IModuleEG {
 
 		adsr = new EnvelopeDAHDSR();
 
-		this.gate = PACFactory.getFactory().newInputPort(this, IN_NAME,	adsr.input);
+		this.gate = PACFactory.getFactory().newInputPort(this, IN_NAME, adsr.input);
 		this.out = PACFactory.getFactory().newOutputPort(this, OUT_NAME, adsr.output);
 
 		addPort(gate);
@@ -113,11 +113,11 @@ public class ModuleEG extends AModule implements IModuleEG {
 	public List<IWire> getWires() {
 		List<IWire> wires = new ArrayList<IWire>();
 		if (gate.getWire() != null) {
-			if(!wires.contains(gate.getWire()))
+			if (!wires.contains(gate.getWire()))
 				wires.add(gate.getWire());
 		}
 		if (out.getWire() != null) {
-			if(!wires.contains(out.getWire()))
+			if (!wires.contains(out.getWire()))
 				wires.add(out.getWire());
 		}
 		return wires;

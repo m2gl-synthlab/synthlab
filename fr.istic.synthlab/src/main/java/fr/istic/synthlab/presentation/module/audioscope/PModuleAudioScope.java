@@ -1,9 +1,7 @@
 package fr.istic.synthlab.presentation.module.audioscope;
 
 import java.awt.Dimension;
-import java.awt.LayoutManager;
 
-import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 import com.jsyn.scope.AudioScopeModel;
@@ -25,7 +23,7 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 
 	private ICModuleAudioScope ctrl;
 	private AudioScopeModel model;
-	
+
 	private PInputPort inputPort;
 	private POutputPort outputPort;
 
@@ -40,29 +38,18 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 	}
 
 	private void configView() {
-		JPanel panelScope= new JPanel();
+		JPanel panelScope = new JPanel();
 		JPanel panelPort = new JPanel();
-		
+
 		panelScope.setOpaque(false);
 		panelPort.setOpaque(false);
 
+		
 		AudioScopeView scope = new AudioScopeView();
 		model = ctrl.getModel();
 		scope.setModel(model);
 		scope.setControlsVisible(true);
 		panelScope.add(scope);
-		
-		JCheckBox auto = new JCheckBox("Autooooo");
-		//auto.addActionListener(new StateListener());
-		auto.setSelected(true);
-		
-		LayoutManager layoutOfScope = panelScope.getLayout();
-		panelScope.setLayout(null);
-		auto.setBounds(15, 15, 30, 30);
-		panelScope.add(auto);
-		panelScope.setLayout(layoutOfScope);
-		
-		
 
 		inputPort = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
 		outputPort = (POutputPort) ((ICOutputPort) ctrl.getOutput()).getPresentation();
@@ -70,23 +57,22 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 		panelPort.add(outputPort);
 
 		this.setAutoscrolls(true);
-		
+
 		super.setWidth(630);
-		super.setHeigth(450);
-		
+		super.setHeigth(360);
+
 		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
-		
+
 		this.addTitleBar();
-		this.addPanel(panelScope, 630, 300);
-		this.addPanel(panelPort, 630, 120);
+		this.addPanel(panelScope, 630, 260);
+		this.addPanel(panelPort, 630, 60);
 
 	}
 
 	private void defineCallbacks() {
 	}
-	
 
 	@Override
 	public ICModuleAudioScope getControl() {

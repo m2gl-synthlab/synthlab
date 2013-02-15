@@ -12,7 +12,7 @@ import fr.istic.synthlab.abstraction.port.IOutputPort;
 public interface IModuleAudioScope extends IModule {
 
 	/**
-	 * Return the input port of the AudioScope  module
+	 * Return the input port of the AudioScope module
 	 * 
 	 * @return input
 	 */
@@ -24,10 +24,10 @@ public interface IModuleAudioScope extends IModule {
 	 * @return output
 	 */
 	public IOutputPort getOutput();
-	
 
 	/**
 	 * Return the AudioScope model
+	 * 
 	 * @return
 	 */
 	public AudioScopeModel getModel();

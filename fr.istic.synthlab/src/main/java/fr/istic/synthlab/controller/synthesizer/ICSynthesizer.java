@@ -27,12 +27,14 @@ public interface ICSynthesizer extends ISynthesizer {
 
 	/**
 	 * The presentation ask to add a module
+	 * 
 	 * @param module
 	 */
 	public void p2cAddModule(ICModule module);
 
 	/**
 	 * The presentation ask to remove a module
+	 * 
 	 * @param module
 	 */
 	public void p2cRemoveModule(ICModule module);
@@ -44,9 +46,10 @@ public interface ICSynthesizer extends ISynthesizer {
 
 	/**
 	 * set the current color for the next wire
+	 * 
 	 * @param currentWireColor
 	 */
 	public void setCurrentWireColor(Color currentWireColor);
-	
+
 	public Color getCurrentWireColor();
 }

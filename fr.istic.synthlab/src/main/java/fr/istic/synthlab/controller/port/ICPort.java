@@ -16,5 +16,5 @@ public interface ICPort extends IPort {
 	 * The view inform the controller that a click happened on the port
 	 */
 	public void p2cMouseClicked();
-	
+
 }

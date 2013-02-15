@@ -19,31 +19,30 @@ public class SaveAsSynthCommand implements ICommand {
 		this.synthApp = synthApp;
 		this.synthFrame = synthFrame;
 		this.chooser = new FileDialog((SynthFrame) this.synthFrame, "Save this instance as", FileDialog.SAVE);
-		
-		
+
 	}
 
 	@Override
 	public void execute() {
 		String[] currentFile = synthApp.getCurrentFile();
-		
-		if(currentFile[1]!=null){
+
+		if (currentFile[1] != null) {
 			chooser.setDirectory(currentFile[0]);
 			chooser.setFile(currentFile[1]);
 		} else {
 			chooser.setFile("untitled.synthlab");
 		}
-		
+
 		chooser.setVisible(true);
-		
-		String dir= chooser.getDirectory();
+
+		String dir = chooser.getDirectory();
 		String file = chooser.getFile();
 
-		if(file != null){
-			if(!file.endsWith(".synthlab"))
-				file = file+".synthlab";
+		if (file != null) {
+			if (!file.endsWith(".synthlab"))
+				file = file + ".synthlab";
 			synthApp.saveToXML(dir, file);
-			((JFrame)synthFrame).setTitle("SynthlabG2 - "+dir+file);
+			((JFrame) synthFrame).setTitle("SynthlabG2 - " + dir + file);
 		}
 	}
 

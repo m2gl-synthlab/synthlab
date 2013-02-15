@@ -10,7 +10,7 @@ public class ToolbarPauseCommand implements ICommand {
 	public ToolbarPauseCommand(IPSynthesizer synth) {
 		this.synth = synth;
 	}
-	
+
 	@Override
 	public void execute() {
 		synth.stop();

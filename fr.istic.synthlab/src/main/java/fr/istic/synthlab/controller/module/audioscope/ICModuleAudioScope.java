@@ -4,7 +4,6 @@ import fr.istic.synthlab.abstraction.module.audioscope.IModuleAudioScope;
 import fr.istic.synthlab.controller.module.ICModule;
 import fr.istic.synthlab.presentation.module.audioscope.IPModuleAudioScope;
 
-
 /**
  * Interface of a AudioScope module controller
  */

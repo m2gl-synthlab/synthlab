@@ -29,25 +29,25 @@ public class CInputPort extends InputPort implements ICInputPort {
 
 	@Override
 	public void p2cMouseHover() {
-		if(getWire() == null){
-			if(CSynthesizer.getInstance().getCurrentWire() != null){
-				if(CSynthesizer.getInstance().getCurrentWire().getOutput() != null){
+		if (getWire() == null) {
+			if (CSynthesizer.getInstance().getCurrentWire() != null) {
+				if (CSynthesizer.getInstance().getCurrentWire().getOutput() != null) {
 					pres.c2pConnectionAllowed();
 				} else {
 					pres.c2pConnectionNotAllowed();
 				}
-			}else{
+			} else {
 				pres.c2pConnectionAllowed();
 			}
 		} else {
-			if(CSynthesizer.getInstance().getCurrentWire() == null){
+			if (CSynthesizer.getInstance().getCurrentWire() == null) {
 				pres.c2pConnectionAllowed();
 			} else {
 				pres.c2pConnectionNotAllowed();
 			}
 		}
 	}
-	
+
 	@Override
 	public void p2cMouseClicked() {
 		ISynthesizer synth = Synthesizer.getInstance();
@@ -87,7 +87,7 @@ public class CInputPort extends InputPort implements ICInputPort {
 				synth.setCurrentWire(null);
 			}
 
-		} 
+		}
 		// If a wire is already connected, we disconnect it
 		else {
 			if (CSynthesizer.getInstance().getCurrentWire() == null) {
@@ -97,6 +97,5 @@ public class CInputPort extends InputPort implements ICInputPort {
 			}
 		}
 	}
-
 
 }

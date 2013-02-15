@@ -5,7 +5,9 @@ import fr.istic.synthlab.presentation.module.IPModule;
 
 public interface IPModuleOUT extends IPModule {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.istic.synthlab.presentation.IPModule#getControl()
 	 */
 	public ICModuleOUT getControl();

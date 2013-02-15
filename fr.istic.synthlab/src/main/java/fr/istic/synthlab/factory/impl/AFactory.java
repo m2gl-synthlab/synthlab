@@ -69,7 +69,7 @@ public class AFactory implements IFactory {
 		IModuleVCF module = new ModuleVCF_LP();
 		return module;
 	}
-	
+
 	@Override
 	public IModuleVCF newVCFA_HP() {
 		IModuleVCF module = new ModuleVCF_HP();
@@ -99,7 +99,7 @@ public class AFactory implements IFactory {
 		IModuleREP module = new ModuleREP();
 		return module;
 	}
-	
+
 	@Override
 	public IModule newMIX() {
 		IModuleMIX module = new ModuleMIX();

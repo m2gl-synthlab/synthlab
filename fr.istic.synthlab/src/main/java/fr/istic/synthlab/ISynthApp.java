@@ -52,14 +52,15 @@ public interface ISynthApp {
 	 * Save the current instance to an XML file
 	 */
 	public void saveToXML(String fileDir, String filename);
-	
+
 	/**
 	 * Load an instance from an XML file
 	 */
 	public void loadFromXML(String dir, String file);
-	
+
 	/**
 	 * Return the path of the current instance
+	 * 
 	 * @return
 	 */
 	public String[] getCurrentFile();

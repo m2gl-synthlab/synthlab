@@ -6,7 +6,7 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.module.vca.IPModuleVCA;
 
 public class CModuleVCA extends ModuleVCA implements ICModuleVCA {
-	
+
 	private IPModuleVCA pres;
 
 	public CModuleVCA() {
@@ -22,7 +22,7 @@ public class CModuleVCA extends ModuleVCA implements ICModuleVCA {
 
 	@Override
 	public void p2cClosing() {
-		for(IWire w : this.getWires()){
+		for (IWire w : this.getWires()) {
 			w.disconnect();
 		}
 	}
@@ -31,18 +31,17 @@ public class CModuleVCA extends ModuleVCA implements ICModuleVCA {
 		setAttenuation(amplitude);
 		this.pres.c2pSetAttenuationValue(getAttenuation());
 	}
-	
+
 	@Override
 	public void p2cAttenuationValueChanged(double amplitude) {
 		changeAttenuation(amplitude);
 	}
 
 	@Override
-	public void setParameter(String key, Double value){
-		if(key.equals("attenuation")){
+	public void setParameter(String key, Double value) {
+		if (key.equals("attenuation")) {
 			changeAttenuation(value);
-		} 
+		}
 	}
-
 
 }

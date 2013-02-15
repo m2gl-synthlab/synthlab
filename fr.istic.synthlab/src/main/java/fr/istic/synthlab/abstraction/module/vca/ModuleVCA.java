@@ -23,41 +23,48 @@ public class ModuleVCA extends AModule implements IModuleVCA, Observer<Port> {
 	private static final String INPUT_NAME = "Input";
 	private static final String INPUT_AM_NAME = "AM";
 	private static final String OUTPUT_NAME = "Output";
-	
-	public static final String PARAM_AMPLITUDE_NAME = "Gain";
 
 	// Input & Output du module
 	private IInputPort input, inputAm;
 	private IOutputPort output;
-	
-	// Modulateur d'amplitude 
+
+	// Modulateur d'amplitude
 	private AttenuationFilter attenuator;
 	private AmplitudeModulatorFilter inputAmplitudeModulator;
 	private PassThrough passThroughA, passThroughB;
-	
+
 	public ModuleVCA() {
 		super(MODULE_NAME);
 
 		passThroughA = new PassThrough();
 		passThroughB = new PassThrough();
-		
+
 		// Attenuateur de base
 		this.attenuator = new AttenuationFilter();
-		
+
 		// Modulateur sur entrée Am
 		this.inputAmplitudeModulator = new AmplitudeModulatorFilter(0);
-		
+
 		this.setAttenuation(0);
-		
-		this.input = PACFactory.getFactory().newInputPort(this, INPUT_NAME, attenuator.input); // Ajout du port INPUT
+
+		this.input = PACFactory.getFactory().newInputPort(this, INPUT_NAME, attenuator.input); // Ajout
+																								// du
+																								// port
+																								// INPUT
 
 		this.passThroughA.input.connect(attenuator.output);
 		this.passThroughB.input.connect(passThroughA.output);
-		
-		this.inputAm = PACFactory.getFactory().newInputPort(this, INPUT_AM_NAME, inputAmplitudeModulator.inputAm); // Ajout du port AM
+
+		this.inputAm = PACFactory.getFactory().newInputPort(this, INPUT_AM_NAME, inputAmplitudeModulator.inputAm); // Ajout
+																													// du
+																													// port
+																													// AM
 		this.inputAm.addObserver(this);
-		this.output = PACFactory.getFactory().newOutputPort(this, OUTPUT_NAME, passThroughB.output); // Ajout du port OUTPUT
-		
+		this.output = PACFactory.getFactory().newOutputPort(this, OUTPUT_NAME, passThroughB.output); // Ajout
+																										// du
+																										// port
+																										// OUTPUT
+
 		addPort(input);
 		addPort(inputAm);
 		addPort(output);
@@ -76,13 +83,13 @@ public class ModuleVCA extends AModule implements IModuleVCA, Observer<Port> {
 		this.attenuator.start();
 		this.inputAmplitudeModulator.start();
 	}
-	
+
 	@Override
 	public void stop() {
 		this.attenuator.stop();
 		this.inputAmplitudeModulator.stop();
 	}
-	
+
 	@Override
 	public IInputPort getInput() {
 		return input;
@@ -92,7 +99,7 @@ public class ModuleVCA extends AModule implements IModuleVCA, Observer<Port> {
 	public IInputPort getInputAM() {
 		return inputAm;
 	}
-	
+
 	@Override
 	public IOutputPort getOutput() {
 		return output;
@@ -101,16 +108,16 @@ public class ModuleVCA extends AModule implements IModuleVCA, Observer<Port> {
 	@Override
 	public List<IWire> getWires() {
 		List<IWire> wires = new ArrayList<IWire>();
-		if(input.isInUse())
-			if(!wires.contains(input.getWire()))
+		if (input.isInUse())
+			if (!wires.contains(input.getWire()))
 				wires.add(input.getWire());
 
-		if(inputAm.isInUse())
-			if(!wires.contains(inputAm.getWire()))
+		if (inputAm.isInUse())
+			if (!wires.contains(inputAm.getWire()))
 				wires.add(inputAm.getWire());
 
-		if(output.isInUse())
-			if(!wires.contains(output.getWire()))
+		if (output.isInUse())
+			if (!wires.contains(output.getWire()))
 				wires.add(output.getWire());
 		return wires;
 	}
@@ -129,20 +136,20 @@ public class ModuleVCA extends AModule implements IModuleVCA, Observer<Port> {
 	@Override
 	public void update(Port subject) {
 		// If the FM input port send a connection event
-		if(subject == inputAm){
+		if (subject == inputAm) {
 			// If it is in use
-			if(inputAm.isInUse()){
+			if (inputAm.isInUse()) {
 				passThroughB.input.disconnectAll();
 				passThroughA.output.disconnectAll();
 				passThroughA.output.connect(inputAmplitudeModulator.input);
 				passThroughB.input.connect(inputAmplitudeModulator.output);
-			}else{
+			} else {
 				passThroughB.input.disconnectAll();
 				passThroughA.output.disconnectAll();
 				passThroughA.output.connect(passThroughB.input);
 			}
-				
+
 		}
 	}
-	
+
 }

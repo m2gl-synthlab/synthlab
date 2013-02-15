@@ -1,4 +1,3 @@
-
 package fr.istic.synthlab.controller.module.vco;
 
 import fr.istic.synthlab.abstraction.module.vco.IModuleVCO;
@@ -22,5 +21,5 @@ public interface ICModuleVCO extends ICModule, IModuleVCO {
 	public void p2cToneChanged(double tone);
 
 	public IPModuleVCO getPresentation();
-	
+
 }

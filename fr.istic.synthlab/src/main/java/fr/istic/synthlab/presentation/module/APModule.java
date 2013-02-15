@@ -1,6 +1,5 @@
 package fr.istic.synthlab.presentation.module;
 
-import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -77,7 +76,6 @@ public abstract class APModule extends WebPanel implements IPModule {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				CSynthesizer.getInstance().p2cDisconnectCurrentWire();
 			}
 		});
 
@@ -89,8 +87,7 @@ public abstract class APModule extends WebPanel implements IPModule {
 
 			@Override
 			public void focusGained(FocusEvent e) {
-				IPSynthesizer presSynth = 
-						CSynthesizer.getInstance().getPresentation();
+				IPSynthesizer presSynth = CSynthesizer.getInstance().getPresentation();
 				((JLayeredPane) presSynth).setLayer(APModule.this, 0, 0);
 				for (IWire w : ctrl.getWires()) {
 					if (w != null) {
@@ -126,13 +123,11 @@ public abstract class APModule extends WebPanel implements IPModule {
 		this.addMouseMotionListener(new MouseMotionListener() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				((Component) CSynthesizer.getInstance().getPresentation()).dispatchEvent(e);
 			}
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				setLocation(e.getLocationOnScreen().x - dX,
-						e.getLocationOnScreen().y - dY);
+				setLocation(e.getLocationOnScreen().x - dX, e.getLocationOnScreen().y - dY);
 				dX = e.getLocationOnScreen().x - getX();
 				dY = e.getLocationOnScreen().y - getY();
 			}
@@ -177,12 +172,12 @@ public abstract class APModule extends WebPanel implements IPModule {
 	public void setHeigth(int heigth) {
 		this.heigth = heigth;
 	}
-	
-	public Point getPosition(){
+
+	public Point getPosition() {
 		return this.getLocation();
 	}
-	
-	public void setPosition(Point point){
+
+	public void setPosition(Point point) {
 		this.setLocation(point);
 	}
 
