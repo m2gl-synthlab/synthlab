@@ -46,7 +46,6 @@ public class ModuleAudioScope extends AModule implements IModuleAudioScope {
 
 		addPort(in);
 		addPort(out);
-		
 	}
 
 	@Override

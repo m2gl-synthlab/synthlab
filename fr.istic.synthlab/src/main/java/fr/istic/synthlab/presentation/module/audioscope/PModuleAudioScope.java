@@ -1,7 +1,9 @@
 package fr.istic.synthlab.presentation.module.audioscope;
 
 import java.awt.Dimension;
+import java.awt.LayoutManager;
 
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 import com.jsyn.scope.AudioScopeModel;
@@ -49,6 +51,18 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 		scope.setModel(model);
 		scope.setControlsVisible(true);
 		panelScope.add(scope);
+		
+		JCheckBox auto = new JCheckBox("Autooooo");
+		//auto.addActionListener(new StateListener());
+		auto.setSelected(true);
+		
+		LayoutManager layoutOfScope = panelScope.getLayout();
+		panelScope.setLayout(null);
+		auto.setBounds(15, 15, 30, 30);
+		panelScope.add(auto);
+		panelScope.setLayout(layoutOfScope);
+		
+		
 
 		inputPort = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
 		outputPort = (POutputPort) ((ICOutputPort) ctrl.getOutput()).getPresentation();
