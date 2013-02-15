@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -36,9 +38,7 @@ import fr.istic.synthlab.command.menu.AddModuleAudioScopeCommand;
 import fr.istic.synthlab.command.menu.AddModuleMIXCommand;
 import fr.istic.synthlab.command.menu.AddModuleREPCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarCurrentWireColorCommand;
-import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
-import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 import fr.istic.synthlab.presentation.synthesizer.PSynthesizer;
 
@@ -50,12 +50,13 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 	// Menu
 	private JMenuBar mainMenuBar;
-	private JMenu menuFile, menuAdd, menuHelp;
+	private JMenu menuFile, menuAdd, menuHelp, menuWindow;
 	private JMenuItem menuItemNew, menuItemOpen, menuItemSave, menuItemSaveAs;
 	private JMenuItem menuItemQuit, menuItemDoc, menuItemAbout;
 	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT, menuItemAddModuleVCFLP, menuItemAddModuleVCFHP, menuItemAddModuleEG,
 			menuItemAddModuleAudioScope, menuItemAddModuleREP, menuItemAddModuleVCA, menuItemAddModuleMIX;
-
+	private List<JMenuItem> files;
+	
 	// Toolbar
 	private WebToolBar toolBar = new WebToolBar();
 	private String[] iconFiles = { "res/play.png", "res/stop.png" };
@@ -91,10 +92,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 	private Color toolbarCurrentWireColor;
 	private boolean isPlaying = true;
-	private ICSynthesizer cSynthesizer;
+	private ISynthApp app;
 
-	public SynthFrame(ICSynthesizer cSynthesizer) {
-		this.cSynthesizer = cSynthesizer;
+	public SynthFrame(ISynthApp app) {
+		this.app = app;
 		this.initComponents();
 		this.configureView();
 		this.defineCallbacks();
@@ -104,6 +105,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	 * Initialize the frame's components
 	 */
 	private void initComponents() {
+		files = new ArrayList<JMenuItem>();
 		// instanciation de la barre de menu
 
 		mainMenuBar = new JMenuBar();
@@ -159,6 +161,9 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuAdd.add(menuItemAddModuleREP);
 		menuAdd.add(menuItemAddModuleOUT);
 		menuAdd.add(menuItemAddModuleAudioScope);
+		
+		// -------------------------- File Menu --------------------------
+		menuWindow = new JMenu("Window");
 
 		// -------------------------- Help Menu --------------------------
 		menuHelp = new JMenu("Help");
@@ -174,6 +179,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		// ajout des menus a la barre de menus
 		mainMenuBar.add(menuFile);
 		mainMenuBar.add(menuAdd);
+		mainMenuBar.add(menuWindow);
 		mainMenuBar.add(menuHelp);
 		this.setJMenuBar(mainMenuBar);
 
@@ -248,7 +254,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		colorButtonYellow = new WebButton(ImageUtils.createColorIcon(Color.YELLOW));
 
 		colorChooserButton = new WebButton("Current color",
-				ImageUtils.createColorIcon(cSynthesizer.getCurrentWireColor()));
+				ImageUtils.createColorIcon(app.getSynthesizer().getCurrentWireColor()));
 
 		toolBar.add(colorButtonBlack);
 		toolBar.add(colorButtonGray);
@@ -570,7 +576,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			public void actionPerformed(ActionEvent e) {
 				WebColorChooserDialog colorChooser = new WebColorChooserDialog(
 						toolBar);
-				colorChooser.setColor(cSynthesizer
+				colorChooser.setColor(app.getSynthesizer()
 						.getCurrentWireColor());
 				colorChooser.setVisible(true);
 
@@ -587,9 +593,11 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		if (pres != null)
 			this.remove((PSynthesizer) pres);
 
-		pres = cSynthesizer.getPresentation();
+		pres = app.getSynthesizer().getPresentation();
 		this.add((PSynthesizer) pres);
 		this.setVisible(true);
+		this.repaint();
+		this.validate();
 	}
 
 	@Override
@@ -752,8 +760,39 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	}
 
 	@Override
-	public void setSynthesizer(ICSynthesizer synth) {
-		this.cSynthesizer = synth;
+	public void addToMenu(ICSynthesizer currentSynth) {
+		final JMenuItem item = new JMenuItem(currentSynth.getPath());
+		item.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				app.setSynthesizer(item.getText());
+				displaySynth();
+			}
+		});
+		files.add(item);
+		menuWindow.add(item);
+	}
+
+	@Override
+	public void stop() {
+		Image img;
+		try {
+			img = ImageIO.read(new File(iconFiles[0]));
+			img = img.getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+			buttonPlayPause.setIcon(new ImageIcon(img));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		isPlaying = false;
+	}
+
+	@Override
+	public void removeFromMenu(ICSynthesizer currentSynth) {
+		for(JMenuItem currItem : files){
+			if(currItem.getText().equals(currentSynth.getPath())){
+				menuWindow.remove(currItem);
+			}
+		}
 	}
 
 }

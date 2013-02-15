@@ -3,6 +3,8 @@ package fr.istic.synthlab.abstraction.filter;
 import com.jsyn.ports.UnitInputPort;
 import com.jsyn.unitgen.UnitFilter;
 
+import fr.istic.synthlab.abstraction.util.Convert;
+
 public class AmplitudeModulatorFilter extends UnitFilter {
 
 	public static String INPUT_AM_NAME = "Am";
@@ -11,6 +13,7 @@ public class AmplitudeModulatorFilter extends UnitFilter {
 
 	public AmplitudeModulatorFilter(double baseAmplitude) {
 		addPort(inputAm);
+		
 	}
 
 	@Override
@@ -23,9 +26,8 @@ public class AmplitudeModulatorFilter extends UnitFilter {
 		for (int i = start; i < limit; i++) {
 			double in = inputs[i]; // Signal d'entrée
 			double am = inputsAm[i]; // Signal de modulation -1;1
-			// double mod = am * 5 * 12; // Conversion en dB
-			// TODO : Formule a vérifier avec Mr P.
-			outputs[i] = in * am;// Convert.dB2V(mod) ; // Modulation du signal
+			double mod = am * 5 * 12; // Conversion en dB
+			outputs[i] = in * Convert.dB2V(mod); // Modulation du signal
 		}
 	}
 }

@@ -60,7 +60,7 @@ public class Synthlab {
 	
 		// Create the application
 		SynthApp app = new SynthApp(frame);
-		frame = new SynthFrame(app.getSynthesizer());
+		frame = new SynthFrame(app);
 		frame.setTitle("SynthlabG2 - untitled");
 		try {
 			Image imageIcon = ImageIO.read(new File("res/logo.png"));
@@ -103,6 +103,9 @@ public class Synthlab {
 
 		// Start the application
 		app.startSynth();
+
+		frame.addToMenu(app.getSynthesizer());
+		app.getSynthesizer().setFrame(frame);
 
 		// Chargement du fichier ouvert
 		String filename = null;

@@ -113,10 +113,7 @@ public class ModuleVCF_HP extends AModule implements IModuleVCF, Observer<Port> 
 
 	@Override
 	public void setCutFrequency(int value) {
-		int freq = value;
-		if (freq < 40)
-			freq = 40;
-		getParameters().put("cutFrequency", (double) freq);
+		getParameters().put("cutFrequency", (double) value);
 		updateFrequency();
 	}
 
@@ -129,6 +126,7 @@ public class ModuleVCF_HP extends AModule implements IModuleVCF, Observer<Port> 
 	public void setResonance(double value) {
 		getParameters().put("resonance", (double) value);
 		this.filterJSyn1.Q.set(value);
+		this.filterJSyn2.Q.set(value);
 	}
 
 	@Override

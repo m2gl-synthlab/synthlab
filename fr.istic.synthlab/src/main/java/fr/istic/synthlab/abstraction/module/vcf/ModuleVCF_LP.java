@@ -126,6 +126,7 @@ public class ModuleVCF_LP extends AModule implements IModuleVCF, Observer<Port> 
 	public void setResonance(double value) {
 		getParameters().put("resonance", (double) value);
 		this.filterJSyn1.Q.set(value);
+		this.filterJSyn2.Q.set(value);
 	}
 
 	@Override
