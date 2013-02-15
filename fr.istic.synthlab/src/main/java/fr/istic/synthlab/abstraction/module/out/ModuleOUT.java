@@ -20,6 +20,8 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	private static final String MODULE_NAME = "OUT";
 	private static final String IN_NAME = "In";
+	
+	protected static final boolean DEFAULT_STATE_MUTE = true;
 
 	private ChannelOut out;
 	private AttenuationFilter attenuator;
@@ -36,7 +38,8 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 		attenuator.output.connect(out.input);
 
-		getParameters().put("mute", 1.0);
+		// Set the default state
+		setMute(DEFAULT_STATE_MUTE);
 
 		addPort(in);
 	}

@@ -50,8 +50,8 @@ public class CModuleOUT extends ModuleOUT implements ICModuleOUT {
 		if (key.equals("attenuation")) {
 			changeGain(value);
 		} else if (key.equals("mute")) {
-			if (value == 1) {
-				pres.c2pMute(true);
+			if (value != (DEFAULT_STATE_MUTE ? 1.0 : 0.0)) {
+				pres.c2pMute(!DEFAULT_STATE_MUTE);
 			}
 		}
 	}
