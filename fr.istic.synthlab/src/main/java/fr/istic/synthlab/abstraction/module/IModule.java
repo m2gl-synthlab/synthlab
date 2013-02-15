@@ -46,6 +46,7 @@ public interface IModule {
 
 	/**
 	 * Indicate if the port is contained by the module or not
+	 * 
 	 * @param port
 	 * @return
 	 */
@@ -53,12 +54,14 @@ public interface IModule {
 
 	/**
 	 * Add the given port to the list of module's ports
+	 * 
 	 * @param port
 	 */
 	public void addPort(IPort port);
 
 	/**
 	 * return the asked parameter value
+	 * 
 	 * @param key
 	 * @return
 	 */
@@ -66,12 +69,14 @@ public interface IModule {
 
 	/**
 	 * Return the list of all parameters
+	 * 
 	 * @return
 	 */
 	public HashMap<String, Double> getParameters();
-	
+
 	/**
 	 * Return a port by its name
+	 * 
 	 * @param portName
 	 * @return
 	 */

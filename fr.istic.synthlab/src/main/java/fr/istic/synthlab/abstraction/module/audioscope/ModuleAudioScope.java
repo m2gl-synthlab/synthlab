@@ -46,7 +46,7 @@ public class ModuleAudioScope extends AModule implements IModuleAudioScope {
 
 		addPort(in);
 		addPort(out);
-		
+
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class ModuleAudioScope extends AModule implements IModuleAudioScope {
 	public void stop() {
 		scope.stop();
 	}
-	
+
 	@Override
 	public IInputPort getInput() {
 		return in;
@@ -85,11 +85,11 @@ public class ModuleAudioScope extends AModule implements IModuleAudioScope {
 	public List<IWire> getWires() {
 		List<IWire> wires = new ArrayList<IWire>();
 		if (in.getWire() != null) {
-			if(!wires.contains(in.getWire()))
+			if (!wires.contains(in.getWire()))
 				wires.add(in.getWire());
 		}
 		if (out.getWire() != null) {
-			if(!wires.contains(out.getWire()))
+			if (!wires.contains(out.getWire()))
 				wires.add(out.getWire());
 		}
 		return wires;

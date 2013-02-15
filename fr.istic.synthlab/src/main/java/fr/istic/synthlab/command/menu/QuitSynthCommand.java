@@ -2,6 +2,7 @@ package fr.istic.synthlab.command.menu;
 
 import fr.istic.synthlab.ISynthApp;
 import fr.istic.synthlab.command.ICommand;
+
 /**
  * Command that quit the application
  */

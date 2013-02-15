@@ -34,9 +34,9 @@ public class Wire implements IWire {
 		if (input != null) {
 			throw new BadConnectionException("The wire is already connected to an input");
 		} else {
-			if(port.getWire() != null){
+			if (port.getWire() != null) {
 				throw new PortAlreadyInUseException("The port is already in use");
-			}else{
+			} else {
 				this.input = port;
 				connect();
 			}
@@ -48,9 +48,9 @@ public class Wire implements IWire {
 		if (output != null) {
 			throw new BadConnectionException("The wire is already connected to an output");
 		} else {
-			if(port.getWire() != null){
+			if (port.getWire() != null) {
 				throw new PortAlreadyInUseException("The port is already in use");
-			}else{
+			} else {
 				this.output = port;
 				connect();
 			}
@@ -73,12 +73,12 @@ public class Wire implements IWire {
 		if (isConnected()) {
 			this.output.getJSyn().disconnect(this.input.getJSyn());
 		}
-		if(this.output != null)
+		if (this.output != null)
 			this.output.setWire(null);
-			
-		if(this.input != null)
+
+		if (this.input != null)
 			this.input.setWire(null);
-		
+
 		Synthesizer.getInstance().remove(this);
 
 	}

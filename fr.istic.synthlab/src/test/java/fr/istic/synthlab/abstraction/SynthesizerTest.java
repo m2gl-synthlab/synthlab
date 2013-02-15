@@ -19,12 +19,11 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
 
 public class SynthesizerTest extends TestCase {
-	
+
 	private ISynthesizer synth;
 	private IModule module;
 
-	
-	public void setUp(){
+	public void setUp() {
 		PACFactory.setFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
@@ -33,54 +32,50 @@ public class SynthesizerTest extends TestCase {
 
 		
 
+
 	}
-	
+
 	public void testGetInstance() {
-		assertEquals(synth,Synthesizer.getInstance());
+		assertEquals(synth, Synthesizer.getInstance());
 	}
-
-
 
 	public void testGetJSyn() {
-		boolean jsyn=false;
-		for(int i=0;i<synth.getJSyn().getClass().getInterfaces().length;i++)
-			if(
-		synth.getJSyn().getClass().getInterfaces()[i].equals(com.jsyn.Synthesizer.class)
-		
-		)
-				jsyn=true;
-	
-	assertTrue(jsyn);
-	
-	}
-	
+		boolean jsyn = false;
+		for (int i = 0; i < synth.getJSyn().getClass().getInterfaces().length; i++)
+			if (synth.getJSyn().getClass().getInterfaces()[i].equals(com.jsyn.Synthesizer.class)
 
+			)
+				jsyn = true;
+
+		assertTrue(jsyn);
+
+	}
 
 	public void testAddIModule() {
 		synth.add(module);
-		assertEquals(1,synth.getModules().size());
+		assertEquals(1, synth.getModules().size());
 
-		assertEquals(module,synth.getModules().get(0));
+		assertEquals(module, synth.getModules().get(0));
 	}
-	
 
 	public void testRemoveIModule() {
 		synth.add(new ModuleOUT());
 		synth.remove(synth.getModules().get(0));
-		assertEquals(0,synth.getModules().size());	}
+		assertEquals(0, synth.getModules().size());
+	}
 
 	@SuppressWarnings("unchecked")
 	public void testAddIWire() {
-		IWire w=new Wire();
+		IWire w = new Wire();
 		synth.add(w);
 
 		Field f = null;
-		   try {
-			   for(int i=0;i<synth.getClass().getDeclaredFields().length;i++)
-				   System.out.println(synth.getClass().getDeclaredFields()[i]);
-				   ;
-			 f = synth.getClass().getDeclaredField("wires");
-			 f.setAccessible(true);
+		try {
+			for (int i = 0; i < synth.getClass().getDeclaredFields().length; i++)
+				System.out.println(synth.getClass().getDeclaredFields()[i]);
+			;
+			f = synth.getClass().getDeclaredField("wires");
+			f.setAccessible(true);
 		} catch (NoSuchFieldException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -88,10 +83,10 @@ public class SynthesizerTest extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		   List<Wire> p=null;
-		   try {
-			 p=(List<Wire>) f.get(synth);
-			 System.out.println(p);
+		List<Wire> p = null;
+		try {
+			p = (List<Wire>) f.get(synth);
+			System.out.println(p);
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -99,9 +94,9 @@ public class SynthesizerTest extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		assertEquals(1,p.size());
-		assertEquals(w,p.get(0));
+
+		assertEquals(1, p.size());
+		assertEquals(w, p.get(0));
 
 	}
 
@@ -116,26 +111,21 @@ public class SynthesizerTest extends TestCase {
 		synth.add(new CModuleAudioScope());
 		assertTrue(synth.isRunning());
 
-	
 	}
 
-	
 	public void testStop() {
 		synth.start();
 		synth.stop();
 		assertFalse(synth.isRunning());
 	}
-	
+
 	public void testStartModule() {
 		synth.stop();
-		
+
 		synth.add(new CModuleAudioScope());
 		synth.startModule(synth.getModules().get(0));
 		assertFalse(synth.isRunning());
 	}
-
-
-
 
 	public void testStopModule() {
 		synth.start();
@@ -144,22 +134,19 @@ public class SynthesizerTest extends TestCase {
 		assertTrue(synth.isRunning());
 	}
 
-
-
-
 	public void testSetGetCurrentWire() {
-		IWire w=new Wire();
+		IWire w = new Wire();
 		synth.setCurrentWire(w);
 		assertEquals(w, synth.getCurrentWire());
 	}
 
 	public void testRemoveIWire() {
-		IWire w=new Wire();
+		IWire w = new Wire();
 		synth.add(w);
 		Field f = null;
-		   try {
-			 f = synth.getClass().getDeclaredField("wires");
-			 f.setAccessible(true);
+		try {
+			f = synth.getClass().getDeclaredField("wires");
+			f.setAccessible(true);
 		} catch (NoSuchFieldException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -167,9 +154,9 @@ public class SynthesizerTest extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		   List<Wire> p=null;
-		   try {
-			 p=(List<Wire>) f.get(synth);
+		List<Wire> p = null;
+		try {
+			p = (List<Wire>) f.get(synth);
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -177,9 +164,9 @@ public class SynthesizerTest extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		synth.remove(p.get(0));
-		assertEquals(0,p.size());
 
-}
+		synth.remove(p.get(0));
+		assertEquals(0, p.size());
+
+	}
 }

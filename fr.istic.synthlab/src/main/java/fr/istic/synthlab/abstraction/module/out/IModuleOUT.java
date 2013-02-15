@@ -9,6 +9,11 @@ import fr.istic.synthlab.abstraction.port.IInputPort;
 public interface IModuleOUT extends IModule {
 
 	/**
+	 * Parameters name
+	 */
+	public static final String PARAM_NAME_GAIN = "Gain";
+
+	/**
 	 * Start/Stop sending sound to the sound card
 	 */
 	public void setMute(boolean mute);

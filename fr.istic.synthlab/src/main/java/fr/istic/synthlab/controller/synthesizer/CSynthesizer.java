@@ -16,6 +16,7 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	private Color currentWireColor = Color.GRAY;
 
 	private static ICSynthesizer instance;
+
 	/**
 	 * @return the synthesizer's instance
 	 */
@@ -25,7 +26,7 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 		}
 		return instance;
 	}
-	
+
 	public CSynthesizer() {
 		super();
 		this.pres = PACFactory.getPFactory().newSynthesizer();
@@ -98,7 +99,7 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 
 	@Override
 	public void p2cDisconnectCurrentWire() {
-		if(getCurrentWire() != null)
+		if (getCurrentWire() != null)
 			getCurrentWire().disconnect();
 	}
 

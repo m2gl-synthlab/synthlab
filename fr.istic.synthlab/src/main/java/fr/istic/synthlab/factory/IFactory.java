@@ -18,21 +18,29 @@ import fr.istic.synthlab.abstraction.wire.IWire;
 public interface IFactory {
 
 	ISynthesizer newSynthesizer();
-	
+
 	IModuleVCO newVCO();
+
 	IModuleVCA newVCA();
+
 	IModule newVCFA_LP();
+
 	IModule newVCFA_HP();
+
 	IModuleOUT newOUT();
+
 	IModuleEG newEG();
+
 	IModuleAudioScope newAudioScope();
+
 	IModuleREP newREP();
+
 	IModule newMIX();
 
 	IWire newWire();
 
 	IInputPort newInputPort(IModule mod, String name, UnitInputPort input);
-	IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output);
 
+	IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output);
 
 }

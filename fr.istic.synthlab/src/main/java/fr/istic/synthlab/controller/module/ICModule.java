@@ -19,9 +19,10 @@ public interface ICModule extends IModule {
 	 * Called when the presentation is closing
 	 */
 	public void p2cClosing();
-	
+
 	/**
 	 * Set the given parameter
+	 * 
 	 * @param key
 	 * @param value
 	 */

@@ -4,20 +4,19 @@ import java.awt.Dimension;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.jsyn.swing.DoubleBoundedRangeModel;
-import com.jsyn.swing.RotaryTextController;
 
-import fr.istic.synthlab.abstraction.module.vco.ModuleVCO;
+import fr.istic.synthlab.abstraction.module.vco.IModuleVCO;
 import fr.istic.synthlab.controller.module.vco.ICModuleVCO;
 import fr.istic.synthlab.controller.port.ICInputPort;
 import fr.istic.synthlab.controller.port.ICOutputPort;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.port.PInputPort;
 import fr.istic.synthlab.presentation.port.POutputPort;
+import fr.istic.synthlab.presentation.util.RotaryTextController;
 
 /**
  * Presentation of a module
@@ -53,20 +52,17 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 		JPanel panelParams = new JPanel();
 		JPanel panelFrequency = new JPanel();
 		JPanel panelInputOutput = new JPanel();
-		
+
 		panelParams.setOpaque(false);
 		panelFrequency.setOpaque(false);
 		panelInputOutput.setOpaque(false);
-		
-		octaveModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_OCTAVE_NAME,
-				14, 0, 14, ctrl.getOctave());
+
+		octaveModel = new DoubleBoundedRangeModel(IModuleVCO.PARAM_NAME_OCTAVE, 14, 0, 14, ctrl.getOctave());
 		RotaryTextController octaveRotary = new RotaryTextController(octaveModel, 4);
-		octaveRotary.setBorder(new TitledBorder(ModuleVCO.PARAM_OCTAVE_NAME));
 		panelParams.add(octaveRotary);
 
-		toneModel = new DoubleBoundedRangeModel(ModuleVCO.PARAM_TONE_NAME, 100,	-1.0, 1.0, ctrl.getTone());
+		toneModel = new DoubleBoundedRangeModel(IModuleVCO.PARAM_NAME_TONE, 100, -1.0, 1.0, ctrl.getTone());
 		RotaryTextController toneRotary = new RotaryTextController(toneModel, 4);
-		toneRotary.setBorder(new TitledBorder(ModuleVCO.PARAM_TONE_NAME));
 		panelParams.add(toneRotary);
 
 		frequencyLabel = new JLabel();
@@ -76,31 +72,27 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 		fm = (PInputPort) ((ICInputPort) ctrl.getInputFm()).getPresentation();
 		panelInputOutput.add(fm);
 
-		outputSquare = (POutputPort) ((ICOutputPort) ctrl.getOutputSquare())
-				.getPresentation();
+		outputSquare = (POutputPort) ((ICOutputPort) ctrl.getOutputSquare()).getPresentation();
 		panelInputOutput.add(outputSquare);
 
-		outputTriangle = (POutputPort) ((ICOutputPort) ctrl.getOutputTriangle())
-				.getPresentation();
+		outputTriangle = (POutputPort) ((ICOutputPort) ctrl.getOutputTriangle()).getPresentation();
 		panelInputOutput.add(outputTriangle);
 
 		outputSawtooth = (POutputPort) ((ICOutputPort) ctrl.getOutputSawtooth()).getPresentation();
 		panelInputOutput.add(outputSawtooth);
 
 		super.setWidth(270);
-		super.setHeigth(240);
-		
+		super.setHeigth(220);
+
 		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
-		
+
 		this.addTitleBar();
-		this.addPanel(panelParams, 270, 115);
-		this.addPanel(panelFrequency, 270, 25);
+		this.addPanel(panelParams, 270, 110);
+		this.addPanel(panelFrequency, 270, 20);
 		this.addPanel(panelInputOutput, 270, 60);
 	}
-
-
 
 	private void defineCallbacks() {
 		// Slider change listener
@@ -137,7 +129,7 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 
 	@Override
 	public void c2pSetFrequencyValue(double frequency) {
-		frequencyLabel.setText(""+String.format("%.2f", frequency)+" Hz");
+		frequencyLabel.setText("" + String.format("%.2f", frequency) + " Hz");
 	}
 
 }

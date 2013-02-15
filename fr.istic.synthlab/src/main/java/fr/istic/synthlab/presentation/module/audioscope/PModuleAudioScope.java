@@ -23,7 +23,7 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 
 	private ICModuleAudioScope ctrl;
 	private AudioScopeModel model;
-	
+
 	private PInputPort inputPort;
 	private POutputPort outputPort;
 
@@ -38,9 +38,9 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 	}
 
 	private void configView() {
-		JPanel panelScope= new JPanel();
+		JPanel panelScope = new JPanel();
 		JPanel panelPort = new JPanel();
-		
+
 		panelScope.setOpaque(false);
 		panelPort.setOpaque(false);
 
@@ -56,23 +56,22 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 		panelPort.add(outputPort);
 
 		this.setAutoscrolls(true);
-		
+
 		super.setWidth(630);
-		super.setHeigth(450);
-		
+		super.setHeigth(360);
+
 		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
-		
+
 		this.addTitleBar();
-		this.addPanel(panelScope, 630, 300);
-		this.addPanel(panelPort, 630, 120);
+		this.addPanel(panelScope, 630, 260);
+		this.addPanel(panelPort, 630, 60);
 
 	}
 
 	private void defineCallbacks() {
 	}
-	
 
 	@Override
 	public ICModuleAudioScope getControl() {

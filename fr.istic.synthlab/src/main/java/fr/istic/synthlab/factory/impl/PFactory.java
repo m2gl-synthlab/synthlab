@@ -72,12 +72,12 @@ public class PFactory implements IPFactory {
 	public IPModuleOUT newOUT(ICModuleOUT control) {
 		return new PModuleOUT(control);
 	}
-	
+
 	@Override
 	public IPModuleEG newEG(ICModuleEG control) {
 		return new PModuleEG(control);
 	}
-	
+
 	@Override
 	public IPModuleAudioScope newAudioScope(ICModuleAudioScope control) {
 		return new PModuleAudioScope(control);
@@ -87,12 +87,12 @@ public class PFactory implements IPFactory {
 	public IPModuleREP newREP(ICModuleREP control) {
 		return new PModuleREP(control);
 	}
-	
+
 	@Override
 	public IPModuleMIX newMIX(ICModuleMIX control) {
 		return new PModuleMIX(control);
 	}
-	
+
 	@Override
 	public IPWire newWire(ICWire control) {
 		return new PWire(control);

@@ -8,13 +8,13 @@ import fr.istic.synthlab.presentation.module.rep.IPModuleREP;
 
 //TODO : need comments
 
-public class CModuleREP  extends ModuleREP implements ICModuleREP {
+public class CModuleREP extends ModuleREP implements ICModuleREP {
 
 	private IPModuleREP pres;
-	
+
 	public CModuleREP() {
 		super();
-		this.pres = PACFactory.getPFactory().newREP(this);	
+		this.pres = PACFactory.getPFactory().newREP(this);
 	}
 
 	@Override
@@ -24,13 +24,13 @@ public class CModuleREP  extends ModuleREP implements ICModuleREP {
 
 	@Override
 	public void p2cClosing() {
-		for(IWire w : this.getWires()){
+		for (IWire w : this.getWires()) {
 			w.disconnect();
-		}		
+		}
 	}
-	
-	@Override
-	public void setParameter(String key, Double value){}
 
+	@Override
+	public void setParameter(String key, Double value) {
+	}
 
 }

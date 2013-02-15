@@ -7,7 +7,7 @@ import fr.istic.synthlab.abstraction.wire.IWire;
 /**
  * Interface for a module port
  */
-public interface IPort extends Observable{
+public interface IPort extends Observable {
 
 	/**
 	 * Set the port's name
@@ -34,7 +34,7 @@ public interface IPort extends Observable{
 	 * @return the connected wire
 	 */
 	public IWire getWire();
-	
+
 	/**
 	 * Tell if the port is in use
 	 * 

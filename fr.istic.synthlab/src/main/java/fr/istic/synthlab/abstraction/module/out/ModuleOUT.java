@@ -31,13 +31,12 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 		this.out = new ChannelOut();
 		this.attenuator = new AttenuationFilter();
 
-		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME,
-				attenuator.input);
+		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME, attenuator.input);
 		this.setAttenuation(0);
 
 		attenuator.output.connect(out.input);
-		
-		setMute(false);
+
+		getParameters().put("mute", 1.0);
 
 		addPort(in);
 	}
@@ -79,7 +78,7 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	@Override
 	public void setMute(boolean mute) {
-		getParameters().put("mute", mute?1.0:0.0);
+		getParameters().put("mute", mute ? 1.0 : 0.0);
 		if (isMute()) {
 			try {
 				stop();

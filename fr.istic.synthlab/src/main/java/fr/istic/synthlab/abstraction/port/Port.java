@@ -12,8 +12,8 @@ import fr.istic.synthlab.abstraction.wire.IWire;
  * Class that represent a module port
  */
 public class Port implements IPort {
-	
-	private List<Observer<Port>> observers; 
+
+	private List<Observer<Port>> observers;
 
 	private String name;
 	private IWire wire;
@@ -51,16 +51,15 @@ public class Port implements IPort {
 		return this.module;
 	}
 
-
 	@Override
 	public boolean isInUse() {
 		return (getWire() != null);
 	}
-	
+
 	/** OBSERVER */
 	@Override
 	public void notifyObservers() {
-		for(Observer<Port> o : observers){
+		for (Observer<Port> o : observers) {
 			o.update(this);
 		}
 	}

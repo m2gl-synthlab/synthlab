@@ -31,15 +31,11 @@ public class ModuleREP extends AModule implements IModuleREP {
 
 		this.passThrough = new TriplePassThroughFilter();
 
-		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME,
-				passThrough.getInput());
+		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME, passThrough.getInput());
 
-		this.output1 = PACFactory.getFactory().newOutputPort(this, OUT1_NAME,
-				passThrough.getOutput1());
-		this.output2 = PACFactory.getFactory().newOutputPort(this, OUT2_NAME,
-				passThrough.getOutput2());
-		this.output3 = PACFactory.getFactory().newOutputPort(this, OUT3_NAME,
-				passThrough.getOutput3());
+		this.output1 = PACFactory.getFactory().newOutputPort(this, OUT1_NAME, passThrough.getOutput1());
+		this.output2 = PACFactory.getFactory().newOutputPort(this, OUT2_NAME, passThrough.getOutput2());
+		this.output3 = PACFactory.getFactory().newOutputPort(this, OUT3_NAME, passThrough.getOutput3());
 
 		addPort(in);
 		addPort(output1);
@@ -63,25 +59,25 @@ public class ModuleREP extends AModule implements IModuleREP {
 	public void stop() {
 		this.passThrough.stop();
 	}
-	
+
 	@Override
 	public List<IWire> getWires() {
 
 		List<IWire> wires = new ArrayList<IWire>();
 		if (in.getWire() != null) {
-			if(!wires.contains(in.getWire()))
+			if (!wires.contains(in.getWire()))
 				wires.add(in.getWire());
 		}
 		if (output1.getWire() != null) {
-			if(!wires.contains(output1.getWire()))
+			if (!wires.contains(output1.getWire()))
 				wires.add(output1.getWire());
 		}
 		if (output2.getWire() != null) {
-			if(!wires.contains(output2.getWire()))
+			if (!wires.contains(output2.getWire()))
 				wires.add(output2.getWire());
 		}
 		if (output3.getWire() != null) {
-			if(!wires.contains(output3.getWire()))
+			if (!wires.contains(output3.getWire()))
 				wires.add(output3.getWire());
 		}
 		return wires;
