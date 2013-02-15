@@ -1,7 +1,7 @@
 /**
  * Test de la Classe CModuleAudioScopeTest
  */
-package fr.istic.synthlab.controler;
+package fr.istic.synthlab.controler.module;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertNotNull;
