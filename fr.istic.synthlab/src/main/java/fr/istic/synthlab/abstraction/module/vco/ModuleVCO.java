@@ -55,6 +55,7 @@ public class ModuleVCO extends AModule implements IModuleVCO, Observer<Port>{
 		this.vcoTriangle = new TriangleOscillator();
 		this.vcoSawtooth = new SawtoothOscillator();
 		
+		
 		// fm -> modulator -> passThrough -|-> generator.frequency
 		
 		// Création du modulateur de fréquence

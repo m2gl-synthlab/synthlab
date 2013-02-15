@@ -5,12 +5,16 @@ import java.lang.reflect.Field;
 import junit.framework.TestCase;
 
 import com.jsyn.unitgen.PassThrough;
+import com.jsyn.unitgen.SawtoothOscillator;
+import com.jsyn.unitgen.SquareOscillator;
+import com.jsyn.unitgen.TriangleOscillator;
 
 import fr.istic.synthlab.abstraction.exception.BadConnectionException;
 import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
 import fr.istic.synthlab.abstraction.module.vco.IModuleVCO;
 import fr.istic.synthlab.abstraction.module.vco.ModuleVCO;
 import fr.istic.synthlab.abstraction.port.Port;
+import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.abstraction.wire.Wire;
 import fr.istic.synthlab.factory.impl.AFactory;
@@ -34,7 +38,45 @@ public class ModuleVCOTest extends TestCase {
 	
 
 	public void testStart() {
-		fail("Not yet implemented");
+		Field vcoSquare=null;
+		Field vcoTriangle=null;
+		Field vcoSawTooth=null;
+
+		   try {
+			 vcoSquare = m.getClass().getDeclaredField("vcoSquare");
+			 vcoTriangle= m.getClass().getDeclaredField("vcoTriangle");
+			 vcoSawTooth = m.getClass().getDeclaredField("vcoSawtooth");
+			 
+			 vcoSquare.setAccessible(true);
+			 vcoTriangle.setAccessible(true);
+			 vcoSawTooth.setAccessible(true);
+		} catch (NoSuchFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		   PassThrough p=null;
+		   SquareOscillator sqo=null;
+		   TriangleOscillator tro=null;
+		   SawtoothOscillator sto=null;
+		   
+		   try {
+			 sqo=(SquareOscillator) vcoSquare.get(m);
+			 tro=(TriangleOscillator) vcoTriangle.get(m);
+			 sto=(SawtoothOscillator) vcoSawTooth.get(m);
+
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		   Synthesizer synth=new Synthesizer();
+		   m.start();
+		
 	}
 	
 
@@ -96,10 +138,22 @@ public class ModuleVCOTest extends TestCase {
 		}
 		
 		((ModuleVCO) m).update((Port) m.getInputFm());
+((ModuleVCO) m).update((Port) m.getInputFm());
 		
 		Field f = null;
+		Field vcoSquare=null;
+		Field vcoTriangle=null;
+		Field vcoSawTooth=null;
+
 		   try {
 			 f = m.getClass().getDeclaredField("passThrough");
+			 vcoSquare = m.getClass().getDeclaredField("vcoSquare");
+			 vcoTriangle= m.getClass().getDeclaredField("vcoTriangle");
+			 vcoSawTooth = m.getClass().getDeclaredField("vcoSawtooth");
+			 
+			 vcoSquare.setAccessible(true);
+			 vcoTriangle.setAccessible(true);
+			 vcoSawTooth.setAccessible(true);
 			 f.setAccessible(true);
 		} catch (NoSuchFieldException e) {
 			// TODO Auto-generated catch block
@@ -109,8 +163,16 @@ public class ModuleVCOTest extends TestCase {
 			e.printStackTrace();
 		}
 		   PassThrough p=null;
+		   SquareOscillator sqo=null;
+		   TriangleOscillator tro=null;
+		   SawtoothOscillator sto=null;
+		   
 		   try {
 			 p=(PassThrough) f.get(m);
+			 sqo=(SquareOscillator) vcoSquare.get(m);
+			 tro=(TriangleOscillator) vcoTriangle.get(m);
+			 sto=(SawtoothOscillator) vcoSawTooth.get(m);
+
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -120,9 +182,13 @@ public class ModuleVCOTest extends TestCase {
 		}
 		
 		
-		assertEquals(w, m.getWires().get(0));
+		   
 		assertTrue(p.output.isConnected());
-
+		assertTrue (tro.frequency.isConnected());
+		assertTrue (sto.frequency.isConnected());
+		assertTrue (sqo.frequency.isConnected());
+		
+		
 
 		
 	}
@@ -133,8 +199,19 @@ public class ModuleVCOTest extends TestCase {
 		((ModuleVCO) m).update((Port) m.getInputFm());
 		
 		Field f = null;
+		Field vcoSquare=null;
+		Field vcoTriangle=null;
+		Field vcoSawTooth=null;
+
 		   try {
 			 f = m.getClass().getDeclaredField("passThrough");
+			 vcoSquare = m.getClass().getDeclaredField("vcoSquare");
+			 vcoTriangle= m.getClass().getDeclaredField("vcoTriangle");
+			 vcoSawTooth = m.getClass().getDeclaredField("vcoSawtooth");
+			 
+			 vcoSquare.setAccessible(true);
+			 vcoTriangle.setAccessible(true);
+			 vcoSawTooth.setAccessible(true);
 			 f.setAccessible(true);
 		} catch (NoSuchFieldException e) {
 			// TODO Auto-generated catch block
@@ -144,8 +221,16 @@ public class ModuleVCOTest extends TestCase {
 			e.printStackTrace();
 		}
 		   PassThrough p=null;
+		   SquareOscillator sqo=null;
+		   TriangleOscillator tro=null;
+		   SawtoothOscillator sto=null;
+		   
 		   try {
 			 p=(PassThrough) f.get(m);
+			 sqo=(SquareOscillator) vcoSquare.get(m);
+			 tro=(TriangleOscillator) vcoTriangle.get(m);
+			 sto=(SawtoothOscillator) vcoSawTooth.get(m);
+
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -156,6 +241,9 @@ public class ModuleVCOTest extends TestCase {
 		
 		
 		assertFalse(p.output.isConnected());
+		assertEquals (m.getFrequency(),tro.frequency.get());
+		assertEquals (m.getFrequency(),sto.frequency.get());
+		assertEquals (m.getFrequency(),sqo.frequency.get());
 
 
 		
