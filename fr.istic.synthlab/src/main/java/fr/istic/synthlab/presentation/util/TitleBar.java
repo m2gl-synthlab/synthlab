@@ -10,16 +10,16 @@ import javax.swing.border.MatteBorder;
 import com.alee.laf.panel.WebPanel;
 
 import fr.istic.synthlab.controller.module.ICModule;
-import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
+import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 
 public class TitleBar extends WebPanel {
 
 	private static final long serialVersionUID = 276841652604347112L;
 
-	ICModule module = null;
-	JLabel titleLbl;
-	JLabel closeLbl;
+	private ICModule module = null;
+	private JLabel titleLbl;
+	private JLabel closeLbl;
 
 	public TitleBar(ICModule mod) {
 		super();
@@ -49,7 +49,7 @@ public class TitleBar extends WebPanel {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getButton() == MouseEvent.BUTTON1) {
 					module.p2cClosing();
-					((ICSynthesizer) CSynthesizer.getInstance()).p2cRemoveModule(module);
+					module.p2cRemoveModule(module);
 				}
 			}
 		});

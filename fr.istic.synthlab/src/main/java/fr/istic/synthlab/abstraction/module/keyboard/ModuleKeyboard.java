@@ -7,13 +7,14 @@ import com.jsyn.unitgen.UnitGenerator;
 import fr.istic.synthlab.abstraction.module.AModule;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
 import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 
 public class ModuleKeyboard extends AModule implements IModuleKeyboard {
 
 	private static final String MODULE_NAME = "EG";
 	
-	public ModuleKeyboard() {
-		super(MODULE_NAME);
+	public ModuleKeyboard(ICSynthesizer synth) {
+		super(synth, MODULE_NAME);
 		// TODO Auto-generated constructor stub
 	}
 

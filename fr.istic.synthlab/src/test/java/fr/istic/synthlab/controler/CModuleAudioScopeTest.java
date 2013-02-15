@@ -35,7 +35,7 @@ public class CModuleAudioScopeTest {
 		PACFactory.setAFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
-		iTest = new CModuleAudioScope();
+		iTest = new CModuleAudioScope(null);
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class CModuleAudioScopeTest {
 	 */
 	@Test
 	public void testP2cClosingAllWireConnected() {
-		ModuleEG module = new ModuleEG();
+		ModuleEG module = new ModuleEG(null);
 		UnitInputPort jSynPort = new UnitInputPort("TestInput");
 		for(IWire w : iTest.getWires()){
 			try {
@@ -100,7 +100,7 @@ public class CModuleAudioScopeTest {
 	@Test
 	public void testP2cClosingHalfWireConnected() {
 		int i = 0;
-		ModuleEG module = new ModuleEG();
+		ModuleEG module = new ModuleEG(null);
 		UnitInputPort jSynPort = new UnitInputPort("TestInput");
 		for(IWire w : iTest.getWires()){
 			if (i%2 == 0){

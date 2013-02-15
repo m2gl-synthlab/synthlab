@@ -1,4 +1,4 @@
-package fr.istic.synthlab.abstraction;
+package fr.istic.synthlab.abstraction.module;
 
 import junit.framework.TestCase;
 
@@ -25,8 +25,8 @@ public class ModuleTest extends TestCase {
 
 		SineOscillator osc = new SineOscillator();
 		synth.getJSyn().add(osc);
-
-		IModuleOUT out = PACFactory.getFactory().newOUT();
+		
+		IModuleOUT out = PACFactory.getFactory().newOUT(synth);
 		synth.add(out);
 		osc.output.connect(out.getInput().getJSyn());
 

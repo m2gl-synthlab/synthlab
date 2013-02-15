@@ -37,6 +37,8 @@ import fr.istic.synthlab.command.menu.AddModuleMIXCommand;
 import fr.istic.synthlab.command.menu.AddModuleREPCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarCurrentWireColorCommand;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
+import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
+import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 import fr.istic.synthlab.presentation.synthesizer.PSynthesizer;
 
@@ -89,8 +91,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 	private Color toolbarCurrentWireColor;
 	private boolean isPlaying = true;
+	private ICSynthesizer cSynthesizer;
 
-	public SynthFrame() {
+	public SynthFrame(ICSynthesizer cSynthesizer) {
+		this.cSynthesizer = cSynthesizer;
 		this.initComponents();
 		this.configureView();
 		this.defineCallbacks();
@@ -243,7 +247,8 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		colorButtonWhite = new WebButton(ImageUtils.createColorIcon(Color.WHITE));
 		colorButtonYellow = new WebButton(ImageUtils.createColorIcon(Color.YELLOW));
 
-		colorChooserButton = new WebButton("Current color", ImageUtils.createColorIcon(CSynthesizer.getInstance().getCurrentWireColor()));
+		colorChooserButton = new WebButton("Current color",
+				ImageUtils.createColorIcon(cSynthesizer.getCurrentWireColor()));
 
 		toolBar.add(colorButtonBlack);
 		toolBar.add(colorButtonGray);
@@ -563,8 +568,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		colorChooserButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				WebColorChooserDialog colorChooser = new WebColorChooserDialog(toolBar);
-				colorChooser.setColor(CSynthesizer.getInstance().getCurrentWireColor());
+				WebColorChooserDialog colorChooser = new WebColorChooserDialog(
+						toolBar);
+				colorChooser.setColor(cSynthesizer
+						.getCurrentWireColor());
 				colorChooser.setVisible(true);
 
 				if (colorChooser.getResult() == StyleConstants.OK_OPTION) {
@@ -576,15 +583,12 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	}
 
 	@Override
-	public void displaySynth(IPSynthesizer presentation) {
+	public void displaySynth() {
 		if (pres != null)
 			this.remove((PSynthesizer) pres);
 
-		pres = presentation;
-		// JScrollPane scrollPane = new JScrollPane();
+		pres = cSynthesizer.getPresentation();
 		this.add((PSynthesizer) pres);
-		// scrollPane.setViewportView((PSynthesizer) pres);
-
 		this.setVisible(true);
 	}
 
@@ -745,6 +749,11 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private void setCurrentWireColor(Color color) {
 		toolbarCurrentWireColor = color;
 		colorChooserButton.setIcon(ImageUtils.createColorIcon(toolbarCurrentWireColor));
+	}
+
+	@Override
+	public void setSynthesizer(ICSynthesizer synth) {
+		this.cSynthesizer = synth;
 	}
 
 }

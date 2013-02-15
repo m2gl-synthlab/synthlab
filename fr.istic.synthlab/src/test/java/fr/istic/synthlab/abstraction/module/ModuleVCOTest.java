@@ -1,8 +1,10 @@
-package fr.istic.synthlab.abstraction;
+package fr.istic.synthlab.abstraction.module;
 
 import java.lang.reflect.Field;
 
 import junit.framework.TestCase;
+
+import org.junit.Test;
 
 import com.jsyn.unitgen.PassThrough;
 import com.jsyn.unitgen.SawtoothOscillator;
@@ -11,12 +13,16 @@ import com.jsyn.unitgen.TriangleOscillator;
 
 import fr.istic.synthlab.abstraction.exception.BadConnectionException;
 import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
+import fr.istic.synthlab.abstraction.module.rep.IModuleREP;
+import fr.istic.synthlab.abstraction.module.rep.ModuleREP;
 import fr.istic.synthlab.abstraction.module.vco.IModuleVCO;
 import fr.istic.synthlab.abstraction.module.vco.ModuleVCO;
 import fr.istic.synthlab.abstraction.port.Port;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.abstraction.wire.Wire;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -25,11 +31,13 @@ import fr.istic.synthlab.factory.impl.PFactory;
 public class ModuleVCOTest extends TestCase {
 	
 	private IModuleVCO m;
+	private ISynthesizer synth;
 	public void setUp(){
 		PACFactory.setFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
-		m=new ModuleVCO();
+		synth = new CSynthesizer();
+		m=new ModuleVCO(synth);
 	
 
 		
@@ -38,44 +46,8 @@ public class ModuleVCOTest extends TestCase {
 	
 
 	public void testStart() {
-		Field vcoSquare=null;
-		Field vcoTriangle=null;
-		Field vcoSawTooth=null;
+		fail("Not yet implemented");
 
-		   try {
-			 vcoSquare = m.getClass().getDeclaredField("vcoSquare");
-			 vcoTriangle= m.getClass().getDeclaredField("vcoTriangle");
-			 vcoSawTooth = m.getClass().getDeclaredField("vcoSawtooth");
-			 
-			 vcoSquare.setAccessible(true);
-			 vcoTriangle.setAccessible(true);
-			 vcoSawTooth.setAccessible(true);
-		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		   PassThrough p=null;
-		   SquareOscillator sqo=null;
-		   TriangleOscillator tro=null;
-		   SawtoothOscillator sto=null;
-		   
-		   try {
-			 sqo=(SquareOscillator) vcoSquare.get(m);
-			 tro=(TriangleOscillator) vcoTriangle.get(m);
-			 sto=(SawtoothOscillator) vcoSawTooth.get(m);
-
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		   Synthesizer synth=new Synthesizer();
-		   m.start();
 		
 	}
 	
@@ -114,10 +86,12 @@ public class ModuleVCOTest extends TestCase {
 		m.setFrequency(140.0);
 		assertEquals(140.0, m.getFrequency());
 	}
-
 	
-	public void testGetWiresUpdate() {
-		IWire w=new Wire();
+	public void testGetJSyn() {
+		assertNotNull(m.getJSyn());
+	}
+	public void testGetWires(){
+		IWire w=new Wire(synth);
 		try {
 			w.connect(m.getInputFm());
 		} catch (PortAlreadyInUseException e) {
@@ -137,8 +111,100 @@ public class ModuleVCOTest extends TestCase {
 			e.printStackTrace();
 		}
 		
+		assertEquals(1, m.getWires().size());
+		assertEquals(w, m.getWires().get(0));
+
+
+		
+	}
+	
+	@Test
+	public void testGetWiresDifferentBad(){
+		IWire w=new Wire(synth);		
+		IWire w2=new Wire(synth);
+		IModuleREP mrep=new ModuleREP(synth);
+
+		try {
+			w.connect(m.getInputFm());
+			w.connect(mrep.getOutput1());
+			w2.connect(m.getInputFm());
+			fail("Une exception devrait etre lancée");
+
+		} catch (PortAlreadyInUseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BadConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+		
+
+	public void testGetWiresDifferent(){
+		IWire w=new Wire(synth);		
+		IWire w2=new Wire(synth);
+		IModuleREP mrep=new ModuleREP(synth);
+
+		try {
+			w.connect(m.getInputFm());
+			w2.connect(mrep.getInput());
+
+		} catch (PortAlreadyInUseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BadConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			w.connect(m.getOutputSawtooth());
+			w2.connect(m.getOutputSquare());
+
+
+		} catch (PortAlreadyInUseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BadConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		assertEquals(2, m.getWires().size());
+		assertEquals(w, m.getWires().get(0));
+		assertEquals(w2, m.getWires().get(1));
+
+
+		
+	}
+
+
+
+	
+	public void testGetWiresUpdate() {
+		IWire w=new Wire(synth);
+		try {
+			w.connect(m.getInputFm());
+		} catch (PortAlreadyInUseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BadConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			w.connect(m.getOutputSawtooth());
+		} catch (PortAlreadyInUseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BadConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
 		((ModuleVCO) m).update((Port) m.getInputFm());
-((ModuleVCO) m).update((Port) m.getInputFm());
+
 		
 		Field f = null;
 		Field vcoSquare=null;
@@ -182,7 +248,6 @@ public class ModuleVCOTest extends TestCase {
 		}
 		
 		
-		   
 		assertTrue(p.output.isConnected());
 		assertTrue (tro.frequency.isConnected());
 		assertTrue (sto.frequency.isConnected());

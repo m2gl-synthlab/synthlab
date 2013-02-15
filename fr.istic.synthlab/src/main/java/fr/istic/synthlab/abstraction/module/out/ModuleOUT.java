@@ -9,8 +9,10 @@ import com.jsyn.unitgen.UnitGenerator;
 import fr.istic.synthlab.abstraction.filter.AttenuationFilter;
 import fr.istic.synthlab.abstraction.module.AModule;
 import fr.istic.synthlab.abstraction.port.IInputPort;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.util.Convert;
 import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.factory.IFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 /**
@@ -28,12 +30,13 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	private IInputPort in;
 
-	public ModuleOUT() {
-		super(MODULE_NAME);
+	public ModuleOUT(ISynthesizer synth) {
+		super(synth, MODULE_NAME);
 		this.out = new ChannelOut();
 		this.attenuator = new AttenuationFilter();
 
-		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME, attenuator.input);
+		this.in = PACFactory.getFactory().newInputPort(synth, this, IN_NAME,
+				attenuator.input);
 		this.setAttenuation(0);
 
 		attenuator.output.connect(out.input);

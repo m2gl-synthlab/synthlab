@@ -6,19 +6,19 @@ import fr.istic.synthlab.abstraction.exception.BadConnectionException;
 import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
 import fr.istic.synthlab.abstraction.module.IModule;
 import fr.istic.synthlab.abstraction.port.OutputPort;
-import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
-import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
-import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
+import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.port.IPOutputPort;
 
 public class COutputPort extends OutputPort implements ICOutputPort {
 
 	private IPOutputPort pres;
+	private ICSynthesizer cSynthesizer;
 
-	public COutputPort(String name, ConnectableOutput output, IModule module) {
+	public COutputPort(ICSynthesizer cSynthesizer, String name, ConnectableOutput output, IModule module) {
 		super(name, output, module);
+		this.cSynthesizer = cSynthesizer;
 		this.pres = PACFactory.getPFactory().newOutputPort(this);
 	}
 
@@ -68,8 +68,8 @@ public class COutputPort extends OutputPort implements ICOutputPort {
 	@Override
 	public void p2cMouseHover() {
 		if (getWire() == null) {
-			if (CSynthesizer.getInstance().getCurrentWire() != null) {
-				if (CSynthesizer.getInstance().getCurrentWire().getInput() != null) {
+			if (cSynthesizer.getCurrentWire() != null) {
+				if (cSynthesizer.getCurrentWire().getInput() != null) {
 					pres.c2pConnectionAllowed();
 				} else {
 					pres.c2pConnectionNotAllowed();
@@ -78,7 +78,7 @@ public class COutputPort extends OutputPort implements ICOutputPort {
 				pres.c2pConnectionAllowed();
 			}
 		} else {
-			if (CSynthesizer.getInstance().getCurrentWire() == null) {
+			if (cSynthesizer.getCurrentWire() == null) {
 				pres.c2pConnectionAllowed();
 			} else {
 				pres.c2pConnectionNotAllowed();
@@ -88,22 +88,21 @@ public class COutputPort extends OutputPort implements ICOutputPort {
 
 	@Override
 	public void p2cMouseClicked() {
-		ISynthesizer synth = Synthesizer.getInstance();
 
 		// If there is no wire already connected
 		if (getWire() == null) {
-			IWire currentWire = synth.getCurrentWire();
+			IWire currentWire = cSynthesizer.getCurrentWire();
 
 			// If there is no current wire in the synthesizer
 			if (currentWire == null) {
 				// We create a new one
-				synth.setCurrentWire(PACFactory.getFactory().newWire());
-				currentWire = synth.getCurrentWire();
+				cSynthesizer.setCurrentWire(PACFactory.getFactory().newWire(cSynthesizer));
+				currentWire = cSynthesizer.getCurrentWire();
 			}
 			// If there is an existing wire in the synthesizer
 			else {
 				// We check if there is already an Output port connected with it
-				if (CSynthesizer.getInstance().getCurrentWire().getOutput() != null) {
+				if (cSynthesizer.getCurrentWire().getOutput() != null) {
 					pres.c2pConnectionAttemptFailed();
 					return;
 				}
@@ -122,13 +121,13 @@ public class COutputPort extends OutputPort implements ICOutputPort {
 
 			// If the wire is well connected, delete it from the synth
 			if (currentWire.isConnected()) {
-				synth.setCurrentWire(null);
+				cSynthesizer.setCurrentWire(null);
 			}
 
 		}
 		// If a wire is already connected, we disconnect it
 		else {
-			if (CSynthesizer.getInstance().getCurrentWire() == null) {
+			if (cSynthesizer.getCurrentWire() == null) {
 				if (getWire() != null) {
 					getWire().disconnect();
 				}

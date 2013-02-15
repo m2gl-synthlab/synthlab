@@ -8,12 +8,12 @@ public interface ISynthApp {
 	/**
 	 * Start the synthesizer
 	 */
-	public void startSynth();
+	public void newSynth();
 
 	/**
 	 * Restart the synthesizer
 	 */
-	public void newSynth();
+	public void startSynth();
 
 	/**
 	 * Quit the synthesizer

@@ -22,14 +22,14 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	 */
 	public static ICSynthesizer getInstance() {
 		if (instance == null) {
-			instance = (ICSynthesizer) PACFactory.getFactory().newSynthesizer();
+			instance = (ICSynthesizer)PACFactory.getFactory().newSynthesizer();
 		}
 		return instance;
 	}
 
 	public CSynthesizer() {
 		super();
-		this.pres = PACFactory.getPFactory().newSynthesizer();
+		this.pres = PACFactory.getPFactory().newSynthesizer(this);
 		instance = this;
 	}
 

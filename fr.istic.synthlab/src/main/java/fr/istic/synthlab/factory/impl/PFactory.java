@@ -10,6 +10,7 @@ import fr.istic.synthlab.controller.module.vcf.ICModuleVCF;
 import fr.istic.synthlab.controller.module.vco.ICModuleVCO;
 import fr.istic.synthlab.controller.port.ICInputPort;
 import fr.istic.synthlab.controller.port.ICOutputPort;
+import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.factory.IPFactory;
 import fr.istic.synthlab.presentation.module.audioscope.IPModuleAudioScope;
@@ -49,8 +50,8 @@ public class PFactory implements IPFactory {
 	}
 
 	@Override
-	public IPSynthesizer newSynthesizer() {
-		return new PSynthesizer();
+	public IPSynthesizer newSynthesizer(ICSynthesizer cSynthesizer) {
+		return new PSynthesizer(cSynthesizer);
 	}
 
 	@Override

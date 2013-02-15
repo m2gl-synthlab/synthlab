@@ -1,16 +1,22 @@
 package fr.istic.synthlab.controller.module.vcf;
 
 import fr.istic.synthlab.abstraction.module.vcf.ModuleVCF_HP;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.controller.module.ICModule;
+import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.module.vcf.IPModuleVCF;
+import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 
 public class CModuleVCF_HP extends ModuleVCF_HP implements ICModuleVCF {
 
 	private IPModuleVCF pres;
+	private ISynthesizer cSynthesizer;
 
-	public CModuleVCF_HP() {
-		super();
+	public CModuleVCF_HP(ISynthesizer cSynthesizer) {
+		super(cSynthesizer);
+		this.cSynthesizer = cSynthesizer;
 		this.pres = PACFactory.getPFactory().newVCF(this);
 	}
 
@@ -53,5 +59,15 @@ public class CModuleVCF_HP extends ModuleVCF_HP implements ICModuleVCF {
 		} else if (key.equals("resonance")) {
 			changeResonance(value);
 		}
+	}
+	
+	@Override
+	public IPSynthesizer getSynthesizerPresentation() {
+		return ((ICSynthesizer)cSynthesizer).getPresentation();
+	}
+
+	@Override
+	public void p2cRemoveModule(ICModule module) {
+		((ICSynthesizer) cSynthesizer).p2cRemoveModule(module);
 	}
 }
