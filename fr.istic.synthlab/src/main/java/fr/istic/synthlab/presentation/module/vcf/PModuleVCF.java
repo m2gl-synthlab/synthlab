@@ -7,6 +7,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.jsyn.swing.DoubleBoundedRangeModel;
+import com.jsyn.swing.ExponentialRangeModel;
 
 import fr.istic.synthlab.abstraction.module.vcf.IModuleVCF;
 import fr.istic.synthlab.controller.module.vcf.ICModuleVCF;
@@ -52,7 +53,7 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 		panelParams.setOpaque(false);
 		panelInputOutput.setOpaque(false);
 
-		cutFrequencyModel = new DoubleBoundedRangeModel(IModuleVCF.PARAM_NAME_CUT_FREQUENCY, 100, 10, 22000, ctrl.getCutFrequency());
+		cutFrequencyModel = new ExponentialRangeModel(IModuleVCF.PARAM_NAME_CUT_FREQUENCY, 100, 10, 10000, ctrl.getCutFrequency());
 		RotaryTextController cutRotary = new RotaryTextController(cutFrequencyModel, 4);
 		panelParams.add(cutRotary);
 
