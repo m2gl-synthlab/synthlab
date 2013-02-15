@@ -52,7 +52,7 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 		panelParams.setOpaque(false);
 		panelInputOutput.setOpaque(false);
 
-		cutFrequencyModel = new DoubleBoundedRangeModel(IModuleVCF.PARAM_NAME_CUT_FREQUENCY, 100, 0, 22000, ctrl.getCutFrequency());
+		cutFrequencyModel = new DoubleBoundedRangeModel(IModuleVCF.PARAM_NAME_CUT_FREQUENCY, 100, 10, 22000, ctrl.getCutFrequency());
 		RotaryTextController cutRotary = new RotaryTextController(cutFrequencyModel, 4);
 		panelParams.add(cutRotary);
 
