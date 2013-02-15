@@ -17,7 +17,9 @@ public interface ISynthFrame {
 	 */
 	public void quitSynth();
 
-	public void setSynthesizer(ICSynthesizer synth);
+//	public void setSynthesizer(ICSynthesizer synth);
+
+	public void addToMenu(ICSynthesizer currentSynth);
 
 
 }

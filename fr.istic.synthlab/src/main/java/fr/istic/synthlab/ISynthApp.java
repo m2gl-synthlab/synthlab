@@ -25,7 +25,7 @@ public interface ISynthApp {
 	 * 
 	 * @param synthesizer
 	 */
-	public void setSynthesizer(ICSynthesizer synth);
+	public void setSynthesizer(String string);
 
 	/**
 	 * Return the current synthesizer controller
