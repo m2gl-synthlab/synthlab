@@ -17,32 +17,33 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
 
 public class WireTest extends TestCase {
-	
+
 	private IWire wire;
 	private IInputPort ip;
 	private IOutputPort op;
-	public void setUp(){
+
+	public void setUp() {
 		PACFactory.setFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 
-		wire=PACFactory.getAFactory().newWire();
-			ip=PACFactory.getAFactory().newInputPort(new ModuleOUT(),"port", new UnitInputPort("port"));
-		 op=PACFactory.getAFactory().newOutputPort(new ModuleOUT(),"port", new UnitOutputPort("port"));
+		wire = PACFactory.getAFactory().newWire();
+		ip = PACFactory.getAFactory().newInputPort(new ModuleOUT(), "port", new UnitInputPort("port"));
+		op = PACFactory.getAFactory().newOutputPort(new ModuleOUT(), "port", new UnitOutputPort("port"));
 
 	}
-	
+
 	public void testGetInput() {
 		System.out.println(wire);
-		assertEquals(null,wire.getInput());
+		assertEquals(null, wire.getInput());
 	}
 
 	public void testGetOutput() {
-		assertEquals(null,wire.getOutput());
+		assertEquals(null, wire.getOutput());
 	}
 
 	public void testIsConnected() {
-		assertEquals(false,wire.isConnected());
+		assertEquals(false, wire.isConnected());
 	}
 
 	public void testConnectIInputPort() {
@@ -55,7 +56,7 @@ public class WireTest extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		assertEquals(ip, wire.getInput());
 		assertFalse(ip.isInUse());
 		assertFalse(wire.isConnected());
@@ -74,14 +75,13 @@ public class WireTest extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		assertEquals(
-				op, wire.getOutput());
-;
+
+		assertEquals(op, wire.getOutput());
+		;
 		assertTrue(op.isInUse());
 		assertTrue(ip.isInUse());
 		assertTrue(wire.isConnected());
-		
+
 	}
 
 	public void testDisconnect() {

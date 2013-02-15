@@ -22,10 +22,10 @@ public class ModuleTest extends TestCase {
 
 	public void testCModuleOUT() {
 		ISynthesizer synth = PACFactory.getFactory().newSynthesizer();
-		
+
 		SineOscillator osc = new SineOscillator();
 		synth.getJSyn().add(osc);
-		
+
 		IModuleOUT out = PACFactory.getFactory().newOUT();
 		synth.add(out);
 		osc.output.connect(out.getInput().getJSyn());
