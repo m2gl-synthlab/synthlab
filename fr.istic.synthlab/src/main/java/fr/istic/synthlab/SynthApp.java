@@ -75,6 +75,11 @@ public class SynthApp implements ISynthApp {
 		currentFile[0] = fileDir;
 		currentFile[1] = filename;
 
+		frame.removeFromMenu(currentSynth);
+		
+		currentSynth.setPath(fileDir + filename);
+		frame.addToMenu(currentSynth);
+		
 	}
 
 	@Override

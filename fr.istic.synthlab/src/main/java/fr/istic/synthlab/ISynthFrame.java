@@ -23,5 +23,7 @@ public interface ISynthFrame {
 
 	public void stop();
 
+	public void removeFromMenu(ICSynthesizer currentSynth);
+
 
 }

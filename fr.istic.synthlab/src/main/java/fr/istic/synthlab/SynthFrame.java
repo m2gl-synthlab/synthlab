@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -36,9 +38,7 @@ import fr.istic.synthlab.command.menu.AddModuleAudioScopeCommand;
 import fr.istic.synthlab.command.menu.AddModuleMIXCommand;
 import fr.istic.synthlab.command.menu.AddModuleREPCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarCurrentWireColorCommand;
-import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
-import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 import fr.istic.synthlab.presentation.synthesizer.PSynthesizer;
 
@@ -55,7 +55,8 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private JMenuItem menuItemQuit, menuItemDoc, menuItemAbout;
 	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT, menuItemAddModuleVCFLP, menuItemAddModuleVCFHP, menuItemAddModuleEG,
 			menuItemAddModuleAudioScope, menuItemAddModuleREP, menuItemAddModuleVCA, menuItemAddModuleMIX;
-
+	private List<JMenuItem> files;
+	
 	// Toolbar
 	private WebToolBar toolBar = new WebToolBar();
 	private String[] iconFiles = { "res/play.png", "res/stop.png" };
@@ -104,6 +105,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	 * Initialize the frame's components
 	 */
 	private void initComponents() {
+		files = new ArrayList<JMenuItem>();
 		// instanciation de la barre de menu
 
 		mainMenuBar = new JMenuBar();
@@ -767,7 +769,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 				displaySynth();
 			}
 		});
-		
+		files.add(item);
 		menuWindow.add(item);
 	}
 
@@ -782,6 +784,15 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			e1.printStackTrace();
 		}
 		isPlaying = false;
+	}
+
+	@Override
+	public void removeFromMenu(ICSynthesizer currentSynth) {
+		for(JMenuItem currItem : files){
+			if(currItem.getText().equals(currentSynth.getPath())){
+				menuWindow.remove(currItem);
+			}
+		}
 	}
 
 }
