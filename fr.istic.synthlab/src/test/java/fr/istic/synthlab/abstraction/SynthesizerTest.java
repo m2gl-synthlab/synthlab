@@ -27,9 +27,11 @@ public class SynthesizerTest extends TestCase {
 		PACFactory.setFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
-		synth = new Synthesizer();
-		module = new CModuleOUT();
-		;
+		synth=new Synthesizer();
+		module=PACFactory.getAFactory().newOUT();
+
+		
+
 
 	}
 
