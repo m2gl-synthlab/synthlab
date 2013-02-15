@@ -1,9 +1,16 @@
 package fr.istic.synthlab.abstraction;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import java.lang.reflect.Field;
+import java.rmi.server.UID;
+
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
+import com.jsyn.ports.UnitOutputPort;
 import com.jsyn.unitgen.PassThrough;
 import com.jsyn.unitgen.SawtoothOscillator;
 import com.jsyn.unitgen.SquareOscillator;
@@ -11,8 +18,12 @@ import com.jsyn.unitgen.TriangleOscillator;
 
 import fr.istic.synthlab.abstraction.exception.BadConnectionException;
 import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
+import fr.istic.synthlab.abstraction.module.rep.IModuleREP;
+import fr.istic.synthlab.abstraction.module.rep.ModuleREP;
 import fr.istic.synthlab.abstraction.module.vco.IModuleVCO;
 import fr.istic.synthlab.abstraction.module.vco.ModuleVCO;
+import fr.istic.synthlab.abstraction.port.IOutputPort;
+import fr.istic.synthlab.abstraction.port.OutputPort;
 import fr.istic.synthlab.abstraction.port.Port;
 import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
@@ -75,6 +86,7 @@ public class ModuleVCOTest extends TestCase {
 			e.printStackTrace();
 		}
 		   Synthesizer synth=new Synthesizer();
+		   synth.add(m);
 		   m.start();
 		
 	}
@@ -114,9 +126,11 @@ public class ModuleVCOTest extends TestCase {
 		m.setFrequency(140.0);
 		assertEquals(140.0, m.getFrequency());
 	}
-
 	
-	public void testGetWiresUpdate() {
+	public void testGetJSyn() {
+		assertNotNull(m.getJSyn());
+	}
+	public void testGetWires(){
 		IWire w=new Wire();
 		try {
 			w.connect(m.getInputFm());
@@ -137,8 +151,100 @@ public class ModuleVCOTest extends TestCase {
 			e.printStackTrace();
 		}
 		
+		assertEquals(1, m.getWires().size());
+		assertEquals(w, m.getWires().get(0));
+
+
+		
+	}
+	
+	@Test
+	public void testGetWiresDifferentBad(){
+		IWire w=new Wire();		
+		IWire w2=new Wire();
+		IModuleREP mrep=new ModuleREP();
+
+		try {
+			w.connect(m.getInputFm());
+			w.connect(mrep.getOutput1());
+			w2.connect(m.getInputFm());
+			fail("Une exception devrait etre lancée");
+
+		} catch (PortAlreadyInUseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BadConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+		
+
+	public void testGetWiresDifferent(){
+		IWire w=new Wire();		
+		IWire w2=new Wire();
+		IModuleREP mrep=new ModuleREP();
+
+		try {
+			w.connect(m.getInputFm());
+			w2.connect(mrep.getInput());
+
+		} catch (PortAlreadyInUseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BadConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			w.connect(m.getOutputSawtooth());
+			w2.connect(m.getOutputSquare());
+
+
+		} catch (PortAlreadyInUseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BadConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		assertEquals(2, m.getWires().size());
+		assertEquals(w, m.getWires().get(0));
+		assertEquals(w2, m.getWires().get(1));
+
+
+		
+	}
+
+
+
+	
+	public void testUpdate() {
+		IWire w=new Wire();
+		try {
+			w.connect(m.getInputFm());
+		} catch (PortAlreadyInUseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BadConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			w.connect(m.getOutputSawtooth());
+		} catch (PortAlreadyInUseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BadConnectionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
 		((ModuleVCO) m).update((Port) m.getInputFm());
-((ModuleVCO) m).update((Port) m.getInputFm());
+
 		
 		Field f = null;
 		Field vcoSquare=null;
@@ -182,7 +288,6 @@ public class ModuleVCOTest extends TestCase {
 		}
 		
 		
-		   
 		assertTrue(p.output.isConnected());
 		assertTrue (tro.frequency.isConnected());
 		assertTrue (sto.frequency.isConnected());
