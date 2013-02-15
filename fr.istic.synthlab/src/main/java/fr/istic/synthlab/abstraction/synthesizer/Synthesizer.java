@@ -73,7 +73,7 @@ public class Synthesizer implements ISynthesizer {
 	@Override
 	public void start() {
 		if (!isRunning()) {
-			this.synth.start(22000);
+			this.synth.start();
 			for (IModule mod : this.modules) {
 				mod.start();
 			}
