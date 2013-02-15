@@ -11,6 +11,7 @@ public class AmplitudeModulatorFilter extends UnitFilter {
 
 	public AmplitudeModulatorFilter(double baseAmplitude) {
 		addPort(inputAm);
+		
 	}
 
 	@Override
@@ -24,7 +25,6 @@ public class AmplitudeModulatorFilter extends UnitFilter {
 			double in = inputs[i]; // Signal d'entrée
 			double am = inputsAm[i]; // Signal de modulation -1;1
 			// double mod = am * 5 * 12; // Conversion en dB
-			// TODO : Formule a vérifier avec Mr P.
 			outputs[i] = in * am;// Convert.dB2V(mod) ; // Modulation du signal
 		}
 	}
