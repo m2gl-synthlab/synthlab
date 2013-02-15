@@ -1,26 +1,26 @@
-package fr.istic.synthlab.abstraction;
+package fr.istic.synthlab.abstraction.module;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.lang.reflect.Field;
 
-import org.junit.Before;
 import org.junit.Test;
 
-import com.jsyn.unitgen.FilterLowPass;
 import com.jsyn.unitgen.PassThrough;
+import com.jsyn.unitgen.SawtoothOscillator;
+import com.jsyn.unitgen.SquareOscillator;
+import com.jsyn.unitgen.TriangleOscillator;
 
+import junit.framework.TestCase;
 import fr.istic.synthlab.abstraction.exception.BadConnectionException;
 import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
+import fr.istic.synthlab.abstraction.filter.AmplitudeModulatorFilter;
 import fr.istic.synthlab.abstraction.module.rep.IModuleREP;
 import fr.istic.synthlab.abstraction.module.rep.ModuleREP;
-import fr.istic.synthlab.abstraction.module.vcf.IModuleVCF;
-import fr.istic.synthlab.abstraction.module.vcf.ModuleVCF_HP;
-import fr.istic.synthlab.abstraction.module.vcf.ModuleVCF_LP;
+import fr.istic.synthlab.abstraction.module.vca.IModuleVCA;
+import fr.istic.synthlab.abstraction.module.vca.ModuleVCA;
+import fr.istic.synthlab.abstraction.module.vco.ModuleVCO;
 import fr.istic.synthlab.abstraction.port.Port;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
@@ -31,53 +31,36 @@ import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
 
-public class ModuleVCF_LPTest {
-
-	IModuleVCF m;
+public class ModuleVCATest extends TestCase {
+	
+	private IModuleVCA m;
 	private ISynthesizer synth;
-	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 		PACFactory.setFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
-		m=new ModuleVCF_LP(synth);
+		m=new ModuleVCA(synth);
 	
-	}
-	@Test
-	public void testGetJSyn() {
-		assertNotNull(m.getJSyn());
-	}
 
-	@Test
+		
+
+	}
+	
+
+
 	public void testStart() {
 		fail("Not yet implemented");
 	}
 
-	@Test
 	public void testStop() {
 		fail("Not yet implemented");
 	}
-
-	@Test
-	public void testSetGetCutFrequency() {
-		m.setCutFrequency(3000);
-		assertEquals(3000, m.getCutFrequency());
-	}
-
-
-	@Test
-	public void testSetGetResonance() {
-		m.setResonance(25.5);
-		assertEquals(25.5, m.getResonance(),0);	}
-
-
-
 	
 	public void testGetWires(){
 		IWire w=new Wire(synth);
 		try {
-			w.connect(m.getInputFm());
+			w.connect(m.getInputAM());
 		} catch (PortAlreadyInUseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -102,8 +85,10 @@ public class ModuleVCF_LPTest {
 		
 	}
 	
+	public void testGetJSyn() {
+		assertNotNull(m.getJSyn());
+	}
 	
-	@Test
 	public void testGetWiresDifferent(){
 		IWire w=new Wire(synth);		
 		IWire w2=new Wire(synth);
@@ -141,13 +126,11 @@ public class ModuleVCF_LPTest {
 
 		
 	}
-
-
-	@Test
+	
 	public void testUpdate() {
 		IWire w=new Wire(synth);
 		try {
-			w.connect(m.getInputFm());
+			w.connect(m.getInputAM());
 		} catch (PortAlreadyInUseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -165,20 +148,20 @@ public class ModuleVCF_LPTest {
 			e.printStackTrace();
 		}
 		
-((ModuleVCF_LP) m).update((Port) m.getInputFm());
+		((ModuleVCA) m).update((Port) m.getInputAM());
 		
-		Field ptr = null;
-		Field fj1=null;
-		Field fj2=null;
+		Field pta = null;
+		Field ptb=null;
+		Field iam=null;
 
 		   try {
-			 ptr = m.getClass().getDeclaredField("passThrough");
-			 fj1 = m.getClass().getDeclaredField("filterJSyn1");
-			 fj2= m.getClass().getDeclaredField("filterJSyn2");
+			 pta = m.getClass().getDeclaredField("passThroughA");
+			 ptb = m.getClass().getDeclaredField("passThroughB");
+			 iam= m.getClass().getDeclaredField("inputAmplitudeModulator");
 			 
-			 ptr.setAccessible(true);
-			 fj1.setAccessible(true);
-			 fj2.setAccessible(true);
+			 pta.setAccessible(true);
+			 ptb.setAccessible(true);
+			 iam.setAccessible(true);
 		} catch (NoSuchFieldException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -186,15 +169,14 @@ public class ModuleVCF_LPTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		   PassThrough passThrough=null;
-
-		   FilterLowPass filterJSyn1=null;
-		   FilterLowPass filterJSyn2=null;
+		   PassThrough passThroughA=null;
+		   PassThrough passThroughB=null;
+		   AmplitudeModulatorFilter inputAmplitudeModulatorFilter=null;
 		   
 		   try {
-			   passThrough=(PassThrough) ptr.get(m);
-			   filterJSyn1=(FilterLowPass) fj1.get(m);
-			   filterJSyn2=(FilterLowPass) fj2.get(m);
+			   passThroughA=(PassThrough) pta.get(m);
+			   passThroughB=(PassThrough) ptb.get(m);
+			   inputAmplitudeModulatorFilter=(AmplitudeModulatorFilter) iam.get(m);
 
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
@@ -206,32 +188,32 @@ public class ModuleVCF_LPTest {
 		
 		
 		   
-		assertTrue(passThrough.output.isConnected());
-		assertTrue(filterJSyn1.frequency.isConnected());
-		assertTrue(filterJSyn2.output.isConnected());
-
+		assertTrue(passThroughA.output.isConnected());
+		assertTrue (passThroughB.input.isConnected());
+		assertTrue (inputAmplitudeModulatorFilter.input.isConnected());
+		assertTrue (inputAmplitudeModulatorFilter.output.isConnected());
+		
 		
 
 		
 	}
 	
-	@Test
 	public void testUpdateWithoutConnect() {
 
-((ModuleVCF_LP) m).update((Port) m.getInputFm());
+((ModuleVCA) m).update((Port) m.getInputAM());
 		
-		Field ptr = null;
-		Field fj1=null;
-		Field fj2=null;
+		Field pta = null;
+		Field ptb=null;
+		Field iam=null;
 
 		   try {
-			 ptr = m.getClass().getDeclaredField("passThrough");
-			 fj1 = m.getClass().getDeclaredField("filterJSyn1");
-			 fj2= m.getClass().getDeclaredField("filterJSyn2");
+			 pta = m.getClass().getDeclaredField("passThroughA");
+			 ptb = m.getClass().getDeclaredField("passThroughB");
+			 iam= m.getClass().getDeclaredField("inputAmplitudeModulator");
 			 
-			 ptr.setAccessible(true);
-			 fj1.setAccessible(true);
-			 fj2.setAccessible(true);
+			 pta.setAccessible(true);
+			 ptb.setAccessible(true);
+			 iam.setAccessible(true);
 		} catch (NoSuchFieldException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -239,15 +221,14 @@ public class ModuleVCF_LPTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		   PassThrough passThrough=null;
-
-		   FilterLowPass filterJSyn1=null;
-		   FilterLowPass filterJSyn2=null;
+		   PassThrough passThroughA=null;
+		   PassThrough passThroughB=null;
+		   AmplitudeModulatorFilter inputAmplitudeModulatorFilter=null;
 		   
 		   try {
-			   passThrough=(PassThrough) ptr.get(m);
-			   filterJSyn1=(FilterLowPass) fj1.get(m);
-			   filterJSyn2=(FilterLowPass) fj2.get(m);
+			   passThroughA=(PassThrough) pta.get(m);
+			   passThroughB=(PassThrough) ptb.get(m);
+			   inputAmplitudeModulatorFilter=(AmplitudeModulatorFilter) iam.get(m);
 
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
@@ -259,20 +240,16 @@ public class ModuleVCF_LPTest {
 		
 		
 		   
-		   
-		assertFalse(passThrough.output.isConnected());
-		assertFalse(filterJSyn1.frequency.isConnected());
-		assertFalse(filterJSyn2.output.isConnected());
-
-		assertEquals(m.getCutFrequency(), filterJSyn1.frequency.get(),0);
-		assertEquals(m.getCutFrequency(), filterJSyn2.frequency.get(),0);
-
+		assertTrue(passThroughA.output.isConnected());
+		assertTrue (passThroughB.input.isConnected());
+		assertFalse (inputAmplitudeModulatorFilter.input.isConnected());
+		assertFalse (inputAmplitudeModulatorFilter.output.isConnected());
+		
 		
 
 		
 	}
 	
-	@Test
 	public void testGetWiresDifferentBad(){
 		IWire w=new Wire(synth);		
 		IWire w2=new Wire(synth);
@@ -296,4 +273,13 @@ public class ModuleVCF_LPTest {
 		
 
 
+		
+	
+	public void testSetGetAttenuation() {
+		m.setAttenuation(4.0);
+		assertEquals(4.0, m.getAttenuation());
+	}
+
+
+	
 }

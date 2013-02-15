@@ -1,4 +1,4 @@
-package fr.istic.synthlab.abstraction;
+package fr.istic.synthlab.abstraction.module;
 
 import java.lang.reflect.Field;
 
@@ -46,45 +46,8 @@ public class ModuleVCOTest extends TestCase {
 	
 
 	public void testStart() {
-		Field vcoSquare=null;
-		Field vcoTriangle=null;
-		Field vcoSawTooth=null;
+		fail("Not yet implemented");
 
-		   try {
-			 vcoSquare = m.getClass().getDeclaredField("vcoSquare");
-			 vcoTriangle= m.getClass().getDeclaredField("vcoTriangle");
-			 vcoSawTooth = m.getClass().getDeclaredField("vcoSawtooth");
-			 
-			 vcoSquare.setAccessible(true);
-			 vcoTriangle.setAccessible(true);
-			 vcoSawTooth.setAccessible(true);
-		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		   PassThrough p=null;
-		   SquareOscillator sqo=null;
-		   TriangleOscillator tro=null;
-		   SawtoothOscillator sto=null;
-		   
-		   try {
-			 sqo=(SquareOscillator) vcoSquare.get(m);
-			 tro=(TriangleOscillator) vcoTriangle.get(m);
-			 sto=(SawtoothOscillator) vcoSawTooth.get(m);
-
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		   Synthesizer synth=new Synthesizer();
-		   synth.add(m);
-		   m.start();
 		
 	}
 	
