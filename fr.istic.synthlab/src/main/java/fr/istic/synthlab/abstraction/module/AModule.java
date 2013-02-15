@@ -6,8 +6,6 @@ import java.util.List;
 
 import fr.istic.synthlab.abstraction.port.IPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
-import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
-import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 
 /**
  * Abstract class for modules.
@@ -19,11 +17,16 @@ public abstract class AModule implements IModule {
 	private HashMap<String, Double> parameters;
 	
 	public AModule(ISynthesizer synth, String name) {
+		//genère le numero de serie des modules
 		int nbModules = 0;
 		if(synth.getModules().size() >0){
 			for (IModule module : synth.getModules()) {
+				//on recupere le numero de serie du module
+				String numberModule[]= module.getName().split("- ");
+				//Selon le modele du module
 				if (module.getName().startsWith(name)) {
-					nbModules++;
+					//On retient le numero de la dernière instance
+					nbModules = Integer.parseInt(numberModule[1]);
 				}
 			}
 		}
@@ -35,6 +38,11 @@ public abstract class AModule implements IModule {
 	@Override
 	public String getName() {
 		return name;
+	}
+	
+	@Override
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
@@ -72,4 +80,6 @@ public abstract class AModule implements IModule {
 		}
 		return null;
 	}
+	
+	
 }

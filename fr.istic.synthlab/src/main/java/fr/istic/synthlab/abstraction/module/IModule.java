@@ -36,6 +36,13 @@ public interface IModule {
 	 * @return
 	 */
 	public String getName();
+	
+	/**
+	 *Set the module's name
+	 * 
+	 * @return
+	 */
+	public void setName(String name);
 
 	/**
 	 * Return the list of wire connected to the module

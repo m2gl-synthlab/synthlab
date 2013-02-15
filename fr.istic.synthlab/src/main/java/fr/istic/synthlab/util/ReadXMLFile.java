@@ -87,6 +87,7 @@ public class ReadXMLFile {
 						throw new Exception("Module not recognized in xml file");
 					}
 
+					module.setName(eElement.getAttribute("name"));
 					int x = (int) Double.parseDouble(eElement.getAttribute("x"));
 					int y = (int) Double.parseDouble(eElement.getAttribute("y"));
 					Point p = new Point(x, y);
