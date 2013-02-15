@@ -21,5 +21,7 @@ public interface ISynthFrame {
 
 	public void addToMenu(ICSynthesizer currentSynth);
 
+	public void stop();
+
 
 }

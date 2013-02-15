@@ -771,4 +771,17 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuWindow.add(item);
 	}
 
+	@Override
+	public void stop() {
+		Image img;
+		try {
+			img = ImageIO.read(new File(iconFiles[0]));
+			img = img.getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+			buttonPlayPause.setIcon(new ImageIcon(img));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		isPlaying = false;
+	}
+
 }

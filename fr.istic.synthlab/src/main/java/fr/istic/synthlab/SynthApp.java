@@ -54,6 +54,7 @@ public class SynthApp implements ISynthApp {
 		this.synth.add((ICSynthesizer) (PACFactory.getFactory()).newSynthesizer());
 		currentSynth = synth.get(synth.size()-1);
 		currentSynth.setPath("untitled"+untitledIndex);
+		currentSynth.setFrame(frame);
 		untitledIndex++;
 	}
 
@@ -96,6 +97,7 @@ public class SynthApp implements ISynthApp {
 
 	@Override
 	public void setSynthesizer(String synthS) {
+		currentSynth.stop();
 		for(ISynthesizer synth : this.synth){
 			if(((ICSynthesizer)synth).getPath().equals(synthS)){
 				currentSynth = (ICSynthesizer) synth;
