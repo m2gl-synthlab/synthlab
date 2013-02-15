@@ -57,13 +57,18 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	@Override
 	public void start() {
-		if (!isMute())
+		if (!isMute()){
+			try{
 			out.start();
+			}catch(Exception e){}
+		}
 	}
 
 	@Override
 	public void stop() {
+		try{
 		out.stop();
+		}catch(Exception e){}
 	}
 
 	@Override

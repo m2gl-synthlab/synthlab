@@ -41,15 +41,15 @@ public class SaveLoadTest extends TestCase {
 		PACFactory.setPFactory(PFactory.getInstance());
 
 		synth = new CSynthesizer();
-		sf = new SynthFrame(synth);
 		s = new SynthApp(sf);
-		s.setSynthesizer(synth);
+		sf = new SynthFrame(s);
+//		//s.setSynthesizer(synth);
 
 	}
 
 	public void testSaveAndLoadSetTone() {
 
-		s.setSynthesizer(synth);
+//		//s.setSynthesizer(synth);
 		s.setDisplaySynthCommand(new DisplayCommand(sf));
 		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
 		ICModuleVCO moduleVCO = new CModuleVCO(synth);
@@ -64,7 +64,7 @@ public class SaveLoadTest extends TestCase {
 
 		s.saveToXML("", "test.synthlab");
 
-		s.setSynthesizer(new CSynthesizer());
+		//s.setSynthesizer(new CSynthesizer());
 		s.loadFromXML("", "test.synthlab");
 		assertEquals(3, s.getSynthesizer().getModules().size());
 		assertEquals("CModuleVCO", s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
@@ -77,7 +77,7 @@ public class SaveLoadTest extends TestCase {
 
 	public void testSaveAndLoadSetAttenuation() {
 
-		s.setSynthesizer(synth);
+		//s.setSynthesizer(synth);
 		s.setDisplaySynthCommand(new DisplayCommand(sf));
 		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
 		ICModuleVCO moduleVCO = new CModuleVCO(synth);
@@ -92,7 +92,7 @@ public class SaveLoadTest extends TestCase {
 
 		s.saveToXML("", "test.synthlab");
 
-		s.setSynthesizer(new CSynthesizer());
+		//s.setSynthesizer(new CSynthesizer());
 		s.loadFromXML("", "test.synthlab");
 		assertEquals(3, s.getSynthesizer().getModules().size());
 		assertEquals("CModuleVCO", s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
@@ -105,7 +105,7 @@ public class SaveLoadTest extends TestCase {
 
 	public void testSaveAndLoadWire() {
 
-		s.setSynthesizer(synth);
+		//s.setSynthesizer(synth);
 		s.setDisplaySynthCommand(new DisplayCommand(sf));
 		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
 		ICModuleVCO moduleVCO = new CModuleVCO(synth);
@@ -141,7 +141,7 @@ public class SaveLoadTest extends TestCase {
 
 		s.saveToXML("", "test.synthlab");
 
-		s.setSynthesizer(new CSynthesizer());
+		//s.setSynthesizer(new CSynthesizer());
 		s.loadFromXML("", "test.synthlab");
 		assertEquals(3, s.getSynthesizer().getModules().size());
 		assertEquals("CModuleVCO", s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
@@ -154,7 +154,7 @@ public class SaveLoadTest extends TestCase {
 
 	public void testSaveAndLoadWireVCF() {
 
-		s.setSynthesizer(synth);
+		//s.setSynthesizer(synth);
 		s.setDisplaySynthCommand(new DisplayCommand(sf));
 		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
 		ICModuleVCF moduleVCF = new CModuleVCF_LP(synth);
@@ -190,7 +190,7 @@ public class SaveLoadTest extends TestCase {
 
 		s.saveToXML("", "test.synthlab");
 
-		s.setSynthesizer(new CSynthesizer());
+		//s.setSynthesizer(new CSynthesizer());
 		s.loadFromXML("", "test.synthlab");
 		assertEquals(3, s.getSynthesizer().getModules().size());
 		assertEquals("CModuleVCFA_LP", s.getSynthesizer().getModules().get(0).getClass().getSimpleName());

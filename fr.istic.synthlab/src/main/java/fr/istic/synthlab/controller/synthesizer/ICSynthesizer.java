@@ -2,6 +2,9 @@ package fr.istic.synthlab.controller.synthesizer;
 
 import java.awt.Color;
 
+import javax.swing.Icon;
+
+import fr.istic.synthlab.ISynthFrame;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.controller.module.ICModule;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
@@ -52,4 +55,10 @@ public interface ICSynthesizer extends ISynthesizer {
 	public void setCurrentWireColor(Color currentWireColor);
 
 	public Color getCurrentWireColor();
+
+	public String getPath();
+
+	void setPath(String path);
+
+	void setFrame(ISynthFrame frame);
 }

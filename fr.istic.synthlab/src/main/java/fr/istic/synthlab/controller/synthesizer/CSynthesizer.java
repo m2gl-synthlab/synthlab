@@ -2,6 +2,7 @@ package fr.istic.synthlab.controller.synthesizer;
 
 import java.awt.Color;
 
+import fr.istic.synthlab.ISynthFrame;
 import fr.istic.synthlab.abstraction.module.IModule;
 import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
@@ -14,23 +15,12 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 
 	private IPSynthesizer pres;
 	private Color currentWireColor = Color.GRAY;
-
-	private static ICSynthesizer instance;
-
-	/**
-	 * @return the synthesizer's instance
-	 */
-	public static ICSynthesizer getInstance() {
-		if (instance == null) {
-			instance = (ICSynthesizer)PACFactory.getFactory().newSynthesizer();
-		}
-		return instance;
-	}
+	private String path;
+	private ISynthFrame frame;
 
 	public CSynthesizer() {
 		super();
 		this.pres = PACFactory.getPFactory().newSynthesizer(this);
-		instance = this;
 	}
 
 	@Override
@@ -45,6 +35,7 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	public void stop() {
 		super.stop();
 		if (!isRunning()) {
+			frame.stop();
 			pres.c2pStop();
 		}
 	}
@@ -111,5 +102,20 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	@Override
 	public Color getCurrentWireColor() {
 		return currentWireColor;
+	}
+
+	@Override
+	public String getPath() {
+		return path;
+	}
+	
+	@Override
+	public void setPath(String path) {
+		this.path = path;
+	}
+	
+	@Override
+	public void setFrame(ISynthFrame frame) {
+		this.frame = frame;
 	}
 }
