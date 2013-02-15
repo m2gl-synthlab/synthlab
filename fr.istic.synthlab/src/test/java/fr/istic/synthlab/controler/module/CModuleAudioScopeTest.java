@@ -14,10 +14,10 @@ import org.junit.Test;
 import com.jsyn.ports.ConnectableInput;
 import com.jsyn.ports.UnitInputPort;
 
-import fr.istic.synthlab.abstraction.ModuleTest;
 import fr.istic.synthlab.abstraction.exception.BadConnectionException;
 import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
 import fr.istic.synthlab.abstraction.module.IModule;
+import fr.istic.synthlab.abstraction.module.ModuleTest;
 import fr.istic.synthlab.abstraction.module.audioscope.ModuleAudioScope;
 import fr.istic.synthlab.abstraction.module.eg.ModuleEG;
 import fr.istic.synthlab.abstraction.observer.Observable;

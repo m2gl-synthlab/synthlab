@@ -1,4 +1,4 @@
-package fr.istic.synthlab.abstraction;
+package fr.istic.synthlab.abstraction.module;
 
 import static org.junit.Assert.*;
 

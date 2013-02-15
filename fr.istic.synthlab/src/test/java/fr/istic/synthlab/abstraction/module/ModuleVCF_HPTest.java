@@ -1,26 +1,25 @@
-package fr.istic.synthlab.abstraction;
+package fr.istic.synthlab.abstraction.module;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.lang.reflect.Field;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jsyn.unitgen.FilterLowPass;
+import com.jsyn.unitgen.FilterHighPass;
 import com.jsyn.unitgen.PassThrough;
+import com.softsynth.jsyn.Filter_HighPass;
 
 import fr.istic.synthlab.abstraction.exception.BadConnectionException;
 import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
+import fr.istic.synthlab.abstraction.filter.AmplitudeModulatorFilter;
+import fr.istic.synthlab.abstraction.module.audioscope.ModuleAudioScope;
 import fr.istic.synthlab.abstraction.module.rep.IModuleREP;
 import fr.istic.synthlab.abstraction.module.rep.ModuleREP;
+import fr.istic.synthlab.abstraction.module.vca.ModuleVCA;
 import fr.istic.synthlab.abstraction.module.vcf.IModuleVCF;
 import fr.istic.synthlab.abstraction.module.vcf.ModuleVCF_HP;
-import fr.istic.synthlab.abstraction.module.vcf.ModuleVCF_LP;
 import fr.istic.synthlab.abstraction.port.Port;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.abstraction.wire.Wire;
@@ -29,7 +28,7 @@ import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
 
-public class ModuleVCF_LPTest {
+public class ModuleVCF_HPTest {
 
 	IModuleVCF m;
 	@Before
@@ -37,7 +36,7 @@ public class ModuleVCF_LPTest {
 		PACFactory.setFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
-		m=new ModuleVCF_LP();
+		m=new ModuleVCF_HP();
 	
 	}
 	@Test
@@ -161,7 +160,7 @@ public class ModuleVCF_LPTest {
 			e.printStackTrace();
 		}
 		
-((ModuleVCF_LP) m).update((Port) m.getInputFm());
+((ModuleVCF_HP) m).update((Port) m.getInputFm());
 		
 		Field ptr = null;
 		Field fj1=null;
@@ -184,13 +183,13 @@ public class ModuleVCF_LPTest {
 		}
 		   PassThrough passThrough=null;
 
-		   FilterLowPass filterJSyn1=null;
-		   FilterLowPass filterJSyn2=null;
+		   FilterHighPass filterJSyn1=null;
+		   FilterHighPass filterJSyn2=null;
 		   
 		   try {
 			   passThrough=(PassThrough) ptr.get(m);
-			   filterJSyn1=(FilterLowPass) fj1.get(m);
-			   filterJSyn2=(FilterLowPass) fj2.get(m);
+			   filterJSyn1=(FilterHighPass) fj1.get(m);
+			   filterJSyn2=(FilterHighPass) fj2.get(m);
 
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
@@ -211,10 +210,12 @@ public class ModuleVCF_LPTest {
 		
 	}
 	
+	
+	
 	@Test
 	public void testUpdateWithoutConnect() {
 
-((ModuleVCF_LP) m).update((Port) m.getInputFm());
+((ModuleVCF_HP) m).update((Port) m.getInputFm());
 		
 		Field ptr = null;
 		Field fj1=null;
@@ -237,13 +238,13 @@ public class ModuleVCF_LPTest {
 		}
 		   PassThrough passThrough=null;
 
-		   FilterLowPass filterJSyn1=null;
-		   FilterLowPass filterJSyn2=null;
+		   FilterHighPass filterJSyn1=null;
+		   FilterHighPass filterJSyn2=null;
 		   
 		   try {
 			   passThrough=(PassThrough) ptr.get(m);
-			   filterJSyn1=(FilterLowPass) fj1.get(m);
-			   filterJSyn2=(FilterLowPass) fj2.get(m);
+			   filterJSyn1=(FilterHighPass) fj1.get(m);
+			   filterJSyn2=(FilterHighPass) fj2.get(m);
 
 		} catch (IllegalArgumentException e) {
 			// TODO Auto-generated catch block
