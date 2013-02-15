@@ -1,16 +1,11 @@
 package fr.istic.synthlab.abstraction;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
 import java.lang.reflect.Field;
-import java.rmi.server.UID;
-
-import org.junit.Test;
 
 import junit.framework.TestCase;
 
-import com.jsyn.ports.UnitOutputPort;
+import org.junit.Test;
+
 import com.jsyn.unitgen.PassThrough;
 import com.jsyn.unitgen.SawtoothOscillator;
 import com.jsyn.unitgen.SquareOscillator;
@@ -22,12 +17,12 @@ import fr.istic.synthlab.abstraction.module.rep.IModuleREP;
 import fr.istic.synthlab.abstraction.module.rep.ModuleREP;
 import fr.istic.synthlab.abstraction.module.vco.IModuleVCO;
 import fr.istic.synthlab.abstraction.module.vco.ModuleVCO;
-import fr.istic.synthlab.abstraction.port.IOutputPort;
-import fr.istic.synthlab.abstraction.port.OutputPort;
 import fr.istic.synthlab.abstraction.port.Port;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.abstraction.wire.Wire;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -36,11 +31,13 @@ import fr.istic.synthlab.factory.impl.PFactory;
 public class ModuleVCOTest extends TestCase {
 	
 	private IModuleVCO m;
+	private ISynthesizer synth;
 	public void setUp(){
 		PACFactory.setFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
-		m=new ModuleVCO();
+		synth = new CSynthesizer();
+		m=new ModuleVCO(synth);
 	
 
 		
@@ -131,7 +128,7 @@ public class ModuleVCOTest extends TestCase {
 		assertNotNull(m.getJSyn());
 	}
 	public void testGetWires(){
-		IWire w=new Wire();
+		IWire w=new Wire(synth);
 		try {
 			w.connect(m.getInputFm());
 		} catch (PortAlreadyInUseException e) {
@@ -160,9 +157,9 @@ public class ModuleVCOTest extends TestCase {
 	
 	@Test
 	public void testGetWiresDifferentBad(){
-		IWire w=new Wire();		
-		IWire w2=new Wire();
-		IModuleREP mrep=new ModuleREP();
+		IWire w=new Wire(synth);		
+		IWire w2=new Wire(synth);
+		IModuleREP mrep=new ModuleREP(synth);
 
 		try {
 			w.connect(m.getInputFm());
@@ -181,9 +178,9 @@ public class ModuleVCOTest extends TestCase {
 		
 
 	public void testGetWiresDifferent(){
-		IWire w=new Wire();		
-		IWire w2=new Wire();
-		IModuleREP mrep=new ModuleREP();
+		IWire w=new Wire(synth);		
+		IWire w2=new Wire(synth);
+		IModuleREP mrep=new ModuleREP(synth);
 
 		try {
 			w.connect(m.getInputFm());
@@ -221,8 +218,8 @@ public class ModuleVCOTest extends TestCase {
 
 
 	
-	public void testUpdate() {
-		IWire w=new Wire();
+	public void testGetWiresUpdate() {
+		IWire w=new Wire(synth);
 		try {
 			w.connect(m.getInputFm());
 		} catch (PortAlreadyInUseException e) {

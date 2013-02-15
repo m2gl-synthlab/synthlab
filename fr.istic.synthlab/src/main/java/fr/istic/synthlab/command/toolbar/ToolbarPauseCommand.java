@@ -1,19 +1,19 @@
 package fr.istic.synthlab.command.toolbar;
 
+import fr.istic.synthlab.ISynthApp;
 import fr.istic.synthlab.command.ICommand;
-import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 
 public class ToolbarPauseCommand implements ICommand {
 
-	private IPSynthesizer synth;
+	private ISynthApp app;
 
-	public ToolbarPauseCommand(IPSynthesizer synth) {
-		this.synth = synth;
+	public ToolbarPauseCommand(ISynthApp app) {
+		this.app = app;
 	}
 
 	@Override
 	public void execute() {
-		synth.stop();
+		app.getSynthesizer().stop();
 	}
 
 }

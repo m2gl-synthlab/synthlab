@@ -24,9 +24,11 @@ import fr.istic.synthlab.abstraction.observer.Observable;
 import fr.istic.synthlab.abstraction.observer.Observer;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.InputPort;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope;
 import fr.istic.synthlab.controller.module.audioscope.ICModuleAudioScope;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -35,7 +37,7 @@ import fr.istic.synthlab.factory.impl.PFactory;
 public class CModuleAudioScopeTest {
 
 	ICModuleAudioScope iTest;
-
+	private ISynthesizer synth;
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -44,7 +46,8 @@ public class CModuleAudioScopeTest {
 		PACFactory.setAFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
-		iTest = new CModuleAudioScope();
+		synth = new CSynthesizer();
+		iTest = new CModuleAudioScope(synth);
 	}
 
 	/**
@@ -83,7 +86,7 @@ public class CModuleAudioScopeTest {
 	 */
 	@Test
 	public void testP2cClosingAllWireConnected() {
-		ModuleEG module = new ModuleEG();
+		ModuleEG module = new ModuleEG(synth);
 		UnitInputPort jSynPort = new UnitInputPort("TestInput");
 		for(IWire w : iTest.getWires()){
 			try {
@@ -109,7 +112,7 @@ public class CModuleAudioScopeTest {
 	@Test
 	public void testP2cClosingHalfWireConnected() {
 		int i = 0;
-		ModuleEG module = new ModuleEG();
+		ModuleEG module = new ModuleEG(synth);
 		UnitInputPort jSynPort = new UnitInputPort("TestInput");
 		for(IWire w : iTest.getWires()){
 			if (i%2 == 0){

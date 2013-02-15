@@ -22,8 +22,10 @@ import fr.istic.synthlab.abstraction.module.vca.IModuleVCA;
 import fr.istic.synthlab.abstraction.module.vca.ModuleVCA;
 import fr.istic.synthlab.abstraction.module.vco.ModuleVCO;
 import fr.istic.synthlab.abstraction.port.Port;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.abstraction.wire.Wire;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -32,11 +34,13 @@ import fr.istic.synthlab.factory.impl.PFactory;
 public class ModuleVCATest extends TestCase {
 	
 	private IModuleVCA m;
+	private ISynthesizer synth;
 	public void setUp(){
 		PACFactory.setFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
-		m=new ModuleVCA();
+		synth = new CSynthesizer();
+		m=new ModuleVCA(synth);
 	
 
 		
@@ -54,7 +58,7 @@ public class ModuleVCATest extends TestCase {
 	}
 	
 	public void testGetWires(){
-		IWire w=new Wire();
+		IWire w=new Wire(synth);
 		try {
 			w.connect(m.getInputAM());
 		} catch (PortAlreadyInUseException e) {
@@ -86,9 +90,9 @@ public class ModuleVCATest extends TestCase {
 	}
 	
 	public void testGetWiresDifferent(){
-		IWire w=new Wire();		
-		IWire w2=new Wire();
-		IModuleREP mrep=new ModuleREP();
+		IWire w=new Wire(synth);		
+		IWire w2=new Wire(synth);
+		IModuleREP mrep=new ModuleREP(synth);
 
 		try {
 			w.connect(mrep.getOutput1());
@@ -126,7 +130,7 @@ public class ModuleVCATest extends TestCase {
 
 
 	public void testUpdate() {
-		IWire w=new Wire();
+		IWire w=new Wire(synth);
 		try {
 			w.connect(m.getInputAM());
 		} catch (PortAlreadyInUseException e) {
@@ -249,9 +253,9 @@ public class ModuleVCATest extends TestCase {
 	}
 	
 	public void testGetWiresDifferentBad(){
-		IWire w=new Wire();		
-		IWire w2=new Wire();
-		IModuleREP mrep=new ModuleREP();
+		IWire w=new Wire(synth);		
+		IWire w2=new Wire(synth);
+		IModuleREP mrep=new ModuleREP(synth);
 
 		try {
 			w.connect(m.getInput());

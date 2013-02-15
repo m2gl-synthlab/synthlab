@@ -28,7 +28,7 @@ public class SynthesizerTest extends TestCase {
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth=new Synthesizer();
-		module=PACFactory.getAFactory().newOUT();
+		module=new CModuleOUT(synth);;
 
 		
 
@@ -36,7 +36,7 @@ public class SynthesizerTest extends TestCase {
 	}
 
 	public void testGetInstance() {
-		assertEquals(synth, Synthesizer.getInstance());
+		assertEquals(synth,synth);
 	}
 
 	public void testGetJSyn() {
@@ -59,14 +59,14 @@ public class SynthesizerTest extends TestCase {
 	}
 
 	public void testRemoveIModule() {
-		synth.add(new ModuleOUT());
+		synth.add(new ModuleOUT(synth));
 		synth.remove(synth.getModules().get(0));
 		assertEquals(0, synth.getModules().size());
 	}
 
 	@SuppressWarnings("unchecked")
 	public void testAddIWire() {
-		IWire w = new Wire();
+		IWire w=new Wire(synth);
 		synth.add(w);
 
 		Field f = null;
@@ -106,9 +106,9 @@ public class SynthesizerTest extends TestCase {
 
 	public void testStart() {
 		synth.start();
-		synth.add(new CModuleOUT());
-		synth.add(new CModuleEG());
-		synth.add(new CModuleAudioScope());
+		synth.add(new CModuleOUT(synth));
+		synth.add(new CModuleEG(synth));
+		synth.add(new CModuleAudioScope(synth));
 		assertTrue(synth.isRunning());
 
 	}
@@ -121,27 +121,27 @@ public class SynthesizerTest extends TestCase {
 
 	public void testStartModule() {
 		synth.stop();
-
-		synth.add(new CModuleAudioScope());
+		
+		synth.add(new CModuleAudioScope(synth));
 		synth.startModule(synth.getModules().get(0));
 		assertFalse(synth.isRunning());
 	}
 
 	public void testStopModule() {
 		synth.start();
-		synth.add(new CModuleAudioScope());
+		synth.add(new CModuleAudioScope(synth));
 		synth.stopModule(synth.getModules().get(0));
 		assertTrue(synth.isRunning());
 	}
 
 	public void testSetGetCurrentWire() {
-		IWire w = new Wire();
+		IWire w=new Wire(synth);
 		synth.setCurrentWire(w);
 		assertEquals(w, synth.getCurrentWire());
 	}
 
 	public void testRemoveIWire() {
-		IWire w = new Wire();
+		IWire w=new Wire(synth);
 		synth.add(w);
 		Field f = null;
 		try {

@@ -49,78 +49,78 @@ public class AFactory implements IFactory {
 
 	@Override
 	public ISynthesizer newSynthesizer() {
-		return Synthesizer.getInstance();
+		return new Synthesizer();
 	}
 
 	@Override
-	public IModuleVCO newVCO() {
-		IModuleVCO module = new ModuleVCO();
+	public IModuleVCO newVCO(ISynthesizer synth) {
+		IModuleVCO module = new ModuleVCO(synth);
 		return module;
 	}
 
 	@Override
-	public IModuleVCA newVCA() {
-		IModuleVCA module = new ModuleVCA();
+	public IModuleVCA newVCA(ISynthesizer synth) {
+		IModuleVCA module = new ModuleVCA(synth);
 		return module;
 	}
 
 	@Override
-	public IModuleVCF newVCFA_LP() {
-		IModuleVCF module = new ModuleVCF_LP();
+	public IModuleVCF newVCFA_LP(ISynthesizer synth) {
+		IModuleVCF module = new ModuleVCF_LP(synth);
 		return module;
 	}
 
 	@Override
-	public IModuleVCF newVCFA_HP() {
-		IModuleVCF module = new ModuleVCF_HP();
+	public IModuleVCF newVCFA_HP(ISynthesizer synth) {
+		IModuleVCF module = new ModuleVCF_HP(synth);
 		return module;
 	}
 
 	@Override
-	public IModuleOUT newOUT() {
-		IModuleOUT module = new ModuleOUT();
+	public IModuleOUT newOUT(ISynthesizer synth) {
+		IModuleOUT module = new ModuleOUT(synth);
 		return module;
 	}
 
 	@Override
-	public IModuleEG newEG() {
-		IModuleEG module = new ModuleEG();
+	public IModuleEG newEG(ISynthesizer synth) {
+		IModuleEG module = new ModuleEG(synth);
 		return module;
 	}
 
 	@Override
-	public IModuleAudioScope newAudioScope() {
-		IModuleAudioScope module = new ModuleAudioScope();
+	public IModuleAudioScope newAudioScope(ISynthesizer synth) {
+		IModuleAudioScope module = new ModuleAudioScope(synth);
 		return module;
 	}
 
 	@Override
-	public IModuleREP newREP() {
-		IModuleREP module = new ModuleREP();
+	public IModuleREP newREP(ISynthesizer synth) {
+		IModuleREP module = new ModuleREP(synth);
 		return module;
 	}
 
 	@Override
-	public IModule newMIX() {
-		IModuleMIX module = new ModuleMIX();
+	public IModule newMIX(ISynthesizer synth) {
+		IModuleMIX module = new ModuleMIX(synth);
 		return module;
 	}
 
 	@Override
-	public IWire newWire() {
-		IWire wire = new Wire();
+	public IWire newWire(ISynthesizer synth) {
+		IWire wire = new Wire(synth);
 		return wire;
 	}
 
 	@Override
-	public IInputPort newInputPort(IModule mod, String name, UnitInputPort input) {
+	public IInputPort newInputPort(ISynthesizer synth, IModule mod, String name, UnitInputPort input) {
 		IInputPort port = new InputPort(name, input, mod);
 		port.setName(name);
 		return port;
 	}
 
 	@Override
-	public IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output) {
+	public IOutputPort newOutputPort(ISynthesizer synth, IModule mod, String name, UnitOutputPort output) {
 		IOutputPort port = new OutputPort(name, output, mod);
 		return port;
 	}

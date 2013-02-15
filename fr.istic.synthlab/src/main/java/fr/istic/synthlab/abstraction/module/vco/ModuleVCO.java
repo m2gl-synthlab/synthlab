@@ -15,7 +15,9 @@ import fr.istic.synthlab.abstraction.observer.Observer;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
 import fr.istic.synthlab.abstraction.port.Port;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.factory.IFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleVCO extends AModule implements IModuleVCO, Observer<Port> {
@@ -42,9 +44,9 @@ public class ModuleVCO extends AModule implements IModuleVCO, Observer<Port> {
 	private SquareOscillator vcoSquare;
 	private TriangleOscillator vcoTriangle;
 	private SawtoothOscillator vcoSawtooth;
-
-	public ModuleVCO() {
-		super(MODULE_NAME);
+	
+	public ModuleVCO(ISynthesizer synth) {
+		super(synth, MODULE_NAME);
 		System.out.println("ModuleVCO initialized");
 
 		// Création des générateurs JSyn
@@ -61,13 +63,13 @@ public class ModuleVCO extends AModule implements IModuleVCO, Observer<Port> {
 		this.passThrough = new PassThrough();
 
 		// Création d'un port d'entrée sur le générateur perso
-		this.fm = PACFactory.getFactory().newInputPort(this, IN_MOD_FREQ_NAME, frequencyModulator.input);
+		this.fm = PACFactory.getFactory().newInputPort(synth, this, IN_MOD_FREQ_NAME, frequencyModulator.input);
 		this.fm.addObserver(this);
 
 		// Création des ports de sortie des générateurs JSsyn
-		this.outputSquare = PACFactory.getFactory().newOutputPort(this, OUT_SQUARE_NAME, vcoSquare.output);
-		this.outputTriangle = PACFactory.getFactory().newOutputPort(this, OUT_TRIANGLE_NAME, vcoTriangle.output);
-		this.outputSawtooth = PACFactory.getFactory().newOutputPort(this, OUT_SAWTOOTH_NAME, vcoSawtooth.output);
+		this.outputSquare = PACFactory.getFactory().newOutputPort(synth, this, OUT_SQUARE_NAME, vcoSquare.output);
+		this.outputTriangle = PACFactory.getFactory().newOutputPort(synth, this, OUT_TRIANGLE_NAME, vcoTriangle.output);
+		this.outputSawtooth = PACFactory.getFactory().newOutputPort(synth, this, OUT_SAWTOOTH_NAME, vcoSawtooth.output);
 
 		// Connexion du modulateur au PassThrough
 		frequencyModulator.output.connect(passThrough.input);

@@ -10,6 +10,7 @@ import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
 import fr.istic.synthlab.abstraction.module.out.ModuleOUT;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
@@ -21,15 +22,15 @@ public class WireTest extends TestCase {
 	private IWire wire;
 	private IInputPort ip;
 	private IOutputPort op;
-
-	public void setUp() {
+	private ISynthesizer synth;
+	public void setUp(){
 		PACFactory.setFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 
-		wire = PACFactory.getAFactory().newWire();
-		ip = PACFactory.getAFactory().newInputPort(new ModuleOUT(), "port", new UnitInputPort("port"));
-		op = PACFactory.getAFactory().newOutputPort(new ModuleOUT(), "port", new UnitOutputPort("port"));
+		wire=PACFactory.getAFactory().newWire(synth);
+			ip=PACFactory.getAFactory().newInputPort(synth, new ModuleOUT(synth),"port", new UnitInputPort("port"));
+		 op=PACFactory.getAFactory().newOutputPort(synth, new ModuleOUT(synth),"port", new UnitOutputPort("port"));
 
 	}
 

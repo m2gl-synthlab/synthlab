@@ -10,6 +10,7 @@ import fr.istic.synthlab.controller.module.vcf.ICModuleVCF;
 import fr.istic.synthlab.controller.module.vco.ICModuleVCO;
 import fr.istic.synthlab.controller.port.ICInputPort;
 import fr.istic.synthlab.controller.port.ICOutputPort;
+import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.presentation.module.audioscope.IPModuleAudioScope;
 import fr.istic.synthlab.presentation.module.eg.IPModuleEG;
@@ -27,7 +28,7 @@ import fr.istic.synthlab.presentation.wire.IPWire;
 public interface IPFactory {
 
 	// Synthesize
-	IPSynthesizer newSynthesizer();
+	IPSynthesizer newSynthesizer(ICSynthesizer cSynthesizer);
 
 	// Modules
 	IPModuleVCO newVCO(ICModuleVCO control);

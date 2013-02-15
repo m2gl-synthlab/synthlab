@@ -13,8 +13,10 @@ import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
 import fr.istic.synthlab.abstraction.module.out.ModuleOUT;
 import fr.istic.synthlab.abstraction.module.rep.IModuleREP;
 import fr.istic.synthlab.abstraction.module.rep.ModuleREP;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.abstraction.wire.Wire;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -22,13 +24,15 @@ import fr.istic.synthlab.factory.impl.PFactory;
 public class ModuleOUTTest {
 
 	private IModuleOUT m;
+	private ISynthesizer synth;
 
 	@Before
 	public void setUp() throws Exception {
 		PACFactory.setFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
-		m=new ModuleOUT();
+		synth = new CSynthesizer();
+		m=new ModuleOUT(synth);
 	
 	}
 
@@ -70,8 +74,8 @@ public class ModuleOUTTest {
 
 	@Test
 	public void testGetWires(){
-		IWire w=new Wire();		
-		IModuleREP mrep=new ModuleREP();
+		IWire w=new Wire(synth);		
+		IModuleREP mrep=new ModuleREP(synth);
 		try {
 			w.connect(m.getInput());
 			w.connect(mrep.getOutput1());
@@ -95,9 +99,9 @@ public class ModuleOUTTest {
 
 	@Test
 	public void testGetWiresDifferentBad(){
-		IWire w=new Wire();		
-		IWire w2=new Wire();
-		IModuleREP mrep=new ModuleREP();
+		IWire w=new Wire(synth);		
+		IWire w2=new Wire(synth);
+		IModuleREP mrep=new ModuleREP(synth);
 
 		try {
 			w.connect(m.getInput());

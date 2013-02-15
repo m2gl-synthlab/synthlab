@@ -10,8 +10,10 @@ import fr.istic.synthlab.abstraction.filter.QuadrupleMixFilter;
 import fr.istic.synthlab.abstraction.module.AModule;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.util.Convert;
 import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.factory.IFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleMIX extends AModule implements IModuleMIX {
@@ -29,8 +31,8 @@ public class ModuleMIX extends AModule implements IModuleMIX {
 	private IInputPort in4;
 	private IOutputPort output;
 
-	public ModuleMIX() {
-		super(MODULE_NAME);
+	public ModuleMIX(ISynthesizer synth) {
+		super(synth, MODULE_NAME);
 
 		this.mixer = new QuadrupleMixFilter();
 
@@ -39,10 +41,14 @@ public class ModuleMIX extends AModule implements IModuleMIX {
 		this.attenuator3 = new AttenuationFilter();
 		this.attenuator4 = new AttenuationFilter();
 
-		this.in1 = PACFactory.getFactory().newInputPort(this, IN1_NAME, attenuator1.input);
-		this.in2 = PACFactory.getFactory().newInputPort(this, IN2_NAME, attenuator2.input);
-		this.in3 = PACFactory.getFactory().newInputPort(this, IN3_NAME, attenuator3.input);
-		this.in4 = PACFactory.getFactory().newInputPort(this, IN4_NAME, attenuator4.input);
+		this.in1 = PACFactory.getFactory().newInputPort(synth, this, IN1_NAME,
+				attenuator1.input);
+		this.in2 = PACFactory.getFactory().newInputPort(synth, this, IN2_NAME,
+				attenuator2.input);
+		this.in3 = PACFactory.getFactory().newInputPort(synth, this, IN3_NAME,
+				attenuator3.input);
+		this.in4 = PACFactory.getFactory().newInputPort(synth, this, IN4_NAME,
+				attenuator4.input);
 
 		this.setAttenuation1(-4);
 		this.setAttenuation2(-4);
@@ -54,7 +60,8 @@ public class ModuleMIX extends AModule implements IModuleMIX {
 		this.attenuator3.output.connect(mixer.getInput3());
 		this.attenuator4.output.connect(mixer.getInput4());
 
-		this.output = PACFactory.getFactory().newOutputPort(this, OUT_NAME, mixer.getOutput());
+		this.output = PACFactory.getFactory().newOutputPort(synth, this, OUT_NAME,
+				mixer.getOutput());
 
 		addPort(in1);
 		addPort(in2);

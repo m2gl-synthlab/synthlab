@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import fr.istic.synthlab.abstraction.port.IPort;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 
@@ -16,11 +17,11 @@ public abstract class AModule implements IModule {
 	private String name;
 	private List<IPort> ports;
 	private HashMap<String, Double> parameters;
-
-	public AModule(String name) {
+	
+	public AModule(ISynthesizer synth, String name) {
 		int nbModules = 0;
-		if (Synthesizer.getInstance().getModules().size() > 0) {
-			for (IModule module : CSynthesizer.getInstance().getModules()) {
+		if(synth.getModules().size() >0){
+			for (IModule module : synth.getModules()) {
 				if (module.getName().startsWith(name)) {
 					nbModules++;
 				}

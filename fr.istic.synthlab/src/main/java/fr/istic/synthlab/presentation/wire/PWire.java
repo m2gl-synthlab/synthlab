@@ -36,7 +36,6 @@ public class PWire extends JPanel implements IPWire {
 	private Point posOutput;
 	private PInputPort inputPort;
 	private POutputPort outputPort;
-	private ICSynthesizer synth = null;
 	private Color currentColor = null;
 
 	/**
@@ -44,10 +43,9 @@ public class PWire extends JPanel implements IPWire {
 	 */
 	public PWire(ICWire control) {
 		this.ctrl = control;
-		synth = (ICSynthesizer) Synthesizer.getInstance();
 		configView();
 		defineCallbacks();
-		currentColor = CSynthesizer.getInstance().getCurrentWireColor();
+		currentColor = ctrl.getCurrentWireColor();
 	}
 
 	private void configView() {
@@ -131,14 +129,9 @@ public class PWire extends JPanel implements IPWire {
 			JPanel pan = new JPanel();
 			pan.add(this);
 		}
-		setBounds(x - 10, y - 10, w + 20, getParent().getHeight()); // On ajoute
-																	// une marge
-																	// pour
-																	// évité de
-																	// coupé le
-																	// cable
-
-		IPSynthesizer presSynth = synth.getPresentation();
+		setBounds(x-10, y-10 , w+20, getParent().getHeight()); // On ajoute une marge pour évité de coupé le cable
+		
+		IPSynthesizer presSynth = ctrl.getSynthesizerPresentation();
 		((JLayeredPane) presSynth).setLayer(this, 0, 0);
 
 		repaint();
@@ -191,7 +184,7 @@ public class PWire extends JPanel implements IPWire {
 		// Si le cable est encore attaché a l'output
 		if (getControl().getOutput() != null) {
 			// On set le cable courrant du synthetiseur
-			synth.setCurrentWire(getControl());
+			ctrl.setCurrentWire();
 			inputPort = null;
 			updateDisplay();
 		} else {
@@ -204,7 +197,7 @@ public class PWire extends JPanel implements IPWire {
 		// Si le cable est encore attaché a l'output
 		if (getControl().getInput() != null) {
 			// On set le cable courrant du synthetiseur
-			synth.setCurrentWire(getControl());
+			ctrl.setCurrentWire();
 			outputPort = null;
 			updateDisplay();
 		} else {
@@ -223,10 +216,10 @@ public class PWire extends JPanel implements IPWire {
 		posOutput = mouse;
 		updateDisplay();
 	}
-
-	public void setOnTop(boolean isOnTop) {
-		IPSynthesizer presSynth = synth.getPresentation();
-		if (isOnTop) {
+	
+	public void setOnTop(boolean isOnTop){
+		IPSynthesizer presSynth = ctrl.getSynthesizerPresentation();
+		if(isOnTop){
 			((JLayeredPane) presSynth).setLayer(this, 0, 0);
 		} else {
 			((JLayeredPane) presSynth).setLayer(this, 0, -1);

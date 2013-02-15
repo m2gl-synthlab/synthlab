@@ -1,9 +1,13 @@
 package fr.istic.synthlab.controller.module.out;
 
 import fr.istic.synthlab.abstraction.module.out.ModuleOUT;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.controller.module.ICModule;
+import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.module.out.IPModuleOUT;
+import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 
 /**
  * Controller for the OUT module
@@ -11,9 +15,11 @@ import fr.istic.synthlab.presentation.module.out.IPModuleOUT;
 public class CModuleOUT extends ModuleOUT implements ICModuleOUT {
 
 	private IPModuleOUT pres;
+	private ISynthesizer cSynthesizer;
 
-	public CModuleOUT() {
-		super();
+	public CModuleOUT(ISynthesizer cSynthesizer) {
+		super(cSynthesizer);
+		this.cSynthesizer = cSynthesizer;
 		this.pres = PACFactory.getPFactory().newOUT(this);
 		this.pres.c2pSetGainValue(getAttenuation());
 	}
@@ -54,5 +60,16 @@ public class CModuleOUT extends ModuleOUT implements ICModuleOUT {
 				pres.c2pMute(!DEFAULT_STATE_MUTE);
 			}
 		}
+	}
+	
+	@Override
+	public IPSynthesizer getSynthesizerPresentation() {
+		return ((ICSynthesizer)cSynthesizer).getPresentation();
+	}
+	
+
+	@Override
+	public void p2cRemoveModule(ICModule module) {
+		((ICSynthesizer) cSynthesizer).p2cRemoveModule(module);
 	}
 }
