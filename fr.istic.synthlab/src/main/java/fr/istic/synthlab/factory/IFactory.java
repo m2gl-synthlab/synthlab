@@ -16,31 +16,22 @@ import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 
 public interface IFactory {
-
 	ISynthesizer newSynthesizer();
+	
+	IModuleVCO newVCO(ISynthesizer synth);
+	IModuleVCA newVCA(ISynthesizer synth);
+	IModule newVCFA_LP(ISynthesizer synth);
+	IModule newVCFA_HP(ISynthesizer synth);
+	IModuleOUT newOUT(ISynthesizer synth);
+	IModuleEG newEG(ISynthesizer synth);
+	IModuleAudioScope newAudioScope(ISynthesizer synth);
+	IModuleREP newREP(ISynthesizer synth);
+	IModule newMIX(ISynthesizer synth);
 
-	IModuleVCO newVCO();
+	IWire newWire(ISynthesizer synth);
 
-	IModuleVCA newVCA();
+	IInputPort newInputPort(ISynthesizer synth, IModule mod, String name, UnitInputPort input);
+	IOutputPort newOutputPort(ISynthesizer synth, IModule mod, String name, UnitOutputPort output);
 
-	IModule newVCFA_LP();
-
-	IModule newVCFA_HP();
-
-	IModuleOUT newOUT();
-
-	IModuleEG newEG();
-
-	IModuleAudioScope newAudioScope();
-
-	IModuleREP newREP();
-
-	IModule newMIX();
-
-	IWire newWire();
-
-	IInputPort newInputPort(IModule mod, String name, UnitInputPort input);
-
-	IOutputPort newOutputPort(IModule mod, String name, UnitOutputPort output);
 
 }

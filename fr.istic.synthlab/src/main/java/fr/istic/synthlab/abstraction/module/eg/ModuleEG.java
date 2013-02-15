@@ -9,7 +9,9 @@ import com.jsyn.unitgen.UnitGenerator;
 import fr.istic.synthlab.abstraction.module.AModule;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.factory.IFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 /**
@@ -26,13 +28,13 @@ public class ModuleEG extends AModule implements IModuleEG {
 
 	private EnvelopeDAHDSR adsr;
 
-	public ModuleEG() {
-		super(MODULE_NAME);
+	public ModuleEG(ISynthesizer synth) {
+		super(synth, MODULE_NAME);
 
 		adsr = new EnvelopeDAHDSR();
 
-		this.gate = PACFactory.getFactory().newInputPort(this, IN_NAME, adsr.input);
-		this.out = PACFactory.getFactory().newOutputPort(this, OUT_NAME, adsr.output);
+		this.gate = PACFactory.getFactory().newInputPort(synth, this, IN_NAME,	adsr.input);
+		this.out = PACFactory.getFactory().newOutputPort(synth, this, OUT_NAME, adsr.output);
 
 		addPort(gate);
 		addPort(out);

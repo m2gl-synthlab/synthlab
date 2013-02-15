@@ -16,7 +16,7 @@ import com.alee.laf.panel.WebPanel;
 
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.controller.module.ICModule;
-import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
+import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 import fr.istic.synthlab.presentation.util.SimpleMouseListener;
@@ -57,7 +57,7 @@ public abstract class APModule extends WebPanel implements IPModule {
 		x = 0;
 		y = 25;
 
-		IPSynthesizer presSynth = CSynthesizer.getInstance().getPresentation();
+		IPSynthesizer presSynth = ctrl.getSynthesizerPresentation();
 		((JLayeredPane) presSynth).setLayer(this, 0, -1);
 	}
 
@@ -87,7 +87,7 @@ public abstract class APModule extends WebPanel implements IPModule {
 
 			@Override
 			public void focusGained(FocusEvent e) {
-				IPSynthesizer presSynth = CSynthesizer.getInstance().getPresentation();
+				IPSynthesizer presSynth = ctrl.getSynthesizerPresentation();
 				((JLayeredPane) presSynth).setLayer(APModule.this, 0, 0);
 				for (IWire w : ctrl.getWires()) {
 					if (w != null) {

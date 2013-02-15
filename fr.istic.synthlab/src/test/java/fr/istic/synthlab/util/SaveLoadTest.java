@@ -40,10 +40,10 @@ public class SaveLoadTest extends TestCase {
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 
-		s = new SynthApp();
 		synth = new CSynthesizer();
+		sf = new SynthFrame(synth);
+		s = new SynthApp(sf);
 		s.setSynthesizer(synth);
-		sf = new SynthFrame();
 
 	}
 
@@ -52,9 +52,9 @@ public class SaveLoadTest extends TestCase {
 		s.setSynthesizer(synth);
 		s.setDisplaySynthCommand(new DisplayCommand(sf));
 		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
-		ICModuleVCO moduleVCO = new CModuleVCO();
-		ICModuleVCA moduleVCA = new CModuleVCA();
-		ICModuleEG moduleEG = new CModuleEG();
+		ICModuleVCO moduleVCO = new CModuleVCO(synth);
+		ICModuleVCA moduleVCA = new CModuleVCA(synth);
+		ICModuleEG moduleEG = new CModuleEG(synth);
 
 		synth.add(moduleVCO);
 		synth.add(moduleVCA);
@@ -80,9 +80,9 @@ public class SaveLoadTest extends TestCase {
 		s.setSynthesizer(synth);
 		s.setDisplaySynthCommand(new DisplayCommand(sf));
 		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
-		ICModuleVCO moduleVCO = new CModuleVCO();
-		ICModuleVCA moduleVCA = new CModuleVCA();
-		ICModuleEG moduleEG = new CModuleEG();
+		ICModuleVCO moduleVCO = new CModuleVCO(synth);
+		ICModuleVCA moduleVCA = new CModuleVCA(synth);
+		ICModuleEG moduleEG = new CModuleEG(synth);
 
 		synth.add(moduleVCO);
 		synth.add(moduleVCA);
@@ -108,14 +108,14 @@ public class SaveLoadTest extends TestCase {
 		s.setSynthesizer(synth);
 		s.setDisplaySynthCommand(new DisplayCommand(sf));
 		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
-		ICModuleVCO moduleVCO = new CModuleVCO();
-		ICModuleVCA moduleVCA = new CModuleVCA();
-		ICModuleEG moduleEG = new CModuleEG();
+		ICModuleVCO moduleVCO = new CModuleVCO(synth);
+		ICModuleVCA moduleVCA = new CModuleVCA(synth);
+		ICModuleEG moduleEG = new CModuleEG(synth);
 
 		synth.add(moduleVCO);
 		synth.add(moduleVCA);
 		synth.add(moduleEG);
-		ICWire wire = new CWire();
+		ICWire wire = new CWire(synth);
 		JPanel panelToAdd = new JPanel();
 		panelToAdd.add((Component) wire.getPresentation());
 
@@ -157,14 +157,14 @@ public class SaveLoadTest extends TestCase {
 		s.setSynthesizer(synth);
 		s.setDisplaySynthCommand(new DisplayCommand(sf));
 		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
-		ICModuleVCF moduleVCF = new CModuleVCF_LP();
-		ICModuleVCA moduleVCA = new CModuleVCA();
-		ICModuleEG moduleEG = new CModuleEG();
+		ICModuleVCF moduleVCF = new CModuleVCF_LP(synth);
+		ICModuleVCA moduleVCA = new CModuleVCA(synth);
+		ICModuleEG moduleEG = new CModuleEG(synth);
 
 		synth.add(moduleVCF);
 		synth.add(moduleVCA);
 		synth.add(moduleEG);
-		ICWire wire = new CWire();
+		ICWire wire = new CWire(synth);
 		JPanel panelToAdd = new JPanel();
 		panelToAdd.add((Component) wire.getPresentation());
 

@@ -30,6 +30,15 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/jsyn-beta-16.5.14.jar</systemPath>
 		</dependency>
+		
+		
+		<dependency>
+			<groupId>org.junit4</groupId>
+			<artifactId>junit4</artifactId>
+			<version>4.8.2</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/junit.jar</systemPath>
+		</dependency>
 
 		<dependency>
 			<groupId>com.mortennobel</groupId>

@@ -4,6 +4,7 @@ import fr.istic.synthlab.abstraction.exception.BadConnectionException;
 import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
 
 /**
@@ -13,7 +14,12 @@ public class Wire implements IWire {
 
 	private IInputPort input;
 	private IOutputPort output;
-
+	private ISynthesizer synth;
+	
+	public Wire(ISynthesizer synth){
+		this.synth = synth;
+	}
+	
 	@Override
 	public IInputPort getInput() {
 		return input;
@@ -78,8 +84,8 @@ public class Wire implements IWire {
 
 		if (this.input != null)
 			this.input.setWire(null);
-
-		Synthesizer.getInstance().remove(this);
+		
+		synth.remove(this);
 
 	}
 

@@ -14,25 +14,13 @@ import fr.istic.synthlab.factory.impl.PACFactory;
  * Implementation of a Synthesizer
  */
 public class Synthesizer implements ISynthesizer {
-	protected static ISynthesizer instance;
-
+	
 	private com.jsyn.Synthesizer synth;
 
 	private List<IModule> modules;
 	private List<IWire> wires;
 
 	private IWire currentWire;
-
-	/**
-	 * @return the synthesizer's instance
-	 */
-	public static ISynthesizer getInstance() {
-		if (instance == null) {
-			instance = PACFactory.getFactory().newSynthesizer();
-		}
-		return instance;
-	}
-
 	/**
 	 * Constructor
 	 */
@@ -40,7 +28,7 @@ public class Synthesizer implements ISynthesizer {
 		this.synth = JSyn.createSynthesizer();
 		modules = new ArrayList<IModule>();
 		wires = new ArrayList<IWire>();
-		instance = this;
+//		instance = this;
 	}
 
 	@Override
