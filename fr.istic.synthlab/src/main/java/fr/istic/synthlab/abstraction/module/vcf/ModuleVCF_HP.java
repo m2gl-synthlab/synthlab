@@ -13,7 +13,9 @@ import fr.istic.synthlab.abstraction.observer.Observer;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
 import fr.istic.synthlab.abstraction.port.Port;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.factory.IFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleVCF_HP extends AModule implements IModuleVCF, Observer<Port> {
@@ -38,8 +40,8 @@ public class ModuleVCF_HP extends AModule implements IModuleVCF, Observer<Port> 
 	private FilterHighPass filterJSyn1;
 	private FilterHighPass filterJSyn2;
 
-	public ModuleVCF_HP() {
-		super(MODULE_NAME);
+	public ModuleVCF_HP(ISynthesizer synth) {
+		super(synth, MODULE_NAME);
 		System.out.println("ModuleVCFA HP24 initialized");
 
 		// Création des filtres JSyn
@@ -59,14 +61,17 @@ public class ModuleVCF_HP extends AModule implements IModuleVCF, Observer<Port> 
 		frequencyModulator.output.connect(passThrough.input);
 
 		// Création d'un port d'entrée sur le générateur perso
-		this.fm = PACFactory.getFactory().newInputPort(this, IN_MOD_FREQ_NAME, frequencyModulator.input);
+		this.fm = PACFactory.getFactory().newInputPort(synth, this, IN_MOD_FREQ_NAME,
+				frequencyModulator.input);
 		this.fm.addObserver(this);
 
 		// Création des ports d'entrée sur le filtre JSyn 1
-		this.input = PACFactory.getFactory().newInputPort(this, IN_NAME, filterJSyn1.input);
+		this.input = PACFactory.getFactory().newInputPort(synth, this, IN_NAME,
+				filterJSyn1.input);
 
 		// Création du port de sortie sur le filtre JSyn 2
-		this.output = PACFactory.getFactory().newOutputPort(this, OUT_NAME, filterJSyn2.output);
+		this.output = PACFactory.getFactory().newOutputPort(synth, this, OUT_NAME,
+				filterJSyn2.output);
 
 		// Valeur par defaut
 		this.setCutFrequency(1000);

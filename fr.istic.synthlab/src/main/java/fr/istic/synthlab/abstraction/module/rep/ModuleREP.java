@@ -9,7 +9,9 @@ import fr.istic.synthlab.abstraction.filter.TriplePassThroughFilter;
 import fr.istic.synthlab.abstraction.module.AModule;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.factory.IFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleREP extends AModule implements IModuleREP {
@@ -26,16 +28,20 @@ public class ModuleREP extends AModule implements IModuleREP {
 	private IOutputPort output3;
 	private TriplePassThroughFilter passThrough;
 
-	public ModuleREP() {
-		super(MODULE_NAME);
+	public ModuleREP(ISynthesizer synth) {
+		super(synth, MODULE_NAME);
 
 		this.passThrough = new TriplePassThroughFilter();
 
-		this.in = PACFactory.getFactory().newInputPort(this, IN_NAME, passThrough.getInput());
+		this.in = PACFactory.getFactory().newInputPort(synth, this, IN_NAME,
+				passThrough.getInput());
 
-		this.output1 = PACFactory.getFactory().newOutputPort(this, OUT1_NAME, passThrough.getOutput1());
-		this.output2 = PACFactory.getFactory().newOutputPort(this, OUT2_NAME, passThrough.getOutput2());
-		this.output3 = PACFactory.getFactory().newOutputPort(this, OUT3_NAME, passThrough.getOutput3());
+		this.output1 = PACFactory.getFactory().newOutputPort(synth, this, OUT1_NAME,
+				passThrough.getOutput1());
+		this.output2 = PACFactory.getFactory().newOutputPort(synth, this, OUT2_NAME,
+				passThrough.getOutput2());
+		this.output3 = PACFactory.getFactory().newOutputPort(synth, this, OUT3_NAME,
+				passThrough.getOutput3());
 
 		addPort(in);
 		addPort(output1);

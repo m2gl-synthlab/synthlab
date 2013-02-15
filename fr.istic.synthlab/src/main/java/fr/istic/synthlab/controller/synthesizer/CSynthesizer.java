@@ -14,23 +14,11 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 
 	private IPSynthesizer pres;
 	private Color currentWireColor = Color.GRAY;
-
-	private static ICSynthesizer instance;
-
-	/**
-	 * @return the synthesizer's instance
-	 */
-	public static ICSynthesizer getInstance() {
-		if (instance == null) {
-			instance = (ICSynthesizer) PACFactory.getFactory().newSynthesizer();
-		}
-		return instance;
-	}
+	private String path;
 
 	public CSynthesizer() {
 		super();
-		this.pres = PACFactory.getPFactory().newSynthesizer();
-		instance = this;
+		this.pres = PACFactory.getPFactory().newSynthesizer(this);
 	}
 
 	@Override
@@ -111,5 +99,15 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	@Override
 	public Color getCurrentWireColor() {
 		return currentWireColor;
+	}
+
+	@Override
+	public String getPath() {
+		return path;
+	}
+	
+	@Override
+	public void setPath(String path) {
+		this.path = path;
 	}
 }

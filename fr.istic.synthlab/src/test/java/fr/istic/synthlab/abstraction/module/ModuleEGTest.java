@@ -12,8 +12,10 @@ import fr.istic.synthlab.abstraction.module.eg.ModuleEG;
 import fr.istic.synthlab.abstraction.module.mix.ModuleMIX;
 import fr.istic.synthlab.abstraction.module.rep.IModuleREP;
 import fr.istic.synthlab.abstraction.module.rep.ModuleREP;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.abstraction.wire.Wire;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -22,13 +24,15 @@ import fr.istic.synthlab.factory.impl.PFactory;
 public class ModuleEGTest {
 
 	private IModuleEG m;
+	private ISynthesizer synth;
 
 	@Before
 	public void setUp() throws Exception {
 		PACFactory.setFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
-		m=new ModuleEG();
+		synth = new CSynthesizer();
+		m=new ModuleEG(synth);
 	
 	}
 	@Test
@@ -74,7 +78,7 @@ public class ModuleEGTest {
 
 	@Test
 	public void testGetWires(){
-		IWire w=new Wire();
+		IWire w=new Wire(synth);
 		try {
 			w.connect(m.getGateInput());
 		} catch (PortAlreadyInUseException e) {
@@ -103,9 +107,9 @@ public class ModuleEGTest {
 
 	@Test
 	public void testGetWiresDifferent(){
-		IWire w=new Wire();		
-		IWire w2=new Wire();
-		IModuleREP mrep=new ModuleREP();
+		IWire w=new Wire(synth);		
+		IWire w2=new Wire(synth);
+		IModuleREP mrep=new ModuleREP(synth);
 
 		try {
 			w.connect(mrep.getOutput1());
@@ -146,9 +150,9 @@ public class ModuleEGTest {
 	
 	@Test
 	public void testGetWiresDifferentBad(){
-		IWire w=new Wire();		
-		IWire w2=new Wire();
-		IModuleREP mrep=new ModuleREP();
+		IWire w=new Wire(synth);		
+		IWire w2=new Wire(synth);
+		IModuleREP mrep=new ModuleREP(synth);
 
 		try {
 			w.connect(m.getGateInput());

@@ -29,16 +29,19 @@ import fr.istic.synthlab.controller.module.vcf.CModuleVCF_HP;
 import fr.istic.synthlab.controller.module.vcf.CModuleVCF_LP;
 import fr.istic.synthlab.controller.module.vco.CModuleVCO;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
+import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.CWire;
 import fr.istic.synthlab.controller.wire.ICWire;
 
 public class ReadXMLFile {
 
+	private ICSynthesizer cSynthesizer;
 	private Document doc;
 	private HashMap<String, IModule> modules;
 	private HashMap<IWire, String[]> portsToConnect;
 
-	public ReadXMLFile(File file) {
+	public ReadXMLFile(ICSynthesizer cSynthesizer, File file) {
+		this.cSynthesizer = cSynthesizer;
 		portsToConnect = new HashMap<IWire, String[]>();
 		modules = new HashMap<String, IModule>();
 		try {
@@ -61,25 +64,25 @@ public class ReadXMLFile {
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
 					ICModule module = null;
-
-					if (eElement.getAttribute("name").startsWith("VCO")) {
-						module = new CModuleVCO();
-					} else if (eElement.getAttribute("name").startsWith("VCA")) {
-						module = new CModuleVCA();
-					} else if (eElement.getAttribute("name").startsWith("OUT")) {
-						module = new CModuleOUT();
-					} else if (eElement.getAttribute("name").startsWith("EG")) {
-						module = new CModuleEG();
-					} else if (eElement.getAttribute("name").startsWith("REP")) {
-						module = new CModuleREP();
-					} else if (eElement.getAttribute("name").startsWith("VCF LP24")) {
-						module = new CModuleVCF_LP();
-					} else if (eElement.getAttribute("name").startsWith("VCF HP24")) {
-						module = new CModuleVCF_HP();
-					} else if (eElement.getAttribute("name").startsWith("AudioScope")) {
-						module = new CModuleAudioScope();
-					} else if (eElement.getAttribute("name").startsWith("MIX")) {
-						module = new CModuleMIX();
+					
+					if(eElement.getAttribute("name").startsWith("VCO")){
+						module = new CModuleVCO(cSynthesizer);
+					} else if (eElement.getAttribute("name").startsWith("VCA")){
+						module = new CModuleVCA(cSynthesizer);
+					} else if (eElement.getAttribute("name").startsWith("OUT")){
+						module = new CModuleOUT(cSynthesizer);
+					} else if (eElement.getAttribute("name").startsWith("EG")){
+						module = new CModuleEG(cSynthesizer);
+					} else if (eElement.getAttribute("name").startsWith("REP")){
+						module = new CModuleREP(cSynthesizer);
+					} else if (eElement.getAttribute("name").startsWith("VCF LP24")){
+						module = new CModuleVCF_LP(cSynthesizer);
+					} else if (eElement.getAttribute("name").startsWith("VCF HP24")){
+						module = new CModuleVCF_HP(cSynthesizer);
+					} else if (eElement.getAttribute("name").startsWith("AudioScope")){
+						module = new CModuleAudioScope(cSynthesizer);
+					} else if (eElement.getAttribute("name").startsWith("MIX")){
+						module = new CModuleMIX(cSynthesizer);
 					} else {
 						throw new Exception("Module not recognized in xml file");
 					}
@@ -91,9 +94,9 @@ public class ReadXMLFile {
 
 					for (int i = 0; i < eElement.getElementsByTagName("wire").getLength(); i++) {
 						String portName = ((Element) eElement.getElementsByTagName("wire").item(i)).getAttribute("outputPort");
-
-						IWire wire = new CWire();
-						IOutputPort outport = (IOutputPort) module.getPortByName(portName);
+						
+						IWire wire = new CWire(cSynthesizer);
+						IOutputPort outport = (IOutputPort)module.getPortByName(portName);
 						wire.connect(outport);
 
 						String[] str = { ((Element) eElement.getElementsByTagName("wire").item(i)).getAttribute("inputPortModuleName"),
@@ -115,7 +118,7 @@ public class ReadXMLFile {
 						module.setParameter(key, value);
 					}
 					modules.put(module.getName(), module);
-					CSynthesizer.getInstance().add(module);
+					cSynthesizer.add(module);
 				}
 
 			}
@@ -129,8 +132,8 @@ public class ReadXMLFile {
 
 				IModule moduleToConnect = modules.get(moduleName);
 				IPort port = moduleToConnect.getPortByName(portName);
-				wire.connect((IInputPort) port);
-				CSynthesizer.getInstance().add(wire);
+				wire.connect((IInputPort)port);
+				cSynthesizer.add(wire);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

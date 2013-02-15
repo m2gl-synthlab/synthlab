@@ -19,9 +19,11 @@ import fr.istic.synthlab.abstraction.exception.BadConnectionException;
 import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
 import fr.istic.synthlab.abstraction.module.eg.ModuleEG;
 import fr.istic.synthlab.abstraction.port.InputPort;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.controller.module.eg.CModuleEG;
 import fr.istic.synthlab.controller.module.eg.ICModuleEG;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -34,6 +36,7 @@ import fr.istic.synthlab.factory.impl.PFactory;
 public class CModuleEGTest {
 
 	ICModuleEG iTest;
+	private ISynthesizer synth;
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -42,7 +45,8 @@ public class CModuleEGTest {
 		PACFactory.setAFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
-		iTest = new CModuleEG();
+		synth = new CSynthesizer();
+		iTest = new CModuleEG(synth);
 	}
 
 	/**
@@ -252,7 +256,7 @@ public class CModuleEGTest {
 	 */
 	@Test
 	public void testP2cClosingAllWireConnected() {
-		ModuleEG module = new ModuleEG();
+		ModuleEG module = new ModuleEG(synth);
 		UnitInputPort jSynPort = new UnitInputPort("TestInput");
 		for(IWire w : iTest.getWires()){
 			try {
@@ -278,7 +282,7 @@ public class CModuleEGTest {
 	@Test
 	public void testP2cClosingHalfWireConnected() {
 		int i = 0;
-		ModuleEG module = new ModuleEG();
+		ModuleEG module = new ModuleEG(synth);
 		UnitInputPort jSynPort = new UnitInputPort("TestInput");
 		for(IWire w : iTest.getWires()){
 			if (i%2 == 0){

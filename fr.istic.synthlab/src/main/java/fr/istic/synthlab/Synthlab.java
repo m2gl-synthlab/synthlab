@@ -54,11 +54,13 @@ public class Synthlab {
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 
-		// Create the application
-		SynthApp app = new SynthApp();
-
+		
 		// Create the main frame
-		SynthFrame frame = new SynthFrame();
+		SynthFrame frame = null;
+	
+		// Create the application
+		SynthApp app = new SynthApp(frame);
+		frame = new SynthFrame(app);
 		frame.setTitle("SynthlabG2 - untitled");
 		try {
 			Image imageIcon = ImageIO.read(new File("res/logo.png"));
@@ -66,13 +68,16 @@ public class Synthlab {
 		} catch (IOException e2) {
 			e2.printStackTrace();
 		}
+		
+		app.setFrame(frame);
+//		frame.setSynthesizer();
 
 		// Configure the application
 		app.setDisplaySynthCommand(new DisplayCommand(frame));
 		app.setUndisplaySynthCommand(new UndisplayCommand(frame));
 
 		// Create a default synthesizer
-		app.newSynth();
+		app.displayNewSynth();
 
 		// Configure the frame
 		frame.setNewSynthCommand(new NewSynthCommand(app, frame));
@@ -82,22 +87,24 @@ public class Synthlab {
 		frame.setQuitSynthCommand(new QuitSynthCommand(app));
 		frame.setDocSynthCommand(new DocumentationCommand());
 		frame.setAboutSynthCommand(new AboutCommand());
-		frame.setToolbarPlayCommand(new ToolbarPlayCommand(app.getSynthesizer().getPresentation()));
-		frame.setToolbarPauseCommand(new ToolbarPauseCommand(app.getSynthesizer().getPresentation()));
-		frame.setCurrentWireColorCommand(new ToolbarCurrentWireColorCommand(frame));
+		frame.setToolbarPlayCommand(new ToolbarPlayCommand(app));
+		frame.setToolbarPauseCommand(new ToolbarPauseCommand(app));
+		frame.setCurrentWireColorCommand(new ToolbarCurrentWireColorCommand(app, frame));
 
-		frame.setAddModuleOUTCommand(new AddModuleOUTCommand());
-		frame.setAddModuleVCOCommand(new AddModuleVCOCommand());
-		frame.setAddModuleVCACommand(new AddModuleVCACommand());
-		frame.setAddModuleVCFLPCommand(new AddModuleVCFLPCommand());
-		frame.setAddModuleVCFHPCommand(new AddModuleVCFHPCommand());
-		frame.setAddModuleEGCommand(new AddModuleEGCommand());
-		frame.setAddModuleAudioScopeCommand(new AddModuleAudioScopeCommand());
-		frame.setAddModuleREPCommand(new AddModuleREPCommand());
-		frame.setAddModuleMIXCommand(new AddModuleMIXCommand());
+		frame.setAddModuleOUTCommand(new AddModuleOUTCommand(app));
+		frame.setAddModuleVCOCommand(new AddModuleVCOCommand(app));
+		frame.setAddModuleVCACommand(new AddModuleVCACommand(app));
+		frame.setAddModuleVCFLPCommand(new AddModuleVCFLPCommand(app));
+		frame.setAddModuleVCFHPCommand(new AddModuleVCFHPCommand(app));
+		frame.setAddModuleEGCommand(new AddModuleEGCommand(app));
+		frame.setAddModuleAudioScopeCommand(new AddModuleAudioScopeCommand(app));
+		frame.setAddModuleREPCommand(new AddModuleREPCommand(app));
+		frame.setAddModuleMIXCommand(new AddModuleMIXCommand(app));
 
 		// Start the application
 		app.startSynth();
+
+		frame.addToMenu(app.getSynthesizer());
 
 		// Chargement du fichier ouvert
 		String filename = null;

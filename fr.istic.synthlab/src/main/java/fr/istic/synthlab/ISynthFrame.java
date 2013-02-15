@@ -1,5 +1,6 @@
 package fr.istic.synthlab;
 
+import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 
 public interface ISynthFrame {
@@ -9,11 +10,16 @@ public interface ISynthFrame {
 	 * 
 	 * @param presentation
 	 */
-	public void displaySynth(IPSynthesizer presentation);
+	public void displaySynth();
 
 	/**
 	 * Close the synthesizer
 	 */
 	public void quitSynth();
+
+//	public void setSynthesizer(ICSynthesizer synth);
+
+	public void addToMenu(ICSynthesizer currentSynth);
+
 
 }

@@ -8,12 +8,12 @@ public interface ISynthApp {
 	/**
 	 * Start the synthesizer
 	 */
-	public void startSynth();
+	public void newSynth();
 
 	/**
 	 * Restart the synthesizer
 	 */
-	public void newSynth();
+	public void startSynth();
 
 	/**
 	 * Quit the synthesizer
@@ -25,7 +25,7 @@ public interface ISynthApp {
 	 * 
 	 * @param synthesizer
 	 */
-	public void setSynthesizer(ICSynthesizer synth);
+	public void setSynthesizer(String string);
 
 	/**
 	 * Return the current synthesizer controller
