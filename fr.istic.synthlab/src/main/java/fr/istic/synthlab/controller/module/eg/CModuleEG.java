@@ -12,7 +12,6 @@ public class CModuleEG extends ModuleEG implements ICModuleEG {
 
 	private IPModuleEG pres;
 
-
 	public CModuleEG() {
 		super();
 		this.pres = PACFactory.getPFactory().newEG(this);
@@ -42,7 +41,7 @@ public class CModuleEG extends ModuleEG implements ICModuleEG {
 		setRelease(release);
 		pres.c2pSetReleaseValue(getRelease());
 	}
-	
+
 	@Override
 	public void p2cAttackChanged(double attack) {
 		changeAttack(attack);
@@ -65,20 +64,20 @@ public class CModuleEG extends ModuleEG implements ICModuleEG {
 
 	@Override
 	public void p2cClosing() {
-		for(IWire w : this.getWires()){
+		for (IWire w : this.getWires()) {
 			w.disconnect();
 		}
 	}
-	
+
 	@Override
-	public void setParameter(String key, Double value){
-		if(key.equals("attackTime")){
+	public void setParameter(String key, Double value) {
+		if (key.equals("attackTime")) {
 			changeAttack(value);
-		} else if (key.equals("decayTime")){
+		} else if (key.equals("decayTime")) {
 			changeDecay(value);
-		} else if (key.equals("substainTime")){
+		} else if (key.equals("substainTime")) {
 			changeSustain(value);
-		}else if (key.equals("releaseTime")){
+		} else if (key.equals("releaseTime")) {
 			changeRelease(value);
 		}
 	}

@@ -42,8 +42,7 @@ public class ReadXMLFile {
 		portsToConnect = new HashMap<IWire, String[]>();
 		modules = new HashMap<String, IModule>();
 		try {
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
-					.newInstance();
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			doc = dBuilder.parse(file);
 			doc.getDocumentElement().normalize();
@@ -62,69 +61,55 @@ public class ReadXMLFile {
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
 					ICModule module = null;
-					
-					if(eElement.getAttribute("name").startsWith("VCO")){
+
+					if (eElement.getAttribute("name").startsWith("VCO")) {
 						module = new CModuleVCO();
-					} else if (eElement.getAttribute("name").startsWith("VCA")){
+					} else if (eElement.getAttribute("name").startsWith("VCA")) {
 						module = new CModuleVCA();
-					} else if (eElement.getAttribute("name").startsWith("OUT")){
+					} else if (eElement.getAttribute("name").startsWith("OUT")) {
 						module = new CModuleOUT();
-					} else if (eElement.getAttribute("name").startsWith("EG")){
+					} else if (eElement.getAttribute("name").startsWith("EG")) {
 						module = new CModuleEG();
-					} else if (eElement.getAttribute("name").startsWith("REP")){
+					} else if (eElement.getAttribute("name").startsWith("REP")) {
 						module = new CModuleREP();
-					} else if (eElement.getAttribute("name").startsWith("VCF LP24")){
+					} else if (eElement.getAttribute("name").startsWith("VCF LP24")) {
 						module = new CModuleVCF_LP();
-					} else if (eElement.getAttribute("name").startsWith("VCF HP24")){
+					} else if (eElement.getAttribute("name").startsWith("VCF HP24")) {
 						module = new CModuleVCF_HP();
-					} else if (eElement.getAttribute("name").startsWith("AudioScope")){
+					} else if (eElement.getAttribute("name").startsWith("AudioScope")) {
 						module = new CModuleAudioScope();
-					} else if (eElement.getAttribute("name").startsWith("MIX")){
+					} else if (eElement.getAttribute("name").startsWith("MIX")) {
 						module = new CModuleMIX();
 					} else {
 						throw new Exception("Module not recognized in xml file");
 					}
-					
+
 					int x = (int) Double.parseDouble(eElement.getAttribute("x"));
 					int y = (int) Double.parseDouble(eElement.getAttribute("y"));
-					Point p = new Point(x,y);
+					Point p = new Point(x, y);
 					module.getPresentation().setPosition(p);
-					
-					for (int i = 0; i < eElement.getElementsByTagName("wire")
-							.getLength(); i++) {
+
+					for (int i = 0; i < eElement.getElementsByTagName("wire").getLength(); i++) {
 						String portName = ((Element) eElement.getElementsByTagName("wire").item(i)).getAttribute("outputPort");
-						
+
 						IWire wire = new CWire();
-						IOutputPort outport = (IOutputPort)module.getPortByName(portName);
+						IOutputPort outport = (IOutputPort) module.getPortByName(portName);
 						wire.connect(outport);
-						
-						String[] str = {
-								((Element) eElement.getElementsByTagName(
-										"wire").item(i))
-										.getAttribute("inputPortModuleName"), 
-								
-								((Element) eElement.getElementsByTagName(
-										"wire").item(i))
-										.getAttribute("inputPort"),
-										
-								((Element) eElement.getElementsByTagName(
-										"wire").item(i))
-										.getAttribute("colorR"),
-										
-								((Element) eElement.getElementsByTagName(
-										"wire").item(i))
-										.getAttribute("colorG"),
-										
-								((Element) eElement.getElementsByTagName(
-										"wire").item(i))
-										.getAttribute("colorB")
-						};
-						
-						portsToConnect.put(wire,str);
+
+						String[] str = { ((Element) eElement.getElementsByTagName("wire").item(i)).getAttribute("inputPortModuleName"),
+
+						((Element) eElement.getElementsByTagName("wire").item(i)).getAttribute("inputPort"),
+
+						((Element) eElement.getElementsByTagName("wire").item(i)).getAttribute("colorR"),
+
+						((Element) eElement.getElementsByTagName("wire").item(i)).getAttribute("colorG"),
+
+						((Element) eElement.getElementsByTagName("wire").item(i)).getAttribute("colorB") };
+
+						portsToConnect.put(wire, str);
 					}
-					
-					for (int i = 0; i < eElement.getElementsByTagName(
-							"parameter").getLength(); i++) {
+
+					for (int i = 0; i < eElement.getElementsByTagName("parameter").getLength(); i++) {
 						String key = ((Element) eElement.getElementsByTagName("parameter").item(i)).getAttribute("key");
 						Double value = Double.parseDouble(((Element) eElement.getElementsByTagName("parameter").item(i)).getAttribute("value"));
 						module.setParameter(key, value);
@@ -132,22 +117,19 @@ public class ReadXMLFile {
 					modules.put(module.getName(), module);
 					CSynthesizer.getInstance().add(module);
 				}
-				
+
 			}
-			for(IWire wire : portsToConnect.keySet()){
+			for (IWire wire : portsToConnect.keySet()) {
 				String moduleName = portsToConnect.get(wire)[0];
 				String portName = portsToConnect.get(wire)[1];
-				Color color = new Color(
-						Integer.parseInt(portsToConnect.get(wire)[2]),
-						Integer.parseInt(portsToConnect.get(wire)[3]),
-						Integer.parseInt(portsToConnect.get(wire)[4])
-				);
-				
-				((ICWire)wire).getPresentation().setColor(color);
-				
+				Color color = new Color(Integer.parseInt(portsToConnect.get(wire)[2]), Integer.parseInt(portsToConnect.get(wire)[3]),
+						Integer.parseInt(portsToConnect.get(wire)[4]));
+
+				((ICWire) wire).getPresentation().setColor(color);
+
 				IModule moduleToConnect = modules.get(moduleName);
 				IPort port = moduleToConnect.getPortByName(portName);
-				wire.connect((IInputPort)port);
+				wire.connect((IInputPort) port);
 				CSynthesizer.getInstance().add(wire);
 			}
 		} catch (Exception e) {

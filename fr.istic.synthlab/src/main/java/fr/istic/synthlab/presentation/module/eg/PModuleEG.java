@@ -30,14 +30,14 @@ public class PModuleEG extends APModule implements IPModuleEG {
 	private DoubleBoundedRangeModel decayModel;
 	private DoubleBoundedRangeModel sustainModel;
 	private DoubleBoundedRangeModel releaseModel;
-	
+
 	private PInputPort gatePort;
 	private POutputPort outputPort;
 
 	public PModuleEG(ICModuleEG control) {
 		super(control);
 		ctrl = control;
-		
+
 		configView();
 		registerCallbacks();
 	}
@@ -48,44 +48,44 @@ public class PModuleEG extends APModule implements IPModuleEG {
 
 		panelRotary.setOpaque(false);
 		panelPort.setOpaque(false);
-	
+
 		attackModel = new ExponentialRangeModel(IModuleEG.PARAM_NAME_ATTACK, 500, 0, 5, ctrl.getAttack());
 		decayModel = new ExponentialRangeModel(IModuleEG.PARAM_NAME_DECAY, 500, 0, 5, ctrl.getDecay());
 		sustainModel = new ExponentialRangeModel(IModuleEG.PARAM_NAME_SUSTAIN, 500, 0, 5, ctrl.getSustain());
 		releaseModel = new ExponentialRangeModel(IModuleEG.PARAM_NAME_RELEASE, 500, 0, 5, ctrl.getRelease());
-		
+
 		RotaryTextController attackRotary = new RotaryTextController(attackModel, 2);
 		RotaryTextController decayRotary = new RotaryTextController(decayModel, 2);
 		RotaryTextController sustainRotary = new RotaryTextController(sustainModel, 2);
 		RotaryTextController releaseRotary = new RotaryTextController(releaseModel, 2);
-		
+
 		panelRotary.add(attackRotary);
 		panelRotary.add(decayRotary);
 		panelRotary.add(sustainRotary);
 		panelRotary.add(releaseRotary);
-		
+
 		panelRotary.setPreferredSize(new Dimension(150, 200));
-		
+
 		gatePort = (PInputPort) ((ICInputPort) ctrl.getGateInput()).getPresentation();
 		outputPort = (POutputPort) ((ICOutputPort) ctrl.getOutput()).getPresentation();
 		panelPort.add(gatePort);
 		panelPort.add(outputPort);
-		
+
 		this.setAutoscrolls(true);
-		
+
 		super.setWidth(290);
 		super.setHeigth(200);
-		
+
 		Dimension size = new Dimension(super.getWidth(), super.getHeight());
 		this.setSize(size);
 		this.setPreferredSize(size);
-		
+
 		this.addTitleBar();
 		this.addPanel(panelRotary, 290, 100);
 		this.addPanel(panelPort, 290, 60);
-		
+
 	}
-	
+
 	private void registerCallbacks() {
 
 		attackModel.addChangeListener(new ChangeListener() {
@@ -112,9 +112,9 @@ public class PModuleEG extends APModule implements IPModuleEG {
 				ctrl.p2cReleaseChanged(releaseModel.getDoubleValue());
 			}
 		});
-		
+
 	}
-	
+
 	@Override
 	public ICModuleEG getControl() {
 		return ctrl;

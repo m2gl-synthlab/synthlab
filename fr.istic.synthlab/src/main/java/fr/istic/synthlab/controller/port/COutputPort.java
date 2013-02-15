@@ -125,7 +125,7 @@ public class COutputPort extends OutputPort implements ICOutputPort {
 				synth.setCurrentWire(null);
 			}
 
-		} 
+		}
 		// If a wire is already connected, we disconnect it
 		else {
 			if (CSynthesizer.getInstance().getCurrentWire() == null) {

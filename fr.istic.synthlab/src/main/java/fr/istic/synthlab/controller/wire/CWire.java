@@ -53,7 +53,7 @@ public class CWire extends Wire implements ICWire {
 	public void disconnect() {
 		ICSynthesizer synth = (ICSynthesizer) Synthesizer.getInstance();
 		synth.getPresentation().removeWire(pres);
-//		pres = null;
+		// pres = null;
 		super.disconnect();
 	}
 

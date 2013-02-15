@@ -45,7 +45,7 @@ public class ModuleVCF_LP extends AModule implements IModuleVCF, Observer<Port> 
 		// Création des filtres JSyn
 		this.filterJSyn1 = new FilterLowPass();
 		this.filterJSyn2 = new FilterLowPass();
-		
+
 		// Conection des filtres JSyn
 		this.filterJSyn1.output.connect(this.filterJSyn2.input);
 
@@ -59,17 +59,14 @@ public class ModuleVCF_LP extends AModule implements IModuleVCF, Observer<Port> 
 		frequencyModulator.output.connect(passThrough.input);
 
 		// Création d'un port d'entrée sur le générateur perso
-		this.fm = PACFactory.getFactory().newInputPort(this, IN_MOD_FREQ_NAME,
-				frequencyModulator.input);
+		this.fm = PACFactory.getFactory().newInputPort(this, IN_MOD_FREQ_NAME, frequencyModulator.input);
 		this.fm.addObserver(this);
 
 		// Création des ports d'entrée sur le filtre JSyn 1
-		this.input = PACFactory.getFactory().newInputPort(this, IN_NAME,
-				filterJSyn1.input);
+		this.input = PACFactory.getFactory().newInputPort(this, IN_NAME, filterJSyn1.input);
 
 		// Création du port de sortie sur le filtre JSyn 2
-		this.output = PACFactory.getFactory().newOutputPort(this, OUT_NAME,
-				filterJSyn2.output);
+		this.output = PACFactory.getFactory().newOutputPort(this, OUT_NAME, filterJSyn2.output);
 
 		// Valeur par defaut
 		this.setCutFrequency(1000);
@@ -138,7 +135,7 @@ public class ModuleVCF_LP extends AModule implements IModuleVCF, Observer<Port> 
 			filterJSyn2.frequency.set(getCutFrequency());
 		}
 	}
-	
+
 	@Override
 	public IInputPort getInput() {
 		return input;
@@ -158,15 +155,15 @@ public class ModuleVCF_LP extends AModule implements IModuleVCF, Observer<Port> 
 	public List<IWire> getWires() {
 		List<IWire> wires = new ArrayList<IWire>();
 		if (input.getWire() != null) {
-			if(!wires.contains(input.getWire()))
+			if (!wires.contains(input.getWire()))
 				wires.add(input.getWire());
 		}
 		if (fm.getWire() != null) {
-			if(!wires.contains(fm.getWire()))
+			if (!wires.contains(fm.getWire()))
 				wires.add(fm.getWire());
 		}
 		if (output.getWire() != null) {
-			if(!wires.contains(output.getWire()))
+			if (!wires.contains(output.getWire()))
 				wires.add(output.getWire());
 		}
 		return wires;

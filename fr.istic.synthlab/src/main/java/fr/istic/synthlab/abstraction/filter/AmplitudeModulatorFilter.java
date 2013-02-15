@@ -6,24 +6,24 @@ import com.jsyn.unitgen.UnitFilter;
 public class AmplitudeModulatorFilter extends UnitFilter {
 
 	public static String INPUT_AM_NAME = "Am";
-	
+
 	public UnitInputPort inputAm = new UnitInputPort(INPUT_AM_NAME);
-	
+
 	public AmplitudeModulatorFilter(double baseAmplitude) {
 		addPort(inputAm);
 	}
-	
+
 	@Override
 	public void generate(int start, int limit) {
 
-		double[] inputs = input.getValues();	
-		double[] inputsAm = inputAm.getValues();	
+		double[] inputs = input.getValues();
+		double[] inputsAm = inputAm.getValues();
 		double[] outputs = output.getValues();
 
 		for (int i = start; i < limit; i++) {
 			double in = inputs[i]; // Signal d'entrée
 			double am = inputsAm[i]; // Signal de modulation -1;1
-//			double mod = am * 5 * 12; // Conversion en dB
+			// double mod = am * 5 * 12; // Conversion en dB
 			// TODO : Formule a vérifier avec Mr P.
 			outputs[i] = in * am;// Convert.dB2V(mod) ; // Modulation du signal
 		}

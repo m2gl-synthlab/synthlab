@@ -46,21 +46,19 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 		kit.addAWTEventListener(new AWTEventListener() {
 			@Override
 			public void eventDispatched(AWTEvent event) {
-				if(event instanceof MouseEvent){
+				if (event instanceof MouseEvent) {
 					// Gestion du currentWire
 					if (CSynthesizer.getInstance().getCurrentWire() != null) {
 						IInputPort input = CSynthesizer.getInstance().getCurrentWire().getInput();
 						IOutputPort output = CSynthesizer.getInstance().getCurrentWire().getOutput();
-	
+
 						Point mouse = ((PSynthesizer) CSynthesizer.getInstance().getPresentation()).getMousePosition(true);
-						
+
 						if (input == null && output != null) {
-							((ICWire) CSynthesizer.getInstance().getCurrentWire())
-									.getPresentation().setInputPoint(mouse);
+							((ICWire) CSynthesizer.getInstance().getCurrentWire()).getPresentation().setInputPoint(mouse);
 						}
 						if (output == null && input != null) {
-							((ICWire) CSynthesizer.getInstance().getCurrentWire())
-									.getPresentation().setOutputPoint(mouse);
+							((ICWire) CSynthesizer.getInstance().getCurrentWire()).getPresentation().setOutputPoint(mouse);
 						}
 					}
 				}
@@ -72,17 +70,20 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 		kit.addAWTEventListener(new AWTEventListener() {
 			@Override
 			public void eventDispatched(AWTEvent event) {
-				if(event instanceof MouseEvent){
+				if (event instanceof MouseEvent) {
 					MouseEvent clickEvent = (MouseEvent) event;
-					
-					if(!(event.getSource() instanceof PPort)){
-						
-		                /** Suppression du cable avec le bouton droit ou gauche de la souris */
-						if( clickEvent.getButton() == MouseEvent.BUTTON1 || clickEvent.getButton() == MouseEvent.BUTTON3){
+
+					if (!(event.getSource() instanceof PPort)) {
+
+						/**
+						 * Suppression du cable avec le bouton droit ou gauche
+						 * de la souris
+						 */
+						if (clickEvent.getButton() == MouseEvent.BUTTON1 || clickEvent.getButton() == MouseEvent.BUTTON3) {
 							CSynthesizer.getInstance().p2cDisconnectCurrentWire();
 						}
 					}
-	            }
+				}
 			}
 		}, AWTEvent.MOUSE_EVENT_MASK);
 	}
@@ -125,20 +126,19 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 		this.add((JPanel) module, 0);
 
 		System.out.println(module.getPosition());
-		
-		int x =0;
-		int y =0;
-		
-		if((module.getPosition().x==0)&&(module.getPosition().y==0)){
+
+		int x = 0;
+		int y = 0;
+
+		if ((module.getPosition().x == 0) && (module.getPosition().y == 0)) {
 			x = 10;
 			y = 10;
 		} else {
 			x = module.getPosition().x;
 			y = module.getPosition().y;
 		}
-		
-		((APModule) module).setBounds(x, y, module.getWidth(),
-				module.getHeight());
+
+		((APModule) module).setBounds(x, y, module.getWidth(), module.getHeight());
 
 		modules.add(module);
 		((APModule) module).validate();
@@ -164,8 +164,7 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 	public void c2pRemoveModuleOk(IPModule module) {
 		System.out.println("remove");
 		this.remove((APModule) module);
-		
-		
+
 		validate();
 		repaint();
 	}

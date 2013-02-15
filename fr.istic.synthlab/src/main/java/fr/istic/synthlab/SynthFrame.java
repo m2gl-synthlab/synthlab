@@ -51,10 +51,8 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private JMenu menuFile, menuAdd, menuHelp;
 	private JMenuItem menuItemNew, menuItemOpen, menuItemSave, menuItemSaveAs;
 	private JMenuItem menuItemQuit, menuItemDoc, menuItemAbout;
-	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT,
-			menuItemAddModuleVCFLP, menuItemAddModuleVCFHP,
-			menuItemAddModuleEG, menuItemAddModuleAudioScope,
-			menuItemAddModuleREP, menuItemAddModuleVCA, menuItemAddModuleMIX;
+	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT, menuItemAddModuleVCFLP, menuItemAddModuleVCFHP, menuItemAddModuleEG,
+			menuItemAddModuleAudioScope, menuItemAddModuleREP, menuItemAddModuleVCA, menuItemAddModuleMIX;
 
 	// Toolbar
 	private WebToolBar toolBar = new WebToolBar();
@@ -63,15 +61,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private JButton buttonPlayPause = new JButton();
 	private JButton buttonOUT, buttonVCO, buttonVCA, buttonVCFLP, buttonVCFHP;
 	private JButton buttonEG, buttonMIX, buttonREP, buttonSCOP;
-	private WebButton colorButtonBlack, colorButtonGray, colorButtonBlue,
-			colorButtonCyan, colorButtonGreen, colorButtonMagenta,
-			colorButtonOrange, colorButtonPink, colorButtonRed,
-			colorButtonWhite, colorButtonYellow, colorChooserButton;
-	private String[] tooltipTexts = { "Voltage-Controlled Oscillator",
-			"Voltage-Controlled Amplifier",
-			"Voltage-Controlled Filter Low-Pass",
-			"Voltage-Controlled Filter High-Pass", "Enveloppe generator",
-			"Mixer", "Replicator", "Output on soundcard", "AudioScope" };
+	private WebButton colorButtonBlack, colorButtonGray, colorButtonBlue, colorButtonCyan, colorButtonGreen, colorButtonMagenta, colorButtonOrange,
+			colorButtonPink, colorButtonRed, colorButtonWhite, colorButtonYellow, colorChooserButton;
+	private String[] tooltipTexts = { "Voltage-Controlled Oscillator", "Voltage-Controlled Amplifier", "Voltage-Controlled Filter Low-Pass",
+			"Voltage-Controlled Filter High-Pass", "Enveloppe generator", "Mixer", "Replicator", "Output on soundcard", "AudioScope" };
 
 	// Command
 	private ICommand newSynthCommand;
@@ -139,8 +132,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuItemAddModuleEG = new JMenuItem("EG     | " + tooltipTexts[4]);
 		menuItemAddModuleMIX = new JMenuItem("MIX    | " + tooltipTexts[5]);
 		menuItemAddModuleREP = new JMenuItem("REP    | " + tooltipTexts[6]);
-		menuItemAddModuleAudioScope = new JMenuItem("SCOP   | "
-				+ tooltipTexts[8]);
+		menuItemAddModuleAudioScope = new JMenuItem("SCOP   | " + tooltipTexts[8]);
 		menuItemAddModuleOUT = new JMenuItem("OUT    | " + tooltipTexts[7]);
 
 		Font font = new Font(Font.MONOSPACED, Font.ROMAN_BASELINE, 11);
@@ -239,31 +231,24 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		toolBar.addSpacing(7);
 
 		// -------------------------- Toolbar Colors --------------------------
-		colorButtonBlack = new WebButton(
-				ImageUtils.createColorIcon(Color.BLACK));
+		colorButtonBlack = new WebButton(ImageUtils.createColorIcon(Color.BLACK));
 		colorButtonGray = new WebButton(ImageUtils.createColorIcon(Color.GRAY));
 		colorButtonBlue = new WebButton(ImageUtils.createColorIcon(Color.BLUE));
 		colorButtonCyan = new WebButton(ImageUtils.createColorIcon(Color.CYAN));
-		colorButtonGreen = new WebButton(
-				ImageUtils.createColorIcon(Color.GREEN));
-		colorButtonMagenta = new WebButton(
-				ImageUtils.createColorIcon(Color.MAGENTA));
-		colorButtonOrange = new WebButton(
-				ImageUtils.createColorIcon(Color.ORANGE));
+		colorButtonGreen = new WebButton(ImageUtils.createColorIcon(Color.GREEN));
+		colorButtonMagenta = new WebButton(ImageUtils.createColorIcon(Color.MAGENTA));
+		colorButtonOrange = new WebButton(ImageUtils.createColorIcon(Color.ORANGE));
 		colorButtonPink = new WebButton(ImageUtils.createColorIcon(Color.PINK));
 		colorButtonRed = new WebButton(ImageUtils.createColorIcon(Color.RED));
-		colorButtonWhite = new WebButton(
-				ImageUtils.createColorIcon(Color.WHITE));
-		colorButtonYellow = new WebButton(
-				ImageUtils.createColorIcon(Color.YELLOW));
+		colorButtonWhite = new WebButton(ImageUtils.createColorIcon(Color.WHITE));
+		colorButtonYellow = new WebButton(ImageUtils.createColorIcon(Color.YELLOW));
 
-		colorChooserButton = new WebButton("Current color",
-				ImageUtils.createColorIcon(CSynthesizer.getInstance().getCurrentWireColor()));
+		colorChooserButton = new WebButton("Current color", ImageUtils.createColorIcon(CSynthesizer.getInstance().getCurrentWireColor()));
 
 		toolBar.add(colorButtonBlack);
 		toolBar.add(colorButtonGray);
 		toolBar.add(colorButtonWhite);
-		
+
 		toolBar.add(colorButtonPink);
 		toolBar.add(colorButtonRed);
 		toolBar.add(colorButtonMagenta);
@@ -298,25 +283,17 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		// TODO remonter les evenements start et stop
 
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height
-				/ 2 - this.getSize().height / 2);
+		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 		this.setResizable(true);
 
 		// ajout des raccourcis clavier aux elements du menu
-		menuItemNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
-				ActionEvent.CTRL_MASK));
-		menuItemOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
-				ActionEvent.CTRL_MASK));
-		menuItemSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
-				ActionEvent.CTRL_MASK));
-		menuItemSaveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
-				ActionEvent.SHIFT_MASK + ActionEvent.CTRL_MASK));
-		menuItemQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q,
-				ActionEvent.CTRL_MASK));
-		menuItemDoc.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,
-				ActionEvent.CTRL_MASK));
-		menuItemAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B,
-				ActionEvent.CTRL_MASK));
+		menuItemNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
+		menuItemOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+		menuItemSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+		menuItemSaveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.SHIFT_MASK + ActionEvent.CTRL_MASK));
+		menuItemQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
+		menuItemDoc.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
+		menuItemAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.CTRL_MASK));
 	}
 
 	/**
@@ -479,8 +456,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 						Image img;
 						try {
 							img = ImageIO.read(new File(iconFiles[0]));
-							img = img.getScaledInstance(25, 25,
-									Image.SCALE_DEFAULT);
+							img = img.getScaledInstance(25, 25, Image.SCALE_DEFAULT);
 							buttonPlayPause.setIcon(new ImageIcon(img));
 						} catch (IOException e1) {
 							e1.printStackTrace();
@@ -493,8 +469,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 						Image img;
 						try {
 							img = ImageIO.read(new File(iconFiles[1]));
-							img = img.getScaledInstance(25, 25,
-									Image.SCALE_DEFAULT);
+							img = img.getScaledInstance(25, 25, Image.SCALE_DEFAULT);
 							buttonPlayPause.setIcon(new ImageIcon(img));
 						} catch (IOException e1) {
 							e1.printStackTrace();
@@ -588,10 +563,8 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		colorChooserButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				WebColorChooserDialog colorChooser = new WebColorChooserDialog(
-						toolBar);
-				colorChooser.setColor(CSynthesizer.getInstance()
-						.getCurrentWireColor());
+				WebColorChooserDialog colorChooser = new WebColorChooserDialog(toolBar);
+				colorChooser.setColor(CSynthesizer.getInstance().getCurrentWireColor());
 				colorChooser.setVisible(true);
 
 				if (colorChooser.getResult() == StyleConstants.OK_OPTION) {
@@ -608,10 +581,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			this.remove((PSynthesizer) pres);
 
 		pres = presentation;
-//		JScrollPane scrollPane = new JScrollPane();
+		// JScrollPane scrollPane = new JScrollPane();
 		this.add((PSynthesizer) pres);
-//		scrollPane.setViewportView((PSynthesizer) pres);
-		
+		// scrollPane.setViewportView((PSynthesizer) pres);
+
 		this.setVisible(true);
 	}
 
@@ -743,8 +716,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	/**
 	 * @param addModuleAudioScopeCommand
 	 */
-	public void setAddModuleAudioScopeCommand(
-			AddModuleAudioScopeCommand addModuleAudioScopeCommand) {
+	public void setAddModuleAudioScopeCommand(AddModuleAudioScopeCommand addModuleAudioScopeCommand) {
 		this.addModuleAudioScopeCommand = addModuleAudioScopeCommand;
 	}
 
@@ -762,8 +734,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	/**
 	 * @param setCurrentWireColor
 	 */
-	public void setCurrentWireColorCommand(
-			ToolbarCurrentWireColorCommand currentWireColorCommand) {
+	public void setCurrentWireColorCommand(ToolbarCurrentWireColorCommand currentWireColorCommand) {
 		this.toolbarCurrentWireColorCommand = currentWireColorCommand;
 	}
 
@@ -773,8 +744,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 	private void setCurrentWireColor(Color color) {
 		toolbarCurrentWireColor = color;
-		colorChooserButton.setIcon(ImageUtils
-				.createColorIcon(toolbarCurrentWireColor));
+		colorChooserButton.setIcon(ImageUtils.createColorIcon(toolbarCurrentWireColor));
 	}
 
 }

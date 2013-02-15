@@ -16,12 +16,9 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleMIX extends AModule implements IModuleMIX {
 
-	private static final String MODULE_NAME = "MIX", IN1_NAME = "In1",
-			IN2_NAME = "In2", IN3_NAME = "In3", IN4_NAME = "In4",
-			OUT_NAME = "Out";
+	private static final String MODULE_NAME = "MIX", IN1_NAME = "In1", IN2_NAME = "In2", IN3_NAME = "In3", IN4_NAME = "In4", OUT_NAME = "Out";
 
-	private AttenuationFilter attenuator1, attenuator2, attenuator3,
-			attenuator4;
+	private AttenuationFilter attenuator1, attenuator2, attenuator3, attenuator4;
 
 	private QuadrupleMixFilter mixer;
 
@@ -42,14 +39,10 @@ public class ModuleMIX extends AModule implements IModuleMIX {
 		this.attenuator3 = new AttenuationFilter();
 		this.attenuator4 = new AttenuationFilter();
 
-		this.in1 = PACFactory.getFactory().newInputPort(this, IN1_NAME,
-				attenuator1.input);
-		this.in2 = PACFactory.getFactory().newInputPort(this, IN2_NAME,
-				attenuator2.input);
-		this.in3 = PACFactory.getFactory().newInputPort(this, IN3_NAME,
-				attenuator3.input);
-		this.in4 = PACFactory.getFactory().newInputPort(this, IN4_NAME,
-				attenuator4.input);
+		this.in1 = PACFactory.getFactory().newInputPort(this, IN1_NAME, attenuator1.input);
+		this.in2 = PACFactory.getFactory().newInputPort(this, IN2_NAME, attenuator2.input);
+		this.in3 = PACFactory.getFactory().newInputPort(this, IN3_NAME, attenuator3.input);
+		this.in4 = PACFactory.getFactory().newInputPort(this, IN4_NAME, attenuator4.input);
 
 		this.setAttenuation1(-4);
 		this.setAttenuation2(-4);
@@ -61,8 +54,7 @@ public class ModuleMIX extends AModule implements IModuleMIX {
 		this.attenuator3.output.connect(mixer.getInput3());
 		this.attenuator4.output.connect(mixer.getInput4());
 
-		this.output = PACFactory.getFactory().newOutputPort(this, OUT_NAME,
-				mixer.getOutput());
+		this.output = PACFactory.getFactory().newOutputPort(this, OUT_NAME, mixer.getOutput());
 
 		addPort(in1);
 		addPort(in2);
@@ -174,17 +166,17 @@ public class ModuleMIX extends AModule implements IModuleMIX {
 	public double getAttenuation1() {
 		return getParameter("attenuation1");
 	}
-	
+
 	@Override
 	public double getAttenuation2() {
 		return getParameter("attenuation2");
 	}
-	
+
 	@Override
 	public double getAttenuation3() {
 		return getParameter("attenuation3");
 	}
-	
+
 	@Override
 	public double getAttenuation4() {
 		return getParameter("attenuation4");

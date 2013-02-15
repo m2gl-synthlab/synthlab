@@ -11,15 +11,15 @@ import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 /**
  * Abstract class for modules.
  */
-public abstract class AModule implements IModule{
+public abstract class AModule implements IModule {
 
 	private String name;
 	private List<IPort> ports;
 	private HashMap<String, Double> parameters;
-	
+
 	public AModule(String name) {
 		int nbModules = 0;
-		if(Synthesizer.getInstance().getModules().size() >0){
+		if (Synthesizer.getInstance().getModules().size() > 0) {
 			for (IModule module : CSynthesizer.getInstance().getModules()) {
 				if (module.getName().startsWith(name)) {
 					nbModules++;
@@ -35,37 +35,37 @@ public abstract class AModule implements IModule{
 	public String getName() {
 		return name;
 	}
-	
+
 	@Override
-	public boolean containsPort(IPort port){
-		if(ports.contains(port))
+	public boolean containsPort(IPort port) {
+		if (ports.contains(port))
 			return true;
 		else
 			return false;
 	}
-	
+
 	@Override
-	public void addPort(IPort port){
+	public void addPort(IPort port) {
 		ports.add(port);
 	}
-	
+
 	@Override
-	public Double getParameter(String key){
-		if (parameters.get(key) == null){
+	public Double getParameter(String key) {
+		if (parameters.get(key) == null) {
 			return 0.;
-		} else 
+		} else
 			return parameters.get(key);
 	}
-	
+
 	@Override
-	public HashMap<String, Double> getParameters(){
+	public HashMap<String, Double> getParameters() {
 		return parameters;
 	}
-	
+
 	@Override
-	public IPort getPortByName(String portName){
-		for(IPort port : ports){
-			if(port.getName().equals(portName)){
+	public IPort getPortByName(String portName) {
+		for (IPort port : ports) {
+			if (port.getName().equals(portName)) {
 				return port;
 			}
 		}

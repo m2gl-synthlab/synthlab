@@ -30,8 +30,7 @@ public class WriteXMLFile {
 	public WriteXMLFile(File directory) {
 		this.directory = directory;
 		try {
-			DocumentBuilderFactory docFactory = DocumentBuilderFactory
-					.newInstance();
+			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder;
 			docBuilder = docFactory.newDocumentBuilder();
 
@@ -47,14 +46,13 @@ public class WriteXMLFile {
 	// write the content into xml file
 	public void saveToXML() {
 		try {
-			TransformerFactory transformerFactory = TransformerFactory
-					.newInstance();
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer;
 
 			transformer = transformerFactory.newTransformer();
 
 			DOMSource source = new DOMSource(doc);
-			
+
 			StreamResult result = new StreamResult(directory);
 
 			// Output to console for testing
@@ -69,83 +67,83 @@ public class WriteXMLFile {
 	}
 
 	public void saveModules(List<IModule> modules) {
-		for(IModule module : modules){
+		for (IModule module : modules) {
 			Element moduleName = doc.createElement("module");
 			rootElement.appendChild(moduleName);
-			
-			Point p = ((ICModule)module).getPresentation().getPosition();
+
+			Point p = ((ICModule) module).getPresentation().getPosition();
 			System.out.println(p);
-			
+
 			// Nom module
 			Attr attrName = doc.createAttribute("name");
 			attrName.setValue(module.getName());
 			moduleName.setAttributeNode(attrName);
-			
+
 			// Position x
 			Attr attrX = doc.createAttribute("x");
 			attrX.setValue(Double.toString(p.getX()));
 			moduleName.setAttributeNode(attrX);
-			
+
 			// Position y
 			Attr attrY = doc.createAttribute("y");
 			attrY.setValue(Double.toString(p.getY()));
 			moduleName.setAttributeNode(attrY);
-			
+
 			// Ajout des ports utilises du module
-			for(IWire wire : module.getWires()){
-				
-				if(module.containsPort(wire.getOutput())){
+			for (IWire wire : module.getWires()) {
+
+				if (module.containsPort(wire.getOutput())) {
 
 					// set le port
 					Element port = doc.createElement("wire");
 					moduleName.appendChild(port);
-					
+
 					// Nom port
 					Attr attrPortName = doc.createAttribute("outputPort");
 					attrPortName.setValue(wire.getOutput().getName());
 					port.setAttributeNode(attrPortName);
-					
+
 					// Connected to Module name
 					Attr attrPortConnectedToModuleName = doc.createAttribute("inputPortModuleName");
 					attrPortConnectedToModuleName.setValue(wire.getInput().getModule().getName());
 					port.setAttributeNode(attrPortConnectedToModuleName);
-					
+
 					// Connected to Module port
 					Attr attrPortConnectedToModulePort = doc.createAttribute("inputPort");
 					attrPortConnectedToModulePort.setValue(wire.getInput().getName());
 					port.setAttributeNode(attrPortConnectedToModulePort);
-					
+
 					// Cable Color R
 					Attr attrPortColorR = doc.createAttribute("colorR");
-					
-					System.out.println(((ICWire)wire).getPresentation().getColor());
-					
-					attrPortColorR.setValue(((ICWire)wire).getPresentation().getColor().getRed()+"");
+
+					System.out.println(((ICWire) wire).getPresentation().getColor());
+
+					attrPortColorR.setValue(((ICWire) wire).getPresentation().getColor().getRed() + "");
 					port.setAttributeNode(attrPortColorR);
-					
+
 					// Cable Color G
 					Attr attrPortColorG = doc.createAttribute("colorG");
-					attrPortColorG.setValue(((ICWire)wire).getPresentation().getColor().getGreen()+"");
+					attrPortColorG.setValue(((ICWire) wire).getPresentation().getColor().getGreen() + "");
 					port.setAttributeNode(attrPortColorG);
-					
+
 					// Cable Color B
 					Attr attrPortColorB = doc.createAttribute("colorB");
-					attrPortColorB.setValue(((ICWire)wire).getPresentation().getColor().getBlue()+"");
+					attrPortColorB.setValue(((ICWire) wire).getPresentation().getColor().getBlue() + "");
 					port.setAttributeNode(attrPortColorB);
-					
+
 				}
 			}
-			
-			for(String key : module.getParameters().keySet()){
+
+			for (String key : module.getParameters().keySet()) {
 				// set le parametre
 				Element param = doc.createElement("parameter");
 				moduleName.appendChild(param);
-				
+
 				// Nom parametre
 				Attr attrParamName = doc.createAttribute("key");
 				attrParamName.setValue(key);
 				param.setAttributeNode(attrParamName);
-				
+
 				// Valeur parametre
 				Attr attrParamValue = doc.createAttribute("value");
 				attrParamValue.setValue(module.getParameters().get(key).toString());

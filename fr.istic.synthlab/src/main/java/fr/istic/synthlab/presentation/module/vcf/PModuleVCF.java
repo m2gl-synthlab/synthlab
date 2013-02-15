@@ -52,18 +52,12 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 		panelParams.setOpaque(false);
 		panelInputOutput.setOpaque(false);
 
-		cutFrequencyModel = new DoubleBoundedRangeModel(
-				IModuleVCF.PARAM_NAME_CUT_FREQUENCY, 100, 0, 22000,
-				ctrl.getCutFrequency());
-		RotaryTextController cutRotary = new RotaryTextController(
-				cutFrequencyModel, 4);
+		cutFrequencyModel = new DoubleBoundedRangeModel(IModuleVCF.PARAM_NAME_CUT_FREQUENCY, 100, 0, 22000, ctrl.getCutFrequency());
+		RotaryTextController cutRotary = new RotaryTextController(cutFrequencyModel, 4);
 		panelParams.add(cutRotary);
 
-		resonanceModel = new DoubleBoundedRangeModel(
-				IModuleVCF.PARAM_NAME_RESONANCE, 490, 1, 50,
-				ctrl.getResonance());
-		RotaryTextController resonanceRotary = new RotaryTextController(
-				resonanceModel, 4);
+		resonanceModel = new DoubleBoundedRangeModel(IModuleVCF.PARAM_NAME_RESONANCE, 490, 1, 50, ctrl.getResonance());
+		RotaryTextController resonanceRotary = new RotaryTextController(resonanceModel, 4);
 		panelParams.add(resonanceRotary);
 
 		input = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
@@ -72,8 +66,7 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 		fm = (PInputPort) ((ICInputPort) ctrl.getInputFm()).getPresentation();
 		panelInputOutput.add(fm);
 
-		output = (POutputPort) ((ICOutputPort) ctrl.getOutput())
-				.getPresentation();
+		output = (POutputPort) ((ICOutputPort) ctrl.getOutput()).getPresentation();
 		panelInputOutput.add(output);
 
 		super.setWidth(200);
@@ -93,8 +86,7 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 		cutFrequencyModel.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				ctrl.p2cCutFrequencyChanged((int) cutFrequencyModel
-						.getDoubleValue());
+				ctrl.p2cCutFrequencyChanged((int) cutFrequencyModel.getDoubleValue());
 			}
 		});
 

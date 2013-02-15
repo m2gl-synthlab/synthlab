@@ -15,14 +15,14 @@ import fr.istic.synthlab.factory.impl.PACFactory;
  */
 public class Synthesizer implements ISynthesizer {
 	protected static ISynthesizer instance;
-	
+
 	private com.jsyn.Synthesizer synth;
 
 	private List<IModule> modules;
 	private List<IWire> wires;
 
 	private IWire currentWire;
-	
+
 	/**
 	 * @return the synthesizer's instance
 	 */
@@ -32,7 +32,7 @@ public class Synthesizer implements ISynthesizer {
 		}
 		return instance;
 	}
-	
+
 	/**
 	 * Constructor
 	 */
@@ -45,27 +45,26 @@ public class Synthesizer implements ISynthesizer {
 
 	@Override
 	public com.jsyn.Synthesizer getJSyn() {
-		
+
 		return synth;
 	}
 
-	
 	@Override
 	public void add(IModule module) {
 		modules.add(module);
-		if ( module.getJSyn() !=null)
-			for(UnitGenerator gen : module.getJSyn())
+		if (module.getJSyn() != null)
+			for (UnitGenerator gen : module.getJSyn())
 				this.synth.add(gen);
-		
+
 	}
 
 	@Override
 	public void remove(IModule module) {
 		modules.remove(module);
-		for(UnitGenerator gen : module.getJSyn())
+		for (UnitGenerator gen : module.getJSyn())
 			this.synth.remove(gen);
 	}
-	
+
 	@Override
 	public void add(IWire wire) {
 		wires.add(wire);
@@ -126,8 +125,5 @@ public class Synthesizer implements ISynthesizer {
 		wire = null;
 		currentWire = null;
 	}
-
-	
-	
 
 }

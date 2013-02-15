@@ -47,7 +47,7 @@ public class TitleBar extends WebPanel {
 		closeLbl.addMouseListener(new SimpleMouseListener() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(e.getButton() == MouseEvent.BUTTON1){
+				if (e.getButton() == MouseEvent.BUTTON1) {
 					module.p2cClosing();
 					((ICSynthesizer) CSynthesizer.getInstance()).p2cRemoveModule(module);
 				}

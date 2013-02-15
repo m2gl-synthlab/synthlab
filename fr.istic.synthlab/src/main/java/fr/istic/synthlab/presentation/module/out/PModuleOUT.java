@@ -49,8 +49,7 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		JPanel panelMute = new JPanel();
 		panelMute.setOpaque(false);
 
-		model = new DoubleBoundedRangeModel(IModuleOUT.PARAM_NAME_GAIN, 7200, -60, 12,
-				ctrl.getAttenuation());
+		model = new DoubleBoundedRangeModel(IModuleOUT.PARAM_NAME_GAIN, 7200, -60, 12, ctrl.getAttenuation());
 		RotaryTextController gainRotary = new RotaryTextController(model, 1);
 		panelGain.add(gainRotary);
 
@@ -59,8 +58,7 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		muteSwitch.setSelected(!ctrl.isMute());
 		panelMute.add(muteSwitch);
 
-		inputPort = (PInputPort) ((ICInputPort) ctrl.getInput())
-				.getPresentation();
+		inputPort = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
 		panelInput.add(inputPort);
 
 		this.setAutoscrolls(true);
@@ -89,7 +87,7 @@ public class PModuleOUT extends APModule implements IPModuleOUT {
 		});
 
 		muteSwitch.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ctrl.p2cMute();

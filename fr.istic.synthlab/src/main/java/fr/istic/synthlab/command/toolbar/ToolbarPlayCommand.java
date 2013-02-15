@@ -10,7 +10,7 @@ public class ToolbarPlayCommand implements ICommand {
 	public ToolbarPlayCommand(IPSynthesizer synth) {
 		this.synth = synth;
 	}
-	
+
 	@Override
 	public void execute() {
 		synth.start();

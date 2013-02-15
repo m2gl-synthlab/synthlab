@@ -11,7 +11,7 @@ public interface IModuleVCO extends IModule {
 	 */
 	public static final String PARAM_NAME_OCTAVE = "Octave";
 	public static final String PARAM_NAME_TONE = "Tone";
-	
+
 	/**
 	 * Set the octave value (between 0 and 14)
 	 * 
@@ -77,6 +77,7 @@ public interface IModuleVCO extends IModule {
 
 	/**
 	 * Set the frequency
+	 * 
 	 * @param value
 	 */
 	void setFrequency(Double value);

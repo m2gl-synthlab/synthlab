@@ -11,7 +11,7 @@ public class QuadrupleMixFilter extends UnitGenerator {
 	private static final String IN3_NAME = "In3";
 	private static final String IN4_NAME = "In4";
 	private static final String OUT_NAME = "Out";
-	
+
 	UnitInputPort input1 = new UnitInputPort(IN1_NAME);
 	UnitInputPort input2 = new UnitInputPort(IN2_NAME);
 	UnitInputPort input3 = new UnitInputPort(IN3_NAME);

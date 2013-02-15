@@ -29,7 +29,7 @@ public interface IWire {
 	 * 
 	 * @param port
 	 * @throws PortAlreadyInUseException
-	 * @throws BadConnectionException 
+	 * @throws BadConnectionException
 	 */
 	public void connect(IInputPort port) throws PortAlreadyInUseException, BadConnectionException;
 
@@ -38,7 +38,7 @@ public interface IWire {
 	 * 
 	 * @param port
 	 * @throws PortAlreadyInUseException
-	 * @throws BadConnectionException 
+	 * @throws BadConnectionException
 	 */
 	public void connect(IOutputPort port) throws PortAlreadyInUseException, BadConnectionException;
 

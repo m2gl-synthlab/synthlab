@@ -31,17 +31,26 @@ public interface IPFactory {
 
 	// Modules
 	IPModuleVCO newVCO(ICModuleVCO control);
+
 	IPModuleVCA newVCA(ICModuleVCA control);
+
 	IPModuleVCF newVCF(ICModuleVCF control);
+
 	IPModuleOUT newOUT(ICModuleOUT control);
+
 	IPModuleEG newEG(ICModuleEG control);
+
 	IPModuleAudioScope newAudioScope(ICModuleAudioScope control);
+
 	IPModuleREP newREP(ICModuleREP control);
+
 	IPModuleMIX newMIX(ICModuleMIX control);
 
 	// Connectivity
 	IPWire newWire(ICWire control);
+
 	IPOutputPort newOutputPort(ICOutputPort control);
+
 	IPInputPort newInputPort(ICInputPort cInputPort);
 
 }

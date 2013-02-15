@@ -10,7 +10,7 @@ public interface IModuleVCA extends IModule {
 	 * Parameters name
 	 */
 	public static final String PARAM_NAME_GAIN = "Gain";
-	
+
 	// TODO comment
 	IInputPort getInput();
 
@@ -21,14 +21,16 @@ public interface IModuleVCA extends IModule {
 	/**
 	 * Set the attenuation value (between -30 and 12)
 	 * 
-	 * @param Base Amplitude value
+	 * @param Base
+	 *            Amplitude value
 	 */
 	public void setAttenuation(double value);
 
 	/**
 	 * Return the attenuation value (between -30 and 12)
 	 * 
-	 * @param Base Amplitude value
+	 * @param Base
+	 *            Amplitude value
 	 */
 	public double getAttenuation();
 

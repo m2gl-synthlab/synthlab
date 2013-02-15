@@ -16,7 +16,7 @@ public interface IModuleMIX extends IModule {
 	public static final String PARAM_NAME_GAIN2 = "Gain2";
 	public static final String PARAM_NAME_GAIN3 = "Gain3";
 	public static final String PARAM_NAME_GAIN4 = "Gain4";
-	
+
 	/**
 	 * Return the input port 1 of the MIX module
 	 * 
@@ -37,50 +37,49 @@ public interface IModuleMIX extends IModule {
 	 * @param value
 	 */
 	public void setAttenuation1(double value);
-	
+
 	/**
 	 * Set the attenuation(number) value (between -inf and +12dB)
 	 * 
 	 * @param value
 	 */
 	public void setAttenuation2(double value);
-	
+
 	/**
 	 * Set the attenuation(number) value (between -inf and +12dB)
 	 * 
 	 * @param value
 	 */
 	public void setAttenuation3(double value);
-	
+
 	/**
 	 * Set the attenuation(number) value (between -inf and +12dB)
 	 * 
 	 * @param value
 	 */
 	public void setAttenuation4(double value);
-	
-	
+
 	/**
 	 * Return the attenuation(number) value (between -inf and +12dB)
 	 * 
 	 * @return value
 	 */
 	public double getAttenuation1();
-	
+
 	/**
 	 * Return the attenuation(number) value (between -inf and +12dB)
 	 * 
 	 * @return value
 	 */
 	public double getAttenuation2();
-	
+
 	/**
 	 * Return the attenuation(number) value (between -inf and +12dB)
 	 * 
 	 * @return value
 	 */
 	public double getAttenuation3();
-	
+
 	/**
 	 * Return the attenuation(number) value (between -inf and +12dB)
 	 * 

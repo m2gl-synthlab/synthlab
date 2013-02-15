@@ -19,8 +19,7 @@ public class OpenSynthCommand implements ICommand {
 	public OpenSynthCommand(ISynthApp app, ISynthFrame synthFrame) {
 		this.app = app;
 		this.synthFrame = synthFrame;
-		this.chooser = new FileDialog((SynthFrame) this.synthFrame,
-				"Open a Synthlab File", FileDialog.LOAD);
+		this.chooser = new FileDialog((SynthFrame) this.synthFrame, "Open a Synthlab File", FileDialog.LOAD);
 	}
 
 	@Override
@@ -35,7 +34,7 @@ public class OpenSynthCommand implements ICommand {
 				((JFrame) synthFrame).setTitle("SynthlabG2 - " + dir + file);
 				app.loadFromXML(dir, file);
 			} else {
-				JOptionPane.showMessageDialog(((JFrame) synthFrame),"Select a \'.synthlab\' file please.");
+				JOptionPane.showMessageDialog(((JFrame) synthFrame), "Select a \'.synthlab\' file please.");
 				this.execute();
 			}
 		}

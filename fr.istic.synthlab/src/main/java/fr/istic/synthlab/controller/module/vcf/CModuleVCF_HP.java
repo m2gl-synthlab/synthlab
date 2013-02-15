@@ -18,7 +18,7 @@ public class CModuleVCF_HP extends ModuleVCF_HP implements ICModuleVCF {
 	public IPModuleVCF getPresentation() {
 		return pres;
 	}
-	
+
 	private void changeCutFrequency(int cutFrequency) {
 		setCutFrequency(cutFrequency);
 		pres.c2pSetCutFrequencyValue(getCutFrequency());
@@ -28,7 +28,7 @@ public class CModuleVCF_HP extends ModuleVCF_HP implements ICModuleVCF {
 		setResonance(resonance);
 		pres.c2pSetResonanceValue(getResonance());
 	}
-	
+
 	@Override
 	public void p2cCutFrequencyChanged(int cutFrequency) {
 		changeCutFrequency(cutFrequency);
@@ -41,16 +41,16 @@ public class CModuleVCF_HP extends ModuleVCF_HP implements ICModuleVCF {
 
 	@Override
 	public void p2cClosing() {
-		for(IWire w : this.getWires()){
+		for (IWire w : this.getWires()) {
 			w.disconnect();
 		}
 	}
-	
+
 	@Override
-	public void setParameter(String key, Double value){
-		if(key.equals("cutFrequency")){
+	public void setParameter(String key, Double value) {
+		if (key.equals("cutFrequency")) {
 			changeCutFrequency(value.intValue());
-		} else if (key.equals("resonance")){
+		} else if (key.equals("resonance")) {
 			changeResonance(value);
 		}
 	}

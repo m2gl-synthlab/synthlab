@@ -55,48 +55,35 @@ public class PModuleMIX extends APModule implements IPModuleMIX {
 		panelGains.setOpaque(false);
 		panelInputOutput.setOpaque(false);
 
-		inputPort1 = (PInputPort) ((ICInputPort) ctrl.getInput(1))
-				.getPresentation();
+		inputPort1 = (PInputPort) ((ICInputPort) ctrl.getInput(1)).getPresentation();
 		panelInputOutput.add(inputPort1);
 
-		inputPort2 = (PInputPort) ((ICInputPort) ctrl.getInput(2))
-				.getPresentation();
+		inputPort2 = (PInputPort) ((ICInputPort) ctrl.getInput(2)).getPresentation();
 		panelInputOutput.add(inputPort2);
 
-		inputPort3 = (PInputPort) ((ICInputPort) ctrl.getInput(3))
-				.getPresentation();
+		inputPort3 = (PInputPort) ((ICInputPort) ctrl.getInput(3)).getPresentation();
 		panelInputOutput.add(inputPort3);
 
-		inputPort4 = (PInputPort) ((ICInputPort) ctrl.getInput(4))
-				.getPresentation();
+		inputPort4 = (PInputPort) ((ICInputPort) ctrl.getInput(4)).getPresentation();
 		panelInputOutput.add(inputPort4);
 
-		output = (POutputPort) ((ICOutputPort) ctrl.getOutput())
-				.getPresentation();
+		output = (POutputPort) ((ICOutputPort) ctrl.getOutput()).getPresentation();
 		panelInputOutput.add(output);
 
-		modelGain1 = new DoubleBoundedRangeModel(IModuleMIX.PARAM_NAME_GAIN1,
-				7200, -60, 12, ctrl.getAttenuation1());
-		RotaryTextController gainRotary1 = new RotaryTextController(modelGain1,
-				1);
+		modelGain1 = new DoubleBoundedRangeModel(IModuleMIX.PARAM_NAME_GAIN1, 7200, -60, 12, ctrl.getAttenuation1());
+		RotaryTextController gainRotary1 = new RotaryTextController(modelGain1, 1);
 		panelGains.add(gainRotary1);
 
-		modelGain2 = new DoubleBoundedRangeModel(IModuleMIX.PARAM_NAME_GAIN2,
-				7200, -60, 12, ctrl.getAttenuation2());
-		RotaryTextController gainRotary2 = new RotaryTextController(modelGain2,
-				1);
+		modelGain2 = new DoubleBoundedRangeModel(IModuleMIX.PARAM_NAME_GAIN2, 7200, -60, 12, ctrl.getAttenuation2());
+		RotaryTextController gainRotary2 = new RotaryTextController(modelGain2, 1);
 		panelGains.add(gainRotary2);
 
-		modelGain3 = new DoubleBoundedRangeModel(IModuleMIX.PARAM_NAME_GAIN3,
-				7200, -60, 12, ctrl.getAttenuation3());
-		RotaryTextController gainRotary3 = new RotaryTextController(modelGain3,
-				1);
+		modelGain3 = new DoubleBoundedRangeModel(IModuleMIX.PARAM_NAME_GAIN3, 7200, -60, 12, ctrl.getAttenuation3());
+		RotaryTextController gainRotary3 = new RotaryTextController(modelGain3, 1);
 		panelGains.add(gainRotary3);
 
-		modelGain4 = new DoubleBoundedRangeModel(IModuleMIX.PARAM_NAME_GAIN4,
-				7200, -60, 12, ctrl.getAttenuation4());
-		RotaryTextController gainRotary4 = new RotaryTextController(modelGain4,
-				1);
+		modelGain4 = new DoubleBoundedRangeModel(IModuleMIX.PARAM_NAME_GAIN4, 7200, -60, 12, ctrl.getAttenuation4());
+		RotaryTextController gainRotary4 = new RotaryTextController(modelGain4, 1);
 		panelGains.add(gainRotary4);
 
 		this.setAutoscrolls(true);

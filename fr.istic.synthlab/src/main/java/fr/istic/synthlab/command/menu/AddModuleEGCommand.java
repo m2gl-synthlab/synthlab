@@ -5,7 +5,7 @@ import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class AddModuleEGCommand implements ICommand {
-	
+
 	public AddModuleEGCommand() {
 	}
 

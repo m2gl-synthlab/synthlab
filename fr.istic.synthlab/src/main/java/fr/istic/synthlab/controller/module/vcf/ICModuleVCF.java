@@ -1,4 +1,3 @@
-
 package fr.istic.synthlab.controller.module.vcf;
 
 import fr.istic.synthlab.abstraction.module.vcf.IModuleVCF;
@@ -10,7 +9,8 @@ public interface ICModuleVCF extends ICModule, IModuleVCF {
 	/**
 	 * Called by the presentation when the cut frequency parameter change
 	 * 
-	 * @param cut frequency
+	 * @param cut
+	 *            frequency
 	 */
 	public void p2cCutFrequencyChanged(int cutFrequency);
 
@@ -22,5 +22,5 @@ public interface ICModuleVCF extends ICModule, IModuleVCF {
 	public void p2cResonanceChanged(double resonance);
 
 	public IPModuleVCF getPresentation();
-	
+
 }

@@ -6,6 +6,7 @@ public interface ISynthFrame {
 
 	/**
 	 * Display the synthesizer presentation
+	 * 
 	 * @param presentation
 	 */
 	public void displaySynth(IPSynthesizer presentation);

@@ -16,7 +16,7 @@ public interface IModuleEG extends IModule {
 	public static final String PARAM_NAME_DECAY = "Decay";
 	public static final String PARAM_NAME_SUSTAIN = "Sustain";
 	public static final String PARAM_NAME_RELEASE = "Release";
-	
+
 	/**
 	 * Set the attack time for the module
 	 */
