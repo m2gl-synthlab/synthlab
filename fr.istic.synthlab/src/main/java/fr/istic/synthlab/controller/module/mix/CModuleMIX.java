@@ -5,6 +5,7 @@ import fr.istic.synthlab.abstraction.module.mix.ModuleMIX;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.controller.module.ICModule;
+import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.presentation.module.mix.IPModuleMIX;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
@@ -12,10 +13,11 @@ import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 public class CModuleMIX extends ModuleMIX implements ICModuleMIX {
 
 	private IPModuleMIX pres;
-	private ISynthesizer synth;
+	private ISynthesizer cSynthesizer;
 
 	public CModuleMIX(ISynthesizer synth) {
 		super(synth);
+		this.cSynthesizer = synth;
 		this.pres = PACFactory.getPFactory().newMIX(this);
 	}
 
@@ -86,13 +88,12 @@ public class CModuleMIX extends ModuleMIX implements ICModuleMIX {
 
 	@Override
 	public IPSynthesizer getSynthesizerPresentation() {
-		// TODO Auto-generated method stub
-		return null;
+		return ((ICSynthesizer)cSynthesizer).getPresentation();
 	}
+	
 
 	@Override
 	public void p2cRemoveModule(ICModule module) {
-		// TODO Auto-generated method stub
-		
+		((ICSynthesizer) cSynthesizer).p2cRemoveModule(module);
 	}
 }
