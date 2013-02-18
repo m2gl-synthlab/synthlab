@@ -40,7 +40,6 @@ public class SynthApp implements ISynthApp {
 	public void newSynth() {
 		newSynthInstance();
 		displayNewSynth();
-		startSynth();
 	}
 
 	@Override
@@ -86,7 +85,6 @@ public class SynthApp implements ISynthApp {
 	public void loadFromXML(String dir, String file) {
 		currentSynth.stop();
 		newSynthInstance();
-//		frame.setSynthesizer(currentSynth);
 		displayCmd.execute();
 		
 		ReadXMLFile readXML = new ReadXMLFile(currentSynth, new File(dir+file));
@@ -95,7 +93,6 @@ public class SynthApp implements ISynthApp {
 		currentFile[0] = dir;
 		currentFile[1] = file;
 
-		currentSynth.start();
 		currentSynth.setPath(dir+file);
 		frame.addToMenu(currentSynth);
 	}
@@ -139,7 +136,6 @@ public class SynthApp implements ISynthApp {
 		// Add an OUT module
 		IModuleOUT out = (PACFactory.getFactory()).newOUT(currentSynth);
 		currentSynth.add(out);
-		
 	}
 
 	public void setFrame(SynthFrame frame2) {

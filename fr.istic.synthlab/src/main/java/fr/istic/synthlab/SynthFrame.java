@@ -464,7 +464,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		buttonPlayPause.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (isPlaying) {
+				if (app.getSynthesizer().isRunning()) {
 					if (toolbarPauseCommand != null) {
 						toolbarPauseCommand.execute();
 						Image img;
@@ -475,7 +475,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
-						isPlaying = !isPlaying;
 					}
 				} else {
 					if (toolbarPlayCommand != null) {
@@ -488,7 +487,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
-						isPlaying = !isPlaying;
 					}
 				}
 
@@ -792,7 +790,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		isPlaying = false;
 	}
 
 	@Override

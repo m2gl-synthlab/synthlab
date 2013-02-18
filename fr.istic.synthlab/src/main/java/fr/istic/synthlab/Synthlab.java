@@ -53,7 +53,6 @@ public class Synthlab {
 		PACFactory.setAFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
-
 		
 		// Create the main frame
 		SynthFrame frame = null;
