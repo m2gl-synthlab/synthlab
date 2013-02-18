@@ -39,7 +39,6 @@ public class SaveSynthCommand implements ICommand {
 				if (!file.endsWith(".synthlab"))
 					file = file + ".synthlab";
 				synthApp.saveToXML(dir, file);
-				((JFrame) synthFrame).setTitle("SynthlabG2 - " + dir + file);
 			}
 		}
 	}

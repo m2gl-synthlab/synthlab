@@ -3,10 +3,12 @@
  */
 package fr.istic.synthlab.controler.module;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
@@ -256,4 +258,22 @@ public class CModuleMIXTest {
 		assertEquals(2.0, iTest.getAttenuation4(),0);	
 	}
 
+
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.mix.CModuleMIX#getSynthesizerPresentation()}.
+	 */
+	@Test
+	public void testGetSynthesizerPresentation() {
+		assertNotNull(iTest.getSynthesizerPresentation());
+	}
+
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.mix.CModuleMIX#p2cRemoveModule(fr.istic.synthlab.controller.module.ICModule)}.
+	 */
+	//TODO Test qui ne passe pas ...
+	@Test
+	public void testP2cRemoveModule() {
+		iTest.p2cRemoveModule(iTest);
+		assertNull(iTest);
+	}
 }

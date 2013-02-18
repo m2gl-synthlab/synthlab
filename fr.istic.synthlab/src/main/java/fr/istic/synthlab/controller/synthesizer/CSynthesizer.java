@@ -35,7 +35,7 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	public void stop() {
 		super.stop();
 		if (!isRunning()) {
-			frame.stop();
+			frame.stopTheButton();
 			pres.c2pStop();
 		}
 	}

@@ -1,5 +1,6 @@
 package fr.istic.synthlab;
 
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 
@@ -67,5 +68,15 @@ public interface ISynthApp {
 	 * @return
 	 */
 	public String[] getCurrentFile();
+
+	/**
+	 * Display a new default synthesizer
+	 */
+	void displayNewDefaultSynth();
+
+	/**
+	 * Close the given synth
+	 */
+	public void remove(ISynthesizer synth);
 
 }

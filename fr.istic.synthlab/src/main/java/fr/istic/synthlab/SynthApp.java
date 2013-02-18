@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import fr.istic.synthlab.abstraction.module.IModule;
 import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
@@ -39,8 +41,7 @@ public class SynthApp implements ISynthApp {
 	@Override
 	public void newSynth() {
 		newSynthInstance();
-		displayNewSynth();
-		startSynth();
+		displayNewDefaultSynth();
 	}
 
 	@Override
@@ -60,6 +61,7 @@ public class SynthApp implements ISynthApp {
 
 	@Override
 	public void quitSynth() {
+		currentSynth.stop();
 		this.currentSynth = null;
 		undisplayCmd.execute();
 		System.exit(0);
@@ -84,9 +86,14 @@ public class SynthApp implements ISynthApp {
 
 	@Override
 	public void loadFromXML(String dir, String file) {
+		for(ICSynthesizer s : synth){
+			if(s.getPath().equals(dir+file)){
+				return;
+			}
+		}
+		
 		currentSynth.stop();
 		newSynthInstance();
-//		frame.setSynthesizer(currentSynth);
 		displayCmd.execute();
 		
 		ReadXMLFile readXML = new ReadXMLFile(currentSynth, new File(dir+file));
@@ -95,9 +102,28 @@ public class SynthApp implements ISynthApp {
 		currentFile[0] = dir;
 		currentFile[1] = file;
 
-		currentSynth.start();
 		currentSynth.setPath(dir+file);
 		frame.addToMenu(currentSynth);
+	}
+	
+	@Override
+	public void displayNewDefaultSynth() {
+		displayCmd.execute();
+
+		// Add an OUT module
+		IModuleOUT out = (PACFactory.getFactory()).newOUT(currentSynth);
+		currentSynth.add(out);
+	}
+
+	@Override
+	public void remove(ISynthesizer cSynth) {
+		currentSynth.stop();
+		this.synth.remove(cSynth);
+		frame.removeFromMenu((ICSynthesizer) cSynth);
+		currentSynth = this.synth.get(this.synth.size()-1);
+		frame.displaySynth();
+		((JFrame) frame).setTitle("SynthlabG2 - "+currentSynth.getPath());
+		frame.selectInMenu(currentSynth);
 	}
 
 	@Override
@@ -119,6 +145,15 @@ public class SynthApp implements ISynthApp {
 	}
 
 	@Override
+	public String[] getCurrentFile() {
+		return currentFile;
+	}
+
+	public void setFrame(SynthFrame frame2) {
+		this.frame = frame2;
+	}
+	
+	@Override
 	public void setDisplaySynthCommand(ICommand displaySynthCommand) {
 		this.displayCmd = displaySynthCommand;
 	}
@@ -126,23 +161,5 @@ public class SynthApp implements ISynthApp {
 	@Override
 	public void setUndisplaySynthCommand(ICommand undisplaySynthCommand) {
 		this.undisplayCmd = undisplaySynthCommand;
-	}
-
-	@Override
-	public String[] getCurrentFile() {
-		return currentFile;
-	}
-
-	public void displayNewSynth() {
-		displayCmd.execute();
-
-		// Add an OUT module
-		IModuleOUT out = (PACFactory.getFactory()).newOUT(currentSynth);
-		currentSynth.add(out);
-		
-	}
-
-	public void setFrame(SynthFrame frame2) {
-		this.frame = frame2;
 	}
 }

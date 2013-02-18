@@ -5,7 +5,6 @@ import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
 import fr.istic.synthlab.controller.port.ICInputPort;
@@ -17,6 +16,8 @@ public class PInputPort extends PPort implements IPInputPort, IPPort {
 
 	public static final Color DEFAULT_COLOR = new Color(150, 200, 100);
 	public static final Color DEFAULT_STROKE_COLOR = Color.BLACK;
+	
+	private JLabel name;
 
 	private ICInputPort ctrl;
 
@@ -36,7 +37,7 @@ public class PInputPort extends PPort implements IPInputPort, IPPort {
 		this.setSize(WIDTH, HEIGHT);
 		this.setPreferredSize(this.getSize());
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
-		JLabel name = new JLabel(ctrl.getName());
+		this.name = new JLabel(ctrl.getName(),JLabel.CENTER);
 		this.add(name);
 		setFillColor(DEFAULT_COLOR);
 		setStrokeColor(DEFAULT_STROKE_COLOR);
@@ -82,7 +83,7 @@ public class PInputPort extends PPort implements IPInputPort, IPPort {
 
 	@Override
 	public void c2pNameChanged() {
-		this.setBorder(BorderFactory.createTitledBorder(ctrl.getName()));
+		this.name = new JLabel(ctrl.getName(),JLabel.CENTER);
 	}
 
 	@Override
