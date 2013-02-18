@@ -23,14 +23,15 @@ public class WireTest extends TestCase {
 	private IInputPort ip;
 	private IOutputPort op;
 	private ISynthesizer synth;
-	public void setUp(){
+
+	public void setUp() {
 		PACFactory.setFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 
-		wire=PACFactory.getAFactory().newWire(synth);
-			ip=PACFactory.getAFactory().newInputPort(synth, new ModuleOUT(synth),"port", new UnitInputPort("port"));
-		 op=PACFactory.getAFactory().newOutputPort(synth, new ModuleOUT(synth),"port", new UnitOutputPort("port"));
+		wire = PACFactory.getAFactory().newWire(synth);
+		ip = PACFactory.getAFactory().newInputPort(synth, new ModuleOUT(synth), "port", new UnitInputPort("port"));
+		op = PACFactory.getAFactory().newOutputPort(synth, new ModuleOUT(synth), "port", new UnitOutputPort("port"));
 
 	}
 
@@ -51,10 +52,8 @@ public class WireTest extends TestCase {
 		try {
 			wire.connect(ip);
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -70,10 +69,8 @@ public class WireTest extends TestCase {
 			wire.connect(ip);
 
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

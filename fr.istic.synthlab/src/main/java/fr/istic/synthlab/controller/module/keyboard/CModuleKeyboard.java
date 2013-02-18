@@ -15,7 +15,6 @@ public class CModuleKeyboard extends ModuleKeyboard implements ICModuleKeyboard{
 	public CModuleKeyboard(ICSynthesizer synth) {
 		super(synth);
 		this.cSynthesizer = synth;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

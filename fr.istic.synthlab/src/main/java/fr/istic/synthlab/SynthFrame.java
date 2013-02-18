@@ -298,8 +298,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 		getContentPane().add(BorderLayout.SOUTH, statusBar);
 
-		// TODO remonter les evenements start et stop
-
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 		this.setResizable(true);

@@ -5,7 +5,6 @@ import java.util.List;
 
 import junit.framework.TestCase;
 import fr.istic.synthlab.abstraction.module.IModule;
-import fr.istic.synthlab.abstraction.module.out.ModuleOUT;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.abstraction.wire.Wire;
 import fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope;
@@ -30,16 +29,13 @@ public class SynthesizerTest extends TestCase {
 
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
-		synth=new CSynthesizer();
-		module=new CModuleOUT(synth);
-
-		
-
+		synth = new CSynthesizer();
+		module = new CModuleOUT(synth);
 
 	}
 
 	public void testGetInstance() {
-		assertEquals(synth,synth);
+		assertEquals(synth, synth);
 	}
 
 	public void testGetJSyn() {
@@ -69,7 +65,7 @@ public class SynthesizerTest extends TestCase {
 
 	@SuppressWarnings("unchecked")
 	public void testAddIWire() {
-		ICWire w=new CWire(synth);
+		ICWire w = new CWire(synth);
 		synth.add(w);
 
 		Field f = null;
@@ -80,10 +76,8 @@ public class SynthesizerTest extends TestCase {
 			f = synth.getClass().getDeclaredField("wires");
 			f.setAccessible(true);
 		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		List<Wire> p = null;
@@ -91,10 +85,8 @@ public class SynthesizerTest extends TestCase {
 			p = (List<Wire>) f.get(synth);
 			System.out.println(p);
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -124,7 +116,7 @@ public class SynthesizerTest extends TestCase {
 
 	public void testStartModule() {
 		synth.stop();
-		
+
 		synth.add(new CModuleAudioScope(synth));
 		synth.startModule(synth.getModules().get(0));
 		assertFalse(synth.isRunning());
@@ -138,33 +130,29 @@ public class SynthesizerTest extends TestCase {
 	}
 
 	public void testSetGetCurrentWire() {
-		ICWire w=new CWire(synth);
+		ICWire w = new CWire(synth);
 		synth.setCurrentWire(w);
 		assertEquals(w, synth.getCurrentWire());
 	}
 
 	public void testRemoveIWire() {
-		IWire w=new Wire(synth);
+		IWire w = new Wire(synth);
 		synth.add(w);
 		Field f = null;
 		try {
 			f = synth.getClass().getDeclaredField("wires");
 			f.setAccessible(true);
 		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		List<Wire> p = null;
 		try {
 			p = (List<Wire>) f.get(synth);
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -43,13 +43,13 @@ public class SaveLoadTest extends TestCase {
 		synth = new CSynthesizer();
 		s = new SynthApp(sf);
 		sf = new SynthFrame(s);
-//		//s.setSynthesizer(synth);
+		// //s.setSynthesizer(synth);
 
 	}
 
 	public void testSaveAndLoadSetTone() {
 
-//		//s.setSynthesizer(synth);
+		// //s.setSynthesizer(synth);
 		s.setDisplaySynthCommand(new DisplayCommand(sf));
 		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
 		ICModuleVCO moduleVCO = new CModuleVCO(synth);
@@ -64,7 +64,7 @@ public class SaveLoadTest extends TestCase {
 
 		s.saveToXML("", "test.synthlab");
 
-		//s.setSynthesizer(new CSynthesizer());
+		// s.setSynthesizer(new CSynthesizer());
 		s.loadFromXML("", "test.synthlab");
 		assertEquals(3, s.getSynthesizer().getModules().size());
 		assertEquals("CModuleVCO", s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
@@ -77,7 +77,7 @@ public class SaveLoadTest extends TestCase {
 
 	public void testSaveAndLoadSetAttenuation() {
 
-		//s.setSynthesizer(synth);
+		// s.setSynthesizer(synth);
 		s.setDisplaySynthCommand(new DisplayCommand(sf));
 		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
 		ICModuleVCO moduleVCO = new CModuleVCO(synth);
@@ -92,7 +92,7 @@ public class SaveLoadTest extends TestCase {
 
 		s.saveToXML("", "test.synthlab");
 
-		//s.setSynthesizer(new CSynthesizer());
+		// s.setSynthesizer(new CSynthesizer());
 		s.loadFromXML("", "test.synthlab");
 		assertEquals(3, s.getSynthesizer().getModules().size());
 		assertEquals("CModuleVCO", s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
@@ -105,7 +105,7 @@ public class SaveLoadTest extends TestCase {
 
 	public void testSaveAndLoadWire() {
 
-		//s.setSynthesizer(synth);
+		// s.setSynthesizer(synth);
 		s.setDisplaySynthCommand(new DisplayCommand(sf));
 		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
 		ICModuleVCO moduleVCO = new CModuleVCO(synth);
@@ -123,25 +123,21 @@ public class SaveLoadTest extends TestCase {
 			wire.connect(moduleVCO.getOutputSquare());
 
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			wire.connect(moduleVCA.getInput());
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		s.saveToXML("", "test.synthlab");
 
-		//s.setSynthesizer(new CSynthesizer());
+		// s.setSynthesizer(new CSynthesizer());
 		s.loadFromXML("", "test.synthlab");
 		assertEquals(3, s.getSynthesizer().getModules().size());
 		assertEquals("CModuleVCO", s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
@@ -154,7 +150,7 @@ public class SaveLoadTest extends TestCase {
 
 	public void testSaveAndLoadWireVCF() {
 
-		//s.setSynthesizer(synth);
+		// s.setSynthesizer(synth);
 		s.setDisplaySynthCommand(new DisplayCommand(sf));
 		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
 		ICModuleVCF moduleVCF = new CModuleVCF_LP(synth);
@@ -172,25 +168,21 @@ public class SaveLoadTest extends TestCase {
 			wire.connect(moduleVCF.getOutput());
 
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			wire.connect(moduleVCA.getInput());
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		s.saveToXML("", "test.synthlab");
 
-		//s.setSynthesizer(new CSynthesizer());
+		// s.setSynthesizer(new CSynthesizer());
 		s.loadFromXML("", "test.synthlab");
 		assertEquals(3, s.getSynthesizer().getModules().size());
 		assertEquals("CModuleVCFA_LP", s.getSynthesizer().getModules().get(0).getClass().getSimpleName());

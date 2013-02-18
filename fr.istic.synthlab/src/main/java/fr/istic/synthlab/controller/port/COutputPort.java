@@ -27,44 +27,6 @@ public class COutputPort extends OutputPort implements ICOutputPort {
 		return pres;
 	}
 
-	// @Override
-	// public void p2cConnect() {
-	// ISynthesizer synth = Synthesizer.getInstance();
-	//
-	// // Get the current wire if any
-	// IWire currentWire = synth.getCurrentWire();
-	// if (currentWire == null) {
-	// // Create it if null
-	// synth.setCurrentWire(PACFactory.getFactory().newWire());
-	// currentWire = synth.getCurrentWire();
-	// }
-	//
-	// // Try to connect the wire to the port
-	// try {
-	// currentWire.connect(this);
-	// } catch (PortAlreadyInUseException e1) {
-	// // The port is already connected
-	// // TODO : inform the presentation that the connexion is impossible
-	// } catch (BadConnectionException e) {
-	// // The wire can't connect to the port
-	// // TODO : inform the presentation that the wire is connected to the same
-	// type of port
-	// }
-	//
-	// // If the wire is well connected, delete it from the synth
-	// if (currentWire.isConnected()) {
-	// synth.setCurrentWire(null);
-	// }
-	//
-	// }
-	//
-	// @Override
-	// public void p2cDisconnect() {
-	// if (getWire() != null) {
-	// getWire().disconnect();
-	// }
-	// }
-
 	@Override
 	public void p2cMouseHover() {
 		if (getWire() == null) {
