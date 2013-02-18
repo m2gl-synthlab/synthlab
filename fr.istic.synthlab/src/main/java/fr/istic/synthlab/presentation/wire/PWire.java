@@ -35,6 +35,8 @@ public class PWire extends JPanel implements IPWire {
 	private POutputPort outputPort;
 	private Color currentColor = null;
 
+	private static boolean displayShadow = true;
+
 	/**
 	 * @param control
 	 */
@@ -42,17 +44,16 @@ public class PWire extends JPanel implements IPWire {
 		this.ctrl = control;
 		configView();
 		defineCallbacks();
-		currentColor = ctrl.getCurrentWireColor();
 	}
 
 	private void configView() {
 		setOpaque(false);
 		this.posInput = new Point(0, 0);
 		this.posOutput = new Point(0, 0);
+		this.currentColor = ctrl.getCurrentWireColor();
 	}
 
 	private void defineCallbacks() {
-		// DO NOT PUT ANYTHING HERE !!!
 	}
 
 	@Override
@@ -126,7 +127,7 @@ public class PWire extends JPanel implements IPWire {
 			JPanel pan = new JPanel();
 			pan.add(this);
 		}
-		setBounds(x-10, y-10 , w+20, getParent().getHeight()); // On ajoute une marge pour évité de coupé le cable
+		setBounds(x-10, y-10 , w+20, getParent().getHeight()); // On ajoute une marge pour éviter de couper le cable
 		
 		IPSynthesizer presSynth = ctrl.getSynthesizerPresentation();
 		((JLayeredPane) presSynth).setLayer(this, 0, 0);
@@ -160,19 +161,53 @@ public class PWire extends JPanel implements IPWire {
 
 		// Calcul d'un point centrale
 		Point mid = new Point(w / 2, h + w / 4);
+		Point midShadow = new Point(w / 2, 10 + h + w / 3);
 
 		// Création de la courbe
 		QuadCurve2D curve = new QuadCurve2D.Double(posInput.getX() - getX(), posInput.getY() - getY(), mid.getX(), mid.getY(), posOutput.getX() - getX(),
 				posOutput.getY() - getY());
+		// Création de la courbe de l'ombre
+		QuadCurve2D shadowCurve = new QuadCurve2D.Double(posInput.getX() - getX(), posInput.getY() - getY(), midShadow.getX(), midShadow.getY(), posOutput.getX() - getX(),
+						posOutput.getY() - getY());
 
-		// Dessine la courbe avec des extrémité ronde
-		g2.setStroke(new BasicStroke(6, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
+		
+		// Si les ombres sont activées
+		if(displayShadow ){
+			// On dessine plusieurs couche d'ombre avec transparence
+			g2.setStroke(new BasicStroke(8, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
+			g2.setColor(new Color(100,100,100,30));
+			g2.draw(shadowCurve);
+			
+			g2.setStroke(new BasicStroke(4, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
+			g2.setColor(new Color(100,100,100,10));
+			g2.draw(shadowCurve);
+			
+			g2.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
+			g2.setColor(new Color(100,100,100,10));
+			g2.draw(shadowCurve);
+		}
+		
+		// Dessine la courbe en noir comme base
+		g2.setStroke(new BasicStroke(8, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
 		g2.setColor(Color.BLACK);
 		g2.draw(curve);
 
+		// Ajoute plusieurs traits de couleur avec transparence pour le dégradé 
+		g2.setStroke(new BasicStroke(7, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
+		g2.setColor(new Color(currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue(), 60));
+		g2.draw(curve);
+		
+		g2.setStroke(new BasicStroke(6, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
+		g2.setColor(new Color(currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue(), 100));
+		g2.draw(curve);
+
+		g2.setStroke(new BasicStroke(3, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
+		g2.setColor(new Color(currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue(),120));
+		g2.draw(curve);
+		
 		// Ajoute un trait fin au centre
-		g2.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
-		g2.setColor(currentColor);
+		g2.setStroke(new BasicStroke(1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
+		g2.setColor(new Color(currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue()));
 		g2.draw(curve);
 	}
 
