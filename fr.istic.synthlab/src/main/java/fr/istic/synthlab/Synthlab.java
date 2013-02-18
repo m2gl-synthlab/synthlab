@@ -20,6 +20,7 @@ import fr.istic.synthlab.command.menu.AddModuleVCACommand;
 import fr.istic.synthlab.command.menu.AddModuleVCFHPCommand;
 import fr.istic.synthlab.command.menu.AddModuleVCFLPCommand;
 import fr.istic.synthlab.command.menu.AddModuleVCOCommand;
+import fr.istic.synthlab.command.menu.CloseSynthCommand;
 import fr.istic.synthlab.command.menu.DocumentationCommand;
 import fr.istic.synthlab.command.menu.NewSynthCommand;
 import fr.istic.synthlab.command.menu.OpenSynthCommand;
@@ -53,7 +54,6 @@ public class Synthlab {
 		PACFactory.setAFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
-
 		
 		// Create the main frame
 		SynthFrame frame = null;
@@ -61,7 +61,6 @@ public class Synthlab {
 		// Create the application
 		SynthApp app = new SynthApp(frame);
 		frame = new SynthFrame(app);
-		frame.setTitle("SynthlabG2 - untitled");
 		try {
 			Image imageIcon = ImageIO.read(new File("res/logo.png"));
 			frame.setIconImage(imageIcon);
@@ -70,20 +69,20 @@ public class Synthlab {
 		}
 		
 		app.setFrame(frame);
-//		frame.setSynthesizer();
 
 		// Configure the application
 		app.setDisplaySynthCommand(new DisplayCommand(frame));
 		app.setUndisplaySynthCommand(new UndisplayCommand(frame));
 
 		// Create a default synthesizer
-		app.displayNewSynth();
+		app.displayNewDefaultSynth();
 
 		// Configure the frame
 		frame.setNewSynthCommand(new NewSynthCommand(app, frame));
 		frame.setOpenSynthCommand(new OpenSynthCommand(app, frame));
 		frame.setSaveSynthCommand(new SaveSynthCommand(app, frame));
 		frame.setSaveAsSynthCommand(new SaveAsSynthCommand(app, frame));
+		frame.setCloseSynthCommand(new CloseSynthCommand(app, frame));
 		frame.setQuitSynthCommand(new QuitSynthCommand(app));
 		frame.setDocSynthCommand(new DocumentationCommand());
 		frame.setAboutSynthCommand(new AboutCommand());

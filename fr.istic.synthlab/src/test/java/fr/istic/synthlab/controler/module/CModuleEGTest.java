@@ -6,6 +6,7 @@ package fr.istic.synthlab.controler.module;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
@@ -104,7 +105,7 @@ public class CModuleEGTest {
 	@Test
 	public void testP2cAttackChangedMoreMax() {
 		iTest.p2cAttackChanged(6);
-		assertEquals(5, iTest.getAttack(),0);				
+		assertEquals(1, iTest.getAttack(),0);				
 	}
 
 	/**
@@ -148,7 +149,7 @@ public class CModuleEGTest {
 	@Test
 	public void testP2cDecayChangedMoreMax() {
 		iTest.p2cDecayChanged(6);
-		assertEquals(5, iTest.getDecay(),0);		
+		assertEquals(1, iTest.getDecay(),0);		
 	}
 
 	/**
@@ -231,7 +232,7 @@ public class CModuleEGTest {
 	@Test
 	public void testP2cReleaseChangedMoreMax() {
 		iTest.p2cReleaseChanged(6);
-		assertEquals(5, iTest.getRelease(),0);	
+		assertEquals(1, iTest.getRelease(),0);	
 	}
 
 	/**
@@ -317,6 +318,24 @@ public class CModuleEGTest {
 		assertEquals(1.9955, iTest.getSustain(),4);
 		iTest.setParameter("releaseTime", 2.0);
 		assertEquals(1.9955, iTest.getRelease(),4);
+	}
+	
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.eg.CModuleEG#getSynthesizerPresentation()}.
+	 */
+	@Test
+	public void testGetSynthesizerPresentation() {
+		assertNotNull(iTest.getSynthesizerPresentation());
+	}
+
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.eg.CModuleEG#p2cRemoveModule(fr.istic.synthlab.controller.module.ICModule)}.
+	 */
+	//TODO Test qui ne passe pas ...
+	@Test
+	public void testP2cRemoveModule() {
+		iTest.p2cRemoveModule(iTest);
+		assertNull(iTest);
 	}
 
 }

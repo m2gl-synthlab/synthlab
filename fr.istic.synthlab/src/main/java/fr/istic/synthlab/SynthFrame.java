@@ -16,12 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 
 import com.alee.extended.statusbar.WebMemoryBar;
@@ -52,10 +54,11 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private JMenuBar mainMenuBar;
 	private JMenu menuFile, menuAdd, menuHelp, menuWindow;
 	private JMenuItem menuItemNew, menuItemOpen, menuItemSave, menuItemSaveAs;
-	private JMenuItem menuItemQuit, menuItemDoc, menuItemAbout;
+	private JMenuItem menuItemClose, menuItemQuit, menuItemDoc, menuItemAbout;
 	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT, menuItemAddModuleVCFLP, menuItemAddModuleVCFHP, menuItemAddModuleEG,
 			menuItemAddModuleAudioScope, menuItemAddModuleREP, menuItemAddModuleVCA, menuItemAddModuleMIX;
 	private List<JMenuItem> files;
+	private ButtonGroup filesGroup = new ButtonGroup();
 	
 	// Toolbar
 	private WebToolBar toolBar = new WebToolBar();
@@ -74,6 +77,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand saveSynthCommand;
 	private ICommand saveAsSynthCommand;
 	private ICommand openSynthCommand;
+	private ICommand closeSynthCommand;
 	private ICommand quitSynthCommand;
 	private ICommand docSynthCommand;
 	private ICommand aboutSynthCommand;
@@ -119,6 +123,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuItemOpen = new JMenuItem("Open...");
 		menuItemSave = new JMenuItem("Save");
 		menuItemSaveAs = new JMenuItem("Save as...");
+		menuItemClose = new JMenuItem("Close");
 		menuItemQuit = new JMenuItem("Quit");
 
 		// ajout des items au menu File
@@ -126,6 +131,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuFile.add(menuItemOpen);
 		menuFile.add(menuItemSave);
 		menuFile.add(menuItemSaveAs);
+		menuFile.add(menuItemClose);
 		menuFile.add(menuItemQuit);
 
 		// -------------------------- Add Menu --------------------------
@@ -302,6 +308,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuItemOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
 		menuItemSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 		menuItemSaveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.SHIFT_MASK + ActionEvent.CTRL_MASK));
+		menuItemClose.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK));
 		menuItemQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
 		menuItemDoc.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
 		menuItemAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.CTRL_MASK));
@@ -340,6 +347,14 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (saveAsSynthCommand != null)
 					saveAsSynthCommand.execute();
+			}
+		});
+		
+		menuItemClose.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (closeSynthCommand != null)
+					closeSynthCommand.execute();
 			}
 		});
 
@@ -461,7 +476,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		buttonPlayPause.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (isPlaying) {
+				if (app.getSynthesizer().isRunning()) {
 					if (toolbarPauseCommand != null) {
 						toolbarPauseCommand.execute();
 						Image img;
@@ -472,7 +487,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
-						isPlaying = !isPlaying;
 					}
 				} else {
 					if (toolbarPlayCommand != null) {
@@ -485,7 +499,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
-						isPlaying = !isPlaying;
 					}
 				}
 
@@ -636,6 +649,14 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	public void setOpenSynthCommand(ICommand openSynthCommand) {
 		this.openSynthCommand = openSynthCommand;
 	}
+	
+	/**
+	 * @param closeSynthCommand
+	 *            the openSynthCommand to set
+	 */
+	public void setCloseSynthCommand(ICommand closeSynthCommand) {
+		this.closeSynthCommand = closeSynthCommand;
+	}
 
 	/**
 	 * @param quitSynthCommand
@@ -760,21 +781,27 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	}
 
 	@Override
-	public void addToMenu(ICSynthesizer currentSynth) {
-		final JMenuItem item = new JMenuItem(currentSynth.getPath());
+	public void addToMenu(final ICSynthesizer currentSynth) {
+		final JRadioButtonMenuItem item = new JRadioButtonMenuItem(currentSynth.getPath());
+		filesGroup.add(item);
+		
 		item.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				app.setSynthesizer(item.getText());
 				displaySynth();
+				setTitle("SynthlabG2 - "+currentSynth.getPath());
 			}
 		});
+		
 		files.add(item);
 		menuWindow.add(item);
+		item.setSelected(true);
+		this.setTitle("SynthlabG2 - "+currentSynth.getPath());
 	}
 
 	@Override
-	public void stop() {
+	public void stopTheButton() {
 		Image img;
 		try {
 			img = ImageIO.read(new File(iconFiles[0]));
@@ -783,7 +810,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		isPlaying = false;
 	}
 
 	@Override
@@ -795,4 +821,13 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		}
 	}
 
+	@Override
+	public void selectInMenu(ICSynthesizer currentSynth) {
+		for(JMenuItem currItem : files){
+			if(currItem.getText().equals(currentSynth.getPath())){
+				currItem.setSelected(true);
+			}
+		}
+	}
+	
 }
