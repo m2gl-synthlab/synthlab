@@ -30,18 +30,19 @@ public class SynthApp implements ISynthApp {
 	private String[] currentFile = { null, null };
 	private int untitledIndex = 1;
 
-	public SynthApp(ISynthFrame frame){
+	public SynthApp(ISynthFrame frame) {
 		this.frame = frame;
 		synth = new ArrayList<ICSynthesizer>();
-		currentFile[0]=null;
-		currentFile[1]=null;
+		currentFile[0] = null;
+		currentFile[1] = null;
 		newSynthInstance();
 	}
-	
+
 	@Override
 	public void newSynth() {
 		newSynthInstance();
 		displayNewDefaultSynth();
+		frame.addToMenu(currentSynth);
 	}
 
 	@Override
@@ -50,12 +51,14 @@ public class SynthApp implements ISynthApp {
 	}
 
 	private void newSynthInstance() {
-		if(synth.size()>0)
+		if (synth.size() > 0)
 			currentSynth.stop();
-		this.synth.add((ICSynthesizer) (PACFactory.getFactory()).newSynthesizer());
-		currentSynth = synth.get(synth.size()-1);
-		currentSynth.setPath("untitled"+untitledIndex);
-		currentSynth.setFrame(frame);
+		ICSynthesizer newSynth = (ICSynthesizer) (PACFactory.getFactory())
+				.newSynthesizer();
+		this.synth.add(newSynth);
+		newSynth.setPath("untitled" + untitledIndex);
+		newSynth.setFrame(frame);
+		setSynthesizer(newSynth.getPath());
 		untitledIndex++;
 	}
 
@@ -78,34 +81,35 @@ public class SynthApp implements ISynthApp {
 		currentFile[1] = filename;
 
 		frame.removeFromMenu(currentSynth);
-		
+
 		currentSynth.setPath(fileDir + filename);
 		frame.addToMenu(currentSynth);
-		
+
 	}
 
 	@Override
 	public void loadFromXML(String dir, String file) {
-		for(ICSynthesizer s : synth){
-			if(s.getPath().equals(dir+file)){
+		for (ICSynthesizer s : synth) {
+			if (s.getPath().equals(dir + file)) {
 				return;
 			}
 		}
-		
+
 		currentSynth.stop();
 		newSynthInstance();
 		displayCmd.execute();
-		
-		ReadXMLFile readXML = new ReadXMLFile(currentSynth, new File(dir+file));
+
+		ReadXMLFile readXML = new ReadXMLFile(currentSynth,
+				new File(dir + file));
 		readXML.loadSynthesizer();
 
 		currentFile[0] = dir;
 		currentFile[1] = file;
 
-		currentSynth.setPath(dir+file);
+		currentSynth.setPath(dir + file);
 		frame.addToMenu(currentSynth);
 	}
-	
+
 	@Override
 	public void displayNewDefaultSynth() {
 		displayCmd.execute();
@@ -120,18 +124,26 @@ public class SynthApp implements ISynthApp {
 		currentSynth.stop();
 		this.synth.remove(cSynth);
 		frame.removeFromMenu((ICSynthesizer) cSynth);
-		currentSynth = this.synth.get(this.synth.size()-1);
-		frame.displaySynth();
-		((JFrame) frame).setTitle("SynthlabG2 - "+currentSynth.getPath());
+		if (this.synth.size() > 0) {
+			setSynthesizer(this.synth.get(this.synth.size() - 1).getPath());
+			frame.displaySynth();
+		} else {
+			newSynth();
+			
+		}
+		((JFrame) frame).setTitle("SynthlabG2 - " + currentSynth.getPath());
 		frame.selectInMenu(currentSynth);
 	}
 
 	@Override
 	public void setSynthesizer(String synthS) {
-		currentSynth.stop();
-		for(ISynthesizer synth : this.synth){
-			if(((ICSynthesizer)synth).getPath().equals(synthS)){
+		if(currentSynth != null)
+			currentSynth.stop();
+		for (ISynthesizer synth : this.synth) {
+			if (((ICSynthesizer) synth).getPath().equals(synthS)) {
 				currentSynth = (ICSynthesizer) synth;
+				currentFile[0] = null;
+				currentFile[1] = currentSynth.getPath();
 				return;
 			}
 		}
@@ -139,7 +151,7 @@ public class SynthApp implements ISynthApp {
 
 	@Override
 	public ICSynthesizer getSynthesizer() {
-		if(currentSynth==null)
+		if (currentSynth == null)
 			newSynthInstance();
 		return currentSynth;
 	}
@@ -152,7 +164,7 @@ public class SynthApp implements ISynthApp {
 	public void setFrame(SynthFrame frame2) {
 		this.frame = frame2;
 	}
-	
+
 	@Override
 	public void setDisplaySynthCommand(ICommand displaySynthCommand) {
 		this.displayCmd = displaySynthCommand;
