@@ -3,26 +3,19 @@
  */
 package fr.istic.synthlab.controler.module;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jsyn.ports.ConnectableInput;
 import com.jsyn.ports.UnitInputPort;
 
 import fr.istic.synthlab.abstraction.exception.BadConnectionException;
 import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
-import fr.istic.synthlab.abstraction.module.IModule;
-import fr.istic.synthlab.abstraction.module.ModuleTest;
-import fr.istic.synthlab.abstraction.module.audioscope.ModuleAudioScope;
 import fr.istic.synthlab.abstraction.module.eg.ModuleEG;
-import fr.istic.synthlab.abstraction.observer.Observable;
-import fr.istic.synthlab.abstraction.observer.Observer;
-import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.InputPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
