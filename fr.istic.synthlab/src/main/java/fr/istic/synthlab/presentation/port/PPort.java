@@ -70,7 +70,7 @@ public abstract class PPort extends JPanel implements IPPort {
 			// Contour
 			g2d.setColor(Color.GRAY);
 			g2d.setStroke(new BasicStroke(2));
-			g2d.drawOval((WIDTH - 14) / 2, (HEIGHT - 14) / 2, 14, 14);
+			g2d.drawOval((WIDTH - 14) / 2, (HEIGHT - 14) / 2, 13, 13);
 
 		}
 
