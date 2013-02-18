@@ -22,16 +22,11 @@ public class SynthApp implements ISynthApp {
 	private ISynthFrame frame;
 	private ICommand displayCmd;
 	private ICommand undisplayCmd;
-	private String[] currentFile = { null, null };
 	private int untitledIndex = 1;
 
 	public SynthApp(ISynthFrame frame) {
 		this.frame = frame;
 		synths = new ArrayList<ICSynthesizer>();
-
-		// Set the current directory file and path file to null
-		currentFile[0] = null;
-		currentFile[1] = null;
 
 		// Create a new synthesizer instance
 		newSynthInstance();
@@ -44,7 +39,7 @@ public class SynthApp implements ISynthApp {
 			currentSynth.stop();
 		ICSynthesizer newSynth = (ICSynthesizer) (PACFactory.getFactory()).newSynthesizer();
 		this.synths.add(newSynth);
-		newSynth.setPath("untitled" + untitledIndex);
+		newSynth.setPath(null, "untitled" + untitledIndex);
 		newSynth.setFrame(frame);
 		setSynthesizer(newSynth.getPath());
 		untitledIndex++;
@@ -84,9 +79,7 @@ public class SynthApp implements ISynthApp {
 		writeToXML.saveModules(currentSynth.getModules());
 
 		// Set the path of this instance
-		currentFile[0] = fileDir;
-		currentFile[1] = filename;
-		currentSynth.setPath(fileDir + filename);
+		currentSynth.setPath(fileDir, filename);
 
 		// Reload this instance in the menu
 		frame.removeInMenu(currentSynth);
@@ -97,7 +90,8 @@ public class SynthApp implements ISynthApp {
 	public void loadFromXML(String dir, String file) {
 		// If this file is already open, return
 		for (ICSynthesizer s : synths) {
-			if (s.getPath().equals(dir + file)) {
+			String st = s.getPath()[0]+s.getPath()[1];
+			if (st.equals(dir + file)) {
 				return;
 			}
 		}
@@ -118,9 +112,7 @@ public class SynthApp implements ISynthApp {
 		readXML.loadSynthesizer();
 
 		// Set the current path
-		currentFile[0] = dir;
-		currentFile[1] = file;
-		currentSynth.setPath(dir + file);
+		currentSynth.setPath(dir, file);
 
 		// Add this instance to the menu and set the title bar
 		frame.addToMenu(currentSynth);
@@ -155,22 +147,27 @@ public class SynthApp implements ISynthApp {
 		} else {
 			newSynth();
 		}
-		
+
 		frame.selectInMenu(currentSynth);
 	}
 
 	@Override
-	public void setSynthesizer(String synthS) {
+	public void setSynthesizer(String[] strings) {
 		// If the current synthesizer is running, stop it
 		if (currentSynth != null)
 			currentSynth.stop();
-		
-		// Set the current synthesizer instance fron its path
+
+		// Set the current synthesizer instance from its path
 		for (ISynthesizer synth : this.synths) {
-			if (((ICSynthesizer) synth).getPath().equals(synthS)) {
+			if (((ICSynthesizer) synth).getPath()[0] == null) {
+				if (strings[0] == null) {
+					if (((ICSynthesizer) synth).getPath()[1].equals(strings[1])) {
+						currentSynth = (ICSynthesizer) synth;
+						return;
+					}
+				}
+			} else if ((((ICSynthesizer) synth).getPath()[0].equals(strings[0])) && ((((ICSynthesizer) synth).getPath()[1].equals(strings[1])))) {
 				currentSynth = (ICSynthesizer) synth;
-				currentFile[0] = null;
-				currentFile[1] = currentSynth.getPath();
 				return;
 			}
 		}
@@ -181,11 +178,6 @@ public class SynthApp implements ISynthApp {
 		if (currentSynth == null)
 			newSynthInstance();
 		return currentSynth;
-	}
-
-	@Override
-	public String[] getCurrentFile() {
-		return currentFile;
 	}
 
 	public void setFrame(SynthFrame frame2) {

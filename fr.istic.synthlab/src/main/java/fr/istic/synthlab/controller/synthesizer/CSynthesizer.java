@@ -15,7 +15,7 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 
 	private IPSynthesizer pres;
 	private Color currentWireColor = Color.GRAY;
-	private String path;
+	private String[] path ={null, null};
 	private ISynthFrame frame;
 
 	public CSynthesizer() {
@@ -105,17 +105,20 @@ public class CSynthesizer extends Synthesizer implements ICSynthesizer {
 	}
 
 	@Override
-	public String getPath() {
+	public String[] getPath() {
 		return path;
 	}
 	
 	@Override
-	public void setPath(String path) {
-		this.path = path;
+	public void setPath(String path, String filename) {
+		this.path[0] = path;
+		this.path[1] = filename;
 	}
 	
 	@Override
 	public void setFrame(ISynthFrame frame) {
 		this.frame = frame;
 	}
+
+
 }

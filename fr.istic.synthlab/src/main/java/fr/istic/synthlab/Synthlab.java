@@ -103,6 +103,7 @@ public class Synthlab {
 		// Start the application
 		app.startSynth();
 
+		
 		frame.addToMenu(app.getSynthesizer());
 		app.getSynthesizer().setFrame(frame);
 

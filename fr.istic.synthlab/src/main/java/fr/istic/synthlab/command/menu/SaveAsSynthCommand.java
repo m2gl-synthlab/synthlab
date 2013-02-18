@@ -22,13 +22,11 @@ public class SaveAsSynthCommand implements ICommand {
 
 	@Override
 	public void execute() {
-		String[] currentFile = synthApp.getCurrentFile();
-
-		if (currentFile[0] != null) {
-			chooser.setDirectory(currentFile[0]);
-			chooser.setFile(currentFile[1]);
+		if (synthApp.getSynthesizer().getPath()[0] != null) {
+			chooser.setDirectory(synthApp.getSynthesizer().getPath()[0]);
+			chooser.setFile(synthApp.getSynthesizer().getPath()[1]);
 		} else {
-			chooser.setFile(currentFile[1]+".synthlab");
+			chooser.setFile(synthApp.getSynthesizer().getPath()[1]+".synthlab");
 		}
 
 		chooser.setVisible(true);

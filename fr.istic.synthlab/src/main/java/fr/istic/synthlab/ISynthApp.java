@@ -25,11 +25,11 @@ public interface ISynthApp {
 	public void quitSynth();
 
 	/**
-	 * Set the current synthesizer controller
+	 * Set the current synthesizer controller with its path
 	 * 
 	 * @param synthesizer
 	 */
-	public void setSynthesizer(String string);
+	public void setSynthesizer(String[] string);
 
 	/**
 	 * Return the current synthesizer controller
@@ -61,13 +61,6 @@ public interface ISynthApp {
 	 * Load an instance from an XML file
 	 */
 	public void loadFromXML(String dir, String file);
-
-	/**
-	 * Return the path of the current instance
-	 * 
-	 * @return
-	 */
-	public String[] getCurrentFile();
 
 	/**
 	 * Display a new default synthesizer

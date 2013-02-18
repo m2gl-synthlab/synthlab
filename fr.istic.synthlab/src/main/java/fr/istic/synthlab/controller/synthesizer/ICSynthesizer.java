@@ -52,11 +52,28 @@ public interface ICSynthesizer extends ISynthesizer {
 	 */
 	public void setCurrentWireColor(Color currentWireColor);
 
+	/**
+	 * Return the current wire Color
+	 * @return
+	 */
 	public Color getCurrentWireColor();
 
-	public String getPath();
+	/**
+	 * Get the path
+	 * @return
+	 */
+	public String[] getPath();
 
-	void setPath(String path);
+	/**
+	 * Set the path
+	 * @param path
+	 * @param filename
+	 */
+	void setPath(String path, String filename);
 
+	/**
+	 * Set the frame
+	 * @param frame
+	 */
 	void setFrame(ISynthFrame frame);
 }
