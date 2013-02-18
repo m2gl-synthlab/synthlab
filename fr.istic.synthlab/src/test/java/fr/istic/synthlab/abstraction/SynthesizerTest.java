@@ -135,6 +135,7 @@ public class SynthesizerTest extends TestCase {
 		assertEquals(w, synth.getCurrentWire());
 	}
 
+	@SuppressWarnings("unchecked")
 	public void testRemoveIWire() {
 		IWire w = new Wire(synth);
 		synth.add(w);

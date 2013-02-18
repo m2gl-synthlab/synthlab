@@ -13,7 +13,6 @@ import fr.istic.synthlab.abstraction.module.ModuleVCATest;
 import fr.istic.synthlab.abstraction.module.ModuleVCF_HPTest;
 import fr.istic.synthlab.abstraction.module.ModuleVCF_LPTest;
 import fr.istic.synthlab.abstraction.module.ModuleVCOTest;
-import fr.istic.synthlab.abstraction.module.vcf.ModuleVCF_HP;
 
 @RunWith(Suite.class)
 @SuiteClasses({ ConvertTest.class, ModuleOUTTest.class, ModuleREPTest.class,
