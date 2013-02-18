@@ -3,6 +3,7 @@
  */
 package fr.istic.synthlab.controler.module;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -70,15 +71,36 @@ public class CModuleOUTTest {
 	 */
 	@Test
 	public void testP2cMute() {
-		fail("Not yet implemented");
+		boolean isMute = iTest.isMute();
+		iTest.p2cMute();
+		assertEquals(!isMute,iTest.isMute());
 	}
-
+		
 	/**
 	 * Test method for {@link fr.istic.synthlab.controller.module.out.CModuleOUT#p2cGainChanged(double)}.
 	 */
 	@Test
 	public void testP2cGainChanged() {
-		fail("Not yet implemented");
+		iTest.p2cGainChanged(2.0);
+		assertEquals(2.0, iTest.getAttenuation(),0);
+	}
+	
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.out.CModuleOUT#p2cGainChanged(double)}.
+	 */
+	@Test
+	public void testP2cGainChangedLessMin() {
+		iTest.p2cGainChanged(-62.0);
+		assertEquals(-60.0, iTest.getAttenuation(),0);
+	}
+	
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.out.CModuleOUT#p2cGainChanged(double)}.
+	 */
+	@Test
+	public void testP2cGainChangedMoreMax() {
+		iTest.p2cGainChanged(42.0);
+		assertEquals(12.0, iTest.getAttenuation(),0);
 	}
 
 	/**
@@ -153,7 +175,14 @@ public class CModuleOUTTest {
 	 */
 	@Test
 	public void testSetParameter() {
-		fail("Not yet implemented");
+		iTest.setParameter("attenuation", 2.0);
+		assertEquals(2.0, iTest.getAttenuation(),0);
+		iTest.setParameter("mute", 1.0);
+		assertEquals(true, iTest.isMute());
+		iTest.setParameter("mute", 0.0);
+		assertEquals(false, iTest.isMute());
+		iTest.setParameter("mute", 2.0);
+		assertEquals(true, iTest.isMute());
 	}
 
 	/**
