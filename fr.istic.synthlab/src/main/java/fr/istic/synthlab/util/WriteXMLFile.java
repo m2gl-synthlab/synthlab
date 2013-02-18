@@ -61,7 +61,6 @@ public class WriteXMLFile {
 			transformer.transform(source, result);
 			transformer.transform(source, res);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
