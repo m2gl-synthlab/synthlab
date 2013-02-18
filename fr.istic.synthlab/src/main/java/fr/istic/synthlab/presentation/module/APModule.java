@@ -16,7 +16,6 @@ import com.alee.laf.panel.WebPanel;
 
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.controller.module.ICModule;
-import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 import fr.istic.synthlab.presentation.util.SimpleMouseListener;
