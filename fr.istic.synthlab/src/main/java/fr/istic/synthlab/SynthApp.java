@@ -86,6 +86,12 @@ public class SynthApp implements ISynthApp {
 
 	@Override
 	public void loadFromXML(String dir, String file) {
+		for(ICSynthesizer s : synth){
+			if(s.getPath().equals(dir+file)){
+				return;
+			}
+		}
+		
 		currentSynth.stop();
 		newSynthInstance();
 		displayCmd.execute();
@@ -107,6 +113,17 @@ public class SynthApp implements ISynthApp {
 		// Add an OUT module
 		IModuleOUT out = (PACFactory.getFactory()).newOUT(currentSynth);
 		currentSynth.add(out);
+	}
+
+	@Override
+	public void remove(ISynthesizer cSynth) {
+		currentSynth.stop();
+		this.synth.remove(cSynth);
+		frame.removeFromMenu((ICSynthesizer) cSynth);
+		currentSynth = this.synth.get(this.synth.size()-1);
+		frame.displaySynth();
+		((JFrame) frame).setTitle("SynthlabG2 - "+currentSynth.getPath());
+		frame.selectInMenu(currentSynth);
 	}
 
 	@Override
@@ -144,16 +161,5 @@ public class SynthApp implements ISynthApp {
 	@Override
 	public void setUndisplaySynthCommand(ICommand undisplaySynthCommand) {
 		this.undisplayCmd = undisplaySynthCommand;
-	}
-
-	@Override
-	public void remove(ISynthesizer cSynth) {
-		currentSynth.stop();
-		this.synth.remove(cSynth);
-		frame.removeFromMenu((ICSynthesizer) cSynth);
-		currentSynth = this.synth.get(this.synth.size()-1);
-		frame.displaySynth();
-		((JFrame) frame).setTitle("SynthlabG2 - "+currentSynth.getPath());
-		frame.selectInMenu(currentSynth);
 	}
 }
