@@ -35,6 +35,7 @@ import com.alee.laf.toolbar.ToolbarStyle;
 import com.alee.laf.toolbar.WebToolBar;
 import com.alee.utils.ImageUtils;
 
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.command.menu.AddModuleAudioScopeCommand;
 import fr.istic.synthlab.command.menu.AddModuleMIXCommand;
@@ -608,7 +609,12 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		pres = app.getSynthesizer().getPresentation();
 		this.add((PSynthesizer) pres);
 		
-		this.setTitle("SynthlabG2 - "+app.getSynthesizer().getPath());
+		String titre = "";
+		if(app.getSynthesizer().getPath()[0] != null){
+			titre = app.getSynthesizer().getPath()[0];
+		}
+		titre += app.getSynthesizer().getPath()[1];
+		this.setTitle("SynthlabG2 - "+titre);
 		
 		this.setVisible(true);
 		this.repaint();
@@ -617,13 +623,30 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 	@Override
 	public void addToMenu(final ICSynthesizer currentSynth) {
-		final JRadioButtonMenuItem item = new JRadioButtonMenuItem(currentSynth.getPath());
+		String titre = "";
+		if(app.getSynthesizer().getPath()[0] != null){
+			titre = app.getSynthesizer().getPath()[0];
+		}
+		titre += app.getSynthesizer().getPath()[1];
+		
+		final JRadioButtonMenuItem item = new JRadioButtonMenuItem(titre);
 		filesGroup.add(item);
 		
 		item.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				app.setSynthesizer(item.getText());
+				File f = new File(item.getText());
+				System.out.println("PARENT="+f.getParent());
+				System.out.println("NAME="+f.getName());
+				String[] s = {null, null};
+				if(f.getParent() != null){
+					s[0] = f.getParent()+"/";
+					s[1] = f.getName();
+				} else {
+					s[0] = null;
+					s[1] = f.getName();
+				}
+				app.setSynthesizer(s);
 				displaySynth();
 			}
 		});
@@ -649,18 +672,48 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 	@Override
 	public void removeInMenu(ICSynthesizer currentSynth) {
+		File f = null;
 		for(JMenuItem currItem : files){
-			if(currItem.getText().equals(currentSynth.getPath())){
-				menuWindow.remove(currItem);
+			f = new File(currItem.getText());
+			String file = f.getName();
+			String dir = null;
+			if(f.getParent() != null)
+				dir = f.getParent()+"/";
+			
+			if(dir==null) {
+				if ((currentSynth.getPath()[0] == null) && (file.equals(currentSynth.getPath()[1]))){
+					menuWindow.remove(currItem);
+					return;
+				}
+			} else if(dir != null){
+				if ((currentSynth.getPath()[0].equals(dir)) && (file.equals(currentSynth.getPath()[1]))){
+					menuWindow.remove(currItem);
+					return;
+				}
 			}
 		}
 	}
 
 	@Override
 	public void selectInMenu(ICSynthesizer currentSynth) {
+		File f = null;
 		for(JMenuItem currItem : files){
-			if(currItem.getText().equals(currentSynth.getPath())){
-				currItem.setSelected(true);
+			f = new File(currItem.getText());
+			String file = f.getName();
+			String dir = null;
+			if(f.getParent() != null)
+				dir = f.getParent()+"/";
+			
+			if(dir==null) {
+				if ((currentSynth.getPath()[0] == null) && (file.equals(currentSynth.getPath()[1]))){
+					currItem.setSelected(true);
+					return;
+				}
+			} else if((dir != null)&&(currentSynth.getPath()[0] != null)){
+				if ((currentSynth.getPath()[0].equals(dir)) && (file.equals(currentSynth.getPath()[1]))){
+					currItem.setSelected(true);
+					return;
+				}
 			}
 		}
 	}

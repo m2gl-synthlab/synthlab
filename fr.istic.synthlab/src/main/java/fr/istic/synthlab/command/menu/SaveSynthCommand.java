@@ -21,7 +21,7 @@ public class SaveSynthCommand implements ICommand {
 
 	@Override
 	public void execute() {
-		String[] currentFile = synthApp.getCurrentFile();
+		String[] currentFile = synthApp.getSynthesizer().getPath();
 
 		if (currentFile[0] != null) {
 			synthApp.saveToXML(currentFile[0], currentFile[1]);
