@@ -78,7 +78,6 @@ public class SynthApp implements ISynthApp {
 		// Save all modules
 		writeToXML.saveModules(currentSynth.getModules());
 
-
 		// Remove this instance fromt he menu (not the right name)
 		frame.removeInMenu(currentSynth);
 
