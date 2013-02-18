@@ -104,7 +104,7 @@ public class Synthlab {
 		app.startSynth();
 
 		
-		frame.addToMenu(app.getSynthesizer());
+		frame.addInMenu(app.getSynthesizer());
 		app.getSynthesizer().setFrame(frame);
 
 		// Chargement du fichier ouvert
