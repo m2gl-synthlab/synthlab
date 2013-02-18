@@ -55,11 +55,11 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private JMenu menuFile, menuAdd, menuHelp, menuWindow;
 	private JMenuItem menuItemNew, menuItemOpen, menuItemSave, menuItemSaveAs;
 	private JMenuItem menuItemClose, menuItemQuit, menuItemDoc, menuItemAbout;
-	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT, menuItemAddModuleVCFLP, menuItemAddModuleVCFHP, menuItemAddModuleEG,
-			menuItemAddModuleAudioScope, menuItemAddModuleREP, menuItemAddModuleVCA, menuItemAddModuleMIX;
+	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT, menuItemAddModuleVCFLP, menuItemAddModuleVCFHP, menuItemAddModuleEG, menuItemAddModuleAudioScope,
+			menuItemAddModuleREP, menuItemAddModuleVCA, menuItemAddModuleMIX;
 	private List<JMenuItem> files;
 	private ButtonGroup filesGroup = new ButtonGroup();
-	
+
 	// Toolbar
 	private WebToolBar toolBar = new WebToolBar();
 	private String[] iconFiles = { "play.png", "stop.png" };
@@ -67,10 +67,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private JButton buttonPlayPause = new JButton();
 	private JButton buttonOUT, buttonVCO, buttonVCA, buttonVCFLP, buttonVCFHP;
 	private JButton buttonEG, buttonMIX, buttonREP, buttonSCOP;
-	private WebButton colorButtonBlack, colorButtonGray, colorButtonBlue, colorButtonCyan, colorButtonGreen, colorButtonMagenta, colorButtonOrange,
-			colorButtonPink, colorButtonRed, colorButtonWhite, colorButtonYellow, colorChooserButton;
-	private String[] tooltipTexts = { "Voltage-Controlled Oscillator", "Voltage-Controlled Amplifier", "Voltage-Controlled Filter Low-Pass",
-			"Voltage-Controlled Filter High-Pass", "Enveloppe generator", "Mixer", "Replicator", "Output on soundcard", "AudioScope" };
+	private WebButton colorButtonBlack, colorButtonGray, colorButtonBlue, colorButtonCyan, colorButtonGreen, colorButtonMagenta, colorButtonOrange, colorButtonPink,
+			colorButtonRed, colorButtonWhite, colorButtonYellow, colorChooserButton;
+	private String[] tooltipTexts = { "Voltage-Controlled Oscillator", "Voltage-Controlled Amplifier", "Voltage-Controlled Filter Low-Pass", "Voltage-Controlled Filter High-Pass",
+			"Enveloppe generator", "Mixer", "Replicator", "Output on soundcard", "AudioScope" };
 
 	// Command
 	private ICommand newSynthCommand;
@@ -168,7 +168,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuAdd.add(menuItemAddModuleREP);
 		menuAdd.add(menuItemAddModuleOUT);
 		menuAdd.add(menuItemAddModuleAudioScope);
-		
+
 		// -------------------------- File Menu --------------------------
 		menuWindow = new JMenu("Window");
 
@@ -260,8 +260,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		colorButtonWhite = new WebButton(ImageUtils.createColorIcon(Color.WHITE));
 		colorButtonYellow = new WebButton(ImageUtils.createColorIcon(Color.YELLOW));
 
-		colorChooserButton = new WebButton("Current color",
-				ImageUtils.createColorIcon(app.getSynthesizer().getCurrentWireColor()));
+		colorChooserButton = new WebButton("Current color", ImageUtils.createColorIcon(app.getSynthesizer().getCurrentWireColor()));
 
 		toolBar.add(colorButtonBlack);
 		toolBar.add(colorButtonGray);
@@ -348,7 +347,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 					saveAsSynthCommand.execute();
 			}
 		});
-		
+
 		menuItemClose.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -586,10 +585,8 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		colorChooserButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				WebColorChooserDialog colorChooser = new WebColorChooserDialog(
-						toolBar);
-				colorChooser.setColor(app.getSynthesizer()
-						.getCurrentWireColor());
+				WebColorChooserDialog colorChooser = new WebColorChooserDialog(toolBar);
+				colorChooser.setColor(app.getSynthesizer().getCurrentWireColor());
 				colorChooser.setVisible(true);
 
 				if (colorChooser.getResult() == StyleConstants.OK_OPTION) {
@@ -609,15 +606,15 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		// Add the synthesizer presentation
 		pres = app.getSynthesizer().getPresentation();
 		this.add((PSynthesizer) pres);
-		
+
 		// Set the title of the frame
 		String titre = "";
-		if(app.getSynthesizer().getPath()[0] != null){
+		if (app.getSynthesizer().getPath()[0] != null) {
 			titre = app.getSynthesizer().getPath()[0];
 		}
 		titre += app.getSynthesizer().getPath()[1];
-		this.setTitle("SynthlabG2 - "+titre);
-		
+		this.setTitle("SynthlabG2 - " + titre);
+
 		// Show the presentation
 		this.setVisible(true);
 		this.repaint();
@@ -628,23 +625,23 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	public void addInMenu(final ICSynthesizer currentSynth) {
 		// Build the title tab
 		String title = "";
-		if(app.getSynthesizer().getPath()[0] != null){
+		if (app.getSynthesizer().getPath()[0] != null) {
 			title = app.getSynthesizer().getPath()[0];
 		}
 		title += app.getSynthesizer().getPath()[1];
-		
+
 		// Create a new item
 		final JRadioButtonMenuItem item = new JRadioButtonMenuItem(title);
 		filesGroup.add(item);
-		
+
 		// Add its listener
 		item.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				File f = new File(item.getText());
-				String[] s = {null, null};
-				if(f.getParent() != null){
-					s[0] = f.getParent()+"/";
+				String[] s = { null, null };
+				if (f.getParent() != null) {
+					s[0] = f.getParent() + "/";
 					s[1] = f.getName();
 				} else {
 					s[0] = null;
@@ -654,14 +651,14 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 				displaySynth();
 			}
 		});
-		
+
 		// Add it to the group and the menu
 		files.add(item);
 		menuWindow.add(item);
-		
+
 		// Select it
 		item.setSelected(true);
-		
+
 		// Update the view
 		displaySynth();
 	}
@@ -669,23 +666,25 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	@Override
 	public void removeInMenu(ICSynthesizer currentSynth) {
 		File f = null;
-		for(JMenuItem currItem : files){
+		for (JMenuItem currItem : files) {
 			// Build the title tab
 			f = new File(currItem.getText());
 			String file = f.getName();
 			String dir = null;
-			if(f.getParent() != null)
-				dir = f.getParent()+"/";
-			
-			if(dir==null) {
-				if ((currentSynth.getPath()[0] == null) && (file.equals(currentSynth.getPath()[1]))){
+			if (f.getParent() != null)
+				dir = f.getParent() + "/";
+
+			if (dir == null) {
+				if ((currentSynth.getPath()[0] == null) && (file.equals(currentSynth.getPath()[1]))) {
 					menuWindow.remove(currItem);
 					return;
 				}
-			} else if(dir != null){
-				if ((currentSynth.getPath()[0].equals(dir)) && (file.equals(currentSynth.getPath()[1]))){
-					menuWindow.remove(currItem);
-					return;
+			} else if (dir != null) {
+				if (currentSynth.getPath()[0] != null) {
+					if ((currentSynth.getPath()[0].equals(dir)) && (file.equals(currentSynth.getPath()[1]))) {
+						menuWindow.remove(currItem);
+						return;
+					}
 				}
 			}
 		}
@@ -694,21 +693,21 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	@Override
 	public void selectInMenu(ICSynthesizer currentSynth) {
 		File f = null;
-		for(JMenuItem currItem : files){
+		for (JMenuItem currItem : files) {
 			// Build the title tab
 			f = new File(currItem.getText());
 			String file = f.getName();
 			String dir = null;
-			if(f.getParent() != null)
-				dir = f.getParent()+"/";
-			
-			if(dir==null) {
-				if ((currentSynth.getPath()[0] == null) && (file.equals(currentSynth.getPath()[1]))){
+			if (f.getParent() != null)
+				dir = f.getParent() + "/";
+
+			if (dir == null) {
+				if ((currentSynth.getPath()[0] == null) && (file.equals(currentSynth.getPath()[1]))) {
 					currItem.setSelected(true);
 					return;
 				}
-			} else if((dir != null)&&(currentSynth.getPath()[0] != null)){
-				if ((currentSynth.getPath()[0].equals(dir)) && (file.equals(currentSynth.getPath()[1]))){
+			} else if ((dir != null) && (currentSynth.getPath()[0] != null)) {
+				if ((currentSynth.getPath()[0].equals(dir)) && (file.equals(currentSynth.getPath()[1]))) {
 					currItem.setSelected(true);
 					return;
 				}
@@ -728,14 +727,15 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			e1.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public Color getCurrentWireColor() {
 		return toolbarCurrentWireColor;
 	}
-	
+
 	/**
 	 * Set the current wire Color
+	 * 
 	 * @param color
 	 */
 	private void setCurrentWireColor(Color color) {
@@ -743,7 +743,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		colorChooserButton.setIcon(ImageUtils.createColorIcon(toolbarCurrentWireColor));
 	}
 
-	
 	@Override
 	public void quitSynth() {
 		this.setVisible(false);
@@ -780,7 +779,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	public void setOpenSynthCommand(ICommand openSynthCommand) {
 		this.openSynthCommand = openSynthCommand;
 	}
-	
+
 	/**
 	 * @param closeSynthCommand
 	 *            the openSynthCommand to set
