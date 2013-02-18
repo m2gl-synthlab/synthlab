@@ -33,7 +33,9 @@ public interface ISynthFrame {
 	 */
 	public void removeFromMenu(ICSynthesizer currentSynth);
 
-	// TODO : need comments
-	public void stop();
+	/**
+	 * Set the play/stop button to the Stop state
+	 */
+	public void stopTheButton();
 
 }

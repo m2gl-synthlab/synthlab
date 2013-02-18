@@ -61,7 +61,6 @@ public class Synthlab {
 		// Create the application
 		SynthApp app = new SynthApp(frame);
 		frame = new SynthFrame(app);
-		frame.setTitle("SynthlabG2 - untitled");
 		try {
 			Image imageIcon = ImageIO.read(new File("res/logo.png"));
 			frame.setIconImage(imageIcon);
@@ -70,7 +69,6 @@ public class Synthlab {
 		}
 		
 		app.setFrame(frame);
-//		frame.setSynthesizer();
 
 		// Configure the application
 		app.setDisplaySynthCommand(new DisplayCommand(frame));

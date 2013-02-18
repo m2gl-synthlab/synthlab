@@ -16,12 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 
 import com.alee.extended.statusbar.WebMemoryBar;
@@ -56,6 +58,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT, menuItemAddModuleVCFLP, menuItemAddModuleVCFHP, menuItemAddModuleEG,
 			menuItemAddModuleAudioScope, menuItemAddModuleREP, menuItemAddModuleVCA, menuItemAddModuleMIX;
 	private List<JMenuItem> files;
+	private ButtonGroup filesGroup = new ButtonGroup();
 	
 	// Toolbar
 	private WebToolBar toolBar = new WebToolBar();
@@ -760,21 +763,27 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	}
 
 	@Override
-	public void addToMenu(ICSynthesizer currentSynth) {
-		final JMenuItem item = new JMenuItem(currentSynth.getPath());
+	public void addToMenu(final ICSynthesizer currentSynth) {
+		final JRadioButtonMenuItem item = new JRadioButtonMenuItem(currentSynth.getPath());
+		filesGroup.add(item);
+		
 		item.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				app.setSynthesizer(item.getText());
 				displaySynth();
+				setTitle("SynthlabG2 - "+currentSynth.getPath());
 			}
 		});
+		
 		files.add(item);
 		menuWindow.add(item);
+		item.setSelected(true);
+		this.setTitle("SynthlabG2 - "+currentSynth.getPath());
 	}
 
 	@Override
-	public void stop() {
+	public void stopTheButton() {
 		Image img;
 		try {
 			img = ImageIO.read(new File(iconFiles[0]));

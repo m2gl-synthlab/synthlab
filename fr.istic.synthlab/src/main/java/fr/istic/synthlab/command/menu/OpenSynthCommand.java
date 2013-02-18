@@ -31,7 +31,6 @@ public class OpenSynthCommand implements ICommand {
 		String file = chooser.getFile();
 		if (file != null) {
 			if (file.endsWith(".synthlab")) {
-				((JFrame) synthFrame).setTitle("SynthlabG2 - " + dir + file);
 				app.loadFromXML(dir, file);
 			} else {
 				JOptionPane.showMessageDialog(((JFrame) synthFrame), "Select a \'.synthlab\' file please.");
