@@ -5,6 +5,7 @@ package fr.istic.synthlab.controler.module;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -160,7 +161,7 @@ public class CModuleOUTTest {
 	 */
 	@Test
 	public void testGetSynthesizerPresentation() {
-		fail("Not yet implemented");
+		assertNotNull(iTest.getSynthesizerPresentation());
 	}
 
 	/**
@@ -168,7 +169,8 @@ public class CModuleOUTTest {
 	 */
 	@Test
 	public void testP2cRemoveModule() {
-		fail("Not yet implemented");
+		iTest.p2cRemoveModule(iTest);
+		assertNull(iTest);
 	}
 
 }
