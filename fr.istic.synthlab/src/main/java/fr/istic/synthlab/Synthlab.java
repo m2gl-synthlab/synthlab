@@ -1,7 +1,6 @@
 package fr.istic.synthlab;
 
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -36,13 +35,17 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
 
 public class Synthlab {
+	
+	private static final String LOGO_FILE = "logo.png";
+	
 	public static void main(String[] args) {
 		// Set the look and feel
 		WebLookAndFeel.install();
 
 		// Set the icon application
+		Image imageIcon = null;
 		try {
-			Image imageIcon = ImageIO.read(new File("res/logo.png"));
+			imageIcon = ImageIO.read(ClassLoader.getSystemResourceAsStream(LOGO_FILE));
 			if (System.getProperty("os.name").contains("Mac")) {
 				com.apple.eawt.Application.getApplication().setDockIconImage(imageIcon);
 			}
@@ -61,12 +64,7 @@ public class Synthlab {
 		// Create the application
 		SynthApp app = new SynthApp(frame);
 		frame = new SynthFrame(app);
-		try {
-			Image imageIcon = ImageIO.read(new File("res/logo.png"));
-			frame.setIconImage(imageIcon);
-		} catch (IOException e2) {
-			e2.printStackTrace();
-		}
+		frame.setIconImage(imageIcon);
 		
 		app.setFrame(frame);
 

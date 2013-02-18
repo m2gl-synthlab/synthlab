@@ -62,7 +62,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	
 	// Toolbar
 	private WebToolBar toolBar = new WebToolBar();
-	private String[] iconFiles = { "res/play.png", "res/stop.png" };
+	private String[] iconFiles = { "play.png", "stop.png" };
 	private String buttonPlayPauseLabel = "Play/Stop";
 	private JButton buttonPlayPause = new JButton();
 	private JButton buttonOUT, buttonVCO, buttonVCA, buttonVCFLP, buttonVCFHP;
@@ -198,7 +198,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 		Image img;
 		try {
-			img = ImageIO.read(new File(iconFiles[1]));
+			img = ImageIO.read(ClassLoader.getSystemResourceAsStream(iconFiles[1]));
 			img = img.getScaledInstance(25, 25, Image.SCALE_DEFAULT);
 			buttonPlayPause = new JButton(new ImageIcon(img));
 			buttonPlayPause.setToolTipText(buttonPlayPauseLabel);
@@ -480,7 +480,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 						toolbarPauseCommand.execute();
 						Image img;
 						try {
-							img = ImageIO.read(new File(iconFiles[0]));
+							img = ImageIO.read(ClassLoader.getSystemResourceAsStream(iconFiles[0]));
 							img = img.getScaledInstance(25, 25, Image.SCALE_DEFAULT);
 							buttonPlayPause.setIcon(new ImageIcon(img));
 						} catch (IOException e1) {
@@ -492,7 +492,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 						toolbarPlayCommand.execute();
 						Image img;
 						try {
-							img = ImageIO.read(new File(iconFiles[1]));
+							img = ImageIO.read(ClassLoader.getSystemResourceAsStream(iconFiles[1]));
 							img = img.getScaledInstance(25, 25, Image.SCALE_DEFAULT);
 							buttonPlayPause.setIcon(new ImageIcon(img));
 						} catch (IOException e1) {
