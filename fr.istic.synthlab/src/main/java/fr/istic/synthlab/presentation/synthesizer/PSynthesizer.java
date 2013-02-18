@@ -132,9 +132,11 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 		int y = 0;
 
 		if ((module.getPosition().x == 0) && (module.getPosition().y == 0)) {
-			x = 10;
-			y = 10;
+			// On place les module en fonction de leur nombre pour évité les recouvrements
+			x = (modules.size()+1) * 10;
+			y = ((modules.size()%15)+1) * 20;
 		} else {
+			// Placement depuis xml
 			x = module.getPosition().x;
 			y = module.getPosition().y;
 		}
@@ -165,7 +167,8 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 	public void c2pRemoveModuleOk(IPModule module) {
 		System.out.println("remove");
 		this.remove((APModule) module);
-
+		modules.remove(module);
+		
 		validate();
 		repaint();
 	}

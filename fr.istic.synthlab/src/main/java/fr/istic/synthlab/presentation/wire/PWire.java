@@ -161,7 +161,7 @@ public class PWire extends JPanel implements IPWire {
 
 		// Calcul d'un point centrale
 		Point mid = new Point(w / 2, h + w / 4);
-		Point midShadow = new Point(w / 2, h + w / 3);
+		Point midShadow = new Point(w / 2, 10 + h + w / 3);
 
 		// Création de la courbe
 		QuadCurve2D curve = new QuadCurve2D.Double(posInput.getX() - getX(), posInput.getY() - getY(), mid.getX(), mid.getY(), posOutput.getX() - getX(),
