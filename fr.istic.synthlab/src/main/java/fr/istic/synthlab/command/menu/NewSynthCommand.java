@@ -1,7 +1,6 @@
 package fr.istic.synthlab.command.menu;
 
 import fr.istic.synthlab.ISynthApp;
-import fr.istic.synthlab.ISynthFrame;
 import fr.istic.synthlab.command.ICommand;
 
 /**
@@ -10,11 +9,9 @@ import fr.istic.synthlab.command.ICommand;
 public class NewSynthCommand implements ICommand {
 
 	private ISynthApp synthApp;
-	private ISynthFrame frame;
 
-	public NewSynthCommand(ISynthApp synthApp, ISynthFrame frame) {
+	public NewSynthCommand(ISynthApp synthApp) {
 		this.synthApp = synthApp;
-		this.frame = frame;
 	}
 
 	/*
