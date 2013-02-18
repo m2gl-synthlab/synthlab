@@ -95,7 +95,7 @@ public class CModuleOUTTest {
 	}
 
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.mix.CModuleMIX#p2cClosing()}.
+	 * Test method for {@link fr.istic.synthlab.controller.module.out.CModuleOUT#p2cClosing()}.
 	 * Test de la méthode la p2cClosing lorsque tout les ports sont connecté
 	 */
 	@Test
@@ -119,7 +119,7 @@ public class CModuleOUTTest {
 	}
 
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.mix.CModuleMIX#p2cClosing()}.
+	 * Test method for {@link fr.istic.synthlab.controller.module.out.CModuleOUT#p2cClosing()}.
 	 * Test de la méthode la p2cClosing lorsque certains port sont connectés.
 	 */
 	@Test
