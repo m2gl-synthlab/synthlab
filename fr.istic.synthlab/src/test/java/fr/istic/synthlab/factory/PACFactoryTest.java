@@ -1,10 +1,13 @@
 package fr.istic.synthlab.factory;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import fr.istic.synthlab.factory.IFactory;
+import fr.istic.synthlab.factory.IPFactory;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;

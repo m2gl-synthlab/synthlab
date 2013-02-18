@@ -21,7 +21,6 @@ import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
-
 public class ModuleOUTTest {
 
 	private IModuleOUT m;
@@ -33,15 +32,14 @@ public class ModuleOUTTest {
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
-		m = new ModuleOUT(synth);
-
+		m=new ModuleOUT(synth);
+	
 	}
 
 	@Test
 	public void testGetJSyn() {
 		assertNotNull(m.getJSyn());
 	}
-
 	@Test
 	public void testStart() {
 		fail("Not yet implemented");
@@ -55,44 +53,59 @@ public class ModuleOUTTest {
 	@Test
 	public void testSetGetAttenuation() {
 		m.setAttenuation(5.0);
-		assertEquals(5.0, m.getAttenuation(), 0);
+		assertEquals(5.0,m.getAttenuation(),0);
 	}
+
+	
 
 	@Test
 	public void testSetIsMuteTrue() {
 		m.setMute(true);
+		
 		assertEquals(true, m.isMute());
 	}
-
+	
 	@Test
 	public void testSetIsMuteFalse() {
 		m.setMute(false);
 		assertEquals(false, m.isMute());
 	}
+	
+	
+
+
+
 
 	@Test
-	public void testGetWires() {
-		IWire w = new Wire(synth);
-		IModuleREP mrep = new ModuleREP(synth);
+	public void testGetWires(){
+		IWire w=new Wire(synth);		
+		IModuleREP mrep=new ModuleREP(synth);
 		try {
 			w.connect(m.getInput());
 			w.connect(mrep.getOutput1());
 		} catch (PortAlreadyInUseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+		
 		assertEquals(1, m.getWires().size());
 		assertEquals(w, m.getWires().get(0));
 
+		
+
+		
 	}
+	
 
 	@Test
-	public void testGetWiresDifferentBad() {
-		IWire w = new Wire(synth);
-		IWire w2 = new Wire(synth);
-		IModuleREP mrep = new ModuleREP(synth);
+	public void testGetWiresDifferentBad(){
+		IWire w=new Wire(synth);		
+		IWire w2=new Wire(synth);
+		IModuleREP mrep=new ModuleREP(synth);
 
 		try {
 			w.connect(m.getInput());
@@ -101,11 +114,19 @@ public class ModuleOUTTest {
 			fail("Une exception devrait etre lancée");
 
 		} catch (PortAlreadyInUseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	
+		
 
+		
 	}
+
+	
+
 
 }
