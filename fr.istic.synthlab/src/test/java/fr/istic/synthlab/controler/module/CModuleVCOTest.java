@@ -3,6 +3,7 @@
  */
 package fr.istic.synthlab.controler.module;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -69,7 +70,26 @@ public class CModuleVCOTest {
 	 */
 	@Test
 	public void testP2cOctaveChanged() {
-		fail("Not yet implemented");
+		iTest.p2cOctaveChanged(5);
+		assertEquals(5, iTest.getOctave(),0);
+	}
+
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.vco.CModuleVCO#p2cOctaveChanged(int)}.
+	 */
+	@Test
+	public void testP2cOctaveChangedLessMin() {
+		iTest.p2cOctaveChanged(-5);
+		assertEquals(0, iTest.getOctave(),0);
+	}
+
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.vco.CModuleVCO#p2cOctaveChanged(int)}.
+	 */
+	@Test
+	public void testP2cOctaveChangedMoreMax() {
+		iTest.p2cOctaveChanged(25);
+		assertEquals(14, iTest.getOctave(),0);
 	}
 
 	/**
@@ -77,9 +97,28 @@ public class CModuleVCOTest {
 	 */
 	@Test
 	public void testP2cToneChanged() {
-		fail("Not yet implemented");
+		iTest.p2cToneChanged(0.5);
+		assertEquals(0.5, iTest.getTone(),0);
 	}
-	
+
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.vco.CModuleVCO#p2cToneChanged(double)}.
+	 */
+	@Test
+	public void testP2cToneChangedLessMin() {
+		iTest.p2cToneChanged(-2.5);
+		assertEquals(-1.0, iTest.getTone(),0);
+	}
+
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.vco.CModuleVCO#p2cToneChanged(double)}.
+	 */
+	@Test
+	public void testP2cToneChangedMoreMax() {
+		iTest.p2cToneChanged(2.5);
+		assertEquals(1.0, iTest.getTone(),0);
+	}
+
 	/**
 	 * Test method for {@link fr.istic.synthlab.controller.module.vco.CModuleVCO#p2cClosing()}.
 	 * Test de la méthode pour p2cClosing lorsqu'aucun des ports n'est connecté
@@ -154,7 +193,10 @@ public class CModuleVCOTest {
 	 */
 	@Test
 	public void testSetParameter() {
-		fail("Not yet implemented");
+		iTest.setParameter("octave", 3.0);
+		assertEquals(3, iTest.getOctave(),0);
+		iTest.setParameter("tone", 0.2);
+		assertEquals(0.2, iTest.getTone(),2);
 	}
 
 	/**
@@ -168,6 +210,7 @@ public class CModuleVCOTest {
 	/**
 	 * Test method for {@link fr.istic.synthlab.controller.module.vco.CModuleVCO#p2cRemoveModule(fr.istic.synthlab.controller.module.ICModule)}.
 	 */
+	//TODO Fonctionne pas !
 	@Test
 	public void testP2cRemoveModule() {
 		iTest.p2cRemoveModule(iTest);
