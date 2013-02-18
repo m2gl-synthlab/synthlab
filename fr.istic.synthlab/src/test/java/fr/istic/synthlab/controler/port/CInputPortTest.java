@@ -1,4 +1,4 @@
-package fr.istic.synthlab.controler;
+package fr.istic.synthlab.controler.port;
 
 import junit.framework.TestCase;
 
