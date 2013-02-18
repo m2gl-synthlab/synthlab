@@ -1,1 +1,25 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><modules><module name="REP - 1" x="547.0" y="375.0"><wire colorB="128" colorG="128" colorR="128" inputPort="In" inputPortModuleName="AudioScope - 1" outputPort="Out1"/><wire colorB="128" colorG="128" colorR="128" inputPort="In" inputPortModuleName="AudioScope - 2" outputPort="Out2"/><wire colorB="128" colorG="128" colorR="128" inputPort="In" inputPortModuleName="AudioScope - 4" outputPort="Out3"/></module><module name="AudioScope - 1" x="39.0" y="480.0"/><module name="AudioScope - 2" x="669.0" y="480.0"/><module name="AudioScope - 3" x="280.0" y="10.0"><wire colorB="128" colorG="128" colorR="128" inputPort="In" inputPortModuleName="REP - 1" outputPort="Out"/></module><module name="VCO - 1" x="10.0" y="10.0"><wire colorB="128" colorG="128" colorR="128" inputPort="In" inputPortModuleName="AudioScope - 3" outputPort="Triangle"/><parameter key="octave" value="9.0"/><parameter key="tone" value="0.0"/><parameter key="frequency" value="512.0"/></module><module name="AudioScope - 4" x="923.0" y="21.0"/></modules>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modules>
+	<module name="REP - 1" x="547.0" y="375.0">
+		<wire colorB="128" colorG="128" colorR="128" inputPort="In"
+			inputPortModuleName="AudioScope - 1" outputPort="Out1" />
+		<wire colorB="128" colorG="128" colorR="128" inputPort="In"
+			inputPortModuleName="AudioScope - 2" outputPort="Out2" />
+		<wire colorB="128" colorG="128" colorR="128" inputPort="In"
+			inputPortModuleName="AudioScope - 4" outputPort="Out3" />
+	</module>
+	<module name="AudioScope - 1" x="39.0" y="480.0" />
+	<module name="AudioScope - 2" x="669.0" y="480.0" />
+	<module name="AudioScope - 3" x="280.0" y="10.0">
+		<wire colorB="128" colorG="128" colorR="128" inputPort="In"
+			inputPortModuleName="REP - 1" outputPort="Out" />
+	</module>
+	<module name="VCO - 1" x="10.0" y="10.0">
+		<wire colorB="128" colorG="128" colorR="128" inputPort="In"
+			inputPortModuleName="AudioScope - 3" outputPort="Triangle" />
+		<parameter key="octave" value="9.0" />
+		<parameter key="tone" value="0.0" />
+		<parameter key="frequency" value="512.0" />
+	</module>
+	<module name="AudioScope - 4" x="923.0" y="21.0" />
+</modules>

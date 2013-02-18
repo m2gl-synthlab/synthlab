@@ -81,7 +81,7 @@ public class CModuleEG extends ModuleEG implements ICModuleEG {
 			changeAttack(value);
 		} else if (key.equals("decayTime")) {
 			changeDecay(value);
-		} else if (key.equals("substainTime")) {
+		} else if (key.equals("sustainValue")) {
 			changeSustain(value);
 		} else if (key.equals("releaseTime")) {
 			changeRelease(value);

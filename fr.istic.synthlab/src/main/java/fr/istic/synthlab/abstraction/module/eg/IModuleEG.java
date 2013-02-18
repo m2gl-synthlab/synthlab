@@ -19,6 +19,8 @@ public interface IModuleEG extends IModule {
 
 	/**
 	 * Set the attack time for the module
+	 * 
+	 * @param attackTime
 	 */
 	public void setAttack(double attackTime);
 
@@ -29,6 +31,8 @@ public interface IModuleEG extends IModule {
 
 	/**
 	 * Set the decay time for the module
+	 * 
+	 * @param decayTime
 	 */
 	public void setDecay(double decayTime);
 
@@ -38,12 +42,14 @@ public interface IModuleEG extends IModule {
 	public double getDecay();
 
 	/**
-	 * @param substainTime
+	 * Set the sustain value (between 0V to 5V) 
+	 * 
+	 * @param sustainValue
 	 */
-	void setSustain(double substainTime);
+	void setSustain(double sustainValue);
 
 	/**
-	 * Get the sustain time for the module
+	 * Get the sustain value for the module
 	 */
 	public double getSustain();
 
