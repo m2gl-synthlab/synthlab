@@ -1,7 +1,9 @@
 package fr.istic.synthlab.presentation.module.mix;
 
 import java.awt.Dimension;
+import java.awt.GridLayout;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -49,45 +51,52 @@ public class PModuleMIX extends APModule implements IPModuleMIX {
 	}
 
 	private void configView() {
-		JPanel panelGains = new JPanel();
-		JPanel panelInputOutput = new JPanel();
+		JPanel panelComponent = new JPanel();
+		GridLayout layout = new GridLayout(2, 6);
+		layout.setVgap(20);
+		panelComponent.setLayout(layout);		
+		panelComponent.setOpaque(false);
+		
 
-		panelGains.setOpaque(false);
-		panelInputOutput.setOpaque(false);
-
-		inputPort1 = (PInputPort) ((ICInputPort) ctrl.getInput(1)).getPresentation();
-		panelInputOutput.add(inputPort1);
-
-		inputPort2 = (PInputPort) ((ICInputPort) ctrl.getInput(2)).getPresentation();
-		panelInputOutput.add(inputPort2);
-
-		inputPort3 = (PInputPort) ((ICInputPort) ctrl.getInput(3)).getPresentation();
-		panelInputOutput.add(inputPort3);
-
-		inputPort4 = (PInputPort) ((ICInputPort) ctrl.getInput(4)).getPresentation();
-		panelInputOutput.add(inputPort4);
-
-		output = (POutputPort) ((ICOutputPort) ctrl.getOutput()).getPresentation();
-		panelInputOutput.add(output);
-
+		panelComponent.add(new JLabel());
+		
 		modelGain1 = new DoubleBoundedRangeModel(IModuleMIX.PARAM_NAME_GAIN1, 7200, -60, 12, ctrl.getAttenuation1());
 		RotaryTextController gainRotary1 = new RotaryTextController(modelGain1, 1);
-		panelGains.add(gainRotary1);
+		panelComponent.add(gainRotary1);
 
 		modelGain2 = new DoubleBoundedRangeModel(IModuleMIX.PARAM_NAME_GAIN2, 7200, -60, 12, ctrl.getAttenuation2());
 		RotaryTextController gainRotary2 = new RotaryTextController(modelGain2, 1);
-		panelGains.add(gainRotary2);
+		panelComponent.add(gainRotary2);
 
 		modelGain3 = new DoubleBoundedRangeModel(IModuleMIX.PARAM_NAME_GAIN3, 7200, -60, 12, ctrl.getAttenuation3());
 		RotaryTextController gainRotary3 = new RotaryTextController(modelGain3, 1);
-		panelGains.add(gainRotary3);
+		panelComponent.add(gainRotary3);
 
 		modelGain4 = new DoubleBoundedRangeModel(IModuleMIX.PARAM_NAME_GAIN4, 7200, -60, 12, ctrl.getAttenuation4());
 		RotaryTextController gainRotary4 = new RotaryTextController(modelGain4, 1);
-		panelGains.add(gainRotary4);
+		panelComponent.add(gainRotary4);
+		
+		panelComponent.add(new JLabel());
+		panelComponent.add(new JLabel());
 
+		inputPort1 = (PInputPort) ((ICInputPort) ctrl.getInput(1)).getPresentation();
+		panelComponent.add(inputPort1);
+
+		inputPort2 = (PInputPort) ((ICInputPort) ctrl.getInput(2)).getPresentation();
+		panelComponent.add(inputPort2);
+
+		inputPort3 = (PInputPort) ((ICInputPort) ctrl.getInput(3)).getPresentation();
+		panelComponent.add(inputPort3);
+
+		inputPort4 = (PInputPort) ((ICInputPort) ctrl.getInput(4)).getPresentation();
+		panelComponent.add(inputPort4);
+
+		output = (POutputPort) ((ICOutputPort) ctrl.getOutput()).getPresentation();
+		panelComponent.add(output);
+
+		
 		this.setAutoscrolls(true);
-		super.setWidth(330);
+		super.setWidth(350);
 		super.setHeigth(200);
 
 		Dimension size = new Dimension(super.getWidth(), super.getHeight());
@@ -95,8 +104,7 @@ public class PModuleMIX extends APModule implements IPModuleMIX {
 		this.setPreferredSize(size);
 
 		this.addTitleBar();
-		this.addPanel(panelGains, 330, 100);
-		this.addPanel(panelInputOutput, 330, 100);
+		this.addPanel(panelComponent, 330, 200);
 	}
 
 	private void defineCallbacks() {
