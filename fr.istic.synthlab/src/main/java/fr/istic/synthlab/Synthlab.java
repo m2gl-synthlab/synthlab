@@ -35,9 +35,9 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
 
 public class Synthlab {
-	
+
 	private static final String LOGO_FILE = "logo.png";
-	
+
 	public static void main(String[] args) {
 		// Set the look and feel
 		WebLookAndFeel.install();
@@ -45,9 +45,11 @@ public class Synthlab {
 		// Set the icon application
 		Image imageIcon = null;
 		try {
-			imageIcon = ImageIO.read(ClassLoader.getSystemResourceAsStream(LOGO_FILE));
+			imageIcon = ImageIO.read(ClassLoader
+					.getSystemResourceAsStream(LOGO_FILE));
 			if (System.getProperty("os.name").contains("Mac")) {
-				com.apple.eawt.Application.getApplication().setDockIconImage(imageIcon);
+				com.apple.eawt.Application.getApplication().setDockIconImage(
+						imageIcon);
 			}
 		} catch (IOException e2) {
 			e2.printStackTrace();
@@ -57,15 +59,15 @@ public class Synthlab {
 		PACFactory.setAFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
-		
+
 		// Create the main frame
 		SynthFrame frame = null;
-	
+
 		// Create the application
 		SynthApp app = new SynthApp(frame);
 		frame = new SynthFrame(app);
 		frame.setIconImage(imageIcon);
-		
+
 		app.setFrame(frame);
 
 		// Configure the application
@@ -86,7 +88,8 @@ public class Synthlab {
 		frame.setAboutSynthCommand(new AboutCommand());
 		frame.setToolbarPlayCommand(new ToolbarPlayCommand(app));
 		frame.setToolbarPauseCommand(new ToolbarPauseCommand(app));
-		frame.setCurrentWireColorCommand(new ToolbarCurrentWireColorCommand(app, frame));
+		frame.setCurrentWireColorCommand(new ToolbarCurrentWireColorCommand(
+				app, frame));
 
 		frame.setAddModuleOUTCommand(new AddModuleOUTCommand(app));
 		frame.setAddModuleVCOCommand(new AddModuleVCOCommand(app));
@@ -101,7 +104,6 @@ public class Synthlab {
 		// Start the application
 		app.startSynth();
 
-		
 		frame.addInMenu(app.getSynthesizer());
 		app.getSynthesizer().setFrame(frame);
 
