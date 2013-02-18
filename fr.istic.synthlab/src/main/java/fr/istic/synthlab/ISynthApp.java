@@ -10,7 +10,7 @@ import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 public interface ISynthApp {
 
 	/**
-	 * Start the synthesizer
+	 * Create a new instance, display and add it to the menu
 	 */
 	public void newSynth();
 

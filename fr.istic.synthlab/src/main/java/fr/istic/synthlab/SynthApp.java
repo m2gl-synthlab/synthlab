@@ -4,9 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
-
-import fr.istic.synthlab.abstraction.module.IModule;
 import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.command.ICommand;
@@ -15,14 +12,12 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.util.ReadXMLFile;
 import fr.istic.synthlab.util.WriteXMLFile;
 
-//github.com/m2gl-synthlab/synthlab.git/
-
 /**
  * Application
  */
 public class SynthApp implements ISynthApp {
 
-	private List<ICSynthesizer> synth;
+	private List<ICSynthesizer> synths;
 	private ICSynthesizer currentSynth;
 	private ISynthFrame frame;
 	private ICommand displayCmd;
@@ -32,34 +27,44 @@ public class SynthApp implements ISynthApp {
 
 	public SynthApp(ISynthFrame frame) {
 		this.frame = frame;
-		synth = new ArrayList<ICSynthesizer>();
+		synths = new ArrayList<ICSynthesizer>();
+
+		// Set the current directory file and path file to null
 		currentFile[0] = null;
 		currentFile[1] = null;
+
+		// Create a new synthesizer instance
 		newSynthInstance();
+	}
+
+	// Create a new synthesizer instance, set its path and frame, and add it to
+	// the list
+	private void newSynthInstance() {
+		if (synths.size() > 0)
+			currentSynth.stop();
+		ICSynthesizer newSynth = (ICSynthesizer) (PACFactory.getFactory()).newSynthesizer();
+		this.synths.add(newSynth);
+		newSynth.setPath("untitled" + untitledIndex);
+		newSynth.setFrame(frame);
+		setSynthesizer(newSynth.getPath());
+		untitledIndex++;
 	}
 
 	@Override
 	public void newSynth() {
+		// Create a new instance
 		newSynthInstance();
+
+		// Display the new instance and add an OUT module
 		displayNewDefaultSynth();
+
+		// Add this new instance to the menu
 		frame.addToMenu(currentSynth);
 	}
 
 	@Override
 	public void startSynth() {
 		currentSynth.start();
-	}
-
-	private void newSynthInstance() {
-		if (synth.size() > 0)
-			currentSynth.stop();
-		ICSynthesizer newSynth = (ICSynthesizer) (PACFactory.getFactory())
-				.newSynthesizer();
-		this.synth.add(newSynth);
-		newSynth.setPath("untitled" + untitledIndex);
-		newSynth.setFrame(frame);
-		setSynthesizer(newSynth.getPath());
-		untitledIndex++;
 	}
 
 	@Override
@@ -72,46 +77,58 @@ public class SynthApp implements ISynthApp {
 
 	@Override
 	public void saveToXML(String fileDir, String filename) {
-		List<IModule> modules = currentSynth.getModules();
-
+		// Create a new writter
 		WriteXMLFile writeToXML = new WriteXMLFile(new File(fileDir + filename));
-		writeToXML.saveModules(modules);
 
+		// Save all modules
+		writeToXML.saveModules(currentSynth.getModules());
+
+		// Set the path of this instance
 		currentFile[0] = fileDir;
 		currentFile[1] = filename;
-
-		frame.removeFromMenu(currentSynth);
-
 		currentSynth.setPath(fileDir + filename);
-		frame.addToMenu(currentSynth);
 
+		// Reload this instance in the menu
+		frame.removeInMenu(currentSynth);
+		frame.addToMenu(currentSynth);
 	}
 
 	@Override
 	public void loadFromXML(String dir, String file) {
-		for (ICSynthesizer s : synth) {
+		// If this file is already open, return
+		for (ICSynthesizer s : synths) {
 			if (s.getPath().equals(dir + file)) {
 				return;
 			}
 		}
 
+		// Stop the current instance
 		currentSynth.stop();
+
+		// Create a new instance
 		newSynthInstance();
+
+		// Display the new instance
 		displayCmd.execute();
 
-		ReadXMLFile readXML = new ReadXMLFile(currentSynth,
-				new File(dir + file));
+		// Create a new reader
+		ReadXMLFile readXML = new ReadXMLFile(currentSynth, new File(dir + file));
+
+		// Populate the current synthesizer with the file
 		readXML.loadSynthesizer();
 
+		// Set the current path
 		currentFile[0] = dir;
 		currentFile[1] = file;
-
 		currentSynth.setPath(dir + file);
+
+		// Add this instance to the menu and set the title bar
 		frame.addToMenu(currentSynth);
 	}
 
 	@Override
 	public void displayNewDefaultSynth() {
+		// Display the current instance
 		displayCmd.execute();
 
 		// Add an OUT module
@@ -121,25 +138,35 @@ public class SynthApp implements ISynthApp {
 
 	@Override
 	public void remove(ISynthesizer cSynth) {
-		currentSynth.stop();
-		this.synth.remove(cSynth);
-		frame.removeFromMenu((ICSynthesizer) cSynth);
-		if (this.synth.size() > 0) {
-			setSynthesizer(this.synth.get(this.synth.size() - 1).getPath());
+		// Stop the synthesizer
+		cSynth.stop();
+
+		// Remove the synthesizer from the list
+		this.synths.remove(cSynth);
+
+		// Remove the synthesizer in the menu
+		frame.removeInMenu((ICSynthesizer) cSynth);
+
+		// If we have another synthesizer loaded, we display the last one, else
+		// we create a new one
+		if (this.synths.size() > 0) {
+			setSynthesizer(this.synths.get(this.synths.size() - 1).getPath());
 			frame.displaySynth();
 		} else {
 			newSynth();
-			
 		}
-		((JFrame) frame).setTitle("SynthlabG2 - " + currentSynth.getPath());
+		
 		frame.selectInMenu(currentSynth);
 	}
 
 	@Override
 	public void setSynthesizer(String synthS) {
-		if(currentSynth != null)
+		// If the current synthesizer is running, stop it
+		if (currentSynth != null)
 			currentSynth.stop();
-		for (ISynthesizer synth : this.synth) {
+		
+		// Set the current synthesizer instance fron its path
+		for (ISynthesizer synth : this.synths) {
 			if (((ICSynthesizer) synth).getPath().equals(synthS)) {
 				currentSynth = (ICSynthesizer) synth;
 				currentFile[0] = null;
