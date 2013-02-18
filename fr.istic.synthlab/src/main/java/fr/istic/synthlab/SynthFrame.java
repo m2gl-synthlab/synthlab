@@ -35,7 +35,6 @@ import com.alee.laf.toolbar.ToolbarStyle;
 import com.alee.laf.toolbar.WebToolBar;
 import com.alee.utils.ImageUtils;
 
-import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.command.menu.AddModuleAudioScopeCommand;
 import fr.istic.synthlab.command.menu.AddModuleMIXCommand;
@@ -603,12 +602,15 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 	@Override
 	public void displaySynth() {
+		// If there is a presentation, delete it
 		if (pres != null)
 			this.remove((PSynthesizer) pres);
 
+		// Add the synthesizer presentation
 		pres = app.getSynthesizer().getPresentation();
 		this.add((PSynthesizer) pres);
 		
+		// Set the title of the frame
 		String titre = "";
 		if(app.getSynthesizer().getPath()[0] != null){
 			titre = app.getSynthesizer().getPath()[0];
@@ -616,6 +618,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		titre += app.getSynthesizer().getPath()[1];
 		this.setTitle("SynthlabG2 - "+titre);
 		
+		// Show the presentation
 		this.setVisible(true);
 		this.repaint();
 		this.validate();
@@ -623,21 +626,22 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 	@Override
 	public void addToMenu(final ICSynthesizer currentSynth) {
-		String titre = "";
+		// Build the title tab
+		String title = "";
 		if(app.getSynthesizer().getPath()[0] != null){
-			titre = app.getSynthesizer().getPath()[0];
+			title = app.getSynthesizer().getPath()[0];
 		}
-		titre += app.getSynthesizer().getPath()[1];
+		title += app.getSynthesizer().getPath()[1];
 		
-		final JRadioButtonMenuItem item = new JRadioButtonMenuItem(titre);
+		// Create a new item
+		final JRadioButtonMenuItem item = new JRadioButtonMenuItem(title);
 		filesGroup.add(item);
 		
+		// Add its listener
 		item.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				File f = new File(item.getText());
-				System.out.println("PARENT="+f.getParent());
-				System.out.println("NAME="+f.getName());
 				String[] s = {null, null};
 				if(f.getParent() != null){
 					s[0] = f.getParent()+"/";
@@ -651,9 +655,14 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			}
 		});
 		
+		// Add it to the group and the menu
 		files.add(item);
 		menuWindow.add(item);
+		
+		// Select it
 		item.setSelected(true);
+		
+		// Update the view
 		displaySynth();
 	}
 
@@ -674,6 +683,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	public void removeInMenu(ICSynthesizer currentSynth) {
 		File f = null;
 		for(JMenuItem currItem : files){
+			// Build the title tab
 			f = new File(currItem.getText());
 			String file = f.getName();
 			String dir = null;
@@ -698,6 +708,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	public void selectInMenu(ICSynthesizer currentSynth) {
 		File f = null;
 		for(JMenuItem currItem : files){
+			// Build the title tab
 			f = new File(currItem.getText());
 			String file = f.getName();
 			String dir = null;
