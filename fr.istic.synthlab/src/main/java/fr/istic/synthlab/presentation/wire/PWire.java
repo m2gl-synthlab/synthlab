@@ -12,9 +12,6 @@ import java.awt.geom.QuadCurve2D;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
-import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
-import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.presentation.port.IPInputPort;
 import fr.istic.synthlab.presentation.port.IPOutputPort;

@@ -10,8 +10,6 @@ import javax.swing.border.MatteBorder;
 import com.alee.laf.panel.WebPanel;
 
 import fr.istic.synthlab.controller.module.ICModule;
-import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
-import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 
 public class TitleBar extends WebPanel {
 

@@ -28,7 +28,6 @@ import fr.istic.synthlab.controller.module.vca.CModuleVCA;
 import fr.istic.synthlab.controller.module.vcf.CModuleVCF_HP;
 import fr.istic.synthlab.controller.module.vcf.CModuleVCF_LP;
 import fr.istic.synthlab.controller.module.vco.CModuleVCO;
-import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.CWire;
 import fr.istic.synthlab.controller.wire.ICWire;

@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
-import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.presentation.module.APModule;

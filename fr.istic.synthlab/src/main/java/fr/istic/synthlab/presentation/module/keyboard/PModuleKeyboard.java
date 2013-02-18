@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import fr.istic.synthlab.controller.module.ICModule;
 import fr.istic.synthlab.controller.module.keyboard.ICModuleKeyboard;
 import fr.istic.synthlab.presentation.module.APModule;
 

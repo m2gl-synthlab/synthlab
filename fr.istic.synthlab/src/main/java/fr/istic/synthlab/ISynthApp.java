@@ -3,6 +3,9 @@ package fr.istic.synthlab;
 import fr.istic.synthlab.command.ICommand;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 
+/**
+ * Interface for the synthesizer application
+ */
 public interface ISynthApp {
 
 	/**

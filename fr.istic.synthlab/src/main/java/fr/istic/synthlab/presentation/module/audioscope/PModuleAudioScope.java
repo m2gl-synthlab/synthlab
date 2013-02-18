@@ -1,6 +1,8 @@
 package fr.istic.synthlab.presentation.module.audioscope;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
@@ -10,7 +12,6 @@ import com.jsyn.scope.swing.AudioScopeView;
 import fr.istic.synthlab.controller.module.audioscope.ICModuleAudioScope;
 import fr.istic.synthlab.controller.port.ICInputPort;
 import fr.istic.synthlab.controller.port.ICOutputPort;
-import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.presentation.module.APModule;
 import fr.istic.synthlab.presentation.port.PInputPort;
 import fr.istic.synthlab.presentation.port.POutputPort;
@@ -51,7 +52,6 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 		scope.setModel(model);
 		scope.setControlsVisible(true);
 		panelScope.add(scope);
-
 		inputPort = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
 		outputPort = (POutputPort) ((ICOutputPort) ctrl.getOutput()).getPresentation();
 		panelPort.add(inputPort);

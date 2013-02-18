@@ -1,8 +1,10 @@
 package fr.istic.synthlab;
 
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
-import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 
+/**
+ * Interface for the synthesizer frame
+ */
 public interface ISynthFrame {
 
 	/**
@@ -17,13 +19,21 @@ public interface ISynthFrame {
 	 */
 	public void quitSynth();
 
-//	public void setSynthesizer(ICSynthesizer synth);
-
+	/**
+	 * Add a synthesizer in the list
+	 * 
+	 * @param currentSynth
+	 */
 	public void addToMenu(ICSynthesizer currentSynth);
 
-	public void stop();
-
+	/**
+	 * Remove a synthesizer from the list
+	 * 
+	 * @param currentSynth
+	 */
 	public void removeFromMenu(ICSynthesizer currentSynth);
 
+	// TODO : need comments
+	public void stop();
 
 }
