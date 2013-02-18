@@ -54,7 +54,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private JMenuBar mainMenuBar;
 	private JMenu menuFile, menuAdd, menuHelp, menuWindow;
 	private JMenuItem menuItemNew, menuItemOpen, menuItemSave, menuItemSaveAs;
-	private JMenuItem menuItemQuit, menuItemDoc, menuItemAbout;
+	private JMenuItem menuItemClose, menuItemQuit, menuItemDoc, menuItemAbout;
 	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT, menuItemAddModuleVCFLP, menuItemAddModuleVCFHP, menuItemAddModuleEG,
 			menuItemAddModuleAudioScope, menuItemAddModuleREP, menuItemAddModuleVCA, menuItemAddModuleMIX;
 	private List<JMenuItem> files;
@@ -77,6 +77,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand saveSynthCommand;
 	private ICommand saveAsSynthCommand;
 	private ICommand openSynthCommand;
+	private ICommand closeSynthCommand;
 	private ICommand quitSynthCommand;
 	private ICommand docSynthCommand;
 	private ICommand aboutSynthCommand;
@@ -122,6 +123,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuItemOpen = new JMenuItem("Open...");
 		menuItemSave = new JMenuItem("Save");
 		menuItemSaveAs = new JMenuItem("Save as...");
+		menuItemClose = new JMenuItem("Close");
 		menuItemQuit = new JMenuItem("Quit");
 
 		// ajout des items au menu File
@@ -129,6 +131,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuFile.add(menuItemOpen);
 		menuFile.add(menuItemSave);
 		menuFile.add(menuItemSaveAs);
+		menuFile.add(menuItemClose);
 		menuFile.add(menuItemQuit);
 
 		// -------------------------- Add Menu --------------------------
@@ -305,6 +308,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuItemOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
 		menuItemSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 		menuItemSaveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.SHIFT_MASK + ActionEvent.CTRL_MASK));
+		menuItemClose.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK));
 		menuItemQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
 		menuItemDoc.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
 		menuItemAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.CTRL_MASK));
@@ -343,6 +347,14 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (saveAsSynthCommand != null)
 					saveAsSynthCommand.execute();
+			}
+		});
+		
+		menuItemClose.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (closeSynthCommand != null)
+					closeSynthCommand.execute();
 			}
 		});
 
@@ -637,6 +649,14 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	public void setOpenSynthCommand(ICommand openSynthCommand) {
 		this.openSynthCommand = openSynthCommand;
 	}
+	
+	/**
+	 * @param closeSynthCommand
+	 *            the openSynthCommand to set
+	 */
+	public void setCloseSynthCommand(ICommand closeSynthCommand) {
+		this.closeSynthCommand = closeSynthCommand;
+	}
 
 	/**
 	 * @param quitSynthCommand
@@ -801,4 +821,13 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		}
 	}
 
+	@Override
+	public void selectInMenu(ICSynthesizer currentSynth) {
+		for(JMenuItem currItem : files){
+			if(currItem.getText().equals(currentSynth.getPath())){
+				currItem.setSelected(true);
+			}
+		}
+	}
+	
 }

@@ -38,4 +38,10 @@ public interface ISynthFrame {
 	 */
 	public void stopTheButton();
 
+	/**
+	 * select the given synth in the menu
+	 * @param currentSynth
+	 */
+	public void selectInMenu(ICSynthesizer currentSynth);
+
 }
