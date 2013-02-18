@@ -26,11 +26,11 @@ public class SaveAsSynthCommand implements ICommand {
 	public void execute() {
 		String[] currentFile = synthApp.getCurrentFile();
 
-		if (currentFile[1] != null) {
+		if (currentFile[0] != null) {
 			chooser.setDirectory(currentFile[0]);
 			chooser.setFile(currentFile[1]);
 		} else {
-			chooser.setFile("untitled.synthlab");
+			chooser.setFile(currentFile[1]+".synthlab");
 		}
 
 		chooser.setVisible(true);

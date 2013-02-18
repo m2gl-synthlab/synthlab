@@ -28,7 +28,6 @@ public class NewSynthCommand implements ICommand {
 	public void execute() {
 //		((JFrame) frame).setTitle("SynthlabG2 - untitled");
 		synthApp.newSynth();
-		frame.addToMenu(synthApp.getSynthesizer());
 	}
 
 }
