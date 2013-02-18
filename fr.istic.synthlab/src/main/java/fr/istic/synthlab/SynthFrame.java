@@ -625,7 +625,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	}
 
 	@Override
-	public void addToMenu(final ICSynthesizer currentSynth) {
+	public void addInMenu(final ICSynthesizer currentSynth) {
 		// Build the title tab
 		String title = "";
 		if(app.getSynthesizer().getPath()[0] != null){
@@ -664,19 +664,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		
 		// Update the view
 		displaySynth();
-	}
-
-	@Override
-	public void stopTheButton() {
-		// Set the play/stop button to Stop
-		Image img;
-		try {
-			img = ImageIO.read(new File(iconFiles[0]));
-			img = img.getScaledInstance(25, 25, Image.SCALE_DEFAULT);
-			buttonPlayPause.setIcon(new ImageIcon(img));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
 	}
 
 	@Override
@@ -726,6 +713,19 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 					return;
 				}
 			}
+		}
+	}
+
+	@Override
+	public void stopTheButton() {
+		// Set the play/stop button to Stop
+		Image img;
+		try {
+			img = ImageIO.read(new File(iconFiles[0]));
+			img = img.getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+			buttonPlayPause.setIcon(new ImageIcon(img));
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 	}
 	

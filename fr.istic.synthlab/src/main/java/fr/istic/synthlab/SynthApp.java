@@ -54,7 +54,7 @@ public class SynthApp implements ISynthApp {
 		displayNewDefaultSynth();
 
 		// Add this new instance to the menu
-		frame.addToMenu(currentSynth);
+		frame.addInMenu(currentSynth);
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class SynthApp implements ISynthApp {
 
 		// Reload this instance in the menu
 		frame.removeInMenu(currentSynth);
-		frame.addToMenu(currentSynth);
+		frame.addInMenu(currentSynth);
 	}
 
 	@Override
@@ -115,7 +115,7 @@ public class SynthApp implements ISynthApp {
 		currentSynth.setPath(dir, file);
 
 		// Add this instance to the menu and set the title bar
-		frame.addToMenu(currentSynth);
+		frame.addInMenu(currentSynth);
 	}
 
 	@Override

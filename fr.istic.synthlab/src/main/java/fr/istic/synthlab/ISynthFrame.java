@@ -26,7 +26,7 @@ public interface ISynthFrame {
 	 * 
 	 * @param currentSynth
 	 */
-	public void addToMenu(ICSynthesizer currentSynth);
+	public void addInMenu(ICSynthesizer currentSynth);
 
 	/**
 	 * Remove a synthesizer from the menu and update the title bar
