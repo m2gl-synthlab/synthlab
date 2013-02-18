@@ -1,9 +1,7 @@
 package fr.istic.synthlab.command.menu;
 
 import fr.istic.synthlab.ISynthApp;
-import fr.istic.synthlab.SynthApp;
 import fr.istic.synthlab.command.ICommand;
-import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.factory.IFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 

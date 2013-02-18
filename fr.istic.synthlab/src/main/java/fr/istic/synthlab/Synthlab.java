@@ -78,11 +78,11 @@ public class Synthlab {
 		app.displayNewDefaultSynth();
 
 		// Configure the frame
-		frame.setNewSynthCommand(new NewSynthCommand(app, frame));
+		frame.setNewSynthCommand(new NewSynthCommand(app));
 		frame.setOpenSynthCommand(new OpenSynthCommand(app, frame));
 		frame.setSaveSynthCommand(new SaveSynthCommand(app, frame));
 		frame.setSaveAsSynthCommand(new SaveAsSynthCommand(app, frame));
-		frame.setCloseSynthCommand(new CloseSynthCommand(app, frame));
+		frame.setCloseSynthCommand(new CloseSynthCommand(app));
 		frame.setQuitSynthCommand(new QuitSynthCommand(app));
 		frame.setDocSynthCommand(new DocumentationCommand());
 		frame.setAboutSynthCommand(new AboutCommand());

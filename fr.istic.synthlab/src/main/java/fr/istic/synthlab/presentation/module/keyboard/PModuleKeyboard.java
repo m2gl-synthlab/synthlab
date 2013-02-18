@@ -11,6 +11,9 @@ import fr.istic.synthlab.presentation.module.APModule;
 
 public class PModuleKeyboard extends APModule implements IPModuleKeyboard {
 
+	/**
+	 * Generated serialVersionUID
+	 */
 	private static final long serialVersionUID = -1169985238707648442L;
 
 	private ICModuleKeyboard ctrl;
@@ -35,8 +38,9 @@ public class PModuleKeyboard extends APModule implements IPModuleKeyboard {
 		configView();
 		defineCallbacks();
 	}
-
+	
 	private void configView() {
+		
 		doBtn = new JButton();
 		doBtn.setBackground(Color.WHITE);
 		doBtn.setLocation(0 * 20, 0);

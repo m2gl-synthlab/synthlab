@@ -1,9 +1,6 @@
 package fr.istic.synthlab.command.menu;
 
-import javax.swing.JFrame;
-
 import fr.istic.synthlab.ISynthApp;
-import fr.istic.synthlab.ISynthFrame;
 import fr.istic.synthlab.command.ICommand;
 
 /**
@@ -12,11 +9,9 @@ import fr.istic.synthlab.command.ICommand;
 public class NewSynthCommand implements ICommand {
 
 	private ISynthApp synthApp;
-	private ISynthFrame frame;
 
-	public NewSynthCommand(ISynthApp synthApp, ISynthFrame frame) {
+	public NewSynthCommand(ISynthApp synthApp) {
 		this.synthApp = synthApp;
-		this.frame = frame;
 	}
 
 	/*
@@ -26,7 +21,6 @@ public class NewSynthCommand implements ICommand {
 	 */
 	@Override
 	public void execute() {
-//		((JFrame) frame).setTitle("SynthlabG2 - untitled");
 		synthApp.newSynth();
 	}
 

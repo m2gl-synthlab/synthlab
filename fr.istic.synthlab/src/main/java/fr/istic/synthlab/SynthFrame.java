@@ -95,7 +95,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand toolbarCurrentWireColorCommand;
 
 	private Color toolbarCurrentWireColor;
-	private boolean isPlaying = true;
 	private ISynthApp app;
 
 	public SynthFrame(ISynthApp app) {
@@ -129,9 +128,11 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		// ajout des items au menu File
 		menuFile.add(menuItemNew);
 		menuFile.add(menuItemOpen);
+		menuFile.addSeparator();
+		menuFile.add(menuItemClose);
 		menuFile.add(menuItemSave);
 		menuFile.add(menuItemSaveAs);
-		menuFile.add(menuItemClose);
+		menuFile.addSeparator();
 		menuFile.add(menuItemQuit);
 
 		// -------------------------- Add Menu --------------------------
@@ -608,11 +609,79 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 
 		pres = app.getSynthesizer().getPresentation();
 		this.add((PSynthesizer) pres);
+		
+		this.setTitle("SynthlabG2 - "+app.getSynthesizer().getPath());
+		
 		this.setVisible(true);
 		this.repaint();
 		this.validate();
 	}
 
+	@Override
+	public void addToMenu(final ICSynthesizer currentSynth) {
+		final JRadioButtonMenuItem item = new JRadioButtonMenuItem(currentSynth.getPath());
+		filesGroup.add(item);
+		
+		item.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				app.setSynthesizer(item.getText());
+				displaySynth();
+			}
+		});
+		
+		files.add(item);
+		menuWindow.add(item);
+		item.setSelected(true);
+		displaySynth();
+	}
+
+	@Override
+	public void stopTheButton() {
+		// Set the play/stop button to Stop
+		Image img;
+		try {
+			img = ImageIO.read(new File(iconFiles[0]));
+			img = img.getScaledInstance(25, 25, Image.SCALE_DEFAULT);
+			buttonPlayPause.setIcon(new ImageIcon(img));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	@Override
+	public void removeInMenu(ICSynthesizer currentSynth) {
+		for(JMenuItem currItem : files){
+			if(currItem.getText().equals(currentSynth.getPath())){
+				menuWindow.remove(currItem);
+			}
+		}
+	}
+
+	@Override
+	public void selectInMenu(ICSynthesizer currentSynth) {
+		for(JMenuItem currItem : files){
+			if(currItem.getText().equals(currentSynth.getPath())){
+				currItem.setSelected(true);
+			}
+		}
+	}
+	
+	@Override
+	public Color getCurrentWireColor() {
+		return toolbarCurrentWireColor;
+	}
+	
+	/**
+	 * Set the current wire Color
+	 * @param color
+	 */
+	private void setCurrentWireColor(Color color) {
+		toolbarCurrentWireColor = color;
+		colorChooserButton.setIcon(ImageUtils.createColorIcon(toolbarCurrentWireColor));
+	}
+
+	
 	@Override
 	public void quitSynth() {
 		this.setVisible(false);
@@ -760,6 +829,9 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		this.addModuleREPCommand = addModuleREPCommand;
 	}
 
+	/**
+	 * @param addModuleMIXCommand
+	 */
 	public void setAddModuleMIXCommand(AddModuleMIXCommand addModuleMIXCommand) {
 		this.addModuleMIXCommand = addModuleMIXCommand;
 	}
@@ -771,63 +843,4 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		this.toolbarCurrentWireColorCommand = currentWireColorCommand;
 	}
 
-	public Color getCurrentWireColor() {
-		return toolbarCurrentWireColor;
-	}
-
-	private void setCurrentWireColor(Color color) {
-		toolbarCurrentWireColor = color;
-		colorChooserButton.setIcon(ImageUtils.createColorIcon(toolbarCurrentWireColor));
-	}
-
-	@Override
-	public void addToMenu(final ICSynthesizer currentSynth) {
-		final JRadioButtonMenuItem item = new JRadioButtonMenuItem(currentSynth.getPath());
-		filesGroup.add(item);
-		
-		item.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				app.setSynthesizer(item.getText());
-				displaySynth();
-				setTitle("SynthlabG2 - "+currentSynth.getPath());
-			}
-		});
-		
-		files.add(item);
-		menuWindow.add(item);
-		item.setSelected(true);
-		this.setTitle("SynthlabG2 - "+currentSynth.getPath());
-	}
-
-	@Override
-	public void stopTheButton() {
-		Image img;
-		try {
-			img = ImageIO.read(new File(iconFiles[0]));
-			img = img.getScaledInstance(25, 25, Image.SCALE_DEFAULT);
-			buttonPlayPause.setIcon(new ImageIcon(img));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-	}
-
-	@Override
-	public void removeFromMenu(ICSynthesizer currentSynth) {
-		for(JMenuItem currItem : files){
-			if(currItem.getText().equals(currentSynth.getPath())){
-				menuWindow.remove(currItem);
-			}
-		}
-	}
-
-	@Override
-	public void selectInMenu(ICSynthesizer currentSynth) {
-		for(JMenuItem currItem : files){
-			if(currItem.getText().equals(currentSynth.getPath())){
-				currItem.setSelected(true);
-			}
-		}
-	}
-	
 }

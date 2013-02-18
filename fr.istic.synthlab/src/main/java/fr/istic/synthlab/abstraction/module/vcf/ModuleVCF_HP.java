@@ -15,7 +15,6 @@ import fr.istic.synthlab.abstraction.port.IOutputPort;
 import fr.istic.synthlab.abstraction.port.Port;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
-import fr.istic.synthlab.factory.IFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleVCF_HP extends AModule implements IModuleVCF, Observer<Port> {

@@ -13,7 +13,6 @@ import fr.istic.synthlab.abstraction.port.IOutputPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.util.Convert;
 import fr.istic.synthlab.abstraction.wire.IWire;
-import fr.istic.synthlab.factory.IFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleMIX extends AModule implements IModuleMIX {

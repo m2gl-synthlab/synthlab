@@ -1,5 +1,7 @@
 package fr.istic.synthlab;
 
+import java.awt.Color;
+
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 
 /**
@@ -20,18 +22,18 @@ public interface ISynthFrame {
 	public void quitSynth();
 
 	/**
-	 * Add a synthesizer in the list
+	 * Add a synthesizer in the list and update the title bar
 	 * 
 	 * @param currentSynth
 	 */
 	public void addToMenu(ICSynthesizer currentSynth);
 
 	/**
-	 * Remove a synthesizer from the list
+	 * Remove a synthesizer from the menu and update the title bar
 	 * 
 	 * @param currentSynth
 	 */
-	public void removeFromMenu(ICSynthesizer currentSynth);
+	public void removeInMenu(ICSynthesizer currentSynth);
 
 	/**
 	 * Set the play/stop button to the Stop state
@@ -44,5 +46,11 @@ public interface ISynthFrame {
 	 * @param currentSynth
 	 */
 	public void selectInMenu(ICSynthesizer currentSynth);
+
+	/**
+	 * Return the current wire Color
+	 * @return
+	 */
+	Color getCurrentWireColor();
 
 }

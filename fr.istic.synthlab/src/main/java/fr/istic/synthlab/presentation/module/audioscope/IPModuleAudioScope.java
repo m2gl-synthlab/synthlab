@@ -7,7 +7,7 @@ import fr.istic.synthlab.presentation.module.IPModule;
  * Interface for an SCOP module presentation
  */
 public interface IPModuleAudioScope extends IPModule {
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

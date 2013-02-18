@@ -34,8 +34,7 @@ public class WriteXMLFile {
 		this.directory = directory;
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder docBuilder;
-			docBuilder = docFactory.newDocumentBuilder();
+			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
 			// root elements
 			doc = docBuilder.newDocument();
@@ -52,9 +51,7 @@ public class WriteXMLFile {
 	public void saveToXML() {
 		try {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
-			Transformer transformer;
-
-			transformer = transformerFactory.newTransformer();
+			Transformer transformer = transformerFactory.newTransformer();
 
 			DOMSource source = new DOMSource(doc);
 
@@ -66,7 +63,6 @@ public class WriteXMLFile {
 			transformer.transform(source, result);
 			transformer.transform(source, res);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

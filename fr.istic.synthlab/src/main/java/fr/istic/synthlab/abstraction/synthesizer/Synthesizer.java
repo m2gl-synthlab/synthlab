@@ -8,7 +8,6 @@ import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.module.IModule;
 import fr.istic.synthlab.abstraction.wire.IWire;
-import fr.istic.synthlab.factory.impl.PACFactory;
 
 /**
  * Implementation of a Synthesizer

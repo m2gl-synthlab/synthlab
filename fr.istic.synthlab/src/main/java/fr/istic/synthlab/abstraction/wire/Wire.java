@@ -5,7 +5,6 @@ import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
-import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
 
 /**
  * Class that represent a wire between two port

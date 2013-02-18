@@ -41,8 +41,7 @@ public class ModuleAudioScope extends AModule implements IModuleAudioScope {
 		this.out = PACFactory.getFactory().newOutputPort(synth, this, OUT_NAME, passThrough.output);
 
 		this.scope.addProbe((UnitOutputPort) this.out.getJSyn());
-		this.scope.setTriggerMode(AudioScope.TriggerMode.NORMAL);
-		
+		this.scope.setTriggerMode(AudioScope.TriggerMode.AUTO);
 		this.start();
 
 		addPort(in);
