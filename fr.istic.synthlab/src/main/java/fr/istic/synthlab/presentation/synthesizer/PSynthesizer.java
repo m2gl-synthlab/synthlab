@@ -159,6 +159,7 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 	@Override
 	public void c2pAddWire(IPWire wire) {
 		this.add((PWire) wire);
+		wire.updateDisplay();
 		validate();
 		repaint();
 	}
