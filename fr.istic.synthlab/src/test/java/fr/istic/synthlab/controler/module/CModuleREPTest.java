@@ -1,43 +1,39 @@
 /**
- * Test de la Classe CModuleAudioScopeTest
+ * 
  */
 package fr.istic.synthlab.controler.module;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jsyn.ports.ConnectableInput;
 import com.jsyn.ports.UnitInputPort;
 
 import fr.istic.synthlab.abstraction.exception.BadConnectionException;
 import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
-import fr.istic.synthlab.abstraction.module.IModule;
-import fr.istic.synthlab.abstraction.module.ModuleTest;
-import fr.istic.synthlab.abstraction.module.audioscope.ModuleAudioScope;
 import fr.istic.synthlab.abstraction.module.eg.ModuleEG;
-import fr.istic.synthlab.abstraction.observer.Observable;
-import fr.istic.synthlab.abstraction.observer.Observer;
-import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.InputPort;
-import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
-import fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope;
-import fr.istic.synthlab.controller.module.audioscope.ICModuleAudioScope;
+import fr.istic.synthlab.controller.module.mix.CModuleMIX;
+import fr.istic.synthlab.controller.module.rep.CModuleREP;
+import fr.istic.synthlab.controller.module.rep.ICModuleREP;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
 
-public class CModuleAudioScopeTest {
+/**
+ * @author USER
+ *
+ */
+public class CModuleREPTest {
 
-	ICModuleAudioScope iTest;
-	private ISynthesizer synth;
+	private ICModuleREP iTest;
+	private CSynthesizer synth;
+
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -47,7 +43,7 @@ public class CModuleAudioScopeTest {
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
-		iTest = new CModuleAudioScope(synth);
+		iTest = new CModuleREP(synth);
 	}
 
 	/**
@@ -58,7 +54,7 @@ public class CModuleAudioScopeTest {
 	}
 
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope#getPresentation()}.
+	 * Test method for {@link fr.istic.synthlab.controller.module.rep.CModuleREP#getPresentation()}.
 	 */
 	@Test
 	public void testGetPresentation() {
@@ -66,7 +62,7 @@ public class CModuleAudioScopeTest {
 	}
 
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope#p2cClosing()}.
+	 * Test method for {@link fr.istic.synthlab.controller.module.rep.CModuleREP#p2cClosing()}.
 	 * Test de la méthode pour p2cClosing lorsqu'aucun des ports n'est connecté
 	 */
 	@Test
@@ -81,7 +77,7 @@ public class CModuleAudioScopeTest {
 	}
 
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope#p2cClosing()}.
+	 * Test method for {@link fr.istic.synthlab.controller.module.rep.CModuleREP#p2cClosing()}.
 	 * Test de la méthode la p2cClosing lorsque tout les ports sont connecté
 	 */
 	@Test
@@ -104,9 +100,8 @@ public class CModuleAudioScopeTest {
 		}
 	}
 
-
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope#p2cClosing()}.
+	 * Test method for {@link fr.istic.synthlab.controller.module.rep.CModuleREP#p2cClosing()}.
 	 * Test de la méthode la p2cClosing lorsque certains port sont connectés.
 	 */
 	@Test
@@ -134,9 +129,9 @@ public class CModuleAudioScopeTest {
 			assertFalse(w.isConnected());
 		}
 	}
-
+	
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope#getSynthesizerPresentation()}.
+	 * Test method for {@link fr.istic.synthlab.controller.module.rep.CModuleREP#getSynthesizerPresentation()}.
 	 */
 	@Test
 	public void testGetSynthesizerPresentation() {
@@ -144,13 +139,22 @@ public class CModuleAudioScopeTest {
 	}
 
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.audioscope.CModuleAusioScope#p2cRemoveModule(fr.istic.synthlab.controller.module.ICModule)}.
+	 * Test method for {@link fr.istic.synthlab.controller.module.rep.CModuleREP#p2cRemoveModule(fr.istic.synthlab.controller.module.ICModule)}.
 	 */
-	//TODO ne fonctionne pas 
+	//TODO Test qui ne passe pas ...
 	@Test
 	public void testP2cRemoveModule() {
 		iTest.p2cRemoveModule(iTest);
 		assertNull(iTest);
+	}
+	
+	
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.rep.CModuleREP#setParameter(java.lang.String, java.lang.Double)}.
+	 */
+	@Test
+	public void testSetParameter() {
+		fail("Not yet implemented");
 	}
 
 }

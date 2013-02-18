@@ -196,6 +196,7 @@ public class CModuleOUTTest {
 	/**
 	 * Test method for {@link fr.istic.synthlab.controller.module.out.CModuleOUT#p2cRemoveModule(fr.istic.synthlab.controller.module.ICModule)}.
 	 */
+	//TODO ne fonctionne pas 
 	@Test
 	public void testP2cRemoveModule() {
 		iTest.p2cRemoveModule(iTest);
