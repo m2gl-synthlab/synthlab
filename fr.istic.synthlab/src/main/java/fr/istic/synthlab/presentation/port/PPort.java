@@ -61,6 +61,19 @@ public abstract class PPort extends JPanel implements IPPort {
 		g2d.setStroke(new BasicStroke(2));
 		g2d.drawOval((WIDTH - RADIUS) / 2, (HEIGHT - RADIUS) / 2, RADIUS, RADIUS);
 
+		if (getControl().isInUse()) {
+
+			// Fond
+			g2d.setColor(Color.BLACK);
+			g2d.fillOval((WIDTH - 14) / 2, (HEIGHT - 14) / 2, 14, 14);
+
+			// Contour
+			g2d.setColor(Color.GRAY);
+			g2d.setStroke(new BasicStroke(2));
+			g2d.drawOval((WIDTH - 14) / 2, (HEIGHT - 14) / 2, 14, 14);
+
+		}
+
 		super.paint(g2d);
 	}
 

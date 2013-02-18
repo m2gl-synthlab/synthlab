@@ -170,7 +170,7 @@ public class PWire extends JPanel implements IPWire {
 		QuadCurve2D shadowCurve = new QuadCurve2D.Double(posInput.getX() - getX(), posInput.getY() - getY(), midShadow.getX(), midShadow.getY(), posOutput.getX() - getX(),
 						posOutput.getY() - getY());
 
-		
+
 		// Si les ombres sont activées
 		if(displayShadow ){
 			// On dessine plusieurs couche d'ombre avec transparence
