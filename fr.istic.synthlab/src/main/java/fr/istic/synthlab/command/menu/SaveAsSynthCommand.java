@@ -2,8 +2,6 @@ package fr.istic.synthlab.command.menu;
 
 import java.awt.FileDialog;
 
-import javax.swing.JFrame;
-
 import fr.istic.synthlab.ISynthApp;
 import fr.istic.synthlab.ISynthFrame;
 import fr.istic.synthlab.SynthFrame;

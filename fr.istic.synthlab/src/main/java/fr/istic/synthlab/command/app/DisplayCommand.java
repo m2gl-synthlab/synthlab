@@ -2,8 +2,6 @@ package fr.istic.synthlab.command.app;
 
 import fr.istic.synthlab.ISynthFrame;
 import fr.istic.synthlab.command.ICommand;
-import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
-import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 
 /**
  * Command that display the synthesizer

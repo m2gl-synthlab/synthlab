@@ -11,7 +11,6 @@ import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
-import fr.istic.synthlab.factory.IFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class ModuleREP extends AModule implements IModuleREP {

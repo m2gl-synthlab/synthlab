@@ -12,7 +12,6 @@ import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.util.Convert;
 import fr.istic.synthlab.abstraction.wire.IWire;
-import fr.istic.synthlab.factory.IFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 /**

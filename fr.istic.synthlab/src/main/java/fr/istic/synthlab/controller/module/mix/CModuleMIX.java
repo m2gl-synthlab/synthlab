@@ -1,6 +1,5 @@
 package fr.istic.synthlab.controller.module.mix;
 
-import fr.istic.synthlab.ISynthApp;
 import fr.istic.synthlab.abstraction.module.mix.ModuleMIX;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;

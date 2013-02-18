@@ -2,8 +2,6 @@ package fr.istic.synthlab.controller.synthesizer;
 
 import java.awt.Color;
 
-import javax.swing.Icon;
-
 import fr.istic.synthlab.ISynthFrame;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.controller.module.ICModule;

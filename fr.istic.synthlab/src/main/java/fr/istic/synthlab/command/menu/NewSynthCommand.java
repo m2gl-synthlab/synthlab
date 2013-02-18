@@ -1,7 +1,5 @@
 package fr.istic.synthlab.command.menu;
 
-import javax.swing.JFrame;
-
 import fr.istic.synthlab.ISynthApp;
 import fr.istic.synthlab.ISynthFrame;
 import fr.istic.synthlab.command.ICommand;

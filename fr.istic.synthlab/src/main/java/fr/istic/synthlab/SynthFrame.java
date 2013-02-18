@@ -95,7 +95,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand toolbarCurrentWireColorCommand;
 
 	private Color toolbarCurrentWireColor;
-	private boolean isPlaying = true;
 	private ISynthApp app;
 
 	public SynthFrame(ISynthApp app) {
