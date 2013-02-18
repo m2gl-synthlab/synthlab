@@ -31,6 +31,9 @@ public class CModuleVCF_LP extends ModuleVCF_LP implements ICModuleVCF {
 	}
 
 	private void changeResonance(double resonance) {
+		if(resonance < 1.0){
+			resonance = 1.0;
+		}
 		setResonance(resonance);
 		pres.c2pSetResonanceValue(getResonance());
 	}

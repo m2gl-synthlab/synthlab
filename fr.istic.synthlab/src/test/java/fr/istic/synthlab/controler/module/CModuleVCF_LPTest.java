@@ -3,6 +3,7 @@
  */
 package fr.istic.synthlab.controler.module;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -69,7 +70,26 @@ public class CModuleVCF_LPTest {
 	 */
 	@Test
 	public void testP2cCutFrequencyChanged() {
-		fail("Not yet implemented");
+		iTest.p2cCutFrequencyChanged(80);
+		assertEquals(89.3864, iTest.getCutFrequency(),4);
+	}
+
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.vcf.CModuleVCF_LP#p2cCutFrequencyChanged(int)}.
+	 */
+	@Test
+	public void testP2cCutFrequencyChangedLessMin() {
+		iTest.p2cCutFrequencyChanged(2);
+		assertEquals(10, iTest.getCutFrequency(),4);
+	}
+
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.vcf.CModuleVCF_LP#p2cCutFrequencyChanged(int)}.
+	 */
+	@Test
+	public void testP2cCutFrequencyChangedMoreMax() {
+		iTest.p2cCutFrequencyChanged(102455);
+		assertEquals(10000, iTest.getCutFrequency(),0);
 	}
 
 	/**
@@ -77,7 +97,26 @@ public class CModuleVCF_LPTest {
 	 */
 	@Test
 	public void testP2cResonanceChanged() {
-		fail("Not yet implemented");
+		iTest.p2cResonanceChanged(12);
+		assertEquals(11.9820, iTest.getResonance(),4);
+	}
+
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.vcf.CModuleVCF_LP#p2cResonanceChanged(double)}.
+	 */
+	@Test
+	public void testP2cResonanceChangedLessMin() {
+		iTest.p2cResonanceChanged(-12);
+		assertEquals(1, iTest.getResonance(),0);
+	}
+
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.vcf.CModuleVCF_LP#p2cResonanceChanged(double)}.
+	 */
+	@Test
+	public void testP2cResonanceChangedMoreMax() {
+		iTest.p2cResonanceChanged(120);
+		assertEquals(50, iTest.getResonance(),0);
 	}
 
 	/**
@@ -155,7 +194,10 @@ public class CModuleVCF_LPTest {
 	 */
 	@Test
 	public void testSetParameter() {
-		fail("Not yet implemented");
+		iTest.setParameter("cutFrequency", 900.0);
+		assertEquals(919.8680, iTest.getCutFrequency(),4);
+		iTest.setParameter("resonnance", 2.0);
+		assertEquals(2.0035, iTest.getResonance(),4);	
 	}
 
 	/**
