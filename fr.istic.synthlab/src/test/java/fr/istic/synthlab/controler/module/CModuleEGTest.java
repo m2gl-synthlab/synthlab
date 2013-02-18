@@ -313,7 +313,7 @@ public class CModuleEGTest {
 		assertEquals(1.9955, iTest.getAttack(),4);
 		iTest.setParameter("decayTime", 2.0);
 		assertEquals(1.9955, iTest.getDecay(),4);
-		iTest.setParameter("substainTime", 2.0);
+		iTest.setParameter("sustainValue", 2.0);
 		assertEquals(1.9955, iTest.getSustain(),4);
 		iTest.setParameter("releaseTime", 2.0);
 		assertEquals(1.9955, iTest.getRelease(),4);

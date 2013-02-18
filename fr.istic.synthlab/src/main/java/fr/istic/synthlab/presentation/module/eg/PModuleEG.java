@@ -51,7 +51,7 @@ public class PModuleEG extends APModule implements IPModuleEG {
 
 		attackModel = new ExponentialRangeModel(IModuleEG.PARAM_NAME_ATTACK, 100, 0, 1, ctrl.getAttack());
 		decayModel = new ExponentialRangeModel(IModuleEG.PARAM_NAME_DECAY, 100, 0, 1, ctrl.getDecay());
-		sustainModel = new DoubleBoundedRangeModel(IModuleEG.PARAM_NAME_SUSTAIN, 100, 0, 1, ctrl.getSustain());
+		sustainModel = new DoubleBoundedRangeModel(IModuleEG.PARAM_NAME_SUSTAIN, 100, 0, 5, ctrl.getSustain());
 		releaseModel = new ExponentialRangeModel(IModuleEG.PARAM_NAME_RELEASE, 100, 0, 1, ctrl.getRelease());
 
 		RotaryTextController attackRotary = new RotaryTextController(attackModel, 2);

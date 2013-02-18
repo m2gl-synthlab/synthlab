@@ -11,7 +11,6 @@ import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
-import fr.istic.synthlab.factory.IFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 /**
@@ -48,7 +47,7 @@ public class ModuleEG extends AModule implements IModuleEG {
 
 	@Override
 	public double getAttack() {
-		return adsr.attack.get();
+		return getParameter("attackTime");
 	}
 
 	@Override
@@ -59,18 +58,18 @@ public class ModuleEG extends AModule implements IModuleEG {
 
 	@Override
 	public double getDecay() {
-		return adsr.decay.get();
+		return getParameter("decayTime");
 	}
 
 	@Override
-	public void setSustain(double substainTime) {
-		getParameters().put("substainTime", substainTime);
-		adsr.sustain.set(substainTime);
+	public void setSustain(double sustainValue) {
+		getParameters().put("sustainValue", sustainValue);
+		adsr.sustain.set(sustainValue/5);
 	}
 
 	@Override
 	public double getSustain() {
-		return adsr.sustain.get();
+		return getParameter("sustainValue");
 	}
 
 	@Override
@@ -81,7 +80,7 @@ public class ModuleEG extends AModule implements IModuleEG {
 
 	@Override
 	public double getRelease() {
-		return adsr.release.get();
+		return getParameter("releaseTime");
 	}
 
 	@Override
