@@ -16,7 +16,7 @@ public class PInputPort extends PPort implements IPInputPort, IPPort {
 
 	public static final Color DEFAULT_COLOR = new Color(150, 200, 100);
 	public static final Color DEFAULT_STROKE_COLOR = Color.BLACK;
-	
+
 	private JLabel name;
 
 	private ICInputPort ctrl;
@@ -37,7 +37,7 @@ public class PInputPort extends PPort implements IPInputPort, IPPort {
 		this.setSize(WIDTH, HEIGHT);
 		this.setPreferredSize(this.getSize());
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
-		this.name = new JLabel(ctrl.getName(),JLabel.CENTER);
+		this.name = new JLabel(ctrl.getName(), JLabel.CENTER);
 		this.add(name);
 		setFillColor(DEFAULT_COLOR);
 		setStrokeColor(DEFAULT_STROKE_COLOR);
@@ -83,7 +83,7 @@ public class PInputPort extends PPort implements IPInputPort, IPPort {
 
 	@Override
 	public void c2pNameChanged() {
-		this.name = new JLabel(ctrl.getName(),JLabel.CENTER);
+		this.name = new JLabel(ctrl.getName(), JLabel.CENTER);
 	}
 
 	@Override

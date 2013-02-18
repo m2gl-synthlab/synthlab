@@ -7,7 +7,11 @@ import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.presentation.port.IPInputPort;
 import fr.istic.synthlab.presentation.port.IPOutputPort;
 
+/**
+ * Interface of a wire presentation
+ */
 public interface IPWire {
+
 	/**
 	 * Return the presentation's controller
 	 * 
@@ -62,10 +66,25 @@ public interface IPWire {
 	 */
 	public void setOutputPoint(Point mouse);
 
+	/**
+	 * Put the wire presentation on top a its container
+	 * 
+	 * @param isOnTop
+	 */
 	public void setOnTop(boolean isOnTop);
 
+	/**
+	 * Return the wire color
+	 * 
+	 * @return color
+	 */
 	public Color getColor();
 
+	/**
+	 * Set the wire color
+	 * 
+	 * @param color
+	 */
 	public void setColor(Color color);
 
 }

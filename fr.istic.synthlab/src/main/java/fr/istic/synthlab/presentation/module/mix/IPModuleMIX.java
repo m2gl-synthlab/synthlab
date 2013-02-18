@@ -3,8 +3,16 @@ package fr.istic.synthlab.presentation.module.mix;
 import fr.istic.synthlab.controller.module.mix.ICModuleMIX;
 import fr.istic.synthlab.presentation.module.IPModule;
 
+/**
+ * Interface for an MIX module presentation
+ */
 public interface IPModuleMIX extends IPModule {
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.istic.synthlab.presentation.module.IPModule#getControl()
+	 */
 	public ICModuleMIX getControl();
 
 	/**

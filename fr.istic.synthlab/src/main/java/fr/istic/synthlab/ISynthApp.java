@@ -75,7 +75,7 @@ public interface ISynthApp {
 	void displayNewDefaultSynth();
 
 	/**
-	 * Close the given synth
+	 * Close the given synthesizer
 	 */
 	public void remove(ISynthesizer synth);
 

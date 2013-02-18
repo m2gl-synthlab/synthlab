@@ -83,7 +83,7 @@ public class POutputPort extends PPort implements IPOutputPort {
 
 	@Override
 	public void c2pNameChanged() {
-		this.name = new JLabel(ctrl.getName(),JLabel.CENTER);
+		this.name = new JLabel(ctrl.getName(), JLabel.CENTER);
 	}
 
 	@Override

@@ -32,6 +32,10 @@ import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.controller.wire.CWire;
 import fr.istic.synthlab.controller.wire.ICWire;
 
+/**
+ * Class that is used to load a list of modules into a synthesizer from an xml
+ * file
+ */
 public class ReadXMLFile {
 
 	private ICSynthesizer cSynthesizer;
@@ -63,24 +67,24 @@ public class ReadXMLFile {
 				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) nNode;
 					ICModule module = null;
-					
-					if(eElement.getAttribute("name").startsWith("VCO")){
+
+					if (eElement.getAttribute("name").startsWith("VCO")) {
 						module = new CModuleVCO(cSynthesizer);
-					} else if (eElement.getAttribute("name").startsWith("VCA")){
+					} else if (eElement.getAttribute("name").startsWith("VCA")) {
 						module = new CModuleVCA(cSynthesizer);
-					} else if (eElement.getAttribute("name").startsWith("OUT")){
+					} else if (eElement.getAttribute("name").startsWith("OUT")) {
 						module = new CModuleOUT(cSynthesizer);
-					} else if (eElement.getAttribute("name").startsWith("EG")){
+					} else if (eElement.getAttribute("name").startsWith("EG")) {
 						module = new CModuleEG(cSynthesizer);
-					} else if (eElement.getAttribute("name").startsWith("REP")){
+					} else if (eElement.getAttribute("name").startsWith("REP")) {
 						module = new CModuleREP(cSynthesizer);
-					} else if (eElement.getAttribute("name").startsWith("VCF LP24")){
+					} else if (eElement.getAttribute("name").startsWith("VCF LP24")) {
 						module = new CModuleVCF_LP(cSynthesizer);
-					} else if (eElement.getAttribute("name").startsWith("VCF HP24")){
+					} else if (eElement.getAttribute("name").startsWith("VCF HP24")) {
 						module = new CModuleVCF_HP(cSynthesizer);
-					} else if (eElement.getAttribute("name").startsWith("AudioScope")){
+					} else if (eElement.getAttribute("name").startsWith("AudioScope")) {
 						module = new CModuleAudioScope(cSynthesizer);
-					} else if (eElement.getAttribute("name").startsWith("MIX")){
+					} else if (eElement.getAttribute("name").startsWith("MIX")) {
 						module = new CModuleMIX(cSynthesizer);
 					} else {
 						throw new Exception("Module not recognized in xml file");
@@ -94,9 +98,9 @@ public class ReadXMLFile {
 
 					for (int i = 0; i < eElement.getElementsByTagName("wire").getLength(); i++) {
 						String portName = ((Element) eElement.getElementsByTagName("wire").item(i)).getAttribute("outputPort");
-						
+
 						IWire wire = new CWire(cSynthesizer);
-						IOutputPort outport = (IOutputPort)module.getPortByName(portName);
+						IOutputPort outport = (IOutputPort) module.getPortByName(portName);
 						wire.connect(outport);
 
 						String[] str = { ((Element) eElement.getElementsByTagName("wire").item(i)).getAttribute("inputPortModuleName"),
@@ -132,7 +136,7 @@ public class ReadXMLFile {
 
 				IModule moduleToConnect = modules.get(moduleName);
 				IPort port = moduleToConnect.getPortByName(portName);
-				wire.connect((IInputPort)port);
+				wire.connect((IInputPort) port);
 				cSynthesizer.add(wire);
 			}
 		} catch (Exception e) {

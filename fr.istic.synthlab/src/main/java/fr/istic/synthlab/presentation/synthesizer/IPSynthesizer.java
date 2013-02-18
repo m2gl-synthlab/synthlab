@@ -3,6 +3,9 @@ package fr.istic.synthlab.presentation.synthesizer;
 import fr.istic.synthlab.presentation.module.IPModule;
 import fr.istic.synthlab.presentation.wire.IPWire;
 
+/**
+ * Interface for a synthesizer presentation
+ */
 public interface IPSynthesizer {
 
 	/**
@@ -69,6 +72,11 @@ public interface IPSynthesizer {
 	 */
 	public void c2pAddWire(IPWire presentation);
 
+	/**
+	 * Remove a wire presentation from the synthesizer presentation
+	 * 
+	 * @param pres
+	 */
 	public void removeWire(IPWire pres);
 
 }

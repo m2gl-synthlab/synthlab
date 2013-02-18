@@ -3,6 +3,9 @@ package fr.istic.synthlab.presentation.module.vca;
 import fr.istic.synthlab.controller.module.vca.ICModuleVCA;
 import fr.istic.synthlab.presentation.module.IPModule;
 
+/**
+ * Interface for an VCA module presentation
+ */
 public interface IPModuleVCA extends IPModule {
 
 	/*

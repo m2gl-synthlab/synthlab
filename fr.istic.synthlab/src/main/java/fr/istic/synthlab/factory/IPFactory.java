@@ -25,33 +25,108 @@ import fr.istic.synthlab.presentation.port.IPOutputPort;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 import fr.istic.synthlab.presentation.wire.IPWire;
 
+/**
+ * Interface of the presentatio factory
+ */
 public interface IPFactory {
 
-	// Synthesize
-	IPSynthesizer newSynthesizer(ICSynthesizer cSynthesizer);
+	// Synthesizer
+	/**
+	 * Return a synthesizer presentation
+	 * 
+	 * @param control
+	 * @return pres
+	 */
+	IPSynthesizer newSynthesizer(ICSynthesizer control);
 
 	// Modules
+	/**
+	 * Return a VCO module presentation
+	 * 
+	 * @param control
+	 * @return pres
+	 */
 	IPModuleVCO newVCO(ICModuleVCO control);
 
+	/**
+	 * Return a VCA module presentation
+	 * 
+	 * @param control
+	 * @return pres
+	 */
 	IPModuleVCA newVCA(ICModuleVCA control);
 
+	/**
+	 * Return a VCF module presentation
+	 * 
+	 * @param control
+	 * @return pres
+	 */
 	IPModuleVCF newVCF(ICModuleVCF control);
 
+	/**
+	 * Return a OUT module presentation
+	 * 
+	 * @param control
+	 * @return pres
+	 */
 	IPModuleOUT newOUT(ICModuleOUT control);
 
+	/**
+	 * Return a EG module presentation
+	 * 
+	 * @param control
+	 * @return pres
+	 */
 	IPModuleEG newEG(ICModuleEG control);
 
+	/**
+	 * Return a SCOP module presentation
+	 * 
+	 * @param control
+	 * @return pres
+	 */
 	IPModuleAudioScope newAudioScope(ICModuleAudioScope control);
 
+	/**
+	 * Return a REP module presentation
+	 * 
+	 * @param control
+	 * @return pres
+	 */
 	IPModuleREP newREP(ICModuleREP control);
 
+	/**
+	 * Return a MIX module presentation
+	 * 
+	 * @param control
+	 * @return pres
+	 */
 	IPModuleMIX newMIX(ICModuleMIX control);
 
 	// Connectivity
+	/**
+	 * Return a wire presentation
+	 * 
+	 * @param control
+	 * @return pres
+	 */
 	IPWire newWire(ICWire control);
 
+	/**
+	 * Return an output port presentation
+	 * 
+	 * @param control
+	 * @return pres
+	 */
 	IPOutputPort newOutputPort(ICOutputPort control);
 
+	/**
+	 * Return an input port presentation
+	 * 
+	 * @param control
+	 * @return pres
+	 */
 	IPInputPort newInputPort(ICInputPort cInputPort);
 
 }

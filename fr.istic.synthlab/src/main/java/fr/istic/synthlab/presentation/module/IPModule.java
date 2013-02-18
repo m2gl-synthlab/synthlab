@@ -15,12 +15,32 @@ public interface IPModule {
 	 */
 	public ICModule getControl();
 
+	/**
+	 * Return the module height
+	 * 
+	 * @return height
+	 */
 	public int getHeight();
 
+	/**
+	 * Return the module width
+	 * 
+	 * @return width
+	 */
 	public int getWidth();
 
+	/**
+	 * Return the module position
+	 * 
+	 * @return position
+	 */
 	public Point getPosition();
 
+	/**
+	 * Set the module position
+	 * 
+	 * @param point
+	 */
 	public void setPosition(Point point);
 
 }

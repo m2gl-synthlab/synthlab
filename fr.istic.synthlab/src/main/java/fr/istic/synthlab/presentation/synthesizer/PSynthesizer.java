@@ -165,10 +165,8 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 
 	@Override
 	public void c2pRemoveModuleOk(IPModule module) {
-		System.out.println("remove");
 		this.remove((APModule) module);
 		modules.remove(module);
-		
 		validate();
 		repaint();
 	}

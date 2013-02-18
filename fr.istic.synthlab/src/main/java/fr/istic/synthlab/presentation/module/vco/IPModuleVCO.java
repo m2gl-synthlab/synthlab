@@ -3,6 +3,9 @@ package fr.istic.synthlab.presentation.module.vco;
 import fr.istic.synthlab.controller.module.vco.ICModuleVCO;
 import fr.istic.synthlab.presentation.module.IPModule;
 
+/**
+ * Interface for an VCO module presentation
+ */
 public interface IPModuleVCO extends IPModule {
 
 	/*

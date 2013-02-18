@@ -11,8 +11,10 @@ import fr.istic.synthlab.presentation.module.APModule;
 
 public class PModuleKeyboard extends APModule implements IPModuleKeyboard {
 
+	private static final long serialVersionUID = -1169985238707648442L;
+
 	private ICModuleKeyboard ctrl;
-	
+
 	private JButton doBtn;
 	private JButton doDBtn;
 	private JButton reBtn;
@@ -29,11 +31,12 @@ public class PModuleKeyboard extends APModule implements IPModuleKeyboard {
 	public PModuleKeyboard(ICModuleKeyboard control) {
 		super(control);
 		ctrl = control;
-		
+
 		configView();
 		defineCallbacks();
 	}
-	private void configView(){
+
+	private void configView() {
 		doBtn = new JButton();
 		doBtn.setBackground(Color.WHITE);
 		doBtn.setLocation(0 * 20, 0);
@@ -108,77 +111,77 @@ public class PModuleKeyboard extends APModule implements IPModuleKeyboard {
 		add(laDBtn, 1, -1);
 
 	}
-	
-	private void defineCallbacks(){
+
+	private void defineCallbacks() {
 		doBtn.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				System.out.println("do");
 			}
 		});
 		doDBtn.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				System.out.println("doD");
 			}
 		});
 		reBtn.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				System.out.println("re");
 			}
 		});
 		reDBtn.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				System.out.println("reD");
 			}
 		});
 		miBtn.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				System.out.println("mi");
 			}
 		});
 		faDBtn.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				System.out.println("fa");
 			}
 		});
 		faBtn.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				System.out.println("faD");
 			}
 		});
 		solBtn.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				System.out.println("sol");
 			}
 		});
 		solDBtn.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				System.out.println("solD");
 			}
 		});
 		laBtn.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				System.out.println("la");
 			}
 		});
 		laDBtn.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				System.out.println("laD");
 			}
 		});
 		siBtn.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				System.out.println("si");
 			}
 		});

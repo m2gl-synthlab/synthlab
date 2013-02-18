@@ -21,6 +21,9 @@ import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.controller.module.ICModule;
 import fr.istic.synthlab.controller.wire.ICWire;
 
+/**
+ * Class that is used to save a list of modules into an xml file
+ */
 public class WriteXMLFile {
 
 	private Document doc;
@@ -43,7 +46,9 @@ public class WriteXMLFile {
 		}
 	}
 
-	// write the content into xml file
+	/**
+	 * Write the current document content into an xml file
+	 */
 	public void saveToXML() {
 		try {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -66,6 +71,11 @@ public class WriteXMLFile {
 		}
 	}
 
+	/**
+	 * Create the xml containing the modules description
+	 * 
+	 * @param modules
+	 */
 	public void saveModules(List<IModule> modules) {
 		for (IModule module : modules) {
 			Element moduleName = doc.createElement("module");

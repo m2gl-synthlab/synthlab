@@ -3,6 +3,9 @@ package fr.istic.synthlab.presentation.module.out;
 import fr.istic.synthlab.controller.module.out.ICModuleOUT;
 import fr.istic.synthlab.presentation.module.IPModule;
 
+/**
+ * Interface for an OUT module presentation
+ */
 public interface IPModuleOUT extends IPModule {
 
 	/*
