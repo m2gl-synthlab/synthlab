@@ -4,6 +4,7 @@ import fr.istic.synthlab.controller.module.audioscope.ICModuleAudioScope;
 import fr.istic.synthlab.controller.module.eg.ICModuleEG;
 import fr.istic.synthlab.controller.module.mix.ICModuleMIX;
 import fr.istic.synthlab.controller.module.out.ICModuleOUT;
+import fr.istic.synthlab.controller.module.rec.ICModuleREC;
 import fr.istic.synthlab.controller.module.rep.ICModuleREP;
 import fr.istic.synthlab.controller.module.vca.ICModuleVCA;
 import fr.istic.synthlab.controller.module.vcf.ICModuleVCF;
@@ -21,6 +22,8 @@ import fr.istic.synthlab.presentation.module.mix.IPModuleMIX;
 import fr.istic.synthlab.presentation.module.mix.PModuleMIX;
 import fr.istic.synthlab.presentation.module.out.IPModuleOUT;
 import fr.istic.synthlab.presentation.module.out.PModuleOUT;
+import fr.istic.synthlab.presentation.module.rec.IPModuleREC;
+import fr.istic.synthlab.presentation.module.rec.PModuleREC;
 import fr.istic.synthlab.presentation.module.rep.IPModuleREP;
 import fr.istic.synthlab.presentation.module.rep.PModuleREP;
 import fr.istic.synthlab.presentation.module.vca.IPModuleVCA;
@@ -72,6 +75,11 @@ public class PFactory implements IPFactory {
 	@Override
 	public IPModuleOUT newOUT(ICModuleOUT control) {
 		return new PModuleOUT(control);
+	}
+	
+	@Override
+	public IPModuleREC newREC(ICModuleREC control) {
+		return new PModuleREC(control);
 	}
 
 	@Override

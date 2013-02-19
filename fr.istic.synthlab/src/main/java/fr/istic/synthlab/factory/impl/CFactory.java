@@ -8,6 +8,7 @@ import fr.istic.synthlab.abstraction.module.audioscope.IModuleAudioScope;
 import fr.istic.synthlab.abstraction.module.eg.IModuleEG;
 import fr.istic.synthlab.abstraction.module.mix.IModuleMIX;
 import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
+import fr.istic.synthlab.abstraction.module.rec.IModuleREC;
 import fr.istic.synthlab.abstraction.module.rep.IModuleREP;
 import fr.istic.synthlab.abstraction.module.vca.IModuleVCA;
 import fr.istic.synthlab.abstraction.module.vco.IModuleVCO;
@@ -19,6 +20,7 @@ import fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope;
 import fr.istic.synthlab.controller.module.eg.CModuleEG;
 import fr.istic.synthlab.controller.module.mix.CModuleMIX;
 import fr.istic.synthlab.controller.module.out.CModuleOUT;
+import fr.istic.synthlab.controller.module.rec.CModuleREC;
 import fr.istic.synthlab.controller.module.rep.CModuleREP;
 import fr.istic.synthlab.controller.module.vca.CModuleVCA;
 import fr.istic.synthlab.controller.module.vcf.CModuleVCF_HP;
@@ -75,6 +77,12 @@ public class CFactory implements IFactory {
 	@Override
 	public IModuleOUT newOUT(ISynthesizer cSynthesizer) {
 		IModuleOUT module = new CModuleOUT(cSynthesizer);
+		return module;
+	}
+
+	@Override
+	public IModuleREC newREC(ISynthesizer cSynthesizer) {
+		IModuleREC module = new CModuleREC(cSynthesizer);
 		return module;
 	}
 

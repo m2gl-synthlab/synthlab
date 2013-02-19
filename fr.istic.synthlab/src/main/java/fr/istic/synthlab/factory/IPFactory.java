@@ -4,6 +4,7 @@ import fr.istic.synthlab.controller.module.audioscope.ICModuleAudioScope;
 import fr.istic.synthlab.controller.module.eg.ICModuleEG;
 import fr.istic.synthlab.controller.module.mix.ICModuleMIX;
 import fr.istic.synthlab.controller.module.out.ICModuleOUT;
+import fr.istic.synthlab.controller.module.rec.ICModuleREC;
 import fr.istic.synthlab.controller.module.rep.ICModuleREP;
 import fr.istic.synthlab.controller.module.vca.ICModuleVCA;
 import fr.istic.synthlab.controller.module.vcf.ICModuleVCF;
@@ -16,6 +17,7 @@ import fr.istic.synthlab.presentation.module.audioscope.IPModuleAudioScope;
 import fr.istic.synthlab.presentation.module.eg.IPModuleEG;
 import fr.istic.synthlab.presentation.module.mix.IPModuleMIX;
 import fr.istic.synthlab.presentation.module.out.IPModuleOUT;
+import fr.istic.synthlab.presentation.module.rec.IPModuleREC;
 import fr.istic.synthlab.presentation.module.rep.IPModuleREP;
 import fr.istic.synthlab.presentation.module.vca.IPModuleVCA;
 import fr.istic.synthlab.presentation.module.vcf.IPModuleVCF;
@@ -71,6 +73,14 @@ public interface IPFactory {
 	 * @return pres
 	 */
 	IPModuleOUT newOUT(ICModuleOUT control);
+
+	/**
+	 * Return a REC module presentation
+	 * 
+	 * @param control
+	 * @return pres
+	 */
+	IPModuleREC newREC(ICModuleREC control);
 
 	/**
 	 * Return a EG module presentation
