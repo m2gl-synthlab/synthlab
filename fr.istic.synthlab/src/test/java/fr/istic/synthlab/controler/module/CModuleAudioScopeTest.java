@@ -42,6 +42,7 @@ public class CModuleAudioScopeTest {
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
 		iTest = new CModuleAudioScope(synth);
+		synth.add(iTest);
 	}
 
 	/**
@@ -143,8 +144,9 @@ public class CModuleAudioScopeTest {
 	//TODO ne fonctionne pas 
 	@Test
 	public void testP2cRemoveModule() {
+		assertTrue(synth.getModules().contains(iTest));
 		iTest.p2cRemoveModule(iTest);
-		assertNull(iTest);
+		assertFalse(synth.getModules().contains(iTest));
 	}
 
 }
