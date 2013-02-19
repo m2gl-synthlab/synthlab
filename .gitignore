@@ -10,3 +10,6 @@ target/
 *.war
 *.ear
 .DS_Store
+
+#Sounds files#
+*.wav
