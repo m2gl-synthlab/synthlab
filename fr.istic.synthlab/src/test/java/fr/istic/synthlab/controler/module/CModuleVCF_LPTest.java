@@ -48,6 +48,7 @@ public class CModuleVCF_LPTest {
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
 		iTest = new CModuleVCF_LP(synth);
+		synth.add(iTest);
 	}
 
 	/**
@@ -213,8 +214,9 @@ public class CModuleVCF_LPTest {
 	 */
 	@Test
 	public void testP2cRemoveModule() {
+		assertTrue(synth.getModules().contains(iTest));
 		iTest.p2cRemoveModule(iTest);
-		assertNull(iTest);
+		assertFalse(synth.getModules().contains(iTest));
 	}
 
 }

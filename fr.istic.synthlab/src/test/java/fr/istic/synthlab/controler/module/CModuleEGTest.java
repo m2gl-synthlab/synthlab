@@ -47,6 +47,7 @@ public class CModuleEGTest {
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
 		iTest = new CModuleEG(synth);
+		synth.add(iTest);
 	}
 
 	/**
@@ -334,8 +335,9 @@ public class CModuleEGTest {
 	//TODO Test qui ne passe pas ...
 	@Test
 	public void testP2cRemoveModule() {
+		assertTrue(synth.getModules().contains(iTest));
 		iTest.p2cRemoveModule(iTest);
-		assertNull(iTest);
+		assertFalse(synth.getModules().contains(iTest));
 	}
 
 }

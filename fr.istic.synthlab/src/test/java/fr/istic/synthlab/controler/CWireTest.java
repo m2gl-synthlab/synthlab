@@ -25,7 +25,7 @@ import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
-
+//TODO A finir !!
 public class CWireTest {
 
 	private ICSynthesizer synth;
