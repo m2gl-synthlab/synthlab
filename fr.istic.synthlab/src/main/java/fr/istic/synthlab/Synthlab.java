@@ -37,6 +37,8 @@ import fr.istic.synthlab.factory.impl.PFactory;
 
 public class Synthlab {
 
+	public static final String DOCUMENTATION_PDF_FILE = "Documentation.pdf";
+	
 	private static final String LOGO_FILE = "logo.png";
 
 	public static void main(String[] args) {

@@ -6,7 +6,6 @@ package fr.istic.synthlab.controler.module;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
@@ -47,6 +46,7 @@ public class CModuleVCOTest {
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
 		iTest = new CModuleVCO(synth);
+		synth.add(iTest);
 	}
 
 	/**
@@ -212,8 +212,9 @@ public class CModuleVCOTest {
 	//TODO Fonctionne pas !
 	@Test
 	public void testP2cRemoveModule() {
+		assertTrue(synth.getModules().contains(iTest));
 		iTest.p2cRemoveModule(iTest);
-		assertNull(iTest);
+		assertFalse(synth.getModules().contains(iTest));
 	}
 
 }
