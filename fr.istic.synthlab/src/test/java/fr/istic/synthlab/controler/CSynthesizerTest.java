@@ -6,10 +6,24 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import fr.istic.synthlab.abstraction.module.out.ModuleOUT;
+import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
+import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
+import fr.istic.synthlab.factory.impl.AFactory;
+import fr.istic.synthlab.factory.impl.CFactory;
+import fr.istic.synthlab.factory.impl.PACFactory;
+import fr.istic.synthlab.factory.impl.PFactory;
+
 public class CSynthesizerTest {
+
+	private ICSynthesizer synth;
 
 	@Before
 	public void setUp() throws Exception {
+		PACFactory.setAFactory(AFactory.getInstance());
+		PACFactory.setCFactory(CFactory.getInstance());
+		PACFactory.setPFactory(PFactory.getInstance());
+		synth = new CSynthesizer();
 	}
 
 	@After
@@ -18,7 +32,9 @@ public class CSynthesizerTest {
 
 	@Test
 	public void testAddIModule() {
-		fail("Not yet implemented");
+		assertEquals(0,synth.getModules().size());
+		synth.add(new ModuleOUT(synth));
+		assertEquals(1,synth.getModules().size());
 	}
 
 	@Test
@@ -43,7 +59,7 @@ public class CSynthesizerTest {
 
 	@Test
 	public void testGetPresentation() {
-		fail("Not yet implemented");
+		assertNotNull(synth.getPresentation());
 	}
 
 	@Test

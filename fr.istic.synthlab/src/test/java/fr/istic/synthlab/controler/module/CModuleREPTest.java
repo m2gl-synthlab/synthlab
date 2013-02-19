@@ -150,14 +150,4 @@ public class CModuleREPTest {
 		iTest.p2cRemoveModule(iTest);
 		assertNull(iTest);
 	}
-	
-	
-	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.rep.CModuleREP#setParameter(java.lang.String, java.lang.Double)}.
-	 */
-	@Test
-	public void testSetParameter() {
-		fail("Not yet implemented");
-	}
-
 }
