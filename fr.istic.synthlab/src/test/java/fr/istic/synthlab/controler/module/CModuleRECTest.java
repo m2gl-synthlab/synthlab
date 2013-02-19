@@ -3,6 +3,7 @@
  */
 package fr.istic.synthlab.controler.module;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -20,9 +21,10 @@ import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
 import fr.istic.synthlab.abstraction.module.eg.ModuleEG;
 import fr.istic.synthlab.abstraction.port.InputPort;
 import fr.istic.synthlab.abstraction.wire.IWire;
-import fr.istic.synthlab.controller.module.rep.CModuleREP;
-import fr.istic.synthlab.controller.module.rep.ICModuleREP;
+import fr.istic.synthlab.controller.module.rec.CModuleREC;
+import fr.istic.synthlab.controller.module.rec.ICModuleREC;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
+import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -32,10 +34,10 @@ import fr.istic.synthlab.factory.impl.PFactory;
  * @author USER
  *
  */
-public class CModuleREPTest {
+public class CModuleRECTest {
 
-	private ICModuleREP iTest;
-	private CSynthesizer synth;
+	private ICSynthesizer synth;
+	private ICModuleREC iTest;
 
 	/**
 	 * @throws java.lang.Exception
@@ -46,7 +48,7 @@ public class CModuleREPTest {
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
-		iTest = new CModuleREP(synth);
+		iTest = new CModuleREC(synth);
 	}
 
 	/**
@@ -57,7 +59,7 @@ public class CModuleREPTest {
 	}
 
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.rep.CModuleREP#getPresentation()}.
+	 * Test method for {@link fr.istic.synthlab.controller.module.rec.CModuleREC#getPresentation()}.
 	 */
 	@Test
 	public void testGetPresentation() {
@@ -65,8 +67,45 @@ public class CModuleREPTest {
 	}
 
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.rep.CModuleREP#p2cClosing()}.
-	 * Test de la méthode pour p2cClosing lorsqu'aucun des ports n'est connecté
+	 * Test method for {@link fr.istic.synthlab.controller.module.rec.CModuleREC#p2cRecord()}.
+	 */
+	@Test
+	public void testP2cRecord() {
+		boolean testRecord = iTest.isRecording();
+		iTest.p2cRecord();
+		assertEquals(!testRecord,iTest.isRecording());
+	}
+
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.rec.CModuleREC#p2cGainChanged(double)}.
+	 */
+	@Test
+	public void testP2cGainChanged() {
+		iTest.p2cGainChanged(2.0);
+		assertEquals(2.0, iTest.getAttenuation(),0);
+	}
+
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.rec.CModuleREC#p2cGainChanged(double)}.
+	 */
+	@Test
+	public void testP2cGainChangedLessMin() {
+		iTest.p2cGainChanged(-62.0);
+		assertEquals(-60.0, iTest.getAttenuation(),0);
+	}
+
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.rec.CModuleREC#p2cGainChanged(double)}.
+	 */
+	@Test
+	public void testP2cGainChangedMoreMax() {
+		iTest.p2cGainChanged(42.0);
+		assertEquals(12.0, iTest.getAttenuation(),0);
+	}
+
+
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.rec.CModuleREC#p2cClosing()}.
 	 */
 	@Test
 	public void testP2cClosingWireNotConnected() {
@@ -80,7 +119,7 @@ public class CModuleREPTest {
 	}
 
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.rep.CModuleREP#p2cClosing()}.
+	 * Test method for {@link fr.istic.synthlab.controller.module.rec.CModuleREC#p2cClosing()}.
 	 * Test de la méthode la p2cClosing lorsque tout les ports sont connecté
 	 */
 	@Test
@@ -104,7 +143,7 @@ public class CModuleREPTest {
 	}
 
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.rep.CModuleREP#p2cClosing()}.
+	 * Test method for {@link fr.istic.synthlab.controller.module.rec.CModuleREC#p2cClosing()}.
 	 * Test de la méthode la p2cClosing lorsque certains port sont connectés.
 	 */
 	@Test
@@ -132,9 +171,23 @@ public class CModuleREPTest {
 			assertFalse(w.isConnected());
 		}
 	}
-	
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.rep.CModuleREP#getSynthesizerPresentation()}.
+	 * Test method for {@link fr.istic.synthlab.controller.module.rec.CModuleREC#setParameter(java.lang.String, java.lang.Double)}.
+	 */
+	@Test
+	public void testSetParameter() {
+		iTest.setParameter("attenuation", 2.0);
+		assertEquals(2.0, iTest.getAttenuation(),0);
+		iTest.setParameter("isRecording", 1.0);
+		assertEquals(false, iTest.isRecording());
+		iTest.setParameter("isRecording", 0.0);
+		assertEquals(true, iTest.isRecording());
+		iTest.setParameter("isRecording", 2.0);
+		assertEquals(false, iTest.isRecording());
+	}
+
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.rec.CModuleREC#getSynthesizerPresentation()}.
 	 */
 	@Test
 	public void testGetSynthesizerPresentation() {
@@ -142,12 +195,12 @@ public class CModuleREPTest {
 	}
 
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.rep.CModuleREP#p2cRemoveModule(fr.istic.synthlab.controller.module.ICModule)}.
+	 * Test method for {@link fr.istic.synthlab.controller.module.rec.CModuleREC#p2cRemoveModule(fr.istic.synthlab.controller.module.ICModule)}.
 	 */
-	//TODO Test qui ne passe pas ...
 	@Test
 	public void testP2cRemoveModule() {
 		iTest.p2cRemoveModule(iTest);
 		assertNull(iTest);
 	}
+
 }
