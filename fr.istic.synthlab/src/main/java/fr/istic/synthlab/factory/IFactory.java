@@ -3,6 +3,7 @@ package fr.istic.synthlab.factory;
 import com.jsyn.ports.UnitInputPort;
 import com.jsyn.ports.UnitOutputPort;
 
+import fr.istic.synthlab.ISynthApp;
 import fr.istic.synthlab.abstraction.module.IModule;
 import fr.istic.synthlab.abstraction.module.audioscope.IModuleAudioScope;
 import fr.istic.synthlab.abstraction.module.eg.IModuleEG;
@@ -31,7 +32,7 @@ public interface IFactory {
 
 	IModuleOUT newOUT(ISynthesizer synth);
 
-	IModuleREC newREC(ISynthesizer synth);
+	IModuleREC newREC(ISynthApp app);
 
 	IModuleEG newEG(ISynthesizer synth);
 

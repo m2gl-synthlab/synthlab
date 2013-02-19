@@ -15,7 +15,7 @@ public class AddModuleRECCommand implements ICommand {
 	@Override
 	public void execute() {
 		IFactory fact = PACFactory.getFactory();
-		app.getSynthesizer().add(fact.newREC(app.getSynthesizer()));
+		app.getSynthesizer().add(fact.newREC(app));
 	}
 
 }

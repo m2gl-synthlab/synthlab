@@ -25,7 +25,9 @@ public class ModuleREC extends AModule implements IModuleREC {
 
 	protected static final boolean DEFAULT_STATE_RECORDING = true;
 
+	// Dernier fichier enregistré
 	private File wavFile;
+	
 	private WaveRecorder rec;
 	private AttenuationFilter attenuator;
 
@@ -122,6 +124,13 @@ public class ModuleREC extends AModule implements IModuleREC {
 				wires.add(in.getWire());
 		}
 		return wires;
+	}
+
+	@Override
+	public void saveRecordToFile(String dir, String file) {
+		if (wavFile != null) {
+			wavFile.renameTo(new File(dir + file));
+		}
 	}
 
 }
