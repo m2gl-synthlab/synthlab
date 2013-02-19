@@ -14,6 +14,7 @@ import fr.istic.synthlab.command.menu.AddModuleAudioScopeCommand;
 import fr.istic.synthlab.command.menu.AddModuleEGCommand;
 import fr.istic.synthlab.command.menu.AddModuleMIXCommand;
 import fr.istic.synthlab.command.menu.AddModuleOUTCommand;
+import fr.istic.synthlab.command.menu.AddModuleRECCommand;
 import fr.istic.synthlab.command.menu.AddModuleREPCommand;
 import fr.istic.synthlab.command.menu.AddModuleVCACommand;
 import fr.istic.synthlab.command.menu.AddModuleVCFHPCommand;
@@ -45,11 +46,9 @@ public class Synthlab {
 		// Set the icon application
 		Image imageIcon = null;
 		try {
-			imageIcon = ImageIO.read(ClassLoader
-					.getSystemResourceAsStream(LOGO_FILE));
+			imageIcon = ImageIO.read(ClassLoader.getSystemResourceAsStream(LOGO_FILE));
 			if (System.getProperty("os.name").contains("Mac")) {
-				com.apple.eawt.Application.getApplication().setDockIconImage(
-						imageIcon);
+				com.apple.eawt.Application.getApplication().setDockIconImage(imageIcon);
 			}
 		} catch (IOException e2) {
 			e2.printStackTrace();
@@ -88,10 +87,10 @@ public class Synthlab {
 		frame.setAboutSynthCommand(new AboutCommand());
 		frame.setToolbarPlayCommand(new ToolbarPlayCommand(app));
 		frame.setToolbarPauseCommand(new ToolbarPauseCommand(app));
-		frame.setCurrentWireColorCommand(new ToolbarCurrentWireColorCommand(
-				app, frame));
+		frame.setCurrentWireColorCommand(new ToolbarCurrentWireColorCommand(app, frame));
 
 		frame.setAddModuleOUTCommand(new AddModuleOUTCommand(app));
+		frame.setAddModuleRECCommand(new AddModuleRECCommand(app));
 		frame.setAddModuleVCOCommand(new AddModuleVCOCommand(app));
 		frame.setAddModuleVCACommand(new AddModuleVCACommand(app));
 		frame.setAddModuleVCFLPCommand(new AddModuleVCFLPCommand(app));

@@ -12,6 +12,8 @@ import fr.istic.synthlab.abstraction.module.mix.IModuleMIX;
 import fr.istic.synthlab.abstraction.module.mix.ModuleMIX;
 import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
 import fr.istic.synthlab.abstraction.module.out.ModuleOUT;
+import fr.istic.synthlab.abstraction.module.rec.IModuleREC;
+import fr.istic.synthlab.abstraction.module.rec.ModuleREC;
 import fr.istic.synthlab.abstraction.module.rep.IModuleREP;
 import fr.istic.synthlab.abstraction.module.rep.ModuleREP;
 import fr.istic.synthlab.abstraction.module.vca.IModuleVCA;
@@ -79,6 +81,12 @@ public class AFactory implements IFactory {
 	@Override
 	public IModuleOUT newOUT(ISynthesizer synth) {
 		IModuleOUT module = new ModuleOUT(synth);
+		return module;
+	}
+
+	@Override
+	public IModuleREC newREC(ISynthesizer synth) {
+		IModuleREC module = new ModuleREC(synth);
 		return module;
 	}
 
