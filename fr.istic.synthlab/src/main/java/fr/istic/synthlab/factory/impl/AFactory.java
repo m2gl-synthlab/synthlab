@@ -3,6 +3,7 @@ package fr.istic.synthlab.factory.impl;
 import com.jsyn.ports.UnitInputPort;
 import com.jsyn.ports.UnitOutputPort;
 
+import fr.istic.synthlab.ISynthApp;
 import fr.istic.synthlab.abstraction.module.IModule;
 import fr.istic.synthlab.abstraction.module.audioscope.IModuleAudioScope;
 import fr.istic.synthlab.abstraction.module.audioscope.ModuleAudioScope;
@@ -85,8 +86,8 @@ public class AFactory implements IFactory {
 	}
 
 	@Override
-	public IModuleREC newREC(ISynthesizer synth) {
-		IModuleREC module = new ModuleREC(synth);
+	public IModuleREC newREC(ISynthApp synth) {
+		IModuleREC module = new ModuleREC(synth.getSynthesizer());
 		return module;
 	}
 

@@ -3,6 +3,7 @@ package fr.istic.synthlab.controller.module.rec;
 import fr.istic.synthlab.abstraction.module.rec.ModuleREC;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.command.toolbar.ToolbarRecordCommand;
 import fr.istic.synthlab.controller.module.ICModule;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.factory.impl.PACFactory;
@@ -16,6 +17,7 @@ public class CModuleREC extends ModuleREC implements ICModuleREC {
 
 	private IPModuleREC pres;
 	private ISynthesizer cSynthesizer;
+	private ToolbarRecordCommand recordCmd;
 
 	public CModuleREC(ISynthesizer cSynthesizer) {
 		super(cSynthesizer);
@@ -37,6 +39,9 @@ public class CModuleREC extends ModuleREC implements ICModuleREC {
 	@Override
 	public void p2cRecord() {
 		setRecording(!isRecording());
+		if (!isRecording()) {
+			recordCmd.execute();
+		}
 	}
 
 	@Override
@@ -71,5 +76,10 @@ public class CModuleREC extends ModuleREC implements ICModuleREC {
 	@Override
 	public void p2cRemoveModule(ICModule module) {
 		((ICSynthesizer) cSynthesizer).p2cRemoveModule(module);
+	}
+
+	@Override
+	public void setRecordCmd(ToolbarRecordCommand toolbarRecordCommand) {
+		this.recordCmd = toolbarRecordCommand;
 	}
 }

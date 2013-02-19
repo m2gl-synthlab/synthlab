@@ -181,6 +181,10 @@ public class SynthApp implements ISynthApp {
 			newSynthInstance();
 		return currentSynth;
 	}
+	
+	public ISynthFrame getFrame() {
+		return this.frame;
+	}
 
 	public void setFrame(SynthFrame frame2) {
 		this.frame = frame2;
