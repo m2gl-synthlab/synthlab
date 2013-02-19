@@ -48,6 +48,7 @@ public class CModuleVCF_HPTest {
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
 		iTest = new CModuleVCF_HP(synth);
+		synth.add(iTest);
 	}
 
 	/**
@@ -214,8 +215,9 @@ public class CModuleVCF_HPTest {
 	//TODO fonctionne pas !! 
 	@Test
 	public void testP2cRemoveModule() {
+		assertTrue(synth.getModules().contains(iTest));
 		iTest.p2cRemoveModule(iTest);
-		assertNull(iTest);
+		assertFalse(synth.getModules().contains(iTest));
 	}
 
 }

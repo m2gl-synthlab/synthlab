@@ -1,12 +1,18 @@
 package fr.istic.synthlab.controler;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import fr.istic.synthlab.abstraction.module.out.ModuleOUT;
+import fr.istic.synthlab.controller.module.ICModule;
+import fr.istic.synthlab.controller.module.out.CModuleOUT;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.factory.impl.AFactory;
@@ -14,9 +20,11 @@ import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
 
+//TODO A finir !!
 public class CSynthesizerTest {
 
 	private ICSynthesizer synth;
+	private ICModule iTest;
 
 	@Before
 	public void setUp() throws Exception {
@@ -24,6 +32,7 @@ public class CSynthesizerTest {
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
+		iTest = new CModuleOUT(synth);
 	}
 
 	@After
@@ -32,9 +41,9 @@ public class CSynthesizerTest {
 
 	@Test
 	public void testAddIModule() {
-		assertEquals(0,synth.getModules().size());
-		synth.add(new ModuleOUT(synth));
-		assertEquals(1,synth.getModules().size());
+		assertFalse(synth.getModules().contains(iTest));
+		synth.add(iTest);
+		assertTrue(synth.getModules().contains(iTest));
 	}
 
 	@Test
@@ -74,12 +83,17 @@ public class CSynthesizerTest {
 
 	@Test
 	public void testP2cAddModule() {
-		fail("Not yet implemented");
+		assertFalse(synth.getModules().contains(iTest));
+		synth.p2cAddModule(iTest);
+		assertTrue(synth.getModules().contains(iTest));
 	}
 
 	@Test
 	public void testP2cRemoveModule() {
-		fail("Not yet implemented");
+		synth.add(iTest);
+		assertTrue(synth.getModules().contains(iTest));
+		synth.p2cRemoveModule(iTest);
+		assertFalse(synth.getModules().contains(iTest));
 	}
 
 	@Test

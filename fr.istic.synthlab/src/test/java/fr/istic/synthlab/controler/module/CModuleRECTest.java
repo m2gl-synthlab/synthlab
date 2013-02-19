@@ -49,6 +49,7 @@ public class CModuleRECTest {
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
 		iTest = new CModuleREC(synth);
+		synth.add(iTest);
 	}
 
 	/**
@@ -199,8 +200,9 @@ public class CModuleRECTest {
 	 */
 	@Test
 	public void testP2cRemoveModule() {
+		assertTrue(synth.getModules().contains(iTest));
 		iTest.p2cRemoveModule(iTest);
-		assertNull(iTest);
+		assertFalse(synth.getModules().contains(iTest));
 	}
 
 }

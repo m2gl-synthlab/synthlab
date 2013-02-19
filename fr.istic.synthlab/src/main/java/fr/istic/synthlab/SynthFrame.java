@@ -131,10 +131,10 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuFile.add(menuItemNew);
 		menuFile.add(menuItemOpen);
 		menuFile.addSeparator();
-		menuFile.add(menuItemClose);
 		menuFile.add(menuItemSave);
 		menuFile.add(menuItemSaveAs);
 		menuFile.addSeparator();
+		menuFile.add(menuItemClose);
 		menuFile.add(menuItemQuit);
 
 		// -------------------------- Add Menu --------------------------
