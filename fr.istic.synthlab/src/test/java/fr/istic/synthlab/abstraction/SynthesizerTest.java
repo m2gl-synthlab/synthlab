@@ -5,32 +5,28 @@ import java.util.List;
 
 import junit.framework.TestCase;
 import fr.istic.synthlab.abstraction.module.IModule;
+import fr.istic.synthlab.abstraction.module.audioscope.ModuleAudioScope;
+import fr.istic.synthlab.abstraction.module.eg.ModuleEG;
+import fr.istic.synthlab.abstraction.module.out.ModuleOUT;
+import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
+import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.abstraction.wire.Wire;
-import fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope;
-import fr.istic.synthlab.controller.module.eg.CModuleEG;
-import fr.istic.synthlab.controller.module.out.CModuleOUT;
-import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
-import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
-import fr.istic.synthlab.controller.wire.CWire;
-import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.factory.impl.AFactory;
-import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
-import fr.istic.synthlab.factory.impl.PFactory;
 
 public class SynthesizerTest extends TestCase {
 
-	private ICSynthesizer synth;
+	private ISynthesizer synth;
 	private IModule module;
 
 	public void setUp() {
 		PACFactory.setFactory(AFactory.getInstance());
+		PACFactory.setCFactory(null);
 
-		PACFactory.setCFactory(CFactory.getInstance());
-		PACFactory.setPFactory(PFactory.getInstance());
-		synth = new CSynthesizer();
-		module = new CModuleOUT(synth);
+
+		synth = new Synthesizer();
+		module = new ModuleOUT(synth);
 
 	}
 
@@ -58,14 +54,14 @@ public class SynthesizerTest extends TestCase {
 	}
 
 	public void testRemoveIModule() {
-		synth.add(new CModuleOUT(synth));
+		synth.add(new ModuleOUT(synth));
 		synth.remove(synth.getModules().get(0));
 		assertEquals(0, synth.getModules().size());
 	}
 
 	@SuppressWarnings("unchecked")
 	public void testAddIWire() {
-		ICWire w = new CWire(synth);
+		IWire w = new Wire(synth);
 		synth.add(w);
 
 		Field f = null;
@@ -101,9 +97,9 @@ public class SynthesizerTest extends TestCase {
 
 	public void testStart() {
 		synth.start();
-		synth.add(new CModuleOUT(synth));
-		synth.add(new CModuleEG(synth));
-		synth.add(new CModuleAudioScope(synth));
+		synth.add(new ModuleOUT(synth));
+		synth.add(new ModuleEG(synth));
+		synth.add(new ModuleAudioScope(synth));
 		assertTrue(synth.isRunning());
 
 	}
@@ -117,20 +113,20 @@ public class SynthesizerTest extends TestCase {
 	public void testStartModule() {
 		synth.stop();
 
-		synth.add(new CModuleAudioScope(synth));
+		synth.add(new ModuleAudioScope(synth));
 		synth.startModule(synth.getModules().get(0));
 		assertFalse(synth.isRunning());
 	}
 
 	public void testStopModule() {
 		synth.start();
-		synth.add(new CModuleAudioScope(synth));
+		synth.add(new ModuleAudioScope(synth));
 		synth.stopModule(synth.getModules().get(0));
 		assertTrue(synth.isRunning());
 	}
 
 	public void testSetGetCurrentWire() {
-		ICWire w = new CWire(synth);
+		IWire w = new Wire(synth);
 		synth.setCurrentWire(w);
 		assertEquals(w, synth.getCurrentWire());
 	}
