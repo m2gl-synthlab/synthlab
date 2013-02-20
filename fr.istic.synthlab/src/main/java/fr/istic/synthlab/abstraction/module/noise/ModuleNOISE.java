@@ -6,6 +6,7 @@ import java.util.List;
 import com.jsyn.unitgen.UnitGenerator;
 import com.jsyn.unitgen.WhiteNoise;
 
+import fr.istic.synthlab.abstraction.filter.AttenuationFilter;
 import fr.istic.synthlab.abstraction.module.AModule;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
@@ -24,16 +25,21 @@ public class ModuleNOISE extends AModule implements IModuleNOISE {
 	protected static final boolean DEFAULT_STATE_MUTE = true;
 
 	private WhiteNoise noise;
+	private AttenuationFilter attenuator;	
 
 	private IOutputPort out;
 
 	public ModuleNOISE(ISynthesizer synth) {
 		super(synth, MODULE_NAME);
 		this.noise = new WhiteNoise();
+		this.attenuator = new AttenuationFilter();
 
 		this.out = PACFactory.getFactory().newOutputPort(synth, this, OUT_NAME,
-				noise.output);
+				attenuator.output);
 		this.setAttenuation(0);
+		
+		// Connect WhiteNoise generator to AttenuationFilter
+		noise.output.connect(attenuator.input);
 
 		addPort(out);
 	}
@@ -42,23 +48,26 @@ public class ModuleNOISE extends AModule implements IModuleNOISE {
 	public List<UnitGenerator> getJSyn() {
 		List<UnitGenerator> generators = new ArrayList<UnitGenerator>();
 		generators.add(noise);
+		generators.add(attenuator);
 		return generators;
 	}
 
 	@Override
 	public void start() {
 		noise.start();
+		attenuator.start();
 	}
 
 	@Override
 	public void stop() {
 		noise.stop();
+		attenuator.stop();
 	}
 
 	@Override
 	public void setAttenuation(double value) {
 		getParameters().put("attenuation", (double) value);
-		this.noise.amplitude.set(Convert.dB2V(value));
+		this.attenuator.setAttenuation(Convert.dB2V(value));
 	}
 
 	@Override
