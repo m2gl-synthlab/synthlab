@@ -13,6 +13,7 @@ import fr.istic.synthlab.command.menu.AboutCommand;
 import fr.istic.synthlab.command.menu.AddModuleAudioScopeCommand;
 import fr.istic.synthlab.command.menu.AddModuleEGCommand;
 import fr.istic.synthlab.command.menu.AddModuleMIXCommand;
+import fr.istic.synthlab.command.menu.AddModuleNOISECommand;
 import fr.istic.synthlab.command.menu.AddModuleOUTCommand;
 import fr.istic.synthlab.command.menu.AddModuleRECCommand;
 import fr.istic.synthlab.command.menu.AddModuleREPCommand;
@@ -94,6 +95,7 @@ public class Synthlab {
 		frame.setAddModuleVCFLPCommand(new AddModuleVCFLPCommand(app));
 		frame.setAddModuleVCFHPCommand(new AddModuleVCFHPCommand(app));
 		frame.setAddModuleEGCommand(new AddModuleEGCommand(app));
+		frame.setAddModuleNOISECommand(new AddModuleNOISECommand(app));
 		frame.setAddModuleAudioScopeCommand(new AddModuleAudioScopeCommand(app));
 		frame.setAddModuleREPCommand(new AddModuleREPCommand(app));
 		frame.setAddModuleMIXCommand(new AddModuleMIXCommand(app));

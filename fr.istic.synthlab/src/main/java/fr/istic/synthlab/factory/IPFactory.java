@@ -3,6 +3,7 @@ package fr.istic.synthlab.factory;
 import fr.istic.synthlab.controller.module.audioscope.ICModuleAudioScope;
 import fr.istic.synthlab.controller.module.eg.ICModuleEG;
 import fr.istic.synthlab.controller.module.mix.ICModuleMIX;
+import fr.istic.synthlab.controller.module.noise.ICModuleNOISE;
 import fr.istic.synthlab.controller.module.out.ICModuleOUT;
 import fr.istic.synthlab.controller.module.rec.ICModuleREC;
 import fr.istic.synthlab.controller.module.rep.ICModuleREP;
@@ -16,6 +17,7 @@ import fr.istic.synthlab.controller.wire.ICWire;
 import fr.istic.synthlab.presentation.module.audioscope.IPModuleAudioScope;
 import fr.istic.synthlab.presentation.module.eg.IPModuleEG;
 import fr.istic.synthlab.presentation.module.mix.IPModuleMIX;
+import fr.istic.synthlab.presentation.module.noise.IPModuleNOISE;
 import fr.istic.synthlab.presentation.module.out.IPModuleOUT;
 import fr.istic.synthlab.presentation.module.rec.IPModuleREC;
 import fr.istic.synthlab.presentation.module.rep.IPModuleREP;
@@ -89,6 +91,14 @@ public interface IPFactory {
 	 * @return pres
 	 */
 	IPModuleEG newEG(ICModuleEG control);
+
+	/**
+	 * Return a NOISE module presentation
+	 * 
+	 * @param control
+	 * @return pres
+	 */
+	IPModuleNOISE newNOISE(ICModuleNOISE control);
 
 	/**
 	 * Return a SCOP module presentation

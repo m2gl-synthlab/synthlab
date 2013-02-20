@@ -3,6 +3,7 @@ package fr.istic.synthlab.factory.impl;
 import fr.istic.synthlab.controller.module.audioscope.ICModuleAudioScope;
 import fr.istic.synthlab.controller.module.eg.ICModuleEG;
 import fr.istic.synthlab.controller.module.mix.ICModuleMIX;
+import fr.istic.synthlab.controller.module.noise.ICModuleNOISE;
 import fr.istic.synthlab.controller.module.out.ICModuleOUT;
 import fr.istic.synthlab.controller.module.rec.ICModuleREC;
 import fr.istic.synthlab.controller.module.rep.ICModuleREP;
@@ -20,6 +21,8 @@ import fr.istic.synthlab.presentation.module.eg.IPModuleEG;
 import fr.istic.synthlab.presentation.module.eg.PModuleEG;
 import fr.istic.synthlab.presentation.module.mix.IPModuleMIX;
 import fr.istic.synthlab.presentation.module.mix.PModuleMIX;
+import fr.istic.synthlab.presentation.module.noise.IPModuleNOISE;
+import fr.istic.synthlab.presentation.module.noise.PModuleNOISE;
 import fr.istic.synthlab.presentation.module.out.IPModuleOUT;
 import fr.istic.synthlab.presentation.module.out.PModuleOUT;
 import fr.istic.synthlab.presentation.module.rec.IPModuleREC;
@@ -70,6 +73,11 @@ public class PFactory implements IPFactory {
 	@Override
 	public IPModuleVCF newVCF(ICModuleVCF control) {
 		return new PModuleVCF(control);
+	}
+	
+	@Override
+	public IPModuleNOISE newNOISE(ICModuleNOISE control) {
+		return new PModuleNOISE(control);
 	}
 
 	@Override

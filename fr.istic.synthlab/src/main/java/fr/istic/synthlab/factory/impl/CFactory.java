@@ -8,10 +8,12 @@ import fr.istic.synthlab.abstraction.module.IModule;
 import fr.istic.synthlab.abstraction.module.audioscope.IModuleAudioScope;
 import fr.istic.synthlab.abstraction.module.eg.IModuleEG;
 import fr.istic.synthlab.abstraction.module.mix.IModuleMIX;
+import fr.istic.synthlab.abstraction.module.noise.IModuleNOISE;
 import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
 import fr.istic.synthlab.abstraction.module.rec.IModuleREC;
 import fr.istic.synthlab.abstraction.module.rep.IModuleREP;
 import fr.istic.synthlab.abstraction.module.vca.IModuleVCA;
+import fr.istic.synthlab.abstraction.module.vcf.IModuleVCF;
 import fr.istic.synthlab.abstraction.module.vco.IModuleVCO;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
@@ -20,6 +22,7 @@ import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope;
 import fr.istic.synthlab.controller.module.eg.CModuleEG;
 import fr.istic.synthlab.controller.module.mix.CModuleMIX;
+import fr.istic.synthlab.controller.module.noise.CModuleNOISE;
 import fr.istic.synthlab.controller.module.out.CModuleOUT;
 import fr.istic.synthlab.controller.module.rec.CModuleREC;
 import fr.istic.synthlab.controller.module.rep.CModuleREP;
@@ -64,17 +67,23 @@ public class CFactory implements IFactory {
 	}
 
 	@Override
-	public IModule newVCFA_LP(ISynthesizer cSynthesizer) {
-		IModule module = new CModuleVCF_LP(cSynthesizer);
+	public IModuleVCF newVCFA_LP(ISynthesizer cSynthesizer) {
+		IModuleVCF module = new CModuleVCF_LP(cSynthesizer);
 		return module;
 	}
 
 	@Override
-	public IModule newVCFA_HP(ISynthesizer cSynthesizer) {
-		IModule module = new CModuleVCF_HP(cSynthesizer);
+	public IModuleVCF newVCFA_HP(ISynthesizer cSynthesizer) {
+		IModuleVCF module = new CModuleVCF_HP(cSynthesizer);
 		return module;
 	}
 
+	@Override
+	public IModuleNOISE newNOISE(ISynthesizer cSynthesizer) {
+		IModuleNOISE module = new CModuleNOISE(cSynthesizer);
+		return module;
+	}
+	
 	@Override
 	public IModuleOUT newOUT(ISynthesizer cSynthesizer) {
 		IModuleOUT module = new CModuleOUT(cSynthesizer);

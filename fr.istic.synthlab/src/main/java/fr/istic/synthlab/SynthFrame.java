@@ -54,7 +54,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private JMenu menuFile, menuAdd, menuHelp, menuWindow;
 	private JMenuItem menuItemNew, menuItemOpen, menuItemSave, menuItemSaveAs;
 	private JMenuItem menuItemClose, menuItemQuit, menuItemAbout;
-	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT, menuItemAddModuleVCFLP, menuItemAddModuleVCFHP, menuItemAddModuleEG,
+	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT, menuItemAddModuleNOISE, menuItemAddModuleVCFLP, menuItemAddModuleVCFHP, menuItemAddModuleEG,
 			menuItemAddModuleAudioScope, menuItemAddModuleREP, menuItemAddModuleVCA, menuItemAddModuleMIX, menuItemAddModuleREC;
 	private List<JMenuItem> files;
 	private ButtonGroup filesGroup = new ButtonGroup();
@@ -67,11 +67,11 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private String buttonPlayPauseLabel = "Play/Stop";
 	private JButton buttonPlayPause = new JButton();
 	private JButton buttonOUT, buttonVCO, buttonVCA, buttonVCFLP, buttonVCFHP;
-	private JButton buttonEG, buttonMIX, buttonREP, buttonSCOP, buttonREC;
+	private JButton buttonEG, buttonMIX, buttonREP, buttonSCOP, buttonREC, buttonNOISE;
 	private WebButton colorButtonBlack, colorButtonGray, colorButtonBlue, colorButtonCyan, colorButtonGreen, colorButtonMagenta, colorButtonOrange,
 			colorButtonPink, colorButtonRed, colorButtonWhite, colorButtonYellow, colorChooserButton;
 	private String[] tooltipTexts = { "Voltage-Controlled Oscillator", "Voltage-Controlled Amplifier", "Voltage-Controlled Filter Low-Pass",
-			"Voltage-Controlled Filter High-Pass", "Enveloppe generator", "Mixer", "Replicator", "Output on soundcard", "AudioScope", "Record to a WAV File" };
+			"Voltage-Controlled Filter High-Pass", "Enveloppe generator", "White Noise generator", "Mixer", "Replicator", "Output on soundcard", "AudioScope", "Record to a WAV File" };
 
 	// Command
 	private ICommand newSynthCommand;
@@ -88,6 +88,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand addModuleVCFLPCommand;
 	private ICommand addModuleVCFHPCommand;
 	private ICommand addModuleEGCommand;
+	private ICommand addModuleNOISECommand;
 	private ICommand addModuleAudioScopeCommand;
 	private ICommand addModuleREPCommand;
 	private ICommand addModuleMIXCommand;
@@ -144,11 +145,12 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuItemAddModuleVCFLP = new JMenuItem("VCF-LP | " + tooltipTexts[2]);
 		menuItemAddModuleVCFHP = new JMenuItem("VCF-HP | " + tooltipTexts[3]);
 		menuItemAddModuleEG = new JMenuItem("EG     | " + tooltipTexts[4]);
-		menuItemAddModuleMIX = new JMenuItem("MIX    | " + tooltipTexts[5]);
-		menuItemAddModuleREP = new JMenuItem("REP    | " + tooltipTexts[6]);
-		menuItemAddModuleAudioScope = new JMenuItem("SCOP   | " + tooltipTexts[8]);
-		menuItemAddModuleOUT = new JMenuItem("OUT    | " + tooltipTexts[7]);
-		menuItemAddModuleREC = new JMenuItem("REC    | " + tooltipTexts[9]);
+		menuItemAddModuleNOISE = new JMenuItem("NOISE    | " + tooltipTexts[5]);
+		menuItemAddModuleMIX = new JMenuItem("MIX    | " + tooltipTexts[6]);
+		menuItemAddModuleREP = new JMenuItem("REP    | " + tooltipTexts[7]);
+		menuItemAddModuleAudioScope = new JMenuItem("SCOP   | " + tooltipTexts[9]);
+		menuItemAddModuleOUT = new JMenuItem("OUT    | " + tooltipTexts[8]);
+		menuItemAddModuleREC = new JMenuItem("REC    | " + tooltipTexts[10]);
 
 		Font font = new Font(Font.MONOSPACED, Font.ROMAN_BASELINE, 11);
 		menuItemAddModuleVCO.setFont(font);
@@ -156,6 +158,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuItemAddModuleVCFLP.setFont(font);
 		menuItemAddModuleVCFHP.setFont(font);
 		menuItemAddModuleEG.setFont(font);
+		menuItemAddModuleNOISE.setFont(font);
 		menuItemAddModuleMIX.setFont(font);
 		menuItemAddModuleREP.setFont(font);
 		menuItemAddModuleOUT.setFont(font);
@@ -167,6 +170,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuAdd.add(menuItemAddModuleVCFLP);
 		menuAdd.add(menuItemAddModuleVCFHP);
 		menuAdd.add(menuItemAddModuleEG);
+		menuAdd.add(menuItemAddModuleNOISE);
 		menuAdd.add(menuItemAddModuleMIX);
 		menuAdd.add(menuItemAddModuleREP);
 		menuAdd.add(menuItemAddModuleOUT);
@@ -220,6 +224,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		buttonVCFLP = new JButton("VCF-LP");
 		buttonVCFHP = new JButton("VCF-HP");
 		buttonEG = new JButton("EG");
+		buttonNOISE = new JButton("NOISE");
 		buttonMIX = new JButton("MIX");
 		buttonREP = new JButton("REP");
 		buttonOUT = new JButton("OUT");
@@ -231,17 +236,19 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		buttonVCFLP.setToolTipText(tooltipTexts[2]);
 		buttonVCFHP.setToolTipText(tooltipTexts[3]);
 		buttonEG.setToolTipText(tooltipTexts[4]);
-		buttonMIX.setToolTipText(tooltipTexts[5]);
-		buttonREP.setToolTipText(tooltipTexts[6]);
-		buttonOUT.setToolTipText(tooltipTexts[7]);
+		buttonNOISE.setToolTipText(tooltipTexts[5]);
+		buttonMIX.setToolTipText(tooltipTexts[6]);
+		buttonREP.setToolTipText(tooltipTexts[7]);
+		buttonOUT.setToolTipText(tooltipTexts[8]);
 		buttonREC.setToolTipText(tooltipTexts[9]);
-		buttonSCOP.setToolTipText(tooltipTexts[8]);
+		buttonSCOP.setToolTipText(tooltipTexts[10]);
 
 		toolBar.add(buttonVCO);
 		toolBar.add(buttonVCA);
 		toolBar.add(buttonVCFLP);
 		toolBar.add(buttonVCFHP);
 		toolBar.add(buttonEG);
+		toolBar.add(buttonNOISE);
 		toolBar.add(buttonMIX);
 		toolBar.add(buttonREP);
 		toolBar.add(buttonOUT);
@@ -437,6 +444,16 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		};
 		menuItemAddModuleEG.addActionListener(listenerEG);
 		buttonEG.addActionListener(listenerEG);
+		
+		ActionListener listenerNOISE = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (addModuleNOISECommand != null)
+					addModuleNOISECommand.execute();
+			}
+		};
+		menuItemAddModuleNOISE.addActionListener(listenerNOISE);
+		buttonNOISE.addActionListener(listenerNOISE);
 
 		ActionListener listenerSCOP = new ActionListener() {
 			@Override
@@ -858,6 +875,13 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	 */
 	public void setAddModuleEGCommand(ICommand addModuleEGCommand) {
 		this.addModuleEGCommand = addModuleEGCommand;
+	}
+	
+	/**
+	 * @param addModuleNOISECommand
+	 */
+	public void setAddModuleNOISECommand(ICommand addModuleNOISECommand) {
+		this.addModuleNOISECommand = addModuleNOISECommand;
 	}
 
 	/**

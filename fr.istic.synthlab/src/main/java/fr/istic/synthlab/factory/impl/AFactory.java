@@ -11,6 +11,8 @@ import fr.istic.synthlab.abstraction.module.eg.IModuleEG;
 import fr.istic.synthlab.abstraction.module.eg.ModuleEG;
 import fr.istic.synthlab.abstraction.module.mix.IModuleMIX;
 import fr.istic.synthlab.abstraction.module.mix.ModuleMIX;
+import fr.istic.synthlab.abstraction.module.noise.IModuleNOISE;
+import fr.istic.synthlab.abstraction.module.noise.ModuleNOISE;
 import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
 import fr.istic.synthlab.abstraction.module.out.ModuleOUT;
 import fr.istic.synthlab.abstraction.module.rec.IModuleREC;
@@ -78,6 +80,13 @@ public class AFactory implements IFactory {
 		IModuleVCF module = new ModuleVCF_HP(synth);
 		return module;
 	}
+	
+	@Override
+	public IModuleNOISE newNOISE(ISynthesizer synth) {
+		IModuleNOISE module = new ModuleNOISE(synth);
+		return module;
+	}
+
 
 	@Override
 	public IModuleOUT newOUT(ISynthesizer synth) {
