@@ -21,7 +21,6 @@ import fr.istic.synthlab.command.menu.AddModuleVCFHPCommand;
 import fr.istic.synthlab.command.menu.AddModuleVCFLPCommand;
 import fr.istic.synthlab.command.menu.AddModuleVCOCommand;
 import fr.istic.synthlab.command.menu.CloseSynthCommand;
-import fr.istic.synthlab.command.menu.DocumentationCommand;
 import fr.istic.synthlab.command.menu.NewSynthCommand;
 import fr.istic.synthlab.command.menu.OpenSynthCommand;
 import fr.istic.synthlab.command.menu.QuitSynthCommand;
@@ -37,8 +36,6 @@ import fr.istic.synthlab.factory.impl.PFactory;
 
 public class Synthlab {
 
-	public static final String DOCUMENTATION_PDF_FILE = "Documentation.pdf";
-	
 	private static final String LOGO_FILE = "logo.png";
 
 	public static void main(String[] args) {
@@ -85,7 +82,6 @@ public class Synthlab {
 		frame.setSaveAsSynthCommand(new SaveAsSynthCommand(app, frame));
 		frame.setCloseSynthCommand(new CloseSynthCommand(app));
 		frame.setQuitSynthCommand(new QuitSynthCommand(app));
-		frame.setDocSynthCommand(new DocumentationCommand());
 		frame.setAboutSynthCommand(new AboutCommand());
 		frame.setToolbarPlayCommand(new ToolbarPlayCommand(app));
 		frame.setToolbarPauseCommand(new ToolbarPauseCommand(app));

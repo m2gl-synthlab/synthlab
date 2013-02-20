@@ -53,7 +53,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private JMenuBar mainMenuBar;
 	private JMenu menuFile, menuAdd, menuHelp, menuWindow;
 	private JMenuItem menuItemNew, menuItemOpen, menuItemSave, menuItemSaveAs;
-	private JMenuItem menuItemClose, menuItemQuit, menuItemDoc, menuItemAbout;
+	private JMenuItem menuItemClose, menuItemQuit, menuItemAbout;
 	private JMenuItem menuItemAddModuleVCO, menuItemAddModuleOUT, menuItemAddModuleVCFLP, menuItemAddModuleVCFHP, menuItemAddModuleEG,
 			menuItemAddModuleAudioScope, menuItemAddModuleREP, menuItemAddModuleVCA, menuItemAddModuleMIX, menuItemAddModuleREC;
 	private List<JMenuItem> files;
@@ -80,7 +80,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private ICommand openSynthCommand;
 	private ICommand closeSynthCommand;
 	private ICommand quitSynthCommand;
-	private ICommand docSynthCommand;
 	private ICommand aboutSynthCommand;
 	private ICommand addModuleOUTCommand;
 	private ICommand addModuleRECCommand;
@@ -181,11 +180,9 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuHelp = new JMenu("Help");
 
 		// instanciation des items
-		menuItemDoc = new JMenuItem("Documentation");
 		menuItemAbout = new JMenuItem("About");
 
 		// ajout des items au menu Help
-		menuHelp.add(menuItemDoc);
 		menuHelp.add(menuItemAbout);
 
 		// ajout des menus a la barre de menus
@@ -316,7 +313,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuItemSaveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.SHIFT_MASK + ActionEvent.CTRL_MASK));
 		menuItemClose.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, ActionEvent.CTRL_MASK));
 		menuItemQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
-		menuItemDoc.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
 		menuItemAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, ActionEvent.CTRL_MASK));
 	}
 
@@ -472,14 +468,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuItemAddModuleMIX.addActionListener(listenerMIX);
 		buttonMIX.addActionListener(listenerMIX);
 
-		menuItemDoc.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (docSynthCommand != null)
-					docSynthCommand.execute();
-			}
-		});
 		menuItemAbout.addActionListener(new ActionListener() {
 
 			@Override
@@ -791,14 +779,6 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	 */
 	public void setQuitSynthCommand(ICommand quitSynthCommand) {
 		this.quitSynthCommand = quitSynthCommand;
-	}
-
-	/**
-	 * @param docSynthCommand
-	 *            the docSynthCommand to set
-	 */
-	public void setDocSynthCommand(ICommand docSynthCommand) {
-		this.docSynthCommand = docSynthCommand;
 	}
 
 	/**
