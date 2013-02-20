@@ -58,7 +58,7 @@ public class ModuleNOISE extends AModule implements IModuleNOISE {
 	@Override
 	public void setAttenuation(double value) {
 		getParameters().put("attenuation", (double) value);
-		this.noise.amplitude.set(Convert.dB2V(value)/10);
+		this.noise.amplitude.set(Convert.dB2V(value));
 	}
 
 	@Override

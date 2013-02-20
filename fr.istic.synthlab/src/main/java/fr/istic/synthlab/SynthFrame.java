@@ -145,7 +145,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		menuItemAddModuleVCFLP = new JMenuItem("VCF-LP | " + tooltipTexts[2]);
 		menuItemAddModuleVCFHP = new JMenuItem("VCF-HP | " + tooltipTexts[3]);
 		menuItemAddModuleEG = new JMenuItem("EG     | " + tooltipTexts[4]);
-		menuItemAddModuleNOISE = new JMenuItem("NOISE    | " + tooltipTexts[5]);
+		menuItemAddModuleNOISE = new JMenuItem("NOISE  | " + tooltipTexts[5]);
 		menuItemAddModuleMIX = new JMenuItem("MIX    | " + tooltipTexts[6]);
 		menuItemAddModuleREP = new JMenuItem("REP    | " + tooltipTexts[7]);
 		menuItemAddModuleAudioScope = new JMenuItem("SCOP   | " + tooltipTexts[9]);
