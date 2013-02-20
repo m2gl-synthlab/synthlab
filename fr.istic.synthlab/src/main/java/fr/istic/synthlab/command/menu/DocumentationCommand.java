@@ -43,7 +43,7 @@ public class DocumentationCommand implements ICommand {
 				System.err.println("Can't locate documentation file !");
 			}
 		} else {
-			System.err.println("Desktop function not supported");
+			System.err.println("Desktop function not supported !");
 		}
 	}
 
