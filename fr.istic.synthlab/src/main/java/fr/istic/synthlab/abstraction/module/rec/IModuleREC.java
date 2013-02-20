@@ -49,12 +49,4 @@ public interface IModuleREC extends IModule {
 	 */
 	public IInputPort getInput();
 
-	/**
-	 * Save the last wav file recorded to the specified directory
-	 * 
-	 * @param dir
-	 * @param file
-	 */
-	public void saveRecordToFile(String dir, String file);
-
 }

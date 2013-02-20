@@ -42,7 +42,7 @@ public class ToolbarRecordCommand implements ICommand {
 		if (file != null) {
 			if (!file.endsWith(".wav"))
 				file = file + ".wav";
-			moduleRec.saveRecordToFile(dir, file);
+//			moduleRec.saveRecordToFile(dir, file);
 		}
 	}
 

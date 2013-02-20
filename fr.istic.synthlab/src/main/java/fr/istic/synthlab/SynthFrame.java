@@ -633,7 +633,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 				File f = new File(item.getText());
 				String[] s = { null, null };
 				if (f.getParent() != null) {
-					s[0] = f.getParent() + "/";
+					s[0] = f.getParent() + File.separator;
 					s[1] = f.getName();
 				} else {
 					s[0] = null;
@@ -664,7 +664,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			String file = f.getName();
 			String dir = null;
 			if (f.getParent() != null)
-				dir = f.getParent() + "/";
+				dir = f.getParent() + File.separator;
 
 			if (dir == null) {
 				if ((currentSynth.getPath()[0] == null) && (file.equals(currentSynth.getPath()[1]))) {
@@ -691,7 +691,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 			String file = f.getName();
 			String dir = null;
 			if (f.getParent() != null)
-				dir = f.getParent() + "/";
+				dir = f.getParent() + File.separator;
 
 			if (dir == null) {
 				if ((currentSynth.getPath()[0] == null) && (file.equals(currentSynth.getPath()[1]))) {

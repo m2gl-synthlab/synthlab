@@ -17,13 +17,11 @@ import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
-import fr.istic.synthlab.command.toolbar.ToolbarRecordCommand;
 import fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope;
 import fr.istic.synthlab.controller.module.eg.CModuleEG;
 import fr.istic.synthlab.controller.module.mix.CModuleMIX;
 import fr.istic.synthlab.controller.module.out.CModuleOUT;
 import fr.istic.synthlab.controller.module.rec.CModuleREC;
-import fr.istic.synthlab.controller.module.rec.ICModuleREC;
 import fr.istic.synthlab.controller.module.rep.CModuleREP;
 import fr.istic.synthlab.controller.module.vca.CModuleVCA;
 import fr.istic.synthlab.controller.module.vcf.CModuleVCF_HP;
@@ -86,7 +84,6 @@ public class CFactory implements IFactory {
 	@Override
 	public IModuleREC newREC(ISynthApp app) {
 		IModuleREC module = new CModuleREC(app.getSynthesizer());
-		((ICModuleREC) module).setRecordCmd(new ToolbarRecordCommand(app, app.getFrame(), module));
 		return module;
 	}
 

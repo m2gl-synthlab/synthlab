@@ -1,7 +1,6 @@
 package fr.istic.synthlab.controller.module.rec;
 
 import fr.istic.synthlab.abstraction.module.rec.IModuleREC;
-import fr.istic.synthlab.command.toolbar.ToolbarRecordCommand;
 import fr.istic.synthlab.controller.module.ICModule;
 import fr.istic.synthlab.presentation.module.rec.IPModuleREC;
 
@@ -29,10 +28,4 @@ public interface ICModuleREC extends ICModule, IModuleREC {
 	 */
 	public void p2cGainChanged(double gain);
 	
-	/**
-	 * Set the record command
-	 * 
-	 * @param toolbarRecordCommand
-	 */
-	public void setRecordCmd(ToolbarRecordCommand toolbarRecordCommand);
 }

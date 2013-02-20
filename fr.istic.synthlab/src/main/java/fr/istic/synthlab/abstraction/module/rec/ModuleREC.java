@@ -2,7 +2,10 @@ package fr.istic.synthlab.abstraction.module.rec;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.jsyn.unitgen.UnitGenerator;
@@ -14,6 +17,7 @@ import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.util.Convert;
 import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 /**
@@ -63,7 +67,8 @@ public class ModuleREC extends AModule implements IModuleREC {
 		if (isRecording()) {
 			System.out.println("Start recording ...");
 			try {
-				this.wavFile = new File("sound_" + synth.getJSyn().getCurrentTime() + ".wav");
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+				this.wavFile = new File(((ICSynthesizer) synth).getPath()[1] + "_" + dateFormat.format(new Date()) + ".wav");
 				this.rec = new WaveRecorder(synth.getJSyn(), wavFile);
 				attenuator.output.connect(rec.getInput());
 				this.rec.start();
@@ -125,12 +130,4 @@ public class ModuleREC extends AModule implements IModuleREC {
 		}
 		return wires;
 	}
-
-	@Override
-	public void saveRecordToFile(String dir, String file) {
-		if (wavFile != null) {
-			wavFile.renameTo(new File(dir + file));
-		}
-	}
-
 }
