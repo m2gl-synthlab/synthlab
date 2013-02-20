@@ -22,6 +22,7 @@ import fr.istic.synthlab.controller.module.ICModule;
 import fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope;
 import fr.istic.synthlab.controller.module.eg.CModuleEG;
 import fr.istic.synthlab.controller.module.mix.CModuleMIX;
+import fr.istic.synthlab.controller.module.noise.CModuleNOISE;
 import fr.istic.synthlab.controller.module.out.CModuleOUT;
 import fr.istic.synthlab.controller.module.rec.CModuleREC;
 import fr.istic.synthlab.controller.module.rep.CModuleREP;
@@ -79,6 +80,8 @@ public class ReadXMLFile {
 						module = new CModuleREC(cSynthesizer);
 					} else if (eElement.getAttribute("name").startsWith("EG")) {
 						module = new CModuleEG(cSynthesizer);
+					} else if (eElement.getAttribute("name").startsWith("NOISE")) {
+						module = new CModuleNOISE(cSynthesizer);
 					} else if (eElement.getAttribute("name").startsWith("REP")) {
 						module = new CModuleREP(cSynthesizer);
 					} else if (eElement.getAttribute("name").startsWith("VCF LP24")) {
