@@ -1,27 +1,21 @@
 package fr.istic.synthlab.abstraction.module;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import java.lang.reflect.Field;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jsyn.unitgen.FilterLowPass;
-import com.jsyn.unitgen.PassThrough;
-
 import fr.istic.synthlab.abstraction.exception.BadConnectionException;
 import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
-import fr.istic.synthlab.abstraction.filter.AmplitudeModulatorFilter;
 import fr.istic.synthlab.abstraction.module.mix.IModuleMIX;
 import fr.istic.synthlab.abstraction.module.mix.ModuleMIX;
-import fr.istic.synthlab.abstraction.module.out.IModuleOUT;
-import fr.istic.synthlab.abstraction.module.out.ModuleOUT;
 import fr.istic.synthlab.abstraction.module.rep.IModuleREP;
 import fr.istic.synthlab.abstraction.module.rep.ModuleREP;
-import fr.istic.synthlab.abstraction.module.vca.ModuleVCA;
 import fr.istic.synthlab.abstraction.port.IInputPort;
-import fr.istic.synthlab.abstraction.port.Port;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.abstraction.wire.Wire;

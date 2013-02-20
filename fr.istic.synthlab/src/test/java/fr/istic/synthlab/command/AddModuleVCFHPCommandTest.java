@@ -10,7 +10,6 @@ import fr.istic.synthlab.ISynthFrame;
 import fr.istic.synthlab.SynthApp;
 import fr.istic.synthlab.SynthFrame;
 import fr.istic.synthlab.command.menu.AddModuleVCFHPCommand;
-import fr.istic.synthlab.controller.module.eg.CModuleEG;
 import fr.istic.synthlab.controller.module.vcf.CModuleVCF_HP;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;

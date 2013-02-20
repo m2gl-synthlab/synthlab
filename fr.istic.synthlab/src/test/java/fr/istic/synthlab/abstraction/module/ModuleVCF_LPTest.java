@@ -19,7 +19,6 @@ import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
 import fr.istic.synthlab.abstraction.module.rep.IModuleREP;
 import fr.istic.synthlab.abstraction.module.rep.ModuleREP;
 import fr.istic.synthlab.abstraction.module.vcf.IModuleVCF;
-import fr.istic.synthlab.abstraction.module.vcf.ModuleVCF_HP;
 import fr.istic.synthlab.abstraction.module.vcf.ModuleVCF_LP;
 import fr.istic.synthlab.abstraction.port.Port;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
