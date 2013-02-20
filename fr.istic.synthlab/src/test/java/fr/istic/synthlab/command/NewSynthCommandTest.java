@@ -10,6 +10,7 @@ import fr.istic.synthlab.ISynthFrame;
 import fr.istic.synthlab.SynthApp;
 import fr.istic.synthlab.SynthFrame;
 import fr.istic.synthlab.command.app.DisplayCommand;
+import fr.istic.synthlab.command.menu.NewSynthCommand;
 import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
@@ -32,7 +33,7 @@ public class NewSynthCommandTest {
 		 app = new SynthApp(frame);
 		frame = new SynthFrame(app);
 		//TODO ya des choses pas logique par ici oO
-//		command=new NewSynthCommand(app,frame);
+	command=new NewSynthCommand(app);
 		app.setDisplaySynthCommand(new DisplayCommand(frame));
 	}
 
@@ -41,6 +42,7 @@ public class NewSynthCommandTest {
 	public void testExecute() {
 		ICSynthesizer synth=app.getSynthesizer();
 		synth.setFrame(frame);
+		((SynthApp) app).setFrame((SynthFrame) frame);
 		
 		command.execute();
 		

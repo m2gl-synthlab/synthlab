@@ -61,7 +61,7 @@ public class SaveLoadTest extends TestCase {
 		synth.add(moduleEG);
 
 		moduleVCO.setTone(0.4);
-
+		((SynthApp) s).setFrame((SynthFrame) sf);
 		s.saveToXML("", "test.synthlab");
 
 		// s.setSynthesizer(new CSynthesizer());
