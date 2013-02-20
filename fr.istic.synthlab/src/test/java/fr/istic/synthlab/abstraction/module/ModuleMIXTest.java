@@ -44,16 +44,7 @@ public class ModuleMIXTest {
 		assertNotNull(m.getJSyn());
 	}
 
-	@Test
-	public void testStart() {
-		fail("Not yet implemented");
-	}
 
-	@Test
-	public void testStop() {
-		fail("Not yet implemented");
-	}
-	
 	@Test
 	public void testGetWires3(){
 		IWire w=new Wire(synth);

@@ -41,13 +41,7 @@ public class ModuleVCATest extends TestCase {
 	
 
 
-	public void testStart() {
-		fail("Not yet implemented");
-	}
 
-	public void testStop() {
-		fail("Not yet implemented");
-	}
 	
 	public void testGetWires(){
 		IWire w=new Wire(synth);

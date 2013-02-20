@@ -44,19 +44,6 @@ public class ModuleVCOTest extends TestCase {
 	}
 	
 
-	public void testStart() {
-		fail("Not yet implemented");
-
-		
-	}
-	
-
-	
-	
-
-	public void testStop() {
-		fail("Not yet implemented");
-	}
 
 	public void testSetGetOctave() {
 		m.setOctave(5);

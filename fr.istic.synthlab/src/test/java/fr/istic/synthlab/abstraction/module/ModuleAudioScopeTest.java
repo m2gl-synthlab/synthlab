@@ -45,15 +45,6 @@ public class ModuleAudioScopeTest {
 		assertNotNull(m.getJSyn());
 	}
 
-	@Test
-	public void testStart() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testStop() {
-		fail("Not yet implemented");
-	}
 
 
 
