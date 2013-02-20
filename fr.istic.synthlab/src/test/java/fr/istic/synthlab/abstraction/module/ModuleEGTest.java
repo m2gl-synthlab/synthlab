@@ -1,6 +1,8 @@
 package fr.istic.synthlab.abstraction.module;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +11,6 @@ import fr.istic.synthlab.abstraction.exception.BadConnectionException;
 import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
 import fr.istic.synthlab.abstraction.module.eg.IModuleEG;
 import fr.istic.synthlab.abstraction.module.eg.ModuleEG;
-import fr.istic.synthlab.abstraction.module.mix.ModuleMIX;
 import fr.istic.synthlab.abstraction.module.rep.IModuleREP;
 import fr.istic.synthlab.abstraction.module.rep.ModuleREP;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;

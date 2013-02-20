@@ -1,6 +1,10 @@
 package fr.istic.synthlab.abstraction.module;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.lang.reflect.Field;
 
@@ -9,15 +13,11 @@ import org.junit.Test;
 
 import com.jsyn.unitgen.FilterHighPass;
 import com.jsyn.unitgen.PassThrough;
-import com.softsynth.jsyn.Filter_HighPass;
 
 import fr.istic.synthlab.abstraction.exception.BadConnectionException;
 import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
-import fr.istic.synthlab.abstraction.filter.AmplitudeModulatorFilter;
-import fr.istic.synthlab.abstraction.module.audioscope.ModuleAudioScope;
 import fr.istic.synthlab.abstraction.module.rep.IModuleREP;
 import fr.istic.synthlab.abstraction.module.rep.ModuleREP;
-import fr.istic.synthlab.abstraction.module.vca.ModuleVCA;
 import fr.istic.synthlab.abstraction.module.vcf.IModuleVCF;
 import fr.istic.synthlab.abstraction.module.vcf.ModuleVCF_HP;
 import fr.istic.synthlab.abstraction.port.Port;

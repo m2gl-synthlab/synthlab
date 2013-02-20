@@ -19,7 +19,6 @@ import fr.istic.synthlab.abstraction.module.vco.IModuleVCO;
 import fr.istic.synthlab.abstraction.module.vco.ModuleVCO;
 import fr.istic.synthlab.abstraction.port.Port;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
-import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.abstraction.wire.Wire;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;

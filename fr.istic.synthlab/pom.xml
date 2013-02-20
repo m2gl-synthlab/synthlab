@@ -30,14 +30,14 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/lib/jsyn-beta-16.5.14.jar</systemPath>
 		</dependency>
-		
-		
-   <dependency>
-     <groupId>junit</groupId>
-     <artifactId>junit</artifactId>
-     <version>4.0</version>
-     <scope>test</scope>
-   </dependency>
+
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.0</version>
+			<scope>test</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>com.mortennobel</groupId>
@@ -56,7 +56,14 @@
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>res</directory>
+			</resource>
+		</resources>
+		
 		<plugins>
+
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
@@ -92,6 +99,7 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+
 		</plugins>
 	</build>
 

@@ -8,8 +8,7 @@ import fr.istic.synthlab.command.ICommand;
 public class AboutCommand implements ICommand {
 
 	public void execute() {
-		System.out.println("Command " + this.getClass().getSimpleName() + " not implemented...");
-		JOptionPane.showMessageDialog(new JFrame("About"), "        SynthLab/Groupe 2\n" + "Chevalier - Chevalot - Guerra\n" + "   Hardouin - Kwete - Le Ho\n"
-				+ "          ISTIC 2013", "A propos", JOptionPane.PLAIN_MESSAGE);
+		String html = "<html><body><div align=\"center\">SynthLab (Groupe 2)<br/> Chevalier - Chevalot - Guerra <br/> Hardouin - Kwete - Le Ho <br/> ISTIC 2013 </div></body></html>";
+		JOptionPane.showMessageDialog(new JFrame("About"), html, "About", JOptionPane.INFORMATION_MESSAGE);
 	}
 }
