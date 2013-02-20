@@ -175,15 +175,15 @@ public class PWire extends JPanel implements IPWire {
 		if(displayShadow ){
 			// On dessine plusieurs couche d'ombre avec transparence
 			g2.setStroke(new BasicStroke(8, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
-			g2.setColor(new Color(100,100,100,30));
+			g2.setColor(new Color(100,100,100,60));
 			g2.draw(shadowCurve);
 			
 			g2.setStroke(new BasicStroke(4, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
-			g2.setColor(new Color(100,100,100,10));
+			g2.setColor(new Color(100,100,100,20));
 			g2.draw(shadowCurve);
 			
 			g2.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
-			g2.setColor(new Color(100,100,100,10));
+			g2.setColor(new Color(100,100,100,20));
 			g2.draw(shadowCurve);
 		}
 		
