@@ -27,7 +27,7 @@ public class ModuleREC extends AModule implements IModuleREC {
 
 	private static final String IN_NAME = "In";
 
-	protected static final boolean DEFAULT_STATE_RECORDING = true;
+	protected static final boolean DEFAULT_STATE_RECORDING = false;
 
 	// Dernier fichier enregistré
 	private File wavFile;
@@ -49,7 +49,7 @@ public class ModuleREC extends AModule implements IModuleREC {
 		this.setAttenuation(0);
 
 		// Set the default state
-		setRecording(false);
+		setRecording(DEFAULT_STATE_RECORDING);
 
 		addPort(in);
 	}

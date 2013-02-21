@@ -24,6 +24,7 @@ public class ModuleNOISE extends AModule implements IModuleNOISE {
 
 	protected static final boolean DEFAULT_STATE_MUTE = true;
 
+	// JSyn WhiteNoise generator and AttenuationFilter perso
 	private WhiteNoise noise;
 	private AttenuationFilter attenuator;	
 
