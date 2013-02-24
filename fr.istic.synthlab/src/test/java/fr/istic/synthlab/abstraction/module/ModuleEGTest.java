@@ -74,27 +74,19 @@ public class ModuleEGTest {
 		try {
 			w.connect(m.getGateInput());
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			w.connect(m.getOutput());
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		assertEquals(1, m.getWires().size());
 		assertEquals(w, m.getWires().get(0));
-
-
-		
 	}
 
 	@Test
@@ -108,38 +100,23 @@ public class ModuleEGTest {
 			w2.connect(mrep.getInput());
 
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			w.connect(m.getGateInput());
 			w2.connect(m.getOutput());
-
-
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		
 		assertEquals(2, m.getWires().size());
 		assertEquals(w, m.getWires().get(0));
 		assertEquals(w2, m.getWires().get(1));
-
-
-		
 	}
 
-
-
-	
-	
 	@Test
 	public void testGetWiresDifferentBad(){
 		IWire w=new Wire(synth);		
@@ -153,12 +130,9 @@ public class ModuleEGTest {
 			fail("Une exception devrait etre lancée");
 
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
 }

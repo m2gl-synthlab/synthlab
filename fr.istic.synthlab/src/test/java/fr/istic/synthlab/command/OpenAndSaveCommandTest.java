@@ -34,17 +34,17 @@ public class OpenAndSaveCommandTest {
 
 	ISynthApp app;
 	ISynthFrame frame;
-	
+
 
 	@Before
 	public void setUp() throws Exception {
-	
+
 		PACFactory.setAFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 
-		
-		 app = new SynthApp(frame);
+
+		app = new SynthApp(frame);
 		frame = new SynthFrame(app);
 		commandOpen=new OpenSynthCommand(app,frame);
 		commandSave=new SaveAsSynthCommand(app,frame);
@@ -63,265 +63,163 @@ public class OpenAndSaveCommandTest {
 		((SynthApp)app).setFrame((SynthFrame)frame);
 		((SynthApp)app).getSynthesizer().setFrame((SynthFrame)frame);
 
-		
-		
-		
 		Field chooserSave = null;
 
-		
-
-		   try {
-			 chooserSave = commandSave.getClass().getDeclaredField("chooser");
-
-			
-			 
-			 chooserSave.setAccessible(true);
-
-			
+		try {
+			chooserSave = commandSave.getClass().getDeclaredField("chooser");
+			chooserSave.setAccessible(true);
 		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		   FileDialog real_chooserSave=null;
+		FileDialog real_chooserSave=null;
 
-		 
-		   try {
-			   real_chooserSave=(FileDialog) chooserSave.get(commandSave);
-			   
-
-			  
-
+		try {
+			real_chooserSave=(FileDialog) chooserSave.get(commandSave);
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		   String fileToSave ="save";
-		   String fileToOpen="open";
-		   String directoryToSave ="saveD";
-		   String directoryToOpen="openD";
-		   
-		   app.getSynthesizer().add(new CModuleVCF_HP(app.getSynthesizer()));
-		   
-		  while (!fileToOpen.equals(fileToSave) || !directoryToOpen.equals(directoryToSave)){
-			 
+		String fileToSave ="save";
+		String fileToOpen="open";
+		String directoryToSave ="saveD";
+		String directoryToOpen="openD";
 
-			  JOptionPane.showMessageDialog((JFrame)frame,"You must save and open the same document to make this test (without modification test)");
-		   commandSave.execute();
-		   
-		   
-		   fileToSave=real_chooserSave.getFile();
-		   directoryToSave=real_chooserSave.getDirectory();
+		app.getSynthesizer().add(new CModuleVCF_HP(app.getSynthesizer()));
 
-
-		   
-		   
-		   app=new SynthApp(frame);
+		while (!fileToOpen.equals(fileToSave) || !directoryToOpen.equals(directoryToSave)){
+			JOptionPane.showMessageDialog((JFrame)frame,"You must save and open the same document to make this test (without modification test)");
+			commandSave.execute();
+			fileToSave=real_chooserSave.getFile();
+			directoryToSave=real_chooserSave.getDirectory();
+			app=new SynthApp(frame);
 			app.setDisplaySynthCommand(new DisplayCommand(frame));
-
-		   commandOpen=new OpenSynthCommand(app, frame);
-		   
-		   Field chooserOpen=null;
-		   
-		   try {
-				 chooserOpen = commandOpen.getClass().getDeclaredField("chooser");
-
-				
-				 
-				 chooserOpen.setAccessible(true);
-
-				
+			commandOpen=new OpenSynthCommand(app, frame);
+			Field chooserOpen=null;
+			try {
+				chooserOpen = commandOpen.getClass().getDeclaredField("chooser");
+				chooserOpen.setAccessible(true);
 			} catch (NoSuchFieldException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			   FileDialog real_chooserOpen=null;
+			FileDialog real_chooserOpen=null;
 
-			 
-			   try {
-				   real_chooserOpen=(FileDialog) chooserOpen.get(commandOpen);
-				   
 
-				  
-
+			try {
+				real_chooserOpen=(FileDialog) chooserOpen.get(commandOpen);
 			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		   
-		   commandOpen.execute();
-		   fileToOpen=real_chooserOpen.getFile();
-		   directoryToOpen=real_chooserOpen.getDirectory();
 
-		   
-		  }
+			commandOpen.execute();
+			fileToOpen=real_chooserOpen.getFile();
+			directoryToOpen=real_chooserOpen.getDirectory();
+		}
 
-		   assertEquals(1,app.getSynthesizer().getModules().size());
-		   assertEquals(CModuleVCF_HP.class,app.getSynthesizer().getModules().get(0).getClass());
+		assertEquals(1,app.getSynthesizer().getModules().size());
+		assertEquals(CModuleVCF_HP.class,app.getSynthesizer().getModules().get(0).getClass());
 
-		   
-	
-
-
-				
-				
-				
 	}
-	
+
 	/**
 	 * On sauvegarde,on modifie,on sauvegarde à nouveau puis on ouvre le meme fichier 
 	 */
-	
+
 	@Test
 	public void testExecuteModifySame() {
 		((SynthApp)app).setFrame((SynthFrame)frame);
 		((SynthApp)app).getSynthesizer().setFrame((SynthFrame)frame);
-
-		
-		
-		
 		Field chooserSave = null;
-
-		
-
-		   try {
-			 chooserSave = commandSave.getClass().getDeclaredField("chooser");
-
-			
-			 
-			 chooserSave.setAccessible(true);
-
-			
+		try {
+			chooserSave = commandSave.getClass().getDeclaredField("chooser");
+			chooserSave.setAccessible(true);
 		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		   FileDialog real_chooserSave=null;
+		FileDialog real_chooserSave=null;
 
-		 
-		   try {
-			   real_chooserSave=(FileDialog) chooserSave.get(commandSave);
-			   
-
-			  
-
+		try {
+			real_chooserSave=(FileDialog) chooserSave.get(commandSave);
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		   String fileToSave ="save";
-		   String fileToOpen="open";
-		   String directoryToSave ="saveD";
-		   String directoryToOpen="openD";
-		   
-		   
-		  while (!fileToOpen.equals(fileToSave) || !directoryToOpen.equals(directoryToSave)){
+		String fileToSave ="save";
+		String fileToOpen="open";
+		String directoryToSave ="saveD";
+		String directoryToOpen="openD";
 
+		while (!fileToOpen.equals(fileToSave) || !directoryToOpen.equals(directoryToSave)){
 
-			  JOptionPane.showMessageDialog((JFrame)frame,"You must save and open the same document to make this test (with modification test)");
-			   app.getSynthesizer().add(new CModuleVCF_HP(app.getSynthesizer()));
+			JOptionPane.showMessageDialog((JFrame)frame,"You must save and open the same document to make this test (with modification test)");
+			app.getSynthesizer().add(new CModuleVCF_HP(app.getSynthesizer()));
 
-		   commandSave.execute();
+			commandSave.execute();
 
-		   
-		   fileToSave=real_chooserSave.getFile();
-		   directoryToSave=real_chooserSave.getDirectory();
+			fileToSave=real_chooserSave.getFile();
+			directoryToSave=real_chooserSave.getDirectory();
 
-		   
-		   app.getSynthesizer().add(new CModuleVCF_LP(app.getSynthesizer()));
-		   commandReSave.execute();
+			app.getSynthesizer().add(new CModuleVCF_LP(app.getSynthesizer()));
+			commandReSave.execute();
 
-		   
-		   app=new SynthApp(frame);
+			app=new SynthApp(frame);
 			app.setDisplaySynthCommand(new DisplayCommand(frame));
 
-		   commandOpen=new OpenSynthCommand(app, frame);
-		   
-		   Field chooserOpen=null;
-		   
-		   try {
-				 chooserOpen = commandOpen.getClass().getDeclaredField("chooser");
+			commandOpen=new OpenSynthCommand(app, frame);
 
-				
-				 
-				 chooserOpen.setAccessible(true);
+			Field chooserOpen=null;
 
-				
+			try {
+				chooserOpen = commandOpen.getClass().getDeclaredField("chooser");
+				chooserOpen.setAccessible(true);
 			} catch (NoSuchFieldException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			   FileDialog real_chooserOpen=null;
-
-			 
-			   try {
-				   real_chooserOpen=(FileDialog) chooserOpen.get(commandOpen);
-				   
-
-				  
-
+			FileDialog real_chooserOpen=null;
+			try {
+				real_chooserOpen=(FileDialog) chooserOpen.get(commandOpen);
 			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		   
-		   commandOpen.execute();
-		   fileToOpen=real_chooserOpen.getFile();
-		   directoryToOpen=real_chooserOpen.getDirectory();
 
-		   
-		  }
+			commandOpen.execute();
+			fileToOpen=real_chooserOpen.getFile();
+			directoryToOpen=real_chooserOpen.getDirectory();
+		}
 
-		   assertEquals(2,app.getSynthesizer().getModules().size());
-		   assertEquals(CModuleVCF_HP.class,app.getSynthesizer().getModules().get(0).getClass());
-		   assertEquals(CModuleVCF_LP.class,app.getSynthesizer().getModules().get(1).getClass());
-	
-
-
-				
-				
-				
+		assertEquals(2,app.getSynthesizer().getModules().size());
+		assertEquals(CModuleVCF_HP.class,app.getSynthesizer().getModules().get(0).getClass());
+		assertEquals(CModuleVCF_LP.class,app.getSynthesizer().getModules().get(1).getClass());
 	}
-	
 }
-				
-			
-				
-				
-
-		
 
 
-		
-		
-		
-		
-		
-		
-				
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

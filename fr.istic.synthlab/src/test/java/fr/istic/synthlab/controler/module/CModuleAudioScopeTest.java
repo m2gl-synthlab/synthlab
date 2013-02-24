@@ -19,6 +19,7 @@ import fr.istic.synthlab.abstraction.module.eg.ModuleEG;
 import fr.istic.synthlab.abstraction.port.InputPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.abstraction.wire.Wire;
 import fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope;
 import fr.istic.synthlab.controller.module.audioscope.ICModuleAudioScope;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
@@ -80,48 +81,28 @@ public class CModuleAudioScopeTest {
 	 */
 	@Test
 	public void testP2cClosingAllWireConnected() {
-		ModuleEG module = new ModuleEG(synth);
-		UnitInputPort jSynPort = new UnitInputPort("TestInput");
+		
+		IWire wireIn = new Wire(synth);
+		IWire wireOut = new Wire(synth);
+		
+		try {
+			wireIn.connect(iTest.getInput());
+		} catch (PortAlreadyInUseException e1) {
+			e1.printStackTrace();
+		} catch (BadConnectionException e1) {
+			e1.printStackTrace();
+		}
+		
+		try {
+			wireOut.connect(iTest.getOutput());
+		} catch (PortAlreadyInUseException e1) {
+			e1.printStackTrace();
+		} catch (BadConnectionException e1) {
+			e1.printStackTrace();
+		}
+		
 		for(IWire w : iTest.getWires()){
-			try {
-				w.connect(new InputPort("TestInput", jSynPort, module));
-			} catch (PortAlreadyInUseException e) {
-				e.printStackTrace();
-			} catch (BadConnectionException e) {
-				e.printStackTrace();
-			}
 			assertTrue(w.isConnected());
-		}
-		iTest.p2cClosing();
-		for (IWire w : iTest.getWires()) {
-			assertFalse(w.isConnected());
-		}
-	}
-
-
-	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope#p2cClosing()}.
-	 * Test de la méthode la p2cClosing lorsque certains port sont connectés.
-	 */
-	@Test
-	public void testP2cClosingHalfWireConnected() {
-		int i = 0;
-		ModuleEG module = new ModuleEG(synth);
-		UnitInputPort jSynPort = new UnitInputPort("TestInput");
-		for(IWire w : iTest.getWires()){
-			if (i%2 == 0){
-				try {
-					w.connect(new InputPort("TestInput", jSynPort, module));
-				} catch (PortAlreadyInUseException e) {
-					e.printStackTrace();
-				} catch (BadConnectionException e) {
-					e.printStackTrace();
-				}
-				assertTrue(w.isConnected());
-			}else{
-				assertFalse(w.isConnected());
-			}
-			i++;
 		}
 		iTest.p2cClosing();
 		for (IWire w : iTest.getWires()) {
@@ -140,7 +121,6 @@ public class CModuleAudioScopeTest {
 	/**
 	 * Test method for {@link fr.istic.synthlab.controller.module.audioscope.CModuleAusioScope#p2cRemoveModule(fr.istic.synthlab.controller.module.ICModule)}.
 	 */
-	//TODO ne fonctionne pas 
 	@Test
 	public void testP2cRemoveModule() {
 		assertTrue(synth.getModules().contains(iTest));

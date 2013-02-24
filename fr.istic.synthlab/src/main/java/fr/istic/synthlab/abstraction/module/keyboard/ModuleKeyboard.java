@@ -15,42 +15,33 @@ public class ModuleKeyboard extends AModule implements IModuleKeyboard {
 	
 	public ModuleKeyboard(ICSynthesizer synth) {
 		super(synth, MODULE_NAME);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public List<UnitGenerator> getJSyn() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void start() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public List<IWire> getWires() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void play(double frequency) {
-		// TODO Auto-generated method stub
-		
+	public void play(double frequency) {		
 	}
 
 	@Override
-	public void stop() {
-		// TODO Auto-generated method stub
-		
+	public void stop() {		
 	}
 
 	@Override
 	public IOutputPort getOutput() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

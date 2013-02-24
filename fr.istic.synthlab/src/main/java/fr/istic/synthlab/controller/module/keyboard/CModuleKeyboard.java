@@ -19,20 +19,15 @@ public class CModuleKeyboard extends ModuleKeyboard implements ICModuleKeyboard{
 
 	@Override
 	public IPModuleKeyboard getPresentation() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void p2cClosing() {
-		// TODO Auto-generated method stub
-		
+	public void p2cClosing() {		
 	}
 
 	@Override
-	public void setParameter(String key, Double value) {
-		// TODO Auto-generated method stub
-		
+	public void setParameter(String key, Double value) {		
 	}
 
 	@Override

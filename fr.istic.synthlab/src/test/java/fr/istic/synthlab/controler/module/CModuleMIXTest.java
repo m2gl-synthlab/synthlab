@@ -20,6 +20,7 @@ import fr.istic.synthlab.abstraction.module.eg.ModuleEG;
 import fr.istic.synthlab.abstraction.port.InputPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.abstraction.wire.Wire;
 import fr.istic.synthlab.controller.module.mix.CModuleMIX;
 import fr.istic.synthlab.controller.module.mix.ICModuleMIX;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
@@ -86,47 +87,54 @@ public class CModuleMIXTest {
 	 */
 	@Test
 	public void testP2cClosingAllWireConnected() {
-		ModuleEG module = new ModuleEG(synth);
-		UnitInputPort jSynPort = new UnitInputPort("TestInput");
+		IWire wireIn1 = new Wire(synth);
+		IWire wireIn2 = new Wire(synth);
+		IWire wireIn3 = new Wire(synth);
+		IWire wireIn4 = new Wire(synth);
+		IWire wireOut = new Wire(synth);
+		
+		try {
+			wireIn1.connect(iTest.getInput(0));
+		} catch (PortAlreadyInUseException e1) {
+			e1.printStackTrace();
+		} catch (BadConnectionException e1) {
+			e1.printStackTrace();
+		}
+		
+		try {
+			wireIn2.connect(iTest.getInput(1));
+		} catch (PortAlreadyInUseException e1) {
+			e1.printStackTrace();
+		} catch (BadConnectionException e1) {
+			e1.printStackTrace();
+		}
+		
+		try {
+			wireIn3.connect(iTest.getInput(2));
+		} catch (PortAlreadyInUseException e1) {
+			e1.printStackTrace();
+		} catch (BadConnectionException e1) {
+			e1.printStackTrace();
+		}
+		
+		try {
+			wireIn4.connect(iTest.getInput(3));
+		} catch (PortAlreadyInUseException e1) {
+			e1.printStackTrace();
+		} catch (BadConnectionException e1) {
+			e1.printStackTrace();
+		}
+		
+		try {
+			wireOut.connect(iTest.getOutput());
+		} catch (PortAlreadyInUseException e1) {
+			e1.printStackTrace();
+		} catch (BadConnectionException e1) {
+			e1.printStackTrace();
+		}
+		
 		for(IWire w : iTest.getWires()){
-			try {
-				w.connect(new InputPort("TestInput", jSynPort, module));
-			} catch (PortAlreadyInUseException e) {
-				e.printStackTrace();
-			} catch (BadConnectionException e) {
-				e.printStackTrace();
-			}
 			assertTrue(w.isConnected());
-		}
-		iTest.p2cClosing();
-		for (IWire w : iTest.getWires()) {
-			assertFalse(w.isConnected());
-		}
-	}
-
-	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.mix.CModuleMIX#p2cClosing()}.
-	 * Test de la méthode la p2cClosing lorsque certains port sont connectés.
-	 */
-	@Test
-	public void testP2cClosingHalfWireConnected() {
-		int i = 0;
-		ModuleEG module = new ModuleEG(synth);
-		UnitInputPort jSynPort = new UnitInputPort("TestInput");
-		for(IWire w : iTest.getWires()){
-			if (i%2 == 0){
-				try {
-					w.connect(new InputPort("TestInput", jSynPort, module));
-				} catch (PortAlreadyInUseException e) {
-					e.printStackTrace();
-				} catch (BadConnectionException e) {
-					e.printStackTrace();
-				}
-				assertTrue(w.isConnected());
-			}else{
-				assertFalse(w.isConnected());
-			}
-			i++;
 		}
 		iTest.p2cClosing();
 		for (IWire w : iTest.getWires()) {
@@ -257,6 +265,18 @@ public class CModuleMIXTest {
 		assertEquals(2.0, iTest.getAttenuation4(),0);	
 	}
 
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.mix.CModuleMIX#setParameter(java.lang.String, java.lang.Double)}.
+	 */
+	@Test
+	public void testSetParameterFalseParameter() {
+		double attenuation1 = iTest.getAttenuation1(), attenuation2 = iTest.getAttenuation2(), attenuation3 = iTest.getAttenuation3(), attenuation4 = iTest.getAttenuation4();
+		iTest.setParameter("falseParameters", 2.0);
+		assertEquals(attenuation1, iTest.getAttenuation1(),4);
+		assertEquals(attenuation2, iTest.getAttenuation2(),4);
+		assertEquals(attenuation3, iTest.getAttenuation3(),4);
+		assertEquals(attenuation4, iTest.getAttenuation4(),4);
+	}
 
 	/**
 	 * Test method for {@link fr.istic.synthlab.controller.module.mix.CModuleMIX#getSynthesizerPresentation()}.
@@ -269,7 +289,6 @@ public class CModuleMIXTest {
 	/**
 	 * Test method for {@link fr.istic.synthlab.controller.module.mix.CModuleMIX#p2cRemoveModule(fr.istic.synthlab.controller.module.ICModule)}.
 	 */
-	//TODO Test qui ne passe pas ...
 	@Test
 	public void testP2cRemoveModule() {
 		assertTrue(synth.getModules().contains(iTest));

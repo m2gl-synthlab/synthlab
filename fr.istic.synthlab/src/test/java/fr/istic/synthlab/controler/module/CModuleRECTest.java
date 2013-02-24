@@ -19,6 +19,7 @@ import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
 import fr.istic.synthlab.abstraction.module.eg.ModuleEG;
 import fr.istic.synthlab.abstraction.port.InputPort;
 import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.abstraction.wire.Wire;
 import fr.istic.synthlab.controller.module.rec.CModuleREC;
 import fr.istic.synthlab.controller.module.rec.ICModuleREC;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
@@ -123,16 +124,17 @@ public class CModuleRECTest {
 	 */
 	@Test
 	public void testP2cClosingAllWireConnected() {
-		ModuleEG module = new ModuleEG(synth);
-		UnitInputPort jSynPort = new UnitInputPort("TestInput");
+		IWire wireIn = new Wire(synth);
+
+		try {
+			wireIn.connect(iTest.getInput());
+		} catch (PortAlreadyInUseException e1) {
+			e1.printStackTrace();
+		} catch (BadConnectionException e1) {
+			e1.printStackTrace();
+		}
+		
 		for(IWire w : iTest.getWires()){
-			try {
-				w.connect(new InputPort("TestInput", jSynPort, module));
-			} catch (PortAlreadyInUseException e) {
-				e.printStackTrace();
-			} catch (BadConnectionException e) {
-				e.printStackTrace();
-			}
 			assertTrue(w.isConnected());
 		}
 		iTest.p2cClosing();
@@ -141,35 +143,6 @@ public class CModuleRECTest {
 		}
 	}
 
-	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.rec.CModuleREC#p2cClosing()}.
-	 * Test de la méthode la p2cClosing lorsque certains port sont connectés.
-	 */
-	@Test
-	public void testP2cClosingHalfWireConnected() {
-		int i = 0;
-		ModuleEG module = new ModuleEG(synth);
-		UnitInputPort jSynPort = new UnitInputPort("TestInput");
-		for(IWire w : iTest.getWires()){
-			if (i%2 == 0){
-				try {
-					w.connect(new InputPort("TestInput", jSynPort, module));
-				} catch (PortAlreadyInUseException e) {
-					e.printStackTrace();
-				} catch (BadConnectionException e) {
-					e.printStackTrace();
-				}
-				assertTrue(w.isConnected());
-			}else{
-				assertFalse(w.isConnected());
-			}
-			i++;
-		}
-		iTest.p2cClosing();
-		for (IWire w : iTest.getWires()) {
-			assertFalse(w.isConnected());
-		}
-	}
 	/**
 	 * Test method for {@link fr.istic.synthlab.controller.module.rec.CModuleREC#setParameter(java.lang.String, java.lang.Double)}.
 	 */
@@ -185,6 +158,18 @@ public class CModuleRECTest {
 		assertEquals(false, iTest.isRecording());
 	}
 
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.rec.CModuleREC#setParameter(java.lang.String, java.lang.Double)}.
+	 */
+	@Test
+	public void testSetParameterFalseParameter() {
+		double attenuation = iTest.getAttenuation();
+		boolean recording = iTest.isRecording(); 
+		iTest.setParameter("falseParameters", 2.0);
+		assertEquals(attenuation, iTest.getAttenuation(),4);
+		assertEquals(recording, iTest.isRecording());
+	}
+	
 	/**
 	 * Test method for {@link fr.istic.synthlab.controller.module.rec.CModuleREC#getSynthesizerPresentation()}.
 	 */

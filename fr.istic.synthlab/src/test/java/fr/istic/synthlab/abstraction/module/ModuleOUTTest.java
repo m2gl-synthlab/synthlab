@@ -75,20 +75,12 @@ public class ModuleOUTTest {
 			w.connect(m.getInput());
 			w.connect(mrep.getOutput1());
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-
-		
+		}		
 		assertEquals(1, m.getWires().size());
-		assertEquals(w, m.getWires().get(0));
-
-		
-
-		
+		assertEquals(w, m.getWires().get(0));		
 	}
 	
 
@@ -105,19 +97,9 @@ public class ModuleOUTTest {
 			fail("Une exception devrait etre lancée");
 
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-	
-		
-
-		
+		}	
 	}
-
-	
-
-
 }

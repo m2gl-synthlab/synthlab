@@ -24,14 +24,12 @@ public class CInputPortTest extends TestCase {
 		iop = new CInputPort(synth,"out1", null, null);
 		assertEquals("out1", iop.getName());
 		assertNotNull(iop.getPresentation());
-
 	}
 
 	public void testCInputPortUnitInputPort() {
 		UnitInputPort iop2 = new UnitInputPort("test");
 		iop = new CInputPort(synth, "iop", iop2, null);
 		assertEquals(iop2, iop.getJSyn());
-
 		assertNotNull(iop.getPresentation());
 	}
 

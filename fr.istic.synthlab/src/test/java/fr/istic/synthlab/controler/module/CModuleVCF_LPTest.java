@@ -19,6 +19,7 @@ import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
 import fr.istic.synthlab.abstraction.module.eg.ModuleEG;
 import fr.istic.synthlab.abstraction.port.InputPort;
 import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.abstraction.wire.Wire;
 import fr.istic.synthlab.controller.module.vcf.CModuleVCF_LP;
 import fr.istic.synthlab.controller.module.vcf.ICModuleVCF;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
@@ -139,16 +140,35 @@ public class CModuleVCF_LPTest {
 	 */
 	@Test
 	public void testP2cClosingAllWireConnected() {
-		ModuleEG module = new ModuleEG(synth);
-		UnitInputPort jSynPort = new UnitInputPort("TestInput");
+		IWire wireIn = new Wire(synth);
+		IWire wireInFM = new Wire(synth);
+		IWire wireOut = new Wire(synth);
+		
+		try {
+			wireIn.connect(iTest.getInput());
+		} catch (PortAlreadyInUseException e1) {
+			e1.printStackTrace();
+		} catch (BadConnectionException e1) {
+			e1.printStackTrace();
+		}
+		
+		try {
+			wireInFM.connect(iTest.getInputFm());
+		} catch (PortAlreadyInUseException e1) {
+			e1.printStackTrace();
+		} catch (BadConnectionException e1) {
+			e1.printStackTrace();
+		}
+		
+		try {
+			wireOut.connect(iTest.getOutput());
+		} catch (PortAlreadyInUseException e1) {
+			e1.printStackTrace();
+		} catch (BadConnectionException e1) {
+			e1.printStackTrace();
+		}
+		
 		for(IWire w : iTest.getWires()){
-			try {
-				w.connect(new InputPort("TestInput", jSynPort, module));
-			} catch (PortAlreadyInUseException e) {
-				e.printStackTrace();
-			} catch (BadConnectionException e) {
-				e.printStackTrace();
-			}
 			assertTrue(w.isConnected());
 		}
 		iTest.p2cClosing();
@@ -156,37 +176,6 @@ public class CModuleVCF_LPTest {
 			assertFalse(w.isConnected());
 		}
 	}
-
-	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.vcf.CModuleVCF_LP#p2cClosing()}.
-	 * Test de la méthode la p2cClosing lorsque certains port sont connectés.
-	 */
-	@Test
-	public void testP2cClosingHalfWireConnected() {
-		int i = 0;
-		ModuleEG module = new ModuleEG(synth);
-		UnitInputPort jSynPort = new UnitInputPort("TestInput");
-		for(IWire w : iTest.getWires()){
-			if (i%2 == 0){
-				try {
-					w.connect(new InputPort("TestInput", jSynPort, module));
-				} catch (PortAlreadyInUseException e) {
-					e.printStackTrace();
-				} catch (BadConnectionException e) {
-					e.printStackTrace();
-				}
-				assertTrue(w.isConnected());
-			}else{
-				assertFalse(w.isConnected());
-			}
-			i++;
-		}
-		iTest.p2cClosing();
-		for (IWire w : iTest.getWires()) {
-			assertFalse(w.isConnected());
-		}
-	}
-
 	
 	/**
 	 * Test method for {@link fr.istic.synthlab.controller.module.vcf.CModuleVCF_LP#setParameter(java.lang.String, java.lang.Double)}.
@@ -197,6 +186,17 @@ public class CModuleVCF_LPTest {
 		assertEquals(919.8680, iTest.getCutFrequency(),4);
 		iTest.setParameter("resonnance", 2.0);
 		assertEquals(2.0035, iTest.getResonance(),4);	
+	}
+	
+	/**
+	 * Test method for {@link fr.istic.synthlab.controller.module.vcf.CModuleVCF_LP#setParameter(java.lang.String, java.lang.Double)}.
+	 */
+	@Test
+	public void testSetParameterFalseParameter() {
+		double resonnance = iTest.getResonance(), frequency = iTest.getCutFrequency();
+		iTest.setParameter("falseParameters", 2.0);
+		assertEquals(resonnance, iTest.getResonance(),4);
+		assertEquals(frequency, iTest.getCutFrequency(),4);
 	}
 
 	/**

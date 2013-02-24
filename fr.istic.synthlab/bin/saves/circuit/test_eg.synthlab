@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modules>
+	<module name="EG - 1" x="285.0" y="10.0">
+		<wire colorB="128" colorG="128" colorR="128" inputPort="In"
+			inputPortModuleName="AudioScope - 1" outputPort="Out" />
+		<parameter key="decayTime" value="0.022473826068601432" />
+		<parameter key="substainTime" value="0.44" />
+		<parameter key="releaseTime" value="0.007946589470845158" />
+		<parameter key="attackTime" value="0.002588110253417125" />
+	</module>
+	<module name="AudioScope - 1" x="581.0" y="11.0" />
+	<module name="VCO - 1" x="10.0" y="10.0">
+		<wire colorB="128" colorG="128" colorR="128" inputPort="Gate"
+			inputPortModuleName="EG - 1" outputPort="Square" />
+		<parameter key="octave" value="6.0" />
+		<parameter key="tone" value="-0.020000000000000018" />
+		<parameter key="frequency" value="63.118893087575" />
+	</module>
+</modules>

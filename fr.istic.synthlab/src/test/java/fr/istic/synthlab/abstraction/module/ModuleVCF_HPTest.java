@@ -41,7 +41,7 @@ public class ModuleVCF_HPTest {
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
 		m=new ModuleVCF_HP(synth);
-	
+
 	}
 	@Test
 	public void testGetJSyn() {
@@ -63,36 +63,29 @@ public class ModuleVCF_HPTest {
 
 
 
-	
+
 	public void testGetWires(){
 		IWire w=new Wire(synth);
 		try {
 			w.connect(m.getInputFm());
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			w.connect(m.getOutput());
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		assertEquals(1, m.getWires().size());
-		assertEquals(w, m.getWires().get(0));
-
-
-		
+		assertEquals(w, m.getWires().get(0));		
 	}
-	
-	
+
+
 	@Test
 	public void testGetWiresDifferent(){
 		IWire w=new Wire(synth);		
@@ -104,32 +97,21 @@ public class ModuleVCF_HPTest {
 			w2.connect(mrep.getInput());
 
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			w.connect(m.getInput());
 			w2.connect(m.getOutput());
-
-
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		
 		assertEquals(2, m.getWires().size());
 		assertEquals(w, m.getWires().get(0));
 		assertEquals(w2, m.getWires().get(1));
-
-
-		
 	}
 
 
@@ -139,131 +121,102 @@ public class ModuleVCF_HPTest {
 		try {
 			w.connect(m.getInputFm());
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			w.connect(m.getOutput());
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-((ModuleVCF_HP) m).update((Port) m.getInputFm());
-		
+
+		((ModuleVCF_HP) m).update((Port) m.getInputFm());
+
 		Field ptr = null;
 		Field fj1=null;
 		Field fj2=null;
 
-		   try {
-			 ptr = m.getClass().getDeclaredField("passThrough");
-			 fj1 = m.getClass().getDeclaredField("filterJSyn1");
-			 fj2= m.getClass().getDeclaredField("filterJSyn2");
-			 
-			 ptr.setAccessible(true);
-			 fj1.setAccessible(true);
-			 fj2.setAccessible(true);
+		try {
+			ptr = m.getClass().getDeclaredField("passThrough");
+			fj1 = m.getClass().getDeclaredField("filterJSyn1");
+			fj2= m.getClass().getDeclaredField("filterJSyn2");
+
+			ptr.setAccessible(true);
+			fj1.setAccessible(true);
+			fj2.setAccessible(true);
 		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		   PassThrough passThrough=null;
+		PassThrough passThrough=null;
 
-		   FilterHighPass filterJSyn1=null;
-		   FilterHighPass filterJSyn2=null;
-		   
-		   try {
-			   passThrough=(PassThrough) ptr.get(m);
-			   filterJSyn1=(FilterHighPass) fj1.get(m);
-			   filterJSyn2=(FilterHighPass) fj2.get(m);
+		FilterHighPass filterJSyn1=null;
+		FilterHighPass filterJSyn2=null;
+
+		try {
+			passThrough=(PassThrough) ptr.get(m);
+			filterJSyn1=(FilterHighPass) fj1.get(m);
+			filterJSyn2=(FilterHighPass) fj2.get(m);
 
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		   
 		assertTrue(passThrough.output.isConnected());
 		assertTrue(filterJSyn1.frequency.isConnected());
 		assertTrue(filterJSyn2.output.isConnected());
-
-		
-
-		
 	}
-	
-	
-	
+
 	@Test
 	public void testUpdateWithoutConnect() {
 
-((ModuleVCF_HP) m).update((Port) m.getInputFm());
-		
+		((ModuleVCF_HP) m).update((Port) m.getInputFm());
+
 		Field ptr = null;
 		Field fj1=null;
 		Field fj2=null;
 
-		   try {
-			 ptr = m.getClass().getDeclaredField("passThrough");
-			 fj1 = m.getClass().getDeclaredField("filterJSyn1");
-			 fj2= m.getClass().getDeclaredField("filterJSyn2");
-			 
-			 ptr.setAccessible(true);
-			 fj1.setAccessible(true);
-			 fj2.setAccessible(true);
+		try {
+			ptr = m.getClass().getDeclaredField("passThrough");
+			fj1 = m.getClass().getDeclaredField("filterJSyn1");
+			fj2= m.getClass().getDeclaredField("filterJSyn2");
+
+			ptr.setAccessible(true);
+			fj1.setAccessible(true);
+			fj2.setAccessible(true);
 		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		   PassThrough passThrough=null;
+		PassThrough passThrough=null;
+		FilterHighPass filterJSyn1=null;
+		FilterHighPass filterJSyn2=null;
 
-		   FilterHighPass filterJSyn1=null;
-		   FilterHighPass filterJSyn2=null;
-		   
-		   try {
-			   passThrough=(PassThrough) ptr.get(m);
-			   filterJSyn1=(FilterHighPass) fj1.get(m);
-			   filterJSyn2=(FilterHighPass) fj2.get(m);
+		try {
+			passThrough=(PassThrough) ptr.get(m);
+			filterJSyn1=(FilterHighPass) fj1.get(m);
+			filterJSyn2=(FilterHighPass) fj2.get(m);
 
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		   
-		   
+
 		assertFalse(passThrough.output.isConnected());
 		assertFalse(filterJSyn1.frequency.isConnected());
 		assertFalse(filterJSyn2.output.isConnected());
 
 		assertEquals(m.getCutFrequency(), filterJSyn1.frequency.get(),0);
 		assertEquals(m.getCutFrequency(), filterJSyn2.frequency.get(),0);
-
-		
-
-		
 	}
-	
+
 	@Test
 	public void testGetWiresDifferentBad(){
 		IWire w=new Wire(synth);		
@@ -275,17 +228,10 @@ public class ModuleVCF_HPTest {
 			w.connect(mrep.getOutput1());
 			w2.connect(m.getInput());
 			fail("Une exception devrait etre lancée");
-
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-		
-
-
 }
