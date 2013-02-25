@@ -36,13 +36,13 @@ public class CModuleAudioScope extends ModuleAudioScope implements ICModuleAudio
 	}
 
 	@Override
-	public void setParameter(String key, Double value){}
+	public void setParameter(String key, Double value) {
+	}
 
 	@Override
 	public IPSynthesizer getSynthesizerPresentation() {
-		return ((ICSynthesizer)cSynthesizer).getPresentation();
+		return ((ICSynthesizer) cSynthesizer).getPresentation();
 	}
-
 
 	@Override
 	public void p2cRemoveModule(ICModule module) {

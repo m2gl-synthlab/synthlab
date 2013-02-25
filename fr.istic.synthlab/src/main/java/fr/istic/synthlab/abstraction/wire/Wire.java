@@ -14,11 +14,11 @@ public class Wire implements IWire {
 	private IInputPort input;
 	private IOutputPort output;
 	private ISynthesizer synth;
-	
-	public Wire(ISynthesizer synth){
+
+	public Wire(ISynthesizer synth) {
 		this.synth = synth;
 	}
-	
+
 	@Override
 	public IInputPort getInput() {
 		return input;
@@ -83,7 +83,7 @@ public class Wire implements IWire {
 
 		if (this.input != null)
 			this.input.setWire(null);
-		
+
 		synth.remove(this);
 
 	}

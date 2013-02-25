@@ -38,9 +38,9 @@ public class PModuleKeyboard extends APModule implements IPModuleKeyboard {
 		configView();
 		defineCallbacks();
 	}
-	
+
 	private void configView() {
-		
+
 		doBtn = new JButton();
 		doBtn.setBackground(Color.WHITE);
 		doBtn.setLocation(0 * 20, 0);

@@ -33,7 +33,7 @@ public class ModuleVCA extends AModule implements IModuleVCA, Observer<Port> {
 	private AttenuationFilter attenuator;
 	private AmplitudeModulatorFilter inputAmplitudeModulator;
 	private PassThrough passThroughA, passThroughB;
-	
+
 	public ModuleVCA(ISynthesizer synth) {
 		super(synth, MODULE_NAME);
 
@@ -47,15 +47,24 @@ public class ModuleVCA extends AModule implements IModuleVCA, Observer<Port> {
 		this.inputAmplitudeModulator = new AmplitudeModulatorFilter(0);
 
 		this.setAttenuation(0);
-		
-		this.input = PACFactory.getFactory().newInputPort(synth, this, INPUT_NAME, attenuator.input); // Ajout du port INPUT
+
+		this.input = PACFactory.getFactory().newInputPort(synth, this, INPUT_NAME, attenuator.input); // Ajout
+																										// du
+																										// port
+																										// INPUT
 
 		this.passThroughA.input.connect(attenuator.output);
 		this.passThroughB.input.connect(passThroughA.output);
-		
-		this.inputAm = PACFactory.getFactory().newInputPort(synth, this, INPUT_AM_NAME, inputAmplitudeModulator.inputAm); // Ajout du port AM
+
+		this.inputAm = PACFactory.getFactory().newInputPort(synth, this, INPUT_AM_NAME, inputAmplitudeModulator.inputAm); // Ajout
+																															// du
+																															// port
+																															// AM
 		this.inputAm.addObserver(this);
-		this.output = PACFactory.getFactory().newOutputPort(synth, this, OUTPUT_NAME, passThroughB.output); // Ajout du port OUTPUT
+		this.output = PACFactory.getFactory().newOutputPort(synth, this, OUTPUT_NAME, passThroughB.output); // Ajout
+																											// du
+																											// port
+																											// OUTPUT
 		addPort(input);
 		addPort(inputAm);
 		addPort(output);

@@ -26,7 +26,7 @@ public class ModuleNOISE extends AModule implements IModuleNOISE {
 
 	// JSyn WhiteNoise generator and AttenuationFilter perso
 	private WhiteNoise noise;
-	private AttenuationFilter attenuator;	
+	private AttenuationFilter attenuator;
 
 	private IOutputPort out;
 
@@ -35,10 +35,9 @@ public class ModuleNOISE extends AModule implements IModuleNOISE {
 		this.noise = new WhiteNoise();
 		this.attenuator = new AttenuationFilter();
 
-		this.out = PACFactory.getFactory().newOutputPort(synth, this, OUT_NAME,
-				attenuator.output);
+		this.out = PACFactory.getFactory().newOutputPort(synth, this, OUT_NAME, attenuator.output);
 		this.setAttenuation(0);
-		
+
 		// Connect WhiteNoise generator to AttenuationFilter
 		noise.output.connect(attenuator.input);
 

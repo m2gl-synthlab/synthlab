@@ -49,12 +49,12 @@ public class CModuleVCA extends ModuleVCA implements ICModuleVCA {
 			changeAttenuation(value);
 		}
 	}
-	
+
 	@Override
 	public IPSynthesizer getSynthesizerPresentation() {
-		return ((ICSynthesizer)cSynthesizer).getPresentation();
+		return ((ICSynthesizer) cSynthesizer).getPresentation();
 	}
-	
+
 	@Override
 	public void p2cRemoveModule(ICModule module) {
 		((ICSynthesizer) cSynthesizer).p2cRemoveModule(module);

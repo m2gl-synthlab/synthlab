@@ -32,7 +32,7 @@ public class ModuleEG extends AModule implements IModuleEG {
 
 		adsr = new EnvelopeDAHDSR();
 
-		this.gate = PACFactory.getFactory().newInputPort(synth, this, IN_NAME,	adsr.input);
+		this.gate = PACFactory.getFactory().newInputPort(synth, this, IN_NAME, adsr.input);
 		this.out = PACFactory.getFactory().newOutputPort(synth, this, OUT_NAME, adsr.output);
 
 		addPort(gate);
@@ -41,7 +41,7 @@ public class ModuleEG extends AModule implements IModuleEG {
 
 	@Override
 	public void setAttack(double attackTime) {
-		if (attackTime < 0.0){
+		if (attackTime < 0.0) {
 			attackTime = 0.0;
 		}
 		getParameters().put("attackTime", attackTime);
@@ -55,7 +55,7 @@ public class ModuleEG extends AModule implements IModuleEG {
 
 	@Override
 	public void setDecay(double decayTime) {
-		if (decayTime < 0.0){
+		if (decayTime < 0.0) {
 			decayTime = 0.0;
 		}
 		getParameters().put("decayTime", decayTime);
@@ -69,11 +69,11 @@ public class ModuleEG extends AModule implements IModuleEG {
 
 	@Override
 	public void setSustain(double sustainValue) {
-		if (sustainValue < 0.0){
+		if (sustainValue < 0.0) {
 			sustainValue = 0.0;
 		}
 		getParameters().put("sustainValue", sustainValue);
-		adsr.sustain.set(sustainValue/5);
+		adsr.sustain.set(sustainValue / 5);
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class ModuleEG extends AModule implements IModuleEG {
 
 	@Override
 	public void setRelease(double releaseTime) {
-		if (releaseTime < 0.0){
+		if (releaseTime < 0.0) {
 			releaseTime = 0.0;
 		}
 		getParameters().put("releaseTime", releaseTime);

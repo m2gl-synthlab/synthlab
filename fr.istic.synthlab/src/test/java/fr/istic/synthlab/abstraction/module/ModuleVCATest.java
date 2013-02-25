@@ -27,16 +27,17 @@ public class ModuleVCATest extends TestCase {
 
 	private IModuleVCA m;
 	private ISynthesizer synth;
-	public void setUp(){
+
+	public void setUp() {
 		PACFactory.setFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
-		m=new ModuleVCA(synth);
+		m = new ModuleVCA(synth);
 	}
 
-	public void testGetWires(){
-		IWire w=new Wire(synth);
+	public void testGetWires() {
+		IWire w = new Wire(synth);
 		try {
 			w.connect(m.getInputAM());
 		} catch (PortAlreadyInUseException e) {
@@ -52,17 +53,17 @@ public class ModuleVCATest extends TestCase {
 			e.printStackTrace();
 		}
 		assertEquals(1, m.getWires().size());
-		assertEquals(w, m.getWires().get(0));		
+		assertEquals(w, m.getWires().get(0));
 	}
 
 	public void testGetJSyn() {
 		assertNotNull(m.getJSyn());
 	}
 
-	public void testGetWiresDifferent(){
-		IWire w=new Wire(synth);		
-		IWire w2=new Wire(synth);
-		IModuleREP mrep=new ModuleREP(synth);
+	public void testGetWiresDifferent() {
+		IWire w = new Wire(synth);
+		IWire w2 = new Wire(synth);
+		IModuleREP mrep = new ModuleREP(synth);
 
 		try {
 			w.connect(mrep.getOutput1());
@@ -82,11 +83,11 @@ public class ModuleVCATest extends TestCase {
 		}
 		assertEquals(2, m.getWires().size());
 		assertEquals(w, m.getWires().get(0));
-		assertEquals(w2, m.getWires().get(1));	
+		assertEquals(w2, m.getWires().get(1));
 	}
 
 	public void testUpdate() {
-		IWire w=new Wire(synth);
+		IWire w = new Wire(synth);
 		try {
 			w.connect(m.getInputAM());
 		} catch (PortAlreadyInUseException e) {
@@ -105,13 +106,13 @@ public class ModuleVCATest extends TestCase {
 		((ModuleVCA) m).update((Port) m.getInputAM());
 
 		Field pta = null;
-		Field ptb=null;
-		Field iam=null;
+		Field ptb = null;
+		Field iam = null;
 
 		try {
 			pta = m.getClass().getDeclaredField("passThroughA");
 			ptb = m.getClass().getDeclaredField("passThroughB");
-			iam= m.getClass().getDeclaredField("inputAmplitudeModulator");
+			iam = m.getClass().getDeclaredField("inputAmplitudeModulator");
 
 			pta.setAccessible(true);
 			ptb.setAccessible(true);
@@ -121,23 +122,23 @@ public class ModuleVCATest extends TestCase {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		}
-		PassThrough passThroughA=null;
-		PassThrough passThroughB=null;
-		AmplitudeModulatorFilter inputAmplitudeModulatorFilter=null;
+		PassThrough passThroughA = null;
+		PassThrough passThroughB = null;
+		AmplitudeModulatorFilter inputAmplitudeModulatorFilter = null;
 
 		try {
-			passThroughA=(PassThrough) pta.get(m);
-			passThroughB=(PassThrough) ptb.get(m);
-			inputAmplitudeModulatorFilter=(AmplitudeModulatorFilter) iam.get(m);
+			passThroughA = (PassThrough) pta.get(m);
+			passThroughB = (PassThrough) ptb.get(m);
+			inputAmplitudeModulatorFilter = (AmplitudeModulatorFilter) iam.get(m);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
 		assertTrue(passThroughA.output.isConnected());
-		assertTrue (passThroughB.input.isConnected());
-		assertTrue (inputAmplitudeModulatorFilter.input.isConnected());
-		assertTrue (inputAmplitudeModulatorFilter.output.isConnected());
+		assertTrue(passThroughB.input.isConnected());
+		assertTrue(inputAmplitudeModulatorFilter.input.isConnected());
+		assertTrue(inputAmplitudeModulatorFilter.output.isConnected());
 	}
 
 	public void testUpdateWithoutConnect() {
@@ -145,13 +146,13 @@ public class ModuleVCATest extends TestCase {
 		((ModuleVCA) m).update((Port) m.getInputAM());
 
 		Field pta = null;
-		Field ptb=null;
-		Field iam=null;
+		Field ptb = null;
+		Field iam = null;
 
 		try {
 			pta = m.getClass().getDeclaredField("passThroughA");
 			ptb = m.getClass().getDeclaredField("passThroughB");
-			iam= m.getClass().getDeclaredField("inputAmplitudeModulator");
+			iam = m.getClass().getDeclaredField("inputAmplitudeModulator");
 
 			pta.setAccessible(true);
 			ptb.setAccessible(true);
@@ -161,14 +162,14 @@ public class ModuleVCATest extends TestCase {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		}
-		PassThrough passThroughA=null;
-		PassThrough passThroughB=null;
-		AmplitudeModulatorFilter inputAmplitudeModulatorFilter=null;
+		PassThrough passThroughA = null;
+		PassThrough passThroughB = null;
+		AmplitudeModulatorFilter inputAmplitudeModulatorFilter = null;
 
 		try {
-			passThroughA=(PassThrough) pta.get(m);
-			passThroughB=(PassThrough) ptb.get(m);
-			inputAmplitudeModulatorFilter=(AmplitudeModulatorFilter) iam.get(m);
+			passThroughA = (PassThrough) pta.get(m);
+			passThroughB = (PassThrough) ptb.get(m);
+			inputAmplitudeModulatorFilter = (AmplitudeModulatorFilter) iam.get(m);
 
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
@@ -176,15 +177,15 @@ public class ModuleVCATest extends TestCase {
 			e.printStackTrace();
 		}
 		assertTrue(passThroughA.output.isConnected());
-		assertTrue (passThroughB.input.isConnected());
-		assertFalse (inputAmplitudeModulatorFilter.input.isConnected());
-		assertFalse (inputAmplitudeModulatorFilter.output.isConnected());
+		assertTrue(passThroughB.input.isConnected());
+		assertFalse(inputAmplitudeModulatorFilter.input.isConnected());
+		assertFalse(inputAmplitudeModulatorFilter.output.isConnected());
 	}
 
-	public void testGetWiresDifferentBad(){
-		IWire w=new Wire(synth);		
-		IWire w2=new Wire(synth);
-		IModuleREP mrep=new ModuleREP(synth);
+	public void testGetWiresDifferentBad() {
+		IWire w = new Wire(synth);
+		IWire w2 = new Wire(synth);
+		IModuleREP mrep = new ModuleREP(synth);
 
 		try {
 			w.connect(m.getInput());

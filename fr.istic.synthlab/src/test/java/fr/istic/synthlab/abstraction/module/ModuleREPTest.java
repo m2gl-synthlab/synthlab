@@ -31,7 +31,7 @@ public class ModuleREPTest {
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
-		m=new ModuleREP(synth);
+		m = new ModuleREP(synth);
 
 	}
 
@@ -40,11 +40,9 @@ public class ModuleREPTest {
 		assertNotNull(m.getJSyn());
 	}
 
-
-
 	@Test
-	public void testGetWires(){
-		IWire w=new Wire(synth);
+	public void testGetWires() {
+		IWire w = new Wire(synth);
 		try {
 			w.connect(m.getOutput2());
 		} catch (PortAlreadyInUseException e) {
@@ -60,14 +58,14 @@ public class ModuleREPTest {
 			e.printStackTrace();
 		}
 		assertEquals(1, m.getWires().size());
-		assertEquals(w, m.getWires().get(0));		
+		assertEquals(w, m.getWires().get(0));
 	}
 
 	@Test
-	public void testGetWiresDifferent(){
-		IWire w=new Wire(synth);		
-		IWire w2=new Wire(synth);
-		IModuleREP mrep=new ModuleREP(synth);
+	public void testGetWiresDifferent() {
+		IWire w = new Wire(synth);
+		IWire w2 = new Wire(synth);
+		IModuleREP mrep = new ModuleREP(synth);
 
 		try {
 			w.connect(m.getInput());
@@ -85,17 +83,17 @@ public class ModuleREPTest {
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
 			e.printStackTrace();
-		}	
+		}
 		assertEquals(2, m.getWires().size());
 		assertEquals(w, m.getWires().get(0));
 		assertEquals(w2, m.getWires().get(1));
 	}
 
 	@Test
-	public void testGetWiresDifferentBad(){
-		IWire w=new Wire(synth);		
-		IWire w2=new Wire(synth);
-		IModuleREP mrep=new ModuleREP(synth);
+	public void testGetWiresDifferentBad() {
+		IWire w = new Wire(synth);
+		IWire w2 = new Wire(synth);
+		IModuleREP mrep = new ModuleREP(synth);
 
 		try {
 			w.connect(m.getInput());

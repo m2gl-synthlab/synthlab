@@ -29,9 +29,9 @@ public class CInputPort extends InputPort implements ICInputPort {
 
 	@Override
 	public void p2cMouseHover() {
-		if(getWire() == null){
-			if(cSynthesizer.getCurrentWire() != null){
-				if(cSynthesizer.getCurrentWire().getOutput() != null){
+		if (getWire() == null) {
+			if (cSynthesizer.getCurrentWire() != null) {
+				if (cSynthesizer.getCurrentWire().getOutput() != null) {
 					pres.c2pConnectionAllowed();
 				} else {
 					pres.c2pConnectionNotAllowed();
@@ -40,7 +40,7 @@ public class CInputPort extends InputPort implements ICInputPort {
 				pres.c2pConnectionAllowed();
 			}
 		} else {
-			if(cSynthesizer.getCurrentWire() == null){
+			if (cSynthesizer.getCurrentWire() == null) {
 				pres.c2pConnectionAllowed();
 			} else {
 				pres.c2pConnectionNotAllowed();

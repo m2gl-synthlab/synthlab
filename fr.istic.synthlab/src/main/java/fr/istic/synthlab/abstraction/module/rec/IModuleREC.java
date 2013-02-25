@@ -12,7 +12,7 @@ public interface IModuleREC extends IModule {
 	 * Module name
 	 */
 	public static final String MODULE_NAME = "REC";
-	
+
 	/**
 	 * Parameters name
 	 */

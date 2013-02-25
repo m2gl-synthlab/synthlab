@@ -31,10 +31,8 @@ public class OpenAndSaveCommandTest {
 	ICommand commandSave;
 	ICommand commandReSave;
 
-
 	ISynthApp app;
 	ISynthFrame frame;
-
 
 	@Before
 	public void setUp() throws Exception {
@@ -43,25 +41,22 @@ public class OpenAndSaveCommandTest {
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 
-
 		app = new SynthApp(frame);
 		frame = new SynthFrame(app);
-		commandOpen=new OpenSynthCommand(app,frame);
-		commandSave=new SaveAsSynthCommand(app,frame);
-		commandReSave=new SaveSynthCommand(app,frame);
-
+		commandOpen = new OpenSynthCommand(app, frame);
+		commandSave = new SaveAsSynthCommand(app, frame);
+		commandReSave = new SaveSynthCommand(app, frame);
 
 		app.setDisplaySynthCommand(new DisplayCommand(frame));
 	}
 
-
 	/**
-	 * On sauvegarde puis on ouvre le meme fichier 
+	 * On sauvegarde puis on ouvre le meme fichier
 	 */
 	@Test
 	public void testExecuteSame() {
-		((SynthApp)app).setFrame((SynthFrame)frame);
-		((SynthApp)app).getSynthesizer().setFrame((SynthFrame)frame);
+		((SynthApp) app).setFrame((SynthFrame) frame);
+		((SynthApp) app).getSynthesizer().setFrame((SynthFrame) frame);
 
 		Field chooserSave = null;
 
@@ -73,31 +68,31 @@ public class OpenAndSaveCommandTest {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		}
-		FileDialog real_chooserSave=null;
+		FileDialog real_chooserSave = null;
 
 		try {
-			real_chooserSave=(FileDialog) chooserSave.get(commandSave);
+			real_chooserSave = (FileDialog) chooserSave.get(commandSave);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
-		String fileToSave ="save";
-		String fileToOpen="open";
-		String directoryToSave ="saveD";
-		String directoryToOpen="openD";
+		String fileToSave = "save";
+		String fileToOpen = "open";
+		String directoryToSave = "saveD";
+		String directoryToOpen = "openD";
 
 		app.getSynthesizer().add(new CModuleVCF_HP(app.getSynthesizer()));
 
-		while (!fileToOpen.equals(fileToSave) || !directoryToOpen.equals(directoryToSave)){
-			JOptionPane.showMessageDialog((JFrame)frame,"You must save and open the same document to make this test (without modification test)");
+		while (!fileToOpen.equals(fileToSave) || !directoryToOpen.equals(directoryToSave)) {
+			JOptionPane.showMessageDialog((JFrame) frame, "You must save and open the same document to make this test (without modification test)");
 			commandSave.execute();
-			fileToSave=real_chooserSave.getFile();
-			directoryToSave=real_chooserSave.getDirectory();
-			app=new SynthApp(frame);
+			fileToSave = real_chooserSave.getFile();
+			directoryToSave = real_chooserSave.getDirectory();
+			app = new SynthApp(frame);
 			app.setDisplaySynthCommand(new DisplayCommand(frame));
-			commandOpen=new OpenSynthCommand(app, frame);
-			Field chooserOpen=null;
+			commandOpen = new OpenSynthCommand(app, frame);
+			Field chooserOpen = null;
 			try {
 				chooserOpen = commandOpen.getClass().getDeclaredField("chooser");
 				chooserOpen.setAccessible(true);
@@ -106,11 +101,10 @@ public class OpenAndSaveCommandTest {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			}
-			FileDialog real_chooserOpen=null;
-
+			FileDialog real_chooserOpen = null;
 
 			try {
-				real_chooserOpen=(FileDialog) chooserOpen.get(commandOpen);
+				real_chooserOpen = (FileDialog) chooserOpen.get(commandOpen);
 			} catch (IllegalArgumentException e) {
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
@@ -118,23 +112,24 @@ public class OpenAndSaveCommandTest {
 			}
 
 			commandOpen.execute();
-			fileToOpen=real_chooserOpen.getFile();
-			directoryToOpen=real_chooserOpen.getDirectory();
+			fileToOpen = real_chooserOpen.getFile();
+			directoryToOpen = real_chooserOpen.getDirectory();
 		}
 
-		assertEquals(1,app.getSynthesizer().getModules().size());
-		assertEquals(CModuleVCF_HP.class,app.getSynthesizer().getModules().get(0).getClass());
+		assertEquals(1, app.getSynthesizer().getModules().size());
+		assertEquals(CModuleVCF_HP.class, app.getSynthesizer().getModules().get(0).getClass());
 
 	}
 
 	/**
-	 * On sauvegarde,on modifie,on sauvegarde à nouveau puis on ouvre le meme fichier 
+	 * On sauvegarde,on modifie,on sauvegarde à nouveau puis on ouvre le meme
+	 * fichier
 	 */
 
 	@Test
 	public void testExecuteModifySame() {
-		((SynthApp)app).setFrame((SynthFrame)frame);
-		((SynthApp)app).getSynthesizer().setFrame((SynthFrame)frame);
+		((SynthApp) app).setFrame((SynthFrame) frame);
+		((SynthApp) app).getSynthesizer().setFrame((SynthFrame) frame);
 		Field chooserSave = null;
 		try {
 			chooserSave = commandSave.getClass().getDeclaredField("chooser");
@@ -144,39 +139,39 @@ public class OpenAndSaveCommandTest {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		}
-		FileDialog real_chooserSave=null;
+		FileDialog real_chooserSave = null;
 
 		try {
-			real_chooserSave=(FileDialog) chooserSave.get(commandSave);
+			real_chooserSave = (FileDialog) chooserSave.get(commandSave);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
-		String fileToSave ="save";
-		String fileToOpen="open";
-		String directoryToSave ="saveD";
-		String directoryToOpen="openD";
+		String fileToSave = "save";
+		String fileToOpen = "open";
+		String directoryToSave = "saveD";
+		String directoryToOpen = "openD";
 
-		while (!fileToOpen.equals(fileToSave) || !directoryToOpen.equals(directoryToSave)){
+		while (!fileToOpen.equals(fileToSave) || !directoryToOpen.equals(directoryToSave)) {
 
-			JOptionPane.showMessageDialog((JFrame)frame,"You must save and open the same document to make this test (with modification test)");
+			JOptionPane.showMessageDialog((JFrame) frame, "You must save and open the same document to make this test (with modification test)");
 			app.getSynthesizer().add(new CModuleVCF_HP(app.getSynthesizer()));
 
 			commandSave.execute();
 
-			fileToSave=real_chooserSave.getFile();
-			directoryToSave=real_chooserSave.getDirectory();
+			fileToSave = real_chooserSave.getFile();
+			directoryToSave = real_chooserSave.getDirectory();
 
 			app.getSynthesizer().add(new CModuleVCF_LP(app.getSynthesizer()));
 			commandReSave.execute();
 
-			app=new SynthApp(frame);
+			app = new SynthApp(frame);
 			app.setDisplaySynthCommand(new DisplayCommand(frame));
 
-			commandOpen=new OpenSynthCommand(app, frame);
+			commandOpen = new OpenSynthCommand(app, frame);
 
-			Field chooserOpen=null;
+			Field chooserOpen = null;
 
 			try {
 				chooserOpen = commandOpen.getClass().getDeclaredField("chooser");
@@ -186,9 +181,9 @@ public class OpenAndSaveCommandTest {
 			} catch (SecurityException e) {
 				e.printStackTrace();
 			}
-			FileDialog real_chooserOpen=null;
+			FileDialog real_chooserOpen = null;
 			try {
-				real_chooserOpen=(FileDialog) chooserOpen.get(commandOpen);
+				real_chooserOpen = (FileDialog) chooserOpen.get(commandOpen);
 			} catch (IllegalArgumentException e) {
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
@@ -196,30 +191,12 @@ public class OpenAndSaveCommandTest {
 			}
 
 			commandOpen.execute();
-			fileToOpen=real_chooserOpen.getFile();
-			directoryToOpen=real_chooserOpen.getDirectory();
+			fileToOpen = real_chooserOpen.getFile();
+			directoryToOpen = real_chooserOpen.getDirectory();
 		}
 
-		assertEquals(2,app.getSynthesizer().getModules().size());
-		assertEquals(CModuleVCF_HP.class,app.getSynthesizer().getModules().get(0).getClass());
-		assertEquals(CModuleVCF_LP.class,app.getSynthesizer().getModules().get(1).getClass());
+		assertEquals(2, app.getSynthesizer().getModules().size());
+		assertEquals(CModuleVCF_HP.class, app.getSynthesizer().getModules().get(0).getClass());
+		assertEquals(CModuleVCF_LP.class, app.getSynthesizer().getModules().get(1).getClass());
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

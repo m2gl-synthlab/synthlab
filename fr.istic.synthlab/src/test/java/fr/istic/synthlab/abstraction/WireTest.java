@@ -14,9 +14,7 @@ import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.synthesizer.Synthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
 import fr.istic.synthlab.factory.impl.AFactory;
-import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
-import fr.istic.synthlab.factory.impl.PFactory;
 
 public class WireTest extends TestCase {
 
@@ -29,7 +27,7 @@ public class WireTest extends TestCase {
 		PACFactory.setFactory(AFactory.getInstance());
 		PACFactory.setCFactory(null);
 
-		synth=new Synthesizer();
+		synth = new Synthesizer();
 		wire = PACFactory.getAFactory().newWire(synth);
 		ip = PACFactory.getAFactory().newInputPort(synth, new ModuleOUT(synth), "port", new UnitInputPort("port"));
 		op = PACFactory.getAFactory().newOutputPort(synth, new ModuleOUT(synth), "port", new UnitOutputPort("port"));

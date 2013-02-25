@@ -74,7 +74,7 @@ public class PFactory implements IPFactory {
 	public IPModuleVCF newVCF(ICModuleVCF control) {
 		return new PModuleVCF(control);
 	}
-	
+
 	@Override
 	public IPModuleNOISE newNOISE(ICModuleNOISE control) {
 		return new PModuleNOISE(control);
@@ -84,7 +84,7 @@ public class PFactory implements IPFactory {
 	public IPModuleOUT newOUT(ICModuleOUT control) {
 		return new PModuleOUT(control);
 	}
-	
+
 	@Override
 	public IPModuleREC newREC(ICModuleREC control) {
 		return new PModuleREC(control);

@@ -42,7 +42,7 @@ public interface IModuleEG extends IModule {
 	public double getDecay();
 
 	/**
-	 * Set the sustain value (between 0V to 5V) 
+	 * Set the sustain value (between 0V to 5V)
 	 * 
 	 * @param sustainValue
 	 */

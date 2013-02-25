@@ -36,18 +36,18 @@ public class ModuleMIXTest {
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
-		m=new ModuleMIX(synth);
+		m = new ModuleMIX(synth);
 
 	}
+
 	@Test
 	public void testGetJSyn() {
 		assertNotNull(m.getJSyn());
 	}
 
-
 	@Test
-	public void testGetWires3(){
-		IWire w=new Wire(synth);
+	public void testGetWires3() {
+		IWire w = new Wire(synth);
 		try {
 			w.connect(m.getInput(3));
 		} catch (PortAlreadyInUseException e) {
@@ -68,8 +68,8 @@ public class ModuleMIXTest {
 	}
 
 	@Test
-	public void testGetWires4(){
-		IWire w=new Wire(synth);
+	public void testGetWires4() {
+		IWire w = new Wire(synth);
 		try {
 			w.connect(m.getInput(4));
 		} catch (PortAlreadyInUseException e) {
@@ -89,8 +89,8 @@ public class ModuleMIXTest {
 	}
 
 	@Test
-	public void testGetWires1(){
-		IWire w=new Wire(synth);
+	public void testGetWires1() {
+		IWire w = new Wire(synth);
 		try {
 			w.connect(m.getInput(1));
 		} catch (PortAlreadyInUseException e) {
@@ -110,8 +110,8 @@ public class ModuleMIXTest {
 	}
 
 	@Test
-	public void testGetWires2(){
-		IWire w=new Wire(synth);
+	public void testGetWires2() {
+		IWire w = new Wire(synth);
 		try {
 			w.connect(m.getInput(2));
 		} catch (PortAlreadyInUseException e) {
@@ -128,14 +128,14 @@ public class ModuleMIXTest {
 		}
 
 		assertEquals(1, m.getWires().size());
-		assertEquals(w, m.getWires().get(0));		
+		assertEquals(w, m.getWires().get(0));
 	}
 
 	@Test
-	public void testGetWiresDifferent(){
-		IWire w=new Wire(synth);		
-		IWire w2=new Wire(synth);
-		IModuleREP mrep=new ModuleREP(synth);
+	public void testGetWiresDifferent() {
+		IWire w = new Wire(synth);
+		IWire w2 = new Wire(synth);
+		IModuleREP mrep = new ModuleREP(synth);
 
 		try {
 			w.connect(mrep.getOutput1());
@@ -160,10 +160,10 @@ public class ModuleMIXTest {
 	}
 
 	@Test
-	public void testGetWiresDifferentBad(){
-		IWire w=new Wire(synth);		
-		IWire w2=new Wire(synth);
-		IModuleREP mrep=new ModuleREP(synth);
+	public void testGetWiresDifferentBad() {
+		IWire w = new Wire(synth);
+		IWire w2 = new Wire(synth);
+		IModuleREP mrep = new ModuleREP(synth);
 
 		try {
 			w.connect(m.getInput(2));
@@ -179,19 +179,18 @@ public class ModuleMIXTest {
 	}
 
 	@Test
-	public void testGetInput(){
+	public void testGetInput() {
 
 		Field in1 = null;
-		Field in2=null;
-		Field in3=null;
-		Field in4=null;
-
+		Field in2 = null;
+		Field in3 = null;
+		Field in4 = null;
 
 		try {
 			in1 = m.getClass().getDeclaredField("in1");
 			in2 = m.getClass().getDeclaredField("in2");
-			in3= m.getClass().getDeclaredField("in3");
-			in4= m.getClass().getDeclaredField("in4");
+			in3 = m.getClass().getDeclaredField("in3");
+			in4 = m.getClass().getDeclaredField("in4");
 
 			in1.setAccessible(true);
 			in2.setAccessible(true);
@@ -203,49 +202,50 @@ public class ModuleMIXTest {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		}
-		IInputPort input1=null;
-		IInputPort input2=null;
-		IInputPort input3=null;
-		IInputPort input4=null;
+		IInputPort input1 = null;
+		IInputPort input2 = null;
+		IInputPort input3 = null;
+		IInputPort input4 = null;
 
 		try {
-			input1=(IInputPort) in1.get(m);
-			input2=(IInputPort) in2.get(m);
-			input3=(IInputPort) in3.get(m);
-			input4=(IInputPort) in4.get(m);
+			input1 = (IInputPort) in1.get(m);
+			input2 = (IInputPort) in2.get(m);
+			input3 = (IInputPort) in3.get(m);
+			input4 = (IInputPort) in4.get(m);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
 
-		assertEquals(input1,m.getInput(1));
-		assertEquals(input2,m.getInput(2));
-		assertEquals(input3,m.getInput(3));
-		assertEquals(input4,m.getInput(4));
-		assertEquals(null,m.getInput(7));
+		assertEquals(input1, m.getInput(1));
+		assertEquals(input2, m.getInput(2));
+		assertEquals(input3, m.getInput(3));
+		assertEquals(input4, m.getInput(4));
+		assertEquals(null, m.getInput(7));
 	}
-
 
 	@Test
 	public void testSetGetAttenuation1() {
 		m.setAttenuation1(2.0);
-		assertEquals(2.0, m.getAttenuation1(),0);
+		assertEquals(2.0, m.getAttenuation1(), 0);
 	}
 
 	@Test
 	public void testSetGetAttenuation2() {
 		m.setAttenuation2(2.0);
-		assertEquals(2.0, m.getAttenuation2(),0);
+		assertEquals(2.0, m.getAttenuation2(), 0);
 	}
+
 	@Test
 	public void testSetGetAttenuation3() {
 		m.setAttenuation3(2.0);
-		assertEquals(2.0, m.getAttenuation3(),0);
+		assertEquals(2.0, m.getAttenuation3(), 0);
 	}
+
 	@Test
 	public void testSetGetAttenuation4() {
 		m.setAttenuation4(2.0);
-		assertEquals(2.0, m.getAttenuation4(),0);
+		assertEquals(2.0, m.getAttenuation4(), 0);
 	}
 }

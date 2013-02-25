@@ -71,7 +71,8 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	private WebButton colorButtonBlack, colorButtonGray, colorButtonBlue, colorButtonCyan, colorButtonGreen, colorButtonMagenta, colorButtonOrange,
 			colorButtonPink, colorButtonRed, colorButtonWhite, colorButtonYellow, colorChooserButton;
 	private String[] tooltipTexts = { "Voltage-Controlled Oscillator", "Voltage-Controlled Amplifier", "Voltage-Controlled Filter Low-Pass",
-			"Voltage-Controlled Filter High-Pass", "Enveloppe generator", "White Noise generator", "Mixer", "Replicator", "Output on soundcard", "AudioScope", "Record to a WAV File" };
+			"Voltage-Controlled Filter High-Pass", "Enveloppe generator", "White Noise generator", "Mixer", "Replicator", "Output on soundcard", "AudioScope",
+			"Record to a WAV File" };
 
 	// Command
 	private ICommand newSynthCommand;
@@ -384,7 +385,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		};
 		menuItemAddModuleOUT.addActionListener(listenerOUT);
 		buttonOUT.addActionListener(listenerOUT);
-		
+
 		ActionListener listenerREC = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -444,7 +445,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		};
 		menuItemAddModuleEG.addActionListener(listenerEG);
 		buttonEG.addActionListener(listenerEG);
-		
+
 		ActionListener listenerNOISE = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -876,7 +877,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 	public void setAddModuleEGCommand(ICommand addModuleEGCommand) {
 		this.addModuleEGCommand = addModuleEGCommand;
 	}
-	
+
 	/**
 	 * @param addModuleNOISECommand
 	 */

@@ -50,10 +50,8 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 		model = ctrl.getModel();
 		scope.setModel(model);
 		panelScope.add(scope);
-		inputPort = (PInputPort) ((ICInputPort) ctrl.getInput())
-				.getPresentation();
-		outputPort = (POutputPort) ((ICOutputPort) ctrl.getOutput())
-				.getPresentation();
+		inputPort = (PInputPort) ((ICInputPort) ctrl.getInput()).getPresentation();
+		outputPort = (POutputPort) ((ICOutputPort) ctrl.getOutput()).getPresentation();
 		panelPort.add(inputPort);
 		panelPort.add(outputPort);
 
@@ -62,20 +60,16 @@ public class PModuleAudioScope extends APModule implements IPModuleAudioScope {
 		scope.setOpaque(false);
 
 		// Set the default Y-Scale value
-		scope.getProbeViews()[0].getWaveTraceView().getVerticalRangeModel()
-				.setDoubleValue(IModuleAudioScope.DEFAULT_VERTICAL_SCALE_Y);
+		scope.getProbeViews()[0].getWaveTraceView().getVerticalRangeModel().setDoubleValue(IModuleAudioScope.DEFAULT_VERTICAL_SCALE_Y);
 
 		// Disable auto-scaling
-		scope.getProbeViews()[0].getWaveTraceView().getAutoButtonModel()
-				.setSelected(false);
+		scope.getProbeViews()[0].getWaveTraceView().getAutoButtonModel().setSelected(false);
 
 		// Set the default WaveTraceColor value
-		scope.getProbeViews()[0].getWaveTraceView().setColor(
-				IModuleAudioScope.DEFAULT_WAVE_TRACE_COLOR);
+		scope.getProbeViews()[0].getWaveTraceView().setColor(IModuleAudioScope.DEFAULT_WAVE_TRACE_COLOR);
 
 		// Set the default TriggerLevel value
-		scope.getModel().getTriggerModel().getLevelModel()
-				.setDoubleValue(IModuleAudioScope.DEFAULT_TRIGGER_LEVEL);
+		scope.getModel().getTriggerModel().getLevelModel().setDoubleValue(IModuleAudioScope.DEFAULT_TRIGGER_LEVEL);
 
 		this.setAutoscrolls(true);
 

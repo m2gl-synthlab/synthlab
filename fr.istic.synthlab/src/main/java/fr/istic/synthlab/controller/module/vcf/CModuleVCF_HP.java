@@ -31,7 +31,7 @@ public class CModuleVCF_HP extends ModuleVCF_HP implements ICModuleVCF {
 	}
 
 	private void changeResonance(double resonance) {
-		if(resonance < 1.0){
+		if (resonance < 1.0) {
 			resonance = 1.0;
 		}
 		setResonance(resonance);
@@ -63,10 +63,10 @@ public class CModuleVCF_HP extends ModuleVCF_HP implements ICModuleVCF {
 			changeResonance(value);
 		}
 	}
-	
+
 	@Override
 	public IPSynthesizer getSynthesizerPresentation() {
-		return ((ICSynthesizer)cSynthesizer).getPresentation();
+		return ((ICSynthesizer) cSynthesizer).getPresentation();
 	}
 
 	@Override

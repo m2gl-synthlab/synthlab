@@ -37,7 +37,7 @@ public class ModuleAudioScopeTest {
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
-		m=new ModuleAudioScope(synth);
+		m = new ModuleAudioScope(synth);
 	}
 
 	@Test
@@ -58,10 +58,10 @@ public class ModuleAudioScopeTest {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		}
-		AudioScope scope=null;
+		AudioScope scope = null;
 
 		try {
-			scope=(AudioScope) scp.get(m);
+			scope = (AudioScope) scp.get(m);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -69,12 +69,12 @@ public class ModuleAudioScopeTest {
 		}
 
 		assertNotNull(m.getModel());
-		assertEquals(scope.getModel(),m.getModel());
+		assertEquals(scope.getModel(), m.getModel());
 	}
 
 	@Test
-	public void testGetWires(){
-		IWire w=new Wire(synth);
+	public void testGetWires() {
+		IWire w = new Wire(synth);
 		try {
 			w.connect(m.getInput());
 		} catch (PortAlreadyInUseException e) {
@@ -94,10 +94,10 @@ public class ModuleAudioScopeTest {
 	}
 
 	@Test
-	public void testGetWiresDifferent(){
-		IWire w=new Wire(synth);		
-		IWire w2=new Wire(synth);
-		IModuleREP mrep=new ModuleREP(synth);
+	public void testGetWiresDifferent() {
+		IWire w = new Wire(synth);
+		IWire w2 = new Wire(synth);
+		IModuleREP mrep = new ModuleREP(synth);
 
 		try {
 			w.connect(mrep.getOutput1());
@@ -123,10 +123,10 @@ public class ModuleAudioScopeTest {
 	}
 
 	@Test
-	public void testGetWiresDifferentBad(){
-		IWire w=new Wire(synth);		
-		IWire w2=new Wire(synth);
-		IModuleREP mrep=new ModuleREP(synth);
+	public void testGetWiresDifferentBad() {
+		IWire w = new Wire(synth);
+		IWire w2 = new Wire(synth);
+		IModuleREP mrep = new ModuleREP(synth);
 
 		try {
 			w.connect(m.getInput());

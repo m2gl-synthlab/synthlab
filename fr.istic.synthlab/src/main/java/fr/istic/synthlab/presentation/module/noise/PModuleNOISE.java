@@ -49,7 +49,6 @@ public class PModuleNOISE extends APModule implements IPModuleNOISE {
 		RotaryTextController gainRotary = new RotaryTextController(model, 1);
 		panelGain.add(gainRotary);
 
-
 		outputPort = (POutputPort) ((ICOutputPort) ctrl.getOutput()).getPresentation();
 		panelInput.add(outputPort);
 

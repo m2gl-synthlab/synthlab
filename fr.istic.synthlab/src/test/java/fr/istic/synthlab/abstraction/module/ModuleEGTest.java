@@ -33,9 +33,10 @@ public class ModuleEGTest {
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
-		m=new ModuleEG(synth);
-	
+		m = new ModuleEG(synth);
+
 	}
+
 	@Test
 	public void testGetJSyn() {
 		assertNotNull(m.getJSyn());
@@ -44,33 +45,30 @@ public class ModuleEGTest {
 	@Test
 	public void testSetGetAttack() {
 		m.setAttack(2.0);
-		assertEquals(2.0, m.getAttack(),0);
+		assertEquals(2.0, m.getAttack(), 0);
 	}
-
-
 
 	@Test
 	public void testSetGetDecay() {
 		m.setDecay(2.0);
-		assertEquals(2.0, m.getDecay(),0);	}
+		assertEquals(2.0, m.getDecay(), 0);
+	}
 
 	@Test
 	public void testSetGetSustain() {
 		m.setSustain(2.0);
-		assertEquals(2.0, m.getSustain(),0);	}
-
+		assertEquals(2.0, m.getSustain(), 0);
+	}
 
 	@Test
 	public void testSetGetRelease() {
 		m.setRelease(2.0);
-		assertEquals(2.0, m.getRelease(),0);	}
-
-
-
+		assertEquals(2.0, m.getRelease(), 0);
+	}
 
 	@Test
-	public void testGetWires(){
-		IWire w=new Wire(synth);
+	public void testGetWires() {
+		IWire w = new Wire(synth);
 		try {
 			w.connect(m.getGateInput());
 		} catch (PortAlreadyInUseException e) {
@@ -90,10 +88,10 @@ public class ModuleEGTest {
 	}
 
 	@Test
-	public void testGetWiresDifferent(){
-		IWire w=new Wire(synth);		
-		IWire w2=new Wire(synth);
-		IModuleREP mrep=new ModuleREP(synth);
+	public void testGetWiresDifferent() {
+		IWire w = new Wire(synth);
+		IWire w2 = new Wire(synth);
+		IModuleREP mrep = new ModuleREP(synth);
 
 		try {
 			w.connect(mrep.getOutput1());
@@ -118,10 +116,10 @@ public class ModuleEGTest {
 	}
 
 	@Test
-	public void testGetWiresDifferentBad(){
-		IWire w=new Wire(synth);		
-		IWire w2=new Wire(synth);
-		IModuleREP mrep=new ModuleREP(synth);
+	public void testGetWiresDifferentBad() {
+		IWire w = new Wire(synth);
+		IWire w2 = new Wire(synth);
+		IModuleREP mrep = new ModuleREP(synth);
 
 		try {
 			w.connect(m.getGateInput());

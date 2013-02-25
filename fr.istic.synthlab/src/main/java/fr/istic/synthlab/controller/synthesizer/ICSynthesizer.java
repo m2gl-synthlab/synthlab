@@ -54,18 +54,21 @@ public interface ICSynthesizer extends ISynthesizer {
 
 	/**
 	 * Return the current wire Color
+	 * 
 	 * @return
 	 */
 	public Color getCurrentWireColor();
 
 	/**
 	 * Get the path
+	 * 
 	 * @return
 	 */
 	public String[] getPath();
 
 	/**
 	 * Set the path
+	 * 
 	 * @param path
 	 * @param filename
 	 */
@@ -73,6 +76,7 @@ public interface ICSynthesizer extends ISynthesizer {
 
 	/**
 	 * Set the frame
+	 * 
 	 * @param frame
 	 */
 	void setFrame(ISynthFrame frame);

@@ -8,6 +8,7 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 public class AddModuleMIXCommand implements ICommand {
 
 	private ISynthApp app;
+
 	public AddModuleMIXCommand(ISynthApp app) {
 		this.app = app;
 	}

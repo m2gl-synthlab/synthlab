@@ -52,12 +52,11 @@ public class CModuleNOISE extends ModuleNOISE implements ICModuleNOISE {
 			changeGain(value);
 		}
 	}
-	
+
 	@Override
 	public IPSynthesizer getSynthesizerPresentation() {
-		return ((ICSynthesizer)cSynthesizer).getPresentation();
+		return ((ICSynthesizer) cSynthesizer).getPresentation();
 	}
-	
 
 	@Override
 	public void p2cRemoveModule(ICModule module) {

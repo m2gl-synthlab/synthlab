@@ -32,15 +32,11 @@ public class ModuleREP extends AModule implements IModuleREP {
 
 		this.passThrough = new TriplePassThroughFilter();
 
-		this.in = PACFactory.getFactory().newInputPort(synth, this, IN_NAME,
-				passThrough.getInput());
+		this.in = PACFactory.getFactory().newInputPort(synth, this, IN_NAME, passThrough.getInput());
 
-		this.output1 = PACFactory.getFactory().newOutputPort(synth, this, OUT1_NAME,
-				passThrough.getOutput1());
-		this.output2 = PACFactory.getFactory().newOutputPort(synth, this, OUT2_NAME,
-				passThrough.getOutput2());
-		this.output3 = PACFactory.getFactory().newOutputPort(synth, this, OUT3_NAME,
-				passThrough.getOutput3());
+		this.output1 = PACFactory.getFactory().newOutputPort(synth, this, OUT1_NAME, passThrough.getOutput1());
+		this.output2 = PACFactory.getFactory().newOutputPort(synth, this, OUT2_NAME, passThrough.getOutput2());
+		this.output3 = PACFactory.getFactory().newOutputPort(synth, this, OUT3_NAME, passThrough.getOutput3());
 
 		addPort(in);
 		addPort(output1);

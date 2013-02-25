@@ -71,7 +71,7 @@ public interface ISynthApp {
 	 * Close the given synthesizer
 	 */
 	public void remove(ISynthesizer synth);
-	
+
 	/**
 	 * Return the frame
 	 * 

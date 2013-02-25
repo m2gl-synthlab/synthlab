@@ -18,52 +18,44 @@ public class PACFactoryTest {
 
 	@Test
 	public void testSetGetAFactory() {
-		IFactory fact=AFactory.getInstance();
+		IFactory fact = AFactory.getInstance();
 		PACFactory.setAFactory(fact);
 		assertEquals(fact, PACFactory.getAFactory());
 	}
 
-
-
 	@Test
 	public void testSetGetCFactory() {
-		IFactory fact=CFactory.getInstance();
+		IFactory fact = CFactory.getInstance();
 		PACFactory.setCFactory(fact);
 		assertEquals(fact, PACFactory.getCFactory());
 	}
 
-	
-
 	@Test
 	public void testSetGetPFactory() {
-		IPFactory fact=PFactory.getInstance();
+		IPFactory fact = PFactory.getInstance();
 		PACFactory.setPFactory(fact);
 		assertEquals(fact, PACFactory.getPFactory());
 	}
 
-	
 	@Test
 	public void testSetGetFactoryNullCFactory() {
-		IFactory fact=AFactory.getInstance();
+		IFactory fact = AFactory.getInstance();
 
 		PACFactory.setAFactory(fact);
 		PACFactory.setCFactory(null);
 		assertEquals(fact, PACFactory.getFactory());
-		
+
 	}
-	
-	
+
 	@Test
 	public void testSetGetFactoryNotNullCFactory() {
-		IFactory fact=AFactory.getInstance();
-		IFactory fact2=CFactory.getInstance();
+		IFactory fact = AFactory.getInstance();
+		IFactory fact2 = CFactory.getInstance();
 
 		PACFactory.setAFactory(fact);
 		PACFactory.setCFactory(fact2);
 		assertEquals(fact2, PACFactory.getFactory());
-		
-	}
 
-	
+	}
 
 }

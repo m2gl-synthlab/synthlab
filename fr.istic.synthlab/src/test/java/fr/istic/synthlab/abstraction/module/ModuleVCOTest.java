@@ -31,42 +31,33 @@ public class ModuleVCOTest extends TestCase {
 
 	private IModuleVCO m;
 	private ISynthesizer synth;
-	public void setUp(){
+
+	public void setUp() {
 		PACFactory.setFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
-		m=new ModuleVCO(synth);
-
-
-
+		m = new ModuleVCO(synth);
 
 	}
-
-
 
 	public void testSetGetOctave() {
 		m.setOctave(5);
 		m.setTone(0.4);
 		assertEquals(5, m.getOctave());
-		assertEquals( (double) Math.pow(2,5+0.4), m.getFrequency());
-
+		assertEquals((double) Math.pow(2, 5 + 0.4), m.getFrequency());
 
 	}
-
 
 	public void testSetGetTone() {
 		m.setTone(0.24);
 		m.setOctave(6);
 
-		assertEquals(0.24, m.getTone());	
+		assertEquals(0.24, m.getTone());
 
-		assertEquals( (double) Math.pow(2,6+0.24), m.getFrequency());
+		assertEquals((double) Math.pow(2, 6 + 0.24), m.getFrequency());
 
 	}
-
-
-
 
 	public void testSetGetFrequency() {
 		m.setFrequency(140.0);
@@ -76,8 +67,9 @@ public class ModuleVCOTest extends TestCase {
 	public void testGetJSyn() {
 		assertNotNull(m.getJSyn());
 	}
-	public void testGetWires(){
-		IWire w=new Wire(synth);
+
+	public void testGetWires() {
+		IWire w = new Wire(synth);
 		try {
 			w.connect(m.getInputFm());
 		} catch (PortAlreadyInUseException e) {
@@ -98,10 +90,10 @@ public class ModuleVCOTest extends TestCase {
 	}
 
 	@Test
-	public void testGetWiresDifferentBad(){
-		IWire w=new Wire(synth);		
-		IWire w2=new Wire(synth);
-		IModuleREP mrep=new ModuleREP(synth);
+	public void testGetWiresDifferentBad() {
+		IWire w = new Wire(synth);
+		IWire w2 = new Wire(synth);
+		IModuleREP mrep = new ModuleREP(synth);
 
 		try {
 			w.connect(m.getInputFm());
@@ -116,11 +108,10 @@ public class ModuleVCOTest extends TestCase {
 		}
 	}
 
-
-	public void testGetWiresDifferent(){
-		IWire w=new Wire(synth);		
-		IWire w2=new Wire(synth);
-		IModuleREP mrep=new ModuleREP(synth);
+	public void testGetWiresDifferent() {
+		IWire w = new Wire(synth);
+		IWire w2 = new Wire(synth);
+		IModuleREP mrep = new ModuleREP(synth);
 
 		try {
 			w.connect(m.getInputFm());
@@ -145,7 +136,7 @@ public class ModuleVCOTest extends TestCase {
 	}
 
 	public void testGetWiresUpdate() {
-		IWire w=new Wire(synth);
+		IWire w = new Wire(synth);
 		try {
 			w.connect(m.getInputFm());
 		} catch (PortAlreadyInUseException e) {
@@ -164,14 +155,14 @@ public class ModuleVCOTest extends TestCase {
 		((ModuleVCO) m).update((Port) m.getInputFm());
 
 		Field f = null;
-		Field vcoSquare=null;
-		Field vcoTriangle=null;
-		Field vcoSawTooth=null;
+		Field vcoSquare = null;
+		Field vcoTriangle = null;
+		Field vcoSawTooth = null;
 
 		try {
 			f = m.getClass().getDeclaredField("passThrough");
 			vcoSquare = m.getClass().getDeclaredField("vcoSquare");
-			vcoTriangle= m.getClass().getDeclaredField("vcoTriangle");
+			vcoTriangle = m.getClass().getDeclaredField("vcoTriangle");
 			vcoSawTooth = m.getClass().getDeclaredField("vcoSawtooth");
 
 			vcoSquare.setAccessible(true);
@@ -183,16 +174,16 @@ public class ModuleVCOTest extends TestCase {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		}
-		PassThrough p=null;
-		SquareOscillator sqo=null;
-		TriangleOscillator tro=null;
-		SawtoothOscillator sto=null;
+		PassThrough p = null;
+		SquareOscillator sqo = null;
+		TriangleOscillator tro = null;
+		SawtoothOscillator sto = null;
 
 		try {
-			p=(PassThrough) f.get(m);
-			sqo=(SquareOscillator) vcoSquare.get(m);
-			tro=(TriangleOscillator) vcoTriangle.get(m);
-			sto=(SawtoothOscillator) vcoSawTooth.get(m);
+			p = (PassThrough) f.get(m);
+			sqo = (SquareOscillator) vcoSquare.get(m);
+			tro = (TriangleOscillator) vcoTriangle.get(m);
+			sto = (SawtoothOscillator) vcoSawTooth.get(m);
 
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
@@ -201,9 +192,9 @@ public class ModuleVCOTest extends TestCase {
 		}
 
 		assertTrue(p.output.isConnected());
-		assertTrue (tro.frequency.isConnected());
-		assertTrue (sto.frequency.isConnected());
-		assertTrue (sqo.frequency.isConnected());	
+		assertTrue(tro.frequency.isConnected());
+		assertTrue(sto.frequency.isConnected());
+		assertTrue(sqo.frequency.isConnected());
 	}
 
 	public void testUpdateWithoutConnect() {
@@ -211,14 +202,14 @@ public class ModuleVCOTest extends TestCase {
 		((ModuleVCO) m).update((Port) m.getInputFm());
 
 		Field f = null;
-		Field vcoSquare=null;
-		Field vcoTriangle=null;
-		Field vcoSawTooth=null;
+		Field vcoSquare = null;
+		Field vcoTriangle = null;
+		Field vcoSawTooth = null;
 
 		try {
 			f = m.getClass().getDeclaredField("passThrough");
 			vcoSquare = m.getClass().getDeclaredField("vcoSquare");
-			vcoTriangle= m.getClass().getDeclaredField("vcoTriangle");
+			vcoTriangle = m.getClass().getDeclaredField("vcoTriangle");
 			vcoSawTooth = m.getClass().getDeclaredField("vcoSawtooth");
 
 			vcoSquare.setAccessible(true);
@@ -230,16 +221,16 @@ public class ModuleVCOTest extends TestCase {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		}
-		PassThrough p=null;
-		SquareOscillator sqo=null;
-		TriangleOscillator tro=null;
-		SawtoothOscillator sto=null;
+		PassThrough p = null;
+		SquareOscillator sqo = null;
+		TriangleOscillator tro = null;
+		SawtoothOscillator sto = null;
 
 		try {
-			p=(PassThrough) f.get(m);
-			sqo=(SquareOscillator) vcoSquare.get(m);
-			tro=(TriangleOscillator) vcoTriangle.get(m);
-			sto=(SawtoothOscillator) vcoSawTooth.get(m);
+			p = (PassThrough) f.get(m);
+			sqo = (SquareOscillator) vcoSquare.get(m);
+			tro = (TriangleOscillator) vcoTriangle.get(m);
+			sto = (SawtoothOscillator) vcoSawTooth.get(m);
 
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
@@ -248,8 +239,8 @@ public class ModuleVCOTest extends TestCase {
 		}
 
 		assertFalse(p.output.isConnected());
-		assertEquals (m.getFrequency(),tro.frequency.get());
-		assertEquals (m.getFrequency(),sto.frequency.get());
-		assertEquals (m.getFrequency(),sqo.frequency.get());
+		assertEquals(m.getFrequency(), tro.frequency.get());
+		assertEquals(m.getFrequency(), sto.frequency.get());
+		assertEquals(m.getFrequency(), sqo.frequency.get());
 	}
 }

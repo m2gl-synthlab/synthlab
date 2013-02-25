@@ -7,10 +7,9 @@ import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 import fr.istic.synthlab.presentation.module.keyboard.IPModuleKeyboard;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 
-public class CModuleKeyboard extends ModuleKeyboard implements ICModuleKeyboard{
+public class CModuleKeyboard extends ModuleKeyboard implements ICModuleKeyboard {
 
 	private ISynthesizer cSynthesizer;
-
 
 	public CModuleKeyboard(ICSynthesizer synth) {
 		super(synth);
@@ -23,18 +22,17 @@ public class CModuleKeyboard extends ModuleKeyboard implements ICModuleKeyboard{
 	}
 
 	@Override
-	public void p2cClosing() {		
+	public void p2cClosing() {
 	}
 
 	@Override
-	public void setParameter(String key, Double value) {		
+	public void setParameter(String key, Double value) {
 	}
 
 	@Override
 	public IPSynthesizer getSynthesizerPresentation() {
-		return ((ICSynthesizer)cSynthesizer).getPresentation();
+		return ((ICSynthesizer) cSynthesizer).getPresentation();
 	}
-	
 
 	@Override
 	public void p2cRemoveModule(ICModule module) {

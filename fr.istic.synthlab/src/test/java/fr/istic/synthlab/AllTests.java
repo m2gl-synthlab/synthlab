@@ -44,19 +44,14 @@ import fr.istic.synthlab.controler.module.CModuleVCOTest;
 import fr.istic.synthlab.util.SaveLoadTest;
 
 @RunWith(Suite.class)
-@SuiteClasses({ AmplitudeModulatorFilterTest.class,
-		AttenuationFilterTest.class, FrequencyModulatorFilterTest.class,
-		QuadrupleMixFilterTest.class, TriplePassThroughFilterTest.class, CModuleAudioScopeTest.class, CModuleEGTest.class,
-		CModuleMIXTest.class, CModuleOUTTest.class, CModuleRECTest.class,
-		CModuleREPTest.class, CModuleVCATest.class, CModuleVCF_HPTest.class,
-		CModuleVCF_LPTest.class, CModuleVCOTest.class ,AddModuleEGCommandTest.class, AddModuleMIXCommandTest.class,
-		AddModuleOUTCommandTest.class, AddModuleREPCommandTest.class,
-		AddModuleVCACommandTest.class, AddModuleVCFHPCommandTest.class,
-		AddModuleVCFLPCommandTest.class, AddModuleVCOCommandTest.class,
-		NewSynthCommandTest.class, OpenAndSaveCommandTest.class,ConvertTest.class, ModuleOUTTest.class, ModuleREPTest.class,
-		 ModuleVCATest.class, ModuleVCOTest.class,
-		SynthesizerTest.class, WireTest.class,ModuleMIXTest.class,ModuleEGTest.class,ModuleAudioScopeTest.class,ModuleVCF_HPTest.class,
-		ModuleVCF_LPTest.class,SaveLoadTest.class })
+@SuiteClasses({ AmplitudeModulatorFilterTest.class, AttenuationFilterTest.class, FrequencyModulatorFilterTest.class, QuadrupleMixFilterTest.class,
+		TriplePassThroughFilterTest.class, CModuleAudioScopeTest.class, CModuleEGTest.class, CModuleMIXTest.class, CModuleOUTTest.class, CModuleRECTest.class,
+		CModuleREPTest.class, CModuleVCATest.class, CModuleVCF_HPTest.class, CModuleVCF_LPTest.class, CModuleVCOTest.class, AddModuleEGCommandTest.class,
+		AddModuleMIXCommandTest.class, AddModuleOUTCommandTest.class, AddModuleREPCommandTest.class, AddModuleVCACommandTest.class,
+		AddModuleVCFHPCommandTest.class, AddModuleVCFLPCommandTest.class, AddModuleVCOCommandTest.class, NewSynthCommandTest.class,
+		OpenAndSaveCommandTest.class, ConvertTest.class, ModuleOUTTest.class, ModuleREPTest.class, ModuleVCATest.class, ModuleVCOTest.class,
+		SynthesizerTest.class, WireTest.class, ModuleMIXTest.class, ModuleEGTest.class, ModuleAudioScopeTest.class, ModuleVCF_HPTest.class,
+		ModuleVCF_LPTest.class, SaveLoadTest.class })
 public class AllTests {
 
 }

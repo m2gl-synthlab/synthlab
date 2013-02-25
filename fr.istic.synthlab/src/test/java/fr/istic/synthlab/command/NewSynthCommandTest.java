@@ -21,7 +21,6 @@ public class NewSynthCommandTest {
 	ICommand command;
 	ISynthApp app;
 	ISynthFrame frame;
-	
 
 	@Before
 	public void setUp() throws Exception {
@@ -29,27 +28,23 @@ public class NewSynthCommandTest {
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 
-		
-		 app = new SynthApp(frame);
+		app = new SynthApp(frame);
 		frame = new SynthFrame(app);
-		//TODO ya des choses pas logique par ici oO
-	command=new NewSynthCommand(app);
+		// TODO ya des choses pas logique par ici oO
+		command = new NewSynthCommand(app);
 		app.setDisplaySynthCommand(new DisplayCommand(frame));
 	}
 
-
 	@Test
 	public void testExecute() {
-		ICSynthesizer synth=app.getSynthesizer();
+		ICSynthesizer synth = app.getSynthesizer();
 		synth.setFrame(frame);
 		((SynthApp) app).setFrame((SynthFrame) frame);
-		
+
 		command.execute();
-		
-		
-		assertFalse(synth==app.getSynthesizer());
-		
-		
+
+		assertFalse(synth == app.getSynthesizer());
+
 	}
 
 }

@@ -7,5 +7,5 @@ public interface IPModuleKeyboard extends IPModule {
 
 	@Override
 	public ICModuleKeyboard getControl();
-	
+
 }

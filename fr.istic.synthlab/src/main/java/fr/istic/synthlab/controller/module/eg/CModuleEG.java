@@ -87,12 +87,11 @@ public class CModuleEG extends ModuleEG implements ICModuleEG {
 			changeRelease(value);
 		}
 	}
-	
+
 	@Override
 	public IPSynthesizer getSynthesizerPresentation() {
-		return ((ICSynthesizer)cSynthesizer).getPresentation();
+		return ((ICSynthesizer) cSynthesizer).getPresentation();
 	}
-	
 
 	@Override
 	public void p2cRemoveModule(ICModule module) {

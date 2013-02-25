@@ -43,7 +43,7 @@ public class ModuleVCO extends AModule implements IModuleVCO, Observer<Port> {
 	private SquareOscillator vcoSquare;
 	private TriangleOscillator vcoTriangle;
 	private SawtoothOscillator vcoSawtooth;
-	
+
 	public ModuleVCO(ISynthesizer synth) {
 		super(synth, MODULE_NAME);
 		System.out.println("ModuleVCO initialized");

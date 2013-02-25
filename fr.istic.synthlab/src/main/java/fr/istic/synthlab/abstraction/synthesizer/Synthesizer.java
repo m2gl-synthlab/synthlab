@@ -13,13 +13,14 @@ import fr.istic.synthlab.abstraction.wire.IWire;
  * Implementation of a Synthesizer
  */
 public class Synthesizer implements ISynthesizer {
-	
+
 	private com.jsyn.Synthesizer synth;
 
 	private List<IModule> modules;
 	private List<IWire> wires;
 
 	private IWire currentWire;
+
 	/**
 	 * Constructor
 	 */
@@ -27,7 +28,7 @@ public class Synthesizer implements ISynthesizer {
 		this.synth = JSyn.createSynthesizer();
 		modules = new ArrayList<IModule>();
 		wires = new ArrayList<IWire>();
-//		instance = this;
+		// instance = this;
 	}
 
 	@Override

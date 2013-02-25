@@ -8,5 +8,5 @@ public interface ICModuleKeyboard extends ICModule, IModuleKeyboard {
 
 	@Override
 	public IPModuleKeyboard getPresentation();
-	
+
 }

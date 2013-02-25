@@ -26,7 +26,7 @@ public class SaveAsSynthCommand implements ICommand {
 			chooser.setDirectory(synthApp.getSynthesizer().getPath()[0]);
 			chooser.setFile(synthApp.getSynthesizer().getPath()[1]);
 		} else {
-			chooser.setFile(synthApp.getSynthesizer().getPath()[1]+".synthlab");
+			chooser.setFile(synthApp.getSynthesizer().getPath()[1] + ".synthlab");
 		}
 
 		chooser.setVisible(true);

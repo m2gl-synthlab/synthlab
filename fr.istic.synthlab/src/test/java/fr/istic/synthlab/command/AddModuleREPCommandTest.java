@@ -19,7 +19,6 @@ import fr.istic.synthlab.factory.impl.PFactory;
 public class AddModuleREPCommandTest {
 	ICommand command;
 	ISynthApp app;
-	
 
 	@Before
 	public void setUp() throws Exception {
@@ -28,18 +27,17 @@ public class AddModuleREPCommandTest {
 		PACFactory.setPFactory(PFactory.getInstance());
 
 		ISynthFrame frame = null;
-		
-		 app = new SynthApp(frame);
-		frame = new SynthFrame(app);
-		command=new AddModuleREPCommand(app);
-	}
 
+		app = new SynthApp(frame);
+		frame = new SynthFrame(app);
+		command = new AddModuleREPCommand(app);
+	}
 
 	@Test
 	public void testExecute() {
 		command.execute();
-		assertEquals(1,app.getSynthesizer().getModules().size());
-		assertEquals(CModuleREP.class,app.getSynthesizer().getModules().get(0).getClass());
+		assertEquals(1, app.getSynthesizer().getModules().size());
+		assertEquals(CModuleREP.class, app.getSynthesizer().getModules().get(0).getClass());
 	}
 
 }

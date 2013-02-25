@@ -80,13 +80,12 @@ public class AFactory implements IFactory {
 		IModuleVCF module = new ModuleVCF_HP(synth);
 		return module;
 	}
-	
+
 	@Override
 	public IModuleNOISE newNOISE(ISynthesizer synth) {
 		IModuleNOISE module = new ModuleNOISE(synth);
 		return module;
 	}
-
 
 	@Override
 	public IModuleOUT newOUT(ISynthesizer synth) {

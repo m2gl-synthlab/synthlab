@@ -26,7 +26,7 @@ public class SaveSynthCommand implements ICommand {
 		if (currentFile[0] != null) {
 			synthApp.saveToXML(currentFile[0], currentFile[1]);
 		} else {
-			chooser.setFile(currentFile[1]+".synthlab");
+			chooser.setFile(currentFile[1] + ".synthlab");
 
 			chooser.setVisible(true);
 

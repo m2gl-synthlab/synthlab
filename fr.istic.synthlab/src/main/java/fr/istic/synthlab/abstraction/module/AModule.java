@@ -15,17 +15,17 @@ public abstract class AModule implements IModule {
 	private String name;
 	private List<IPort> ports;
 	private HashMap<String, Double> parameters;
-	
+
 	public AModule(ISynthesizer synth, String name) {
-		//genère le numero de serie des modules
+		// genère le numero de serie des modules
 		int nbModules = 0;
-		if(synth.getModules().size() >0){
+		if (synth.getModules().size() > 0) {
 			for (IModule module : synth.getModules()) {
-				//on recupere le numero de serie du module
-				String numberModule[]= module.getName().split("- ");
-				//Selon le modele du module
+				// on recupere le numero de serie du module
+				String numberModule[] = module.getName().split("- ");
+				// Selon le modele du module
 				if (module.getName().startsWith(name)) {
-					//On retient le numero de la dernière instance
+					// On retient le numero de la dernière instance
 					nbModules = Integer.parseInt(numberModule[1]);
 				}
 			}
@@ -39,7 +39,7 @@ public abstract class AModule implements IModule {
 	public String getName() {
 		return name;
 	}
-	
+
 	@Override
 	public void setName(String name) {
 		this.name = name;
@@ -80,6 +80,5 @@ public abstract class AModule implements IModule {
 		}
 		return null;
 	}
-	
-	
+
 }

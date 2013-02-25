@@ -21,7 +21,7 @@ public class CInputPortTest extends TestCase {
 	}
 
 	public void testCInputPortString() {
-		iop = new CInputPort(synth,"out1", null, null);
+		iop = new CInputPort(synth, "out1", null, null);
 		assertEquals("out1", iop.getName());
 		assertNotNull(iop.getPresentation());
 	}

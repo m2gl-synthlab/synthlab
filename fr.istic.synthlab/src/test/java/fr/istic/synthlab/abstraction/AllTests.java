@@ -15,11 +15,8 @@ import fr.istic.synthlab.abstraction.module.ModuleVCF_LPTest;
 import fr.istic.synthlab.abstraction.module.ModuleVCOTest;
 
 @RunWith(Suite.class)
-@SuiteClasses({ ConvertTest.class, ModuleOUTTest.class, ModuleREPTest.class,
-		 ModuleVCATest.class, ModuleVCOTest.class,
-		SynthesizerTest.class, WireTest.class,ModuleMIXTest.class,ModuleEGTest.class,ModuleAudioScopeTest.class,ModuleVCF_HPTest.class,
-		ModuleVCF_LPTest.class
-})
+@SuiteClasses({ ConvertTest.class, ModuleOUTTest.class, ModuleREPTest.class, ModuleVCATest.class, ModuleVCOTest.class, SynthesizerTest.class, WireTest.class,
+		ModuleMIXTest.class, ModuleEGTest.class, ModuleAudioScopeTest.class, ModuleVCF_HPTest.class, ModuleVCF_LPTest.class })
 public class AllTests {
 
 }

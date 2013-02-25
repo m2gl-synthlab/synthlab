@@ -19,7 +19,7 @@ public interface IModuleAudioScope extends IModule {
 	static final double DEFAULT_VERTICAL_SCALE_Y = 2.0;
 	static final Color DEFAULT_WAVE_TRACE_COLOR = Color.DARK_GRAY;
 	static final double DEFAULT_TRIGGER_LEVEL = 0.01;
-	
+
 	/**
 	 * Return the input port of the AudioScope module
 	 * 

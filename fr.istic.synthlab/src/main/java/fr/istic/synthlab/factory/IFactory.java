@@ -31,7 +31,7 @@ public interface IFactory {
 	IModuleVCF newVCFA_LP(ISynthesizer synth);
 
 	IModuleVCF newVCFA_HP(ISynthesizer synth);
-	
+
 	IModuleNOISE newNOISE(ISynthesizer synthesizer);
 
 	IModuleOUT newOUT(ISynthesizer synth);

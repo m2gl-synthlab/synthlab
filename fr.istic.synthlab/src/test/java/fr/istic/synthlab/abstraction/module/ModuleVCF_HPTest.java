@@ -34,20 +34,21 @@ public class ModuleVCF_HPTest {
 
 	IModuleVCF m;
 	private ISynthesizer synth;
+
 	@Before
 	public void setUp() throws Exception {
 		PACFactory.setFactory(AFactory.getInstance());
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
-		m=new ModuleVCF_HP(synth);
+		m = new ModuleVCF_HP(synth);
 
 	}
+
 	@Test
 	public void testGetJSyn() {
 		assertNotNull(m.getJSyn());
 	}
-
 
 	@Test
 	public void testSetGetCutFrequency() {
@@ -55,17 +56,14 @@ public class ModuleVCF_HPTest {
 		assertEquals(3000, m.getCutFrequency());
 	}
 
-
 	@Test
 	public void testSetGetResonance() {
 		m.setResonance(25.5);
-		assertEquals(25.5, m.getResonance(),0);	}
+		assertEquals(25.5, m.getResonance(), 0);
+	}
 
-
-
-
-	public void testGetWires(){
-		IWire w=new Wire(synth);
+	public void testGetWires() {
+		IWire w = new Wire(synth);
 		try {
 			w.connect(m.getInputFm());
 		} catch (PortAlreadyInUseException e) {
@@ -82,15 +80,14 @@ public class ModuleVCF_HPTest {
 		}
 
 		assertEquals(1, m.getWires().size());
-		assertEquals(w, m.getWires().get(0));		
+		assertEquals(w, m.getWires().get(0));
 	}
 
-
 	@Test
-	public void testGetWiresDifferent(){
-		IWire w=new Wire(synth);		
-		IWire w2=new Wire(synth);
-		IModuleREP mrep=new ModuleREP(synth);
+	public void testGetWiresDifferent() {
+		IWire w = new Wire(synth);
+		IWire w2 = new Wire(synth);
+		IModuleREP mrep = new ModuleREP(synth);
 
 		try {
 			w.connect(mrep.getOutput1());
@@ -114,10 +111,9 @@ public class ModuleVCF_HPTest {
 		assertEquals(w2, m.getWires().get(1));
 	}
 
-
 	@Test
 	public void testUpdate() {
-		IWire w=new Wire(synth);
+		IWire w = new Wire(synth);
 		try {
 			w.connect(m.getInputFm());
 		} catch (PortAlreadyInUseException e) {
@@ -136,13 +132,13 @@ public class ModuleVCF_HPTest {
 		((ModuleVCF_HP) m).update((Port) m.getInputFm());
 
 		Field ptr = null;
-		Field fj1=null;
-		Field fj2=null;
+		Field fj1 = null;
+		Field fj2 = null;
 
 		try {
 			ptr = m.getClass().getDeclaredField("passThrough");
 			fj1 = m.getClass().getDeclaredField("filterJSyn1");
-			fj2= m.getClass().getDeclaredField("filterJSyn2");
+			fj2 = m.getClass().getDeclaredField("filterJSyn2");
 
 			ptr.setAccessible(true);
 			fj1.setAccessible(true);
@@ -152,15 +148,15 @@ public class ModuleVCF_HPTest {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		}
-		PassThrough passThrough=null;
+		PassThrough passThrough = null;
 
-		FilterHighPass filterJSyn1=null;
-		FilterHighPass filterJSyn2=null;
+		FilterHighPass filterJSyn1 = null;
+		FilterHighPass filterJSyn2 = null;
 
 		try {
-			passThrough=(PassThrough) ptr.get(m);
-			filterJSyn1=(FilterHighPass) fj1.get(m);
-			filterJSyn2=(FilterHighPass) fj2.get(m);
+			passThrough = (PassThrough) ptr.get(m);
+			filterJSyn1 = (FilterHighPass) fj1.get(m);
+			filterJSyn2 = (FilterHighPass) fj2.get(m);
 
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
@@ -178,13 +174,13 @@ public class ModuleVCF_HPTest {
 		((ModuleVCF_HP) m).update((Port) m.getInputFm());
 
 		Field ptr = null;
-		Field fj1=null;
-		Field fj2=null;
+		Field fj1 = null;
+		Field fj2 = null;
 
 		try {
 			ptr = m.getClass().getDeclaredField("passThrough");
 			fj1 = m.getClass().getDeclaredField("filterJSyn1");
-			fj2= m.getClass().getDeclaredField("filterJSyn2");
+			fj2 = m.getClass().getDeclaredField("filterJSyn2");
 
 			ptr.setAccessible(true);
 			fj1.setAccessible(true);
@@ -194,14 +190,14 @@ public class ModuleVCF_HPTest {
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		}
-		PassThrough passThrough=null;
-		FilterHighPass filterJSyn1=null;
-		FilterHighPass filterJSyn2=null;
+		PassThrough passThrough = null;
+		FilterHighPass filterJSyn1 = null;
+		FilterHighPass filterJSyn2 = null;
 
 		try {
-			passThrough=(PassThrough) ptr.get(m);
-			filterJSyn1=(FilterHighPass) fj1.get(m);
-			filterJSyn2=(FilterHighPass) fj2.get(m);
+			passThrough = (PassThrough) ptr.get(m);
+			filterJSyn1 = (FilterHighPass) fj1.get(m);
+			filterJSyn2 = (FilterHighPass) fj2.get(m);
 
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
@@ -213,15 +209,15 @@ public class ModuleVCF_HPTest {
 		assertFalse(filterJSyn1.frequency.isConnected());
 		assertFalse(filterJSyn2.output.isConnected());
 
-		assertEquals(m.getCutFrequency(), filterJSyn1.frequency.get(),0);
-		assertEquals(m.getCutFrequency(), filterJSyn2.frequency.get(),0);
+		assertEquals(m.getCutFrequency(), filterJSyn1.frequency.get(), 0);
+		assertEquals(m.getCutFrequency(), filterJSyn2.frequency.get(), 0);
 	}
 
 	@Test
-	public void testGetWiresDifferentBad(){
-		IWire w=new Wire(synth);		
-		IWire w2=new Wire(synth);
-		IModuleREP mrep=new ModuleREP(synth);
+	public void testGetWiresDifferentBad() {
+		IWire w = new Wire(synth);
+		IWire w2 = new Wire(synth);
+		IModuleREP mrep = new ModuleREP(synth);
 
 		try {
 			w.connect(m.getInput());

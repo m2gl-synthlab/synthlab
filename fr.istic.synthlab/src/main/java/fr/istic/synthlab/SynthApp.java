@@ -83,7 +83,7 @@ public class SynthApp implements ISynthApp {
 
 		// Set the path of this instance
 		currentSynth.setPath(fileDir, filename);
-		
+
 		// Reload this instance in the menu
 		frame.addInMenu(currentSynth);
 	}
@@ -92,7 +92,7 @@ public class SynthApp implements ISynthApp {
 	public void loadFromXML(String dir, String file) {
 		// If this file is already open, return
 		for (ICSynthesizer s : synths) {
-			String st = s.getPath()[0]+s.getPath()[1];
+			String st = s.getPath()[0] + s.getPath()[1];
 			if (st.equals(dir + file)) {
 				return;
 			}
@@ -181,7 +181,7 @@ public class SynthApp implements ISynthApp {
 			newSynthInstance();
 		return currentSynth;
 	}
-	
+
 	public ISynthFrame getFrame() {
 		return this.frame;
 	}

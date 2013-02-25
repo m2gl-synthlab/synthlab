@@ -127,8 +127,13 @@ public class PWire extends JPanel implements IPWire {
 			JPanel pan = new JPanel();
 			pan.add(this);
 		}
-		setBounds(x-10, y-10 , w+20, getParent().getHeight()); // On ajoute une marge pour éviter de couper le cable
-		
+		setBounds(x - 10, y - 10, w + 20, getParent().getHeight()); // On ajoute
+																	// une marge
+																	// pour
+																	// éviter de
+																	// couper le
+																	// cable
+
 		IPSynthesizer presSynth = ctrl.getSynthesizerPresentation();
 		((JLayeredPane) presSynth).setLayer(this, 0, 0);
 
@@ -167,44 +172,43 @@ public class PWire extends JPanel implements IPWire {
 		QuadCurve2D curve = new QuadCurve2D.Double(posInput.getX() - getX(), posInput.getY() - getY(), mid.getX(), mid.getY(), posOutput.getX() - getX(),
 				posOutput.getY() - getY());
 		// Création de la courbe de l'ombre
-		QuadCurve2D shadowCurve = new QuadCurve2D.Double(posInput.getX() - getX(), posInput.getY() - getY(), midShadow.getX(), midShadow.getY(), posOutput.getX() - getX(),
-						posOutput.getY() - getY());
-
+		QuadCurve2D shadowCurve = new QuadCurve2D.Double(posInput.getX() - getX(), posInput.getY() - getY(), midShadow.getX(), midShadow.getY(),
+				posOutput.getX() - getX(), posOutput.getY() - getY());
 
 		// Si les ombres sont activées
-		if(displayShadow ){
+		if (displayShadow) {
 			// On dessine plusieurs couche d'ombre avec transparence
 			g2.setStroke(new BasicStroke(8, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
-			g2.setColor(new Color(100,100,100,60));
+			g2.setColor(new Color(100, 100, 100, 60));
 			g2.draw(shadowCurve);
-			
+
 			g2.setStroke(new BasicStroke(4, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
-			g2.setColor(new Color(100,100,100,20));
+			g2.setColor(new Color(100, 100, 100, 20));
 			g2.draw(shadowCurve);
-			
+
 			g2.setStroke(new BasicStroke(2, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
-			g2.setColor(new Color(100,100,100,20));
+			g2.setColor(new Color(100, 100, 100, 20));
 			g2.draw(shadowCurve);
 		}
-		
+
 		// Dessine la courbe en noir comme base
 		g2.setStroke(new BasicStroke(8, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
 		g2.setColor(Color.BLACK);
 		g2.draw(curve);
 
-		// Ajoute plusieurs traits de couleur avec transparence pour le dégradé 
+		// Ajoute plusieurs traits de couleur avec transparence pour le dégradé
 		g2.setStroke(new BasicStroke(7, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
 		g2.setColor(new Color(currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue(), 60));
 		g2.draw(curve);
-		
+
 		g2.setStroke(new BasicStroke(6, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
 		g2.setColor(new Color(currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue(), 100));
 		g2.draw(curve);
 
 		g2.setStroke(new BasicStroke(3, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
-		g2.setColor(new Color(currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue(),120));
+		g2.setColor(new Color(currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue(), 120));
 		g2.draw(curve);
-		
+
 		// Ajoute un trait fin au centre
 		g2.setStroke(new BasicStroke(1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
 		g2.setColor(new Color(currentColor.getRed(), currentColor.getGreen(), currentColor.getBlue()));
@@ -248,10 +252,10 @@ public class PWire extends JPanel implements IPWire {
 		posOutput = mouse;
 		updateDisplay();
 	}
-	
-	public void setOnTop(boolean isOnTop){
+
+	public void setOnTop(boolean isOnTop) {
 		IPSynthesizer presSynth = ctrl.getSynthesizerPresentation();
-		if(isOnTop){
+		if (isOnTop) {
 			((JLayeredPane) presSynth).setLayer(this, 0, 0);
 		} else {
 			((JLayeredPane) presSynth).setLayer(this, 0, -1);

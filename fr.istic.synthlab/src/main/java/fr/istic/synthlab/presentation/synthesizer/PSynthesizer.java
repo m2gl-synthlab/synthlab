@@ -53,16 +53,14 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 					if (cSynthesizer.getCurrentWire() != null) {
 						IInputPort input = cSynthesizer.getCurrentWire().getInput();
 						IOutputPort output = cSynthesizer.getCurrentWire().getOutput();
-	
+
 						Point mouse = ((PSynthesizer) cSynthesizer.getPresentation()).getMousePosition(true);
-						
+
 						if (input == null && output != null) {
-							((ICWire) cSynthesizer.getCurrentWire())
-									.getPresentation().setInputPoint(mouse);
+							((ICWire) cSynthesizer.getCurrentWire()).getPresentation().setInputPoint(mouse);
 						}
 						if (output == null && input != null) {
-							((ICWire) cSynthesizer.getCurrentWire())
-									.getPresentation().setOutputPoint(mouse);
+							((ICWire) cSynthesizer.getCurrentWire()).getPresentation().setOutputPoint(mouse);
 						}
 					}
 				}
@@ -76,11 +74,14 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 			public void eventDispatched(AWTEvent event) {
 				if (event instanceof MouseEvent) {
 					MouseEvent clickEvent = (MouseEvent) event;
-					
-					if(!(event.getSource() instanceof PPort)){
-						
-		                /** Suppression du cable avec le bouton droit ou gauche de la souris */
-						if( clickEvent.getButton() == MouseEvent.BUTTON1 || clickEvent.getButton() == MouseEvent.BUTTON3){
+
+					if (!(event.getSource() instanceof PPort)) {
+
+						/**
+						 * Suppression du cable avec le bouton droit ou gauche
+						 * de la souris
+						 */
+						if (clickEvent.getButton() == MouseEvent.BUTTON1 || clickEvent.getButton() == MouseEvent.BUTTON3) {
 							cSynthesizer.p2cDisconnectCurrentWire();
 						}
 					}
@@ -132,9 +133,10 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 		int y = 0;
 
 		if ((module.getPosition().x == 0) && (module.getPosition().y == 0)) {
-			// On place les module en fonction de leur nombre pour évité les recouvrements
-			x = (modules.size()+1) * 10;
-			y = ((modules.size()%15)+1) * 20;
+			// On place les module en fonction de leur nombre pour évité les
+			// recouvrements
+			x = (modules.size() + 1) * 10;
+			y = ((modules.size() % 15) + 1) * 20;
 		} else {
 			// Placement depuis xml
 			x = module.getPosition().x;

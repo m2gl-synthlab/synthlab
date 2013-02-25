@@ -12,7 +12,7 @@ import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 public class ModuleKeyboard extends AModule implements IModuleKeyboard {
 
 	private static final String MODULE_NAME = "EG";
-	
+
 	public ModuleKeyboard(ICSynthesizer synth) {
 		super(synth, MODULE_NAME);
 	}
@@ -24,7 +24,7 @@ public class ModuleKeyboard extends AModule implements IModuleKeyboard {
 
 	@Override
 	public void start() {
-		
+
 	}
 
 	@Override
@@ -33,11 +33,11 @@ public class ModuleKeyboard extends AModule implements IModuleKeyboard {
 	}
 
 	@Override
-	public void play(double frequency) {		
+	public void play(double frequency) {
 	}
 
 	@Override
-	public void stop() {		
+	public void stop() {
 	}
 
 	@Override

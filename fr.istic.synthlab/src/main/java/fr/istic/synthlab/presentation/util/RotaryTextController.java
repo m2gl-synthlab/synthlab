@@ -23,7 +23,7 @@ public class RotaryTextController extends JPanel {
 		rotaryPanel.setOpaque(false);
 
 		setLayout(new BorderLayout());
-		this.add(new JLabel(model.getName(),JLabel.CENTER), BorderLayout.CENTER);
+		this.add(new JLabel(model.getName(), JLabel.CENTER), BorderLayout.CENTER);
 		this.add(rotaryPanel, BorderLayout.PAGE_END);
 
 		this.setOpaque(false);
