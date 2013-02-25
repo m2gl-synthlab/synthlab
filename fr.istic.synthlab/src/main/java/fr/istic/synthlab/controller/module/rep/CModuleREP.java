@@ -10,8 +10,9 @@ import fr.istic.synthlab.presentation.module.IPModule;
 import fr.istic.synthlab.presentation.module.rep.IPModuleREP;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 
-//TODO : need comments
-
+/**
+ * Controller of a REP module controller 
+ */
 public class CModuleREP extends ModuleREP implements ICModuleREP {
 
 	private IPModuleREP pres;

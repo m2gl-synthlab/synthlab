@@ -49,6 +49,8 @@ public interface IWire {
 	 */
 	public boolean isConnected();
 
-	// TODO : need comments
+	/**
+	 * Disconnect the wire from both ports
+	 */
 	public void disconnect();
 }

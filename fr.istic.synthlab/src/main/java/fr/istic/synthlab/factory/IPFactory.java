@@ -30,7 +30,7 @@ import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 import fr.istic.synthlab.presentation.wire.IPWire;
 
 /**
- * Interface of the presentatio factory
+ * Interface of the presentation factory
  */
 public interface IPFactory {
 

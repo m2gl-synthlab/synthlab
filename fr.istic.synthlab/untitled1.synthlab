@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><modules><module name="VCF HP24 - 1" x="10.0" y="20.0"><parameter key="resonance" value="1.0"/><parameter key="cutFrequency" value="1000.0"/></module><module name="VCF LP24 - 1" x="20.0" y="40.0"><parameter key="resonance" value="1.0"/><parameter key="cutFrequency" value="1000.0"/></module></modules>
