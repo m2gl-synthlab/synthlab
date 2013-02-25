@@ -38,7 +38,6 @@ public class PModuleMIX extends APModule implements IPModuleMIX {
 
 	public PModuleMIX(ICModuleMIX control) {
 		super(control);
-		System.out.println("PModuleMIX initialized");
 
 		this.ctrl = control;
 		configView();

@@ -34,7 +34,6 @@ public class PModuleVCA extends APModule implements IPModuleVCA {
 	 */
 	public PModuleVCA(ICModuleVCA control) {
 		super(control);
-		System.out.println("PModuleVCA initialized");
 
 		this.ctrl = control;
 		configView();

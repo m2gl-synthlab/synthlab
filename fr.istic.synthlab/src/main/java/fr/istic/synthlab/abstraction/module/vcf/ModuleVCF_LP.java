@@ -41,7 +41,6 @@ public class ModuleVCF_LP extends AModule implements IModuleVCF, Observer<Port> 
 
 	public ModuleVCF_LP(ISynthesizer synth) {
 		super(synth, MODULE_NAME);
-		System.out.println("ModuleVCFA LP24 initialized");
 
 		// Création des filtres JSyn
 		this.filterJSyn1 = new FilterLowPass();

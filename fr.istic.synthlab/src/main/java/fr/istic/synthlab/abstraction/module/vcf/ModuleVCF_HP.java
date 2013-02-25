@@ -41,7 +41,6 @@ public class ModuleVCF_HP extends AModule implements IModuleVCF, Observer<Port> 
 
 	public ModuleVCF_HP(ISynthesizer synth) {
 		super(synth, MODULE_NAME);
-		System.out.println("ModuleVCFA HP24 initialized");
 
 		// Création des filtres JSyn
 		this.filterJSyn1 = new FilterHighPass();

@@ -32,6 +32,7 @@ public class ModuleTest extends TestCase {
 
 		synth.start();
 		for (int i = 0; i < 10; i++) {
+			//TODO : Something need to be done
 			System.out.println("Testing CModuleOUT : " + osc.output.get());
 		}
 		synth.stop();

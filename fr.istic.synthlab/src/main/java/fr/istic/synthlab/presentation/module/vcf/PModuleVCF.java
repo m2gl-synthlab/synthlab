@@ -39,7 +39,6 @@ public class PModuleVCF extends APModule implements IPModuleVCF {
 	 */
 	public PModuleVCF(ICModuleVCF control) {
 		super(control);
-		System.out.println("PModuleVCF initialized");
 
 		this.ctrl = control;
 		configView();

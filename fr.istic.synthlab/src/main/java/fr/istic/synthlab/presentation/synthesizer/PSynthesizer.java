@@ -127,8 +127,6 @@ public class PSynthesizer extends JLayeredPane implements IPSynthesizer {
 		((APModule) module).setVisible(true);
 		this.add((JPanel) module, 0);
 
-		System.out.println(module.getPosition());
-
 		int x = 0;
 		int y = 0;
 

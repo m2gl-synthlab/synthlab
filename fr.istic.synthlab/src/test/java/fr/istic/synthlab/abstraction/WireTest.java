@@ -35,7 +35,6 @@ public class WireTest extends TestCase {
 	}
 
 	public void testGetInput() {
-		System.out.println(wire);
 		assertEquals(null, wire.getInput());
 	}
 

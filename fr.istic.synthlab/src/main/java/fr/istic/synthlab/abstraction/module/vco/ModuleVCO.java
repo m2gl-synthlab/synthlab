@@ -46,7 +46,6 @@ public class ModuleVCO extends AModule implements IModuleVCO, Observer<Port> {
 
 	public ModuleVCO(ISynthesizer synth) {
 		super(synth, MODULE_NAME);
-		System.out.println("ModuleVCO initialized");
 
 		// Création des générateurs JSyn
 		this.vcoSquare = new SquareOscillator();

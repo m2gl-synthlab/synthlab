@@ -78,7 +78,6 @@ public class WriteXMLFile {
 			rootElement.appendChild(moduleName);
 
 			Point p = ((ICModule) module).getPresentation().getPosition();
-			System.out.println(p);
 
 			// Nom module
 			Attr attrName = doc.createAttribute("name");
@@ -121,8 +120,6 @@ public class WriteXMLFile {
 
 					// Cable Color R
 					Attr attrPortColorR = doc.createAttribute("colorR");
-
-					System.out.println(((ICWire) wire).getPresentation().getColor());
 
 					attrPortColorR.setValue(((ICWire) wire).getPresentation().getColor().getRed() + "");
 					port.setAttributeNode(attrPortColorR);
