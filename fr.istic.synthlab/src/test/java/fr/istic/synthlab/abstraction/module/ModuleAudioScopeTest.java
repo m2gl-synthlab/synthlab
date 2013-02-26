@@ -182,6 +182,10 @@ public class ModuleAudioScopeTest {
 			e.printStackTrace();
 		}
 	}
-	
+	@Test
+	public void testGetWiresNotConnected(){
 
+		assertEquals(0, m.getWires().size());
+		
+	}
 }

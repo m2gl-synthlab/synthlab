@@ -11,6 +11,7 @@ import fr.istic.synthlab.SynthApp;
 import fr.istic.synthlab.SynthFrame;
 import fr.istic.synthlab.abstraction.exception.BadConnectionException;
 import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
+import fr.istic.synthlab.abstraction.module.vco.ModuleVCO;
 import fr.istic.synthlab.command.app.DisplayCommand;
 import fr.istic.synthlab.command.app.UndisplayCommand;
 import fr.istic.synthlab.controller.module.eg.CModuleEG;
@@ -31,69 +32,71 @@ import fr.istic.synthlab.factory.impl.PFactory;
 
 public class SaveLoadTest extends TestCase {
 
-	ISynthApp s;
-	ICSynthesizer synth;
-	ISynthFrame sf;
+	private ISynthApp s;
+	private ICSynthesizer synth;
+	private ISynthFrame sf;
+	private String chemin=System.getProperty("user.dir");
+
 
 	public void setUp() {
-
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 
 		synth = new CSynthesizer();
 		s = new SynthApp(sf);
 		sf = new SynthFrame(s);
-		// //s.setSynthesizer(synth);
-
+		((SynthApp) s).setFrame((SynthFrame) sf);
+		s.getSynthesizer().setFrame(sf);
+		s.setSynthesizer(s.getSynthesizer().getPath());
+		
 	}
 
 	public void testSaveAndLoadSetTone() {
 
-		// //s.setSynthesizer(synth);
+		s.setSynthesizer(s.getSynthesizer().getPath());
 		s.setDisplaySynthCommand(new DisplayCommand(sf));
 		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
 		ICModuleVCO moduleVCO = new CModuleVCO(synth);
 		ICModuleVCA moduleVCA = new CModuleVCA(synth);
 		ICModuleEG moduleEG = new CModuleEG(synth);
 
-		synth.add(moduleVCO);
-		synth.add(moduleVCA);
-		synth.add(moduleEG);
+		s.getSynthesizer().add(moduleVCO);
+		s.getSynthesizer().add(moduleVCA);
+		s.getSynthesizer().add(moduleEG);
+		
 
 		moduleVCO.setTone(0.4);
-		((SynthApp) s).setFrame((SynthFrame) sf);
-		s.saveToXML("", "test.synthlab");
+		s.saveToXML(chemin+"/", "test.synthlab");
 
-		// s.setSynthesizer(new CSynthesizer());
-		s.loadFromXML("", "test.synthlab");
+		s.setSynthesizer(new String[2]);
+		s.loadFromXML(chemin+"/", "test.synthlab");
 		assertEquals(3, s.getSynthesizer().getModules().size());
 		assertEquals("CModuleVCO", s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
 		assertEquals("CModuleVCA", s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
 		assertEquals("CModuleEG", s.getSynthesizer().getModules().get(2).getClass().getSimpleName());
 
-		assertEquals(168.0, ((CModuleVCO) s.getSynthesizer().getModules().get(0)).getFrequency());
+		assertEquals(168.0, Math.floor(((CModuleVCO) s.getSynthesizer().getModules().get(0)).getFrequency()));
 
 	}
 
 	public void testSaveAndLoadSetAttenuation() {
-
-		// s.setSynthesizer(synth);
+		s.setSynthesizer(s.getSynthesizer().getPath());
 		s.setDisplaySynthCommand(new DisplayCommand(sf));
 		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
 		ICModuleVCO moduleVCO = new CModuleVCO(synth);
 		ICModuleVCA moduleVCA = new CModuleVCA(synth);
 		ICModuleEG moduleEG = new CModuleEG(synth);
 
-		synth.add(moduleVCO);
-		synth.add(moduleVCA);
-		synth.add(moduleEG);
+		s.getSynthesizer().add(moduleVCO);
+		s.getSynthesizer().add(moduleVCA);
+		s.getSynthesizer().add(moduleEG);
 
 		moduleVCA.setAttenuation(7.0);
 
-		s.saveToXML("", "test.synthlab");
+		s.saveToXML(chemin+"/", "test.synthlab");
 
-		// s.setSynthesizer(new CSynthesizer());
-		s.loadFromXML("", "test.synthlab");
+		 s.setSynthesizer(new String[2]);
+		s.loadFromXML(chemin+"/", "test.synthlab");
 		assertEquals(3, s.getSynthesizer().getModules().size());
 		assertEquals("CModuleVCO", s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
 		assertEquals("CModuleVCA", s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
@@ -105,16 +108,16 @@ public class SaveLoadTest extends TestCase {
 
 	public void testSaveAndLoadWire() {
 
-		// s.setSynthesizer(synth);
+		s.setSynthesizer(s.getSynthesizer().getPath());
 		s.setDisplaySynthCommand(new DisplayCommand(sf));
 		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
 		ICModuleVCO moduleVCO = new CModuleVCO(synth);
 		ICModuleVCA moduleVCA = new CModuleVCA(synth);
 		ICModuleEG moduleEG = new CModuleEG(synth);
 
-		synth.add(moduleVCO);
-		synth.add(moduleVCA);
-		synth.add(moduleEG);
+		s.getSynthesizer().add(moduleVCO);
+		s.getSynthesizer().add(moduleVCA);
+		s.getSynthesizer().add(moduleEG);
 		ICWire wire = new CWire(synth);
 		JPanel panelToAdd = new JPanel();
 		panelToAdd.add((Component) wire.getPresentation());
@@ -135,10 +138,10 @@ public class SaveLoadTest extends TestCase {
 			e.printStackTrace();
 		}
 
-		s.saveToXML("", "test.synthlab");
+		s.saveToXML(chemin+"/", "test.synthlab");
 
-		// s.setSynthesizer(new CSynthesizer());
-		s.loadFromXML("", "test.synthlab");
+		((SynthApp)s).setSynthesizer(new String[2]);
+		s.loadFromXML(chemin+"/", "test.synthlab");
 		assertEquals(3, s.getSynthesizer().getModules().size());
 		assertEquals("CModuleVCO", s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
 		assertEquals("CModuleVCA", s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
@@ -150,16 +153,16 @@ public class SaveLoadTest extends TestCase {
 
 	public void testSaveAndLoadWireVCF() {
 
-		// s.setSynthesizer(synth);
+		s.setSynthesizer(s.getSynthesizer().getPath());
 		s.setDisplaySynthCommand(new DisplayCommand(sf));
 		s.setUndisplaySynthCommand(new UndisplayCommand(sf));
 		ICModuleVCF moduleVCF = new CModuleVCF_LP(synth);
 		ICModuleVCA moduleVCA = new CModuleVCA(synth);
 		ICModuleEG moduleEG = new CModuleEG(synth);
 
-		synth.add(moduleVCF);
-		synth.add(moduleVCA);
-		synth.add(moduleEG);
+		s.getSynthesizer().add(moduleVCF);
+		s.getSynthesizer().add(moduleVCA);
+		s.getSynthesizer().add(moduleEG);
 		ICWire wire = new CWire(synth);
 		JPanel panelToAdd = new JPanel();
 		panelToAdd.add((Component) wire.getPresentation());
@@ -180,12 +183,12 @@ public class SaveLoadTest extends TestCase {
 			e.printStackTrace();
 		}
 
-		s.saveToXML("", "test.synthlab");
+		s.saveToXML(chemin+"/", "test.synthlab");
 
-		// s.setSynthesizer(new CSynthesizer());
-		s.loadFromXML("", "test.synthlab");
+		s.setSynthesizer(new String[2]);
+		s.loadFromXML(chemin+"/", "test.synthlab");
 		assertEquals(3, s.getSynthesizer().getModules().size());
-		assertEquals("CModuleVCFA_LP", s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
+		assertEquals("CModuleVCF_LP", s.getSynthesizer().getModules().get(0).getClass().getSimpleName());
 		assertEquals("CModuleVCA", s.getSynthesizer().getModules().get(1).getClass().getSimpleName());
 		assertEquals("CModuleEG", s.getSynthesizer().getModules().get(2).getClass().getSimpleName());
 		assertTrue(((CModuleVCA) s.getSynthesizer().getModules().get(1)).getInput().isInUse());

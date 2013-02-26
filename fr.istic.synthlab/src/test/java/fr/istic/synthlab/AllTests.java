@@ -21,9 +21,14 @@ import fr.istic.synthlab.abstraction.module.ModuleVCATest;
 import fr.istic.synthlab.abstraction.module.ModuleVCF_HPTest;
 import fr.istic.synthlab.abstraction.module.ModuleVCF_LPTest;
 import fr.istic.synthlab.abstraction.module.ModuleVCOTest;
+import fr.istic.synthlab.abstraction.port.InputPortTest;
+import fr.istic.synthlab.abstraction.port.OutputPortTest;
+import fr.istic.synthlab.command.AddModuleAudioScopeCommandTest;
 import fr.istic.synthlab.command.AddModuleEGCommandTest;
 import fr.istic.synthlab.command.AddModuleMIXCommandTest;
+import fr.istic.synthlab.command.AddModuleNOISECommandTest;
 import fr.istic.synthlab.command.AddModuleOUTCommandTest;
+import fr.istic.synthlab.command.AddModuleRECCommandTest;
 import fr.istic.synthlab.command.AddModuleREPCommandTest;
 import fr.istic.synthlab.command.AddModuleVCACommandTest;
 import fr.istic.synthlab.command.AddModuleVCFHPCommandTest;
@@ -31,6 +36,8 @@ import fr.istic.synthlab.command.AddModuleVCFLPCommandTest;
 import fr.istic.synthlab.command.AddModuleVCOCommandTest;
 import fr.istic.synthlab.command.NewSynthCommandTest;
 import fr.istic.synthlab.command.OpenAndSaveCommandTest;
+import fr.istic.synthlab.command.ToolbarCurrentWireColorCommandTest;
+import fr.istic.synthlab.command.ToolbarPausePlayCommandTest;
 import fr.istic.synthlab.controler.module.CModuleAudioScopeTest;
 import fr.istic.synthlab.controler.module.CModuleEGTest;
 import fr.istic.synthlab.controler.module.CModuleMIXTest;
@@ -41,6 +48,10 @@ import fr.istic.synthlab.controler.module.CModuleVCATest;
 import fr.istic.synthlab.controler.module.CModuleVCF_HPTest;
 import fr.istic.synthlab.controler.module.CModuleVCF_LPTest;
 import fr.istic.synthlab.controler.module.CModuleVCOTest;
+import fr.istic.synthlab.factory.AFactoryTest;
+import fr.istic.synthlab.factory.CFactoryTest;
+import fr.istic.synthlab.factory.PACFactoryTest;
+import fr.istic.synthlab.factory.PFactoryTest;
 import fr.istic.synthlab.util.SaveLoadTest;
 
 @RunWith(Suite.class)
@@ -56,7 +67,10 @@ import fr.istic.synthlab.util.SaveLoadTest;
 		NewSynthCommandTest.class, OpenAndSaveCommandTest.class,ConvertTest.class, ModuleOUTTest.class, ModuleREPTest.class,
 		 ModuleVCATest.class, ModuleVCOTest.class,
 		SynthesizerTest.class, WireTest.class,ModuleMIXTest.class,ModuleEGTest.class,ModuleAudioScopeTest.class,ModuleVCF_HPTest.class,
-		ModuleVCF_LPTest.class,SaveLoadTest.class })
+		ModuleVCF_LPTest.class,SaveLoadTest.class,InputPortTest.class,OutputPortTest.class,PACFactoryTest.class,PFactoryTest.class,CFactoryTest.class,AFactoryTest.class,AddModuleAudioScopeCommandTest.class,AddModuleNOISECommandTest.class,
+		ToolbarCurrentWireColorCommandTest.class,ToolbarPausePlayCommandTest.class,AddModuleRECCommandTest.class
+		
+})
 public class AllTests {
 
 }

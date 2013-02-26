@@ -138,4 +138,10 @@ public class ModuleREPTest {
 	
 
 }
+	@Test
+	public void testGetWiresNotConnected(){
+
+		assertEquals(0, m.getWires().size());
+		
+	}
 }

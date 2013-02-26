@@ -68,7 +68,7 @@ public class ModuleOUTTest {
 
 
 	@Test
-	public void testGetWires(){
+	public void testGetWiresDifferent(){
 		IWire w=new Wire(synth);		
 		IModuleREP mrep=new ModuleREP(synth);
 		try {
@@ -116,7 +116,12 @@ public class ModuleOUTTest {
 
 		
 	}
+	@Test
+	public void testGetWiresNotConnected(){
 
+		assertEquals(0, m.getWires().size());
+		
+	}
 	
 
 

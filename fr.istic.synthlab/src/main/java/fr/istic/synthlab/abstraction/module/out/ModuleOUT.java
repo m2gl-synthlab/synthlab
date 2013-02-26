@@ -90,19 +90,14 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 	public void setMute(boolean mute) {
 		getParameters().put("mute", mute ? 1.0 : 0.0);
 		if (isMute()) {
-			try {
 				stop();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			try {
+			} 
+		 else {
 				start();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			
 		}
 	}
+	
 
 	@Override
 	public boolean isMute() {

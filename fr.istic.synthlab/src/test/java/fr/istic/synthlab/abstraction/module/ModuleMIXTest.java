@@ -307,6 +307,11 @@ public class ModuleMIXTest {
 		m.setAttenuation4(2.0);
 		assertEquals(2.0, m.getAttenuation4(),0);
 	}
+	@Test
+	public void testGetWiresNotConnected(){
 
+		assertEquals(0, m.getWires().size());
+		
+	}
 
 }

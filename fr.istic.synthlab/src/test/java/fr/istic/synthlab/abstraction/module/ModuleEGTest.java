@@ -66,6 +66,30 @@ public class ModuleEGTest {
 		assertEquals(2.0, m.getRelease(),0);	}
 
 
+	@Test
+	public void testSetGetAttackNegative() {
+		m.setAttack(-2.0);
+		assertEquals(0.0, m.getAttack(),0);
+	}
+
+
+
+	@Test
+	public void testSetGetDecayNegative() {
+		m.setDecay(-2.0);
+		assertEquals(0.0, m.getDecay(),0);	}
+
+	@Test
+	public void testSetGetSustainNegative() {
+		m.setSustain(-2.0);
+		assertEquals(0.0, m.getSustain(),0);	}
+
+
+	@Test
+	public void testSetGetReleaseNegative() {
+		m.setRelease(-2.0);
+		assertEquals(0.0, m.getRelease(),0);	}
+
 
 
 	@Test
@@ -74,31 +98,24 @@ public class ModuleEGTest {
 		try {
 			w.connect(m.getGateInput());
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			w.connect(m.getOutput());
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		assertEquals(1, m.getWires().size());
 		assertEquals(w, m.getWires().get(0));
-
-
-		
 	}
 
 	@Test
-	public void testGetWiresDifferent(){
+	public void testGetWiresDifferentOut(){
 		IWire w=new Wire(synth);		
 		IWire w2=new Wire(synth);
 		IModuleREP mrep=new ModuleREP(synth);
@@ -108,10 +125,8 @@ public class ModuleEGTest {
 			w2.connect(mrep.getInput());
 
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
@@ -120,45 +135,57 @@ public class ModuleEGTest {
 
 
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		
 		assertEquals(2, m.getWires().size());
 		assertEquals(w, m.getWires().get(0));
-		assertEquals(w2, m.getWires().get(1));
-
-
-		
+		assertEquals(w2, m.getWires().get(1));		
 	}
-
-
-
-	
 	
 	@Test
-	public void testGetWiresDifferentBad(){
+	public void testGetWiresDifferentGate(){
 		IWire w=new Wire(synth);		
 		IWire w2=new Wire(synth);
 		IModuleREP mrep=new ModuleREP(synth);
 
 		try {
-			w.connect(m.getGateInput());
 			w.connect(mrep.getOutput1());
-			w2.connect(m.getGateInput());
-			fail("Une exception devrait etre lancée");
+			w2.connect(mrep.getInput());
 
 		} catch (PortAlreadyInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadConnectionException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		try {
+			w.connect(m.getGateInput());
+			w2.connect(m.getOutput());
+
+
+		} catch (PortAlreadyInUseException e) {
+			e.printStackTrace();
+		} catch (BadConnectionException e) {
+			e.printStackTrace();
+		}
+
+		assertEquals(2, m.getWires().size());
+		assertEquals(w, m.getWires().get(0));
+		assertEquals(w2, m.getWires().get(1));		
 	}
+	
+	
+	
+	@Test
+	public void testGetWiresNotConnected(){
+
+		assertEquals(0, m.getWires().size());
+		
+	}
+
+	
+	
 	
 }

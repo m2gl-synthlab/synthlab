@@ -1,5 +1,7 @@
 package fr.istic.synthlab.abstraction.module;
 
+import static org.junit.Assert.assertEquals;
+
 import java.lang.reflect.Field;
 
 import junit.framework.TestCase;
@@ -167,7 +169,7 @@ public class ModuleVCOTest extends TestCase {
 
 
 	
-	public void testGetWiresUpdate() {
+	public void testUpdate() {
 		IWire w=new Wire(synth);
 		try {
 			w.connect(m.getInputFm());
@@ -299,7 +301,12 @@ public class ModuleVCOTest extends TestCase {
 
 		
 	}
-	
+	@Test
+	public void testGetWiresNotConnected(){
+
+		assertEquals(0, m.getWires().size());
+		
+	}
 	
 
 }

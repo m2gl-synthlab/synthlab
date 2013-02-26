@@ -286,6 +286,11 @@ public class ModuleVCF_HPTest {
 	}
 	
 		
+	@Test
+	public void testGetWiresNotConnected(){
 
+		assertEquals(0, m.getWires().size());
+		
+	}
 
 }

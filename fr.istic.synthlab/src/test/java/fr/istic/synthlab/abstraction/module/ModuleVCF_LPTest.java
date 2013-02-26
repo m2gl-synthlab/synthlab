@@ -282,7 +282,12 @@ public class ModuleVCF_LPTest {
 			e.printStackTrace();
 		}
 	}
-	
+	@Test
+	public void testGetWiresNotConnected(){
+
+		assertEquals(0, m.getWires().size());
+		
+	}
 		
 
 

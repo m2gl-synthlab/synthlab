@@ -32,7 +32,6 @@ public class NewSynthCommandTest {
 		
 		 app = new SynthApp(frame);
 		frame = new SynthFrame(app);
-		//TODO ya des choses pas logique par ici oO
 	command=new NewSynthCommand(app);
 		app.setDisplaySynthCommand(new DisplayCommand(frame));
 	}

@@ -19,6 +19,7 @@ import fr.istic.synthlab.abstraction.module.eg.ModuleEG;
 import fr.istic.synthlab.abstraction.port.InputPort;
 import fr.istic.synthlab.abstraction.synthesizer.ISynthesizer;
 import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.abstraction.wire.Wire;
 import fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope;
 import fr.istic.synthlab.controller.module.audioscope.ICModuleAudioScope;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
@@ -128,6 +129,30 @@ public class CModuleAudioScopeTest {
 			assertFalse(w.isConnected());
 		}
 	}
+	
+	@Test
+	public void testP2cClosingWireConnected2() {
+		IWire wire=new Wire(synth);
+		try {
+			wire.connect(iTest.getInput());
+		} catch (PortAlreadyInUseException | BadConnectionException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			wire.connect(iTest.getOutput());
+		} catch (PortAlreadyInUseException | BadConnectionException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		iTest.p2cClosing();
+		for (IWire w : iTest.getWires()) {
+			assertFalse(w.isConnected());
+		}
+	}
+
 
 	/**
 	 * Test method for {@link fr.istic.synthlab.controller.module.audioscope.CModuleAudioScope#getSynthesizerPresentation()}.

@@ -177,9 +177,9 @@ public class CModuleRECTest {
 	public void testSetParameter() {
 		iTest.setParameter("attenuation", 2.0);
 		assertEquals(2.0, iTest.getAttenuation(),0);
-		iTest.setParameter("isRecording", 1.0);
-		assertEquals(false, iTest.isRecording());
 		iTest.setParameter("isRecording", 0.0);
+		assertEquals(false, iTest.isRecording());
+		iTest.setParameter("isRecording", 1.0);
 		assertEquals(true, iTest.isRecording());
 		iTest.setParameter("isRecording", 2.0);
 		assertEquals(false, iTest.isRecording());

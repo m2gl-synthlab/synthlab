@@ -205,7 +205,7 @@ public class SynthFrame extends JFrame implements ISynthFrame {
 		// Chargement des images de la toolbar
 		try {
 			imageIconPlay = new ImageIcon(ImageIO.read(ClassLoader.getSystemResourceAsStream(iconFiles[0])));
-			imageIconStop = new ImageIcon(ImageIO.read(ClassLoader.getSystemResourceAsStream(iconFiles[1])));
+			//imageIconStop = new ImageIcon(ImageIO.read(ClassLoader.getSystemResourceAsStream(iconFiles[1])));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

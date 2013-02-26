@@ -1,6 +1,10 @@
 package fr.istic.synthlab.abstraction.module;
 
+import static org.junit.Assert.assertEquals;
+
 import java.lang.reflect.Field;
+
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -266,6 +270,12 @@ public class ModuleVCATest extends TestCase {
 		assertEquals(4.0, m.getAttenuation());
 	}
 
+	@Test
+	public void testGetWiresNotConnected(){
+
+		assertEquals(0, m.getWires().size());
+		
+	}
 
 	
 }

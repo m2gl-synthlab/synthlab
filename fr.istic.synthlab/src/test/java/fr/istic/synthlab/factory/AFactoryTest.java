@@ -43,6 +43,8 @@ public class AFactoryTest {
 	@Before
 	public void setUp() throws Exception {
 		PACFactory.setAFactory(AFactory.getInstance());
+		PACFactory.setCFactory(null);
+
 		fact=AFactory.getInstance();
 	}
 
