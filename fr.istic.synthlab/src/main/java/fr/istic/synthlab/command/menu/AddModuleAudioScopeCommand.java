@@ -8,6 +8,7 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 public class AddModuleAudioScopeCommand implements ICommand {
 
 	private ISynthApp app;
+
 	public AddModuleAudioScopeCommand(ISynthApp app) {
 		this.app = app;
 	}

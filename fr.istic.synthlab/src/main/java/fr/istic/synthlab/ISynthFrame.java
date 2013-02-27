@@ -49,6 +49,7 @@ public interface ISynthFrame {
 
 	/**
 	 * Return the current wire Color
+	 * 
 	 * @return
 	 */
 	Color getCurrentWireColor();

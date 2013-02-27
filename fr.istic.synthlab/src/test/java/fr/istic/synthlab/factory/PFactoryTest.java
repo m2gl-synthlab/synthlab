@@ -59,74 +59,85 @@ public class PFactoryTest {
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 
-		fact=PFactory.getInstance();
+		fact = PFactory.getInstance();
 	}
 
 	@Test
 	public void testNewSynthesizer() {
-		IPSynthesizer synth=fact.newSynthesizer(new CSynthesizer());
-		assertEquals(PSynthesizer.class,synth.getClass());
+		IPSynthesizer synth = fact.newSynthesizer(new CSynthesizer());
+		assertEquals(PSynthesizer.class, synth.getClass());
 	}
 
 	@Test
 	public void testNewVCO() {
-		IPModuleVCO vco=fact.newVCO(new CModuleVCO(new CSynthesizer()));
+		IPModuleVCO vco = fact.newVCO(new CModuleVCO(new CSynthesizer()));
 		assertEquals(PModuleVCO.class, vco.getClass());
 	}
 
 	@Test
 	public void testNewVCA() {
-		IPModuleVCA vca=fact.newVCA(new CModuleVCA(new CSynthesizer()));
-		assertEquals(PModuleVCA.class, vca.getClass());	}
+		IPModuleVCA vca = fact.newVCA(new CModuleVCA(new CSynthesizer()));
+		assertEquals(PModuleVCA.class, vca.getClass());
+	}
 
 	@Test
 	public void testNewVCFA_LP() {
-		IPModuleVCF vcflp= fact.newVCF(new CModuleVCF_LP(new CSynthesizer()));
-		assertEquals(PModuleVCF.class, vcflp.getClass());	}
+		IPModuleVCF vcflp = fact.newVCF(new CModuleVCF_LP(new CSynthesizer()));
+		assertEquals(PModuleVCF.class, vcflp.getClass());
+	}
 
 	@Test
 	public void testNewVCFA_HP() {
-		IPModuleVCF vcfhp= fact.newVCF(new CModuleVCF_HP(new CSynthesizer()));
-		assertEquals(PModuleVCF.class, vcfhp.getClass());	}
+		IPModuleVCF vcfhp = fact.newVCF(new CModuleVCF_HP(new CSynthesizer()));
+		assertEquals(PModuleVCF.class, vcfhp.getClass());
+	}
 
 	@Test
 	public void testNewOUT() {
-		IPModuleOUT out=fact.newOUT(new CModuleOUT(new CSynthesizer()));
-		assertEquals(PModuleOUT.class, out.getClass());	}
+		IPModuleOUT out = fact.newOUT(new CModuleOUT(new CSynthesizer()));
+		assertEquals(PModuleOUT.class, out.getClass());
+	}
 
 	@Test
 	public void testNewEG() {
-		IPModuleEG eg=fact.newEG(new CModuleEG(new CSynthesizer()));
-		assertEquals(PModuleEG.class, eg.getClass());	}
+		IPModuleEG eg = fact.newEG(new CModuleEG(new CSynthesizer()));
+		assertEquals(PModuleEG.class, eg.getClass());
+	}
 
 	@Test
 	public void testNewAudioScope() {
-		IPModuleAudioScope scope=fact.newAudioScope(new CModuleAudioScope(new CSynthesizer()));
-		assertEquals(PModuleAudioScope.class, scope.getClass());	}
+		IPModuleAudioScope scope = fact.newAudioScope(new CModuleAudioScope(new CSynthesizer()));
+		assertEquals(PModuleAudioScope.class, scope.getClass());
+	}
 
 	@Test
 	public void testNewREP() {
-		IPModuleREP rep=fact.newREP(new CModuleREP(new CSynthesizer()));
-		assertEquals(PModuleREP.class, rep.getClass());	}
+		IPModuleREP rep = fact.newREP(new CModuleREP(new CSynthesizer()));
+		assertEquals(PModuleREP.class, rep.getClass());
+	}
 
 	@Test
 	public void testNewMIX() {
-		IPModuleMIX mix= fact.newMIX(new CModuleMIX(new CSynthesizer()));
-		assertEquals(PModuleMIX.class, mix.getClass());	}
+		IPModuleMIX mix = fact.newMIX(new CModuleMIX(new CSynthesizer()));
+		assertEquals(PModuleMIX.class, mix.getClass());
+	}
 
 	@Test
 	public void testNewWire() {
-		IPWire wire=fact.newWire(new CWire(new CSynthesizer()));
-		assertEquals(PWire.class, wire.getClass());	}
+		IPWire wire = fact.newWire(new CWire(new CSynthesizer()));
+		assertEquals(PWire.class, wire.getClass());
+	}
 
 	@Test
 	public void testNewInputPort() {
-		IPInputPort ip=fact.newInputPort(new CInputPort(new CSynthesizer(),"input", new UnitInputPort("port"), new CModuleVCO(new CSynthesizer())));
-		assertEquals(PInputPort.class, ip.getClass());	}
+		IPInputPort ip = fact.newInputPort(new CInputPort(new CSynthesizer(), "input", new UnitInputPort("port"), new CModuleVCO(new CSynthesizer())));
+		assertEquals(PInputPort.class, ip.getClass());
+	}
 
 	@Test
 	public void testNewOutputPort() {
-		IPOutputPort ip=fact.newOutputPort(new COutputPort(new CSynthesizer(),"input", new UnitOutputPort("port"), new CModuleVCO(new CSynthesizer())));
-		assertEquals(POutputPort.class, ip.getClass());	}
+		IPOutputPort ip = fact.newOutputPort(new COutputPort(new CSynthesizer(), "input", new UnitOutputPort("port"), new CModuleVCO(new CSynthesizer())));
+		assertEquals(POutputPort.class, ip.getClass());
+	}
 
 }

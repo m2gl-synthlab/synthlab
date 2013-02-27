@@ -21,7 +21,7 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	private static final String MODULE_NAME = "OUT";
 	private static final String IN_NAME = "In";
-	
+
 	protected static final boolean DEFAULT_STATE_MUTE = true;
 
 	private ChannelOut out;
@@ -34,8 +34,7 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 		this.out = new ChannelOut();
 		this.attenuator = new AttenuationFilter();
 
-		this.in = PACFactory.getFactory().newInputPort(synth, this, IN_NAME,
-				attenuator.input);
+		this.in = PACFactory.getFactory().newInputPort(synth, this, IN_NAME, attenuator.input);
 		this.setAttenuation(0);
 
 		attenuator.output.connect(out.input);
@@ -56,18 +55,20 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 
 	@Override
 	public void start() {
-		if (!isMute()){
-			try{
-			out.start();
-			}catch(Exception e){}
+		if (!isMute()) {
+			try {
+				out.start();
+			} catch (Exception e) {
+			}
 		}
 	}
 
 	@Override
 	public void stop() {
-		try{
-		out.stop();
-		}catch(Exception e){}
+		try {
+			out.stop();
+		} catch (Exception e) {
+		}
 	}
 
 	@Override
@@ -90,14 +91,19 @@ public class ModuleOUT extends AModule implements IModuleOUT {
 	public void setMute(boolean mute) {
 		getParameters().put("mute", mute ? 1.0 : 0.0);
 		if (isMute()) {
+			try {
 				stop();
-			} 
-		 else {
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
 				start();
-			
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	
 
 	@Override
 	public boolean isMute() {

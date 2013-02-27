@@ -1,3 +1,4 @@
+
 package fr.istic.synthlab.controler.port;
 
 import junit.framework.TestCase;
@@ -31,7 +32,6 @@ public class COutputPortTest extends TestCase {
 		iop = new COutputPort(synth, "out2", iop2, null);
 		assertEquals("out2", iop.getName());
 		assertEquals(iop2, iop.getJSyn());
-
 		assertNotNull(iop.getPresentation());
 	}
 

@@ -27,5 +27,5 @@ public interface ICModuleREC extends ICModule, IModuleREC {
 	 * @param gain
 	 */
 	public void p2cGainChanged(double gain);
-	
+
 }

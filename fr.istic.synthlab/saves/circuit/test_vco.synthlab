@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modules>
+	<module name="OUT - 1" x="1228.0" y="15.0">
+		<parameter key="attenuation" value="0.0" />
+		<parameter key="mute" value="0.0" />
+	</module>
+	<module name="VCO - 1" x="329.0" y="15.0">
+		<wire colorB="128" colorG="128" colorR="128" inputPort="In"
+			inputPortModuleName="AudioScope - 1" outputPort="Triangle" />
+		<parameter key="octave" value="8.0" />
+		<parameter key="tone" value="0.0" />
+		<parameter key="frequency" value="256.0" />
+	</module>
+	<module name="VCO - 2" x="59.0" y="15.0">
+		<wire colorB="128" colorG="128" colorR="128" inputPort="fm"
+			inputPortModuleName="VCO - 1" outputPort="Triangle" />
+		<parameter key="octave" value="0.0" />
+		<parameter key="tone" value="-0.96" />
+		<parameter key="frequency" value="0.5140569133280333" />
+	</module>
+	<module name="AudioScope - 1" x="598.0" y="15.0">
+		<wire colorB="128" colorG="128" colorR="128" inputPort="In"
+			inputPortModuleName="OUT - 1" outputPort="Out" />
+	</module>
+</modules>

@@ -57,18 +57,18 @@ public class CWire extends Wire implements ICWire {
 
 	@Override
 	public void disconnect() {
-		((ICSynthesizer)cSynthesizer).getPresentation().removeWire(pres);
+		((ICSynthesizer) cSynthesizer).getPresentation().removeWire(pres);
 		super.disconnect();
 	}
 
 	@Override
 	public Color getCurrentWireColor() {
-		return ((ICSynthesizer)cSynthesizer).getCurrentWireColor();
+		return ((ICSynthesizer) cSynthesizer).getCurrentWireColor();
 	}
 
 	@Override
 	public IPSynthesizer getSynthesizerPresentation() {
-		 return ((ICSynthesizer)cSynthesizer).getPresentation(); 
+		return ((ICSynthesizer) cSynthesizer).getPresentation();
 	}
 
 	@Override

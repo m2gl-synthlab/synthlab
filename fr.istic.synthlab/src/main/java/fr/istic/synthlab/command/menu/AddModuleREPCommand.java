@@ -8,6 +8,7 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 public class AddModuleREPCommand implements ICommand {
 
 	private ISynthApp app;
+
 	public AddModuleREPCommand(ISynthApp app) {
 		this.app = app;
 	}

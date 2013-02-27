@@ -66,10 +66,10 @@ public class CModuleVCO extends ModuleVCO implements ICModuleVCO {
 		}
 
 	}
-	
+
 	@Override
 	public IPSynthesizer getSynthesizerPresentation() {
-		return ((ICSynthesizer)cSynthesizer).getPresentation();
+		return ((ICSynthesizer) cSynthesizer).getPresentation();
 	}
 
 	@Override

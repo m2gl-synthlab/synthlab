@@ -19,7 +19,6 @@ import fr.istic.synthlab.factory.impl.PFactory;
 public class AddModuleVCACommandTest {
 	ICommand command;
 	ISynthApp app;
-	
 
 	@Before
 	public void setUp() throws Exception {
@@ -28,18 +27,17 @@ public class AddModuleVCACommandTest {
 		PACFactory.setPFactory(PFactory.getInstance());
 
 		ISynthFrame frame = null;
-		
-		 app = new SynthApp(frame);
-		frame = new SynthFrame(app);
-		command=new AddModuleVCACommand(app);
-	}
 
+		app = new SynthApp(frame);
+		frame = new SynthFrame(app);
+		command = new AddModuleVCACommand(app);
+	}
 
 	@Test
 	public void testExecute() {
 		command.execute();
-		assertEquals(1,app.getSynthesizer().getModules().size());
-		assertEquals(CModuleVCA.class,app.getSynthesizer().getModules().get(0).getClass());
+		assertEquals(1, app.getSynthesizer().getModules().size());
+		assertEquals(CModuleVCA.class, app.getSynthesizer().getModules().get(0).getClass());
 	}
 
 }

@@ -36,9 +36,9 @@ public interface IModule {
 	 * @return
 	 */
 	public String getName();
-	
+
 	/**
-	 *Set the module's name
+	 * Set the module's name
 	 * 
 	 * @return
 	 */

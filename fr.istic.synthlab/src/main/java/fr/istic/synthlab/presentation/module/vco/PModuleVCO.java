@@ -41,7 +41,6 @@ public class PModuleVCO extends APModule implements IPModuleVCO {
 	 */
 	public PModuleVCO(ICModuleVCO control) {
 		super(control);
-		System.out.println("PModuleVCO initialized");
 
 		this.ctrl = control;
 		configView();

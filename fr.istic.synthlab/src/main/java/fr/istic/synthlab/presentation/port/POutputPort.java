@@ -98,6 +98,5 @@ public class POutputPort extends PPort implements IPOutputPort {
 
 	@Override
 	public void c2pConnectionAttemptSucceed() {
-		// TODO Auto-generated method stub
 	}
 }

@@ -31,7 +31,7 @@ public class ModuleREC extends AModule implements IModuleREC {
 
 	// Dernier fichier enregistré
 	private File wavFile;
-	
+
 	private WaveRecorder rec;
 	private AttenuationFilter attenuator;
 

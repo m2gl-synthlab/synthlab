@@ -41,7 +41,6 @@ public class ModuleVCF_LP extends AModule implements IModuleVCF, Observer<Port> 
 
 	public ModuleVCF_LP(ISynthesizer synth) {
 		super(synth, MODULE_NAME);
-		System.out.println("ModuleVCFA LP24 initialized");
 
 		// Création des filtres JSyn
 		this.filterJSyn1 = new FilterLowPass();
@@ -60,17 +59,14 @@ public class ModuleVCF_LP extends AModule implements IModuleVCF, Observer<Port> 
 		frequencyModulator.output.connect(passThrough.input);
 
 		// Création d'un port d'entrée sur le générateur perso
-		this.fm = PACFactory.getFactory().newInputPort(synth, this, IN_MOD_FREQ_NAME,
-				frequencyModulator.input);
+		this.fm = PACFactory.getFactory().newInputPort(synth, this, IN_MOD_FREQ_NAME, frequencyModulator.input);
 		this.fm.addObserver(this);
 
 		// Création des ports d'entrée sur le filtre JSyn 1
-		this.input = PACFactory.getFactory().newInputPort(synth, this, IN_NAME,
-				filterJSyn1.input);
+		this.input = PACFactory.getFactory().newInputPort(synth, this, IN_NAME, filterJSyn1.input);
 
 		// Création du port de sortie sur le filtre JSyn 2
-		this.output = PACFactory.getFactory().newOutputPort(synth, this, OUT_NAME,
-				filterJSyn2.output);
+		this.output = PACFactory.getFactory().newOutputPort(synth, this, OUT_NAME, filterJSyn2.output);
 
 		// Valeur par defaut
 		this.setCutFrequency(1000);

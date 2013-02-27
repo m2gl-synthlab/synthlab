@@ -13,7 +13,7 @@ public class AmplitudeModulatorFilter extends UnitFilter {
 
 	public AmplitudeModulatorFilter(double baseAmplitude) {
 		addPort(inputAm);
-		
+
 	}
 
 	@Override

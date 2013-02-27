@@ -83,7 +83,7 @@ public class CFactory implements IFactory {
 		IModuleNOISE module = new CModuleNOISE(cSynthesizer);
 		return module;
 	}
-	
+
 	@Override
 	public IModuleOUT newOUT(ISynthesizer cSynthesizer) {
 		IModuleOUT module = new CModuleOUT(cSynthesizer);

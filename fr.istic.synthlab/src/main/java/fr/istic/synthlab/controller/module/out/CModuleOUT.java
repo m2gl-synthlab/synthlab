@@ -61,12 +61,11 @@ public class CModuleOUT extends ModuleOUT implements ICModuleOUT {
 			}
 		}
 	}
-	
+
 	@Override
 	public IPSynthesizer getSynthesizerPresentation() {
-		return ((ICSynthesizer)cSynthesizer).getPresentation();
+		return ((ICSynthesizer) cSynthesizer).getPresentation();
 	}
-	
 
 	@Override
 	public void p2cRemoveModule(ICModule module) {

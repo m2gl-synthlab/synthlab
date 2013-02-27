@@ -38,7 +38,6 @@ public class PModuleMIX extends APModule implements IPModuleMIX {
 
 	public PModuleMIX(ICModuleMIX control) {
 		super(control);
-		System.out.println("PModuleMIX initialized");
 
 		this.ctrl = control;
 		configView();
@@ -54,12 +53,11 @@ public class PModuleMIX extends APModule implements IPModuleMIX {
 		JPanel panelComponent = new JPanel();
 		GridLayout layout = new GridLayout(2, 6);
 		layout.setVgap(20);
-		panelComponent.setLayout(layout);		
+		panelComponent.setLayout(layout);
 		panelComponent.setOpaque(false);
-		
 
 		panelComponent.add(new JLabel());
-		
+
 		modelGain1 = new DoubleBoundedRangeModel(IModuleMIX.PARAM_NAME_GAIN1, 7200, -60, 12, ctrl.getAttenuation1());
 		RotaryTextController gainRotary1 = new RotaryTextController(modelGain1, 1);
 		panelComponent.add(gainRotary1);
@@ -75,7 +73,7 @@ public class PModuleMIX extends APModule implements IPModuleMIX {
 		modelGain4 = new DoubleBoundedRangeModel(IModuleMIX.PARAM_NAME_GAIN4, 7200, -60, 12, ctrl.getAttenuation4());
 		RotaryTextController gainRotary4 = new RotaryTextController(modelGain4, 1);
 		panelComponent.add(gainRotary4);
-		
+
 		panelComponent.add(new JLabel());
 		panelComponent.add(new JLabel());
 
@@ -94,7 +92,6 @@ public class PModuleMIX extends APModule implements IPModuleMIX {
 		output = (POutputPort) ((ICOutputPort) ctrl.getOutput()).getPresentation();
 		panelComponent.add(output);
 
-		
 		this.setAutoscrolls(true);
 		super.setWidth(350);
 		super.setHeigth(200);

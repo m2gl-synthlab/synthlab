@@ -10,17 +10,18 @@ import fr.istic.synthlab.presentation.module.IPModule;
 import fr.istic.synthlab.presentation.module.rep.IPModuleREP;
 import fr.istic.synthlab.presentation.synthesizer.IPSynthesizer;
 
-//TODO : need comments
-
+/**
+ * Controller of a REP module controller 
+ */
 public class CModuleREP extends ModuleREP implements ICModuleREP {
 
 	private IPModuleREP pres;
 	private ISynthesizer cSynthesizer;
-	
+
 	public CModuleREP(ISynthesizer cSynthesizer) {
 		super(cSynthesizer);
 		this.cSynthesizer = cSynthesizer;
-		this.pres = PACFactory.getPFactory().newREP(this);	
+		this.pres = PACFactory.getPFactory().newREP(this);
 	}
 
 	@Override
@@ -37,9 +38,8 @@ public class CModuleREP extends ModuleREP implements ICModuleREP {
 
 	@Override
 	public IPSynthesizer getSynthesizerPresentation() {
-		return ((ICSynthesizer)cSynthesizer).getPresentation();
+		return ((ICSynthesizer) cSynthesizer).getPresentation();
 	}
-	
 
 	@Override
 	public void p2cRemoveModule(ICModule module) {
@@ -47,5 +47,6 @@ public class CModuleREP extends ModuleREP implements ICModuleREP {
 	}
 
 	@Override
-	public void setParameter(String key, Double value) {}
+	public void setParameter(String key, Double value) {
+	}
 }

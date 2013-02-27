@@ -74,3 +74,4 @@ import fr.istic.synthlab.util.SaveLoadTest;
 public class AllTests {
 
 }
+

@@ -90,4 +90,8 @@ public class WireTest extends TestCase {
 		assertFalse(wire.isConnected());
 	}
 
+
+
+
 }
+

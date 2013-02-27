@@ -8,6 +8,7 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 public class AddModuleVCACommand implements ICommand {
 
 	private ISynthApp app;
+
 	public AddModuleVCACommand(ISynthApp app) {
 		this.app = app;
 	}

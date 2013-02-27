@@ -4,6 +4,9 @@ import fr.istic.synthlab.abstraction.module.IModule;
 import fr.istic.synthlab.abstraction.port.IInputPort;
 import fr.istic.synthlab.abstraction.port.IOutputPort;
 
+/**
+ * Interface for a VCA Module
+ */
 public interface IModuleVCA extends IModule {
 
 	/**
@@ -11,11 +14,25 @@ public interface IModuleVCA extends IModule {
 	 */
 	public static final String PARAM_NAME_GAIN = "Gain";
 
-	// TODO comment
+	/**
+	 * Return the module input port
+	 * 
+	 * @return input
+	 */
 	IInputPort getInput();
 
+	/**
+	 * Return the module am input port
+	 * 
+	 * @return am
+	 */
 	IInputPort getInputAM();
 
+	/**
+	 * Return the module output port
+	 * 
+	 * @return output
+	 */
 	IOutputPort getOutput();
 
 	/**

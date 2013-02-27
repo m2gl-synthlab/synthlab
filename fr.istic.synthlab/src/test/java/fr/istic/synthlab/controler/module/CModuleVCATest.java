@@ -9,13 +9,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.jsyn.ports.UnitInputPort;
-
 import fr.istic.synthlab.abstraction.exception.BadConnectionException;
 import fr.istic.synthlab.abstraction.exception.PortAlreadyInUseException;
-import fr.istic.synthlab.abstraction.module.eg.ModuleEG;
-import fr.istic.synthlab.abstraction.port.InputPort;
 import fr.istic.synthlab.abstraction.wire.IWire;
+import fr.istic.synthlab.abstraction.wire.Wire;
 import fr.istic.synthlab.controller.module.vca.CModuleVCA;
 import fr.istic.synthlab.controller.module.vca.ICModuleVCA;
 import fr.istic.synthlab.controller.synthesizer.CSynthesizer;
@@ -26,7 +23,7 @@ import fr.istic.synthlab.factory.impl.PFactory;
 
 /**
  * @author USER
- *
+ * 
  */
 public class CModuleVCATest {
 
@@ -54,7 +51,9 @@ public class CModuleVCATest {
 	}
 
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#getPresentation()}.
+	 * Test method for
+	 * {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#getPresentation()}
+	 * .
 	 */
 	@Test
 	public void testGetPresentation() {
@@ -62,7 +61,8 @@ public class CModuleVCATest {
 	}
 
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#p2cClosing()}.
+	 * Test method for
+	 * {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#p2cClosing()}.
 	 * Test de la méthode pour p2cClosing lorsqu'aucun des ports n'est connecté
 	 */
 	@Test
@@ -77,21 +77,41 @@ public class CModuleVCATest {
 	}
 
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#p2cClosing()}.
+	 * Test method for
+	 * {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#p2cClosing()}.
 	 * Test de la méthode la p2cClosing lorsque tout les ports sont connecté
 	 */
 	@Test
 	public void testP2cClosingAllWireConnected() {
-		ModuleEG module = new ModuleEG(synth);
-		UnitInputPort jSynPort = new UnitInputPort("TestInput");
-		for(IWire w : iTest.getWires()){
-			try {
-				w.connect(new InputPort("TestInput", jSynPort, module));
-			} catch (PortAlreadyInUseException e) {
-				e.printStackTrace();
-			} catch (BadConnectionException e) {
-				e.printStackTrace();
-			}
+		IWire wireIn = new Wire(synth);
+		IWire wireInAM = new Wire(synth);
+		IWire wireOut = new Wire(synth);
+
+		try {
+			wireIn.connect(iTest.getInput());
+		} catch (PortAlreadyInUseException e1) {
+			e1.printStackTrace();
+		} catch (BadConnectionException e1) {
+			e1.printStackTrace();
+		}
+
+		try {
+			wireInAM.connect(iTest.getInputAM());
+		} catch (PortAlreadyInUseException e1) {
+			e1.printStackTrace();
+		} catch (BadConnectionException e1) {
+			e1.printStackTrace();
+		}
+
+		try {
+			wireOut.connect(iTest.getOutput());
+		} catch (PortAlreadyInUseException e1) {
+			e1.printStackTrace();
+		} catch (BadConnectionException e1) {
+			e1.printStackTrace();
+		}
+
+		for (IWire w : iTest.getWires()) {
 			assertTrue(w.isConnected());
 		}
 		iTest.p2cClosing();
@@ -101,75 +121,65 @@ public class CModuleVCATest {
 	}
 
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#p2cClosing()}.
-	 * Test de la méthode la p2cClosing lorsque certains port sont connectés.
-	 */
-	@Test
-	public void testP2cClosingHalfWireConnected() {
-		int i = 0;
-		ModuleEG module = new ModuleEG(synth);
-		UnitInputPort jSynPort = new UnitInputPort("TestInput");
-		for(IWire w : iTest.getWires()){
-			if (i%2 == 0){
-				try {
-					w.connect(new InputPort("TestInput", jSynPort, module));
-				} catch (PortAlreadyInUseException e) {
-					e.printStackTrace();
-				} catch (BadConnectionException e) {
-					e.printStackTrace();
-				}
-				assertTrue(w.isConnected());
-			}else{
-				assertFalse(w.isConnected());
-			}
-			i++;
-		}
-		iTest.p2cClosing();
-		for (IWire w : iTest.getWires()) {
-			assertFalse(w.isConnected());
-		}
-	}
-
-	
-	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#p2cAttenuationValueChanged(double)}.
+	 * Test method for
+	 * {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#p2cAttenuationValueChanged(double)}
+	 * .
 	 */
 	@Test
 	public void testP2cAttenuationValueChanged() {
 		iTest.p2cAttenuationValueChanged(2.0);
-		assertEquals(2.0, iTest.getAttenuation(),0);
+		assertEquals(2.0, iTest.getAttenuation(), 0);
 	}
 
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#p2cAttenuationValueChanged(double)}.
+	 * Test method for
+	 * {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#p2cAttenuationValueChanged(double)}
+	 * .
 	 */
 	@Test
 	public void testP2cAttenuationValueChangedLessMin() {
 		iTest.p2cAttenuationValueChanged(-62.0);
-		assertEquals(-60.0, iTest.getAttenuation(),0);
+		assertEquals(-60.0, iTest.getAttenuation(), 0);
 	}
 
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#p2cAttenuationValueChanged(double)}.
+	 * Test method for
+	 * {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#p2cAttenuationValueChanged(double)}
+	 * .
 	 */
 	@Test
 	public void testP2cAttenuationValueChangedMoreMax() {
 		iTest.p2cAttenuationValueChanged(42.0);
-		assertEquals(12.0, iTest.getAttenuation(),0);
+		assertEquals(12.0, iTest.getAttenuation(), 0);
 	}
 
-	
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#setParameter(java.lang.String, java.lang.Double)}.
+	 * Test method for
+	 * {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#setParameter(java.lang.String, java.lang.Double)}
+	 * .
 	 */
 	@Test
 	public void testSetParameter() {
 		iTest.setParameter("attenuation", 2.0);
-		assertEquals(2.0, iTest.getAttenuation(),0);
+		assertEquals(2.0, iTest.getAttenuation(), 0);
 	}
 
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#getSynthesizerPresentation()}.
+	 * Test method for
+	 * {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#setParameter(java.lang.String, java.lang.Double)}
+	 * .
+	 */
+	@Test
+	public void testSetParameterFalseParameter() {
+		double attenuation = iTest.getAttenuation();
+		iTest.setParameter("falseParameters", 2.0);
+		assertEquals(attenuation, iTest.getAttenuation(), 4);
+	}
+
+	/**
+	 * Test method for
+	 * {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#getSynthesizerPresentation()}
+	 * .
 	 */
 	@Test
 	public void testGetSynthesizerPresentation() {
@@ -177,9 +187,10 @@ public class CModuleVCATest {
 	}
 
 	/**
-	 * Test method for {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#p2cRemoveModule(fr.istic.synthlab.controller.module.ICModule)}.
+	 * Test method for
+	 * {@link fr.istic.synthlab.controller.module.vca.CModuleVCA#p2cRemoveModule(fr.istic.synthlab.controller.module.ICModule)}
+	 * .
 	 */
-	//TODO ne fonctionne pas !
 	@Test
 	public void testP2cRemoveModule() {
 		assertTrue(synth.getModules().contains(iTest));

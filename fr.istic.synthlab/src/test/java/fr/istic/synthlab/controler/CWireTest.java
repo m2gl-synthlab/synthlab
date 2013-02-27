@@ -22,6 +22,7 @@ import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 import fr.istic.synthlab.factory.impl.PFactory;
+
 //TODO A finir !!
 public class CWireTest {
 
@@ -37,7 +38,7 @@ public class CWireTest {
 		PACFactory.setPFactory(PFactory.getInstance());
 		synth = new CSynthesizer();
 		iTest = new CWire(synth);
-		
+
 		ip = PACFactory.getCFactory().newInputPort(synth, new ModuleOUT(synth), "port", new UnitInputPort("port"));
 		op = PACFactory.getCFactory().newOutputPort(synth, new ModuleOUT(synth), "port", new UnitOutputPort("port"));
 	}

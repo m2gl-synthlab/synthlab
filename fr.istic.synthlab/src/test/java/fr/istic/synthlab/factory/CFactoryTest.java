@@ -46,74 +46,85 @@ public class CFactoryTest {
 		PACFactory.setCFactory(CFactory.getInstance());
 		PACFactory.setPFactory(PFactory.getInstance());
 
-		fact=CFactory.getInstance();
+		fact = CFactory.getInstance();
 	}
 
 	@Test
 	public void testNewSynthesizer() {
-		ISynthesizer synth=fact.newSynthesizer();
-		assertEquals(CSynthesizer.class,synth.getClass());
+		ISynthesizer synth = fact.newSynthesizer();
+		assertEquals(CSynthesizer.class, synth.getClass());
 	}
 
 	@Test
 	public void testNewVCO() {
-		IModuleVCO vco=fact.newVCO(new CSynthesizer());
+		IModuleVCO vco = fact.newVCO(new CSynthesizer());
 		assertEquals(CModuleVCO.class, vco.getClass());
 	}
 
 	@Test
 	public void testNewVCA() {
-		IModuleVCA vca=fact.newVCA(new CSynthesizer());
-		assertEquals(CModuleVCA.class, vca.getClass());	}
+		IModuleVCA vca = fact.newVCA(new CSynthesizer());
+		assertEquals(CModuleVCA.class, vca.getClass());
+	}
 
 	@Test
 	public void testNewVCFA_LP() {
-		IModuleVCF vcflp=(IModuleVCF) fact.newVCFA_LP(new CSynthesizer());
-		assertEquals(CModuleVCF_LP.class, vcflp.getClass());	}
+		IModuleVCF vcflp = (IModuleVCF) fact.newVCFA_LP(new CSynthesizer());
+		assertEquals(CModuleVCF_LP.class, vcflp.getClass());
+	}
 
 	@Test
 	public void testNewVCFA_HP() {
-		IModuleVCF vcfhp=(IModuleVCF) fact.newVCFA_HP(new CSynthesizer());
-		assertEquals(CModuleVCF_HP.class, vcfhp.getClass());	}
+		IModuleVCF vcfhp = (IModuleVCF) fact.newVCFA_HP(new CSynthesizer());
+		assertEquals(CModuleVCF_HP.class, vcfhp.getClass());
+	}
 
 	@Test
 	public void testNewOUT() {
-		IModuleOUT out=fact.newOUT(new CSynthesizer());
-		assertEquals(CModuleOUT.class, out.getClass());	}
+		IModuleOUT out = fact.newOUT(new CSynthesizer());
+		assertEquals(CModuleOUT.class, out.getClass());
+	}
 
 	@Test
 	public void testNewEG() {
-		IModuleEG eg=fact.newEG(new CSynthesizer());
-		assertEquals(CModuleEG.class, eg.getClass());	}
+		IModuleEG eg = fact.newEG(new CSynthesizer());
+		assertEquals(CModuleEG.class, eg.getClass());
+	}
 
 	@Test
 	public void testNewAudioScope() {
-		IModuleAudioScope scope=fact.newAudioScope(new CSynthesizer());
-		assertEquals(CModuleAudioScope.class, scope.getClass());	}
+		IModuleAudioScope scope = fact.newAudioScope(new CSynthesizer());
+		assertEquals(CModuleAudioScope.class, scope.getClass());
+	}
 
 	@Test
 	public void testNewREP() {
-		IModuleREP rep=fact.newREP(new CSynthesizer());
-		assertEquals(CModuleREP.class, rep.getClass());	}
+		IModuleREP rep = fact.newREP(new CSynthesizer());
+		assertEquals(CModuleREP.class, rep.getClass());
+	}
 
 	@Test
 	public void testNewMIX() {
-		IModuleMIX mix=(IModuleMIX) fact.newMIX(new CSynthesizer());
-		assertEquals(CModuleMIX.class, mix.getClass());	}
+		IModuleMIX mix = (IModuleMIX) fact.newMIX(new CSynthesizer());
+		assertEquals(CModuleMIX.class, mix.getClass());
+	}
 
 	@Test
 	public void testNewWire() {
-		IWire wire=fact.newWire(new CSynthesizer());
-		assertEquals(CWire.class, wire.getClass());	}
+		IWire wire = fact.newWire(new CSynthesizer());
+		assertEquals(CWire.class, wire.getClass());
+	}
 
 	@Test
 	public void testNewInputPort() {
-		IInputPort ip=fact.newInputPort(new CSynthesizer(),new ModuleVCO(new CSynthesizer()),"input", new UnitInputPort("port"));
-		assertEquals(CInputPort.class, ip.getClass());	}
+		IInputPort ip = fact.newInputPort(new CSynthesizer(), new ModuleVCO(new CSynthesizer()), "input", new UnitInputPort("port"));
+		assertEquals(CInputPort.class, ip.getClass());
+	}
 
 	@Test
 	public void testNewOutputPort() {
-		IOutputPort op=fact.newOutputPort(new CSynthesizer(),new ModuleVCO(new CSynthesizer()),"input", new UnitOutputPort("port"));
-		assertEquals(COutputPort.class, op.getClass());	}
+		IOutputPort op = fact.newOutputPort(new CSynthesizer(), new ModuleVCO(new CSynthesizer()), "input", new UnitOutputPort("port"));
+		assertEquals(COutputPort.class, op.getClass());
+	}
 
 }

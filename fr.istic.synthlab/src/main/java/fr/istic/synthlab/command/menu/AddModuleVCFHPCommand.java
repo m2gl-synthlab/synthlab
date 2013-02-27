@@ -8,6 +8,7 @@ import fr.istic.synthlab.factory.impl.PACFactory;
 public class AddModuleVCFHPCommand implements ICommand {
 
 	private ISynthApp app;
+
 	public AddModuleVCFHPCommand(ISynthApp app) {
 		this.app = app;
 	}

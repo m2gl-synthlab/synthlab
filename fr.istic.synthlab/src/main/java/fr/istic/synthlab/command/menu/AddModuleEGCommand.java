@@ -6,8 +6,9 @@ import fr.istic.synthlab.factory.IFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;
 
 public class AddModuleEGCommand implements ICommand {
-	
+
 	private ISynthApp app;
+
 	public AddModuleEGCommand(ISynthApp app) {
 		this.app = app;
 	}

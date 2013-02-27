@@ -29,7 +29,6 @@ public class AttenuationFilter extends UnitFilter {
 	 * @param attenuation
 	 */
 	public void setAttenuation(double attenuation) {
-		System.out.println("Attenuation set to " + attenuation + " V");
 		this.attenuation = attenuation;
 	}
 

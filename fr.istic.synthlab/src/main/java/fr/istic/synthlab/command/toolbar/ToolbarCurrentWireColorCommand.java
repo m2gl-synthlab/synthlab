@@ -8,8 +8,8 @@ public class ToolbarCurrentWireColorCommand implements ICommand {
 
 	private SynthFrame frame;
 	private ISynthApp app;
-	
-	public ToolbarCurrentWireColorCommand(ISynthApp app, SynthFrame frame){
+
+	public ToolbarCurrentWireColorCommand(ISynthApp app, SynthFrame frame) {
 		this.frame = frame;
 		this.app = app;
 	}
