@@ -30,19 +30,11 @@ public class SynthesizerTest extends TestCase {
 
 	}
 
-	public void testGetInstance() {
-		assertEquals(synth, synth);
-	}
 
 	public void testGetJSyn() {
-		boolean jsyn = false;
-		for (int i = 0; i < synth.getJSyn().getClass().getInterfaces().length; i++)
-			if (synth.getJSyn().getClass().getInterfaces()[i].equals(com.jsyn.Synthesizer.class)
+	
 
-			)
-				jsyn = true;
-
-		assertTrue(jsyn);
+		assertNotNull(synth.getJSyn());
 
 	}
 
