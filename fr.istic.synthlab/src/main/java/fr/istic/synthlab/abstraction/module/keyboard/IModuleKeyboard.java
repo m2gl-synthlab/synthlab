@@ -6,7 +6,6 @@ import com.jsyn.unitgen.UnitGenerator;
 
 import fr.istic.synthlab.abstraction.port.IOutputPort;
 import fr.istic.synthlab.abstraction.wire.IWire;
-import fr.istic.synthlab.controller.synthesizer.ICSynthesizer;
 
 public interface IModuleKeyboard {
 	
