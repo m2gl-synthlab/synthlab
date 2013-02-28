@@ -10,7 +10,6 @@ import fr.istic.synthlab.ISynthFrame;
 import fr.istic.synthlab.SynthApp;
 import fr.istic.synthlab.SynthFrame;
 import fr.istic.synthlab.command.menu.AddModuleRECCommand;
-import fr.istic.synthlab.controller.module.noise.CModuleNOISE;
 import fr.istic.synthlab.controller.module.rec.CModuleREC;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;

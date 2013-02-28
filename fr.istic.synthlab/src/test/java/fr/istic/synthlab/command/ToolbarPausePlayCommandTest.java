@@ -1,14 +1,7 @@
 package fr.istic.synthlab.command;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import java.awt.FileDialog;
-import java.lang.reflect.Field;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,11 +11,8 @@ import fr.istic.synthlab.ISynthFrame;
 import fr.istic.synthlab.SynthApp;
 import fr.istic.synthlab.SynthFrame;
 import fr.istic.synthlab.command.app.DisplayCommand;
-import fr.istic.synthlab.command.menu.OpenSynthCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarPauseCommand;
 import fr.istic.synthlab.command.toolbar.ToolbarPlayCommand;
-import fr.istic.synthlab.controller.module.vcf.CModuleVCF_HP;
-import fr.istic.synthlab.controller.module.vcf.CModuleVCF_LP;
 import fr.istic.synthlab.factory.impl.AFactory;
 import fr.istic.synthlab.factory.impl.CFactory;
 import fr.istic.synthlab.factory.impl.PACFactory;

@@ -174,6 +174,14 @@ public class CModuleVCOTest {
 		}
 
 		try {
+			wireOutSquare.connect(iTest.getOutputSquare());
+		} catch (PortAlreadyInUseException e1) {
+			e1.printStackTrace();
+		} catch (BadConnectionException e1) {
+			e1.printStackTrace();
+		}
+		
+		try {
 			wireOutTriangle.connect(iTest.getOutputTriangle());
 		} catch (PortAlreadyInUseException e1) {
 			e1.printStackTrace();

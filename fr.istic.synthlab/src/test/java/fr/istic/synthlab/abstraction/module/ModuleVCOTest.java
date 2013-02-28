@@ -1,7 +1,5 @@
 package fr.istic.synthlab.abstraction.module;
 
-import static org.junit.Assert.assertEquals;
-
 import java.lang.reflect.Field;
 
 import junit.framework.TestCase;
